@@ -152,7 +152,7 @@ function IssueArticle({
   onDragStart: () => void
   onDrop: () => void
 }) {
-  const image = story.image_path || story.image_url
+  const image = story.image_path ? api.storyImageUrl(story.id) : story.image_url
   return (
     <article
       className={`issue-article ${active ? 'active' : ''}`}
@@ -273,6 +273,7 @@ function DetailPanel({
 }
 
 function DetailSources({ story }: { story: Story }) {
+  const image = story.image_path ? api.storyImageUrl(story.id) : story.image_url
   return (
     <>
       <section className="detail-section">
@@ -285,7 +286,7 @@ function DetailSources({ story }: { story: Story }) {
       </section>
       <section className="detail-section image-section">
         <div className="section-heading"><Image size={16} /><h4>配图</h4></div>
-        {story.image_path || story.image_url ? <img src={story.image_path || story.image_url} alt={story.title} /> : <div className="image-empty"><Image size={22} /></div>}
+        {image ? <img src={image} alt={story.title} /> : <div className="image-empty"><Image size={22} /></div>}
       </section>
     </>
   )

@@ -69,6 +69,7 @@ export const api = {
   generateBrand: (issueId: string, brand: 'appso' | 'ifanr') =>
     request<Job>(`/api/issues/${issueId}/brands/${brand}/generate`, { method: 'POST' }),
   markdownUrl: (issueId: string) => `${getApiUrl()}/api/issues/${issueId}/markdown`,
+  storyImageUrl: (storyId: string) => `${getApiUrl()}/api/stories/${storyId}/image`,
   handoff: (issueId: string) =>
     request<AutomationHandoff>(`/api/issues/${issueId}/handoff`, { method: 'POST' }),
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
