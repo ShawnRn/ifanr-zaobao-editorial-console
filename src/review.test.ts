@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { buildReviewExport } from './review'
+import { applyReviewOperations, buildReviewExport } from './review'
 import type { Issue, Story } from './types'
 
 vi.stubGlobal('crypto', { randomUUID: () => '12345678-1234-1234-1234-123456789abc' })
@@ -77,5 +77,20 @@ describe('buildReviewExport', () => {
       fingerprint: 'fingerprint-b',
       changes: { title: '修改后的第二条', body: '修改后的正文。' },
     })
+  })
+
+  it('replays only the explicit operations over a fresh snapshot', () => {
+    const before = issue([story(), story({ id: 'story-b', fingerprint: 'fingerprint-b', title: '第二条', position: 1 })])
+    const current = issue([
+      story({ selected: false, status: 'excluded' }),
+      story({ id: 'story-b', fingerprint: 'fingerprint-b', title: '新标题', position: 1 }),
+    ])
+    const review = buildReviewExport(before, current)
+
+    const replayed = applyReviewOperations(before, review.operations)
+
+    expect(replayed.stories.find((item) => item.id === 'story-a')).toMatchObject({ selected: false, status: 'excluded' })
+    expect(replayed.stories.find((item) => item.id === 'story-b')).toMatchObject({ selected: true, title: '新标题' })
+    expect(replayed.selected_count).toBe(1)
   })
 })

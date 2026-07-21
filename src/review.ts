@@ -181,6 +181,41 @@ export function buildReviewExport(base: Issue, current: Issue, reviewSessionId?:
   }
 }
 
+export function applyReviewOperations(base: Issue, operations: ReviewOperation[]): Issue {
+  let stories = structuredClone(base.stories)
+  const findStory = (storyId: string, fingerprint: string) => stories.find((story) => story.id === storyId && story.fingerprint === fingerprint)
+
+  operations.forEach((operation) => {
+    if (operation.op === 'reorder') {
+      const positions = new Map(operation.ordered_stories.map((item, index) => [item.story_id, index]))
+      stories = stories.map((story) => story.category === operation.category && positions.has(story.id)
+        ? { ...story, position: positions.get(story.id) || 0 }
+        : story)
+      return
+    }
+    const story = findStory(operation.story_id, operation.fingerprint)
+    if (!story) return
+    if (operation.op === 'exclude') {
+      stories = stories.map((item) => item.id === story.id ? { ...item, selected: false, status: 'excluded' } : item)
+      return
+    }
+    if (operation.op === 'include') {
+      stories = stories.map((item) => item.id === story.id ? { ...item, ...operation.story, selected: true } : item)
+      return
+    }
+    stories = stories.map((item) => item.id === story.id ? { ...item, ...operation.changes } : item)
+  })
+
+  const selected = stories.filter((story) => story.selected && story.status !== 'excluded')
+  return {
+    ...base,
+    stories,
+    selected_count: selected.length,
+    ready_count: selected.filter((story) => story.status === 'ready').length,
+    review_count: stories.filter((story) => story.status === 'needs_review' || story.changed_since_review).length,
+  }
+}
+
 export function renderIssueMarkdown(issue: Issue): string {
   const order = ['重磅', '大公司', 'AI/开发者', '观点', '新产品', '新消费', '好看的']
   const stories = issue.stories.filter((story) => story.selected && story.status !== 'excluded')

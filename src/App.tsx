@@ -28,7 +28,8 @@ import {
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { api, getApiUrl, setApiUrl } from './api'
-import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
+import { applyReviewOperations, buildReviewExport, downloadText, renderIssueMarkdown } from './review'
+import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
 
 const categories = ['全部', '重磅', '大公司', 'AI/开发者', '观点', '新产品', '新消费', '好看的']
@@ -401,8 +402,10 @@ export function App() {
       try {
         const stored = localStorage.getItem(draftKey)
         if (stored) {
-          const parsed = JSON.parse(stored) as Issue
-          if (parsed.id === current.id && parsed.revision === current.revision) reviewDraft = parsed
+          const parsed = JSON.parse(stored) as EditorialReviewExport
+          if (parsed.schema === 'ifanr_editorial_review' && parsed.issue_id === current.id && Array.isArray(parsed.operations)) {
+            reviewDraft = applyReviewOperations(current, parsed.operations)
+          }
         }
       } catch {
         localStorage.removeItem(draftKey)
@@ -465,8 +468,13 @@ export function App() {
       && 'digest' in baseIssue.diagnostics.public_snapshot
       ? String(baseIssue.diagnostics.public_snapshot.digest || '')
       : String(baseIssue.revision)
-    localStorage.setItem(`editorial-review-draft:${baseIssue.id}:${snapshotDigest}`, JSON.stringify(issue))
-  }, [baseIssue, dataMode, issue])
+    try {
+      const review = buildReviewExport(baseIssue, issue, reviewSessionId)
+      localStorage.setItem(`editorial-review-draft:${baseIssue.id}:${snapshotDigest}`, JSON.stringify(review))
+    } catch {
+      // The review still remains in memory and can be exported even if browser storage is unavailable.
+    }
+  }, [baseIssue, dataMode, issue, reviewSessionId])
 
   const draftStories = useMemo(() => {
     if (!issue) return []
