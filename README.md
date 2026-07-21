@@ -13,7 +13,7 @@ pnpm dev
 
 本机开发地址为 `http://127.0.0.1:5173/`。页面会先尝试连接 `http://127.0.0.1:8765`；Worker 不可达时显示 Pages 随最近一次成功发布同步的当日正式稿只读快照。顶栏持续显示 Worker 的连接状态，设置面板会区分「正在检测」「已通过 Tailscale Serve 连接」「Pages 快照」和「Worker 未连接」。
 
-从其他设备连接主 Mac 时，使用 Tailscale Serve 的 HTTPS 根地址，例如 `https://shawn-rains-macbook-pro.tail42e7aa.ts.net`。不要填写 Worker 的本地裸端口 `:8765`，也不要在 HTTPS Pages 中使用 `http://`；页面会规范化旧格式并在连接失败时显示原因。Tailscale Serve 注入的用户身份由 Worker 验证，Worker 本身仍只监听本机回环地址。
+从其他设备连接主 Mac 时，直接打开 Tailscale Serve 的 HTTPS 根地址，例如 `https://shawn-rains-macbook-pro.tail42e7aa.ts.net`。该地址同时提供编辑台页面和 Worker API，避免 GitHub Pages 跨域访问私网被浏览器拦截。不要使用 `https://100.x.x.x`，因为 Tailscale IP 无法匹配 `.ts.net` HTTPS 证书；也不要附加 `:8765`。Tailscale Serve 注入的用户身份由 Worker 验证，Worker 本身仍只监听本机回环地址。
 
 公共页面：https://shawnrn.github.io/ifanr-zaobao-editorial-console/
 

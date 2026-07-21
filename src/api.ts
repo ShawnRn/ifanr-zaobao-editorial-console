@@ -1,6 +1,9 @@
 import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryStatus } from './types'
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
+export const tailscaleConsoleUrl = import.meta.env.VITE_EDITORIAL_TAILSCALE_URL || 'https://shawn-rains-macbook-pro.tail42e7aa.ts.net'
+
+const runtimeDefaultUrl = () => window.location.hostname.endsWith('.ts.net') ? window.location.origin : fallbackUrl
 
 const staticAssetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
@@ -39,10 +42,13 @@ export const apiUrlProblem = (value: string, pageProtocol = window.location.prot
   if (url.hostname.endsWith('.ts.net') && url.port === '8765') {
     return 'Tailscale Serve 请填写 HTTPS 根地址，不要附加 :8765'
   }
+  if (/^100\.(?:6[4-9]|[78]\d|9\d|1[01]\d|12[0-7])\./.test(url.hostname)) {
+    return 'Tailscale IP 无法匹配 HTTPS 证书；请使用 .ts.net 域名'
+  }
   return ''
 }
 
-export const getApiUrl = () => localStorage.getItem('editorial-api-url') || fallbackUrl
+export const getApiUrl = () => localStorage.getItem('editorial-api-url') || runtimeDefaultUrl()
 
 export const setApiUrl = (value: string) => {
   localStorage.setItem('editorial-api-url', normalizeApiUrl(value))

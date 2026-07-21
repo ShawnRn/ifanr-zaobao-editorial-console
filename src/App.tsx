@@ -31,7 +31,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandler, type ReactNode } from 'react'
-import { api, apiUrlProblem, describeWorkerError, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
+import { api, apiUrlProblem, describeWorkerError, getApiUrl, normalizeApiUrl, setApiUrl, tailscaleConsoleUrl } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
@@ -939,6 +939,7 @@ export function App() {
           </div>
           <label><span>Worker URL</span><input aria-label="Worker URL" value={apiUrl} onChange={(event) => setApiUrlInput(event.target.value)} /></label>
           <p className="settings-hint">Tailscale Serve 使用 HTTPS 根地址，不含 <code>:8765</code>。{apiUrl.includes('.ts.net') ? <><br /><a href={`${apiUrl.replace(/\/$/, '')}/health`} target="_blank" rel="noreferrer">直接打开 Worker 健康检查</a>；Chrome 询问时请允许「本地网络访问」。</> : null}</p>
+          {window.location.hostname.endsWith('github.io') ? <a className="same-origin-console" href={tailscaleConsoleUrl} target="_blank" rel="noreferrer">通过 Tailscale 打开可编辑工作台</a> : null}
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void connectWorker()}>{workerConnection.status === 'checking' ? '正在检测…' : '测试并连接'}</button><button type="button" onClick={() => void usePagesMode()}>仅使用 Pages</button></div>
           <div className="settings-divider" />
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已在当前浏览器配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>

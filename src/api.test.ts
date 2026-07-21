@@ -19,6 +19,10 @@ describe('Worker URL handling', () => {
     expect(apiUrlProblem('http://127.0.0.1:8765', 'https:')).toContain('无法连接 HTTP Worker')
   })
 
+  it('rejects a raw Tailscale IP because it cannot match the HTTPS certificate', () => {
+    expect(apiUrlProblem('https://100.103.86.124', 'https:')).toContain('.ts.net')
+  })
+
   it('declares Tailscale requests as local-network access', () => {
     expect(workerFetchOptions('https://shawn-rains-macbook-pro.tail42e7aa.ts.net')).toEqual({
       targetAddressSpace: 'local',
