@@ -22,3 +22,7 @@ pnpm dev
 点击「导出」仍可下载 Markdown 或 handoff 作为留档。Worker 不可达、主 Mac 休眠或当前设备没有 Tailnet 权限时，页面只显示连接错误，不加载新闻数据，也不会把本地旧缓存当作当前稿。
 
 主 Mac 每次成功发布飞书后，仍会运行 `.agent/tools/publish_editorial_pages_snapshot.py`；该脚本现在只同步前端源码并触发 Pages 构建，绝不导出刊期数据。Pages 更新失败只作为同步告警，不影响已经验证通过的飞书发布链路。
+
+## Gemini 标题生成
+
+双品牌页的标题生成由访问页面的浏览器直接调用 Gemini 3.5 Flash。API Key 只保存在该浏览器的 `localStorage` 中，不会写入 Worker、SQLite、导出文件或 GitHub Pages 构建产物。换一台设备或换一个浏览器时，需要在设置中分别配置。

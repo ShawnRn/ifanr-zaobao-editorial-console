@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { App, IssueArticle } from './App'
 import type { Story } from './types'
 
@@ -13,6 +13,8 @@ vi.stubGlobal('localStorage', {
   getItem: vi.fn(() => null),
   setItem: vi.fn(),
 })
+
+afterEach(cleanup)
 
 describe('App', () => {
   it('renders the operational shell while the worker is offline', async () => {
@@ -39,5 +41,37 @@ describe('App', () => {
 
     expect(onExclude).toHaveBeenCalledOnce()
     expect(onOpen).not.toHaveBeenCalled()
+  })
+
+  it('shows elevator controls only where movement is possible and keeps the card closed', () => {
+    const onOpen = vi.fn()
+    const onMoveDown = vi.fn()
+    const story: Story = {
+      id: 'story-1', issue_id: 'issue-1', fingerprint: 'fingerprint-1', title: '测试选题', body: '正文',
+      category: '大公司', status: 'ready', selected: true, position: 0, score: 100,
+      source_url: '', source_name: '', source_type: '', source_quality: 'primary', confidence: 1,
+      cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
+      image_url: '', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
+    }
+    render(<IssueArticle story={story} active={false} canMoveUp={false} canMoveDown onMoveDown={onMoveDown} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+
+    expect(screen.queryByRole('button', { name: '上移一位' })).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: '下移一位' }))
+
+    expect(onMoveDown).toHaveBeenCalledOnce()
+    expect(onOpen).not.toHaveBeenCalled()
+  })
+
+  it('closes settings after an outside click with an exit animation', async () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '连接设置' }))
+    const popover = document.querySelector('.settings-popover') as HTMLElement
+    expect(popover).toBeInTheDocument()
+
+    fireEvent.pointerDown(document.body)
+    expect(popover).toHaveClass('closing')
+    fireEvent.animationEnd(popover)
+
+    await waitFor(() => expect(document.querySelector('.settings-popover')).not.toBeInTheDocument())
   })
 })

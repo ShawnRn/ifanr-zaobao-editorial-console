@@ -1,4 +1,6 @@
 import {
+  ArrowDown,
+  ArrowUp,
   ArrowUpDown,
   BookOpen,
   Check,
@@ -26,8 +28,9 @@ import {
   WandSparkles,
   X,
 } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useState, type MouseEventHandler, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandler, type ReactNode } from 'react'
 import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
+import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
@@ -152,6 +155,11 @@ export function IssueArticle({
   onExclude,
   onDragStart,
   onDrop,
+  canMoveUp = false,
+  canMoveDown = false,
+  onMoveUp,
+  onMoveDown,
+  moving = false,
 }: {
   story: Story
   active: boolean
@@ -159,11 +167,16 @@ export function IssueArticle({
   onExclude: () => void
   onDragStart: () => void
   onDrop: () => void
+  canMoveUp?: boolean
+  canMoveDown?: boolean
+  onMoveUp?: () => void
+  onMoveDown?: () => void
+  moving?: boolean
 }) {
   const image = story.image_path ? api.storyImageUrl(story.id) : story.image_url
   return (
     <article
-      className={`issue-article ${active ? 'active' : ''}`}
+      className={`issue-article ${active ? 'active' : ''} ${moving ? 'moving' : ''}`}
       onClick={onOpen}
       draggable
       onDragStart={onDragStart}
@@ -184,8 +197,11 @@ export function IssueArticle({
       <div className="article-body"><BodyBlocks body={story.body} /></div>
       <LinkedSourceLine story={story} />
       <div className="article-hover-tools">
-        <IconButton title="编辑与核验" onClick={(event) => { event.stopPropagation(); onOpen() }}><FileCheck2 size={15} /></IconButton>
-        <IconButton title="移出早报稿" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={15} /></IconButton>
+        {canMoveUp ? <IconButton title="上移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveUp?.() }}><ArrowUp size={15} /></IconButton> : null}
+        {canMoveDown ? <IconButton title="下移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveDown?.() }}><ArrowDown size={15} /></IconButton> : null}
+        {(canMoveUp || canMoveDown) ? <span className="article-tool-divider" /> : null}
+        <IconButton title="编辑与核验" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onOpen() }}><FileCheck2 size={15} /></IconButton>
+        <IconButton title="移出早报稿" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onExclude() }}><Trash2 size={15} /></IconButton>
       </div>
     </article>
   )
@@ -315,7 +331,7 @@ function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
         const pack = issue.brand_packages[brand]
         return (
           <section className="brand-section" key={brand}>
-            <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating !== null} onClick={() => void onGenerate(brand)}>{generating === brand ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}生成标题</button></header>
+            <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating !== null} onClick={() => void onGenerate(brand)}>{generating === brand ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}{(pack?.headline_options || []).length ? '重新生成标题' : '生成标题'}</button></header>
             <p className="brand-note">从当前共享母稿生成 3 组“三个消息 / 分隔”标题，两个品牌可使用同一选题，但表达分别调整。</p>
             <div className="headline-options">{(pack?.headline_options || []).map((headline) => <label key={headline} className={pack.selected_headline === headline ? 'selected' : ''}><input type="radio" name={`${brand}-headline`} checked={pack.selected_headline === headline} onChange={() => void onSave(brand, { selected_headline: headline })} /><span>{headline}</span></label>)}</div>
             <label className="field-label" htmlFor={`${brand}-headline-custom`}>最终大标题</label>
@@ -369,10 +385,12 @@ export function App() {
   const [error, setError] = useState('')
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('全部')
+  const [activeDraftSection, setActiveDraftSection] = useState('全部')
   const [candidateStatus, setCandidateStatus] = useState('all')
   const [view, setView] = useState<View>('draft')
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null)
   const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null)
+  const [movingStoryId, setMovingStoryId] = useState<string | null>(null)
   const [jobs, setJobs] = useState<Record<string, Job>>({})
   const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
   const [showExport, setShowExport] = useState(false)
@@ -380,13 +398,21 @@ export function App() {
   const [exporting, setExporting] = useState(false)
   const [generatingBrand, setGeneratingBrand] = useState<'appso' | 'ifanr' | null>(null)
   const [showSettings, setShowSettings] = useState(false)
+  const [settingsClosing, setSettingsClosing] = useState(false)
   const [apiUrl, setApiUrlInput] = useState(getApiUrl())
+  const [geminiKey, setGeminiKey] = useState('')
+  const [geminiConfigured, setGeminiConfigured] = useState(hasGeminiKey())
   const [profileMessage, setProfileMessage] = useState('')
   const [workerConnection, setWorkerConnection] = useState<WorkerConnection>({
     status: 'checking',
     detail: '正在检测主 Mac Worker',
     url: getApiUrl(),
   })
+  const draftScrollRef = useRef<HTMLElement | null>(null)
+  const settingsPopoverRef = useRef<HTMLDivElement | null>(null)
+  const settingsTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const connectionTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const settingsCloseTimerRef = useRef<number | null>(null)
 
   const loadIssue = useCallback(async (preferWorker = false) => {
     setLoading(true)
@@ -446,14 +472,57 @@ export function App() {
     api.weekend().then(setWeekend).catch(() => setWeekend({}))
   }, [loadIssue])
 
+  const openSettings = useCallback(() => {
+    if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
+    setSettingsClosing(false)
+    setShowSettings(true)
+  }, [])
+
+  const finishSettingsClose = useCallback(() => {
+    if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
+    settingsCloseTimerRef.current = null
+    setShowSettings(false)
+    setSettingsClosing(false)
+  }, [])
+
+  const closeSettings = useCallback(() => {
+    setSettingsClosing(true)
+    if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
+    settingsCloseTimerRef.current = window.setTimeout(finishSettingsClose, 180)
+  }, [finishSettingsClose])
+
+  const toggleSettings = useCallback(() => {
+    if (showSettings && !settingsClosing) closeSettings()
+    else openSettings()
+  }, [closeSettings, openSettings, settingsClosing, showSettings])
+
+  useEffect(() => {
+    if (!showSettings) return
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (settingsPopoverRef.current?.contains(target) || settingsTriggerRef.current?.contains(target) || connectionTriggerRef.current?.contains(target)) return
+      closeSettings()
+    }
+    const handleKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') closeSettings() }
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [closeSettings, showSettings])
+
+  useEffect(() => () => {
+    if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
+  }, [])
+
   const draftStories = useMemo(() => {
     if (!issue) return []
     const normalized = query.trim().toLowerCase()
     return issue.stories.filter((story) => story.selected && story.status !== 'excluded')
-      .filter((story) => category === '全部' || story.category === category)
       .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
       .sort((a, b) => (categoryOrder.get(a.category) ?? 99) - (categoryOrder.get(b.category) ?? 99) || a.position - b.position)
-  }, [issue, query, category])
+  }, [issue, query])
 
   const groupedDraft = useMemo(() => {
     const groups = new Map<string, Story[]>()
@@ -521,6 +590,65 @@ export function App() {
     setDraggedStoryId(null)
   }
 
+  const moveStory = async (storyId: string, offset: -1 | 1) => {
+    if (!issue) return
+    const story = issue.stories.find((item) => item.id === storyId)
+    if (!story) return
+    const ordered = issue.stories
+      .filter((item) => item.selected && item.status !== 'excluded' && item.category === story.category)
+      .sort((a, b) => a.position - b.position)
+    const from = ordered.findIndex((item) => item.id === storyId)
+    const to = from + offset
+    if (from < 0 || to < 0 || to >= ordered.length) return
+    ;[ordered[from], ordered[to]] = [ordered[to], ordered[from]]
+    const positions = new Map(ordered.map((item, index) => [item.id, index]))
+    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, position: positions.get(item.id) ?? item.position } : item))
+    setIssue(optimistic)
+    setMovingStoryId(storyId)
+    window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
+    if (dataMode === 'static') return
+    try {
+      setIssue(await api.reorder(issue.id, ordered.map((item) => item.id), story.category))
+    } catch (moveError) {
+      setIssue(issue)
+      setError(moveError instanceof Error ? moveError.message : '调整顺序失败')
+    }
+  }
+
+  const scrollToDraftSection = (section: string) => {
+    setActiveDraftSection(section)
+    if (query) setQuery('')
+    const performScroll = () => {
+      const container = draftScrollRef.current
+      if (!container) return
+      if (section === '全部') {
+        container.scrollTo({ top: 0, behavior: 'smooth' })
+        return
+      }
+      const target = document.getElementById(`section-${section.replaceAll('/', '-')}`)
+      if (!target) return
+      const top = target.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop
+      container.scrollTo({ top, behavior: 'smooth' })
+    }
+    window.requestAnimationFrame(() => window.requestAnimationFrame(performScroll))
+  }
+
+  const syncDraftSection = () => {
+    const container = draftScrollRef.current
+    if (!container || view !== 'draft') return
+    if (container.scrollTop < 180) {
+      setActiveDraftSection('全部')
+      return
+    }
+    const threshold = container.getBoundingClientRect().top + 90
+    let active = '全部'
+    groupedDraft.forEach(([section]) => {
+      const element = document.getElementById(`section-${section.replaceAll('/', '-')}`)
+      if (element && element.getBoundingClientRect().top <= threshold) active = section
+    })
+    setActiveDraftSection((current) => current === active ? current : active)
+  }
+
   const adoptCandidate = async (story: Story) => {
     setSelectedStoryId(story.id)
     if (dataMode === 'static') {
@@ -559,21 +687,16 @@ export function App() {
 
   const generateBrand = async (brand: 'appso' | 'ifanr') => {
     if (!issue) return
-    if (dataMode === 'static') {
-      setError('Pages 审稿模式不运行 AI 任务；主 Mac 下一轮会根据审稿单处理。')
-      return
-    }
     setGeneratingBrand(brand)
     setError('')
     try {
-      const queued = await api.generateBrand(issue.id, brand)
-      const job = await api.watchJob(queued.id, () => undefined).catch(async () => {
-        let fallback = await api.job(queued.id)
-        while (!['completed', 'failed'].includes(fallback.state)) { await new Promise((resolve) => window.setTimeout(resolve, 1200)); fallback = await api.job(queued.id) }
-        return fallback
-      })
-      if (job.state === 'failed') throw new Error(job.error)
-      setIssue(await api.getIssue(issue.id))
+      const generated = await generateBrandHeadlines(issue, brand)
+      const patch = { headline_options: generated.headline_options, selected_headline: generated.selected_headline }
+      setIssue((current) => current ? { ...current, brand_packages: { ...current.brand_packages, [brand]: { ...current.brand_packages[brand], ...patch } } } : current)
+      if (dataMode === 'worker') {
+        await api.patchBrand(issue.id, brand, patch)
+        setIssue(await api.getIssue(issue.id))
+      }
     } catch (brandError) { setError(brandError instanceof Error ? brandError.message : '品牌包装生成失败') } finally { setGeneratingBrand(null) }
   }
 
@@ -592,7 +715,22 @@ export function App() {
     finally { setExporting(false) }
   }
 
-  const switchView = (next: View) => { setView(next); setSelectedStoryId(null); setCategory('全部'); setQuery('') }
+  const switchView = (next: View) => { setView(next); setSelectedStoryId(null); setCategory('全部'); setActiveDraftSection('全部'); setQuery('') }
+
+  const saveGeminiKey = async () => {
+    if (!geminiKey.trim()) {
+      setProfileMessage('请输入 Gemini API Key')
+      return
+    }
+    try {
+      persistGeminiKey(geminiKey)
+      setGeminiConfigured(true)
+      setGeminiKey('')
+      setProfileMessage('Gemini API Key 已保存到当前浏览器')
+    } catch (settingsError) {
+      setProfileMessage(settingsError instanceof Error ? settingsError.message : 'Gemini 配置保存失败')
+    }
+  }
 
   const connectWorker = async () => {
     let normalized: string
@@ -647,15 +785,15 @@ export function App() {
           <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
-          <button className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => setShowSettings(true)}>
+          <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={openSettings}>
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
           </button>
           <IconButton title={repoRuntimeAccess ? '同步最新自动化产物' : '读取自动化已同步的最终稿'} onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
-          <IconButton title="连接设置" onClick={() => setShowSettings((value) => !value)} active={showSettings}><Settings size={17} /></IconButton>
+          <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="连接设置" aria-label="连接设置" onClick={toggleSettings}><Settings size={17} /></button>
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
-        {showSettings ? <div className="settings-popover">
+        {showSettings ? <div ref={settingsPopoverRef} className={`settings-popover ${settingsClosing ? 'closing' : ''}`} onAnimationEnd={() => { if (settingsClosing) finishSettingsClose() }}>
           <div className={`connection-summary connection-${workerConnection.status}`}>
             <div>{workerConnection.status === 'checking' ? <LoaderCircle size={16} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={15} /> : <CloudOff size={16} />}</div>
             <span><strong>{connectionLabel}</strong><small>{workerConnection.detail}</small></span>
@@ -663,6 +801,10 @@ export function App() {
           <label><span>Worker URL</span><input aria-label="Worker URL" value={apiUrl} onChange={(event) => setApiUrlInput(event.target.value)} /></label>
           <p className="settings-hint">Tailscale Serve 使用 HTTPS 根地址，不含 <code>:8765</code>。</p>
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void connectWorker()}>{workerConnection.status === 'checking' ? '正在检测…' : '测试并连接'}</button><button type="button" onClick={() => void usePagesMode()}>仅使用 Pages</button></div>
+          <div className="settings-divider" />
+          <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已在当前浏览器配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
+          <button type="button" disabled={!geminiKey.trim()} onClick={() => void saveGeminiKey()}>保存 Gemini Key</button>
+          <p className="settings-hint">Key 只保存在当前浏览器的网页数据中；Gemini 请求也由当前设备直接发出。</p>
           <button type="button" disabled={workerConnection.status !== 'connected'} onClick={() => { setProfileMessage('正在归纳本周编辑决策…'); void api.proposeProfile().then((proposal) => setProfileMessage(proposal.status === 'pending' ? '已生成待确认的偏好差异提案' : '本周暂无需调整的偏好')).catch((profileError) => setProfileMessage(profileError instanceof Error ? profileError.message : '提案生成失败')) }}>生成每周偏好提案</button>
           {profileMessage ? <p className="settings-message">{profileMessage}</p> : null}
         </div> : null}
@@ -672,17 +814,17 @@ export function App() {
         <div className={`editor-layout ${selectedStory ? 'with-detail' : ''}`}>
           <aside className="sidebar">
             <div className="sidebar-heading"><Menu size={16} /><span>栏目</span></div>
-            <nav>{categories.map((item) => <button type="button" className={category === item ? 'active' : ''} onClick={() => setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : issue?.stories.filter((story) => !story.selected && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
+            <nav>{categories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : issue?.stories.filter((story) => !story.selected && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
             {view === 'candidates' ? <><div className="sidebar-heading"><ArrowUpDown size={16} /><span>状态</span></div><nav>{[['all', '待处理'], ['needs_review', '待复核'], ['source_chasing', '追源中'], ['excluded', '已排除']].map(([value, label]) => <button type="button" className={candidateStatus === value ? 'active' : ''} onClick={() => setCandidateStatus(value)} key={value}><span>{label}</span></button>)}</nav></> : null}
             <div className="issue-metrics"><div><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></div><div><strong>{issue?.ready_count || 0}</strong><span>可用</span></div><div><strong>{issue?.review_count || 0}</strong><span>待复核</span></div></div>
           </aside>
 
-          <main className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
+          <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
-            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={() => setShowSettings(true)}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
+            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>当前飞书 Bot 稿 · {issue?.selected_count || 0} 条 · {dataMode === 'static' ? '远程审稿修改将导出到飞书' : '自动化更新后保留人工编辑'}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
+              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后才会出现在“早报稿”。</p></div><strong>{candidates.length}</strong></header>
