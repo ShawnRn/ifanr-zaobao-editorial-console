@@ -1,5 +1,9 @@
 # 早报编辑台
 
+Worker 可用时，编辑台加载并保存真实刊期；Worker 不可达时自动显示明确标识的演示刊期，方便在 GitHub Pages 上查看完整界面。公开 Pages 不包含真实候选、正文、账号或密钥。
+
+稿件详情里的「配图」支持上传本地 JPEG、PNG、GIF、WebP 原图，或粘贴图片 URL 交给 Worker 下载；已有配图可以替换或删除。图片变更需要连接 Worker。
+
 React + TypeScript + Vite 编辑台。GitHub Pages 只承载无数据的静态界面；主 Mac 连接本机 Editorial Worker，其他设备通过 Tailscale Serve HTTPS 连接同一 Worker。
 
 ```bash

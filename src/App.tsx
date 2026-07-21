@@ -26,6 +26,7 @@ import {
   ShieldCheck,
   Sparkles,
   Trash2,
+  Upload,
   WandSparkles,
   X,
 } from 'lucide-react'
@@ -33,6 +34,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandl
 import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
+import { demoIssue, demoWeekend } from './demo'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
@@ -177,7 +179,7 @@ export function IssueArticle({
   onMoveCategory?: (category: string) => void
   moving?: boolean
 }) {
-  const image = story.image_path ? api.storyImageUrl(story.id) : story.image_url
+  const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
   return (
     <article
       className={`issue-article ${active ? 'active' : ''} ${moving ? 'moving' : ''}`}
@@ -260,6 +262,7 @@ function DetailPanel({
   onClose,
   activeJob,
   staticMode,
+  onImageChange,
 }: {
   story: Story
   onPatch: (patch: Partial<Story>) => Promise<unknown>
@@ -267,6 +270,7 @@ function DetailPanel({
   onClose: () => void
   activeJob?: Job
   staticMode: boolean
+  onImageChange: (story: Story) => void
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
@@ -300,18 +304,95 @@ function DetailPanel({
           <button type="button" disabled={staticMode} title={staticMode ? '可以直接编辑正文，或在审稿单中交给下一轮处理' : ''} onClick={() => void onAction('rewrite')}><WandSparkles size={16} />按早报 prompt 重写</button>
           <button type="button" disabled={staticMode} title={staticMode ? '找图由主 Mac 执行' : ''} onClick={() => void onAction('image-search')}><Image size={16} />找图</button>
         </div>
-        {staticMode ? <p className="static-mode-note">当前是 Pages 审稿模式。标题、正文、分类和取舍会写入审稿单；追源、Chrome、核验和找图由主 Mac 执行。</p> : null}
+        {staticMode ? <p className="static-mode-note">当前是 Pages 演示模式。可以浏览和试用编辑界面；连接 Worker 后才会加载真实刊期并保存修改。</p> : null}
         {activeJob ? <div className={`job-banner ${activeJob.state}`}><LoaderCircle size={16} className={activeJob.state === 'running' ? 'spin' : ''} /><span>{activeJob.message || activeJob.action}</span><strong>{activeJob.progress}%</strong></div> : null}
         <label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
         <textarea id="story-body" className="body-editor" value={body} onChange={(event) => setBody(event.target.value)} onBlur={() => body !== story.body && void onPatch({ body })} />
-        <DetailSources story={story} />
+        <DetailSources story={story} staticMode={staticMode} onImageChange={onImageChange} />
       </div>
     </aside>
   )
 }
 
-function DetailSources({ story }: { story: Story }) {
-  const image = story.image_path ? api.storyImageUrl(story.id) : story.image_url
+export function StoryImageEditor({ story, staticMode, onImageChange }: { story: Story; staticMode: boolean; onImageChange: (story: Story) => void }) {
+  const [url, setUrl] = useState('')
+  const [busy, setBusy] = useState<'upload' | 'url' | 'delete' | null>(null)
+  const [message, setMessage] = useState('')
+  const fileInput = useRef<HTMLInputElement | null>(null)
+  const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
+
+  useEffect(() => {
+    setUrl('')
+    setMessage('')
+    setBusy(null)
+  }, [story.id])
+
+  const run = async (operation: 'upload' | 'url' | 'delete', task: () => Promise<Story>) => {
+    setBusy(operation)
+    setMessage('')
+    try {
+      const updated = await task()
+      onImageChange(updated)
+      setUrl('')
+      setMessage(operation === 'delete' ? '配图已删除' : '配图已保存到主 Mac')
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : '配图操作失败')
+    } finally {
+      setBusy(null)
+    }
+  }
+
+  const chooseFile = () => fileInput.current?.click()
+  const uploadFile = (file?: File) => {
+    if (!file) return
+    void run('upload', () => api.uploadStoryImage(story.id, file))
+  }
+  const useUrl = () => {
+    const value = url.trim()
+    if (!value) {
+      setMessage('请先粘贴图片 URL')
+      return
+    }
+    void run('url', () => api.downloadStoryImage(story.id, value))
+  }
+
+  return (
+    <section className="detail-section image-section">
+      <div className="section-heading"><Image size={16} /><h4>配图</h4><span>{image ? '已配图' : '未配图'}</span></div>
+      <div className={`image-preview ${image ? 'has-image' : ''}`}>
+        {image ? <img src={image} alt={story.title} /> : <div className="image-empty"><Image size={22} /><span>尚未添加配图</span></div>}
+      </div>
+      <input
+        ref={fileInput}
+        className="visually-hidden"
+        type="file"
+        accept="image/jpeg,image/png,image/gif,image/webp"
+        disabled={staticMode || busy !== null}
+        onChange={(event) => {
+          uploadFile(event.target.files?.[0])
+          event.target.value = ''
+        }}
+      />
+      <div className="image-actions">
+        <button type="button" disabled={staticMode || busy !== null} onClick={chooseFile}>
+          {busy === 'upload' ? <LoaderCircle size={15} className="spin" /> : <Upload size={15} />}
+          {image ? '替换本地图' : '上传本地图'}
+        </button>
+        {image ? <button type="button" className="danger" disabled={staticMode || busy !== null} onClick={() => void run('delete', () => api.deleteStoryImage(story.id))}>
+          {busy === 'delete' ? <LoaderCircle size={15} className="spin" /> : <Trash2 size={15} />}删除
+        </button> : null}
+      </div>
+      <div className="image-url-editor">
+        <input type="url" value={url} disabled={staticMode || busy !== null} placeholder="粘贴原图 URL" onChange={(event) => setUrl(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); useUrl() } }} />
+        <button type="button" disabled={staticMode || busy !== null} onClick={useUrl}>{busy === 'url' ? <LoaderCircle size={15} className="spin" /> : <Download size={15} />}下载并使用</button>
+      </div>
+      <p className="image-help">保留原始文件与分辨率；URL 图片会先下载到主 Mac，再进入飞书文档。</p>
+      {staticMode ? <p className="image-message">连接 Worker 后才能修改配图。</p> : message ? <p className={`image-message ${message.includes('已') ? 'success' : 'error'}`}>{message}</p> : null}
+    </section>
+  )
+}
+
+function DetailSources({ story, staticMode, onImageChange }: { story: Story; staticMode: boolean; onImageChange: (story: Story) => void }) {
   return (
     <>
       <section className="detail-section">
@@ -322,10 +403,7 @@ function DetailSources({ story }: { story: Story }) {
         <div className="section-heading"><ExternalLink size={16} /><h4>来源链</h4><span>{story.sources.length}</span></div>
         <div className="source-list">{story.sources.map((source: Source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id || source.url}><span className={`source-mark source-${source.authority}`} /><span><strong>{source.publisher || source.title || '来源'}</strong><small>{sourceLabel[source.authority]} · {source.source_type}</small></span><ExternalLink size={14} /></a>)}</div>
       </section>
-      <section className="detail-section image-section">
-        <div className="section-heading"><Image size={16} /><h4>配图</h4></div>
-        {image ? <img src={image} alt={story.title} /> : <div className="image-empty"><Image size={22} /></div>}
-      </section>
+      <StoryImageEditor story={story} staticMode={staticMode} onImageChange={onImageChange} />
     </>
   )
 }
@@ -404,7 +482,7 @@ export function App() {
   const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null)
   const [movingStoryId, setMovingStoryId] = useState<string | null>(null)
   const [jobs, setJobs] = useState<Record<string, Job>>({})
-  const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
+  const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>(demoWeekend)
   const [showExport, setShowExport] = useState(false)
   const [handoff, setHandoff] = useState<AutomationHandoff | null>(null)
   const [exporting, setExporting] = useState(false)
@@ -431,17 +509,20 @@ export function App() {
     setError('')
     const workerUrl = getApiUrl()
     const forceStatic = !preferWorker && new URLSearchParams(window.location.search).get('static') === '1'
-    if (forceStatic) {
-      setWorkerConnection({
-        status: 'pages',
-        detail: 'Pages 只提供界面，尚未连接主 Mac Worker',
-        url: workerUrl,
-      })
-      setIssue(null)
-      setBaseIssue(null)
+    const showPagesFallback = (detail: string) => {
+      const fallback = structuredClone(demoIssue)
+      setWorkerConnection({ status: 'pages', detail, url: workerUrl })
+      setIssue(fallback)
+      setBaseIssue(structuredClone(fallback))
+      setReviewSessionId('')
+      setSelectedStoryId(null)
+      setWeekend(structuredClone(demoWeekend))
       setDataMode('static')
       setRepoRuntimeAccess(false)
-      setError('请打开连接设置，使用 Tailscale Serve HTTPS 地址连接主 Mac Worker。')
+      setError('')
+    }
+    if (forceStatic) {
+      showPagesFallback('当前显示公开演示刊期；连接 Worker 后加载真实早报')
       setLoading(false)
       return
     }
@@ -466,23 +547,15 @@ export function App() {
         url: workerUrl,
         identity,
       })
+      api.weekend().then(setWeekend).catch(() => setWeekend({}))
     } catch (loadError) {
       const workerMessage = loadError instanceof Error ? loadError.message : 'Worker 不可达'
-      setWorkerConnection({
-        status: 'failed',
-        detail: `Worker 未连接：${workerMessage}`,
-        url: workerUrl,
-      })
-      setIssue(null)
-      setBaseIssue(null)
-      setDataMode('offline')
-      setError(`${workerMessage}。请在连接设置中检查 Worker URL 和 Tailscale 状态。`)
+      showPagesFallback(`Worker 未连接，当前显示公开演示刊期：${workerMessage}`)
     } finally { setLoading(false) }
   }, [])
 
   useEffect(() => {
     void loadIssue(false)
-    api.weekend().then(setWeekend).catch(() => setWeekend({}))
   }, [loadIssue])
 
   const openSettings = useCallback(() => {
@@ -804,7 +877,7 @@ export function App() {
     : workerConnection.status === 'checking'
       ? '正在检测'
       : workerConnection.status === 'pages'
-        ? 'Pages 模式'
+        ? 'Pages 演示'
         : 'Worker 未连接'
 
   return (
@@ -856,7 +929,7 @@ export function App() {
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
             {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
-              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>当前飞书 Bot 稿 · {issue?.selected_count || 0} 条 · {dataMode === 'static' ? '远程审稿修改将导出到飞书' : '自动化更新后保留人工编辑'}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
+              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.demo ? '公开演示内容 · 连接 Worker 后加载真实飞书 Bot 稿' : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
               <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
@@ -865,7 +938,7 @@ export function App() {
               <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} />)}</div>
             </> : null}
           </main>
-          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} onClose={() => setSelectedStoryId(null)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} onClose={() => setSelectedStoryId(null)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 

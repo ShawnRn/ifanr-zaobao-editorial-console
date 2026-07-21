@@ -202,8 +202,22 @@ a { color: inherit; }
 .source-primary, .source-strong { background: var(--green); }
 .source-secondary { background: var(--amber); }
 .source-lead { background: var(--red); }
+.image-preview { overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+.image-preview.has-image { padding: 8px; }
 .image-section img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; background: #fff; }
-.image-empty { height: 110px; display: grid; place-items: center; border: 1px dashed var(--line); color: var(--quiet); }
+.image-empty { height: 110px; display: grid; place-items: center; align-content: center; gap: 7px; border: 1px dashed var(--line); color: var(--quiet); font-size: 10px; }
+.image-actions { display: flex; gap: 6px; margin-top: 8px; }
+.image-actions button, .image-url-editor button { min-height: 32px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: #4e5751; font-size: 10px; cursor: pointer; }
+.image-actions button:hover, .image-url-editor button:hover { border-color: #7d8881; color: var(--ink); }
+.image-actions button.danger:hover { border-color: #c98984; color: var(--red); background: #fbf3f2; }
+.image-actions button:disabled, .image-url-editor button:disabled, .image-url-editor input:disabled { cursor: not-allowed; opacity: .45; }
+.image-url-editor { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; margin-top: 8px; }
+.image-url-editor input { min-width: 0; height: 32px; padding: 0 9px; border: 1px solid var(--line); border-radius: 4px; outline: 0; background: #fff; font-size: 10px; }
+.image-url-editor input:focus { border-color: #6e7b73; }
+.image-help, .image-message { margin: 8px 0 0; color: var(--quiet); font-size: 9px; line-height: 1.55; }
+.image-message.success { color: var(--green); }
+.image-message.error { color: var(--red); }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
 
 .brand-workspace { height: calc(100vh - 58px); overflow-y: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #fff; }
 .brand-section { min-width: 0; padding: 40px clamp(28px, 4vw, 70px) 80px; border-right: 1px solid var(--line); }

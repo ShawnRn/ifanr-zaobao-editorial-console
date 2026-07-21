@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { App, IssueArticle } from './App'
+import { App, IssueArticle, StoryImageEditor } from './App'
 import type { Story } from './types'
 
 vi.stubGlobal('fetch', vi.fn(async () => ({
@@ -17,11 +17,13 @@ vi.stubGlobal('localStorage', {
 afterEach(cleanup)
 
 describe('App', () => {
-  it('renders the operational shell while the worker is offline', async () => {
+  it('falls back to a browsable Pages demo while the worker is offline', async () => {
     render(<App />)
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()
     expect(screen.getByText('双品牌')).toBeInTheDocument()
-    expect((await screen.findAllByText('Worker 未连接')).length).toBeGreaterThan(0)
+    expect((await screen.findAllByText('Pages 演示')).length).toBeGreaterThan(0)
+    expect(await screen.findByText('示例重磅｜一条信息完整的头部新闻')).toBeInTheDocument()
+    expect(screen.getByText('公开演示内容 · 连接 Worker 后加载真实飞书 Bot 稿')).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: '连接设置' }).length).toBeGreaterThan(0)
   })
 
@@ -94,5 +96,24 @@ describe('App', () => {
     fireEvent.animationEnd(popover)
 
     await waitFor(() => expect(document.querySelector('.settings-popover')).not.toBeInTheDocument())
+  })
+
+  it('shows manual image controls while connected and protects static mode', () => {
+    const story: Story = {
+      id: 'story-image', issue_id: 'issue-1', fingerprint: 'fingerprint-image', title: '带图选题', body: '正文',
+      category: '大公司', status: 'ready', selected: true, position: 0, score: 100,
+      source_url: '', source_name: '', source_type: '', source_quality: 'primary', confidence: 1,
+      cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
+      image_url: 'https://example.com/image.jpg', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
+    }
+    const { rerender } = render(<StoryImageEditor story={story} staticMode={false} onImageChange={() => undefined} />)
+
+    expect(screen.getByRole('button', { name: '替换本地图' })).toBeEnabled()
+    expect(screen.getByRole('button', { name: '删除' })).toBeEnabled()
+    expect(screen.getByPlaceholderText('粘贴原图 URL')).toBeEnabled()
+
+    rerender(<StoryImageEditor story={story} staticMode onImageChange={() => undefined} />)
+    expect(screen.getByRole('button', { name: '替换本地图' })).toBeDisabled()
+    expect(screen.getByText('连接 Worker 后才能修改配图。')).toBeInTheDocument()
   })
 })

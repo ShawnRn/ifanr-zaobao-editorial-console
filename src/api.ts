@@ -68,6 +68,21 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   }
 }
 
+async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
+  const controller = new AbortController()
+  const timeout = window.setTimeout(() => controller.abort(), 45000)
+  try {
+    const response = await fetch(`${getApiUrl()}${path}`, { ...init, signal: controller.signal })
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({ detail: response.statusText }))
+      throw new Error(payload.detail || response.statusText)
+    }
+    return response.json() as Promise<T>
+  } finally {
+    window.clearTimeout(timeout)
+  }
+}
+
 export const api = {
   health: () => request<WorkerHealth>('/health'),
   currentIssue: () => request<Issue>('/api/issues/current'),
@@ -114,7 +129,18 @@ export const api = {
   generateBrand: (issueId: string, brand: 'appso' | 'ifanr') =>
     request<Job>(`/api/issues/${issueId}/brands/${brand}/generate`, { method: 'POST' }),
   markdownUrl: (issueId: string) => `${getApiUrl()}/api/issues/${issueId}/markdown`,
-  storyImageUrl: (storyId: string) => `${getApiUrl()}/api/stories/${storyId}/image`,
+  storyImageUrl: (storyId: string, version = '') => `${getApiUrl()}/api/stories/${storyId}/image${version ? `?v=${encodeURIComponent(version)}` : ''}`,
+  uploadStoryImage: (storyId: string, file: File) => mediaRequest<Story>(`/api/stories/${storyId}/image/upload`, {
+    method: 'POST',
+    headers: { 'Content-Type': file.type || 'application/octet-stream' },
+    body: file,
+  }),
+  downloadStoryImage: (storyId: string, url: string) => mediaRequest<Story>(`/api/stories/${storyId}/image/from-url`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url }),
+  }),
+  deleteStoryImage: (storyId: string) => mediaRequest<Story>(`/api/stories/${storyId}/image`, { method: 'DELETE' }),
   handoff: (issueId: string) =>
     request<AutomationHandoff>(`/api/issues/${issueId}/handoff`, { method: 'POST' }),
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
