@@ -39,9 +39,16 @@ a { color: inherit; }
 .view-switcher button:hover { color: #eef1ef; }
 .view-switcher button.active { background: #343a36; color: #ffffff; }
 .topbar-actions { display: flex; align-items: center; justify-content: flex-end; gap: 5px; min-width: 0; }
-.connection { height: 28px; display: flex; align-items: center; gap: 6px; padding: 0 8px; color: #89918c; font-size: 10px; text-transform: uppercase; }
-.connection.online svg { color: #65b582; }
-.connection.offline svg { color: #db6b63; }
+.connection { height: 30px; display: flex; align-items: center; gap: 7px; padding: 0 9px; border: 1px solid #343a36; border-radius: 4px; background: #1a1e1b; color: #a9b0ac; font-size: 10px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.connection:hover { border-color: #56605a; color: #f1f4f2; }
+.connection-connected { border-color: #355c45; background: #18251d; color: #94c7a5; }
+.connection-connected svg { color: #65b582; }
+.connection-checking { color: #d8b773; }
+.connection-checking svg { color: #d8b773; }
+.connection-pages { color: #9fb7c1; }
+.connection-pages svg { color: #6e9eb1; }
+.connection-failed, .connection-invalid { border-color: #613a36; background: #271917; color: #e09a93; }
+.connection-failed svg, .connection-invalid svg { color: #db6b63; }
 .icon-button { width: 32px; height: 32px; display: inline-grid; place-items: center; flex: 0 0 auto; padding: 0; border: 0; border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
 .topbar .icon-button:hover, .topbar .icon-button.active { background: #2b302c; color: #fff; }
 .export-button, .primary-button, .generate-button { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 13px; border: 0; border-radius: 4px; background: #356e50; color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; }
@@ -50,6 +57,18 @@ a { color: inherit; }
 .settings-popover label { display: grid; gap: 7px; color: #9da59f; font-size: 11px; }
 .settings-popover input { width: 100%; height: 34px; padding: 0 9px; border: 1px solid #3e4540; border-radius: 4px; outline: 0; background: #111411; color: #fff; }
 .settings-popover button { width: 100%; height: 32px; margin-top: 9px; border: 1px solid #3e4540; border-radius: 4px; background: #252a26; color: #d8ddda; cursor: pointer; }
+.connection-summary { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; margin-bottom: 14px; padding: 11px; border: 1px solid #39403b; border-radius: 5px; background: #111411; }
+.connection-summary > div { padding-top: 1px; }
+.connection-summary strong, .connection-summary small { display: block; }
+.connection-summary strong { color: #edf1ee; font-size: 11px; }
+.connection-summary small { margin-top: 4px; color: #929a95; font-size: 10px; line-height: 1.45; overflow-wrap: anywhere; }
+.connection-summary.connection-connected svg { color: #65b582; }
+.connection-summary.connection-failed svg, .connection-summary.connection-invalid svg { color: #db6b63; }
+.connection-summary.connection-pages svg { color: #6e9eb1; }
+.settings-hint { margin: 7px 0 0; color: #7f8882; font-size: 9px; line-height: 1.45; }
+.settings-hint code { color: #b5bdb8; }
+.settings-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.settings-actions button { min-width: 0; }
 .settings-message { margin: 10px 0 0; color: #aeb5b0; font-size: 10px; line-height: 1.5; }
 
 .editor-layout { display: grid; grid-template-columns: 194px minmax(0, 1fr); height: calc(100vh - 58px); }
@@ -222,7 +241,7 @@ a { color: inherit; }
 
 @media (max-width: 1180px) {
   .topbar { grid-template-columns: auto 1fr auto; gap: 10px; }
-  .brand-lockup span, .connection { display: none; }
+  .brand-lockup span { display: none; }
   .editor-layout.with-detail { grid-template-columns: 168px minmax(480px, 1fr) minmax(340px, 38vw); }
   .editor-layout { grid-template-columns: 168px minmax(0, 1fr); }
   .sidebar { padding-inline: 8px; }
@@ -237,6 +256,8 @@ a { color: inherit; }
   .view-switcher { grid-column: 1 / -1; grid-row: 2; width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .view-switcher button { min-width: 0; padding: 0 4px; }
   .topbar-actions { grid-column: 2; grid-row: 1; }
+  .connection { width: 32px; justify-content: center; padding: 0; }
+  .connection span { display: none; }
   .topbar-actions .icon-button:first-of-type { display: none; }
   .export-button { width: 34px; padding: 0; font-size: 0; }
   .settings-popover { top: 50px; right: 12px; width: calc(100vw - 24px); }

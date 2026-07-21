@@ -4,10 +4,48 @@ const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:
 
 const staticDataUrl = (name: string) => new URL(`data/${name}`, document.baseURI).toString()
 
+export type WorkerHealth = {
+  ok: boolean
+  mode: string
+  repo_runtime_access: boolean
+  access_mode: 'local' | 'tailscale'
+  identity?: string | null
+  time?: string
+}
+
+export const normalizeApiUrl = (value: string) => {
+  const raw = value.trim()
+  if (!raw) throw new Error('请输入 Worker URL')
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`
+  const url = new URL(withScheme)
+  if (url.hostname.endsWith('.ts.net') && url.protocol === 'http:') url.protocol = 'https:'
+  if (url.hostname.endsWith('.ts.net') && url.port === '8765') url.port = ''
+  url.pathname = url.pathname.replace(/\/$/, '')
+  url.search = ''
+  url.hash = ''
+  return url.toString().replace(/\/$/, '')
+}
+
+export const apiUrlProblem = (value: string, pageProtocol = window.location.protocol) => {
+  let url: URL
+  try {
+    url = new URL(value)
+  } catch {
+    return 'Worker URL 格式不正确'
+  }
+  if (pageProtocol === 'https:' && url.protocol !== 'https:') {
+    return 'GitHub Pages 无法连接 HTTP Worker；请使用 Tailscale Serve 的 HTTPS 地址'
+  }
+  if (url.hostname.endsWith('.ts.net') && url.port === '8765') {
+    return 'Tailscale Serve 请填写 HTTPS 根地址，不要附加 :8765'
+  }
+  return ''
+}
+
 export const getApiUrl = () => localStorage.getItem('editorial-api-url') || fallbackUrl
 
 export const setApiUrl = (value: string) => {
-  localStorage.setItem('editorial-api-url', value.replace(/\/$/, ''))
+  localStorage.setItem('editorial-api-url', normalizeApiUrl(value))
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -39,7 +77,7 @@ async function staticRequest<T>(name: string): Promise<T> {
 }
 
 export const api = {
-  health: () => request<{ ok: boolean; mode: string; repo_runtime_access: boolean }>('/health'),
+  health: () => request<WorkerHealth>('/health'),
   staticIssue: () => staticRequest<Issue>('current.json'),
   staticWeekend: () => staticRequest<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('weekend.json'),
   currentIssue: () => request<Issue>('/api/issues/current'),

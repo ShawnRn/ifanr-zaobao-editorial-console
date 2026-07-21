@@ -7,7 +7,9 @@ pnpm install
 pnpm dev
 ```
 
-本机开发地址为 `http://127.0.0.1:5173/`。页面会先尝试连接 `http://127.0.0.1:8765`；本地 Worker 不可达时，自动读取 Pages 的 `public/data/current.json`。静态刊期包包含经过清理的 Bot 稿、候选、公开来源链接和配图，不包含本地路径、Feishu file token、Cookie、账号密钥或发布能力。
+本机开发地址为 `http://127.0.0.1:5173/`。页面会先尝试连接 `http://127.0.0.1:8765`；本地 Worker 不可达时，自动读取 Pages 的静态刊期包。顶栏持续显示 Worker 的连接状态，设置面板会区分「正在检测」「已通过 Tailscale Serve 连接」「Pages 静态模式」和「Worker 未连接」。
+
+从其他设备连接主 Mac 时，使用 Tailscale Serve 的 HTTPS 根地址，例如 `https://shawn-rains-macbook-pro.tail42e7aa.ts.net`。不要填写 Worker 的本地裸端口 `:8765`，也不要在 HTTPS Pages 中使用 `http://`；页面会规范化旧格式并在连接失败时显示原因。Tailscale Serve 注入的用户身份由 Worker 验证，Worker 本身仍只监听本机回环地址。
 
 公共页面：https://shawnrn.github.io/ifanr-zaobao-editorial-console/?static=1
 
