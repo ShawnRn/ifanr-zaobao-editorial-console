@@ -31,7 +31,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandler, type ReactNode } from 'react'
-import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
+import { api, apiUrlProblem, describeWorkerError, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
@@ -574,7 +574,7 @@ export function App() {
       })
       api.weekend().then(setWeekend).catch(() => setWeekend({}))
     } catch (loadError) {
-      const workerMessage = loadError instanceof Error ? loadError.message : 'Worker 不可达'
+      const workerMessage = describeWorkerError(loadError)
       try {
         await showPagesFallback(`Worker 未连接，当前显示 Pages 快照：${workerMessage}`)
       } catch (snapshotError) {
@@ -938,7 +938,7 @@ export function App() {
             <span><strong>{connectionLabel}</strong><small>{workerConnection.detail}</small></span>
           </div>
           <label><span>Worker URL</span><input aria-label="Worker URL" value={apiUrl} onChange={(event) => setApiUrlInput(event.target.value)} /></label>
-          <p className="settings-hint">Tailscale Serve 使用 HTTPS 根地址，不含 <code>:8765</code>。</p>
+          <p className="settings-hint">Tailscale Serve 使用 HTTPS 根地址，不含 <code>:8765</code>。{apiUrl.includes('.ts.net') ? <><br /><a href={`${apiUrl.replace(/\/$/, '')}/health`} target="_blank" rel="noreferrer">直接打开 Worker 健康检查</a>；Chrome 询问时请允许「本地网络访问」。</> : null}</p>
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void connectWorker()}>{workerConnection.status === 'checking' ? '正在检测…' : '测试并连接'}</button><button type="button" onClick={() => void usePagesMode()}>仅使用 Pages</button></div>
           <div className="settings-divider" />
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已在当前浏览器配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>

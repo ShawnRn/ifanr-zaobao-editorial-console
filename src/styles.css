@@ -60,6 +60,7 @@ a { color: inherit; }
 .settings-popover label { display: grid; gap: 7px; color: #9da59f; font-size: 11px; }
 .settings-popover input { width: 100%; height: 34px; padding: 0 9px; border: 1px solid #3e4540; border-radius: 4px; outline: 0; background: #111411; color: #fff; }
 .settings-popover button { width: 100%; height: 32px; margin-top: 9px; border: 1px solid #3e4540; border-radius: 4px; background: #252a26; color: #d8ddda; cursor: pointer; }
+.settings-popover .settings-hint a { color: #82d7a6; text-underline-offset: 2px; }
 .connection-summary { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; margin-bottom: 14px; padding: 11px; border: 1px solid #39403b; border-radius: 5px; background: #111411; }
 .connection-summary > div { padding-top: 1px; }
 .connection-summary strong, .connection-summary small { display: block; }

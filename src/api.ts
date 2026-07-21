@@ -48,11 +48,36 @@ export const setApiUrl = (value: string) => {
   localStorage.setItem('editorial-api-url', normalizeApiUrl(value))
 }
 
+type LocalNetworkRequestInit = RequestInit & {
+  targetAddressSpace?: 'local'
+}
+
+export const workerFetchOptions = (baseUrl: string): LocalNetworkRequestInit => {
+  try {
+    return new URL(baseUrl).hostname.endsWith('.ts.net') ? { targetAddressSpace: 'local' } : {}
+  } catch {
+    return {}
+  }
+}
+
+export const describeWorkerError = (error: unknown) => {
+  if (error instanceof DOMException && error.name === 'AbortError') {
+    return 'Worker 连接超时；请确认两台 Mac 都已连接 Tailscale'
+  }
+  const message = error instanceof Error ? error.message : String(error || '未知错误')
+  if (/failed to fetch|networkerror|load failed/i.test(message)) {
+    return '浏览器阻止了 Worker 请求；请允许本站访问「本地网络」，并确认 Air 已连接 Tailscale'
+  }
+  return message
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const controller = new AbortController()
-  const timeout = window.setTimeout(() => controller.abort(), 1400)
+  const timeout = window.setTimeout(() => controller.abort(), 10000)
+  const baseUrl = getApiUrl()
   try {
-    const response = await fetch(`${getApiUrl()}${path}`, {
+    const response = await fetch(`${baseUrl}${path}`, {
+      ...workerFetchOptions(baseUrl),
       ...init,
       signal: init?.signal || controller.signal,
       headers: {
@@ -73,8 +98,13 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), 45000)
+  const baseUrl = getApiUrl()
   try {
-    const response = await fetch(`${getApiUrl()}${path}`, { ...init, signal: controller.signal })
+    const response = await fetch(`${baseUrl}${path}`, {
+      ...workerFetchOptions(baseUrl),
+      ...init,
+      signal: controller.signal,
+    })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
       throw new Error(payload.detail || response.statusText)

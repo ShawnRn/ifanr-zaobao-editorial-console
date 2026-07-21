@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { apiUrlProblem, normalizeApiUrl } from './api'
+import { apiUrlProblem, describeWorkerError, normalizeApiUrl, workerFetchOptions } from './api'
 
 
 describe('Worker URL handling', () => {
@@ -17,5 +17,16 @@ describe('Worker URL handling', () => {
 
   it('explains mixed-content failures on GitHub Pages', () => {
     expect(apiUrlProblem('http://127.0.0.1:8765', 'https:')).toContain('无法连接 HTTP Worker')
+  })
+
+  it('declares Tailscale requests as local-network access', () => {
+    expect(workerFetchOptions('https://shawn-rains-macbook-pro.tail42e7aa.ts.net')).toEqual({
+      targetAddressSpace: 'local',
+    })
+    expect(workerFetchOptions('http://127.0.0.1:8765')).toEqual({})
+  })
+
+  it('explains browser local-network blocking', () => {
+    expect(describeWorkerError(new TypeError('Failed to fetch'))).toContain('本地网络')
   })
 })
