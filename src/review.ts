@@ -51,6 +51,20 @@ export type EditorialReviewExport = {
 
 const editableFields = ['title', 'body', 'category', 'status', 'event_date', 'disclosed_at'] as const
 
+export function createClientId(): string {
+  if (typeof globalThis.crypto?.randomUUID === 'function') return globalThis.crypto.randomUUID()
+  const bytes = new Uint8Array(16)
+  if (typeof globalThis.crypto?.getRandomValues === 'function') {
+    globalThis.crypto.getRandomValues(bytes)
+  } else {
+    for (let index = 0; index < bytes.length; index += 1) bytes[index] = Math.floor(Math.random() * 256)
+  }
+  bytes[6] = (bytes[6] & 0x0f) | 0x40
+  bytes[8] = (bytes[8] & 0x3f) | 0x80
+  const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('')
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
+}
+
 function storyDigest(story: Story): string {
   const payload = [story.fingerprint, story.title, story.body, story.category, story.source_url, story.updated_at || ''].join('\n')
   let hash = 2166136261
@@ -166,8 +180,8 @@ export function buildReviewExport(base: Issue, current: Issue, reviewSessionId?:
   return {
     schema: 'ifanr_editorial_review',
     schema_version: 1,
-    export_id: crypto.randomUUID(),
-    review_session_id: reviewSessionId || crypto.randomUUID(),
+    export_id: createClientId(),
+    review_session_id: reviewSessionId || createClientId(),
     issue_id: base.id,
     publication_date: base.publication_date,
     base_revision: base.revision,

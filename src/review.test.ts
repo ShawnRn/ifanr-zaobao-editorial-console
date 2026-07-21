@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { applyReviewOperations, buildReviewExport } from './review'
+import { applyReviewOperations, buildReviewExport, createClientId } from './review'
 import type { Issue, Story } from './types'
 
 vi.stubGlobal('crypto', { randomUUID: () => '12345678-1234-1234-1234-123456789abc' })
@@ -56,6 +56,18 @@ function issue(stories: Story[]): Issue {
 }
 
 describe('buildReviewExport', () => {
+  it('creates ids when randomUUID is unavailable on a local HTTP origin', () => {
+    const originalCrypto = globalThis.crypto
+    vi.stubGlobal('crypto', {
+      getRandomValues: (bytes: Uint8Array) => {
+        bytes.fill(17)
+        return bytes
+      },
+    })
+    expect(createClientId()).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)
+    vi.stubGlobal('crypto', originalCrypto)
+  })
+
   it('never treats an absent story as an implicit deletion', () => {
     const before = issue([story(), story({ id: 'story-b', fingerprint: 'fingerprint-b', title: '第二条', position: 1 })])
     const current = issue([story()])
