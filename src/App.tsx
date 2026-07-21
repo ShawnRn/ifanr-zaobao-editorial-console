@@ -34,7 +34,6 @@ import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandl
 import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
-import { demoIssue, demoWeekend } from './demo'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
@@ -304,7 +303,7 @@ function DetailPanel({
           <button type="button" disabled={staticMode} title={staticMode ? '可以直接编辑正文，或在审稿单中交给下一轮处理' : ''} onClick={() => void onAction('rewrite')}><WandSparkles size={16} />按早报 prompt 重写</button>
           <button type="button" disabled={staticMode} title={staticMode ? '找图由主 Mac 执行' : ''} onClick={() => void onAction('image-search')}><Image size={16} />找图</button>
         </div>
-        {staticMode ? <p className="static-mode-note">当前是 Pages 演示模式。可以浏览和试用编辑界面；连接 Worker 后才会加载真实刊期并保存修改。</p> : null}
+        {staticMode ? <p className="static-mode-note">当前显示当天 Bot 稿的 Pages 快照。可以在浏览器内审稿并导出审稿单；连接 Worker 后才会把修改直接保存到主 Mac。</p> : null}
         {activeJob ? <div className={`job-banner ${activeJob.state}`}><LoaderCircle size={16} className={activeJob.state === 'running' ? 'spin' : ''} /><span>{activeJob.message || activeJob.action}</span><strong>{activeJob.progress}%</strong></div> : null}
         <label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
         <textarea id="story-body" className="body-editor" value={body} onChange={(event) => setBody(event.target.value)} onBlur={() => body !== story.body && void onPatch({ body })} />
@@ -356,6 +355,22 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
     void run('url', () => api.downloadStoryImage(story.id, value))
   }
 
+  useEffect(() => {
+    const pasteImage = (event: ClipboardEvent) => {
+      const item = Array.from(event.clipboardData?.items || []).find((candidate) => candidate.kind === 'file' && candidate.type.startsWith('image/'))
+      const file = item?.getAsFile()
+      if (!file || busy !== null) return
+      event.preventDefault()
+      if (staticMode) {
+        setMessage('连接 Worker 后才能粘贴配图')
+        return
+      }
+      uploadFile(file)
+    }
+    window.addEventListener('paste', pasteImage)
+    return () => window.removeEventListener('paste', pasteImage)
+  }, [story.id, staticMode, busy])
+
   return (
     <section className="detail-section image-section">
       <div className="section-heading"><Image size={16} /><h4>配图</h4><span>{image ? '已配图' : '未配图'}</span></div>
@@ -386,8 +401,8 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
         <input type="url" value={url} disabled={staticMode || busy !== null} placeholder="粘贴原图 URL" onChange={(event) => setUrl(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); useUrl() } }} />
         <button type="button" disabled={staticMode || busy !== null} onClick={useUrl}>{busy === 'url' ? <LoaderCircle size={15} className="spin" /> : <Download size={15} />}下载并使用</button>
       </div>
-      <p className="image-help">保留原始文件与分辨率；URL 图片会先下载到主 Mac，再进入飞书文档。</p>
-      {staticMode ? <p className="image-message">连接 Worker 后才能修改配图。</p> : message ? <p className={`image-message ${message.includes('已') ? 'success' : 'error'}`}>{message}</p> : null}
+      <p className="image-help">可直接按 <kbd>⌘V</kbd> 粘贴剪贴板图片；保留原始文件与分辨率，URL 图片会先下载到主 Mac。</p>
+      {staticMode ? <p className="image-message">连接 Worker 后才能粘贴或修改配图。</p> : message ? <p className={`image-message ${message.includes('已') ? 'success' : 'error'}`}>{message}</p> : null}
     </section>
   )
 }
@@ -482,7 +497,7 @@ export function App() {
   const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null)
   const [movingStoryId, setMovingStoryId] = useState<string | null>(null)
   const [jobs, setJobs] = useState<Record<string, Job>>({})
-  const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>(demoWeekend)
+  const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
   const [showExport, setShowExport] = useState(false)
   const [handoff, setHandoff] = useState<AutomationHandoff | null>(null)
   const [exporting, setExporting] = useState(false)
@@ -509,20 +524,30 @@ export function App() {
     setError('')
     const workerUrl = getApiUrl()
     const forceStatic = !preferWorker && new URLSearchParams(window.location.search).get('static') === '1'
-    const showPagesFallback = (detail: string) => {
-      const fallback = structuredClone(demoIssue)
-      setWorkerConnection({ status: 'pages', detail, url: workerUrl })
+    const showPagesFallback = async (detail: string) => {
+      const snapshot = await api.staticIssue()
+      const fallback = issueWithMetrics(snapshot, snapshot.stories)
+      const snapshotTime = String(fallback.diagnostics?.snapshot_generated_at || fallback.updated_at || '')
+      setWorkerConnection({ status: 'pages', detail: `${detail} · ${fallback.publication_date}${snapshotTime ? ` · 快照 ${snapshotTime}` : ''}`, url: workerUrl })
       setIssue(fallback)
       setBaseIssue(structuredClone(fallback))
       setReviewSessionId('')
       setSelectedStoryId(null)
-      setWeekend(structuredClone(demoWeekend))
+      setWeekend({})
       setDataMode('static')
       setRepoRuntimeAccess(false)
       setError('')
     }
     if (forceStatic) {
-      showPagesFallback('当前显示公开演示刊期；连接 Worker 后加载真实早报')
+      try {
+        await showPagesFallback('当前显示当天 Bot 稿的只读 Pages 快照')
+      } catch (snapshotError) {
+        setIssue(null)
+        setBaseIssue(null)
+        setDataMode('offline')
+        setWorkerConnection({ status: 'failed', detail: 'Pages 尚未生成当天早报快照', url: workerUrl })
+        setError(snapshotError instanceof Error ? snapshotError.message : 'Pages 快照读取失败')
+      }
       setLoading(false)
       return
     }
@@ -550,7 +575,15 @@ export function App() {
       api.weekend().then(setWeekend).catch(() => setWeekend({}))
     } catch (loadError) {
       const workerMessage = loadError instanceof Error ? loadError.message : 'Worker 不可达'
-      showPagesFallback(`Worker 未连接，当前显示公开演示刊期：${workerMessage}`)
+      try {
+        await showPagesFallback(`Worker 未连接，当前显示 Pages 快照：${workerMessage}`)
+      } catch (snapshotError) {
+        setIssue(null)
+        setBaseIssue(null)
+        setDataMode('offline')
+        setWorkerConnection({ status: 'failed', detail: `Worker 与 Pages 快照均不可达：${workerMessage}`, url: workerUrl })
+        setError(snapshotError instanceof Error ? snapshotError.message : 'Pages 快照读取失败')
+      }
     } finally { setLoading(false) }
   }, [])
 
@@ -877,7 +910,7 @@ export function App() {
     : workerConnection.status === 'checking'
       ? '正在检测'
       : workerConnection.status === 'pages'
-        ? 'Pages 演示'
+        ? 'Pages 快照'
         : 'Worker 未连接'
 
   return (
@@ -929,7 +962,7 @@ export function App() {
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
             {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
-              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.demo ? '公开演示内容 · 连接 Worker 后加载真实飞书 Bot 稿' : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
+              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
               <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>

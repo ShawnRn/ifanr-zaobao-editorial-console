@@ -2,6 +2,8 @@ import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryStatus } 
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
 
+const staticAssetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
+
 export type WorkerHealth = {
   ok: boolean
   mode: string
@@ -86,6 +88,11 @@ async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
 export const api = {
   health: () => request<WorkerHealth>('/health'),
   currentIssue: () => request<Issue>('/api/issues/current'),
+  staticIssue: async () => {
+    const response = await fetch(`${staticAssetUrl('data/current-issue.json')}?v=${Date.now()}`, { cache: 'no-store' })
+    if (!response.ok) throw new Error('Pages 尚未生成当天早报快照')
+    return response.json() as Promise<Issue>
+  },
   importLatest: () => request<Issue>('/api/issues/import', { method: 'POST', body: '{}' }),
   getIssue: (id: string) => request<Issue>(`/api/issues/${id}`),
   refreshIssue: (id: string, runPreflight: boolean) =>
