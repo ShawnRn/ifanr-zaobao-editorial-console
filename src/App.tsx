@@ -26,7 +26,7 @@ import {
   WandSparkles,
   X,
 } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useState, type MouseEventHandler, type ReactNode } from 'react'
 import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
@@ -70,7 +70,7 @@ function IconButton({
   disabled = false,
 }: {
   title: string
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
   active?: boolean
   disabled?: boolean
@@ -145,7 +145,7 @@ function LinkedSourceLine({ story }: { story: Story }) {
   )
 }
 
-function IssueArticle({
+export function IssueArticle({
   story,
   active,
   onOpen,
@@ -184,8 +184,8 @@ function IssueArticle({
       <div className="article-body"><BodyBlocks body={story.body} /></div>
       <LinkedSourceLine story={story} />
       <div className="article-hover-tools">
-        <IconButton title="编辑与核验" onClick={onOpen}><FileCheck2 size={15} /></IconButton>
-        <IconButton title="移出早报稿" onClick={onExclude}><Trash2 size={15} /></IconButton>
+        <IconButton title="编辑与核验" onClick={(event) => { event.stopPropagation(); onOpen() }}><FileCheck2 size={15} /></IconButton>
+        <IconButton title="移出早报稿" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={15} /></IconButton>
       </div>
     </article>
   )
