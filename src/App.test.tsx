@@ -62,6 +62,27 @@ describe('App', () => {
     expect(onOpen).not.toHaveBeenCalled()
   })
 
+  it('moves a story to another category without opening the detail panel', () => {
+    const onOpen = vi.fn()
+    const onMoveCategory = vi.fn()
+    const story: Story = {
+      id: 'story-1', issue_id: 'issue-1', fingerprint: 'fingerprint-1', title: '测试选题', body: '正文',
+      category: '重磅', status: 'ready', selected: true, position: 0, score: 100,
+      source_url: '', source_name: '', source_type: '', source_quality: 'primary', confidence: 1,
+      cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
+      image_url: '', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
+    }
+    render(<IssueArticle story={story} active={false} onMoveCategory={onMoveCategory} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+
+    fireEvent.change(screen.getByLabelText('移动到其他栏目'), { target: { value: '大公司' } })
+
+    expect(onMoveCategory).toHaveBeenCalledWith('大公司')
+    expect(onOpen).not.toHaveBeenCalled()
+    expect(screen.queryByRole('option', { name: '重磅' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('option', { name: '观点' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('option', { name: 'AI/开发者' })).not.toBeInTheDocument()
+  })
+
   it('closes settings after an outside click with an exit animation', async () => {
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: '连接设置' }))

@@ -12,6 +12,7 @@ import {
   Eye,
   FileCheck2,
   Film,
+  FolderInput,
   Gamepad2,
   Image,
   Library,
@@ -30,13 +31,14 @@ import {
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandler, type ReactNode } from 'react'
 import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
+import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
 
-const categories = ['全部', '重磅', '大公司', 'AI/开发者', '观点', '新产品', '新消费', '好看的']
-const categoryOrder = new Map(categories.slice(1).map((value, index) => [value, index]))
+const categories = ['全部', ...publicationCategories]
+const categoryOrder = publicationCategoryOrder
 
 const statusLabel: Record<string, string> = {
   discovered: '待判断',
@@ -159,6 +161,7 @@ export function IssueArticle({
   canMoveDown = false,
   onMoveUp,
   onMoveDown,
+  onMoveCategory,
   moving = false,
 }: {
   story: Story
@@ -171,6 +174,7 @@ export function IssueArticle({
   canMoveDown?: boolean
   onMoveUp?: () => void
   onMoveDown?: () => void
+  onMoveCategory?: (category: string) => void
   moving?: boolean
 }) {
   const image = story.image_path ? api.storyImageUrl(story.id) : story.image_url
@@ -197,6 +201,13 @@ export function IssueArticle({
       <div className="article-body"><BodyBlocks body={story.body} /></div>
       <LinkedSourceLine story={story} />
       <div className="article-hover-tools">
+        <label className="category-move-control" title="移动到其他栏目" onClick={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()}>
+          <FolderInput size={15} />
+          <select aria-label="移动到其他栏目" value="" onChange={(event) => { event.stopPropagation(); if (event.target.value) onMoveCategory?.(event.target.value) }}>
+            <option value="" disabled>移动到其他栏目</option>
+            {categories.slice(1).filter((category) => category !== story.category).map((category) => <option value={category} key={category}>{category}</option>)}
+          </select>
+        </label>
         {canMoveUp ? <IconButton title="上移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveUp?.() }}><ArrowUp size={15} /></IconButton> : null}
         {canMoveDown ? <IconButton title="下移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveDown?.() }}><ArrowDown size={15} /></IconButton> : null}
         {(canMoveUp || canMoveDown) ? <span className="article-tool-divider" /> : null}
@@ -366,12 +377,13 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, onClos
 }
 
 function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
+  const normalizedStories = stories.map(normalizeStoryCategory)
   return {
     ...issue,
-    stories,
-    selected_count: stories.filter((story) => story.selected && story.status !== 'excluded').length,
-    ready_count: stories.filter((story) => story.selected && story.status === 'ready').length,
-    review_count: stories.filter((story) => story.status === 'needs_review' || story.changed_since_review).length,
+    stories: normalizedStories,
+    selected_count: normalizedStories.filter((story) => story.selected && story.status !== 'excluded').length,
+    ready_count: normalizedStories.filter((story) => story.selected && story.status === 'ready').length,
+    review_count: normalizedStories.filter((story) => story.status === 'needs_review' || story.changed_since_review).length,
   }
 }
 
@@ -440,8 +452,9 @@ export function App() {
       setRepoRuntimeAccess(health.repo_runtime_access)
       let current: Issue
       try { current = await api.currentIssue() } catch { current = await api.importLatest() }
-      setIssue(current)
-      setBaseIssue(structuredClone(current))
+      const normalizedIssue = issueWithMetrics(current, current.stories)
+      setIssue(normalizedIssue)
+      setBaseIssue(structuredClone(normalizedIssue))
       setReviewSessionId('')
       setSelectedStoryId(null)
       const identity = health.identity || ''
@@ -521,13 +534,11 @@ export function App() {
     const normalized = query.trim().toLowerCase()
     return issue.stories.filter((story) => story.selected && story.status !== 'excluded')
       .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
-      .sort((a, b) => (categoryOrder.get(a.category) ?? 99) - (categoryOrder.get(b.category) ?? 99) || a.position - b.position)
+      .sort(comparePublicationStories)
   }, [issue, query])
 
   const groupedDraft = useMemo(() => {
-    const groups = new Map<string, Story[]>()
-    draftStories.forEach((story) => groups.set(story.category, [...(groups.get(story.category) || []), story]))
-    return categories.slice(1).filter((item) => groups.has(item)).map((item) => [item, groups.get(item) || []] as const)
+    return groupPublicationStories(draftStories)
   }, [draftStories])
 
   const candidates = useMemo(() => {
@@ -612,6 +623,28 @@ export function App() {
     } catch (moveError) {
       setIssue(issue)
       setError(moveError instanceof Error ? moveError.message : '调整顺序失败')
+    }
+  }
+
+  const moveStoryToCategory = async (storyId: string, targetCategory: string) => {
+    if (!issue || !categoryOrder.has(targetCategory)) return
+    const story = issue.stories.find((item) => item.id === storyId)
+    if (!story || story.category === targetCategory) return
+    const targetPosition = issue.stories
+      .filter((item) => item.selected && item.status !== 'excluded' && item.category === targetCategory)
+      .reduce((maximum, item) => Math.max(maximum, item.position), -1) + 1
+    const previous = issue
+    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => item.id === storyId ? { ...item, category: targetCategory, position: targetPosition } : item))
+    setIssue(optimistic)
+    setMovingStoryId(storyId)
+    window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
+    if (dataMode === 'static') return
+    try {
+      const updated = await api.patchStory(storyId, { category: targetCategory, position: targetPosition })
+      setIssue((current) => current ? issueWithMetrics(current, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
+    } catch (moveError) {
+      setIssue(previous)
+      setError(moveError instanceof Error ? moveError.message : '移动栏目失败')
     }
   }
 
@@ -824,7 +857,7 @@ export function App() {
             {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>当前飞书 Bot 稿 · {issue?.selected_count || 0} 条 · {dataMode === 'static' ? '远程审稿修改将导出到飞书' : '自动化更新后保留人工编辑'}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
+              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后才会出现在“早报稿”。</p></div><strong>{candidates.length}</strong></header>

@@ -1,4 +1,5 @@
 import type { Issue, Story } from './types'
+import { comparePublicationStories, publicationCategories } from './categories'
 
 export type ReviewOperation =
   | {
@@ -217,20 +218,19 @@ export function applyReviewOperations(base: Issue, operations: ReviewOperation[]
 }
 
 export function renderIssueMarkdown(issue: Issue): string {
-  const order = ['重磅', '大公司', 'AI/开发者', '观点', '新产品', '新消费', '好看的']
   const stories = issue.stories.filter((story) => story.selected && story.status !== 'excluded')
-  const sections = order.map((category) => {
+  const sections = publicationCategories.map((category) => {
     const blocks = stories
       .filter((story) => story.category === category)
-      .sort((a, b) => a.position - b.position)
+      .sort(comparePublicationStories)
       .map((story) => {
         const sourceLine = typeof story.metadata.source_line === 'string'
           ? story.metadata.source_line
           : story.source_url ? `🔗 原文链接：${story.source_url}` : ''
         return [`### ${story.title}`, story.body.trim(), sourceLine].filter(Boolean).join('\n\n')
       })
-    return blocks.length ? `## ${category}\n\n${blocks.join('\n\n')}` : ''
-  }).filter(Boolean)
+    return [`## ${category}`, ...blocks].join('\n\n')
+  })
   return [`# 早报｜${issue.publication_date}`, ...sections].join('\n\n').trim() + '\n'
 }
 
