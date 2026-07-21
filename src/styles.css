@@ -147,6 +147,8 @@ a { color: inherit; }
 .action-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin: 14px 0; }
 .action-strip button { min-width: 0; min-height: 35px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: #545c57; font-size: 10px; cursor: pointer; }
 .action-strip button:hover { border-color: #7d8881; color: var(--ink); }
+.action-strip button:disabled { cursor: not-allowed; opacity: .42; }
+.static-mode-note { margin: 2px 0 18px; padding: 10px 12px; border-left: 2px solid var(--accent); background: #f4f5f3; color: var(--muted); font-size: 11px; line-height: 1.55; }
 .job-banner { min-height: 38px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; margin: 10px 0; padding: 8px 10px; border: 1px solid #84a9b6; border-radius: 4px; background: #e2f0f4; color: #276172; font-size: 11px; }
 .job-banner.failed { border-color: #c3938f; background: #f5e5e3; color: #8e3d37; }
 .detail-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
@@ -211,6 +213,8 @@ a { color: inherit; }
 .export-option strong { font-size: 13px; }
 .export-option small { margin-top: 5px; color: var(--quiet); font-size: 10px; line-height: 1.5; }
 .handoff-success { display: flex; align-items: flex-start; gap: 8px; margin: 0 20px 18px; padding: 11px 12px; border: 1px solid #b8d0c0; border-radius: 5px; background: #eef5f0; color: #2b6044; font-size: 11px; line-height: 1.55; }
+.review-safety { display: flex; align-items: flex-start; gap: 8px; margin: 0 20px 18px; padding: 11px 12px; border: 1px solid #c6d8cd; border-radius: 5px; background: #f2f7f3; color: #416151; font-size: 11px; line-height: 1.55; }
+.review-safety svg { flex: 0 0 auto; }
 .export-dialog footer { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--line); }
 .secondary-button { min-height: 34px; padding: 0 14px; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--muted); cursor: pointer; }
 .spin { animation: spin 1s linear infinite; }

@@ -1,0 +1,393 @@
+{
+  "one_fun_thing": {
+    "label": "One Fun Thing",
+    "candidates": [
+      {
+        "id": "16f01186a85b",
+        "title": "The Shape of Apps：macOS 图标如何走进 Squircle Jail",
+        "urls": [
+          "https://parakeet.co/blog/the-shape-of-apps"
+        ],
+        "discovered_at": "2026-07-17T06:08:47+08:00",
+        "source_date": "2026-07-15",
+        "why": "图标设计师以具体历史版本、图标案例和制作成本解释 macOS 统一轮廓的得失，机制清楚且视觉性强。",
+        "facts": [
+          "Louie Mantia 对比 Big Sur 与 Tahoe 的图标规则，归纳三类 Squircle Jail，并指出 Mac 图标从 128×128 增长至 1024×1024 像素。"
+        ],
+        "score": 8.6,
+        "status": "active",
+        "last_reviewed_at": "2026-07-17T06:08:47+08:00"
+      },
+      {
+        "id": "6ca453733a7f",
+        "title": "URKL 人形机器人自由格斗联赛",
+        "urls": [
+          "https://www.ithome.com/0/977/823.htm"
+        ],
+        "discovered_at": "2026-07-17T09:10:29+08:00",
+        "source_date": null,
+        "why": "1V1 五回合、战术暂停可现场维修，机器人掉头后仍依靠躯干系统继续出拳，趣味机制和赛制都清楚。",
+        "facts": [
+          "揭幕战于 7 月 16 日在深圳举行，32 支队伍亮相。",
+          "赛季持续至 2026 年底，总奖金池 1400 万元。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      },
+      {
+        "id": "604c8b0d375c",
+        "title": "宾利为纯电 Torcal 写了一套动态交响乐",
+        "urls": [
+          "https://www.ithome.com/0/977/851.htm"
+        ],
+        "discovered_at": "2026-07-17T09:10:29+08:00",
+        "source_date": null,
+        "why": "把 V8 节奏拆解成鼓、贝斯和中提琴，并让音乐随油门动作变化，体验机制具体。",
+        "facts": [
+          "Torcal 将于 9 月 23 日在伦敦首秀。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      },
+      {
+        "id": "6846e2e68aa9",
+        "title": "泰晤士河泥滩寻宝：潮汐把伦敦旧物推回岸边",
+        "urls": [
+          "https://www.newyorker.com/news/letter-from-the-uk/how-mudlarking-became-londons-hottest-hobby"
+        ],
+        "discovered_at": "2026-07-17T20:08:02+08:00",
+        "source_date": null,
+        "why": "潮汐不断暴露历史遗物，参与者在河岸寻找硬币、陶片和印刷铅字；社媒走红后又催生稀缺许可、排队与圈内竞争，趣味机制和互联网文化都很具体。",
+        "facts": [
+          "伦敦港务局把许可人数上限定为约 4000 人，等候名单一度达到 1 万人后关闭。",
+          "泥滩寻宝者在泰晤士河岸发现过都铎时期戒指、中世纪朝圣徽章、罗马骨骰和 Doves Press 铅字。",
+          "泰晤士河无氧淤泥保存物件，潮汐和河道变化持续把沉积物推向表面。"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-17T20:08:02+08:00"
+      },
+      {
+        "id": "8c669e7531c2",
+        "title": "ArtfulType：给 68K Macintosh 写的 Markdown 编辑器",
+        "urls": [
+          "https://github.com/ActionRetro/ArtfulType"
+        ],
+        "discovered_at": "2026-07-18T06:04:10+08:00",
+        "source_date": "2026-07-18",
+        "why": "在 System 6/7 真机上实现边写边把 Markdown 转成富文本，还同时提供 BlueSCSI 硬盘镜像与 800K 软盘镜像，老硬件与现代写作格式的组合有明确可体验机制。",
+        "facts": [
+          "项目支持 Mac Plus 等 68K Macintosh，Writer 模式实时隐藏 Markdown 语法并显示粗体、斜体、标题和链接；可从 BlueSCSI 镜像或 800K 软盘启动，保存为普通 .md 文本。"
+        ],
+        "score": 8.5,
+        "status": "active",
+        "last_reviewed_at": "2026-07-18T06:04:10+08:00"
+      },
+      {
+        "id": "0ce8e8d160ab",
+        "title": "Decoy Font：近看与远看读出不同字母的反 AI 字体",
+        "urls": [
+          "https://www.mixfont.com/experiments/decoy-font"
+        ],
+        "discovered_at": "2026-07-18T15:06:49+08:00",
+        "source_date": "2026-07-16",
+        "why": "把混合图像的空间频率错觉做成可安装 TTF，用户可直接输入、下载并拿不同视觉模型实测，趣味机制完整且可亲手体验。",
+        "facts": [
+          "每个字母由清晰的前景诱饵轮廓与模糊低频背景叠加，观看距离变化会让人读到不同信息。",
+          "官方提供免费 TTF 和在线 playground，并明确说明强智能体或针对性提示仍可能解码，不能当作绝对安全工具。"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-18T15:06:49+08:00"
+      },
+      {
+        "id": "6ad3d4f12225",
+        "title": "AWS 预估账单错误生成万亿美元费用",
+        "urls": [
+          "https://www.landian.news/archives/113971.html"
+        ],
+        "discovered_at": "2026-07-18T20:08:42+08:00",
+        "source_date": null,
+        "why": "计费单位异常让预估账单膨胀约十亿倍，用户看到数亿至万亿美元的费用但不会实际扣款",
+        "facts": [
+          "AWS 确认问题发生在预估计费子系统，缓解措施已逐步部署，实际扣费不受影响",
+          "开发者推测系统漏掉 GB 单位后按 Byte 计算，账单数值因此可能膨胀约十亿倍"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-18T20:08:42+08:00"
+      },
+      {
+        "id": "af8bceb57f6b",
+        "title": "Honda ProZision 自主电动割草机",
+        "urls": [
+          "https://electrek.co/2026/07/18/honda-goes-all-in-on-evs-in-a-multibillion-dollar-market-commercial-lawnmowers"
+        ],
+        "discovered_at": "2026-07-19T06:08:31+08:00",
+        "source_date": "2026-07-18",
+        "why": "驾驶一次即可示教路径，之后由多传感器复现割草路线，机制直观且具可体验性。",
+        "facts": [
+          "ProZision 使用 GPS、激光雷达、雷达和 360 度视觉传感器，可将示教割草路径以约 3 厘米精度复现。",
+          "产品提供 54 英寸与 60 英寸割台，采用 48V 电池系统和五台无刷电机，起价 32999 美元。"
+        ],
+        "score": 8.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-19T06:08:31+08:00"
+      },
+      {
+        "id": "86123fe48914",
+        "title": "ROG XREAL R1：把 240Hz 空间屏幕接到掌机与主机",
+        "urls": [
+          "https://www.ifanr.com/1672380"
+        ],
+        "discovered_at": "2026-07-19T17:09:36+08:00",
+        "source_date": "2026-07-19",
+        "why": "今天完整实测给出了自动透明、电致变色、空间固定、掌机联动和多信号切换的真实体验，机制清楚且适合 One Fun Thing。",
+        "facts": [
+          "爱范儿实测显示，R1 重 91 克，默认 120Hz，240Hz 模式可改善高速运动清晰度但会牺牲文字与菜单锐度；Control Dock 提供两个 HDMI 2.0 和一个 DisplayPort 1.4 输入。"
+        ],
+        "score": 8.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-19T17:09:36+08:00"
+      },
+      {
+        "id": "603949ea71e9",
+        "title": "14 个大模型拿同一笔虚拟本金下注世界杯",
+        "urls": [
+          "https://augur-arena.com/how-it-works"
+        ],
+        "discovered_at": "2026-07-19T23:07:59+08:00",
+        "source_date": null,
+        "why": "14 个模型在相同赛程、赔率、提示词和 1 万美元虚拟本金下公开下注，每个模型保留独立策略笔记，赛果直接结算，趣味机制清楚且结果可验证。",
+        "facts": [
+          "本赛季覆盖 2026 世界杯全部 104 场比赛，14 个模型各以 10000 美元虚拟本金开始。",
+          "每个开球时段前 45 分钟并行运行，模型可查看对手已结算下注，但各自的策略笔记保持私有。"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-19T23:07:59+08:00"
+      },
+      {
+        "id": "e84356e07537",
+        "title": "Four Tet 的符号化名专辑在不同平台显示不同字形",
+        "urls": [
+          "https://www.theverge.com/entertainment/967696/four-tet-wingdings-album-review"
+        ],
+        "discovered_at": "2026-07-20T06:09:19+08:00",
+        "source_date": null,
+        "why": "同一串不可发音符号在 Apple Music、YouTube Music 与 Bandcamp 呈现不同字形，形成可感知的平台与音乐文化机制",
+        "facts": [
+          "该符号化名下的作品已累计数百万次播放，并被整理为正式发行的专辑",
+          "第五首曾由 Fred Again 在 Boiler Room 演出中以 Feelings 播放"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-20T06:09:19+08:00"
+      },
+      {
+        "id": "03ccdaf3c662",
+        "title": "Psyche 飞船借火星引力助推并拍下一个月延时影像",
+        "urls": [
+          "https://science.nasa.gov/blogs/psyche/2026/07/17/nasas-psyche-mission-delivers-mars-flyby-data-time-lapse-video"
+        ],
+        "discovered_at": "2026-07-20T06:09:19+08:00",
+        "source_date": null,
+        "why": "飞船把火星当成目标小行星的彩排场，同时用多光谱相机记录从新月形火星到表面细节的完整接近过程",
+        "facts": [
+          "Psyche 于 5 月 15 日从距离火星约 4609 公里处飞掠并借力改变轨道",
+          "相机拍到南极冰盖、Huygens 双环陨石坑以及火卫一和火卫二",
+          "飞船计划于 2029 年夏季抵达小行星 Psyche"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-20T06:09:19+08:00"
+      },
+      {
+        "id": "c61bb9b18bc2",
+        "title": "1010Benja 用数百轮 Suno 与 Ableton 往返制作一首歌",
+        "urls": [
+          "https://www.theverge.com/entertainment/967678/1010benja-semiramis-dream-suno-ai-music"
+        ],
+        "discovered_at": "2026-07-20T06:09:19+08:00",
+        "source_date": null,
+        "why": "创作者先写词、演唱和制作节拍，再把素材在 Suno 与 Ableton 之间反复生成、筛选、编辑与加层，展示了不同于一键生成的具体工作流",
+        "facts": [
+          "1010Benja 估计 Semiramis Dream 经历了数百轮迭代",
+          "Deezer 将歌曲标记为 AI 生成内容，创作者公开承认使用 Suno"
+        ],
+        "score": 0.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-20T06:09:19+08:00"
+      },
+      {
+        "id": "e6fba9ea620e",
+        "title": "Seed Audio 1.0：一条指令编排人声、音效与环境声",
+        "urls": [
+          "https://seed.bytedance.com/zh/seedaudio1_0"
+        ],
+        "discovered_at": "2026-07-20T16:23:20+08:00",
+        "source_date": "2026-07-20",
+        "why": "它把原本要分模型生成、人工拼接和混音的完整声音场景放进统一框架，100ms 时间线控制和约 2 分钟连续生成具有清楚可体验的趣味机制。",
+        "facts": [
+          "字节 Seed 官方页面显示，Seed Audio 1.0 可统一建模人声、音效和环境声，支持 100ms 时间控制、单次约 2 分钟生成、继续延长和 20 多种语言。"
+        ],
+        "score": 8.5,
+        "status": "active",
+        "last_reviewed_at": "2026-07-20T16:23:20+08:00"
+      },
+      {
+        "id": "faf6aa105d57",
+        "title": "Utopai 用 AI 辅助制作儿童书《The Most Serious Fart》动画长片",
+        "urls": [
+          "https://variety.com/2026/film/news/utopai-studios-ai-animated-movie-most-serious-fart-1236816485"
+        ],
+        "discovered_at": "2026-07-20T23:12:16+08:00",
+        "source_date": "2026-07-20",
+        "why": "题材荒诞但制作边界明确：AI 仅作为人类动画师和插画师的工具，可用于讨论 AI 电影制作如何进入原创儿童动画。",
+        "facts": [
+          "Variety 报道，Mike Bender 将自编自导 2023 年儿童书改编动画长片，Utopai 计划院线上映，并明确由人类动画师与插画师创作、AI 只作辅助工具。"
+        ],
+        "score": 8.4,
+        "status": "active",
+        "last_reviewed_at": "2026-07-20T23:12:16+08:00"
+      }
+    ]
+  },
+  "book": {
+    "label": "买书不读指南",
+    "candidates": [
+      {
+        "id": "550c83351407",
+        "title": "Worry Doll",
+        "urls": [
+          "https://www.theguardian.com/books/2026/jul/17/worry-doll-by-laura-mcphee-browne-review-a-sensual-sinister-novel-about-the-horrors-of-desire"
+        ],
+        "discovered_at": "2026-07-17T09:10:47+08:00",
+        "source_date": null,
+        "why": "以欲望、身体与控制为主轴的当周新书书评，具体对象和叙事材料明确。",
+        "facts": [
+          "作者 Laura McPhee-Browne，书评发表于 7 月 17 日。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      },
+      {
+        "id": "4b2bcf420562",
+        "title": "The Anniversary",
+        "urls": [
+          "https://www.theguardian.com/books/2026/jul/13/the-anniversary-by-andrea-bajani-review-meet-the-wearily-predictable-parents"
+        ],
+        "discovered_at": "2026-07-17T09:10:47+08:00",
+        "source_date": null,
+        "why": "小说从断绝家庭联系十年后的回望切入，围绕父权控制、母亲沉默与创伤记忆展开。",
+        "facts": [
+          "作者 Andrea Bajani，英文版书评发表于 7 月 13 日。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      }
+    ]
+  },
+  "watch": {
+    "label": "周末看什么",
+    "candidates": [
+      {
+        "id": "8b57f963ee2e",
+        "title": "Heartstopper Forever",
+        "urls": [
+          "https://media.netflix.com/en/only-on-netflix/82040750"
+        ],
+        "discovered_at": "2026-07-17T09:10:46+08:00",
+        "source_date": null,
+        "why": "三季剧集用一部电影收束，7 月 17 日已上线 Netflix，主创与剧情承接明确。",
+        "facts": [
+          "Alice Oseman 编剧，Kit Connor 与 Joe Locke 回归。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      },
+      {
+        "id": "29658888d651",
+        "title": "Miroirs No. 3",
+        "urls": [
+          "https://mubi.com/en/us/films/miroirs-no-3"
+        ],
+        "discovered_at": "2026-07-17T09:10:46+08:00",
+        "source_date": null,
+        "why": "Christian Petzold 与 Paula Beer 第四次合作，7 月 17 日上线 MUBI，平台评分与可观看信息齐全。",
+        "facts": [
+          "MUBI 用户评分 7.4/10，片长 86 分钟。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      },
+      {
+        "id": "7fb47c1a0423",
+        "title": "《孽欲杀人夜》4K 修复最终剪辑版",
+        "urls": [
+          "https://variety.com/2026/film/columns/manhunter-the-final-cut-the-greatest-thriller-of-our-time-1236815424"
+        ],
+        "discovered_at": "2026-07-19T09:11:34+08:00",
+        "source_date": "2026-07-19",
+        "why": "7 月 24 日小规模院线上映，40 周年 4K 修复，具备明确可观看时间、主创与版本差异。",
+        "facts": [
+          "Michael Mann 监督的 4K 修复最终剪辑版于 7 月 24 日小规模上映；版本沿用 2003 年导演剪辑结构。"
+        ],
+        "score": 8.5,
+        "status": "active",
+        "last_reviewed_at": "2026-07-19T09:11:34+08:00"
+      }
+    ]
+  },
+  "game": {
+    "label": "游戏推荐",
+    "candidates": [
+      {
+        "id": "9725a906ef9e",
+        "title": "加利宅邸悬案",
+        "urls": [
+          "https://store.steampowered.com/app/3641000/The_Incident_at_Galley_House"
+        ],
+        "discovered_at": "2026-07-17T09:10:47+08:00",
+        "source_date": null,
+        "why": "用回声机器重建 1936 年密室事件，调查机制、平台、评分和现行售价完整。",
+        "facts": [
+          "7 月 14 日上线 Steam；简体中文商店页显示 697 篇购买用户评价中 96% 为好评，Metacritic 82 分。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      },
+      {
+        "id": "7632af8da909",
+        "title": "Palworld 1.0",
+        "urls": [
+          "https://www.metacritic.com/game/palworld"
+        ],
+        "discovered_at": "2026-07-17T09:10:47+08:00",
+        "source_date": null,
+        "why": "正式版把探索、基地建设、伙伴培养和后期内容收束成完整循环，当前可玩且有媒体评价。",
+        "facts": [
+          "7 月 10 日发布 1.0，支持 PC、Xbox 与 PS5。"
+        ],
+        "score": 0.0,
+        "status": "used",
+        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
+        "issue_date": "2026-07-18"
+      }
+    ]
+  }
+}

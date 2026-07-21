@@ -28,6 +28,7 @@ import {
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { api, getApiUrl, setApiUrl } from './api'
+import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
 
 const categories = ['全部', '重磅', '大公司', 'AI/开发者', '观点', '新产品', '新消费', '好看的']
@@ -224,12 +225,14 @@ function DetailPanel({
   onAction,
   onClose,
   activeJob,
+  staticMode,
 }: {
   story: Story
-  onPatch: (patch: Partial<Story>) => Promise<void>
+  onPatch: (patch: Partial<Story>) => Promise<unknown>
   onAction: (action: string, chrome?: boolean) => Promise<void>
   onClose: () => void
   activeJob?: Job
+  staticMode: boolean
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
@@ -257,12 +260,13 @@ function DetailPanel({
           <label><span className="field-label">首次披露</span><input value={story.disclosed_at || ''} onChange={(event) => void onPatch({ disclosed_at: event.target.value })} placeholder="来源首次披露时间" /></label>
         </div>
         <div className="action-strip">
-          <button type="button" onClick={() => void onAction('source-chase')}><Search size={16} />追原始信源</button>
-          <button type="button" onClick={() => void onAction('chrome-read', true)}><Eye size={16} />Chrome 补读</button>
-          <button type="button" onClick={() => void onAction('fact-check')}><ShieldCheck size={16} />事实核验</button>
-          <button type="button" onClick={() => void onAction('rewrite')}><WandSparkles size={16} />按早报 prompt 重写</button>
-          <button type="button" onClick={() => void onAction('image-search')}><Image size={16} />找图</button>
+          <button type="button" disabled={staticMode} title={staticMode ? 'AI 操作由主 Mac 的下一轮自动化执行' : ''} onClick={() => void onAction('source-chase')}><Search size={16} />追原始信源</button>
+          <button type="button" disabled={staticMode} title={staticMode ? 'Chrome 补读只能在主 Mac 执行' : ''} onClick={() => void onAction('chrome-read', true)}><Eye size={16} />Chrome 补读</button>
+          <button type="button" disabled={staticMode} title={staticMode ? '事实核验由主 Mac 的下一轮自动化执行' : ''} onClick={() => void onAction('fact-check')}><ShieldCheck size={16} />事实核验</button>
+          <button type="button" disabled={staticMode} title={staticMode ? '可以直接编辑正文，或在审稿单中交给下一轮处理' : ''} onClick={() => void onAction('rewrite')}><WandSparkles size={16} />按早报 prompt 重写</button>
+          <button type="button" disabled={staticMode} title={staticMode ? '找图由主 Mac 执行' : ''} onClick={() => void onAction('image-search')}><Image size={16} />找图</button>
         </div>
+        {staticMode ? <p className="static-mode-note">当前是 Pages 审稿模式。标题、正文、分类和取舍会写入审稿单；追源、Chrome、核验和找图由主 Mac 执行。</p> : null}
         {activeJob ? <div className={`job-banner ${activeJob.state}`}><LoaderCircle size={16} className={activeJob.state === 'running' ? 'spin' : ''} /><span>{activeJob.message || activeJob.action}</span><strong>{activeJob.progress}%</strong></div> : null}
         <label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
         <textarea id="story-body" className="body-editor" value={body} onChange={(event) => setBody(event.target.value)} onBlur={() => body !== story.body && void onPatch({ body })} />
@@ -325,14 +329,17 @@ function WeekendWorkspace({ data }: { data: Record<string, { label: string; cand
   })}</div>
 }
 
-function ExportDialog({ issue, handoff, busy, onClose, onHandoff }: {
+function ExportDialog({ issue, handoff, busy, staticMode, operationCount, onClose, onMarkdown, onHandoff }: {
   issue: Issue
   handoff: AutomationHandoff | null
   busy: boolean
+  staticMode: boolean
+  operationCount: number
   onClose: () => void
+  onMarkdown: () => void
   onHandoff: () => void
 }) {
-  return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}><div className="export-dialog" role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options"><a className="export-option" href={api.markdownUrl(issue.id)} download><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></a><button className="export-option" type="button" disabled={busy} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>交给下一轮自动化</strong><small>写入本机 handoff，定时任务会在同刊期继承并合并新内容</small></span></button></div>{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
+  return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}><div className="export-dialog" role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options"><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
 }
 
 function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
@@ -347,6 +354,9 @@ function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
 
 export function App() {
   const [issue, setIssue] = useState<Issue | null>(null)
+  const [baseIssue, setBaseIssue] = useState<Issue | null>(null)
+  const [reviewSessionId, setReviewSessionId] = useState('')
+  const [dataMode, setDataMode] = useState<'worker' | 'static' | 'offline'>('offline')
   const [online, setOnline] = useState(false)
   const [publishMode, setPublishMode] = useState('shadow')
   const [repoRuntimeAccess, setRepoRuntimeAccess] = useState(true)
@@ -371,25 +381,92 @@ export function App() {
   const loadIssue = useCallback(async () => {
     setLoading(true)
     setError('')
+    const forceStatic = new URLSearchParams(window.location.search).get('static') === '1'
+    const loadStaticIssue = async () => {
+      const current = await api.staticIssue()
+      const snapshot = structuredClone(current)
+      const snapshotDigest = typeof current.diagnostics?.public_snapshot === 'object'
+        && current.diagnostics.public_snapshot
+        && 'digest' in current.diagnostics.public_snapshot
+        ? String(current.diagnostics.public_snapshot.digest || '')
+        : String(current.revision)
+      const draftKey = `editorial-review-draft:${current.id}:${snapshotDigest}`
+      const sessionKey = `editorial-review-session:${current.id}:${snapshotDigest}`
+      let sessionId = localStorage.getItem(sessionKey)
+      if (!sessionId) {
+        sessionId = crypto.randomUUID()
+        localStorage.setItem(sessionKey, sessionId)
+      }
+      let reviewDraft = current
+      try {
+        const stored = localStorage.getItem(draftKey)
+        if (stored) {
+          const parsed = JSON.parse(stored) as Issue
+          if (parsed.id === current.id && parsed.revision === current.revision) reviewDraft = parsed
+        }
+      } catch {
+        localStorage.removeItem(draftKey)
+      }
+      setIssue(reviewDraft)
+      setBaseIssue(snapshot)
+      setReviewSessionId(sessionId)
+      setOnline(true)
+      setDataMode('static')
+      setPublishMode('pages')
+      setRepoRuntimeAccess(false)
+      setSelectedStoryId(null)
+    }
+    if (forceStatic) {
+      try {
+        await loadStaticIssue()
+      } catch (staticError) {
+        setOnline(false)
+        setDataMode('offline')
+        setError(staticError instanceof Error ? staticError.message : 'Pages 暂无可用刊期包')
+      } finally {
+        setLoading(false)
+      }
+      return
+    }
     try {
       const health = await api.health()
       setOnline(true)
+      setDataMode('worker')
       setPublishMode(health.mode)
       setRepoRuntimeAccess(health.repo_runtime_access)
       let current: Issue
       try { current = await api.currentIssue() } catch { current = await api.importLatest() }
       setIssue(current)
+      setBaseIssue(structuredClone(current))
+      setReviewSessionId('')
       setSelectedStoryId(null)
     } catch (loadError) {
-      setOnline(false)
-      setError(loadError instanceof Error ? loadError.message : '本地 worker 不可达')
+      try {
+        await loadStaticIssue()
+      } catch (staticError) {
+        setOnline(false)
+        setDataMode('offline')
+        const workerMessage = loadError instanceof Error ? loadError.message : '本地 worker 不可达'
+        const staticMessage = staticError instanceof Error ? staticError.message : 'Pages 暂无可用刊期包'
+        setError(`${workerMessage}；${staticMessage}`)
+      }
     } finally { setLoading(false) }
   }, [])
 
   useEffect(() => {
     void loadIssue()
-    api.weekend().then(setWeekend).catch(() => undefined)
+    api.weekend().then(setWeekend).catch(() => api.staticWeekend().then(setWeekend).catch(() => undefined))
   }, [loadIssue])
+
+  useEffect(() => {
+    if (dataMode !== 'static' || !issue || !baseIssue) return
+    const snapshotDigest = typeof baseIssue.diagnostics?.public_snapshot === 'object'
+      && baseIssue.diagnostics.public_snapshot
+      && 'digest' in baseIssue.diagnostics.public_snapshot
+      ? String(baseIssue.diagnostics.public_snapshot.digest || '')
+      : String(baseIssue.revision)
+    localStorage.setItem(`editorial-review-draft:${baseIssue.id}:${snapshotDigest}`, JSON.stringify(issue))
+  }, [baseIssue, dataMode, issue])
 
   const draftStories = useMemo(() => {
     if (!issue) return []
@@ -426,8 +503,11 @@ export function App() {
   const selectedJob = selectedStory ? jobs[selectedStory.id] : undefined
 
   const updateStory = async (storyId: string, patch: Partial<Story>) => {
-    const updated = await api.patchStory(storyId, patch)
+    const existing = issue?.stories.find((story) => story.id === storyId)
+    if (!existing) throw new Error('选题不存在')
+    const updated = dataMode === 'static' ? { ...existing, ...patch } : await api.patchStory(storyId, patch)
     setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
+    return updated
   }
 
   const watchJob = async (storyId: string, job: Job) => {
@@ -454,12 +534,21 @@ export function App() {
     const from = ordered.findIndex((story) => story.id === draggedStoryId)
     const to = ordered.findIndex((story) => story.id === targetId)
     ordered.splice(to, 0, ordered.splice(from, 1)[0])
-    setIssue(await api.reorder(issue.id, ordered.map((story) => story.id), target.category))
+    if (dataMode === 'static') {
+      const positions = new Map(ordered.map((story, index) => [story.id, index]))
+      setIssue(issueWithMetrics(issue, issue.stories.map((story) => positions.has(story.id) ? { ...story, position: positions.get(story.id) || 0 } : story)))
+    } else {
+      setIssue(await api.reorder(issue.id, ordered.map((story) => story.id), target.category))
+    }
     setDraggedStoryId(null)
   }
 
   const adoptCandidate = async (story: Story) => {
     setSelectedStoryId(story.id)
+    if (dataMode === 'static') {
+      await updateStory(story.id, { selected: true, status: story.body.trim() ? 'needs_review' : 'drafting' })
+      return
+    }
     try {
       await updateStory(story.id, { status: 'drafting' })
       const queued = await api.action(story.id, 'rewrite')
@@ -473,6 +562,10 @@ export function App() {
 
   const refresh = async (runPreflight: boolean) => {
     if (!issue) return
+    if (dataMode === 'static') {
+      await loadIssue()
+      return
+    }
     setError('')
     try {
       const job = await api.refreshIssue(issue.id, runPreflight)
@@ -488,6 +581,10 @@ export function App() {
 
   const generateBrand = async (brand: 'appso' | 'ifanr') => {
     if (!issue) return
+    if (dataMode === 'static') {
+      setError('Pages 审稿模式不运行 AI 任务；主 Mac 下一轮会根据审稿单处理。')
+      return
+    }
     setGeneratingBrand(brand)
     setError('')
     try {
@@ -504,6 +601,12 @@ export function App() {
 
   const createHandoff = async () => {
     if (!issue) return
+    if (dataMode === 'static') {
+      if (!baseIssue) return
+      const review = buildReviewExport(baseIssue, issue, reviewSessionId)
+      downloadText(`ifanr-editorial-review-${issue.publication_date}-${review.export_id.slice(0, 8)}.json`, JSON.stringify(review, null, 2) + '\n')
+      return
+    }
     setExporting(true)
     setError('')
     try { setHandoff(await api.handoff(issue.id)) }
@@ -512,6 +615,8 @@ export function App() {
   }
 
   const switchView = (next: View) => { setView(next); setSelectedStoryId(null); setCategory('全部'); setQuery('') }
+
+  const reviewOperationCount = useMemo(() => baseIssue && issue ? buildReviewExport(baseIssue, issue, reviewSessionId).operations.length : 0, [baseIssue, issue, reviewSessionId])
 
   return (
     <div className="app-shell">
@@ -524,7 +629,7 @@ export function App() {
           <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
-          <span className={`connection ${online ? 'online' : 'offline'}`} title={repoRuntimeAccess ? '可直接读取仓库 runtime' : '由早报自动化同步到编辑台'}>{online ? <CircleDot size={13} /> : <CloudOff size={14} />}{online ? publishMode : '离线'}</span>
+          <span className={`connection ${online ? 'online' : 'offline'}`} title={dataMode === 'static' ? 'GitHub Pages 静态审稿包' : repoRuntimeAccess ? '可直接读取仓库 runtime' : '由早报自动化同步到编辑台'}>{online ? <CircleDot size={13} /> : <CloudOff size={14} />}{online ? (dataMode === 'static' ? 'PAGES' : publishMode) : '离线'}</span>
           <IconButton title={repoRuntimeAccess ? '同步最新自动化产物' : '读取自动化已同步的最终稿'} onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
           <IconButton title="连接设置" onClick={() => setShowSettings((value) => !value)} active={showSettings}><Settings size={17} /></IconButton>
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setShowExport(true) }}><Download size={16} />导出</button>
@@ -543,9 +648,9 @@ export function App() {
 
           <main className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
-            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>本地 Worker 不可达</strong><span>{error}</span><button type="button" onClick={() => void loadIssue()}>重试</button></div> : null}
+            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>暂无可用刊期</strong><span>{error}</span><button type="button" onClick={() => void loadIssue()}>重试</button></div> : null}
             {!loading && !error && view === 'draft' ? <>
-              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>当前飞书 Bot 稿 · {issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
+              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>当前飞书 Bot 稿 · {issue?.selected_count || 0} 条 · {dataMode === 'static' ? '远程审稿修改将导出到飞书' : '自动化更新后保留人工编辑'}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
               <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
@@ -554,13 +659,13 @@ export function App() {
               <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} />)}</div>
             </> : null}
           </main>
-          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} onClose={() => setSelectedStoryId(null)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} onClose={() => setSelectedStoryId(null)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 
-      {view === 'brands' && issue ? <BrandWorkspace issue={issue} generating={generatingBrand} onGenerate={generateBrand} onSave={async (brand, patch) => { await api.patchBrand(issue.id, brand, patch); setIssue(await api.getIssue(issue.id)) }} /> : null}
+      {view === 'brands' && issue ? <BrandWorkspace issue={issue} generating={generatingBrand} onGenerate={generateBrand} onSave={async (brand, patch) => { if (dataMode === 'static') { setIssue({ ...issue, brand_packages: { ...issue.brand_packages, [brand]: { ...issue.brand_packages[brand], ...patch } } }); return } await api.patchBrand(issue.id, brand, patch); setIssue(await api.getIssue(issue.id)) }} /> : null}
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
-      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} onClose={() => setShowExport(false)} onHandoff={() => void createHandoff()} /> : null}
+      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} onClose={() => setShowExport(false)} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
     </div>
   )
 }

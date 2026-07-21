@@ -18,6 +18,6 @@ describe('App', () => {
     render(<App />)
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()
     expect(screen.getByText('双品牌')).toBeInTheDocument()
-    expect(await screen.findByText('本地 Worker 不可达')).toBeInTheDocument()
+    expect(await screen.findByText('暂无可用刊期')).toBeInTheDocument()
   })
 })

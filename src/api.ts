@@ -2,6 +2,8 @@ import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryStatus } 
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
 
+const staticDataUrl = (name: string) => new URL(`data/${name}`, document.baseURI).toString()
+
 export const getApiUrl = () => localStorage.getItem('editorial-api-url') || fallbackUrl
 
 export const setApiUrl = (value: string) => {
@@ -9,22 +11,37 @@ export const setApiUrl = (value: string) => {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${getApiUrl()}${path}`, {
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...init?.headers,
-    },
-  })
-  if (!response.ok) {
-    const payload = await response.json().catch(() => ({ detail: response.statusText }))
-    throw new Error(payload.detail || response.statusText)
+  const controller = new AbortController()
+  const timeout = window.setTimeout(() => controller.abort(), 1400)
+  try {
+    const response = await fetch(`${getApiUrl()}${path}`, {
+      ...init,
+      signal: init?.signal || controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        ...init?.headers,
+      },
+    })
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({ detail: response.statusText }))
+      throw new Error(payload.detail || response.statusText)
+    }
+    return response.json() as Promise<T>
+  } finally {
+    window.clearTimeout(timeout)
   }
+}
+
+async function staticRequest<T>(name: string): Promise<T> {
+  const response = await fetch(staticDataUrl(name), { cache: 'no-store' })
+  if (!response.ok) throw new Error('Pages 暂无可用刊期包')
   return response.json() as Promise<T>
 }
 
 export const api = {
   health: () => request<{ ok: boolean; mode: string; repo_runtime_access: boolean }>('/health'),
+  staticIssue: () => staticRequest<Issue>('current.json'),
+  staticWeekend: () => staticRequest<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('weekend.json'),
   currentIssue: () => request<Issue>('/api/issues/current'),
   importLatest: () => request<Issue>('/api/issues/import', { method: 'POST', body: '{}' }),
   getIssue: (id: string) => request<Issue>(`/api/issues/${id}`),
