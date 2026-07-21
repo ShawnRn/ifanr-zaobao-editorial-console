@@ -4,7 +4,7 @@ Worker 可用时，编辑台加载并保存真实刊期；Worker 不可达时自
 
 稿件详情里的「配图」支持上传本地 JPEG、PNG、GIF、WebP 原图，粘贴图片 URL 交给 Worker 下载，或直接按 `⌘V` 粘贴剪贴板图片；已有配图可以替换或删除。图片变更需要连接 Worker。
 
-React + TypeScript + Vite 编辑台。GitHub Pages 承载静态界面和脱敏的当日正式稿只读快照；主 Mac 连接本机 Editorial Worker，其他设备通过 Tailscale Serve HTTPS 连接同一 Worker。
+React + TypeScript + Vite 编辑台。GitHub Pages 承载静态界面和脱敏的当日正式稿只读快照；主 Mac 连接本机 Editorial Worker，其他设备通过 Tailscale Serve HTTPS 或家庭局域网连接同一 Worker。
 
 ```bash
 pnpm install
@@ -13,7 +13,9 @@ pnpm dev
 
 本机开发地址为 `http://127.0.0.1:5173/`。页面会先尝试连接 `http://127.0.0.1:8765`；Worker 不可达时显示 Pages 随最近一次成功发布同步的当日正式稿只读快照。顶栏持续显示 Worker 的连接状态，设置面板会区分「正在检测」「已通过 Tailscale Serve 连接」「Pages 快照」和「Worker 未连接」。
 
-从其他设备连接主 Mac 时，直接打开 Tailscale Serve 的 HTTPS 根地址，例如 `https://shawn-rains-macbook-pro.tail42e7aa.ts.net`。该地址同时提供编辑台页面和 Worker API，避免 GitHub Pages 跨域访问私网被浏览器拦截。不要使用 `https://100.x.x.x`，因为 Tailscale IP 无法匹配 `.ts.net` HTTPS 证书；也不要附加 `:8765`。Tailscale Serve 注入的用户身份由 Worker 验证，Worker 本身仍只监听本机回环地址。
+从其他设备连接主 Mac 时，直接打开 Tailscale Serve 的 HTTPS 根地址，例如 `https://shawn-rains-macbook-pro.tail42e7aa.ts.net`。该地址同时提供编辑台页面和 Worker API，避免 GitHub Pages 跨域访问私网被浏览器拦截。不要使用 `https://100.x.x.x`，因为 Tailscale IP 无法匹配 `.ts.net` HTTPS 证书；也不要附加 `:8765`。Tailscale Serve 注入的用户身份由 Worker 验证。
+
+当两台 Mac 位于同一家庭局域网时，可直接打开 `http://shawn-rains-macbook-pro.local:8765/`。这条路径不经过 Tailscale Serve，适合路由器加入 Tailnet，但终端没有独立 Tailnet 身份的情况。Worker 仅允许回环、RFC 1918 私网和 Tailscale CGNAT 网段访问。
 
 公共页面：https://shawnrn.github.io/ifanr-zaobao-editorial-console/
 

@@ -62,6 +62,8 @@ a { color: inherit; }
 .settings-popover button { width: 100%; height: 32px; margin-top: 9px; border: 1px solid #3e4540; border-radius: 4px; background: #252a26; color: #d8ddda; cursor: pointer; }
 .settings-popover .settings-hint a { color: #82d7a6; text-underline-offset: 2px; }
 .settings-popover .same-origin-console { display: grid; place-items: center; min-height: 34px; margin-top: 9px; border: 1px solid #37634b; border-radius: 4px; background: #193326; color: #a6e6c0; font-size: 12px; font-weight: 650; text-decoration: none; }
+.settings-popover .same-origin-links { display: grid; gap: 8px; margin-top: 9px; }
+.settings-popover .same-origin-links .same-origin-console { margin-top: 0; }
 .connection-summary { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; margin-bottom: 14px; padding: 11px; border: 1px solid #39403b; border-radius: 5px; background: #111411; }
 .connection-summary > div { padding-top: 1px; }
 .connection-summary strong, .connection-summary small { display: block; }

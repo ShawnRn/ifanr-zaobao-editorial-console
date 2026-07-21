@@ -1,9 +1,12 @@
 import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryStatus } from './types'
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
-export const tailscaleConsoleUrl = import.meta.env.VITE_EDITORIAL_TAILSCALE_URL || 'https://shawn-rains-macbook-pro.tail42e7aa.ts.net'
+export const tailscaleConsoleUrl = import.meta.env.VITE_EDITORIAL_TAILSCALE_URL || 'http://100.103.86.124:8765'
+export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://Shawn-Rains-MacBook-Pro.local:8765'
 
-const runtimeDefaultUrl = () => window.location.hostname.endsWith('.ts.net') ? window.location.origin : fallbackUrl
+const isWorkerOrigin = () => window.location.hostname.endsWith('.ts.net') || window.location.port === '8765'
+
+const runtimeDefaultUrl = () => isWorkerOrigin() ? window.location.origin : fallbackUrl
 
 const staticAssetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
@@ -48,7 +51,9 @@ export const apiUrlProblem = (value: string, pageProtocol = window.location.prot
   return ''
 }
 
-export const getApiUrl = () => localStorage.getItem('editorial-api-url') || runtimeDefaultUrl()
+export const getApiUrl = () => isWorkerOrigin()
+  ? window.location.origin
+  : localStorage.getItem('editorial-api-url') || runtimeDefaultUrl()
 
 export const setApiUrl = (value: string) => {
   localStorage.setItem('editorial-api-url', normalizeApiUrl(value))
