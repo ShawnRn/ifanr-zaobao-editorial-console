@@ -28,7 +28,7 @@ import {
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { api, apiUrlProblem, getApiUrl, normalizeApiUrl, setApiUrl } from './api'
-import { applyReviewOperations, buildReviewExport, downloadText, renderIssueMarkdown } from './review'
+import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
 
@@ -364,7 +364,6 @@ export function App() {
   const [baseIssue, setBaseIssue] = useState<Issue | null>(null)
   const [reviewSessionId, setReviewSessionId] = useState('')
   const [dataMode, setDataMode] = useState<'worker' | 'static' | 'offline'>('offline')
-  const [publishMode, setPublishMode] = useState('shadow')
   const [repoRuntimeAccess, setRepoRuntimeAccess] = useState(true)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -394,62 +393,24 @@ export function App() {
     setError('')
     const workerUrl = getApiUrl()
     const forceStatic = !preferWorker && new URLSearchParams(window.location.search).get('static') === '1'
-    const loadStaticIssue = async () => {
-      const current = await api.staticIssue()
-      const snapshot = structuredClone(current)
-      const snapshotDigest = typeof current.diagnostics?.public_snapshot === 'object'
-        && current.diagnostics.public_snapshot
-        && 'digest' in current.diagnostics.public_snapshot
-        ? String(current.diagnostics.public_snapshot.digest || '')
-        : String(current.revision)
-      const draftKey = `editorial-review-draft:${current.id}:${snapshotDigest}`
-      const sessionKey = `editorial-review-session:${current.id}:${snapshotDigest}`
-      let sessionId = localStorage.getItem(sessionKey)
-      if (!sessionId) {
-        sessionId = crypto.randomUUID()
-        localStorage.setItem(sessionKey, sessionId)
-      }
-      let reviewDraft = current
-      try {
-        const stored = localStorage.getItem(draftKey)
-        if (stored) {
-          const parsed = JSON.parse(stored) as EditorialReviewExport
-          if (parsed.schema === 'ifanr_editorial_review' && parsed.issue_id === current.id && Array.isArray(parsed.operations)) {
-            reviewDraft = applyReviewOperations(current, parsed.operations)
-          }
-        }
-      } catch {
-        localStorage.removeItem(draftKey)
-      }
-      setIssue(reviewDraft)
-      setBaseIssue(snapshot)
-      setReviewSessionId(sessionId)
-      setDataMode('static')
-      setPublishMode('pages')
-      setRepoRuntimeAccess(false)
-      setSelectedStoryId(null)
-    }
     if (forceStatic) {
       setWorkerConnection({
         status: 'pages',
-        detail: '当前使用 GitHub Pages 静态稿，尚未连接主 Mac Worker',
+        detail: 'Pages 只提供界面，尚未连接主 Mac Worker',
         url: workerUrl,
       })
-      try {
-        await loadStaticIssue()
-      } catch (staticError) {
-        setDataMode('offline')
-        setError(staticError instanceof Error ? staticError.message : 'Pages 暂无可用刊期包')
-      } finally {
-        setLoading(false)
-      }
+      setIssue(null)
+      setBaseIssue(null)
+      setDataMode('static')
+      setRepoRuntimeAccess(false)
+      setError('请打开连接设置，使用 Tailscale Serve HTTPS 地址连接主 Mac Worker。')
+      setLoading(false)
       return
     }
     setWorkerConnection({ status: 'checking', detail: '正在测试 Worker 连接', url: workerUrl })
     try {
       const health = await api.health()
       setDataMode('worker')
-      setPublishMode(health.mode)
       setRepoRuntimeAccess(health.repo_runtime_access)
       let current: Issue
       try { current = await api.currentIssue() } catch { current = await api.importLatest() }
@@ -473,35 +434,17 @@ export function App() {
         detail: `Worker 未连接：${workerMessage}`,
         url: workerUrl,
       })
-      try {
-        await loadStaticIssue()
-      } catch (staticError) {
-        setDataMode('offline')
-        const staticMessage = staticError instanceof Error ? staticError.message : 'Pages 暂无可用刊期包'
-        setError(`${workerMessage}；${staticMessage}`)
-      }
+      setIssue(null)
+      setBaseIssue(null)
+      setDataMode('offline')
+      setError(`${workerMessage}。请在连接设置中检查 Worker URL 和 Tailscale 状态。`)
     } finally { setLoading(false) }
   }, [])
 
   useEffect(() => {
     void loadIssue(false)
-    api.weekend().then(setWeekend).catch(() => api.staticWeekend().then(setWeekend).catch(() => undefined))
+    api.weekend().then(setWeekend).catch(() => setWeekend({}))
   }, [loadIssue])
-
-  useEffect(() => {
-    if (dataMode !== 'static' || !issue || !baseIssue) return
-    const snapshotDigest = typeof baseIssue.diagnostics?.public_snapshot === 'object'
-      && baseIssue.diagnostics.public_snapshot
-      && 'digest' in baseIssue.diagnostics.public_snapshot
-      ? String(baseIssue.diagnostics.public_snapshot.digest || '')
-      : String(baseIssue.revision)
-    try {
-      const review = buildReviewExport(baseIssue, issue, reviewSessionId)
-      localStorage.setItem(`editorial-review-draft:${baseIssue.id}:${snapshotDigest}`, JSON.stringify(review))
-    } catch {
-      // The review still remains in memory and can be exported even if browser storage is unavailable.
-    }
-  }, [baseIssue, dataMode, issue, reviewSessionId])
 
   const draftStories = useMemo(() => {
     if (!issue) return []
@@ -736,7 +679,7 @@ export function App() {
 
           <main className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
-            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>暂无可用刊期</strong><span>{error}</span><button type="button" onClick={() => void loadIssue()}>重试</button></div> : null}
+            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={() => setShowSettings(true)}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>当前飞书 Bot 稿 · {issue?.selected_count || 0} 条 · {dataMode === 'static' ? '远程审稿修改将导出到飞书' : '自动化更新后保留人工编辑'}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
               <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>

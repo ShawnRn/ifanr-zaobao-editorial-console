@@ -2,8 +2,6 @@ import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryStatus } 
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
 
-const staticDataUrl = (name: string) => new URL(`data/${name}`, document.baseURI).toString()
-
 export type WorkerHealth = {
   ok: boolean
   mode: string
@@ -70,16 +68,8 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   }
 }
 
-async function staticRequest<T>(name: string): Promise<T> {
-  const response = await fetch(staticDataUrl(name), { cache: 'no-store' })
-  if (!response.ok) throw new Error('Pages 暂无可用刊期包')
-  return response.json() as Promise<T>
-}
-
 export const api = {
   health: () => request<WorkerHealth>('/health'),
-  staticIssue: () => staticRequest<Issue>('current.json'),
-  staticWeekend: () => staticRequest<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('weekend.json'),
   currentIssue: () => request<Issue>('/api/issues/current'),
   importLatest: () => request<Issue>('/api/issues/import', { method: 'POST', body: '{}' }),
   getIssue: (id: string) => request<Issue>(`/api/issues/${id}`),

@@ -70,6 +70,8 @@ a { color: inherit; }
 .settings-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
 .settings-actions button { min-width: 0; }
 .settings-message { margin: 10px 0 0; color: #aeb5b0; font-size: 10px; line-height: 1.5; }
+.center-state-actions { display: flex; gap: 7px; }
+.center-state-actions button { min-width: 88px; }
 
 .editor-layout { display: grid; grid-template-columns: 194px minmax(0, 1fr); height: calc(100vh - 58px); }
 .editor-layout.with-detail { grid-template-columns: 194px minmax(560px, 1fr) minmax(380px, 30vw); }

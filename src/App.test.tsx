@@ -18,6 +18,7 @@ describe('App', () => {
     render(<App />)
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()
     expect(screen.getByText('双品牌')).toBeInTheDocument()
-    expect(await screen.findByText('暂无可用刊期')).toBeInTheDocument()
+    expect((await screen.findAllByText('Worker 未连接')).length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('button', { name: '连接设置' }).length).toBeGreaterThan(0)
   })
 })
