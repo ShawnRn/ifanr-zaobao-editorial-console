@@ -9,7 +9,7 @@ pnpm dev
 
 本机开发地址为 `http://127.0.0.1:5173/`。页面会先尝试连接 `http://127.0.0.1:8765`；本地 Worker 不可达时，自动读取 Pages 的 `public/data/current.json`。静态刊期包包含经过清理的 Bot 稿、候选、公开来源链接和配图，不包含本地路径、Feishu file token、Cookie、账号密钥或发布能力。
 
-公共页面：https://shawnrn.github.io/ifanr-zaobao-editorial-console/
+公共页面：https://shawnrn.github.io/ifanr-zaobao-editorial-console/?static=1
 
 编辑台只提供筛选、编辑、核验、Markdown 导出和审稿单导出，不直接发布飞书、公众号或 Etherpad。原有 AI 主编到飞书云文档及群卡片的链路始终独立运行。
 
