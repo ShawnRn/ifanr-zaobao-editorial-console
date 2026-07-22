@@ -1,4 +1,4 @@
-import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryStatus } from './types'
+import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryCreateInput, StoryStatus } from './types'
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
 export const tailscaleConsoleUrl = import.meta.env.VITE_EDITORIAL_TAILSCALE_URL || 'http://100.103.86.124:8765'
@@ -136,6 +136,8 @@ export const api = {
   },
   importLatest: () => request<Issue>('/api/issues/import', { method: 'POST', body: '{}' }),
   getIssue: (id: string) => request<Issue>(`/api/issues/${id}`),
+  createStory: (issueId: string, story: StoryCreateInput) =>
+    request<Story>(`/api/issues/${issueId}/stories`, { method: 'POST', body: JSON.stringify(story) }),
   refreshIssue: (id: string, runPreflight: boolean) =>
     request<Job>(`/api/issues/${id}/refresh`, {
       method: 'POST',

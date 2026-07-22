@@ -61,6 +61,23 @@ export type Story = {
   updated_at?: string
 }
 
+export type StoryCreateInput = {
+  title: string
+  body: string
+  category: string
+  selected: boolean
+  source_urls: string[]
+  source_name: string
+  source_type: string
+  source_quality: 'primary' | 'strong' | 'secondary' | 'lead' | 'unknown'
+  confidence: number
+  event_date?: string
+  disclosed_at?: string
+  published_at?: string
+  rumor: boolean
+  editorial_reason: string
+}
+
 export type CoverCandidate = {
   id: string
   story_id?: string

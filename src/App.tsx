@@ -20,6 +20,7 @@ import {
   Menu,
   Newspaper,
   PanelRightClose,
+  Plus,
   RefreshCw,
   Search,
   Settings,
@@ -36,7 +37,7 @@ import { comparePublicationStories, groupPublicationStories, normalizeStoryCateg
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
-import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryStatus } from './types'
+import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
 
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
@@ -469,6 +470,65 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, onClos
   return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}><div className="export-dialog" role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options"><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
 }
 
+function StoryCreateDialog({ busy, onClose, onCreate }: {
+  busy: boolean
+  onClose: () => void
+  onCreate: (story: StoryCreateInput) => Promise<void>
+}) {
+  const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')
+  const [category, setCategory] = useState('大公司')
+  const [sourceUrls, setSourceUrls] = useState('')
+  const [eventDate, setEventDate] = useState('')
+  const [disclosedAt, setDisclosedAt] = useState('')
+  const [selected, setSelected] = useState(true)
+  const [error, setError] = useState('')
+
+  const submit = async () => {
+    if (!title.trim()) {
+      setError('请填写标题')
+      return
+    }
+    setError('')
+    try {
+      await onCreate({
+        title: title.trim(),
+        body: body.trim(),
+        category,
+        selected,
+        source_urls: sourceUrls.split(/\r?\n|；/).map((item) => item.trim()).filter(Boolean),
+        source_name: '手动添加',
+        source_type: 'manual',
+        source_quality: 'unknown',
+        confidence: 0.8,
+        event_date: eventDate || undefined,
+        disclosed_at: disclosedAt || undefined,
+        rumor: false,
+        editorial_reason: '用户在早报编辑台手动添加',
+      })
+    } catch (createError) {
+      setError(createError instanceof Error ? createError.message : '添加选题失败')
+    }
+  }
+
+  return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
+    <form className="story-create-dialog" role="dialog" aria-modal="true" onSubmit={(event) => { event.preventDefault(); void submit() }} onMouseDown={(event) => event.stopPropagation()}>
+      <header><div><span>人工补充</span><h2>手动添加选题</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header>
+      <div className="story-create-fields">
+        <label className="wide"><span>标题</span><input autoFocus value={title} onChange={(event) => setTitle(event.target.value)} placeholder="输入正式早报标题" /></label>
+        <label><span>栏目</span><select value={category} onChange={(event) => setCategory(event.target.value)}>{publicationCategories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>
+        <label><span>事件发生日</span><input type="date" value={eventDate} onChange={(event) => setEventDate(event.target.value)} /></label>
+        <label className="wide"><span>正文</span><textarea rows={7} value={body} onChange={(event) => setBody(event.target.value)} placeholder="按早报 prompt 写入正文；也可以只填标题，稍后追源成稿" /></label>
+        <label className="wide"><span>来源 URL</span><textarea rows={3} value={sourceUrls} onChange={(event) => setSourceUrls(event.target.value)} placeholder="每行一个 URL，第一条作为主来源" /></label>
+        <label className="wide"><span>首次披露时间</span><input value={disclosedAt} onChange={(event) => setDisclosedAt(event.target.value)} placeholder="例如 2026-07-22 09:30" /></label>
+        <label className="story-create-check wide"><input type="checkbox" checked={selected} onChange={(event) => setSelected(event.target.checked)} /><span>直接加入当前早报稿</span></label>
+        {error ? <p className="story-create-error wide">{error}</p> : null}
+      </div>
+      <footer><button type="button" className="secondary-button" onClick={onClose}>取消</button><button type="submit" className="primary-button" disabled={busy}>{busy ? <LoaderCircle size={15} className="spin" /> : <Plus size={15} />}添加选题</button></footer>
+    </form>
+  </div>
+}
+
 function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
   const normalizedStories = stories.map(normalizeStoryCategory)
   return {
@@ -499,6 +559,8 @@ export function App() {
   const [jobs, setJobs] = useState<Record<string, Job>>({})
   const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
   const [showExport, setShowExport] = useState(false)
+  const [showCreateStory, setShowCreateStory] = useState(false)
+  const [creatingStory, setCreatingStory] = useState(false)
   const [handoff, setHandoff] = useState<AutomationHandoff | null>(null)
   const [exporting, setExporting] = useState(false)
   const [generatingBrand, setGeneratingBrand] = useState<'appso' | 'ifanr' | null>(null)
@@ -839,6 +901,22 @@ export function App() {
     } catch (brandError) { setError(brandError instanceof Error ? brandError.message : '品牌包装生成失败') } finally { setGeneratingBrand(null) }
   }
 
+  const createStory = async (input: StoryCreateInput) => {
+    if (!issue || dataMode !== 'worker') throw new Error('连接 Worker 后才能手动添加选题')
+    setCreatingStory(true)
+    try {
+      const created = await api.createStory(issue.id, input)
+      const latest = await api.getIssue(issue.id)
+      const refreshed = issueWithMetrics(latest, latest.stories)
+      setIssue(refreshed)
+      setSelectedStoryId(created.id)
+      setView('draft')
+      setShowCreateStory(false)
+    } finally {
+      setCreatingStory(false)
+    }
+  }
+
   const createHandoff = async () => {
     if (!issue) return
     if (dataMode === 'static') {
@@ -928,6 +1006,7 @@ export function App() {
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
           </button>
+          <IconButton title={dataMode === 'worker' ? '手动添加选题' : '连接 Worker 后才能添加选题'} onClick={() => setShowCreateStory(true)} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
           <IconButton title={repoRuntimeAccess ? '同步最新自动化产物' : '读取自动化已同步的最终稿'} onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="连接设置" aria-label="连接设置" onClick={toggleSettings}><Settings size={17} /></button>
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setShowExport(true) }}><Download size={16} />导出</button>
@@ -978,6 +1057,7 @@ export function App() {
 
       {view === 'brands' && issue ? <BrandWorkspace issue={issue} generating={generatingBrand} onGenerate={generateBrand} onSave={async (brand, patch) => { if (dataMode === 'static') { setIssue({ ...issue, brand_packages: { ...issue.brand_packages, [brand]: { ...issue.brand_packages[brand], ...patch } } }); return } await api.patchBrand(issue.id, brand, patch); setIssue(await api.getIssue(issue.id)) }} /> : null}
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
+      {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} onClose={() => setShowCreateStory(false)} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} onClose={() => setShowExport(false)} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
     </div>
   )

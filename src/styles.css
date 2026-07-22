@@ -251,6 +251,22 @@ a { color: inherit; }
 
 .modal-backdrop { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: #080a09b8; animation: backdrop-in .16s ease-out; }
 .export-dialog { width: min(580px, 100%); border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: 0 28px 80px #0009; animation: dialog-in .2s ease-out; }
+.story-create-dialog { width: min(720px, 100%); max-height: calc(100vh - 40px); overflow: auto; border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: 0 28px 80px #0009; animation: dialog-in .2s ease-out; }
+.story-create-dialog > header { display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.story-create-dialog > header span { color: var(--green); font-size: 10px; font-weight: 800; }
+.story-create-dialog h2 { margin: 5px 0 0; font-size: 19px; }
+.story-create-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 20px; }
+.story-create-fields label { display: grid; gap: 7px; }
+.story-create-fields label > span { color: var(--muted); font-size: 11px; font-weight: 700; }
+.story-create-fields .wide { grid-column: 1 / -1; }
+.story-create-fields input:not([type="checkbox"]), .story-create-fields select, .story-create-fields textarea { width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); font: inherit; line-height: 1.5; }
+.story-create-fields textarea { resize: vertical; }
+.story-create-check { grid-template-columns: 18px 1fr; align-items: center; }
+.story-create-check input { margin: 0; accent-color: var(--green); }
+.story-create-error { margin: 0; color: #a63f36; font-size: 11px; }
+.story-create-dialog footer { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--line); }
+.primary-button { min-height: 34px; display: inline-flex; align-items: center; gap: 7px; padding: 0 14px; border: 0; border-radius: 4px; background: var(--green); color: #fff; font-weight: 700; cursor: pointer; }
+.primary-button:disabled { cursor: wait; opacity: .65; }
 .export-dialog > header { display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
 .export-dialog > header span { color: var(--green); font-size: 10px; font-weight: 800; text-transform: uppercase; }
 .export-dialog h2 { margin: 5px 0 0; font-size: 19px; }
@@ -308,6 +324,7 @@ a { color: inherit; }
   .draft-masthead h1 { font-size: 40px; }
   .draft-document { padding: 0 22px 80px; }
   .issue-section { padding-top: 36px; }
+  .story-create-fields { grid-template-columns: 1fr; }
   .section-title { grid-template-columns: 35px 1fr auto; }
   .issue-article::before { left: -22px; }
   .issue-article h3 { font-size: 21px; }
