@@ -160,6 +160,11 @@ a { color: inherit; }
 .candidate-actions .inline-icon { color: var(--quiet); }
 .adopt-button { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #a8b0ab; border-radius: 4px; background: #fff; color: var(--green); cursor: pointer; }
 .adopt-button:hover { border-color: var(--green); background: #e9f3ed; }
+.restore-button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #91aa99; border-radius: 4px; background: #eef5f0; color: var(--green); cursor: pointer; }
+.restore-button:hover { border-color: var(--green); background: #dfeee4; }
+.trash-row { opacity: .84; }
+.trash-row:hover, .trash-row.active { opacity: 1; }
+.trash-masthead span { color: var(--green); }
 
 .center-state { height: 100%; min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 30px; color: var(--muted); text-align: center; }
 .center-state.error svg { color: var(--red); }
@@ -309,7 +314,7 @@ a { color: inherit; }
   body { overflow-y: auto; }
   .topbar { height: 106px; grid-template-columns: 1fr auto; grid-template-rows: 48px 40px; padding: 5px 12px 8px; }
   .brand-lockup { grid-column: 1; grid-row: 1; }
-  .view-switcher { grid-column: 1 / -1; grid-row: 2; width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .view-switcher { grid-column: 1 / -1; grid-row: 2; width: 100%; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .view-switcher button { min-width: 0; padding: 0 4px; }
   .topbar-actions { grid-column: 2; grid-row: 1; }
   .connection { width: 32px; justify-content: center; padding: 0; }

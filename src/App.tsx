@@ -24,6 +24,7 @@ import {
   PanelRightClose,
   Plus,
   RefreshCw,
+  RotateCcw,
   Search,
   Settings,
   ShieldCheck,
@@ -63,7 +64,7 @@ const sourceLabel: Record<string, string> = {
   unknown: '待追源',
 }
 
-type View = 'draft' | 'candidates' | 'brands' | 'weekend'
+type View = 'draft' | 'candidates' | 'trash' | 'brands' | 'weekend'
 type WorkerConnection = {
   status: 'checking' | 'connected' | 'pages' | 'failed' | 'invalid'
   detail: string
@@ -257,6 +258,35 @@ function CandidateItem({
       <div className="candidate-actions">
         <button type="button" className="adopt-button" title="追源、重写并采用" onClick={(event) => { event.stopPropagation(); onAdopt() }}><Check size={16} /></button>
         <button type="button" className="inline-icon" title="排除" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={15} /></button>
+        <ChevronRight size={16} />
+      </div>
+    </article>
+  )
+}
+
+export function TrashItem({
+  story,
+  active,
+  disabled,
+  onOpen,
+  onRestore,
+}: {
+  story: Story
+  active: boolean
+  disabled: boolean
+  onOpen: () => void
+  onRestore: () => void
+}) {
+  return (
+    <article className={`candidate-row trash-row ${active ? 'active' : ''}`} onClick={onOpen}>
+      <div className="candidate-main">
+        <div className="candidate-overline"><span>{story.category}</span><span>{story.source_name || '待追源'}</span></div>
+        <h3>{story.title}</h3>
+        <p>{story.body || story.editorial_reason || '该条目暂无正文。'}</p>
+        <div className="candidate-meta"><span className="status status-excluded">已移入回收站</span><span>{story.category}</span></div>
+      </div>
+      <div className="candidate-actions">
+        <button type="button" className="restore-button" title="恢复到早报稿" aria-label="恢复到早报稿" disabled={disabled} onClick={(event) => { event.stopPropagation(); onRestore() }}><RotateCcw size={16} /></button>
         <ChevronRight size={16} />
       </div>
     </article>
@@ -727,6 +757,16 @@ export function App() {
       .sort((a, b) => b.score - a.score)
   }, [issue, query, category, candidateStatus])
 
+  const trashStories = useMemo(() => {
+    if (!issue) return []
+    const normalized = query.trim().toLowerCase()
+    return issue.stories
+      .filter((story) => story.status === 'excluded')
+      .filter((story) => category === '全部' || story.category === category)
+      .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
+      .sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')) || b.score - a.score)
+  }, [issue, query, category])
+
   const draftCounts = useMemo(() => {
     const counts: Record<string, number> = { 全部: issue?.selected_count || 0 }
     issue?.stories.filter((story) => story.selected && story.status !== 'excluded').forEach((story) => { counts[story.category] = (counts[story.category] || 0) + 1 })
@@ -742,6 +782,38 @@ export function App() {
     const updated = dataMode === 'static' ? { ...existing, ...patch } : await api.patchStory(storyId, patch)
     setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
     return updated
+  }
+
+  const excludeStory = async (story: Story) => {
+    await updateStory(story.id, {
+      selected: false,
+      status: 'excluded',
+      metadata: {
+        ...story.metadata,
+        _trash_previous_status: story.status,
+        _trash_previous_position: story.position,
+        _trash_deleted_at: new Date().toISOString(),
+      },
+    })
+  }
+
+  const restoreStory = async (story: Story) => {
+    if (!issue) return
+    const previousStatus = typeof story.metadata._trash_previous_status === 'string' && story.metadata._trash_previous_status !== 'excluded'
+      ? story.metadata._trash_previous_status as StoryStatus
+      : story.body.trim() ? 'ready' : 'needs_review'
+    const targetPosition = issue.stories
+      .filter((item) => item.selected && item.status !== 'excluded' && item.category === story.category)
+      .reduce((maximum, item) => Math.max(maximum, item.position), -1) + 1
+    await updateStory(story.id, {
+      selected: true,
+      status: previousStatus,
+      position: targetPosition,
+      metadata: { ...story.metadata, _trash_restored_at: new Date().toISOString() },
+    })
+    setView('draft')
+    setSelectedStoryId(story.id)
+    window.requestAnimationFrame(() => scrollToDraftSection(story.category))
   }
 
   const watchJob = async (storyId: string, job: Job) => {
@@ -1007,6 +1079,7 @@ export function App() {
         <nav className="view-switcher" aria-label="编辑台视图">
           <button className={view === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
           <button className={view === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
+          <button className={view === 'trash' ? 'active' : ''} onClick={() => switchView('trash')} type="button">回收站</button>
           <button className={view === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">双品牌</button>
           <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
@@ -1038,12 +1111,12 @@ export function App() {
         </div> : null}
       </header>
 
-      {(view === 'draft' || view === 'candidates') ? (
+      {(view === 'draft' || view === 'candidates' || view === 'trash') ? (
         <div className={`editor-layout ${selectedStory ? 'with-detail' : ''}`}>
           <aside className="sidebar">
             <div className="sidebar-heading"><Menu size={16} /><span>栏目</span></div>
-            <nav>{categories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : issue?.stories.filter((story) => !story.selected && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
-            {view === 'candidates' ? <><div className="sidebar-heading"><ArrowUpDown size={16} /><span>状态</span></div><nav>{[['all', '待处理'], ['needs_review', '待复核'], ['source_chasing', '追源中'], ['excluded', '已排除']].map(([value, label]) => <button type="button" className={candidateStatus === value ? 'active' : ''} onClick={() => setCandidateStatus(value)} key={value}><span>{label}</span></button>)}</nav></> : null}
+            <nav>{categories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : view === 'trash' ? issue?.stories.filter((story) => story.status === 'excluded' && (item === '全部' || story.category === item)).length || 0 : issue?.stories.filter((story) => !story.selected && story.status !== 'excluded' && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
+            {view === 'candidates' ? <><div className="sidebar-heading"><ArrowUpDown size={16} /><span>状态</span></div><nav>{[['all', '待处理'], ['needs_review', '待复核'], ['source_chasing', '追源中']].map(([value, label]) => <button type="button" className={candidateStatus === value ? 'active' : ''} onClick={() => setCandidateStatus(value)} key={value}><span>{label}</span></button>)}</nav></> : null}
             <div className="issue-metrics"><div><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></div><div><strong>{issue?.ready_count || 0}</strong><span>可用</span></div><div><strong>{issue?.review_count || 0}</strong><span>待复核</span></div></div>
           </aside>
 
@@ -1052,12 +1125,17 @@ export function App() {
             {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
+              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void excludeStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后才会出现在“早报稿”。</p></div><strong>{candidates.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、正文或来源" /></div></div>
               <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} />)}</div>
+            </> : null}
+            {!loading && !error && view === 'trash' ? <>
+              <header className="candidate-masthead trash-masthead"><div><span>当前刊期</span><h1>回收站</h1><p>仅保留当天被移出的选题，恢复后回到原栏目末尾。</p></div><strong>{trashStories.length}</strong></header>
+              <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索已删除的选题" /></div></div>
+              <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
           {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} onClose={() => setSelectedStoryId(null)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}

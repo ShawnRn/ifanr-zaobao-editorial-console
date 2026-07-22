@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { App, IssueArticle, StoryImageEditor } from './App'
+import { App, IssueArticle, StoryImageEditor, TrashItem } from './App'
 import { api } from './api'
 import type { Issue, Story } from './types'
 
@@ -109,6 +109,17 @@ describe('App', () => {
     expect(screen.queryByRole('option', { name: '重磅' })).not.toBeInTheDocument()
     expect(screen.queryByRole('option', { name: '观点' })).not.toBeInTheDocument()
     expect(screen.queryByRole('option', { name: 'AI/开发者' })).not.toBeInTheDocument()
+  })
+
+  it('restores a discarded story without opening its detail panel', () => {
+    const onOpen = vi.fn()
+    const onRestore = vi.fn()
+    render(<TrashItem story={{ ...staticStory, selected: false, status: 'excluded' }} active={false} disabled={false} onOpen={onOpen} onRestore={onRestore} />)
+
+    fireEvent.click(screen.getByRole('button', { name: '恢复到早报稿' }))
+
+    expect(onRestore).toHaveBeenCalledOnce()
+    expect(onOpen).not.toHaveBeenCalled()
   })
 
   it('closes settings after an outside click with an exit animation', async () => {
