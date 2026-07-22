@@ -1,6 +1,8 @@
 import {
   ArrowDown,
+  ArrowDownToLine,
   ArrowUp,
+  ArrowUpToLine,
   ArrowUpDown,
   BookOpen,
   Check,
@@ -163,6 +165,8 @@ export function IssueArticle({
   canMoveDown = false,
   onMoveUp,
   onMoveDown,
+  onMoveTop,
+  onMoveBottom,
   onMoveCategory,
   moving = false,
 }: {
@@ -176,6 +180,8 @@ export function IssueArticle({
   canMoveDown?: boolean
   onMoveUp?: () => void
   onMoveDown?: () => void
+  onMoveTop?: () => void
+  onMoveBottom?: () => void
   onMoveCategory?: (category: string) => void
   moving?: boolean
 }) {
@@ -210,8 +216,10 @@ export function IssueArticle({
             {categories.slice(1).filter((category) => category !== story.category).map((category) => <option value={category} key={category}>{category}</option>)}
           </select>
         </label>
+        {canMoveUp ? <IconButton title="置顶到当前栏目" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveTop?.() }}><ArrowUpToLine size={15} /></IconButton> : null}
         {canMoveUp ? <IconButton title="上移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveUp?.() }}><ArrowUp size={15} /></IconButton> : null}
         {canMoveDown ? <IconButton title="下移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveDown?.() }}><ArrowDown size={15} /></IconButton> : null}
+        {canMoveDown ? <IconButton title="置底到当前栏目" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveBottom?.() }}><ArrowDownToLine size={15} /></IconButton> : null}
         {(canMoveUp || canMoveDown) ? <span className="article-tool-divider" /> : null}
         <IconButton title="编辑与核验" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onOpen() }}><FileCheck2 size={15} /></IconButton>
         <IconButton title="移出早报稿" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onExclude() }}><Trash2 size={15} /></IconButton>
@@ -769,7 +777,7 @@ export function App() {
     setDraggedStoryId(null)
   }
 
-  const moveStory = async (storyId: string, offset: -1 | 1) => {
+  const moveStory = async (storyId: string, target: -1 | 1 | 'first' | 'last') => {
     if (!issue) return
     const story = issue.stories.find((item) => item.id === storyId)
     if (!story) return
@@ -777,9 +785,10 @@ export function App() {
       .filter((item) => item.selected && item.status !== 'excluded' && item.category === story.category)
       .sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((item) => item.id === storyId)
-    const to = from + offset
+    const to = target === 'first' ? 0 : target === 'last' ? ordered.length - 1 : from + target
     if (from < 0 || to < 0 || to >= ordered.length) return
-    ;[ordered[from], ordered[to]] = [ordered[to], ordered[from]]
+    const [moved] = ordered.splice(from, 1)
+    ordered.splice(to, 0, moved)
     const positions = new Map(ordered.map((item, index) => [item.id, index]))
     const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, position: positions.get(item.id) ?? item.position } : item))
     setIssue(optimistic)
@@ -1043,7 +1052,7 @@ export function App() {
             {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
+              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后才会出现在“早报稿”。</p></div><strong>{candidates.length}</strong></header>

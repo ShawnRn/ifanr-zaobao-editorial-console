@@ -70,6 +70,7 @@ describe('App', () => {
   it('shows elevator controls only where movement is possible and keeps the card closed', () => {
     const onOpen = vi.fn()
     const onMoveDown = vi.fn()
+    const onMoveBottom = vi.fn()
     const story: Story = {
       id: 'story-1', issue_id: 'issue-1', fingerprint: 'fingerprint-1', title: '测试选题', body: '正文',
       category: '大公司', status: 'ready', selected: true, position: 0, score: 100,
@@ -77,12 +78,15 @@ describe('App', () => {
       cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
       image_url: '', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
     }
-    render(<IssueArticle story={story} active={false} canMoveUp={false} canMoveDown onMoveDown={onMoveDown} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+    render(<IssueArticle story={story} active={false} canMoveUp={false} canMoveDown onMoveDown={onMoveDown} onMoveBottom={onMoveBottom} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
 
     expect(screen.queryByRole('button', { name: '上移一位' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: '置顶到当前栏目' })).not.toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: '下移一位' }))
+    fireEvent.click(screen.getByRole('button', { name: '置底到当前栏目' }))
 
     expect(onMoveDown).toHaveBeenCalledOnce()
+    expect(onMoveBottom).toHaveBeenCalledOnce()
     expect(onOpen).not.toHaveBeenCalled()
   })
 
