@@ -72,6 +72,26 @@ type WorkerConnection = {
   identity?: string
 }
 
+const invisibleEditorialCharacters = /[\u200B-\u200D\u2060\uFEFF]/g
+
+function cleanBodyLine(line: string) {
+  return line.replace(invisibleEditorialCharacters, '').trim()
+}
+
+function hasMeaningfulBody(body: string) {
+  return Boolean(cleanBodyLine(body))
+}
+
+function pendingAiEditorRequest(story: Story) {
+  const request = story.metadata._ai_editor_request
+  return Boolean(
+    request
+    && typeof request === 'object'
+    && !Array.isArray(request)
+    && (request as Record<string, unknown>).state === 'pending',
+  )
+}
+
 function IconButton({
   title,
   onClick,
@@ -104,15 +124,15 @@ function BodyBlocks({ body }: { body: string }) {
   const blocks: ReactNode[] = []
   let index = 0
   while (index < lines.length) {
-    const line = lines[index].trim()
+    const line = cleanBodyLine(lines[index])
     if (!line) {
       index += 1
       continue
     }
     if (line.startsWith('- ')) {
       const items: string[] = []
-      while (index < lines.length && lines[index].trim().startsWith('- ')) {
-        items.push(lines[index].trim().slice(2))
+      while (index < lines.length && cleanBodyLine(lines[index]).startsWith('- ')) {
+        items.push(cleanBodyLine(lines[index]).slice(2))
         index += 1
       }
       blocks.push(<ul key={`list-${index}`}>{items.map((item) => <li key={item}>{item}</li>)}</ul>)
@@ -120,8 +140,8 @@ function BodyBlocks({ body }: { body: string }) {
     }
     if (line.startsWith('>')) {
       const quote: string[] = []
-      while (index < lines.length && lines[index].trim().startsWith('>')) {
-        quote.push(lines[index].trim().replace(/^>\s?/, ''))
+      while (index < lines.length && cleanBodyLine(lines[index]).startsWith('>')) {
+        quote.push(cleanBodyLine(lines[index]).replace(/^>\s?/, ''))
         index += 1
       }
       blocks.push(<blockquote key={`quote-${index}`}>{quote.join('\n')}</blockquote>)
@@ -129,8 +149,8 @@ function BodyBlocks({ body }: { body: string }) {
     }
     const paragraph = [line]
     index += 1
-    while (index < lines.length && lines[index].trim() && !lines[index].trim().startsWith('- ') && !lines[index].trim().startsWith('>')) {
-      paragraph.push(lines[index].trim())
+    while (index < lines.length && cleanBodyLine(lines[index]) && !cleanBodyLine(lines[index]).startsWith('- ') && !cleanBodyLine(lines[index]).startsWith('>')) {
+      paragraph.push(cleanBodyLine(lines[index]))
       index += 1
     }
     blocks.push(<p key={`p-${index}`}>{paragraph.join(' ')}</p>)
@@ -187,6 +207,7 @@ export function IssueArticle({
   moving?: boolean
 }) {
   const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
+  const awaitingAiEditor = pendingAiEditorRequest(story)
   return (
     <article
       className={`issue-article ${active ? 'active' : ''} ${moving ? 'moving' : ''}`}
@@ -200,15 +221,22 @@ export function IssueArticle({
         onDrop()
       }}
     >
-      <header className={image ? 'article-title-with-image' : ''}>
-        <div>
+      <div className={image ? 'article-layout-with-image' : ''}>
+        <div className="article-copy">
+          <header>
           <h3>{story.title}</h3>
+          {awaitingAiEditor ? <span className="ai-editor-note">待 AI 主编撰写</span> : null}
           {story.changed_since_review ? <span className="changed-note">事实有更新，需复核</span> : null}
+          </header>
+          {hasMeaningfulBody(story.body)
+            ? <div className="article-body"><BodyBlocks body={story.body} /></div>
+            : awaitingAiEditor
+              ? <p className="pending-editorial-copy">已提交给 AI 主编，等待下一轮追源、核验并按早报 prompt 成稿。</p>
+              : null}
+          <LinkedSourceLine story={story} />
         </div>
-        {image ? <img src={image} alt="" /> : null}
-      </header>
-      <div className="article-body"><BodyBlocks body={story.body} /></div>
-      <LinkedSourceLine story={story} />
+        {image ? <img className="article-side-image" src={image} alt="" /> : null}
+      </div>
       <div className="article-hover-tools">
         <label className="category-move-control" title="移动到其他栏目" onClick={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()}>
           <FolderInput size={15} />
@@ -256,7 +284,7 @@ function CandidateItem({
         </div>
       </div>
       <div className="candidate-actions">
-        <button type="button" className="adopt-button" title="追源、重写并采用" onClick={(event) => { event.stopPropagation(); onAdopt() }}><Check size={16} /></button>
+        <button type="button" className="adopt-button" title="提交给 AI 主编撰写" onClick={(event) => { event.stopPropagation(); onAdopt() }}><Check size={16} /></button>
         <button type="button" className="inline-icon" title="排除" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={15} /></button>
         <ChevronRight size={16} />
       </div>
@@ -475,7 +503,7 @@ function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
         return (
           <section className="brand-section" key={brand}>
             <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating !== null} onClick={() => void onGenerate(brand)}>{generating === brand ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}{(pack?.headline_options || []).length ? '重新生成标题' : '生成标题'}</button></header>
-            <p className="brand-note">从当前共享母稿生成 3 组“三个消息 / 分隔”标题，两个品牌可使用同一选题，但表达分别调整。</p>
+            <p className="brand-note">从当前共享母稿生成 3 组「三个消息 / 分隔」标题，两个品牌可使用同一选题，但表达分别调整。</p>
             <div className="headline-options">{(pack?.headline_options || []).map((headline) => <label key={headline} className={pack.selected_headline === headline ? 'selected' : ''}><input type="radio" name={`${brand}-headline`} checked={pack.selected_headline === headline} onChange={() => void onSave(brand, { selected_headline: headline })} /><span>{headline}</span></label>)}</div>
             <label className="field-label" htmlFor={`${brand}-headline-custom`}>最终大标题</label>
             <textarea key={`${brand}-${pack?.selected_headline || ''}`} id={`${brand}-headline-custom`} rows={3} defaultValue={pack?.selected_headline || ''} onBlur={(event) => event.target.value !== pack?.selected_headline && void onSave(brand, { selected_headline: event.target.value })} />
@@ -567,8 +595,42 @@ function StoryCreateDialog({ busy, onClose, onCreate }: {
   </div>
 }
 
+function DeleteConfirmDialog({ story, busy, onCancel, onConfirm }: {
+  story: Story
+  busy: boolean
+  onCancel: () => void
+  onConfirm: () => void
+}) {
+  return <div className="modal-backdrop" role="presentation" onMouseDown={onCancel}>
+    <div className="delete-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" onMouseDown={(event) => event.stopPropagation()}>
+      <header>
+        <div><span>移入回收站</span><h2 id="delete-confirm-title">确定删除这个选题？</h2></div>
+        <IconButton title="关闭" onClick={onCancel}><X size={18} /></IconButton>
+      </header>
+      <div className="delete-confirm-copy">
+        <strong>「{story.title}」</strong>
+        <p>选题会进入当前刊期的回收站。删除后可按 <kbd>⌘Z</kbd> 立即撤回，也可以稍后从回收站恢复。</p>
+      </div>
+      <footer>
+        <button type="button" className="secondary-button" onClick={onCancel}>取消</button>
+        <button type="button" className="danger-button" disabled={busy} onClick={onConfirm}>{busy ? <LoaderCircle size={15} className="spin" /> : <Trash2 size={15} />}移入回收站</button>
+      </footer>
+    </div>
+  </div>
+}
+
 function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
-  const normalizedStories = stories.map(normalizeStoryCategory)
+  const normalizedStories = stories.map(normalizeStoryCategory).map((story) => {
+    if (!story.selected || story.status === 'excluded' || hasMeaningfulBody(story.body)) return story
+    return {
+      ...story,
+      selected: false,
+      status: 'needs_review' as StoryStatus,
+      changed_since_review: true,
+      editorial_reason: story.editorial_reason || '缺少正文，需按早报 prompt 追源并重写',
+      metadata: { ...story.metadata, _empty_body_guard: { client_fallback: true } },
+    }
+  })
   return {
     ...issue,
     stories: normalizedStories,
@@ -599,6 +661,10 @@ export function App() {
   const [showExport, setShowExport] = useState(false)
   const [showCreateStory, setShowCreateStory] = useState(false)
   const [creatingStory, setCreatingStory] = useState(false)
+  const [pendingDelete, setPendingDelete] = useState<Story | null>(null)
+  const [deleteBusy, setDeleteBusy] = useState(false)
+  const [deletedStories, setDeletedStories] = useState<Story[]>([])
+  const [undoBusy, setUndoBusy] = useState(false)
   const [handoff, setHandoff] = useState<AutomationHandoff | null>(null)
   const [exporting, setExporting] = useState(false)
   const [generatingBrand, setGeneratingBrand] = useState<'appso' | 'ifanr' | null>(null)
@@ -738,7 +804,10 @@ export function App() {
   const draftStories = useMemo(() => {
     if (!issue) return []
     const normalized = query.trim().toLowerCase()
-    return issue.stories.filter((story) => story.selected && story.status !== 'excluded')
+    return issue.stories.filter((story) => (
+      (story.selected && story.status !== 'excluded' && hasMeaningfulBody(story.body))
+      || pendingAiEditorRequest(story)
+    ))
       .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
       .sort(comparePublicationStories)
   }, [issue, query])
@@ -750,7 +819,7 @@ export function App() {
   const candidates = useMemo(() => {
     if (!issue) return []
     const normalized = query.trim().toLowerCase()
-    return issue.stories.filter((story) => !story.selected)
+    return issue.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story))
       .filter((story) => category === '全部' || story.category === category)
       .filter((story) => candidateStatus === 'all' ? story.status !== 'excluded' : candidateStatus === 'excluded' ? story.status === 'excluded' : story.status === candidateStatus)
       .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
@@ -768,10 +837,15 @@ export function App() {
   }, [issue, query, category])
 
   const draftCounts = useMemo(() => {
-    const counts: Record<string, number> = { 全部: issue?.selected_count || 0 }
-    issue?.stories.filter((story) => story.selected && story.status !== 'excluded').forEach((story) => { counts[story.category] = (counts[story.category] || 0) + 1 })
+    const counts: Record<string, number> = { 全部: draftStories.length }
+    draftStories.forEach((story) => { counts[story.category] = (counts[story.category] || 0) + 1 })
     return counts
-  }, [issue])
+  }, [draftStories])
+
+  const pendingAiEditorCount = useMemo(
+    () => issue?.stories.filter((story) => pendingAiEditorRequest(story)).length || 0,
+    [issue],
+  )
 
   const selectedStory = issue?.stories.find((story) => story.id === selectedStoryId) || null
   const selectedJob = selectedStory ? jobs[selectedStory.id] : undefined
@@ -796,6 +870,63 @@ export function App() {
       },
     })
   }
+
+  const requestDeleteStory = (story: Story) => {
+    setPendingDelete(story)
+  }
+
+  const confirmDeleteStory = async () => {
+    if (!pendingDelete || deleteBusy) return
+    const snapshot = structuredClone(pendingDelete)
+    setDeleteBusy(true)
+    try {
+      await excludeStory(pendingDelete)
+      setDeletedStories((current) => [...current, snapshot].slice(-20))
+      setPendingDelete(null)
+      if (selectedStoryId === pendingDelete.id) setSelectedStoryId(null)
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : '删除选题失败')
+    } finally {
+      setDeleteBusy(false)
+    }
+  }
+
+  const undoLastDeletion = useCallback(async () => {
+    const snapshot = deletedStories.at(-1)
+    if (!snapshot || undoBusy) return
+    setUndoBusy(true)
+    try {
+      await updateStory(snapshot.id, {
+        selected: snapshot.selected,
+        status: snapshot.status,
+        position: snapshot.position,
+        category: snapshot.category,
+        metadata: snapshot.metadata,
+      })
+      setDeletedStories((current) => current.slice(0, -1))
+      if (snapshot.selected) {
+        setView('draft')
+        window.requestAnimationFrame(() => scrollToDraftSection(snapshot.category))
+      }
+    } catch (undoError) {
+      setError(undoError instanceof Error ? undoError.message : '撤回删除失败')
+    } finally {
+      setUndoBusy(false)
+    }
+  }, [deletedStories, undoBusy, issue, dataMode])
+
+  useEffect(() => {
+    const handleUndo = (event: KeyboardEvent) => {
+      if (!(event.metaKey || event.ctrlKey) || event.shiftKey || event.key.toLowerCase() !== 'z') return
+      const target = event.target
+      if (target instanceof Element && target.closest('input, textarea, select, [contenteditable="true"]')) return
+      if (!deletedStories.length) return
+      event.preventDefault()
+      void undoLastDeletion()
+    }
+    document.addEventListener('keydown', handleUndo)
+    return () => document.removeEventListener('keydown', handleUndo)
+  }, [deletedStories.length, undoLastDeletion])
 
   const restoreStory = async (story: Story) => {
     if (!issue) return
@@ -933,18 +1064,32 @@ export function App() {
 
   const adoptCandidate = async (story: Story) => {
     setSelectedStoryId(story.id)
-    if (dataMode === 'static') {
-      await updateStory(story.id, { selected: true, status: story.body.trim() ? 'needs_review' : 'drafting' })
-      return
-    }
     try {
-      await updateStory(story.id, { status: 'drafting' })
-      const queued = await api.action(story.id, 'rewrite')
-      await watchJob(story.id, queued)
-      await updateStory(story.id, { selected: true })
+      const targetPosition = issue?.stories
+        .filter((item) => item.category === story.category && (
+          (item.selected && item.status !== 'excluded')
+          || pendingAiEditorRequest(item)
+        ))
+        .reduce((maximum, item) => Math.max(maximum, item.position), -1) ?? -1
+      await updateStory(story.id, {
+        selected: false,
+        status: 'drafting',
+        position: targetPosition + 1,
+        editorial_reason: '已采用，等待下一轮 AI 主编追源、撰写并复核',
+        metadata: {
+          ...story.metadata,
+          _ai_editor_request: {
+            state: 'pending',
+            requested_at: new Date().toISOString(),
+            requested_by: 'human',
+            requested_category: story.category,
+          },
+        },
+      })
+      setView('draft')
+      window.requestAnimationFrame(() => scrollToDraftSection(story.category))
     } catch (adoptError) {
-      setError(adoptError instanceof Error ? adoptError.message : '追源成稿失败')
-      await updateStory(story.id, { selected: false, status: 'needs_review' }).catch(() => undefined)
+      setError(adoptError instanceof Error ? adoptError.message : '提交 AI 主编失败')
     }
   }
 
@@ -1115,7 +1260,7 @@ export function App() {
         <div className={`editor-layout ${selectedStory ? 'with-detail' : ''}`}>
           <aside className="sidebar">
             <div className="sidebar-heading"><Menu size={16} /><span>栏目</span></div>
-            <nav>{categories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : view === 'trash' ? issue?.stories.filter((story) => story.status === 'excluded' && (item === '全部' || story.category === item)).length || 0 : issue?.stories.filter((story) => !story.selected && story.status !== 'excluded' && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
+            <nav>{categories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : view === 'trash' ? issue?.stories.filter((story) => story.status === 'excluded' && (item === '全部' || story.category === item)).length || 0 : issue?.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story) && story.status !== 'excluded' && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
             {view === 'candidates' ? <><div className="sidebar-heading"><ArrowUpDown size={16} /><span>状态</span></div><nav>{[['all', '待处理'], ['needs_review', '待复核'], ['source_chasing', '追源中']].map(([value, label]) => <button type="button" className={candidateStatus === value ? 'active' : ''} onClick={() => setCandidateStatus(value)} key={value}><span>{label}</span></button>)}</nav></> : null}
             <div className="issue-metrics"><div><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></div><div><strong>{issue?.ready_count || 0}</strong><span>可用</span></div><div><strong>{issue?.review_count || 0}</strong><span>待复核</span></div></div>
           </aside>
@@ -1124,13 +1269,13 @@ export function App() {
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
             {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && !error && view === 'draft' ? <>
-              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => void excludeStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
+              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
+              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && !error && view === 'candidates' ? <>
-              <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后才会出现在“早报稿”。</p></div><strong>{candidates.length}</strong></header>
+              <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、正文或来源" /></div></div>
-              <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => void updateStory(story.id, { selected: false, status: 'excluded' })} />)}</div>
+              <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => requestDeleteStory(story)} />)}</div>
             </> : null}
             {!loading && !error && view === 'trash' ? <>
               <header className="candidate-masthead trash-masthead"><div><span>当前刊期</span><h1>回收站</h1><p>仅保留当天被移出的选题，恢复后回到原栏目末尾。</p></div><strong>{trashStories.length}</strong></header>
@@ -1146,6 +1291,8 @@ export function App() {
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} onClose={() => setShowCreateStory(false)} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} onClose={() => setShowExport(false)} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
+      {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} onCancel={() => { if (!deleteBusy) setPendingDelete(null) }} onConfirm={() => void confirmDeleteStory()} /> : null}
+      {deletedStories.length ? <div className="undo-toast" role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )
 }

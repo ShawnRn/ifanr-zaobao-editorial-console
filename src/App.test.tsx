@@ -67,6 +67,35 @@ describe('App', () => {
     expect(onOpen).not.toHaveBeenCalled()
   })
 
+  it('ignores zero-width placeholder lines instead of rendering empty paragraphs', () => {
+    const story = {
+      ...staticStory,
+      body: '\u200b\n\n第一段。\n\n\u200b\n\n第二段。\n\n\uFEFF',
+    }
+    const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+
+    const paragraphs = container.querySelectorAll('.article-body p')
+    expect(paragraphs).toHaveLength(2)
+    expect([...paragraphs].map((paragraph) => paragraph.textContent)).toEqual(['第一段。', '第二段。'])
+  })
+
+  it('asks for confirmation before deletion and restores it with Command-Z', async () => {
+    render(<App />)
+    expect(await screen.findByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
+    expect(screen.getByRole('dialog', { name: '确定删除这个选题？' })).toBeInTheDocument()
+    expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: '移入回收站' }))
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: '确定删除这个选题？' })).not.toBeInTheDocument())
+    expect(screen.getByRole('status')).toHaveTextContent('已移入回收站')
+
+    fireEvent.keyDown(document, { key: 'z', metaKey: true })
+    await waitFor(() => expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument())
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+  })
+
   it('shows elevator controls only where movement is possible and keeps the card closed', () => {
     const onOpen = vi.fn()
     const onMoveDown = vi.fn()
@@ -133,6 +162,65 @@ describe('App', () => {
     fireEvent.animationEnd(popover)
 
     await waitFor(() => expect(document.querySelector('.settings-popover')).not.toBeInTheDocument())
+  })
+
+  it('uses corner quotes in visible UI copy', async () => {
+    render(<App />)
+    await screen.findByText('当天真实 Bot 稿标题')
+
+    fireEvent.click(screen.getByRole('button', { name: '候选库' }))
+    expect(screen.getByText(/采用后会先以「待 AI 主编撰写」状态出现在「早报稿」/)).toBeInTheDocument()
+    expect(document.body.textContent).not.toMatch(/[“”]/)
+  })
+
+  it('queues a candidate for the next AI editor run without starting an immediate job', async () => {
+    const candidate: Story = {
+      ...staticStory,
+      id: 'candidate-story',
+      fingerprint: 'candidate-fingerprint',
+      title: '等待主编撰写的候选',
+      body: '',
+      category: '大公司',
+      selected: false,
+      status: 'discovered',
+      metadata: { origin: 'runtime_candidate' },
+    }
+    const connectedIssue = { ...structuredClone(staticIssue), stories: [staticStory, candidate] }
+    const health = vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connectedIssue)
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    const patch = vi.spyOn(api, 'patchStory').mockImplementation(async (_id, changes) => ({ ...candidate, ...changes }))
+    const action = vi.spyOn(api, 'action')
+
+    render(<App />)
+    await waitFor(() => expect(health).toHaveBeenCalled())
+    fireEvent.click(screen.getByRole('button', { name: '候选库' }))
+    fireEvent.click(await screen.findByRole('button', { name: '提交给 AI 主编撰写' }))
+
+    await waitFor(() => expect(patch).toHaveBeenCalled())
+    expect(action).not.toHaveBeenCalled()
+    expect(await screen.findByText('待 AI 主编撰写')).toBeInTheDocument()
+    expect(screen.getByText('已提交给 AI 主编，等待下一轮追源、核验并按早报 prompt 成稿。')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '等待主编撰写的候选' })).toBeInTheDocument()
+    const changes = patch.mock.calls[0][1]
+    expect(changes.selected).toBe(false)
+    expect(changes.status).toBe('drafting')
+    expect((changes.metadata?._ai_editor_request as Record<string, unknown>).state).toBe('pending')
+  })
+
+  it('keeps article copy flowing independently from a tall side image', () => {
+    const story: Story = {
+      ...staticStory,
+      title: '带图稿件',
+      body: '第一段正文。\\n\\n第二段正文。',
+      image_url: 'https://example.com/tall-image.jpg',
+    }
+    const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+
+    const layout = container.querySelector('.article-layout-with-image')
+    expect(layout).toBeInTheDocument()
+    expect(layout?.querySelector('.article-copy .article-body')).toBeInTheDocument()
+    expect(layout?.querySelector(':scope > .article-side-image')).toBeInTheDocument()
   })
 
   it('shows manual image controls while connected and protects static mode', () => {
