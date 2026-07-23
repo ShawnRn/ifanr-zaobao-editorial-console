@@ -665,6 +665,9 @@ export function App() {
   const [deleteBusy, setDeleteBusy] = useState(false)
   const [deletedStories, setDeletedStories] = useState<Story[]>([])
   const [undoBusy, setUndoBusy] = useState(false)
+  const [undoToastVisible, setUndoToastVisible] = useState(false)
+  const [undoToastClosing, setUndoToastClosing] = useState(false)
+  const [undoToastCycle, setUndoToastCycle] = useState(0)
   const [handoff, setHandoff] = useState<AutomationHandoff | null>(null)
   const [exporting, setExporting] = useState(false)
   const [generatingBrand, setGeneratingBrand] = useState<'appso' | 'ifanr' | null>(null)
@@ -801,6 +804,20 @@ export function App() {
     if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
   }, [])
 
+  useEffect(() => {
+    if (!undoToastVisible) return
+    setUndoToastClosing(false)
+    const closeTimer = window.setTimeout(() => setUndoToastClosing(true), 9650)
+    const hideTimer = window.setTimeout(() => {
+      setUndoToastVisible(false)
+      setUndoToastClosing(false)
+    }, 10000)
+    return () => {
+      window.clearTimeout(closeTimer)
+      window.clearTimeout(hideTimer)
+    }
+  }, [undoToastCycle, undoToastVisible])
+
   const draftStories = useMemo(() => {
     if (!issue) return []
     const normalized = query.trim().toLowerCase()
@@ -882,6 +899,9 @@ export function App() {
     try {
       await excludeStory(pendingDelete)
       setDeletedStories((current) => [...current, snapshot].slice(-20))
+      setUndoToastVisible(true)
+      setUndoToastClosing(false)
+      setUndoToastCycle((current) => current + 1)
       setPendingDelete(null)
       if (selectedStoryId === pendingDelete.id) setSelectedStoryId(null)
     } catch (deleteError) {
@@ -904,6 +924,8 @@ export function App() {
         metadata: snapshot.metadata,
       })
       setDeletedStories((current) => current.slice(0, -1))
+      setUndoToastVisible(false)
+      setUndoToastClosing(false)
       if (snapshot.selected) {
         setView('draft')
         window.requestAnimationFrame(() => scrollToDraftSection(snapshot.category))
@@ -1292,7 +1314,7 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} onClose={() => setShowCreateStory(false)} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} onClose={() => setShowExport(false)} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} onCancel={() => { if (!deleteBusy) setPendingDelete(null) }} onConfirm={() => void confirmDeleteStory()} /> : null}
-      {deletedStories.length ? <div className="undo-toast" role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
+      {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/vitest'
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { App, IssueArticle, StoryImageEditor, TrashItem } from './App'
 import { api } from './api'
@@ -94,6 +94,28 @@ describe('App', () => {
     fireEvent.keyDown(document, { key: 'z', metaKey: true })
     await waitFor(() => expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument())
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
+  })
+
+  it('fades the deletion toast after 10 seconds without losing Command-Z history', async () => {
+    render(<App />)
+    expect(await screen.findByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
+    vi.useFakeTimers()
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: '移入回收站' }))
+    })
+    expect(screen.getByRole('status')).toHaveTextContent('已移入回收站')
+
+    await act(async () => { vi.advanceTimersByTime(9650) })
+    expect(screen.getByRole('status')).toHaveClass('is-closing')
+    await act(async () => { vi.advanceTimersByTime(350) })
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+
+    fireEvent.keyDown(document, { key: 'z', metaKey: true })
+    await act(async () => Promise.resolve())
+    expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+    vi.useRealTimers()
   })
 
   it('shows elevator controls only where movement is possible and keeps the card closed', () => {
