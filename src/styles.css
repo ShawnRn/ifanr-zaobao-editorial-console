@@ -23,6 +23,44 @@
   --blue: #176b88;
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #e8e8e5;
+  background: #1a1a18;
+  --ink: #f0f0ed;
+  --muted: #b2b2ac;
+  --quiet: #85857e;
+  --paper: #222220;
+  --warm: #1d1d1b;
+  --canvas: #151513;
+  --panel: #282826;
+  --panel-2: #333330;
+  --line: #474741;
+  --line-soft: #363632;
+  --brand: #f06a53;
+  --brand-secondary: #e7a06f;
+  --green: #88b797;
+  --amber: #d4aa72;
+  --blue: #bbbcb8;
+}
+
+:root[data-theme="dark"] .topbar,
+:root[data-theme="dark"] .view-switcher button.active,
+:root[data-theme="dark"] .sidebar nav button.active,
+:root[data-theme="dark"] .article-hover-tools { background: #242422; }
+:root[data-theme="dark"] .view-switcher { background: #1b1b19; }
+:root[data-theme="dark"] .view-switcher button { color: #aaa9a3; }
+:root[data-theme="dark"] .view-switcher button:hover,
+:root[data-theme="dark"] .sidebar nav button:hover { color: var(--ink); background: #2e2e2b; }
+:root[data-theme="dark"] .sidebar nav button { color: #b1b0aa; }
+:root[data-theme="dark"] .article-body { color: #dcdbd6; }
+:root[data-theme="dark"] .source-line { color: #a6a59e; }
+:root[data-theme="dark"] .source-line a { color: #c5c5be; }
+:root[data-theme="dark"] .issue-metrics strong { color: #e5e4df; }
+:root[data-theme="dark"] .issue-metrics { border-color: var(--line); }
+:root[data-theme="dark"] .connection-pages { border-color: #575752; background: #292927; color: #c5c4be; }
+:root[data-theme="dark"] .connection-pages svg { color: #c5c4be; }
+
 * { box-sizing: border-box; }
 html, body, #root { width: 100%; min-width: 320px; height: 100%; margin: 0; }
 body { overflow: hidden; background: var(--canvas); }

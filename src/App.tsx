@@ -20,6 +20,7 @@ import {
   Library,
   LoaderCircle,
   Menu,
+  Moon,
   PanelRightClose,
   Plus,
   RefreshCw,
@@ -28,6 +29,7 @@ import {
   Settings,
   ShieldCheck,
   Sparkles,
+  Sun,
   Trash2,
   Upload,
   WandSparkles,
@@ -40,9 +42,36 @@ import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
+import ifanrMarkUrl from './assets/ifanr-mark.png'
 
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
+const weekendDraftCategories = ['周末也值得一看的新闻', 'One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
+
+function isSaturdayPublication(publicationDate?: string) {
+  if (!publicationDate) return false
+  const [year, month, day] = publicationDate.split('-').map(Number)
+  return new Date(Date.UTC(year, month - 1, day)).getUTCDay() === 6
+}
+
+function weekendDraftSection(story: Story) {
+  const title = story.title.trim()
+  if (/^One Fun Thing[｜|]/i.test(title)) return 'One Fun Thing'
+  if (/^周末看什么[｜|]/.test(title)) return '周末看什么'
+  if (/^买书不读指南[｜|]/.test(title)) return '买书不读指南'
+  if (/^游戏推荐[｜|]/.test(title)) return '游戏推荐'
+  return '周末也值得一看的新闻'
+}
+
+function groupDraftStories(stories: Story[], isSaturday: boolean): Array<readonly [string, Story[]]> {
+  if (!isSaturday) return groupPublicationStories(stories)
+  const groups = new Map<string, Story[]>()
+  stories.forEach((story) => {
+    const section = weekendDraftSection(story)
+    groups.set(section, [...(groups.get(section) || []), story])
+  })
+  return weekendDraftCategories.map((section) => [section, groups.get(section) || []] as const)
+}
 
 const statusLabel: Record<string, string> = {
   discovered: '待判断',
@@ -640,6 +669,7 @@ function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
 }
 
 export function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => localStorage.getItem('ifanr-editorial-theme') === 'dark' ? 'dark' : 'light')
   const [issue, setIssue] = useState<Issue | null>(null)
   const [baseIssue, setBaseIssue] = useState<Issue | null>(null)
   const [reviewSessionId, setReviewSessionId] = useState('')
@@ -682,6 +712,11 @@ export function App() {
     detail: '正在检测主 Mac Worker',
     url: getApiUrl(),
   })
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('ifanr-editorial-theme', theme)
+  }, [theme])
   const draftScrollRef = useRef<HTMLElement | null>(null)
   const settingsPopoverRef = useRef<HTMLDivElement | null>(null)
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null)
@@ -840,9 +875,11 @@ export function App() {
       .sort(comparePublicationStories)
   }, [issue, query])
 
+  const isSaturdayIssue = isSaturdayPublication(issue?.publication_date)
+
   const groupedDraft = useMemo(() => {
-    return groupPublicationStories(draftStories)
-  }, [draftStories])
+    return groupDraftStories(draftStories, isSaturdayIssue)
+  }, [draftStories, isSaturdayIssue])
 
   const candidates = useMemo(() => {
     if (!issue) return []
@@ -866,9 +903,16 @@ export function App() {
 
   const draftCounts = useMemo(() => {
     const counts: Record<string, number> = { 全部: draftStories.length }
-    draftStories.forEach((story) => { counts[story.category] = (counts[story.category] || 0) + 1 })
+    draftStories.forEach((story) => {
+      const section = isSaturdayIssue ? weekendDraftSection(story) : story.category
+      counts[section] = (counts[section] || 0) + 1
+    })
     return counts
-  }, [draftStories])
+  }, [draftStories, isSaturdayIssue])
+
+  const sidebarCategories = view === 'draft' && isSaturdayIssue
+    ? ['全部', ...weekendDraftCategories]
+    : categories
 
   const pendingAiEditorCount = useMemo(
     () => issue?.stories.filter((story) => pendingAiEditorRequest(story)).length || 0,
@@ -1254,14 +1298,14 @@ export function App() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <img className="brand-logo" src={`${import.meta.env.BASE_URL}assets/ifanr-logo.png`} alt="爱范儿" />
+          <img className="brand-logo" src={ifanrMarkUrl} alt="爱范儿" />
           <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
         </div>
         <nav className="view-switcher" aria-label="编辑台视图">
           <button className={view === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
           <button className={view === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
           <button className={view === 'trash' ? 'active' : ''} onClick={() => switchView('trash')} type="button">回收站</button>
-          <button className={view === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">双品牌</button>
+          <button className={view === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">标题</button>
           <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
@@ -1271,6 +1315,7 @@ export function App() {
           </button>
           <IconButton title={dataMode === 'worker' ? '手动添加选题' : '连接 Worker 后才能添加选题'} onClick={() => setShowCreateStory(true)} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
           <IconButton title={repoRuntimeAccess ? '同步最新自动化产物' : '读取自动化已同步的最终稿'} onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
+          <IconButton title={theme === 'dark' ? '切换到浅色模式' : '切换到深色模式'} onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}><>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="连接设置" aria-label="连接设置" onClick={toggleSettings}><Settings size={17} /></button>
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
@@ -1296,7 +1341,7 @@ export function App() {
         <div className={`editor-layout ${selectedStory ? 'with-detail' : ''}`}>
           <aside className="sidebar">
             <div className="sidebar-heading"><Menu size={16} /><span>栏目</span></div>
-            <nav>{categories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : view === 'trash' ? issue?.stories.filter((story) => story.status === 'excluded' && (item === '全部' || story.category === item)).length || 0 : issue?.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story) && story.status !== 'excluded' && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
+            <nav>{sidebarCategories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : view === 'trash' ? issue?.stories.filter((story) => story.status === 'excluded' && (item === '全部' || story.category === item)).length || 0 : issue?.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story) && story.status !== 'excluded' && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
             {view === 'candidates' ? <><div className="sidebar-heading"><ArrowUpDown size={16} /><span>状态</span></div><nav>{[['all', '待处理'], ['needs_review', '待复核'], ['source_chasing', '追源中']].map(([value, label]) => <button type="button" className={candidateStatus === value ? 'active' : ''} onClick={() => setCandidateStatus(value)} key={value}><span>{label}</span></button>)}</nav></> : null}
             <div className="issue-metrics"><div><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></div><div><strong>{issue?.ready_count || 0}</strong><span>可用</span></div><div><strong>{issue?.review_count || 0}</strong><span>待复核</span></div></div>
           </aside>
@@ -1306,7 +1351,7 @@ export function App() {
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && issue && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
+              <div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
             {!loading && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>

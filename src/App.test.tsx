@@ -42,7 +42,7 @@ describe('App', () => {
   it('falls back to the current real Bot draft snapshot while the worker is offline', async () => {
     render(<App />)
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()
-    expect(screen.getByText('双品牌')).toBeInTheDocument()
+    expect(screen.getByText('标题')).toBeInTheDocument()
     expect((await screen.findAllByText('Pages 快照')).length).toBeGreaterThan(0)
     expect(await screen.findByText('当天真实 Bot 稿标题')).toBeInTheDocument()
     expect(screen.getByText('当天飞书 Bot 稿 · 1 条 · Pages 只读快照')).toBeInTheDocument()
