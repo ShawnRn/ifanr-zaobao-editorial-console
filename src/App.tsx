@@ -35,7 +35,7 @@ import {
   WandSparkles,
   X,
 } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef, useState, type MouseEventHandler, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
 import { api, apiUrlProblem, describeWorkerError, getApiUrl, lanConsoleUrl, normalizeApiUrl, setApiUrl, tailscaleConsoleUrl } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
@@ -755,9 +755,11 @@ export function App() {
   const [candidateStatus, setCandidateStatus] = useState('all')
   const [view, setView] = useState<View>('draft')
   const [outlineCollapsed, setOutlineCollapsed] = useState(() => localStorage.getItem('ifanr-editorial-outline-collapsed') === '1')
+  const [mobileReadOnly, setMobileReadOnly] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 760px)').matches)
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null)
   const [detailClosing, setDetailClosing] = useState(false)
   const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null)
+  const [outlineDrop, setOutlineDrop] = useState<{ targetId: string; after: boolean } | null>(null)
   const [movingStoryId, setMovingStoryId] = useState<string | null>(null)
   const [jobs, setJobs] = useState<Record<string, Job>>({})
   const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
@@ -792,7 +794,17 @@ export function App() {
     localStorage.setItem('ifanr-editorial-theme', theme)
   }, [theme])
   useEffect(() => { localStorage.setItem('ifanr-editorial-outline-collapsed', outlineCollapsed ? '1' : '0') }, [outlineCollapsed])
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return
+    const media = window.matchMedia('(max-width: 760px)')
+    const sync = () => setMobileReadOnly(media.matches)
+    sync()
+    media.addEventListener('change', sync)
+    return () => media.removeEventListener('change', sync)
+  }, [])
+  useEffect(() => { if (mobileReadOnly) setSelectedStoryId(null) }, [mobileReadOnly])
   const draftScrollRef = useRef<HTMLElement | null>(null)
+  const outlineRef = useRef<HTMLElement | null>(null)
   const settingsPopoverRef = useRef<HTMLDivElement | null>(null)
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null)
   const connectionTriggerRef = useRef<HTMLButtonElement | null>(null)
@@ -1036,6 +1048,16 @@ export function App() {
     return groupDraftStories(draftStories, isSaturdayIssue)
   }, [draftStories, isSaturdayIssue])
 
+  const outlineGroupedDraft = useMemo(() => groupedDraft.map(([section, stories]) => {
+    if (!draggedStoryId || !outlineDrop || !stories.some((story) => story.id === draggedStoryId) || !stories.some((story) => story.id === outlineDrop.targetId)) return [section, stories] as const
+    const reordered = [...stories]
+    const from = reordered.findIndex((story) => story.id === draggedStoryId)
+    const [dragged] = reordered.splice(from, 1)
+    const targetIndex = reordered.findIndex((story) => story.id === outlineDrop.targetId)
+    reordered.splice(targetIndex + (outlineDrop.after ? 1 : 0), 0, dragged)
+    return [section, reordered] as const
+  }), [draggedStoryId, groupedDraft, outlineDrop])
+
   const candidates = useMemo(() => {
     if (!issue) return []
     const normalized = query.trim().toLowerCase()
@@ -1074,7 +1096,7 @@ export function App() {
     [issue],
   )
 
-  const selectedStory = issue?.stories.find((story) => story.id === selectedStoryId) || null
+  const selectedStory = mobileReadOnly ? null : issue?.stories.find((story) => story.id === selectedStoryId) || null
   const selectedJob = selectedStory ? jobs[selectedStory.id] : undefined
 
   const updateStory = async (storyId: string, patch: Partial<Story>) => {
@@ -1195,22 +1217,50 @@ export function App() {
     if (issue) setIssue(await api.getIssue(issue.id))
   }
 
-  const handleDrop = async (targetId: string) => {
+  const canOutlineReorder = (targetId: string) => {
+    if (!issue || !draggedStoryId || targetId === draggedStoryId) return false
+    const target = issue.stories.find((story) => story.id === targetId)
+    const dragged = issue.stories.find((story) => story.id === draggedStoryId)
+    return Boolean(target && dragged && target.category === dragged.category && (!isSaturdayIssue || weekendDraftSection(target) === weekendDraftSection(dragged)))
+  }
+
+  const updateOutlineDrop = (event: DragEvent<HTMLButtonElement>, targetId: string) => {
+    if (!canOutlineReorder(targetId)) return
+    event.preventDefault()
+    event.dataTransfer.dropEffect = 'move'
+    const rect = event.currentTarget.getBoundingClientRect()
+    const after = event.clientY >= rect.top + rect.height / 2
+    setOutlineDrop((current) => current?.targetId === targetId && current.after === after ? current : { targetId, after })
+    const outline = outlineRef.current
+    if (!outline) return
+    const outlineRect = outline.getBoundingClientRect()
+    const edge = 34
+    if (event.clientY < outlineRect.top + edge) outline.scrollBy({ top: -18, behavior: 'auto' })
+    if (event.clientY > outlineRect.bottom - edge) outline.scrollBy({ top: 18, behavior: 'auto' })
+  }
+
+  const clearOutlineDrag = () => {
+    setDraggedStoryId(null)
+    setOutlineDrop(null)
+  }
+
+  const handleDrop = async (targetId: string, after = false) => {
     if (!issue || !draggedStoryId || draggedStoryId === targetId) return
     const target = issue.stories.find((story) => story.id === targetId)
     const dragged = issue.stories.find((story) => story.id === draggedStoryId)
-    if (!target || !dragged || target.category !== dragged.category) return
+    if (!target || !dragged || target.category !== dragged.category || (isSaturdayIssue && weekendDraftSection(target) !== weekendDraftSection(dragged))) return
     const ordered = issue.stories.filter((story) => story.selected && story.category === target.category).sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((story) => story.id === draggedStoryId)
-    const to = ordered.findIndex((story) => story.id === targetId)
-    ordered.splice(to, 0, ordered.splice(from, 1)[0])
+    const [moved] = ordered.splice(from, 1)
+    const targetIndex = ordered.findIndex((story) => story.id === targetId)
+    ordered.splice(targetIndex + (after ? 1 : 0), 0, moved)
     if (dataMode === 'static') {
       const positions = new Map(ordered.map((story, index) => [story.id, index]))
       setIssue(issueWithMetrics(issue, issue.stories.map((story) => positions.has(story.id) ? { ...story, position: positions.get(story.id) || 0 } : story)))
     } else {
       setIssue(await api.reorder(issue.id, ordered.map((story) => story.id), target.category))
     }
-    setDraggedStoryId(null)
+    clearOutlineDrag()
   }
 
   const moveStory = async (storyId: string, target: -1 | 1 | 'first' | 'last') => {
@@ -1554,7 +1604,7 @@ export function App() {
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && issue && view === 'draft' ? <div className={`draft-stage ${outlineCollapsed ? 'outline-collapsed' : ''}`}>
-              {!outlineCollapsed ? <aside className="draft-outline" aria-label="稿件目录"><header><span>稿件目录</span><em>{draftStories.length}</em><button type="button" title="收起目录" aria-label="收起目录" onClick={() => setOutlineCollapsed(true)}><PanelRightClose size={16} /></button></header>{groupedDraft.map(([section, stories]) => <section key={section}><button type="button" className="draft-outline-section" onClick={() => scrollToDraftSection(section)}>{section}</button>{stories.map((story) => <button type="button" key={story.id} draggable className={selectedStoryId === story.id ? 'active' : ''} onClick={() => scrollToStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDragOver={(event) => event.preventDefault()} onDrop={(event) => { event.preventDefault(); void handleDrop(story.id) }}><span>{story.title}</span></button>)}</section>)}</aside> : null}
+              {!outlineCollapsed ? <aside ref={outlineRef} className="draft-outline" aria-label="稿件目录"><header><span>稿件目录</span><em>{draftStories.length}</em><button type="button" title="收起目录" aria-label="收起目录" onClick={() => setOutlineCollapsed(true)}><PanelRightClose size={16} /></button></header>{outlineGroupedDraft.map(([section, stories]) => <section key={section}><button type="button" className="draft-outline-section" onClick={() => scrollToDraftSection(section)}>{section}</button>{stories.map((story) => <button type="button" key={story.id} draggable className={`${selectedStoryId === story.id ? 'active ' : ''}${draggedStoryId === story.id ? 'dragging ' : ''}${outlineDrop?.targetId === story.id ? outlineDrop.after ? 'drop-after' : 'drop-before' : ''}`} onClick={() => scrollToStory(story)} onDragStart={(event) => { event.dataTransfer.effectAllowed = 'move'; event.dataTransfer.setData('text/plain', story.id); setDraggedStoryId(story.id); setOutlineDrop(null) }} onDragOver={(event) => updateOutlineDrop(event, story.id)} onDrop={(event) => { event.preventDefault(); const drop = outlineDrop; void handleDrop(story.id, drop?.targetId === story.id ? drop.after : false) }} onDragEnd={clearOutlineDrag}><span>{story.title}</span></button>)}</section>)}</aside> : null}
               {outlineCollapsed ? <button type="button" className="draft-outline-reveal" title="展开稿件目录" aria-label="展开稿件目录" onClick={() => setOutlineCollapsed(false)}><Menu size={17} /></button> : null}
               <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void (isSaturdayIssue ? moveStoryToWeekendSection(story.id, target) : moveStoryToCategory(story.id, target))} moveOptions={isSaturdayIssue ? weekendDraftCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendDraftSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div></div>
             </div> : null}
@@ -1569,7 +1619,7 @@ export function App() {
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
-          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} closing={detailClosing} onClose={closeDetail} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} closing={detailClosing} onClose={closeDetail} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 
