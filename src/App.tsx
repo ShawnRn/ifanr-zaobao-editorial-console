@@ -20,7 +20,6 @@ import {
   Library,
   LoaderCircle,
   Menu,
-  Newspaper,
   PanelRightClose,
   Plus,
   RefreshCw,
@@ -1254,7 +1253,10 @@ export function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <div className="brand-lockup"><Newspaper size={21} /><div><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div></div>
+        <div className="brand-lockup">
+          <img className="brand-logo" src={`${import.meta.env.BASE_URL}assets/ifanr-logo.png`} alt="爱范儿" />
+          <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
+        </div>
         <nav className="view-switcher" aria-label="编辑台视图">
           <button className={view === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
           <button className={view === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
