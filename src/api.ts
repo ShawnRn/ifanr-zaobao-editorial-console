@@ -190,6 +190,7 @@ export const api = {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ url }),
   }),
+  resolveStoryImage: (storyId: string) => mediaRequest<Story>(`/api/stories/${storyId}/image/from-sources`, { method: 'POST' }),
   deleteStoryImage: (storyId: string) => mediaRequest<Story>(`/api/stories/${storyId}/image`, { method: 'DELETE' }),
   handoff: (issueId: string) =>
     request<AutomationHandoff>(`/api/issues/${issueId}/handoff`, { method: 'POST' }),

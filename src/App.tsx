@@ -65,6 +65,14 @@ function weekendDraftSection(story: Story) {
   return '周末也值得一看的新闻'
 }
 
+function moveToWeekendDraftSection(story: Story, section: string) {
+  const match = story.title.match(/^(One Fun Thing|周末看什么|买书不读指南|游戏推荐)｜(主选|备选)｜(.+)$/i)
+  const plainTitle = match ? match[3] : story.title.replace(/^周末也值得一看的新闻｜/, '')
+  if (section === '周末也值得一看的新闻') return plainTitle
+  const slot = match?.[2] || '主选'
+  return `${section}｜${slot}｜${plainTitle}`
+}
+
 function groupDraftStories(stories: Story[], isSaturday: boolean): Array<readonly [string, Story[]]> {
   if (!isSaturday) return groupPublicationStories(stories)
   const groups = new Map<string, Story[]>()
@@ -219,6 +227,8 @@ export function IssueArticle({
   onMoveTop,
   onMoveBottom,
   onMoveCategory,
+  moveOptions = categories.slice(1),
+  currentMoveTarget = story.category,
   moving = false,
 }: {
   story: Story
@@ -234,12 +244,15 @@ export function IssueArticle({
   onMoveTop?: () => void
   onMoveBottom?: () => void
   onMoveCategory?: (category: string) => void
+  moveOptions?: readonly string[]
+  currentMoveTarget?: string
   moving?: boolean
 }) {
   const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
   const awaitingAiEditor = pendingAiEditorRequest(story)
   return (
     <article
+      id={`story-${story.id}`}
       className={`issue-article ${active ? 'active' : ''} ${moving ? 'moving' : ''}`}
       onClick={onOpen}
       draggable
@@ -272,7 +285,7 @@ export function IssueArticle({
           <FolderInput size={15} />
           <select aria-label="移动到其他栏目" value="" onChange={(event) => { event.stopPropagation(); if (event.target.value) onMoveCategory?.(event.target.value) }}>
             <option value="" disabled>移动到其他栏目</option>
-            {categories.slice(1).filter((category) => category !== story.category).map((category) => <option value={category} key={category}>{category}</option>)}
+            {moveOptions.filter((category) => category !== currentMoveTarget).map((category) => <option value={category} key={category}>{category}</option>)}
           </select>
         </label>
         {canMoveUp ? <IconButton title="置顶到当前栏目" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveTop?.() }}><ArrowUpToLine size={15} /></IconButton> : null}
@@ -372,21 +385,68 @@ function DetailPanel({
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
+  const [saveState, setSaveState] = useState<'saved' | 'saving' | 'error'>('saved')
+  const titleSaveTimerRef = useRef<number | null>(null)
+  const bodySaveTimerRef = useRef<number | null>(null)
+  const pendingPatchRef = useRef<Partial<Story>>({})
 
   useEffect(() => {
     setTitle(story.title)
     setBody(story.body)
-  }, [story.id, story.title, story.body])
+    pendingPatchRef.current = {}
+    setSaveState('saved')
+  }, [story.id])
+
+  const persist = useCallback(async (patch: Partial<Story>) => {
+    pendingPatchRef.current = { ...pendingPatchRef.current, ...patch }
+    setSaveState('saving')
+    try {
+      await onPatch(patch)
+      setSaveState('saved')
+    } catch {
+      setSaveState('error')
+    }
+  }, [onPatch])
+
+  const schedulePersist = useCallback((field: 'title' | 'body', value: string, immediate = false) => {
+    const timerRef = field === 'title' ? titleSaveTimerRef : bodySaveTimerRef
+    if (timerRef.current !== null) window.clearTimeout(timerRef.current)
+    const submit = () => {
+      timerRef.current = null
+      void persist({ [field]: value })
+    }
+    if (immediate) submit()
+    else timerRef.current = window.setTimeout(submit, 600)
+  }, [persist])
+
+  const flushPending = useCallback(() => {
+    if (titleSaveTimerRef.current !== null) {
+      window.clearTimeout(titleSaveTimerRef.current)
+      titleSaveTimerRef.current = null
+      if (title !== story.title) void persist({ title })
+    }
+    if (bodySaveTimerRef.current !== null) {
+      window.clearTimeout(bodySaveTimerRef.current)
+      bodySaveTimerRef.current = null
+      if (body !== story.body) void persist({ body })
+    }
+  }, [body, persist, story.body, story.title, title])
+
+  useEffect(() => () => {
+    if (titleSaveTimerRef.current !== null) window.clearTimeout(titleSaveTimerRef.current)
+    if (bodySaveTimerRef.current !== null) window.clearTimeout(bodySaveTimerRef.current)
+  }, [])
 
   return (
     <aside className={`detail-panel ${closing ? 'closing' : ''}`}>
       <div className="detail-toolbar">
         <span className="detail-kicker">稿件与来源</span>
-        <IconButton title="关闭详情" onClick={onClose}><PanelRightClose size={18} /></IconButton>
+        <span className={`autosave-state ${saveState}`} aria-live="polite">{saveState === 'saving' ? '正在保存' : saveState === 'error' ? '保存失败' : staticMode ? '本地审稿' : '已保存'}</span>
+        <IconButton title="关闭详情" onClick={() => { flushPending(); onClose() }}><PanelRightClose size={18} /></IconButton>
       </div>
       <div className="detail-scroll">
         <label className="field-label" htmlFor="story-title">标题</label>
-        <textarea id="story-title" className="title-editor" value={title} rows={2} onChange={(event) => setTitle(event.target.value)} onBlur={() => title !== story.title && void onPatch({ title })} />
+        <textarea id="story-title" className="title-editor" value={title} rows={2} onChange={(event) => { const value = event.target.value; setTitle(value); schedulePersist('title', value) }} onBlur={() => title !== story.title && schedulePersist('title', title, true)} />
         <div className="field-row">
           <label><span className="field-label">分类</span><select value={story.category} onChange={(event) => void onPatch({ category: event.target.value })}>{categories.slice(1).map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span className="field-label">状态</span><select value={story.status} onChange={(event) => void onPatch({ status: event.target.value as StoryStatus })}>{Object.entries(statusLabel).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
@@ -405,7 +465,7 @@ function DetailPanel({
         {staticMode ? <p className="static-mode-note">当前显示当天 Bot 稿的 Pages 快照。可以在浏览器内审稿并导出审稿单；连接 Worker 后才会把修改直接保存到主 Mac。</p> : null}
         {activeJob ? <div className={`job-banner ${activeJob.state}`}><LoaderCircle size={16} className={activeJob.state === 'running' ? 'spin' : ''} /><span>{activeJob.message || activeJob.action}</span><strong>{activeJob.progress}%</strong></div> : null}
         <label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
-        <textarea id="story-body" className="body-editor" value={body} onChange={(event) => setBody(event.target.value)} onBlur={() => body !== story.body && void onPatch({ body })} />
+        <textarea id="story-body" className="body-editor" value={body} onChange={(event) => { const value = event.target.value; setBody(value); schedulePersist('body', value) }} onBlur={() => body !== story.body && schedulePersist('body', body, true)} />
         <DetailSources story={story} staticMode={staticMode} onImageChange={onImageChange} />
       </div>
     </aside>
@@ -414,7 +474,7 @@ function DetailPanel({
 
 export function StoryImageEditor({ story, staticMode, onImageChange }: { story: Story; staticMode: boolean; onImageChange: (story: Story) => void }) {
   const [url, setUrl] = useState('')
-  const [busy, setBusy] = useState<'upload' | 'url' | 'delete' | null>(null)
+  const [busy, setBusy] = useState<'upload' | 'url' | 'sources' | 'delete' | null>(null)
   const [message, setMessage] = useState('')
   const fileInput = useRef<HTMLInputElement | null>(null)
   const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
@@ -425,7 +485,7 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
     setBusy(null)
   }, [story.id])
 
-  const run = async (operation: 'upload' | 'url' | 'delete', task: () => Promise<Story>) => {
+  const run = async (operation: 'upload' | 'url' | 'sources' | 'delete', task: () => Promise<Story>) => {
     setBusy(operation)
     setMessage('')
     try {
@@ -453,6 +513,7 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
     }
     void run('url', () => api.downloadStoryImage(story.id, value))
   }
+  const resolveFromSources = () => void run('sources', () => api.resolveStoryImage(story.id))
 
   useEffect(() => {
     const pasteImage = (event: ClipboardEvent) => {
@@ -492,6 +553,9 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
           {busy === 'upload' ? <LoaderCircle size={15} className="spin" /> : <Upload size={15} />}
           {image ? '替换本地图' : '上传本地图'}
         </button>
+        <button type="button" disabled={staticMode || busy !== null} onClick={resolveFromSources}>
+          {busy === 'sources' ? <LoaderCircle size={15} className="spin" /> : <Image size={15} />}从原始来源找图
+        </button>
         {image ? <button type="button" className="danger" disabled={staticMode || busy !== null} onClick={() => void run('delete', () => api.deleteStoryImage(story.id))}>
           {busy === 'delete' ? <LoaderCircle size={15} className="spin" /> : <Trash2 size={15} />}删除
         </button> : null}
@@ -500,7 +564,7 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
         <input type="url" value={url} disabled={staticMode || busy !== null} placeholder="粘贴原图 URL" onChange={(event) => setUrl(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); useUrl() } }} />
         <button type="button" disabled={staticMode || busy !== null} onClick={useUrl}>{busy === 'url' ? <LoaderCircle size={15} className="spin" /> : <Download size={15} />}下载并使用</button>
       </div>
-      <p className="image-help">可直接按 <kbd>⌘V</kbd> 粘贴剪贴板图片；保留原始文件与分辨率，URL 图片会先下载到主 Mac。</p>
+      <p className="image-help">可直接按 <kbd>⌘V</kbd> 粘贴剪贴板图片；微信 CDN 图会跳过，优先从同稿官方／强来源提取配图。</p>
       {staticMode ? <p className="image-message">连接 Worker 后才能粘贴或修改配图。</p> : message ? <p className={`image-message ${message.includes('已') ? 'success' : 'error'}`}>{message}</p> : null}
     </section>
   )
@@ -690,6 +754,7 @@ export function App() {
   const [activeDraftSection, setActiveDraftSection] = useState('全部')
   const [candidateStatus, setCandidateStatus] = useState('all')
   const [view, setView] = useState<View>('draft')
+  const [outlineCollapsed, setOutlineCollapsed] = useState(() => localStorage.getItem('ifanr-editorial-outline-collapsed') === '1')
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null)
   const [detailClosing, setDetailClosing] = useState(false)
   const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null)
@@ -726,6 +791,7 @@ export function App() {
     document.documentElement.dataset.theme = theme
     localStorage.setItem('ifanr-editorial-theme', theme)
   }, [theme])
+  useEffect(() => { localStorage.setItem('ifanr-editorial-outline-collapsed', outlineCollapsed ? '1' : '0') }, [outlineCollapsed])
   const draftScrollRef = useRef<HTMLElement | null>(null)
   const settingsPopoverRef = useRef<HTMLDivElement | null>(null)
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null)
@@ -1195,6 +1261,25 @@ export function App() {
     }
   }
 
+  const moveStoryToWeekendSection = async (storyId: string, targetSection: string) => {
+    if (!issue || !weekendDraftCategories.includes(targetSection as typeof weekendDraftCategories[number])) return
+    const story = issue.stories.find((item) => item.id === storyId)
+    if (!story || weekendDraftSection(story) === targetSection) return
+    const title = moveToWeekendDraftSection(story, targetSection)
+    const previous = issue
+    setIssue(issueWithMetrics(issue, issue.stories.map((item) => item.id === storyId ? { ...item, title } : item)))
+    setMovingStoryId(storyId)
+    window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
+    if (dataMode === 'static') return
+    try {
+      const updated = await api.patchStory(storyId, { title })
+      setIssue((current) => current ? issueWithMetrics(current, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
+    } catch (moveError) {
+      setIssue(previous)
+      showOperationError(moveError instanceof Error ? moveError.message : '移动周末栏目失败')
+    }
+  }
+
   const scrollToDraftSection = (section: string) => {
     setActiveDraftSection(section)
     if (query) setQuery('')
@@ -1208,6 +1293,19 @@ export function App() {
       const target = document.getElementById(`section-${section.replaceAll('/', '-')}`)
       if (!target) return
       const top = target.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop
+      container.scrollTo({ top, behavior: 'smooth' })
+    }
+    window.requestAnimationFrame(() => window.requestAnimationFrame(performScroll))
+  }
+
+  const scrollToStory = (story: Story) => {
+    setSelectedStoryId(story.id)
+    setActiveDraftSection(isSaturdayIssue ? weekendDraftSection(story) : story.category)
+    const performScroll = () => {
+      const container = draftScrollRef.current
+      const target = document.getElementById(`story-${story.id}`)
+      if (!container || !target) return
+      const top = target.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop - 24
       container.scrollTo({ top, behavior: 'smooth' })
     }
     window.requestAnimationFrame(() => window.requestAnimationFrame(performScroll))
@@ -1455,10 +1553,11 @@ export function App() {
           <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
-            {!loading && issue && view === 'draft' ? <>
-              <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
-              <div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
-            </> : null}
+            {!loading && issue && view === 'draft' ? <div className={`draft-stage ${outlineCollapsed ? 'outline-collapsed' : ''}`}>
+              {!outlineCollapsed ? <aside className="draft-outline" aria-label="稿件目录"><header><span>稿件目录</span><em>{draftStories.length}</em><button type="button" title="收起目录" aria-label="收起目录" onClick={() => setOutlineCollapsed(true)}><PanelRightClose size={16} /></button></header>{groupedDraft.map(([section, stories]) => <section key={section}><button type="button" className="draft-outline-section" onClick={() => scrollToDraftSection(section)}>{section}</button>{stories.map((story) => <button type="button" key={story.id} draggable className={selectedStoryId === story.id ? 'active' : ''} onClick={() => scrollToStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDragOver={(event) => event.preventDefault()} onDrop={(event) => { event.preventDefault(); void handleDrop(story.id) }}><span>{story.title}</span></button>)}</section>)}</aside> : null}
+              {outlineCollapsed ? <button type="button" className="draft-outline-reveal" title="展开稿件目录" aria-label="展开稿件目录" onClick={() => setOutlineCollapsed(false)}><Menu size={17} /></button> : null}
+              <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void (isSaturdayIssue ? moveStoryToWeekendSection(story.id, target) : moveStoryToCategory(story.id, target))} moveOptions={isSaturdayIssue ? weekendDraftCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendDraftSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div></div>
+            </div> : null}
             {!loading && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、正文或来源" /></div></div>

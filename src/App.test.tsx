@@ -44,7 +44,7 @@ describe('App', () => {
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()
     expect(screen.getByText('标题')).toBeInTheDocument()
     expect((await screen.findAllByText('Pages 快照')).length).toBeGreaterThan(0)
-    expect(await screen.findByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
     expect(screen.getByText('当天飞书 Bot 稿 · 1 条 · Pages 只读快照')).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: '连接设置' }).length).toBeGreaterThan(0)
   })
@@ -81,24 +81,24 @@ describe('App', () => {
 
   it('asks for confirmation before deletion and restores it with Command-Z', async () => {
     render(<App />)
-    expect(await screen.findByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
     expect(screen.getByRole('dialog', { name: '确定删除这个选题？' })).toBeInTheDocument()
-    expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: '移入回收站' }))
     await waitFor(() => expect(screen.queryByRole('dialog', { name: '确定删除这个选题？' })).not.toBeInTheDocument())
     expect(screen.getByRole('status')).toHaveTextContent('已移入回收站')
 
     fireEvent.keyDown(document, { key: 'z', metaKey: true })
-    await waitFor(() => expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument())
+    await waitFor(() => expect(screen.getByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument())
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
 
   it('fades the deletion toast after 10 seconds without losing Command-Z history', async () => {
     render(<App />)
-    expect(await screen.findByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
     vi.useFakeTimers()
@@ -114,7 +114,7 @@ describe('App', () => {
 
     fireEvent.keyDown(document, { key: 'z', metaKey: true })
     await act(async () => Promise.resolve())
-    expect(screen.getByText('当天真实 Bot 稿标题')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
     vi.useRealTimers()
   })
 
@@ -188,7 +188,7 @@ describe('App', () => {
 
   it('uses corner quotes in visible UI copy', async () => {
     render(<App />)
-    await screen.findByText('当天真实 Bot 稿标题')
+    await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })
 
     fireEvent.click(screen.getByRole('button', { name: '候选库' }))
     expect(screen.getByText(/采用后会先以「待 AI 主编撰写」状态出现在「早报稿」/)).toBeInTheDocument()
