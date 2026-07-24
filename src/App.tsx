@@ -48,6 +48,7 @@ import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
 const weekendDraftCategories = ['周末也值得一看的新闻', 'One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
+const weekendStorageCategory = '好看的'
 const workerRefreshIntervalMs = 25_000
 
 function isSaturdayPublication(publicationDate?: string) {
@@ -1221,7 +1222,7 @@ export function App() {
     if (!issue || !draggedStoryId || targetId === draggedStoryId) return false
     const target = issue.stories.find((story) => story.id === targetId)
     const dragged = issue.stories.find((story) => story.id === draggedStoryId)
-    return Boolean(target && dragged && target.category === dragged.category && (!isSaturdayIssue || weekendDraftSection(target) === weekendDraftSection(dragged)))
+    return Boolean(target && dragged && (isSaturdayIssue ? weekendDraftSection(target) === weekendDraftSection(dragged) : target.category === dragged.category))
   }
 
   const updateOutlineDrop = (event: DragEvent<HTMLButtonElement>, targetId: string) => {
@@ -1248,17 +1249,17 @@ export function App() {
     if (!issue || !draggedStoryId || draggedStoryId === targetId) return
     const target = issue.stories.find((story) => story.id === targetId)
     const dragged = issue.stories.find((story) => story.id === draggedStoryId)
-    if (!target || !dragged || target.category !== dragged.category || (isSaturdayIssue && weekendDraftSection(target) !== weekendDraftSection(dragged))) return
-    const ordered = issue.stories.filter((story) => story.selected && story.category === target.category).sort((a, b) => a.position - b.position)
+    if (!target || !dragged || (isSaturdayIssue ? weekendDraftSection(target) !== weekendDraftSection(dragged) : target.category !== dragged.category)) return
+    const ordered = issue.stories.filter((story) => story.selected && (isSaturdayIssue ? weekendDraftSection(story) === weekendDraftSection(target) : story.category === target.category)).sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((story) => story.id === draggedStoryId)
     const [moved] = ordered.splice(from, 1)
     const targetIndex = ordered.findIndex((story) => story.id === targetId)
     ordered.splice(targetIndex + (after ? 1 : 0), 0, moved)
     if (dataMode === 'static') {
       const positions = new Map(ordered.map((story, index) => [story.id, index]))
-      setIssue(issueWithMetrics(issue, issue.stories.map((story) => positions.has(story.id) ? { ...story, position: positions.get(story.id) || 0 } : story)))
+      setIssue(issueWithMetrics(issue, issue.stories.map((story) => positions.has(story.id) ? { ...story, category: isSaturdayIssue ? weekendStorageCategory : story.category, position: positions.get(story.id) || 0 } : story)))
     } else {
-      setIssue(await api.reorder(issue.id, ordered.map((story) => story.id), target.category))
+      setIssue(await api.reorder(issue.id, ordered.map((story) => story.id), isSaturdayIssue ? weekendStorageCategory : target.category))
     }
     clearOutlineDrag()
   }
@@ -1268,7 +1269,7 @@ export function App() {
     const story = issue.stories.find((item) => item.id === storyId)
     if (!story) return
     const ordered = issue.stories
-      .filter((item) => item.selected && item.status !== 'excluded' && item.category === story.category)
+      .filter((item) => item.selected && item.status !== 'excluded' && (isSaturdayIssue ? weekendDraftSection(item) === weekendDraftSection(story) : item.category === story.category))
       .sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((item) => item.id === storyId)
     const to = target === 'first' ? 0 : target === 'last' ? ordered.length - 1 : from + target
@@ -1276,13 +1277,13 @@ export function App() {
     const [moved] = ordered.splice(from, 1)
     ordered.splice(to, 0, moved)
     const positions = new Map(ordered.map((item, index) => [item.id, index]))
-    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, position: positions.get(item.id) ?? item.position } : item))
+    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, category: isSaturdayIssue ? weekendStorageCategory : item.category, position: positions.get(item.id) ?? item.position } : item))
     setIssue(optimistic)
     setMovingStoryId(storyId)
     window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
     if (dataMode === 'static') return
     try {
-      setIssue(await api.reorder(issue.id, ordered.map((item) => item.id), story.category))
+      setIssue(await api.reorder(issue.id, ordered.map((item) => item.id), isSaturdayIssue ? weekendStorageCategory : story.category))
     } catch (moveError) {
       setIssue(issue)
       showOperationError(moveError instanceof Error ? moveError.message : '调整顺序失败')
@@ -1316,13 +1317,14 @@ export function App() {
     const story = issue.stories.find((item) => item.id === storyId)
     if (!story || weekendDraftSection(story) === targetSection) return
     const title = moveToWeekendDraftSection(story, targetSection)
+    const position = issue.stories.filter((item) => item.selected && weekendDraftSection(item) === targetSection).reduce((maximum, item) => Math.max(maximum, item.position), -1) + 1
     const previous = issue
-    setIssue(issueWithMetrics(issue, issue.stories.map((item) => item.id === storyId ? { ...item, title } : item)))
+    setIssue(issueWithMetrics(issue, issue.stories.map((item) => item.id === storyId ? { ...item, title, category: weekendStorageCategory, position } : item)))
     setMovingStoryId(storyId)
     window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
     if (dataMode === 'static') return
     try {
-      const updated = await api.patchStory(storyId, { title })
+      const updated = await api.patchStory(storyId, { title, category: weekendStorageCategory, position })
       setIssue((current) => current ? issueWithMetrics(current, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
     } catch (moveError) {
       setIssue(previous)
