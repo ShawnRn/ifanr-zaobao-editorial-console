@@ -346,6 +346,74 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
 .operation-error-toast > span { min-width: 0; flex: 1; font-size: 12px; line-height: 1.5; }
 .operation-error-toast > button { width: 28px; height: 28px; border: 0; border-radius: 4px; background: transparent; color: #e5b7b1; font-size: 20px; line-height: 1; cursor: pointer; }
 .operation-error-toast > button:hover { background: #ffffff12; color: #fff; }
+
+/* 深色模式最终覆盖层：这些界面历史上直接写入了浅色值，必须在规则末尾统一收口。 */
+:root[data-theme="dark"] .connection-connected { border-color: #52745d; background: #27352b; color: #b8d7c0; }
+:root[data-theme="dark"] .connection-checking { border-color: #765a3e; background: #352b20; color: #e3bd86; }
+:root[data-theme="dark"] .connection-failed,
+:root[data-theme="dark"] .connection-invalid { border-color: #70453f; background: #372320; color: #f0aaa1; }
+:root[data-theme="dark"] .sidebar-heading,
+:root[data-theme="dark"] .sidebar nav button,
+:root[data-theme="dark"] .sidebar nav em,
+:root[data-theme="dark"] .issue-metrics span { color: var(--muted); }
+:root[data-theme="dark"] .sidebar nav button.active,
+:root[data-theme="dark"] .view-switcher button.active,
+:root[data-theme="dark"] .article-hover-tools { background: var(--control); }
+:root[data-theme="dark"] .issue-article.moving { animation-name: story-moved-dark; }
+:root[data-theme="dark"] .sidebar nav button:hover,
+:root[data-theme="dark"] .candidate-row:hover,
+:root[data-theme="dark"] .candidate-row.active { background: var(--control-hover); }
+:root[data-theme="dark"] .ai-editor-note { border-color: #705b38; background: #352d20; color: #e2c080; }
+:root[data-theme="dark"] .article-body blockquote { border-color: #696963; color: var(--muted); }
+:root[data-theme="dark"] .candidate-masthead > strong { color: #74746e; }
+:root[data-theme="dark"] .candidate-overline span + span::before { color: #696963; }
+:root[data-theme="dark"] .status,
+:root[data-theme="dark"] .quality { background: #373733; color: #cacac4; }
+:root[data-theme="dark"] .status-ready,
+:root[data-theme="dark"] .quality-primary,
+:root[data-theme="dark"] .quality-strong { background: #263a2d; color: #abd3b5; }
+:root[data-theme="dark"] .status-needs_review,
+:root[data-theme="dark"] .status-fact_checking,
+:root[data-theme="dark"] .quality-secondary { background: #3d3324; color: #e4c48e; }
+:root[data-theme="dark"] .quality-lead,
+:root[data-theme="dark"] .quality-unknown { background: #3d2927; color: #eeafa7; }
+:root[data-theme="dark"] .detail-panel,
+:root[data-theme="dark"] .export-dialog,
+:root[data-theme="dark"] .story-create-dialog,
+:root[data-theme="dark"] .delete-confirm-dialog { background: var(--paper); color: var(--ink); }
+:root[data-theme="dark"] .title-editor,
+:root[data-theme="dark"] .body-editor,
+:root[data-theme="dark"] .brand-section textarea,
+:root[data-theme="dark"] .time-grid input,
+:root[data-theme="dark"] .field-row select,
+:root[data-theme="dark"] .action-strip button,
+:root[data-theme="dark"] .image-preview,
+:root[data-theme="dark"] .image-section img,
+:root[data-theme="dark"] .image-actions button,
+:root[data-theme="dark"] .image-url-editor button,
+:root[data-theme="dark"] .image-url-editor input,
+:root[data-theme="dark"] .story-create-fields input:not([type="checkbox"]),
+:root[data-theme="dark"] .story-create-fields select,
+:root[data-theme="dark"] .story-create-fields textarea,
+:root[data-theme="dark"] .headline-options label,
+:root[data-theme="dark"] .export-option { background: var(--control); color: var(--ink); }
+:root[data-theme="dark"] .headline-options label.selected,
+:root[data-theme="dark"] .export-option:hover { border-color: var(--green); background: var(--control-hover); }
+:root[data-theme="dark"] .static-mode-note { border-left-color: var(--brand); background: #2d2d29; color: var(--muted); }
+:root[data-theme="dark"] .job-banner { border-color: #52666c; background: #263237; color: #b9d2d8; }
+:root[data-theme="dark"] .job-banner.failed { border-color: #704b47; background: #382724; color: #edb0a8; }
+:root[data-theme="dark"] .claim,
+:root[data-theme="dark"] .source-list strong { color: var(--ink); }
+:root[data-theme="dark"] .image-actions button.danger:hover { border-color: #8d544d; background: #3b2926; }
+:root[data-theme="dark"] .delete-confirm-dialog > header span,
+:root[data-theme="dark"] .story-create-error { color: #ef9b91; }
+:root[data-theme="dark"] .danger-button { background: #b64f43; color: #fff; }
+:root[data-theme="dark"] .danger-button:hover { background: #cd5c4e; }
+:root[data-theme="dark"] .primary-button { background: #537d60; color: #fff; }
+:root[data-theme="dark"] .primary-button:hover { background: #659572; }
+:root[data-theme="dark"] .handoff-success { border-color: #4c7057; background: #26362a; color: #b8d7c0; }
+:root[data-theme="dark"] .review-safety { border-color: #4a6653; background: #263229; color: #b9d0bf; }
+:root[data-theme="dark"] kbd { border-color: #666660; background: #30302d; color: #deded8; }
 .story-create-dialog > header { display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
 .story-create-dialog > header span { color: var(--green); font-size: 10px; font-weight: 800; }
 .story-create-dialog h2 { margin: 5px 0 0; font-size: 19px; }
@@ -381,6 +449,7 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
 @keyframes popover-in { from { opacity: 0; transform: translateY(-5px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes popover-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-5px) scale(.985); } }
 @keyframes story-moved { from { background: #edf5f0; transform: translateY(4px); } to { background: transparent; transform: translateY(0); } }
+@keyframes story-moved-dark { from { background: #333330; transform: translateY(4px); } to { background: transparent; transform: translateY(0); } }
 @keyframes detail-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes detail-out { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(12px); } }
 @keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
