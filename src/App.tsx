@@ -648,6 +648,7 @@ export function App() {
   const [repoRuntimeAccess, setRepoRuntimeAccess] = useState(true)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [operationError, setOperationError] = useState('')
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('全部')
   const [activeDraftSection, setActiveDraftSection] = useState('全部')
@@ -687,6 +688,16 @@ export function App() {
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null)
   const connectionTriggerRef = useRef<HTMLButtonElement | null>(null)
   const settingsCloseTimerRef = useRef<number | null>(null)
+  const operationErrorTimerRef = useRef<number | null>(null)
+
+  const showOperationError = useCallback((message: string) => {
+    if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
+    setOperationError(message)
+    operationErrorTimerRef.current = window.setTimeout(() => {
+      setOperationError('')
+      operationErrorTimerRef.current = null
+    }, 8000)
+  }, [])
 
   const loadIssue = useCallback(async (preferWorker = false) => {
     setLoading(true)
@@ -802,6 +813,7 @@ export function App() {
 
   useEffect(() => () => {
     if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
+    if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
   }, [])
 
   useEffect(() => {
@@ -905,7 +917,7 @@ export function App() {
       setPendingDelete(null)
       if (selectedStoryId === pendingDelete.id) setSelectedStoryId(null)
     } catch (deleteError) {
-      setError(deleteError instanceof Error ? deleteError.message : '删除选题失败')
+      showOperationError(deleteError instanceof Error ? deleteError.message : '删除选题失败')
     } finally {
       setDeleteBusy(false)
     }
@@ -931,7 +943,7 @@ export function App() {
         window.requestAnimationFrame(() => scrollToDraftSection(snapshot.category))
       }
     } catch (undoError) {
-      setError(undoError instanceof Error ? undoError.message : '撤回删除失败')
+      showOperationError(undoError instanceof Error ? undoError.message : '撤回删除失败')
     } finally {
       setUndoBusy(false)
     }
@@ -1024,7 +1036,7 @@ export function App() {
       setIssue(await api.reorder(issue.id, ordered.map((item) => item.id), story.category))
     } catch (moveError) {
       setIssue(issue)
-      setError(moveError instanceof Error ? moveError.message : '调整顺序失败')
+      showOperationError(moveError instanceof Error ? moveError.message : '调整顺序失败')
     }
   }
 
@@ -1046,7 +1058,7 @@ export function App() {
       setIssue((current) => current ? issueWithMetrics(current, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
     } catch (moveError) {
       setIssue(previous)
-      setError(moveError instanceof Error ? moveError.message : '移动栏目失败')
+      showOperationError(moveError instanceof Error ? moveError.message : '移动栏目失败')
     }
   }
 
@@ -1111,7 +1123,7 @@ export function App() {
       setView('draft')
       window.requestAnimationFrame(() => scrollToDraftSection(story.category))
     } catch (adoptError) {
-      setError(adoptError instanceof Error ? adoptError.message : '提交 AI 主编失败')
+      showOperationError(adoptError instanceof Error ? adoptError.message : '提交 AI 主编失败')
     }
   }
 
@@ -1121,7 +1133,7 @@ export function App() {
       await loadIssue()
       return
     }
-    setError('')
+    setOperationError('')
     try {
       const job = await api.refreshIssue(issue.id, runPreflight)
       const current = await api.watchJob(job.id, () => undefined).catch(async () => {
@@ -1131,13 +1143,13 @@ export function App() {
       })
       if (current.state === 'failed') throw new Error(current.error)
       setIssue(await api.getIssue(issue.id))
-    } catch (refreshError) { setError(refreshError instanceof Error ? refreshError.message : '刷新失败') }
+    } catch (refreshError) { showOperationError(refreshError instanceof Error ? refreshError.message : '刷新失败') }
   }
 
   const generateBrand = async (brand: 'appso' | 'ifanr') => {
     if (!issue) return
     setGeneratingBrand(brand)
-    setError('')
+    setOperationError('')
     try {
       const generated = await generateBrandHeadlines(issue, brand)
       const patch = { headline_options: generated.headline_options, selected_headline: generated.selected_headline }
@@ -1146,7 +1158,7 @@ export function App() {
         await api.patchBrand(issue.id, brand, patch)
         setIssue(await api.getIssue(issue.id))
       }
-    } catch (brandError) { setError(brandError instanceof Error ? brandError.message : '品牌包装生成失败') } finally { setGeneratingBrand(null) }
+    } catch (brandError) { showOperationError(brandError instanceof Error ? brandError.message : '品牌包装生成失败') } finally { setGeneratingBrand(null) }
   }
 
   const createStory = async (input: StoryCreateInput) => {
@@ -1174,9 +1186,9 @@ export function App() {
       return
     }
     setExporting(true)
-    setError('')
+    setOperationError('')
     try { setHandoff(await api.handoff(issue.id)) }
-    catch (handoffError) { setError(handoffError instanceof Error ? handoffError.message : 'handoff 写入失败') }
+    catch (handoffError) { showOperationError(handoffError instanceof Error ? handoffError.message : 'handoff 写入失败') }
     finally { setExporting(false) }
   }
 
@@ -1289,17 +1301,17 @@ export function App() {
 
           <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
-            {!loading && error ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
-            {!loading && !error && view === 'draft' ? <>
+            {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
+            {!loading && issue && view === 'draft' ? <>
               <header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header>
               <div className="draft-document">{groupedDraft.map(([section, stories]) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String((categoryOrder.get(section) ?? 0) + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(targetCategory) => void moveStoryToCategory(story.id, targetCategory)} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDrop={() => void handleDrop(story.id)} />)}</section>)}</div>
             </> : null}
-            {!loading && !error && view === 'candidates' ? <>
+            {!loading && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、正文或来源" /></div></div>
               <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => requestDeleteStory(story)} />)}</div>
             </> : null}
-            {!loading && !error && view === 'trash' ? <>
+            {!loading && issue && view === 'trash' ? <>
               <header className="candidate-masthead trash-masthead"><div><span>当前刊期</span><h1>回收站</h1><p>仅保留当天被移出的选题，恢复后回到原栏目末尾。</p></div><strong>{trashStories.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索已删除的选题" /></div></div>
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
@@ -1314,6 +1326,7 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} onClose={() => setShowCreateStory(false)} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} onClose={() => setShowExport(false)} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} onCancel={() => { if (!deleteBusy) setPendingDelete(null) }} onConfirm={() => void confirmDeleteStory()} /> : null}
+      {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )

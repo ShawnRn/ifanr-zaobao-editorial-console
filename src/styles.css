@@ -278,6 +278,10 @@ a { color: inherit; }
 .undo-toast button:disabled { cursor: wait; opacity: .65; }
 kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; background: #f3f5f4; color: #3c4942; font: 10px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .undo-toast kbd { border-color: #526159; background: #202a24; color: #d7e1db; }
+.operation-error-toast { position: fixed; z-index: 112; right: 24px; bottom: 24px; width: min(460px, calc(100vw - 32px)); display: flex; align-items: center; gap: 10px; padding: 12px 12px 12px 14px; border: 1px solid #8e4e47; border-radius: 6px; background: #241513; color: #fff3f1; box-shadow: 0 16px 48px #0008; animation: toast-in .2s ease-out; }
+.operation-error-toast > span { min-width: 0; flex: 1; font-size: 12px; line-height: 1.5; }
+.operation-error-toast > button { width: 28px; height: 28px; border: 0; border-radius: 4px; background: transparent; color: #e5b7b1; font-size: 20px; line-height: 1; cursor: pointer; }
+.operation-error-toast > button:hover { background: #ffffff12; color: #fff; }
 .story-create-dialog > header { display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
 .story-create-dialog > header span { color: var(--green); font-size: 10px; font-weight: 800; }
 .story-create-dialog h2 { margin: 5px 0 0; font-size: 19px; }
