@@ -48,6 +48,7 @@ import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
 const weekendDraftCategories = ['周末也值得一看的新闻', 'One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
+const workerRefreshIntervalMs = 25_000
 
 function isSaturdayPublication(publicationDate?: string) {
   if (!publicationDate) return false
@@ -358,6 +359,7 @@ function DetailPanel({
   activeJob,
   staticMode,
   onImageChange,
+  closing = false,
 }: {
   story: Story
   onPatch: (patch: Partial<Story>) => Promise<unknown>
@@ -366,6 +368,7 @@ function DetailPanel({
   activeJob?: Job
   staticMode: boolean
   onImageChange: (story: Story) => void
+  closing?: boolean
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
@@ -376,7 +379,7 @@ function DetailPanel({
   }, [story.id, story.title, story.body])
 
   return (
-    <aside className="detail-panel">
+    <aside className={`detail-panel ${closing ? 'closing' : ''}`}>
       <div className="detail-toolbar">
         <span className="detail-kicker">稿件与来源</span>
         <IconButton title="关闭详情" onClick={onClose}><PanelRightClose size={18} /></IconButton>
@@ -552,21 +555,23 @@ function WeekendWorkspace({ data }: { data: Record<string, { label: string; cand
   })}</div>
 }
 
-function ExportDialog({ issue, handoff, busy, staticMode, operationCount, onClose, onMarkdown, onHandoff }: {
+function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closing = false, onClose, onMarkdown, onHandoff }: {
   issue: Issue
   handoff: AutomationHandoff | null
   busy: boolean
   staticMode: boolean
   operationCount: number
+  closing?: boolean
   onClose: () => void
   onMarkdown: () => void
   onHandoff: () => void
 }) {
-  return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}><div className="export-dialog" role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options"><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options"><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
 }
 
-function StoryCreateDialog({ busy, onClose, onCreate }: {
+function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
   busy: boolean
+  closing?: boolean
   onClose: () => void
   onCreate: (story: StoryCreateInput) => Promise<void>
 }) {
@@ -606,8 +611,8 @@ function StoryCreateDialog({ busy, onClose, onCreate }: {
     }
   }
 
-  return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
-    <form className="story-create-dialog" role="dialog" aria-modal="true" onSubmit={(event) => { event.preventDefault(); void submit() }} onMouseDown={(event) => event.stopPropagation()}>
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}>
+    <form className={`story-create-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onSubmit={(event) => { event.preventDefault(); void submit() }} onMouseDown={(event) => event.stopPropagation()}>
       <header><div><span>人工补充</span><h2>手动添加选题</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header>
       <div className="story-create-fields">
         <label className="wide"><span>标题</span><input autoFocus value={title} onChange={(event) => setTitle(event.target.value)} placeholder="输入正式早报标题" /></label>
@@ -624,14 +629,15 @@ function StoryCreateDialog({ busy, onClose, onCreate }: {
   </div>
 }
 
-function DeleteConfirmDialog({ story, busy, onCancel, onConfirm }: {
+function DeleteConfirmDialog({ story, busy, closing = false, onCancel, onConfirm }: {
   story: Story
   busy: boolean
+  closing?: boolean
   onCancel: () => void
   onConfirm: () => void
 }) {
-  return <div className="modal-backdrop" role="presentation" onMouseDown={onCancel}>
-    <div className="delete-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" onMouseDown={(event) => event.stopPropagation()}>
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onCancel}>
+    <div className={`delete-confirm-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" onMouseDown={(event) => event.stopPropagation()}>
       <header>
         <div><span>移入回收站</span><h2 id="delete-confirm-title">确定删除这个选题？</h2></div>
         <IconButton title="关闭" onClick={onCancel}><X size={18} /></IconButton>
@@ -685,12 +691,14 @@ export function App() {
   const [candidateStatus, setCandidateStatus] = useState('all')
   const [view, setView] = useState<View>('draft')
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null)
+  const [detailClosing, setDetailClosing] = useState(false)
   const [draggedStoryId, setDraggedStoryId] = useState<string | null>(null)
   const [movingStoryId, setMovingStoryId] = useState<string | null>(null)
   const [jobs, setJobs] = useState<Record<string, Job>>({})
   const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
   const [showExport, setShowExport] = useState(false)
   const [showCreateStory, setShowCreateStory] = useState(false)
+  const [closingOverlay, setClosingOverlay] = useState<'create' | 'export' | 'delete' | null>(null)
   const [creatingStory, setCreatingStory] = useState(false)
   const [pendingDelete, setPendingDelete] = useState<Story | null>(null)
   const [deleteBusy, setDeleteBusy] = useState(false)
@@ -724,6 +732,14 @@ export function App() {
   const connectionTriggerRef = useRef<HTMLButtonElement | null>(null)
   const settingsCloseTimerRef = useRef<number | null>(null)
   const operationErrorTimerRef = useRef<number | null>(null)
+  const detailCloseTimerRef = useRef<number | null>(null)
+  const overlayCloseTimerRef = useRef<number | null>(null)
+  const issueRef = useRef<Issue | null>(null)
+  const dataModeRef = useRef(dataMode)
+  const workerRefreshInFlightRef = useRef(false)
+
+  useEffect(() => { issueRef.current = issue }, [issue])
+  useEffect(() => { dataModeRef.current = dataMode }, [dataMode])
 
   const showOperationError = useCallback((message: string) => {
     if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
@@ -733,6 +749,30 @@ export function App() {
       operationErrorTimerRef.current = null
     }, 8000)
   }, [])
+
+  const closeDetail = useCallback(() => {
+    if (!selectedStoryId || detailClosing) return
+    setDetailClosing(true)
+    if (detailCloseTimerRef.current !== null) window.clearTimeout(detailCloseTimerRef.current)
+    detailCloseTimerRef.current = window.setTimeout(() => {
+      setSelectedStoryId(null)
+      setDetailClosing(false)
+      detailCloseTimerRef.current = null
+    }, 180)
+  }, [detailClosing, selectedStoryId])
+
+  const closeOverlay = useCallback((overlay: 'create' | 'export' | 'delete') => {
+    if (closingOverlay) return
+    setClosingOverlay(overlay)
+    if (overlayCloseTimerRef.current !== null) window.clearTimeout(overlayCloseTimerRef.current)
+    overlayCloseTimerRef.current = window.setTimeout(() => {
+      if (overlay === 'create') setShowCreateStory(false)
+      if (overlay === 'export') setShowExport(false)
+      if (overlay === 'delete') setPendingDelete(null)
+      setClosingOverlay(null)
+      overlayCloseTimerRef.current = null
+    }, 180)
+  }, [closingOverlay])
 
   const loadIssue = useCallback(async (preferWorker = false) => {
     setLoading(true)
@@ -806,6 +846,52 @@ export function App() {
     void loadIssue(false)
   }, [loadIssue])
 
+  const refreshWorkerIssue = useCallback(async () => {
+    const currentIssue = issueRef.current
+    if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || workerRefreshInFlightRef.current) return
+    workerRefreshInFlightRef.current = true
+    try {
+      const latest = await api.currentIssue()
+      if (latest.id === currentIssue.id && latest.revision === currentIssue.revision) return
+      const refreshed = issueWithMetrics(latest, latest.stories)
+      const scrollTop = draftScrollRef.current?.scrollTop
+      setIssue(refreshed)
+      setBaseIssue(structuredClone(refreshed))
+      setReviewSessionId('')
+      setSelectedStoryId((selectedId) => refreshed.stories.some((story) => story.id === selectedId) ? selectedId : null)
+      api.weekend().then(setWeekend).catch(() => undefined)
+      if (typeof scrollTop === 'number') window.requestAnimationFrame(() => {
+        if (draftScrollRef.current) draftScrollRef.current.scrollTop = scrollTop
+      })
+    } catch {
+      // 短暂网络抖动不打断正在审稿的页面，下一轮会自动重试。
+    } finally {
+      workerRefreshInFlightRef.current = false
+    }
+  }, [])
+
+  useEffect(() => {
+    if (dataMode !== 'worker') return
+    const refreshWhenVisible = () => { if (!document.hidden) void refreshWorkerIssue() }
+    const timer = window.setInterval(refreshWhenVisible, workerRefreshIntervalMs)
+    window.addEventListener('visibilitychange', refreshWhenVisible)
+    return () => {
+      window.clearInterval(timer)
+      window.removeEventListener('visibilitychange', refreshWhenVisible)
+    }
+  }, [dataMode, refreshWorkerIssue])
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && selectedStoryId) {
+        event.preventDefault()
+        closeDetail()
+      }
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [closeDetail, selectedStoryId])
+
   const openSettings = useCallback(() => {
     if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
     setSettingsClosing(false)
@@ -849,6 +935,8 @@ export function App() {
   useEffect(() => () => {
     if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
     if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
+    if (detailCloseTimerRef.current !== null) window.clearTimeout(detailCloseTimerRef.current)
+    if (overlayCloseTimerRef.current !== null) window.clearTimeout(overlayCloseTimerRef.current)
   }, [])
 
   useEffect(() => {
@@ -945,6 +1033,7 @@ export function App() {
   }
 
   const requestDeleteStory = (story: Story) => {
+    setClosingOverlay(null)
     setPendingDelete(story)
   }
 
@@ -958,7 +1047,7 @@ export function App() {
       setUndoToastVisible(true)
       setUndoToastClosing(false)
       setUndoToastCycle((current) => current + 1)
-      setPendingDelete(null)
+      closeOverlay('delete')
       if (selectedStoryId === pendingDelete.id) setSelectedStoryId(null)
     } catch (deleteError) {
       showOperationError(deleteError instanceof Error ? deleteError.message : '删除选题失败')
@@ -1215,7 +1304,7 @@ export function App() {
       setIssue(refreshed)
       setSelectedStoryId(created.id)
       setView('draft')
-      setShowCreateStory(false)
+      closeOverlay('create')
     } finally {
       setCreatingStory(false)
     }
@@ -1237,6 +1326,22 @@ export function App() {
   }
 
   const switchView = (next: View) => { setView(next); setSelectedStoryId(null); setCategory('全部'); setActiveDraftSection('全部'); setQuery('') }
+
+  const jumpToReview = () => {
+    const target = issue?.stories.find((story) => story.status === 'needs_review' || story.changed_since_review)
+    if (!target) return
+    setDetailClosing(false)
+    setSelectedStoryId(target.id)
+    setQuery('')
+    if (target.selected) {
+      setView('draft')
+      window.requestAnimationFrame(() => scrollToDraftSection(isSaturdayIssue ? weekendDraftSection(target) : target.category))
+    } else {
+      setView('candidates')
+      setCategory('全部')
+      setCandidateStatus('needs_review')
+    }
+  }
 
   const saveGeminiKey = async () => {
     if (!geminiKey.trim()) {
@@ -1314,11 +1419,11 @@ export function App() {
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
           </button>
-          <IconButton title={dataMode === 'worker' ? '手动添加选题' : '连接 Worker 后才能添加选题'} onClick={() => setShowCreateStory(true)} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
+          <IconButton title={dataMode === 'worker' ? '手动添加选题' : '连接 Worker 后才能添加选题'} onClick={() => { setClosingOverlay(null); setShowCreateStory(true) }} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
           <IconButton title={repoRuntimeAccess ? '同步最新自动化产物' : '读取自动化已同步的最终稿'} onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
           <IconButton title={theme === 'dark' ? '切换到浅色模式' : '切换到深色模式'} onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}><>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="连接设置" aria-label="连接设置" onClick={toggleSettings}><Settings size={17} /></button>
-          <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setShowExport(true) }}><Download size={16} />导出</button>
+          <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
         {showSettings ? <div ref={settingsPopoverRef} className={`settings-popover ${settingsClosing ? 'closing' : ''}`} onAnimationEnd={() => { if (settingsClosing) finishSettingsClose() }}>
           <div className={`connection-summary connection-${workerConnection.status}`}>
@@ -1344,7 +1449,7 @@ export function App() {
             <div className="sidebar-heading"><Menu size={16} /><span>栏目</span></div>
             <nav>{sidebarCategories.map((item) => <button type="button" className={(view === 'draft' ? activeDraftSection : category) === item ? 'active' : ''} onClick={() => view === 'draft' ? scrollToDraftSection(item) : setCategory(item)} key={item}><span>{item}</span><em>{view === 'draft' ? draftCounts[item] || 0 : view === 'trash' ? issue?.stories.filter((story) => story.status === 'excluded' && (item === '全部' || story.category === item)).length || 0 : issue?.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story) && story.status !== 'excluded' && (item === '全部' || story.category === item)).length || 0}</em></button>)}</nav>
             {view === 'candidates' ? <><div className="sidebar-heading"><ArrowUpDown size={16} /><span>状态</span></div><nav>{[['all', '待处理'], ['needs_review', '待复核'], ['source_chasing', '追源中']].map(([value, label]) => <button type="button" className={candidateStatus === value ? 'active' : ''} onClick={() => setCandidateStatus(value)} key={value}><span>{label}</span></button>)}</nav></> : null}
-            <div className="issue-metrics"><div><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></div><div><strong>{issue?.ready_count || 0}</strong><span>可用</span></div><div><strong>{issue?.review_count || 0}</strong><span>待复核</span></div></div>
+            <div className="issue-metrics"><button type="button" onClick={() => switchView('draft')}><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></button><button type="button" onClick={() => { setView('candidates'); setCandidateStatus('all'); setCategory('全部'); setQuery('') }}><strong>{issue?.ready_count || 0}</strong><span>可用</span></button><button type="button" onClick={jumpToReview} disabled={!issue?.review_count}><strong>{issue?.review_count || 0}</strong><span>待复核</span></button></div>
           </aside>
 
           <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
@@ -1365,15 +1470,15 @@ export function App() {
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
-          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} onClose={() => setSelectedStoryId(null)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} closing={detailClosing} onClose={closeDetail} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 
       {view === 'brands' && issue ? <BrandWorkspace issue={issue} generating={generatingBrand} onGenerate={generateBrand} onSave={async (brand, patch) => { if (dataMode === 'static') { setIssue({ ...issue, brand_packages: { ...issue.brand_packages, [brand]: { ...issue.brand_packages[brand], ...patch } } }); return } await api.patchBrand(issue.id, brand, patch); setIssue(await api.getIssue(issue.id)) }} /> : null}
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
-      {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} onClose={() => setShowCreateStory(false)} onCreate={createStory} /> : null}
-      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} onClose={() => setShowExport(false)} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
-      {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} onCancel={() => { if (!deleteBusy) setPendingDelete(null) }} onConfirm={() => void confirmDeleteStory()} /> : null}
+      {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
+      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
+      {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>

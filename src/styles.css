@@ -13,6 +13,9 @@
   --canvas: #f1efe8;
   --panel: #faf8f2;
   --panel-2: #f1ede2;
+  --control: #ffffff;
+  --control-hover: #f4f1e9;
+  --highlight-text: #b64535;
   --line: #d9d5ca;
   --line-soft: #ece8dd;
   --brand: #ec1700;
@@ -35,6 +38,9 @@
   --canvas: #151513;
   --panel: #282826;
   --panel-2: #333330;
+  --control: #2c2c29;
+  --control-hover: #383835;
+  --highlight-text: #f2a194;
   --line: #474741;
   --line-soft: #363632;
   --brand: #f06a53;
@@ -60,6 +66,14 @@
 :root[data-theme="dark"] .issue-metrics { border-color: var(--line); }
 :root[data-theme="dark"] .connection-pages { border-color: #575752; background: #292927; color: #c5c4be; }
 :root[data-theme="dark"] .connection-pages svg { color: #c5c4be; }
+
+/* 避免深色模式留下白色控件：所有可编辑与浮层表面都使用主题语义色。 */
+.topbar, .brand-workspace, .weekend-workspace, .export-dialog, .story-create-dialog, .delete-confirm-dialog { background: var(--paper); }
+.view-switcher button.active, .sidebar nav button.active, .article-hover-tools, .center-state button, .title-editor, .body-editor, .brand-section textarea, .time-grid input, .field-row select, .action-strip button, .image-preview, .image-actions button, .image-url-editor button, .image-url-editor input, .story-create-fields input:not([type="checkbox"]), .story-create-fields select, .story-create-fields textarea, .export-option, .adopt-button { background: var(--control); }
+.detail-panel { background: var(--panel); }
+.candidate-row:hover, .candidate-row.active, .adopt-button:hover, .restore-button:hover, .headline-options label.selected, .export-option:hover { background: var(--control-hover); }
+.restore-button { background: var(--panel); border-color: var(--line); }
+.action-strip button, .image-actions button, .image-url-editor button { color: var(--muted); }
 
 * { box-sizing: border-box; }
 html, body, #root { width: 100%; min-width: 320px; height: 100%; margin: 0; }
@@ -135,7 +149,10 @@ a { color: inherit; }
 .sidebar nav button.active { border-left-color: var(--brand); background: #ffffff; color: var(--ink); font-weight: 700; box-shadow: 0 1px 5px #5f43110c; }
 .sidebar nav em { width: 22px; color: #929a95; font-size: 10px; font-style: normal; text-align: right; }
 .issue-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin: 18px 4px 0; padding-top: 14px; border-top: 1px solid #ccd1ce; }
-.issue-metrics div { min-width: 0; text-align: center; }
+.issue-metrics div, .issue-metrics button { min-width: 0; text-align: center; }
+.issue-metrics button { padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
+.issue-metrics button:hover strong, .issue-metrics button:hover span { color: var(--brand); }
+.issue-metrics button:disabled { cursor: default; opacity: .55; }
 .issue-metrics strong { display: block; color: #262b28; font-family: Georgia, "Times New Roman", serif; font-size: 17px; }
 .issue-metrics span { color: #7f8782; font-size: 8px; white-space: nowrap; }
 
@@ -157,7 +174,7 @@ a { color: inherit; }
 .issue-article::before { content: ""; position: absolute; top: 0; bottom: 0; left: -42px; width: 3px; background: transparent; transition: background-color .18s ease; }
 .issue-article:hover::before, .issue-article.active::before { background: var(--brand); }
 .issue-article.moving { animation: story-moved .3s ease-out; }
-.issue-article h3 { margin: 0; font-family: Georgia, "Songti SC", "STSong", serif; font-size: 23px; line-height: 1.45; font-weight: 500; letter-spacing: 0; overflow-wrap: anywhere; }
+.issue-article h3 { margin: 0; color: var(--highlight-text); font-family: Georgia, "Songti SC", "STSong", serif; font-size: 23px; line-height: 1.45; font-weight: 650; letter-spacing: 0; overflow-wrap: anywhere; }
 .article-layout-with-image { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 34%); align-items: start; gap: 28px; }
 .article-copy { min-width: 0; }
 .article-side-image { width: 100%; height: auto; max-height: 190px; display: block; object-fit: contain; }
@@ -196,7 +213,7 @@ a { color: inherit; }
 .candidate-overline { display: flex; gap: 8px; margin-bottom: 8px; color: var(--quiet); font-size: 9px; font-weight: 800; text-transform: uppercase; }
 .candidate-overline span:first-child { color: var(--amber); }
 .candidate-overline span + span::before { content: "/"; margin-right: 8px; color: #bbc0bd; }
-.candidate-row h3 { margin: 0; font-family: Georgia, "Songti SC", "STSong", serif; font-size: 18px; line-height: 1.45; font-weight: 500; }
+.candidate-row h3 { margin: 0; color: var(--highlight-text); font-family: Georgia, "Songti SC", "STSong", serif; font-size: 18px; line-height: 1.45; font-weight: 650; }
 .candidate-row p { display: -webkit-box; margin: 10px 0 0; overflow: hidden; color: var(--muted); font-size: 11px; line-height: 1.65; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .candidate-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; color: var(--quiet); font-size: 9px; }
 .status, .quality { padding: 2px 5px; border-radius: 2px; background: #e5e8e6; }
@@ -220,7 +237,8 @@ a { color: inherit; }
 .center-state.error span { max-width: 440px; font-size: 12px; overflow-wrap: anywhere; }
 .center-state button { height: 32px; padding: 0 14px; border: 1px solid var(--line); border-radius: 4px; background: #fff; cursor: pointer; }
 
-.detail-panel { min-width: 0; border-left: 1px solid var(--line); background: #f7f8f7; overflow: hidden; animation: detail-in .22s ease-out; }
+.detail-panel { min-width: 0; border-left: 1px solid var(--line); background: var(--panel); overflow: hidden; animation: detail-in .22s ease-out; }
+.detail-panel.closing { pointer-events: none; animation: detail-out .18s ease-in forwards; }
 .detail-toolbar { height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 13px 0 18px; border-bottom: 1px solid var(--line); }
 .detail-kicker { color: var(--amber); font-size: 10px; font-weight: 800; letter-spacing: 1px; }
 .detail-scroll { height: calc(100% - 50px); overflow-y: auto; padding: 18px 18px 52px; }
@@ -303,6 +321,8 @@ a { color: inherit; }
 .weekend-column article div { display: flex; justify-content: space-between; margin-top: 10px; color: var(--quiet); font-size: 9px; }
 
 .modal-backdrop { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: #080a09b8; animation: backdrop-in .16s ease-out; }
+.modal-backdrop.closing { pointer-events: none; animation: backdrop-out .18s ease-in forwards; }
+.modal-backdrop.closing .export-dialog, .modal-backdrop.closing .story-create-dialog, .modal-backdrop.closing .delete-confirm-dialog { animation: dialog-out .18s ease-in forwards; }
 .export-dialog { width: min(580px, 100%); border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: 0 28px 80px #0009; animation: dialog-in .2s ease-out; }
 .story-create-dialog { width: min(720px, 100%); max-height: calc(100vh - 40px); overflow: auto; border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: 0 28px 80px #0009; animation: dialog-in .2s ease-out; }
 .delete-confirm-dialog { width: min(480px, 100%); border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: 0 28px 80px #0009; animation: dialog-in .2s ease-out; }
@@ -362,8 +382,11 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
 @keyframes popover-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-5px) scale(.985); } }
 @keyframes story-moved { from { background: #edf5f0; transform: translateY(4px); } to { background: transparent; transform: translateY(0); } }
 @keyframes detail-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes detail-out { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(12px); } }
 @keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes backdrop-out { from { opacity: 1; } to { opacity: 0; } }
 @keyframes dialog-in { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes dialog-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(8px) scale(.985); } }
 @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
 @keyframes toast-out { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, 8px); } }
 
