@@ -73,7 +73,7 @@ a { color: inherit; }
 .app-shell { height: 100%; background: var(--canvas); }
 .topbar { position: relative; z-index: 50; height: 62px; display: grid; grid-template-columns: minmax(270px, 1fr) auto minmax(310px, 1fr); align-items: center; gap: 20px; padding: 0 20px; border-top: 3px solid var(--brand); border-bottom: 1px solid var(--line); background: #fff; color: var(--ink); box-shadow: 0 2px 12px #2d210b0a; }
 .brand-lockup { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.brand-logo { width: 78px; height: 24px; display: block; object-fit: contain; }
+.brand-logo { width: 112px; height: 30px; display: block; flex: 0 0 auto; object-fit: contain; }
 .brand-product { min-width: 0; padding-left: 11px; border-left: 1px solid var(--line); }
 .brand-lockup strong, .brand-lockup span { display: block; }
 .brand-lockup strong { font-size: 13px; font-weight: 750; }
@@ -129,10 +129,11 @@ a { color: inherit; }
 .sidebar { padding: 20px 11px; border-right: 1px solid var(--line); background: var(--warm); overflow-y: auto; }
 .sidebar-heading { height: 28px; display: flex; align-items: center; gap: 8px; margin: 4px 0; padding: 0 9px; color: #7d8580; font-size: 9px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; }
 .sidebar nav { display: grid; gap: 2px; }
-.sidebar nav button { width: 100%; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 9px; border: 0; border-left: 2px solid transparent; background: transparent; color: #59615d; cursor: pointer; text-align: left; }
+.sidebar nav button { width: 100%; min-height: 34px; display: grid; grid-template-columns: minmax(0, 1fr) 22px; align-items: center; column-gap: 10px; padding: 0 9px; border: 0; border-left: 2px solid transparent; background: transparent; color: #59615d; cursor: pointer; text-align: left; }
+.sidebar nav button > span { min-width: 0; padding: 7px 0; line-height: 1.35; overflow-wrap: anywhere; }
 .sidebar nav button:hover { background: #eee9dc; color: var(--ink); }
 .sidebar nav button.active { border-left-color: var(--brand); background: #ffffff; color: var(--ink); font-weight: 700; box-shadow: 0 1px 5px #5f43110c; }
-.sidebar nav em { min-width: 22px; color: #929a95; font-size: 10px; font-style: normal; text-align: right; }
+.sidebar nav em { width: 22px; color: #929a95; font-size: 10px; font-style: normal; text-align: right; }
 .issue-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin: 18px 4px 0; padding-top: 14px; border-top: 1px solid #ccd1ce; }
 .issue-metrics div { min-width: 0; text-align: center; }
 .issue-metrics strong { display: block; color: #262b28; font-family: Georgia, "Times New Roman", serif; font-size: 17px; }
@@ -373,7 +374,7 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
 @media (max-width: 1180px) {
   .topbar { grid-template-columns: auto 1fr auto; gap: 10px; }
   .brand-lockup span { display: none; }
-  .brand-logo { width: 68px; }
+  .brand-logo { width: 96px; height: 26px; }
   .editor-layout.with-detail { grid-template-columns: 168px minmax(480px, 1fr) minmax(340px, 38vw); }
   .editor-layout { grid-template-columns: 168px minmax(0, 1fr); }
   .sidebar { padding-inline: 8px; }
@@ -385,7 +386,7 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
   body { overflow-y: auto; }
   .topbar { height: 110px; grid-template-columns: 1fr auto; grid-template-rows: 50px 40px; padding: 5px 12px 8px; }
   .brand-lockup { grid-column: 1; grid-row: 1; }
-  .brand-logo { width: 64px; height: 21px; }
+  .brand-logo { width: 92px; height: 24px; }
   .brand-product { padding-left: 8px; }
   .view-switcher { grid-column: 1 / -1; grid-row: 2; width: 100%; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .view-switcher button { min-width: 0; padding: 0 4px; }
