@@ -36,7 +36,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, apiUrlProblem, describeWorkerError, getApiUrl, lanConsoleUrl, normalizeApiUrl, setApiUrl, tailscaleConsoleUrl } from './api'
+import { api, apiUrlProblem, describeWorkerError, getApiUrl, getTailscaleConsoleUrl, lanConsoleUrl, normalizeApiUrl, setApiUrl } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
@@ -119,6 +119,30 @@ function cleanBodyLine(line: string) {
 
 function hasMeaningfulBody(body: string) {
   return Boolean(cleanBodyLine(body))
+}
+
+function matchesStoryQuery(story: Story, query: string) {
+  const terms = query
+    .normalize('NFKC')
+    .toLocaleLowerCase()
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+  if (!terms.length) return true
+  const metadata = (() => {
+    try { return JSON.stringify(story.metadata) } catch { return '' }
+  })()
+  const searchable = [
+    story.title,
+    story.body,
+    story.source_name,
+    story.source_url,
+    story.editorial_reason,
+    metadata,
+    ...story.sources.flatMap((source) => [source.title, source.publisher, source.url]),
+    ...story.claims.flatMap((claim) => [claim.text, claim.evidence, claim.source_url]),
+  ].join(' ').normalize('NFKC').toLocaleLowerCase()
+  return terms.every((term) => searchable.includes(term))
 }
 
 function pendingAiEditorRequest(story: Story) {
@@ -1034,12 +1058,11 @@ export function App() {
 
   const draftStories = useMemo(() => {
     if (!issue) return []
-    const normalized = query.trim().toLowerCase()
     return issue.stories.filter((story) => (
       (story.selected && story.status !== 'excluded' && hasMeaningfulBody(story.body))
       || pendingAiEditorRequest(story)
     ))
-      .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
+      .filter((story) => matchesStoryQuery(story, query))
       .sort(comparePublicationStories)
   }, [issue, query])
 
@@ -1061,21 +1084,19 @@ export function App() {
 
   const candidates = useMemo(() => {
     if (!issue) return []
-    const normalized = query.trim().toLowerCase()
     return issue.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story))
       .filter((story) => category === '全部' || story.category === category)
       .filter((story) => candidateStatus === 'all' ? story.status !== 'excluded' : candidateStatus === 'excluded' ? story.status === 'excluded' : story.status === candidateStatus)
-      .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
+      .filter((story) => matchesStoryQuery(story, query))
       .sort((a, b) => b.score - a.score)
   }, [issue, query, category, candidateStatus])
 
   const trashStories = useMemo(() => {
     if (!issue) return []
-    const normalized = query.trim().toLowerCase()
     return issue.stories
       .filter((story) => story.status === 'excluded')
       .filter((story) => category === '全部' || story.category === category)
-      .filter((story) => !normalized || `${story.title} ${story.body} ${story.source_name}`.toLowerCase().includes(normalized))
+      .filter((story) => matchesStoryQuery(story, query))
       .sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')) || b.score - a.score)
   }, [issue, query, category])
 
@@ -1581,7 +1602,7 @@ export function App() {
           </div>
           <label><span>Worker URL</span><input aria-label="Worker URL" value={apiUrl} onChange={(event) => setApiUrlInput(event.target.value)} /></label>
           <p className="settings-hint">Tailscale Serve 使用 HTTPS 根地址，不含 <code>:8765</code>。{apiUrl.includes('.ts.net') ? <><br /><a href={`${apiUrl.replace(/\/$/, '')}/health`} target="_blank" rel="noreferrer">直接打开 Worker 健康检查</a>；Chrome 询问时请允许「本地网络访问」。</> : null}</p>
-          {window.location.hostname.endsWith('github.io') ? <div className="same-origin-links"><a className="same-origin-console" href={lanConsoleUrl} target="_blank" rel="noreferrer">同 Wi-Fi 打开可编辑工作台</a><a className="same-origin-console" href={tailscaleConsoleUrl} target="_blank" rel="noreferrer">通过 Tailscale 直连工作台</a></div> : null}
+          {window.location.hostname.endsWith('github.io') ? <div className="same-origin-links"><a className="same-origin-console" href={lanConsoleUrl} target="_blank" rel="noreferrer">同 Wi-Fi 打开可编辑工作台</a>{getTailscaleConsoleUrl() ? <a className="same-origin-console" href={getTailscaleConsoleUrl()} target="_blank" rel="noreferrer">通过 Tailscale 直连工作台</a> : null}</div> : null}
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void connectWorker()}>{workerConnection.status === 'checking' ? '正在检测…' : '测试并连接'}</button><button type="button" onClick={() => void usePagesMode()}>仅使用 Pages</button></div>
           <div className="settings-divider" />
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已在当前浏览器配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>

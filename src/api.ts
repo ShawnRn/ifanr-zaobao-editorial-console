@@ -1,7 +1,6 @@
 import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryCreateInput, StoryStatus } from './types'
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
-export const tailscaleConsoleUrl = import.meta.env.VITE_EDITORIAL_TAILSCALE_URL || 'http://100.103.86.124:8765'
 export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://Shawn-Rains-MacBook-Pro.local:8765'
 
 const isWorkerOrigin = () => window.location.hostname.endsWith('.ts.net') || window.location.port === '8765'
@@ -55,6 +54,19 @@ export const getApiUrl = () => isWorkerOrigin()
   ? window.location.origin
   : localStorage.getItem('editorial-api-url') || runtimeDefaultUrl()
 
+// The Tailscale address is tailnet-specific. Do not keep a bare 100.x IP as
+// a fallback: it cannot present Tailscale's HTTPS certificate and would make
+// the "direct console" escape hatch fail from GitHub Pages.
+export const getTailscaleConsoleUrl = () => {
+  const configured = import.meta.env.VITE_EDITORIAL_TAILSCALE_URL || getApiUrl()
+  try {
+    const normalized = normalizeApiUrl(configured)
+    return new URL(normalized).hostname.endsWith('.ts.net') ? normalized : ''
+  } catch {
+    return ''
+  }
+}
+
 export const setApiUrl = (value: string) => {
   localStorage.setItem('editorial-api-url', normalizeApiUrl(value))
 }
@@ -65,7 +77,16 @@ type LocalNetworkRequestInit = RequestInit & {
 
 export const workerFetchOptions = (baseUrl: string): LocalNetworkRequestInit => {
   try {
-    return new URL(baseUrl).hostname.endsWith('.ts.net') ? { targetAddressSpace: 'local' } : {}
+    const url = new URL(baseUrl)
+    // Tailscale Serve is always called over its certificate-backed HTTPS
+    // address. Declaring it as a local-network request needlessly invokes
+    // Chrome's Local Network Access permission prompt on GitHub Pages.
+    // That declaration is only useful when an HTTPS page must call an HTTP
+    // local endpoint to bypass mixed-content protection.
+    if (url.hostname.endsWith('.ts.net') && url.protocol === 'http:') {
+      return { targetAddressSpace: 'local' }
+    }
+    return {}
   } catch {
     return {}
   }

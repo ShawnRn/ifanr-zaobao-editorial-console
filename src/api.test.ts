@@ -23,10 +23,8 @@ describe('Worker URL handling', () => {
     expect(apiUrlProblem('https://100.103.86.124', 'https:')).toContain('.ts.net')
   })
 
-  it('declares Tailscale requests as local-network access', () => {
-    expect(workerFetchOptions('https://shawn-rains-macbook-pro.tail42e7aa.ts.net')).toEqual({
-      targetAddressSpace: 'local',
-    })
+  it('keeps HTTPS Tailscale Serve requests outside Chrome local-network permission flow', () => {
+    expect(workerFetchOptions('https://shawn-rains-macbook-pro.tail42e7aa.ts.net')).toEqual({})
     expect(workerFetchOptions('http://127.0.0.1:8765')).toEqual({})
   })
 
