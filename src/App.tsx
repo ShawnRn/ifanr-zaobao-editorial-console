@@ -42,7 +42,8 @@ import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
-import ifanrLogoUrl from './assets/ifanr-logo-standard.png'
+import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
+import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
 
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
@@ -1298,7 +1299,7 @@ export function App() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <img className="brand-logo" src={ifanrLogoUrl} alt="爱范儿 iFanr" />
+          <img className="brand-logo" src={theme === 'dark' ? ifanrLogoDarkUrl : ifanrLogoLightUrl} alt="爱范儿 iFanr" />
           <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
         </div>
         <nav className="view-switcher" aria-label="编辑台视图">
