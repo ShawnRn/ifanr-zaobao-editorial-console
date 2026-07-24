@@ -1349,7 +1349,6 @@ export function App() {
   }
 
   const scrollToStory = (story: Story) => {
-    setSelectedStoryId(story.id)
     setActiveDraftSection(isSaturdayIssue ? weekendDraftSection(story) : story.category)
     const performScroll = () => {
       const container = draftScrollRef.current
