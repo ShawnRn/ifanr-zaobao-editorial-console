@@ -59,7 +59,7 @@ describe('App', () => {
       cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
       image_url: '', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
     }
-    render(<IssueArticle story={story} active={false} onOpen={onOpen} onExclude={onExclude} onDragStart={() => undefined} onDrop={() => undefined} />)
+    render(<IssueArticle story={story} active={false} onOpen={onOpen} onExclude={onExclude} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
 
     fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
 
@@ -72,7 +72,7 @@ describe('App', () => {
       ...staticStory,
       body: '\u200b\n\n第一段。\n\n\u200b\n\n第二段。\n\n\uFEFF',
     }
-    const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+    const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
 
     const paragraphs = container.querySelectorAll('.article-body p')
     expect(paragraphs).toHaveLength(2)
@@ -129,7 +129,7 @@ describe('App', () => {
       cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
       image_url: '', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
     }
-    render(<IssueArticle story={story} active={false} canMoveUp={false} canMoveDown onMoveDown={onMoveDown} onMoveBottom={onMoveBottom} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+    render(<IssueArticle story={story} active={false} canMoveUp={false} canMoveDown onMoveDown={onMoveDown} onMoveBottom={onMoveBottom} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
 
     expect(screen.queryByRole('button', { name: '上移一位' })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: '置顶到当前栏目' })).not.toBeInTheDocument()
@@ -151,7 +151,7 @@ describe('App', () => {
       cross_day_status: '', rumor: false, fact_status: 'verified', changed_since_review: false,
       image_url: '', image_path: '', image_token: '', editorial_reason: '', metadata: {}, sources: [], claims: [],
     }
-    render(<IssueArticle story={story} active={false} onMoveCategory={onMoveCategory} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+    render(<IssueArticle story={story} active={false} onMoveCategory={onMoveCategory} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
 
     fireEvent.change(screen.getByLabelText('移动到其他栏目'), { target: { value: '大公司' } })
 
@@ -237,7 +237,7 @@ describe('App', () => {
       body: '第一段正文。\\n\\n第二段正文。',
       image_url: 'https://example.com/tall-image.jpg',
     }
-    const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} />)
+    const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
 
     const layout = container.querySelector('.article-layout-with-image')
     expect(layout).toBeInTheDocument()
