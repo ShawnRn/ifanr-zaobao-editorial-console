@@ -47,6 +47,7 @@ describe('App', () => {
     expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
     expect(screen.getByText('当天飞书 Bot 稿 · 1 条 · Pages 只读快照')).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: '设置' }).length).toBeGreaterThan(0)
+    expect(screen.getByRole('img', { name: 'ifanr' })).not.toHaveAttribute('src', '/favicon.png')
   })
 
   it('does not open the detail panel when removing a draft item', () => {

@@ -48,6 +48,7 @@ import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
 import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
 import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
+import ifanrMarkUrl from './assets/ifanr-mark.png'
 const AVATAR_STORAGE_KEY = 'ifanr-editorial-avatar'
 
 const categories = ['全部', ...publicationCategories]
@@ -1950,7 +1951,7 @@ export function App() {
           >
             {avatarUrl
               ? <img src={avatarUrl} alt="头像" />
-              : <img src="/favicon.png" alt="ifanr" className="avatar-default-icon" />}
+              : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
           </button>
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
@@ -1974,7 +1975,7 @@ export function App() {
         {showAvatarMenu ? <div ref={avatarMenuRef} className={`avatar-menu ${avatarMenuClosing ? 'closing' : ''}`}>
           <div className="avatar-menu-profile">
             <div className="avatar-menu-avatar">
-              {avatarUrl ? <img src={avatarUrl} alt="头像" /> : <img src="/favicon.png" alt="ifanr" className="avatar-default-icon" />}
+              {avatarUrl ? <img src={avatarUrl} alt="头像" /> : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
             </div>
             <div className="avatar-menu-info">
               <strong>{isReadOnly ? '未登录' : (authUser || 'Shawn Rain')}</strong>
