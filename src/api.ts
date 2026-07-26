@@ -1,7 +1,7 @@
 import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryCreateInput, StoryStatus } from './types'
 
-const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://127.0.0.1:8765'
-export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://Shawn-Rains-MacBook-Pro.local:8765'
+const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://111.228.56.220:8765'
+export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://111.228.56.220:8765'
 
 const isWorkerOrigin = () => window.location.hostname.endsWith('.ts.net') || window.location.port === '8765'
 
@@ -103,17 +103,36 @@ export const describeWorkerError = (error: unknown) => {
   return message
 }
 
+const getCookie = (name: string) => {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+  return match ? decodeURIComponent(match[2]) : ''
+}
+
+export const getAuthToken = () => localStorage.getItem('editorial-auth-token') || getCookie('editorial_auth_token') || ''
+export const setAuthToken = (token: string) => {
+  if (token) {
+    localStorage.setItem('editorial-auth-token', token)
+    document.cookie = `editorial_auth_token=${encodeURIComponent(token)}; path=/; max-age=31536000; SameSite=Lax`
+  } else {
+    localStorage.removeItem('editorial-auth-token')
+    document.cookie = 'editorial_auth_token=; path=/; max-age=0; SameSite=Lax'
+  }
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), 10000)
   const baseUrl = getApiUrl()
+  const token = getAuthToken()
   try {
     const response = await fetch(`${baseUrl}${path}`, {
       ...workerFetchOptions(baseUrl),
+      credentials: 'include',
       ...init,
       signal: init?.signal || controller.signal,
       headers: {
         'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...init?.headers,
       },
     })
@@ -131,11 +150,16 @@ async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), 45000)
   const baseUrl = getApiUrl()
+  const token = getAuthToken()
   try {
     const response = await fetch(`${baseUrl}${path}`, {
       ...workerFetchOptions(baseUrl),
       ...init,
       signal: controller.signal,
+      headers: {
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...init.headers,
+      },
     })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
@@ -218,4 +242,7 @@ export const api = {
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
   proposeProfile: () => request<Record<string, unknown>>('/api/editorial-profile/propose', { method: 'POST' }),
   profileProposals: () => request<Array<Record<string, unknown>>>('/api/editorial-profile/proposals'),
+  authStatus: () => request<{ require_auth: boolean; authenticated: boolean; read_only: boolean; username?: string | null }>('/api/auth/status'),
+  authLogin: (username: string, passwordHash: string) => request<{ ok: boolean; token: string; username?: string; read_only: boolean; message?: string }>('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password_hash: passwordHash }) }),
+  authLogout: () => request<{ ok: boolean }>('/api/auth/logout', { method: 'POST' }),
 }

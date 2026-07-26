@@ -19,7 +19,9 @@ import {
   Image,
   Library,
   LoaderCircle,
+  Lock,
   Menu,
+  Monitor,
   Moon,
   PanelRightClose,
   Plus,
@@ -31,12 +33,13 @@ import {
   Sparkles,
   Sun,
   Trash2,
+  Unlock,
   Upload,
   WandSparkles,
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, apiUrlProblem, describeWorkerError, getApiUrl, getTailscaleConsoleUrl, lanConsoleUrl, normalizeApiUrl, setApiUrl } from './api'
+import { api, apiUrlProblem, describeWorkerError, getApiUrl, getTailscaleConsoleUrl, lanConsoleUrl, normalizeApiUrl, setApiUrl, setAuthToken } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
@@ -749,6 +752,116 @@ function DeleteConfirmDialog({ story, busy, closing = false, onCancel, onConfirm
   </div>
 }
 
+function sha256(ascii: string): string {
+  let i: number, j: number
+  let result = ''
+  const words: number[] = []
+  const asciiBitLength = ascii.length * 8
+  const hash: number[] = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19]
+  const k: number[] = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
+  ]
+  for (i = 0; i < ascii.length; i++) {
+    words[i >> 2] |= ascii.charCodeAt(i) << (24 - (i % 4) * 8)
+  }
+  words[ascii.length >> 2] |= 0x80 << (24 - (ascii.length % 4) * 8)
+  while ((words.length % 16) !== 14) words.push(0)
+  words.push(Math.floor(asciiBitLength / Math.pow(2, 32)))
+  words.push(asciiBitLength & 0xffffffff)
+  for (j = 0; j < words.length; j += 16) {
+    const w = words.slice(j, j + 16)
+    const oldHash = [...hash]
+    for (i = 0; i < 64; i++) {
+      if (i >= 16) {
+        const s0 = ((w[i - 15] >>> 7) | (w[i - 15] << 25)) ^ ((w[i - 15] >>> 18) | (w[i - 15] << 14)) ^ (w[i - 15] >>> 3)
+        const s1 = ((w[i - 2] >>> 17) | (w[i - 2] << 15)) ^ ((w[i - 2] >>> 19) | (w[i - 2] << 13)) ^ (w[i - 2] >>> 10)
+        w[i] = (w[i - 16] + s0 + w[i - 7] + s1) | 0
+      }
+      const ch = (hash[4] & hash[5]) ^ (~hash[4] & hash[6])
+      const maj = (hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2])
+      const S0 = ((hash[0] >>> 2) | (hash[0] << 30)) ^ ((hash[0] >>> 13) | (hash[0] << 19)) ^ ((hash[0] >>> 22) | (hash[0] << 10))
+      const S1 = ((hash[4] >>> 6) | (hash[4] << 26)) ^ ((hash[4] >>> 11) | (hash[4] << 21)) ^ ((hash[4] >>> 25) | (hash[4] << 7))
+      const temp1 = hash[7] + S1 + ch + k[i] + w[i]
+      const temp2 = S0 + maj
+      hash[7] = hash[6]
+      hash[6] = hash[5]
+      hash[5] = hash[4]
+      hash[4] = (hash[3] + temp1) | 0
+      hash[3] = hash[2]
+      hash[2] = hash[1]
+      hash[1] = hash[0]
+      hash[0] = (temp1 + temp2) | 0
+    }
+    for (i = 0; i < 8; i++) hash[i] = (hash[i] + oldHash[i]) | 0
+  }
+  for (i = 0; i < 8; i++) {
+    for (j = 3; j >= 0; j--) {
+      const b = (hash[i] >> (j * 8)) & 255
+      result += (b < 16 ? '0' : '') + b.toString(16)
+    }
+  }
+  return result
+}
+
+async function hashPassword(username: string, password: string): Promise<string> {
+  const salt = 'ifanr_zaobao_secure_salt_v2'
+  const str = `${salt}:${username.trim().toLowerCase()}:${password}`
+  if (window.crypto && window.crypto.subtle && typeof window.crypto.subtle.digest === 'function') {
+    try {
+      const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('')
+    } catch {
+      // fallback to pure JS sha256
+    }
+  }
+  return sha256(str)
+}
+
+function AuthDialog({ isReadOnly, authUser, busy, error, closing = false, onClose, onLogin, onLogout }: {
+  isReadOnly: boolean
+  authUser: string
+  busy: boolean
+  error: string
+  closing?: boolean
+  onClose: () => void
+  onLogin: (username: string, password: string) => void
+  onLogout: () => void
+}) {
+  const [username, setUsername] = useState('Shawn Rain')
+  const [password, setPassword] = useState('')
+
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}>
+    <form className={`auth-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onSubmit={(event) => { event.preventDefault(); if (isReadOnly) onLogin(username, password) }} onMouseDown={(event) => event.stopPropagation()}>
+      <header>
+        <div><span>管理员鉴权</span><h2>{isReadOnly ? '解锁编辑权限' : '已获得编辑权限'}</h2></div>
+        <IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton>
+      </header>
+      <div className="auth-dialog-body">
+        {isReadOnly ? <>
+          <p className="auth-desc">工作台当前处于只读模式。请输入管理员账号与密码解锁编辑与提交权限。</p>
+          <label><span>用户名</span><input autoFocus type="text" value={username} placeholder="Shawn Rain" onChange={(e) => setUsername(e.target.value)} /></label>
+          <label><span>密码</span><input type="password" value={password} placeholder="请输入管理员密码" onChange={(e) => setPassword(e.target.value)} /></label>
+        </> : <div className="auth-unlocked-info">
+          <div className="unlocked-badge"><Unlock size={24} /></div>
+          <p>当前以管理员 <strong>{authUser || 'Shawn Rain'}</strong> 身份登录，已解锁全量编辑权限。</p>
+        </div>}
+        {error ? <p className="auth-error-msg">{error}</p> : null}
+      </div>
+      <footer>
+        <button type="button" className="secondary-button" onClick={onClose}>取消</button>
+        {isReadOnly ? <button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim()}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}验证登录</button> : <button type="button" className="danger-button" disabled={busy} onClick={onLogout}>退出登录 (恢复只读)</button>}
+      </footer>
+    </form>
+  </div>
+}
+
 function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
   const normalizedStories = stories.map(normalizeStoryCategory).map((story) => {
     if (!story.selected || story.status === 'excluded' || hasMeaningfulBody(story.body)) return story
@@ -771,7 +884,12 @@ function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
 }
 
 export function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => localStorage.getItem('ifanr-editorial-theme') === 'dark' ? 'dark' : 'light')
+  const [theme, setTheme] = useState<'system' | 'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('ifanr-editorial-theme')
+    if (saved === 'light' || saved === 'dark' || saved === 'system') return saved
+    return 'system'
+  })
+  const [systemIsDark, setSystemIsDark] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches)
   const [issue, setIssue] = useState<Issue | null>(null)
   const [baseIssue, setBaseIssue] = useState<Issue | null>(null)
   const [reviewSessionId, setReviewSessionId] = useState('')
@@ -796,7 +914,7 @@ export function App() {
   const [weekend, setWeekend] = useState<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>({})
   const [showExport, setShowExport] = useState(false)
   const [showCreateStory, setShowCreateStory] = useState(false)
-  const [closingOverlay, setClosingOverlay] = useState<'create' | 'export' | 'delete' | null>(null)
+  const [closingOverlay, setClosingOverlay] = useState<'create' | 'export' | 'delete' | 'auth' | null>(null)
   const [creatingStory, setCreatingStory] = useState(false)
   const [pendingDelete, setPendingDelete] = useState<Story | null>(null)
   const [deleteBusy, setDeleteBusy] = useState(false)
@@ -814,6 +932,56 @@ export function App() {
   const [geminiKey, setGeminiKey] = useState('')
   const [geminiConfigured, setGeminiConfigured] = useState(hasGeminiKey())
   const [profileMessage, setProfileMessage] = useState('')
+  const [showAuthDialog, setShowAuthDialog] = useState(false)
+  const [authUser, setAuthUser] = useState('Shawn Rain')
+  const [isReadOnly, setIsReadOnly] = useState(false)
+  const [authBusy, setAuthBusy] = useState(false)
+  const [authMessage, setAuthMessage] = useState('')
+
+  const checkAuthStatus = useCallback(async () => {
+    try {
+      const status = await api.authStatus()
+      setIsReadOnly(status.read_only)
+      if (status.username) setAuthUser(status.username)
+    } catch {
+      // ignore
+    }
+  }, [])
+
+  useEffect(() => {
+    void checkAuthStatus()
+  }, [checkAuthStatus, dataMode])
+
+  const doAuthLogin = async (usernameInput: string, passwordInput: string) => {
+    if (!usernameInput.trim() || !passwordInput.trim()) return
+    setAuthBusy(true)
+    setAuthMessage('正在验证安全登录…')
+    try {
+      const pHash = await hashPassword(usernameInput, passwordInput)
+      const res = await api.authLogin(usernameInput.trim(), pHash)
+      setAuthToken(res.token)
+      setIsReadOnly(false)
+      if (res.username) setAuthUser(res.username)
+      setAuthMessage('')
+      closeOverlay('auth')
+    } catch (err) {
+      setAuthMessage(err instanceof Error ? err.message : '验证失败，请检查用户名或密码')
+    } finally {
+      setAuthBusy(false)
+    }
+  }
+
+  const doAuthLogout = async () => {
+    setAuthToken('')
+    setIsReadOnly(true)
+    setAuthMessage('')
+    closeOverlay('auth')
+    try {
+      await api.authLogout()
+    } catch {
+      // ignore
+    }
+  }
   const [workerConnection, setWorkerConnection] = useState<WorkerConnection>({
     status: 'checking',
     detail: '正在检测主 Mac Worker',
@@ -821,9 +989,20 @@ export function App() {
   })
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
+    if (typeof window.matchMedia !== 'function') return
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+    const listener = (e: MediaQueryListEvent) => setSystemIsDark(e.matches)
+    setSystemIsDark(media.matches)
+    media.addEventListener('change', listener)
+    return () => media.removeEventListener('change', listener)
+  }, [])
+
+  const effectiveTheme = theme === 'system' ? (systemIsDark ? 'dark' : 'light') : theme
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = effectiveTheme
     localStorage.setItem('ifanr-editorial-theme', theme)
-  }, [theme])
+  }, [theme, effectiveTheme])
   useEffect(() => { localStorage.setItem('ifanr-editorial-outline-collapsed', outlineCollapsed ? '1' : '0') }, [outlineCollapsed])
   useEffect(() => {
     if (typeof window.matchMedia !== 'function') return
@@ -870,7 +1049,7 @@ export function App() {
     }, 180)
   }, [detailClosing, selectedStoryId])
 
-  const closeOverlay = useCallback((overlay: 'create' | 'export' | 'delete') => {
+  const closeOverlay = useCallback((overlay: 'create' | 'export' | 'delete' | 'auth') => {
     if (closingOverlay) return
     setClosingOverlay(overlay)
     if (overlayCloseTimerRef.current !== null) window.clearTimeout(overlayCloseTimerRef.current)
@@ -878,6 +1057,7 @@ export function App() {
       if (overlay === 'create') setShowCreateStory(false)
       if (overlay === 'export') setShowExport(false)
       if (overlay === 'delete') setPendingDelete(null)
+      if (overlay === 'auth') setShowAuthDialog(false)
       setClosingOverlay(null)
       overlayCloseTimerRef.current = null
     }, 180)
@@ -1580,7 +1760,7 @@ export function App() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <img className="brand-logo" src={theme === 'dark' ? ifanrLogoDarkUrl : ifanrLogoLightUrl} alt="爱范儿 iFanr" />
+          <img className="brand-logo" src={effectiveTheme === 'dark' ? ifanrLogoDarkUrl : ifanrLogoLightUrl} alt="爱范儿 iFanr" />
           <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
         </div>
         <nav className="view-switcher" aria-label="编辑台视图">
@@ -1591,13 +1771,14 @@ export function App() {
           <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
-          <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={openSettings}>
+          <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={`${workerConnection.detail} · 点击管理鉴权与编辑权限`} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
+            {isReadOnly ? <span className="status-mode-tag read-only"><Lock size={12} />只读模式</span> : <span className="status-mode-tag unlocked"><Unlock size={12} />编辑中</span>}
           </button>
           <IconButton title={dataMode === 'worker' ? '手动添加选题' : '连接 Worker 后才能添加选题'} onClick={() => { setClosingOverlay(null); setShowCreateStory(true) }} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
           <IconButton title={repoRuntimeAccess ? '同步最新自动化产物' : '读取自动化已同步的最终稿'} onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
-          <IconButton title={theme === 'dark' ? '切换到浅色模式' : '切换到深色模式'} onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}><>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</></IconButton>
+          <IconButton title={theme === 'system' ? `主题：跟随系统 (${effectiveTheme === 'dark' ? '当前深色' : '当前浅色'})` : theme === 'dark' ? '主题：深色模式' : '主题：浅色模式'} onClick={() => setTheme((current) => current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system')}><>{theme === 'system' ? <Monitor size={17} /> : theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}</></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="连接设置" aria-label="连接设置" onClick={toggleSettings}><Settings size={17} /></button>
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
@@ -1616,6 +1797,14 @@ export function App() {
           <p className="settings-hint">Key 只保存在当前浏览器的网页数据中；Gemini 请求也由当前设备直接发出。</p>
           <button type="button" disabled={workerConnection.status !== 'connected'} onClick={() => { setProfileMessage('正在归纳本周编辑决策…'); void api.proposeProfile().then((proposal) => setProfileMessage(proposal.status === 'pending' ? '已生成待确认的偏好差异提案' : '本周暂无需调整的偏好')).catch((profileError) => setProfileMessage(profileError instanceof Error ? profileError.message : '提案生成失败')) }}>生成每周偏好提案</button>
           {profileMessage ? <p className="settings-message">{profileMessage}</p> : null}
+          <div className="settings-divider" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <span><strong>管理员鉴权与编辑权限</strong></span>
+            <p className="settings-hint">{isReadOnly ? '当前处于只读模式（仅供预览查看）。点击下方按钮打开登录弹窗。' : `当前以 ${authUser || 'Shawn Rain'} 身份登录，已解锁编辑权限。`}</p>
+            <button type="button" onClick={() => { setSettingsClosing(true); setShowAuthDialog(true) }}>
+              {isReadOnly ? '打开登录弹窗 (解锁编辑)' : '管理账号权限 / 退出登录'}
+            </button>
+          </div>
         </div> : null}
       </header>
 
@@ -1647,7 +1836,7 @@ export function App() {
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
-          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static'} closing={detailClosing} onClose={closeDetail} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 
@@ -1656,6 +1845,7 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
+      {showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
