@@ -693,3 +693,51 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
   border-top: 1px solid var(--line-soft);
   background: var(--panel);
 }
+
+.auth-dialog footer > button {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 40px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.auth-dialog footer > button svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.auth-dialog footer > button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.auth-dialog footer > .secondary-button {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--muted);
+}
+
+.auth-dialog footer > .secondary-button:hover {
+  border-color: var(--quiet);
+  background: var(--control);
+  color: var(--ink);
+}
+
+.auth-dialog footer > .danger-button {
+  border: 1px solid transparent;
+}
+
+.auth-dialog footer > .primary-button {
+  border: 1px solid transparent;
+}
