@@ -1936,7 +1936,6 @@ export function App() {
           <IconButton title="刷新" onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
           <IconButton title={theme === 'system' ? `跟随系统（当前${effectiveTheme === 'dark' ? '深色' : '浅色'}）` : theme === 'dark' ? '深色模式' : '浅色模式'} onClick={() => setTheme((current) => current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system')}><>{theme === 'system' ? <Monitor size={17} /> : theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}</></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="设置" aria-label="设置" onClick={toggleSettings}><Settings size={17} /></button>
-          <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
           {/* Avatar button */}
           <button
             ref={avatarTriggerRef}
@@ -1953,6 +1952,7 @@ export function App() {
               ? <img src={avatarUrl} alt="头像" />
               : <img src="/favicon.png" alt="ifanr" className="avatar-default-icon" />}
           </button>
+          <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
         {showSettings ? <div ref={settingsPopoverRef} className={`settings-popover ${settingsClosing ? 'closing' : ''}`} onAnimationEnd={() => { if (settingsClosing) finishSettingsClose() }}>
           <div className={`connection-summary connection-${workerConnection.status}`}>
