@@ -131,4 +131,8 @@ export type AutomationHandoff = {
   publication_date: string
   created_at: string
   status: string
+  requires_ai_headline_rewrite?: boolean
+  headline_quality_warnings?: Array<{ title: string; reason: string }>
+  requires_ai_body_write?: boolean
+  empty_body_titles?: string[]
 }
