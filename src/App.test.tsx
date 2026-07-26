@@ -46,7 +46,7 @@ describe('App', () => {
     expect((await screen.findAllByText('Pages 快照')).length).toBeGreaterThan(0)
     expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
     expect(screen.getByText('当天飞书 Bot 稿 · 1 条 · Pages 只读快照')).toBeInTheDocument()
-    expect(screen.getAllByRole('button', { name: '连接设置' }).length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('button', { name: '设置' }).length).toBeGreaterThan(0)
   })
 
   it('does not open the detail panel when removing a draft item', () => {
@@ -175,7 +175,7 @@ describe('App', () => {
 
   it('closes settings after an outside click with an exit animation', async () => {
     render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: '连接设置' }))
+    fireEvent.click(screen.getByRole('button', { name: '设置' }))
     const popover = document.querySelector('.settings-popover') as HTMLElement
     expect(popover).toBeInTheDocument()
 
