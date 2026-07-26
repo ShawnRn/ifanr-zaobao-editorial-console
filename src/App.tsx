@@ -824,7 +824,7 @@ async function hashPassword(username: string, password: string): Promise<string>
   return sha256(str)
 }
 
-function AuthDialog({ isReadOnly, authUser, busy, error, closing = false, onClose, onLogin, onLogout }: {
+function AuthDialog({ isReadOnly, authUser, busy, error, closing = false, onClose, onLogin, onChangePassword, onLogout }: {
   isReadOnly: boolean
   authUser: string
   busy: boolean
@@ -832,13 +832,26 @@ function AuthDialog({ isReadOnly, authUser, busy, error, closing = false, onClos
   closing?: boolean
   onClose: () => void
   onLogin: (username: string, password: string) => void
+  onChangePassword: (currentPassword: string, newPassword: string) => void
   onLogout: () => void
 }) {
   const [username, setUsername] = useState('Shawn Rain')
   const [password, setPassword] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const passwordChangeReady = Boolean(
+    currentPassword.trim()
+    && newPassword.length >= 12
+    && newPassword === confirmPassword,
+  )
 
   return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}>
-    <form className={`auth-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onSubmit={(event) => { event.preventDefault(); if (isReadOnly) onLogin(username, password) }} onMouseDown={(event) => event.stopPropagation()}>
+    <form className={`auth-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onSubmit={(event) => {
+      event.preventDefault()
+      if (isReadOnly) onLogin(username, password)
+      else if (passwordChangeReady) onChangePassword(currentPassword, newPassword)
+    }} onMouseDown={(event) => event.stopPropagation()}>
       <header>
         <div><span>管理员鉴权</span><h2>{isReadOnly ? '解锁编辑权限' : '已获得编辑权限'}</h2></div>
         <IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton>
@@ -848,15 +861,29 @@ function AuthDialog({ isReadOnly, authUser, busy, error, closing = false, onClos
           <p className="auth-desc">工作台当前处于只读模式。请输入管理员账号与密码解锁编辑与提交权限。</p>
           <label><span>用户名</span><input autoFocus type="text" value={username} placeholder="Shawn Rain" onChange={(e) => setUsername(e.target.value)} /></label>
           <label><span>密码</span><input type="password" value={password} placeholder="请输入管理员密码" onChange={(e) => setPassword(e.target.value)} /></label>
-        </> : <div className="auth-unlocked-info">
-          <div className="unlocked-badge"><Unlock size={24} /></div>
-          <p>当前以管理员 <strong>{authUser || 'Shawn Rain'}</strong> 身份登录，已解锁全量编辑权限。</p>
-        </div>}
-        {error ? <p className="auth-error-msg">{error}</p> : null}
+        </> : <>
+          <div className="auth-unlocked-info">
+            <div className="unlocked-badge"><Unlock size={24} /></div>
+            <p>当前以管理员 <strong>{authUser || 'Shawn Rain'}</strong> 身份登录，已解锁全量编辑权限。</p>
+          </div>
+          <div className="auth-password-section">
+            <strong>修改密码</strong>
+            <label><span>当前密码</span><input autoFocus type="password" autoComplete="current-password" value={currentPassword} placeholder="输入当前密码" onChange={(event) => setCurrentPassword(event.target.value)} /></label>
+            <label><span>新密码</span><input type="password" autoComplete="new-password" minLength={12} value={newPassword} placeholder="至少 12 个字符" onChange={(event) => setNewPassword(event.target.value)} /></label>
+            <label><span>确认新密码</span><input type="password" autoComplete="new-password" minLength={12} value={confirmPassword} placeholder="再次输入新密码" onChange={(event) => setConfirmPassword(event.target.value)} /></label>
+            {confirmPassword && newPassword !== confirmPassword ? <p className="auth-error-msg">两次输入的新密码不一致</p> : null}
+          </div>
+        </>}
+        {error ? <p className={error.startsWith('密码已更新') ? 'auth-success-msg' : 'auth-error-msg'}>{error}</p> : null}
       </div>
       <footer>
         <button type="button" className="secondary-button" onClick={onClose}>取消</button>
-        {isReadOnly ? <button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim()}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}验证登录</button> : <button type="button" className="danger-button" disabled={busy} onClick={onLogout}>退出登录 (恢复只读)</button>}
+        {isReadOnly
+          ? <button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim()}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}验证登录</button>
+          : <>
+            <button type="button" className="danger-button" disabled={busy} onClick={onLogout}>退出登录</button>
+            <button type="submit" className="primary-button" disabled={busy || !passwordChangeReady}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}保存新密码</button>
+          </>}
       </footer>
     </form>
   </div>
@@ -980,6 +1007,25 @@ export function App() {
       await api.authLogout()
     } catch {
       // ignore
+    }
+  }
+
+  const doAuthChangePassword = async (currentPassword: string, newPassword: string) => {
+    setAuthBusy(true)
+    setAuthMessage('正在更新密码…')
+    try {
+      const [currentHash, newHash] = await Promise.all([
+        hashPassword(authUser, currentPassword),
+        hashPassword(authUser, newPassword),
+      ])
+      const res = await api.authChangePassword(authUser, currentHash, newHash)
+      setAuthToken(res.token)
+      setIsReadOnly(false)
+      setAuthMessage('密码已更新，其他浏览器中的旧登录已失效。')
+    } catch (err) {
+      setAuthMessage(err instanceof Error ? err.message : '密码修改失败')
+    } finally {
+      setAuthBusy(false)
     }
   }
   const [workerConnection, setWorkerConnection] = useState<WorkerConnection>({
@@ -1845,7 +1891,7 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
-      {showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onLogout={doAuthLogout} /> : null}
+      {showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>

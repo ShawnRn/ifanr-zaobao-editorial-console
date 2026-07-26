@@ -244,5 +244,14 @@ export const api = {
   profileProposals: () => request<Array<Record<string, unknown>>>('/api/editorial-profile/proposals'),
   authStatus: () => request<{ require_auth: boolean; authenticated: boolean; read_only: boolean; username?: string | null }>('/api/auth/status'),
   authLogin: (username: string, passwordHash: string) => request<{ ok: boolean; token: string; username?: string; read_only: boolean; message?: string }>('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password_hash: passwordHash }) }),
+  authChangePassword: (username: string, currentPasswordHash: string, newPasswordHash: string) =>
+    request<{ ok: boolean; token: string; username?: string; read_only: boolean }>('/api/auth/change-password', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        current_password_hash: currentPasswordHash,
+        new_password_hash: newPasswordHash,
+      }),
+    }),
   authLogout: () => request<{ ok: boolean }>('/api/auth/logout', { method: 'POST' }),
 }
