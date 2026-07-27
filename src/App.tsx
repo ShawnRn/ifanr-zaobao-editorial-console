@@ -1090,6 +1090,8 @@ export function App() {
   const [activeDraftSection, setActiveDraftSection] = useState('全部')
   const [candidateStatus, setCandidateStatus] = useState('all')
   const [view, setView] = useState<View>('draft')
+  const [activeView, setActiveView] = useState<View>('draft')
+  const [viewMotion, setViewMotion] = useState<'idle' | 'out' | 'in'>('idle')
   const [outlineCollapsed, setOutlineCollapsed] = useState(() => localStorage.getItem('ifanr-editorial-outline-collapsed') === '1')
   const [mobileReadOnly, setMobileReadOnly] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 760px)').matches)
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null)
@@ -1334,6 +1336,8 @@ export function App() {
   const operationErrorTimerRef = useRef<number | null>(null)
   const detailCloseTimerRef = useRef<number | null>(null)
   const overlayCloseTimerRef = useRef<number | null>(null)
+  const viewExitTimerRef = useRef<number | null>(null)
+  const viewEnterTimerRef = useRef<number | null>(null)
   const issueRef = useRef<Issue | null>(null)
   const dataModeRef = useRef(dataMode)
   const workerRefreshInFlightRef = useRef(false)
@@ -1341,6 +1345,9 @@ export function App() {
 
   useEffect(() => { issueRef.current = issue }, [issue])
   useEffect(() => { dataModeRef.current = dataMode }, [dataMode])
+  useEffect(() => {
+    if (viewMotion === 'idle') setActiveView(view)
+  }, [view, viewMotion])
 
   const showOperationError = useCallback((message: string) => {
     if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
@@ -1594,6 +1601,8 @@ export function App() {
     if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
     if (detailCloseTimerRef.current !== null) window.clearTimeout(detailCloseTimerRef.current)
     if (overlayCloseTimerRef.current !== null) window.clearTimeout(overlayCloseTimerRef.current)
+    if (viewExitTimerRef.current !== null) window.clearTimeout(viewExitTimerRef.current)
+    if (viewEnterTimerRef.current !== null) window.clearTimeout(viewEnterTimerRef.current)
   }, [])
 
   useEffect(() => {
@@ -2098,12 +2107,36 @@ export function App() {
   }
 
   const switchView = (next: View) => {
-    setView(next)
-    setSelectedStoryId(null)
-    setCategory('全部')
-    setActiveDraftSection('全部')
-    setQuery('')
-    if (next === 'candidates' || next === 'trash') void loadFullIssue()
+    if (next === activeView) return
+    if (viewExitTimerRef.current !== null) window.clearTimeout(viewExitTimerRef.current)
+    if (viewEnterTimerRef.current !== null) window.clearTimeout(viewEnterTimerRef.current)
+
+    const applyView = () => {
+      setView(next)
+      setSelectedStoryId(null)
+      setCategory('全部')
+      setActiveDraftSection('全部')
+      setQuery('')
+      if (next === 'candidates' || next === 'trash') void loadFullIssue()
+    }
+
+    setActiveView(next)
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      setViewMotion('idle')
+      applyView()
+      return
+    }
+
+    setViewMotion('out')
+    viewExitTimerRef.current = window.setTimeout(() => {
+      viewExitTimerRef.current = null
+      applyView()
+      setViewMotion('in')
+      viewEnterTimerRef.current = window.setTimeout(() => {
+        viewEnterTimerRef.current = null
+        setViewMotion('idle')
+      }, 190)
+    }, 110)
   }
 
   const jumpToReview = async () => {
@@ -2189,11 +2222,11 @@ export function App() {
           <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
         </div>
         <nav className="view-switcher" aria-label="编辑台视图">
-          <button className={view === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
-          <button className={view === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
-          <button className={view === 'trash' ? 'active' : ''} onClick={() => switchView('trash')} type="button">回收站</button>
-          <button className={view === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">标题</button>
-          <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
+          <button className={activeView === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
+          <button className={activeView === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
+          <button className={activeView === 'trash' ? 'active' : ''} onClick={() => switchView('trash')} type="button">回收站</button>
+          <button className={activeView === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">标题</button>
+          <button className={activeView === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
           {!isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
@@ -2288,6 +2321,7 @@ export function App() {
         </div> : null}
       </header>
 
+      <div className={`view-content view-content-${viewMotion}`} aria-live="polite">
       {(view === 'draft' || view === 'candidates' || view === 'trash') ? (
         <div className={`editor-layout ${selectedStory ? 'with-detail' : ''}`}>
           <aside className="sidebar">
@@ -2373,6 +2407,7 @@ export function App() {
 
       {view === 'brands' && issue ? <BrandWorkspace issue={issue} generating={generatingBrand} onGenerate={generateBrand} onSave={async (brand, patch) => { if (dataMode === 'static') { setIssue({ ...issue, brand_packages: { ...issue.brand_packages, [brand]: { ...issue.brand_packages[brand], ...patch } } }); return } await api.patchBrand(issue.id, brand, patch); setIssue(await api.getIssue(issue.id)) }} /> : null}
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
+      </div>
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
