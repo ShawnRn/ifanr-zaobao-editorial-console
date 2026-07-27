@@ -46,7 +46,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
 import { api, describeWorkerError, getApiUrl, resolveApiAssetUrl, setAuthToken } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
-import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
+import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
 import { generateQrSvgDataUri } from './totp'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
@@ -1120,6 +1120,9 @@ export function App() {
   const [settingsClosing, setSettingsClosing] = useState(false)
   const [geminiKey, setGeminiKey] = useState('')
   const [geminiConfigured, setGeminiConfigured] = useState(hasGeminiKey())
+  const [geminiModel, setGeminiModel] = useState(getGeminiModel())
+  const [geminiModels, setGeminiModels] = useState<Array<{ name: string; displayName: string }>>([])
+  const [geminiModelsLoading, setGeminiModelsLoading] = useState(false)
   const [profileMessage, setProfileMessage] = useState('')
   const [showAuthDialog, setShowAuthDialog] = useState(false)
   const [authUser, setAuthUser] = useState('Shawn Rain')
@@ -2163,11 +2166,27 @@ export function App() {
     }
     try {
       persistGeminiKey(geminiKey)
+      saveGeminiModel(geminiModel)
       setGeminiConfigured(true)
       setGeminiKey('')
-      setProfileMessage('Gemini API Key 已保存到当前浏览器')
+      setProfileMessage(`Gemini 已保存，当前模型：${geminiModel.trim() || defaultGeminiModel}`)
     } catch (settingsError) {
       setProfileMessage(settingsError instanceof Error ? settingsError.message : 'Gemini 配置保存失败')
+    }
+  }
+
+  const loadGeminiModels = async () => {
+    setGeminiModelsLoading(true)
+    try {
+      const models = await listGeminiModels(geminiKey)
+      setGeminiModels(models)
+      if (models.length && !models.some((model) => model.name === geminiModel)) setGeminiModel(models[0].name)
+      setProfileMessage(models.length ? `已读取 ${models.length} 个支持生成内容的模型` : '没有读到支持生成内容的模型，可手动填写模型名称')
+    } catch (modelError) {
+      setGeminiModels([])
+      setProfileMessage(modelError instanceof Error ? `${modelError.message}；可手动填写模型名称` : '模型列表读取失败；可手动填写模型名称')
+    } finally {
+      setGeminiModelsLoading(false)
     }
   }
 
@@ -2231,7 +2250,9 @@ export function App() {
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void loadIssue(true)}>{workerConnection.status === 'checking' ? '正在检测…' : '重新检测连接'}</button></div>
           <div className="settings-divider" />
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
-          <button type="button" disabled={!geminiKey.trim()} onClick={() => void saveGeminiKey()}>保存</button>
+          <label><span>Gemini 模型</span><input aria-label="Gemini 模型" list="gemini-model-list" autoComplete="off" value={geminiModel} placeholder={defaultGeminiModel} onChange={(event) => setGeminiModel(event.target.value)} /></label>
+          <datalist id="gemini-model-list">{geminiModels.map((model) => <option key={model.name} value={model.name}>{model.displayName}</option>)}</datalist>
+          <div className="settings-actions"><button type="button" disabled={geminiModelsLoading || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void loadGeminiModels()}>{geminiModelsLoading ? '正在读取模型…' : '读取可用模型'}</button><button type="button" disabled={!geminiKey.trim() || !geminiModel.trim()} onClick={() => void saveGeminiKey()}>保存配置</button></div>
           <p className="settings-hint">Key 仅保存在当前浏览器本地；请求也由当前设备直接发出，不经过服务器。</p>
           <button type="button" disabled={workerConnection.status !== 'connected'} onClick={() => { setProfileMessage('正在归纳本周编辑决策…'); void api.proposeProfile().then((proposal) => setProfileMessage(proposal.status === 'pending' ? '已生成待确认的偏好差异提案' : '本周暂无需更新的偏好')).catch((profileError) => setProfileMessage(profileError instanceof Error ? profileError.message : '提案生成失败')) }}>生成本周偏好提案</button>
           {profileMessage ? <p className="settings-message">{profileMessage}</p> : null}

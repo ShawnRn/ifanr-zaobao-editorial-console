@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey } from './gemini'
+import { generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey, saveGeminiModel } from './gemini'
 import type { Issue } from './types'
 
 const storage = new Map<string, string>()
@@ -47,5 +47,29 @@ describe('Gemini headline generation', () => {
     expect(fetchMock).toHaveBeenCalledOnce()
     expect(fetchMock.mock.calls[0][1]?.headers).toMatchObject({ 'x-goog-api-key': 'AIzaSyExampleKey123456789' })
     expect(String(fetchMock.mock.calls[0][0])).toContain('gemini-3.5-flash')
+  })
+
+  it('lists generate-capable models and uses a manually selected model', async () => {
+    saveGeminiKey('AIzaSyExampleKey123456789')
+    const fetchMock = vi.fn(async (url: string) => ({
+      ok: true,
+      json: async () => url.endsWith('/models')
+        ? { models: [
+          { name: 'models/gemini-2.5-flash', displayName: 'Gemini 2.5 Flash', supportedGenerationMethods: ['generateContent'] },
+          { name: 'models/embedding-001', supportedGenerationMethods: ['embedContent'] },
+        ] }
+        : { candidates: [{ content: { parts: [{ text: JSON.stringify({ headline_options: [
+          '消息一 / 消息二 / 消息三', '消息四 / 消息五 / 消息六', '消息七 / 消息八 / 消息九',
+        ] }) }] } }] },
+      status: 200,
+      statusText: 'OK',
+    }))
+    vi.stubGlobal('fetch', fetchMock)
+
+    await expect(listGeminiModels()).resolves.toEqual([{ name: 'gemini-2.5-flash', displayName: 'Gemini 2.5 Flash' }])
+    saveGeminiModel('models/gemini-2.5-flash')
+    expect(getGeminiModel()).toBe('gemini-2.5-flash')
+    await generateBrandHeadlines(issue, 'ifanr')
+    expect(String(fetchMock.mock.calls[1][0])).toContain('gemini-2.5-flash')
   })
 })

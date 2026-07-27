@@ -3,9 +3,16 @@ import ifanrPrompt from '../prompts/ifanr_headline.md?raw'
 import type { Issue } from './types'
 
 const keyName = 'editorial-gemini-api-key'
-const modelName = 'gemini-3.5-flash'
+const modelNameKey = 'editorial-gemini-model'
+export const defaultGeminiModel = 'gemini-3.5-flash'
+
+export type GeminiModel = {
+  name: string
+  displayName: string
+}
 
 export const hasGeminiKey = () => Boolean(localStorage.getItem(keyName)?.trim())
+export const getGeminiModel = () => localStorage.getItem(modelNameKey)?.trim() || defaultGeminiModel
 
 export const saveGeminiKey = (value: string) => {
   const key = value.trim()
@@ -15,9 +22,34 @@ export const saveGeminiKey = (value: string) => {
 
 export const clearGeminiKey = () => localStorage.removeItem(keyName)
 
+export const saveGeminiModel = (value: string) => {
+  const model = value.trim().replace(/^models\//, '')
+  if (!model) throw new Error('请输入 Gemini 模型名称')
+  if (!/^[a-zA-Z0-9._-]+$/.test(model)) throw new Error('Gemini 模型名称格式不正确')
+  localStorage.setItem(modelNameKey, model)
+}
+
+export async function listGeminiModels(apiKeyInput?: string): Promise<GeminiModel[]> {
+  const apiKey = apiKeyInput?.trim() || localStorage.getItem(keyName)?.trim()
+  if (!apiKey) throw new Error('请先填写 Gemini API Key')
+  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
+    headers: { 'x-goog-api-key': apiKey },
+  })
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
+    throw new Error(payload?.error?.message || `无法读取 Gemini 模型列表（${response.status}）`)
+  }
+  const payload = await response.json() as { models?: Array<{ name?: string; displayName?: string; supportedGenerationMethods?: string[] }> }
+  return (payload.models || [])
+    .filter((model) => model.name && model.supportedGenerationMethods?.includes('generateContent'))
+    .map((model) => ({ name: model.name!.replace(/^models\//, ''), displayName: model.displayName || model.name!.replace(/^models\//, '') }))
+    .sort((left, right) => left.name.localeCompare(right.name))
+}
+
 export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifanr') {
   const apiKey = localStorage.getItem(keyName)?.trim()
   if (!apiKey) throw new Error('请先在设置中填写 Gemini API Key')
+  const modelName = getGeminiModel()
   const selected = issue.stories
     .filter((story) => story.selected && story.status !== 'excluded')
     .map((story) => ({
@@ -32,7 +64,7 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), 90_000)
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modelName)}:generateContent`, {
       method: 'POST',
       signal: controller.signal,
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
