@@ -12471,6 +12471,16 @@
         "千问办公客户端上线月费 78 元起 / 腾讯 WorkBuddy 鸿蒙 PC 版支持碰一碰分享 / 杭州机器人学校开学迎来首批 30 台机器人"
       ],
       "selected_headline": "QQ 宠物 3D 版正式回归并接入大模型 / 微信输入法鸿蒙版 1.0.0 上线 / 小米汽车澎程将发布两款增程 SUV"
+    },
+    "ifanr": {
+      "headline_options": [
+        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
+        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享 / SHEIN 通过港交所聆讯，2026 年一季度收入增速降至 1.1%",
+        "腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享 / 千问办公上线，Windows、macOS Beta 版月费 78 元起"
+      ],
+      "selected_headline": "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
+      "cover_candidates": [],
+      "selected_cover": ""
     }
   },
   "diagnostics": {
@@ -12948,8 +12958,8 @@
       "selected_article_enrichment": 5649
     },
     "public_snapshot": {
-      "digest": "f4ad30586d9cbc31c3a8871a771d17e7118764e48e77c446ecab1717de70361b",
-      "generated_at": "2026-07-27T06:14:10+00:00",
+      "digest": "8e2580e9fe3de739262adbe413ef6a2da95aaaba63b02dc6f90e1546968c3795",
+      "generated_at": "2026-07-27T06:32:53+00:00",
       "image_count": 0,
       "mode": "explicit_review_operations"
     }
