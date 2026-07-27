@@ -44,7 +44,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, apiUrlProblem, describeWorkerError, getApiUrl, getTailscaleConsoleUrl, lanConsoleUrl, normalizeApiUrl, resolveApiAssetUrl, setApiUrl, setAuthToken } from './api'
+import { api, describeWorkerError, getApiUrl, resolveApiAssetUrl, setAuthToken } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
 import { generateQrSvgDataUri } from './totp'
@@ -1118,7 +1118,6 @@ export function App() {
   const [generatingBrand, setGeneratingBrand] = useState<'appso' | 'ifanr' | null>(null)
   const [showSettings, setShowSettings] = useState(false)
   const [settingsClosing, setSettingsClosing] = useState(false)
-  const [apiUrl, setApiUrlInput] = useState(getApiUrl())
   const [geminiKey, setGeminiKey] = useState('')
   const [geminiConfigured, setGeminiConfigured] = useState(hasGeminiKey())
   const [profileMessage, setProfileMessage] = useState('')
@@ -2172,38 +2171,6 @@ export function App() {
     }
   }
 
-  const connectWorker = async () => {
-    let normalized: string
-    try {
-      normalized = normalizeApiUrl(apiUrl)
-    } catch (connectError) {
-      setWorkerConnection({
-        status: 'invalid',
-        detail: connectError instanceof Error ? connectError.message : 'Worker URL 格式不正确',
-        url: apiUrl,
-      })
-      return
-    }
-    const problem = apiUrlProblem(normalized)
-    if (problem) {
-      setWorkerConnection({ status: 'invalid', detail: problem, url: normalized })
-      return
-    }
-    setApiUrl(normalized)
-    setApiUrlInput(normalized)
-    const pageUrl = new URL(window.location.href)
-    pageUrl.searchParams.delete('static')
-    window.history.replaceState({}, '', pageUrl)
-    await loadIssue(true)
-  }
-
-  const usePagesMode = async () => {
-    const pageUrl = new URL(window.location.href)
-    pageUrl.searchParams.set('static', '1')
-    window.history.replaceState({}, '', pageUrl)
-    await loadIssue(false)
-  }
-
   const reviewOperationCount = useMemo(() => baseIssue && issue ? buildReviewExport(baseIssue, issue, reviewSessionId).operations.length : 0, [baseIssue, issue, reviewSessionId])
 
   const connectionLabel = workerConnection.status === 'connected'
@@ -2261,10 +2228,7 @@ export function App() {
             <div>{workerConnection.status === 'checking' ? <LoaderCircle size={16} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={15} /> : <CloudOff size={16} />}</div>
             <span><strong>{connectionLabel}</strong><small>{workerConnection.detail}</small></span>
           </div>
-          <label><span>Worker URL</span><input aria-label="Worker URL" value={apiUrl} onChange={(event) => setApiUrlInput(event.target.value)} /></label>
-          <p className="settings-hint">Tailscale Serve 使用 HTTPS 根地址，不含 <code>:8765</code>。{apiUrl.includes('.ts.net') ? <><br /><a href={`${apiUrl.replace(/\/$/, '')}/health`} target="_blank" rel="noreferrer">打开 Worker 健康检查</a>；Chrome 询问时请允许「本地网络访问」。</> : null}</p>
-          {window.location.hostname.endsWith('github.io') ? <div className="same-origin-links"><a className="same-origin-console" href={lanConsoleUrl} target="_blank" rel="noreferrer">同 Wi-Fi 打开可编辑工作台</a>{getTailscaleConsoleUrl() ? <a className="same-origin-console" href={getTailscaleConsoleUrl()} target="_blank" rel="noreferrer">通过 Tailscale 直连工作台</a> : null}</div> : null}
-          <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void connectWorker()}>{workerConnection.status === 'checking' ? '正在检测…' : '测试连接'}</button><button type="button" onClick={() => void usePagesMode()}>仅使用 Pages 快照</button></div>
+          <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void loadIssue(true)}>{workerConnection.status === 'checking' ? '正在检测…' : '重新检测连接'}</button></div>
           <div className="settings-divider" />
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
           <button type="button" disabled={!geminiKey.trim()} onClick={() => void saveGeminiKey()}>保存</button>

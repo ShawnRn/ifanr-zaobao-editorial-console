@@ -203,33 +203,34 @@ a { color: inherit; }
 .export-button, .generate-button { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 15px; border: 0; border-radius: 8px; background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; }
 .export-button:hover, .generate-button:hover { background: #c91400; }
 /* Settings popover — unified with avatar menu visual language */
-.settings-popover { position: absolute; z-index: 80; top: 58px; right: 18px; width: 300px; padding: 6px; border: 1px solid #303530; border-radius: 10px; background: #171c18; color: #e5e9e6; box-shadow: 0 20px 50px #0009; transform-origin: top right; animation: popover-in .18s ease-out; }
+.settings-popover { position: absolute; z-index: 80; top: 58px; right: 18px; width: 300px; padding: 6px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); box-shadow: 0 16px 42px rgba(0, 0, 0, .22); transform-origin: top right; animation: popover-in .18s ease-out; }
 .settings-popover.closing { pointer-events: none; animation: popover-out .16s ease-in forwards; }
 .settings-popover-section { padding: 6px 4px 2px; }
-.settings-popover label { display: grid; gap: 6px; padding: 4px 6px; color: #7a8480; font-size: 11px; }
-.settings-popover input { width: 100%; height: 32px; padding: 0 9px; border: 1px solid #2e3430; border-radius: 6px; outline: 0; background: #0f1210; color: #e5e9e6; font-size: 12px; }
-.settings-popover input:focus { border-color: #4e5a52; }
-.settings-popover button { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 32px; margin-top: 6px; padding: 0 10px; border: 0; border-radius: 6px; background: #1f2622; color: #b8bcba; font-size: 12px; cursor: pointer; transition: background .1s ease, color .1s ease; }
-.settings-popover button:hover { background: #252c28; color: #edf1ee; }
+.settings-popover label { display: grid; gap: 6px; padding: 4px 6px; color: var(--quiet); font-size: 11px; }
+.settings-popover input { width: 100%; height: 32px; padding: 0 9px; border: 1px solid var(--line); border-radius: 6px; outline: 0; background: var(--control); color: var(--ink); font-size: 12px; }
+.settings-popover input:focus { border-color: var(--muted); }
+.settings-popover button { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 32px; margin-top: 6px; padding: 0 10px; border: 0; border-radius: 6px; background: var(--control); color: var(--muted); font-size: 12px; cursor: pointer; transition: background .1s ease, color .1s ease; }
+.settings-popover button:hover { background: var(--control-hover); color: var(--ink); }
 .settings-popover button:disabled { opacity: .4; cursor: not-allowed; }
 .settings-popover .settings-hint a { color: #82d7a6; text-underline-offset: 2px; }
 .settings-popover .same-origin-console { display: grid; place-items: center; min-height: 34px; margin-top: 6px; border: 1px solid #2e4d3a; border-radius: 6px; background: #152b20; color: #8dd4aa; font-size: 12px; font-weight: 650; text-decoration: none; }
 .settings-popover .same-origin-links { display: grid; gap: 6px; margin-top: 6px; }
 .settings-popover .same-origin-links .same-origin-console { margin-top: 0; }
-.connection-summary { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; margin-bottom: 6px; padding: 10px; border: 1px solid #252b27; border-radius: 7px; background: #0f1210; }
+.connection-summary { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; margin-bottom: 6px; padding: 10px; border: 1px solid var(--line-soft); border-radius: 7px; background: var(--panel); }
+.settings-popover .connection-summary.connection-connected { border-color: var(--line-soft); background: var(--panel); color: var(--ink); }
 .connection-summary > div { padding-top: 1px; }
 .connection-summary strong, .connection-summary small { display: block; }
-.connection-summary strong { color: #edf1ee; font-size: 11px; }
-.connection-summary small { margin-top: 4px; color: #5a6260; font-size: 10px; line-height: 1.45; overflow-wrap: anywhere; }
+.connection-summary strong { color: var(--ink); font-size: 11px; }
+.connection-summary small { margin-top: 4px; color: var(--quiet); font-size: 10px; line-height: 1.45; overflow-wrap: anywhere; }
 .connection-summary.connection-connected svg { color: #65b582; }
 .connection-summary.connection-failed svg, .connection-summary.connection-invalid svg { color: #db6b63; }
 .connection-summary.connection-pages svg { color: #6e9eb1; }
-.settings-hint { margin: 6px 6px 0; color: #5a6260; font-size: 9px; line-height: 1.5; }
-.settings-hint code { color: #8ea295; }
+.settings-hint { margin: 6px 6px 0; color: var(--quiet); font-size: 9px; line-height: 1.5; }
+.settings-hint code { color: var(--muted); }
 .settings-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .settings-actions button { min-width: 0; margin-top: 0; }
-.settings-message { margin: 8px 6px 0; color: #8ea295; font-size: 10px; line-height: 1.5; }
-.settings-divider { height: 1px; margin: 6px 0; background: #252b27; }
+.settings-message { margin: 8px 6px 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.settings-divider { height: 1px; margin: 6px 0; background: var(--line-soft); }
 
 /* Avatar button */
 .avatar-button { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; padding: 0; border: 1px solid var(--avatar-default-border); border-radius: 50%; background: var(--avatar-default-bg); cursor: pointer; overflow: hidden; box-sizing: border-box; transition: box-shadow .15s ease, opacity .15s ease, border-color .15s ease; }
@@ -531,6 +532,7 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
 
 /* 深色模式最终覆盖层：这些界面历史上直接写入了浅色值，必须在规则末尾统一收口。 */
 :root[data-theme="dark"] .connection-connected { border-color: #52745d; background: #27352b; color: #b8d7c0; }
+:root[data-theme="dark"] .settings-popover .connection-summary.connection-connected { border-color: var(--line-soft); background: var(--panel); color: var(--ink); }
 :root[data-theme="dark"] .connection-checking { border-color: #765a3e; background: #352b20; color: #e3bd86; }
 :root[data-theme="dark"] .connection-failed,
 :root[data-theme="dark"] .connection-invalid { border-color: #70453f; background: #372320; color: #f0aaa1; }

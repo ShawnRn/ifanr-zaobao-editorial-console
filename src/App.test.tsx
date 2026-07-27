@@ -192,7 +192,7 @@ describe('App', () => {
     await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })
 
     fireEvent.click(screen.getByRole('button', { name: '候选库' }))
-    expect(screen.getByText(/采用后会先以「待 AI 主编撰写」状态出现在「早报稿」/)).toBeInTheDocument()
+    expect(await screen.findByText(/采用后会先以「待 AI 主编撰写」状态出现在「早报稿」/)).toBeInTheDocument()
     expect(document.body.textContent).not.toMatch(/[“”]/)
   })
 
