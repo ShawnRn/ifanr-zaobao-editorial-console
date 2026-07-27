@@ -5,11 +5,11 @@
   "state": "editing",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 71,
-  "selected_count": 28,
-  "review_count": 23,
-  "ready_count": 5,
-  "updated_at": "2026-07-27T08:33:32+00:00",
+  "revision": 119,
+  "selected_count": 24,
+  "review_count": 20,
+  "ready_count": 4,
+  "updated_at": "2026-07-27T08:59:06+00:00",
   "stories": [
     {
       "id": "0d377321-582d-52a0-9305-3adc7592c5f1",
@@ -33,12 +33,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/67e9d17812a3634253c4.jpg",
+      "changed_since_review": false,
+      "image_url": "data/images/67e9d17812a3634253c4.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/825.htm"
         ],
@@ -104,7 +110,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:39:39+00:00"
     },
     {
       "id": "9aef6658-c7d9-5095-8e87-3c225f0753f7",
@@ -128,12 +134,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/3dc151fa40362be454fc.png",
+      "changed_since_review": false,
+      "image_url": "data/images/3dc151fa40362be454fc.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/828.htm"
         ],
@@ -199,81 +211,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "9193db2f-e5a2-5008-9ecf-1481b2cff341",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "35d3d06f948a4a54ac15c3d981cc27739cab054a",
-      "title": "Visa 与连连数科完成大中华区首笔 B2B 智能体支付",
-      "body": "据财新报道，Visa 与连连数科 7 月 24 日完成首笔由 AI 智能体发起的 B2B 支付交易。交易中，智能体负责理解企业采购需求、筛选商品并执行支付流程，连连数科提供支付与商户服务，Visa 提供支付网络支持。\n\n双方将这笔交易作为智能体支付体系进入真实商业场景的验证，后续计划继续探索企业采购、跨境贸易等场景。报道没有把它描述为面向普通消费者的支付产品。\n\n这笔交易的使用对象是企业间的商业支付，重点是把商品选择、订单处理和付款动作连接在同一套流程中；支付网络与商户服务仍由 Visa 和连连数科分别承担。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 5,
-      "score": 0.0,
-      "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
-      "source_name": "finance.caixin.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 21:57",
-      "published_at": "2026-07-26 21:57",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/b76fc76e803730d62603.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://finance.caixin.com/2026-07-26/102468253.html"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://finance.caixin.com/2026-07-26/102468253.html 📮Folo · 2026 年 7 月 27 日 09:57",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2392,
-          "url": "https://finance.caixin.com/2026-07-26/102468253.html",
-          "title": "",
-          "publisher": "finance.caixin.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3358,
-          "text": "据财新报道，Visa 与连连数科 7 月 24 日完成首笔由 AI 智能体发起的 B2B 支付交易。交易中，智能体负责理解企业采购需求、筛选商品并执行支付流程，连连数科提供支付与商户服务，Visa 提供支付网络支持。",
-          "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3359,
-          "text": "双方将这笔交易作为智能体支付体系进入真实商业场景的验证，后续计划继续探索企业采购、跨境贸易等场景。报道没有把它描述为面向普通消费者的支付产品。",
-          "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3360,
-          "text": "这笔交易的使用对象是企业间的商业支付，重点是把商品选择、订单处理和付款动作连接在同一套流程中；支付网络与商户服务仍由 Visa 和连连数科分别承担。",
-          "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:39:39+00:00"
     },
     {
       "id": "45b56358-e45f-57ca-9e9a-daa7b083dfc4",
@@ -303,8 +241,12 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
           "body",
+          "image_path",
+          "image_token",
+          "image_url",
           "title"
         ],
         "all_urls": [
@@ -397,7 +339,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:29:34+00:00"
+      "updated_at": "2026-07-27T08:39:40+00:00"
     },
     {
       "id": "a281f9e7-aa28-59d2-a1fe-a9be286791ba",
@@ -427,7 +369,11 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
           "title"
         ],
         "all_urls": [
@@ -481,88 +427,14 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:25:50+00:00"
-    },
-    {
-      "id": "d14a580c-df1e-5b1a-b284-bcd1ffb3cf2f",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "1b3cc1033c375aeb5372626c1e150b8ab6677dac",
-      "title": "软银为投资 OpenAI 股权的 400 亿美元贷款新增 21 家放款机构",
-      "body": "据报道，软银集团为投资 OpenAI 安排的 400 亿美元过渡贷款已进入大规模分销阶段，新增 21 家金融机构参与放贷，合计分得约 70 亿美元额度。阿布扎比第一银行、新加坡政府投资公司（GIC）和渣打银行各自承贷近 10 亿美元，其余额度由欧洲、日本及中国台湾地区的多家银行分持。\n\n这笔贷款用于支持软银对 OpenAI 的股权投资，消息人士因事项未公开而匿名透露上述安排。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 9,
-      "score": 0.0,
-      "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
-      "source_name": "36kr.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 13:02",
-      "published_at": "2026-07-27 13:02",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://36kr.com/newsflashes/3913423032620420?f=rss"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://36kr.com/newsflashes/3913423032620420?f=rss 📮Folo · 2026 年 7 月 27 日 13:02",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2615,
-          "url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
-          "title": "",
-          "publisher": "36kr.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3496,
-          "text": "知情人士透露，软银集团为投资美国科技巨头OpenAI安排的400亿美元过渡贷款，现已进入大规模分销阶段，新增21家金融机构参与放贷。不愿具名、因事项未公开而匿名受访的知情人士表示，这批新增机构是原有放贷阵容之外的新增投资方，合计分得约70亿美元贷款额度。其中阿布扎比第一银行、新加坡政府投资公司（GIC）、渣打银行各自承贷近10亿美元，剩余额度由多家欧洲、日本及中国台湾地区银行分持。（新浪财经）",
-          "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3650,
-          "text": "据报道，软银集团为投资 OpenAI 安排的 400 亿美元过渡贷款已进入大规模分销阶段，新增 21 家金融机构参与放贷，合计分得约 70 亿美元额度。阿布扎比第一银行、新加坡政府投资公司（GIC）和渣打银行各自承贷近 10 亿美元，其余额度由欧洲、日本及中国台湾地区的多家银行分持。",
-          "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3651,
-          "text": "这笔贷款用于支持软银对 OpenAI 的股权投资，消息人士因事项未公开而匿名透露上述安排。",
-          "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:39:42+00:00"
     },
     {
       "id": "fab3c032-813d-5298-8f2f-f886bd86e039",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "bf323dd754a22a41ece9c7cdc2f5aff5558db588",
-      "title": "💡 奥特曼：AI 未必会带来更短工时，竞争会填满空出来的时间",
-      "body": "OpenAI CEO Sam Altman 在接受 Business Insider 采访时谈到，AI 带来的生产率提升并没有自动变成更短的工作周。他把原因归于人的竞争性：当技术释放出时间，个人和企业往往会把它重新投入竞争，而不是把它固定为休息时间。\n\nAltman 的说法把「技术进步」与「社会如何分配新增效率」分开：工具可以缩短完成任务所需时间，但工作制度是否改变，还取决于企业和个人的选择。采访讨论的是他对 AI 与工作时间的判断，并非 OpenAI 的工时制度安排。\n\n这一判断也没有把 AI 视为单独决定就业或工时的变量。他谈到的核心是，生产率提高之后，人们仍会为更多产出、职位和机会展开竞争，因此不会自然进入短工时状态。\n\nAltman 的回答没有把「四天工作周」当作技术部署后的必然结果，而是把它放在人的行为和组织激励之中讨论。AI 负责改变完成工作的效率，竞争仍会决定这些效率最终被用来增加产出，还是转化为更少的工作时间。\n\n他由此把对 AI 的判断从单纯的工具能力，延伸到技术进入劳动力市场后的使用方式：同一套自动化能力可以减少重复劳动，也可能提高对工作速度和产出的要求。",
+      "title": "💡 OpenAI CEO 谈 AI 生产力：奇点已至，但人类会比以前更忙碌",
+      "body": "据《商业内幕》报道，OpenAI CEO Sam Altman 在上周六发布的「Relentless」播客采访中表示，AI 并不会像许多人预期的那样开启「每周 4 小时工作制」的黄金时代。\n\n他认为，尽管技术长期以来一直承诺减少人类的工作时间并增加休闲，但由于人类天生具备竞争性，这种大规模的社会性变革很难实现。\n\nSam Altman 指出，随着 AI 驱动生产力提升，人们对自己的期望也会随之水涨船高。他表示，人类总是在追求更多，倾向于创造新的事物并进行相互比较，这种「相对游戏」驱动下的竞争是经济发展的动力，且不会停止。\n\n他预测，在「后超级人工智能」时代，人们反而会比想象中更加忙碌。\n\n值得注意的是，Sam Altman 在采访中提到 AI 已经进入了「奇点」阶段，即人工智能超越人类智能并可能开始脱离控制的转折点。\n\n针对后疫情时代兴起的「每周 4 天工作制」讨论，报道提到，虽然部分小企业通过缩短工时提升了员工士气和生产力，但随着各大企业 CEO 强制要求员工重返办公室，甚至推行「996」工作文化，缩短工作周的愿景正变得日益遥远。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
@@ -580,12 +452,17 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": false,
-      "image_url": "data/images/0ca2218b5f0506b8cca0.jpg",
+      "image_url": "data/images/0ca2218b5f0506b8cca0.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
+          "body",
+          "image_path",
+          "image_token",
+          "image_url",
           "title"
         ],
         "all_urls": [
@@ -632,7 +509,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:26:46+00:00"
+      "updated_at": "2026-07-27T08:50:29+00:00"
     },
     {
       "id": "b4d4743f-c530-5510-a636-4f88f2fc9379",
@@ -774,9 +651,13 @@
       "image_token": "",
       "editorial_reason": "已进入当前 Bot 正式稿",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
           "body",
           "category",
+          "image_path",
+          "image_token",
+          "image_url",
           "position"
         ],
         "all_urls": [
@@ -840,7 +721,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:31:52+00:00"
+      "updated_at": "2026-07-27T08:39:46+00:00"
     },
     {
       "id": "73ccacd2-36c0-5cd0-baa3-71f31b7d12fb",
@@ -1003,12 +884,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/8af7d32102c39f618955.jpg",
+      "changed_since_review": false,
+      "image_url": "data/images/8af7d32102c39f618955.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/823.htm"
         ],
@@ -1046,7 +933,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:39:47+00:00"
     },
     {
       "id": "8f25f3fa-7458-54b1-b25d-b0f0b598f65c",
@@ -1161,12 +1048,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/59fe8046e169425eef71.jpg",
+      "changed_since_review": false,
+      "image_url": "data/images/59fe8046e169425eef71.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/814.htm",
           "https://www.ithome.com/0/981/806.htm",
@@ -1228,7 +1121,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:39:48+00:00"
     },
     {
       "id": "12952cd8-64f8-5709-aef5-323cad0b9e6d",
@@ -1319,12 +1212,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/2361bdd4ec3417db75c8.jpg",
+      "changed_since_review": false,
+      "image_url": "data/images/2361bdd4ec3417db75c8.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/838.htm"
         ],
@@ -1362,13 +1261,13 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:54:39+00:00"
     },
     {
       "id": "a806c4c3-3b65-5584-a308-9edc3766176d",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "c729ad72f47874c8a49c29f10a5e8a5caa6e34e0",
-      "title": "腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型",
+      "title": "腾讯 QQ 宠物官宣回归，升级为 3D 形象并接入大模型",
       "body": "腾讯 QQ 7 月 27 日宣布，经典产品「QQ 宠物」正式回归。新版保留喂食、洗澡、打工、好友串门等玩法，宠物升级为 3D 形象，用户可以选择不同性格设定；产品还接入大模型，让宠物能够主动回应，并每天生成「宠物日记」。\n\nQQ 宠物目前可在手机 QQ 中领取，宠物形象也会出现在聊天列表、聊天框等 QQ 场景中。",
       "category": "新产品",
       "status": "needs_review",
@@ -1386,12 +1285,19 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": true,
+      "changed_since_review": false,
       "image_url": "data/images/7a4f2cd0f958435cf193.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "已进入当前 Bot 正式稿",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
+          "title"
+        ],
         "all_urls": [
           "https://mp.weixin.qq.com/s/QTKfbW7s4wX9K8L7Sb4kOA",
           "https://mp.weixin.qq.com/s/etg-9nlt8e69ngvzewBd8Q"
@@ -1441,83 +1347,13 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
-    },
-    {
-      "id": "46728f2d-a364-556a-a5cd-ebf62e5a4f94",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "b28f9e294856e4e604a2d2c10b918f50a3bf8734",
-      "title": "微信输入法鸿蒙版 1.0.0 上线，支持文字整理与跨设备复制图片",
-      "body": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。\n\n输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 2,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/789.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 20:01",
-      "published_at": "2026-07-26 20:01",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/18f2b60bf4a24e73795d.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "_manual_fields": [
-          "body"
-        ],
-        "all_urls": [
-          "https://www.ithome.com/0/981/789.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/789.htm 🛰RSS · 2026 年 7 月 26 日 20:01",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2455,
-          "url": "https://www.ithome.com/0/981/789.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3373,
-          "text": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。",
-          "source_url": "https://www.ithome.com/0/981/789.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3374,
-          "text": "输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。官方发布版本号为 1.0.0。",
-          "source_url": "https://www.ithome.com/0/981/789.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:54:49+00:00"
     },
     {
       "id": "0d3f1bef-62ca-5cec-b8a6-16b6187788cf",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "7f841bb19fda6d3cdc4468d345932c7126a25e03",
-      "title": "宝马摩托发布三款新品，活动礼遇价 19.99 万元起",
+      "title": "19.99 万元起，宝马摩托发布三款新品",
       "body": "宝马摩托车发布 BMW R 12 S、BMW R 1300 GS 探险版自动挡和 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元和 33.79 万元。\n\n其中 R 1300 GS 探险版提供自动挡配置，R 1300 RT Option 719 版属于 R 1300 RT 的个性化版本，三款车型覆盖复古街车、探险旅行和豪华旅行等不同用途。",
       "category": "新产品",
       "status": "needs_review",
@@ -1535,12 +1371,19 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/ce878b3316d294a23ce7.png",
+      "changed_since_review": false,
+      "image_url": "data/images/ce878b3316d294a23ce7.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
+          "title"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/799.htm"
         ],
@@ -1585,89 +1428,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
-    },
-    {
-      "id": "51f1b004-70af-53bf-a835-a9423d290c4c",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "318c18bf1fb3aa3220f702dc5a279e48b9ab9a37",
-      "title": "AppleCare One 将扩展至英国、法国、德国和澳大利亚",
-      "body": "据 Apple Insider 报道，AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。\n\n英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 4,
-      "score": 0.0,
-      "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-      "source_name": "appleinsider.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/d81ef0b917d03264e922.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "已进入当前 Bot 正式稿",
-      "metadata": {
-        "_manual_fields": [
-          "body"
-        ],
-        "all_urls": [
-          "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 来源：https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries；https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/ 🧭飞书群 · 2026 年 7 月 27 日 14:31",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2950,
-          "url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "title": "",
-          "publisher": "appleinsider.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2951,
-          "url": "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/",
-          "title": "",
-          "publisher": "9to5mac.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3818,
-          "text": "AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。",
-          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3819,
-          "text": "英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
-          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:56:47+00:00"
     },
     {
       "id": "e2730a3b-2d3f-5ceb-b0d5-fdb39b5f3184",
@@ -1692,11 +1453,17 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "",
+      "image_url": "data/images/f33ffef4f804c6bf3fb3.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "已进入当前 Bot 正式稿",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [],
         "origin": "bot_draft",
         "runtime_matches": 0,
@@ -1732,7 +1499,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:59:06+00:00"
     },
     {
       "id": "bb9eec0c-dca6-5810-bb8a-4c358b028b58",
@@ -1756,12 +1523,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
+      "changed_since_review": false,
       "image_url": "data/images/fc84d77ef91f6f9901fc.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://mp.weixin.qq.com/s/2fk6KQr4Nw-TZtOS4vrJeg",
           "https://www.ithome.com/0/981/985.htm"
@@ -1865,7 +1638,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:39:58+00:00"
     },
     {
       "id": "21e9528a-bdfd-5498-95ac-b87ca87b56ed",
@@ -1890,12 +1663,16 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": false,
-      "image_url": "data/images/5479c8775ef7a9abf043.png",
+      "image_url": "data/images/5479c8775ef7a9abf043.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
           "title"
         ],
         "all_urls": [
@@ -1935,7 +1712,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:39:59+00:00"
     },
     {
       "id": "8fcac1e4-8541-5846-b33b-6865fe45b98b",
@@ -1965,7 +1742,11 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
           "title"
         ],
         "all_urls": [
@@ -2026,7 +1807,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:39:59+00:00"
     },
     {
       "id": "e3333fdc-d1cd-5bea-8d3b-189991c4eb35",
@@ -2056,8 +1837,12 @@
       "image_token": "",
       "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
-          "body"
+          "body",
+          "image_path",
+          "image_token",
+          "image_url"
         ],
         "all_urls": [
           "https://mp.weixin.qq.com/s/PQX6REhc3E7nhgI7tVd6dQ?isappinstalled=0&scene=1&clicktime=1785126346&enterid=1785126346"
@@ -2096,7 +1881,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:33:32+00:00"
+      "updated_at": "2026-07-27T08:40:02+00:00"
     },
     {
       "id": "b59f3dca-cab6-5d0d-a00d-d3c82295a615",
@@ -2126,6 +1911,12 @@
       "image_token": "",
       "editorial_reason": "已进入当前 Bot 正式稿",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://mp.weixin.qq.com/s/Lvq6w9gXfxi1Dzb04DmULA",
           "https://mp.weixin.qq.com/s/E6F094vTxC6STfbIMOOGgg",
@@ -2187,7 +1978,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:16+00:00"
+      "updated_at": "2026-07-27T08:40:03+00:00"
     },
     {
       "id": "3d95c5dd-800f-589e-a1ed-064367bcce7f",
@@ -2211,12 +2002,18 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/ba52ee652c2448e29eb2.jpg",
+      "changed_since_review": false,
+      "image_url": "data/images/ba52ee652c2448e29eb2.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/812.htm"
         ],
@@ -2268,7 +2065,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:40:03+00:00"
     },
     {
       "id": "04d0eea3-98db-5a8d-93c6-f2f39357b108",
@@ -2298,8 +2095,12 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_image_manual_state": "set",
         "_manual_fields": [
           "category",
+          "image_path",
+          "image_token",
+          "image_url",
           "position"
         ],
         "all_urls": [
@@ -2365,7 +2166,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:15+00:00"
+      "updated_at": "2026-07-27T08:40:04+00:00"
     },
     {
       "id": "4fcfa1a2-656f-5c78-962a-0b96cc494a3f",
@@ -2656,6 +2457,92 @@
       "updated_at": "2026-07-27T08:19:16+00:00"
     },
     {
+      "id": "9193db2f-e5a2-5008-9ecf-1481b2cff341",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "35d3d06f948a4a54ac15c3d981cc27739cab054a",
+      "title": "Visa 与连连数科完成大中华区首笔 B2B 智能体支付",
+      "body": "据财新报道，Visa 与连连数科 7 月 24 日完成首笔由 AI 智能体发起的 B2B 支付交易。交易中，智能体负责理解企业采购需求、筛选商品并执行支付流程，连连数科提供支付与商户服务，Visa 提供支付网络支持。\n\n双方将这笔交易作为智能体支付体系进入真实商业场景的验证，后续计划继续探索企业采购、跨境贸易等场景。报道没有把它描述为面向普通消费者的支付产品。\n\n这笔交易的使用对象是企业间的商业支付，重点是把商品选择、订单处理和付款动作连接在同一套流程中；支付网络与商户服务仍由 Visa 和连连数科分别承担。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 5,
+      "score": 0.0,
+      "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
+      "source_name": "finance.caixin.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 21:57",
+      "published_at": "2026-07-26 21:57",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/b76fc76e803730d62603.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:46:29.715Z",
+        "_trash_previous_position": 5,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://finance.caixin.com/2026-07-26/102468253.html"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://finance.caixin.com/2026-07-26/102468253.html 📮Folo · 2026 年 7 月 27 日 09:57",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2392,
+          "url": "https://finance.caixin.com/2026-07-26/102468253.html",
+          "title": "",
+          "publisher": "finance.caixin.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3358,
+          "text": "据财新报道，Visa 与连连数科 7 月 24 日完成首笔由 AI 智能体发起的 B2B 支付交易。交易中，智能体负责理解企业采购需求、筛选商品并执行支付流程，连连数科提供支付与商户服务，Visa 提供支付网络支持。",
+          "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3359,
+          "text": "双方将这笔交易作为智能体支付体系进入真实商业场景的验证，后续计划继续探索企业采购、跨境贸易等场景。报道没有把它描述为面向普通消费者的支付产品。",
+          "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3360,
+          "text": "这笔交易的使用对象是企业间的商业支付，重点是把商品选择、订单处理和付款动作连接在同一套流程中；支付网络与商户服务仍由 Visa 和连连数科分别承担。",
+          "source_url": "https://finance.caixin.com/2026-07-26/102468253.html",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:46:29+00:00"
+    },
+    {
       "id": "beaac9f2-1a26-5cfb-a046-9aaac50c6078",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "7ab0583ded517477968b7e49efca03f62dbebf01",
@@ -2894,6 +2781,92 @@
         }
       ],
       "updated_at": "2026-07-27T08:26:16+00:00"
+    },
+    {
+      "id": "d14a580c-df1e-5b1a-b284-bcd1ffb3cf2f",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "1b3cc1033c375aeb5372626c1e150b8ab6677dac",
+      "title": "软银为投资 OpenAI 股权的 400 亿美元贷款新增 21 家放款机构",
+      "body": "据报道，软银集团为投资 OpenAI 安排的 400 亿美元过渡贷款已进入大规模分销阶段，新增 21 家金融机构参与放贷，合计分得约 70 亿美元额度。阿布扎比第一银行、新加坡政府投资公司（GIC）和渣打银行各自承贷近 10 亿美元，其余额度由欧洲、日本及中国台湾地区的多家银行分持。\n\n这笔贷款用于支持软银对 OpenAI 的股权投资，消息人士因事项未公开而匿名透露上述安排。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 9,
+      "score": 0.0,
+      "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
+      "source_name": "36kr.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 13:02",
+      "published_at": "2026-07-27 13:02",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/38c3923ee883c11e9167.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "image_path",
+          "image_token",
+          "image_url",
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:47:44.265Z",
+        "_trash_previous_position": 9,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://36kr.com/newsflashes/3913423032620420?f=rss"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://36kr.com/newsflashes/3913423032620420?f=rss 📮Folo · 2026 年 7 月 27 日 13:02",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2615,
+          "url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
+          "title": "",
+          "publisher": "36kr.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3496,
+          "text": "知情人士透露，软银集团为投资美国科技巨头OpenAI安排的400亿美元过渡贷款，现已进入大规模分销阶段，新增21家金融机构参与放贷。不愿具名、因事项未公开而匿名受访的知情人士表示，这批新增机构是原有放贷阵容之外的新增投资方，合计分得约70亿美元贷款额度。其中阿布扎比第一银行、新加坡政府投资公司（GIC）、渣打银行各自承贷近10亿美元，剩余额度由多家欧洲、日本及中国台湾地区银行分持。（新浪财经）",
+          "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3650,
+          "text": "据报道，软银集团为投资 OpenAI 安排的 400 亿美元过渡贷款已进入大规模分销阶段，新增 21 家金融机构参与放贷，合计分得约 70 亿美元额度。阿布扎比第一银行、新加坡政府投资公司（GIC）和渣打银行各自承贷近 10 亿美元，其余额度由欧洲、日本及中国台湾地区的多家银行分持。",
+          "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3651,
+          "text": "这笔贷款用于支持软银对 OpenAI 的股权投资，消息人士因事项未公开而匿名透露上述安排。",
+          "source_url": "https://36kr.com/newsflashes/3913423032620420?f=rss",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:47:44+00:00"
     },
     {
       "id": "9910207b-c1df-5b9d-8ece-910708a8ce09",
@@ -13401,6 +13374,86 @@
       "updated_at": "2026-07-27T08:33:25+00:00"
     },
     {
+      "id": "46728f2d-a364-556a-a5cd-ebf62e5a4f94",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "b28f9e294856e4e604a2d2c10b918f50a3bf8734",
+      "title": "微信输入法鸿蒙版 1.0.0 上线，支持文字整理与跨设备复制图片",
+      "body": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。\n\n输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 2,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/789.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 20:01",
+      "published_at": "2026-07-26 20:01",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/18f2b60bf4a24e73795d.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "body",
+          "image_path",
+          "image_token",
+          "image_url",
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:56:23.031Z",
+        "_trash_previous_position": 2,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/789.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/789.htm 🛰RSS · 2026 年 7 月 26 日 20:01",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2455,
+          "url": "https://www.ithome.com/0/981/789.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3373,
+          "text": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。",
+          "source_url": "https://www.ithome.com/0/981/789.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3374,
+          "text": "输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。官方发布版本号为 1.0.0。",
+          "source_url": "https://www.ithome.com/0/981/789.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:56:23+00:00"
+    },
+    {
       "id": "69d69070-8153-579a-b354-612e42203109",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "e6b7366c5d8e4761d8e4daa584e4b687ba50273b",
@@ -13488,6 +13541,98 @@
         }
       ],
       "updated_at": "2026-07-27T08:30:18+00:00"
+    },
+    {
+      "id": "51f1b004-70af-53bf-a835-a9423d290c4c",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "318c18bf1fb3aa3220f702dc5a279e48b9ab9a37",
+      "title": "AppleCare One 将扩展至英国、法国、德国和澳大利亚",
+      "body": "据 Apple Insider 报道，AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。\n\n英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 4,
+      "score": 0.0,
+      "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+      "source_name": "appleinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/d81ef0b917d03264e922.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "已进入当前 Bot 正式稿",
+      "metadata": {
+        "_image_manual_state": "set",
+        "_manual_fields": [
+          "body",
+          "image_path",
+          "image_token",
+          "image_url",
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:56:54.281Z",
+        "_trash_previous_position": 4,
+        "_trash_previous_status": "ready",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 来源：https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries；https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/ 🧭飞书群 · 2026 年 7 月 27 日 14:31",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2950,
+          "url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "title": "",
+          "publisher": "appleinsider.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2951,
+          "url": "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/",
+          "title": "",
+          "publisher": "9to5mac.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3818,
+          "text": "AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。",
+          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3819,
+          "text": "英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
+          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:56:54+00:00"
     },
     {
       "id": "2f143192-104a-5a9c-875d-4c97ddad67d5",
@@ -22710,11 +22855,11 @@
       "selected_article_enrichment": 3852
     },
     "public_snapshot": {
-      "digest": "b3e4f1a778bea6b50575fdfff5f5c42fdfc166db33d4cc7d24e3679ccfe40f96",
-      "generated_at": "2026-07-27T08:38:30+00:00",
-      "image_count": 0,
-      "selected_count": 28,
-      "selected_image_count": 22,
+      "digest": "1453fd574539757f28244d0204ff5dcc23c630eb723f08c808437a4ab60d3ba4",
+      "generated_at": "2026-07-27T09:00:19+00:00",
+      "image_count": 23,
+      "selected_count": 24,
+      "selected_image_count": 20,
       "mode": "explicit_review_operations"
     }
   }
