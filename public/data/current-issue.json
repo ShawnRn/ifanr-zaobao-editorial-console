@@ -5,181 +5,12 @@
   "state": "editing",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 10,
-  "selected_count": 43,
-  "review_count": 38,
+  "revision": 15,
+  "selected_count": 40,
+  "review_count": 35,
   "ready_count": 5,
-  "updated_at": "2026-07-27T08:07:38+00:00",
+  "updated_at": "2026-07-27T08:09:56+00:00",
   "stories": [
-    {
-      "id": "4fcfa1a2-656f-5c78-962a-0b96cc494a3f",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "ce96d96f43f960aa129fe99b1965fcd7804d84db",
-      "title": "哈啰助力车故障致用户十级伤残，法院调解赔偿 21.5 万元",
-      "body": "厦门一名博士生 2025 年 6 月骑行哈啰校园助力车时，车辆突然断电、后轮锁死并侧翻，造成右胫骨平台外侧撕脱骨折、前交叉韧带断裂和半月板撕裂。厦门市交警部门随后出具事故证明，哈啰方面的故障排查报告确认涉事车辆存在断电故障，并与摔倒受伤有关联。\n\n厦门市翔安区人民法院民事调解文书显示，双方于 2026 年 7 月 17 日达成协议，上海哈啰普惠科技有限公司在 7 月 31 日前一次性支付 21.5 万元。报道还称，事发后交警曾尝试调取平台后台数据但未成功，最终通过校园监控还原事故经过；截至发稿，哈啰方面未回应。\n\n调解协议还约定，当事人放弃对上海哈啰普惠科技有限公司的其余诉讼请求，双方确认本案不再有其他争议。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0.0,
-      "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:00",
-      "published_at": "2026-07-27 09:00",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
-      "metadata": {
-        "all_urls": [
-          "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw 🧭飞书群 · 2026 年 7 月 27 日 09:00",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2524,
-          "url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3343,
-          "text": "厦门一名博士生 2025 年 6 月骑行哈啰校园助力车时，车辆突然断电、后轮锁死并侧翻，造成右胫骨平台外侧撕脱骨折、前交叉韧带断裂和半月板撕裂。厦门市交警部门随后出具事故证明，哈啰方面的故障排查报告确认涉事车辆存在断电故障，并与摔倒受伤有关联。",
-          "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3344,
-          "text": "厦门市翔安区人民法院民事调解文书显示，双方于 2026 年 7 月 17 日达成协议，上海哈啰普惠科技有限公司在 7 月 31 日前一次性支付 21.5 万元。报道还称，事发后交警曾尝试调取平台后台数据但未成功，最终通过校园监控还原事故经过；截至发稿，哈啰方面未回应。",
-          "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3345,
-          "text": "调解协议还约定，当事人放弃对上海哈啰普惠科技有限公司的其余诉讼请求，双方确认本案不再有其他争议。",
-          "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:07:38+00:00"
-    },
-    {
-      "id": "1a00fee6-4bad-5981-a2a2-9cddcd346164",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "45d392fd6b1750cd5f48f56809a319cc9239a424",
-      "title": "英伟达将 Vera 部署到下一代芯片设计流程，部分 EDA 应用提速 1.5 倍",
-      "body": "英伟达在官方博客中介绍，公司正与楷登电子、新思科技合作，将 NVIDIA Vera CPU 部署到下一代 CPU、GPU 开发所用的电子设计自动化流程中。逻辑仿真、形式验证和部分数字实现仍高度依赖 CPU 的单核性能、内存系统和整体吞吐量。\n\n英伟达初步测试显示，Cadence Jasper 形式验证平台和 Synopsys VCS 功能验证解决方案在部分工作负载上的性能最高提升 1.5 倍。Vera 包含 88 个定制 Olympus CPU 核心、LPDDR5X 内存子系统和第二代 NVIDIA 可扩展相干结构；下一代 Rosa 处理器计划采用 NVIDIA Rigel 核心。\n\n这两类工具分别用于设计早期的形式验证和制造前的功能验证。英伟达称，测试期间还与两家公司进行了应用性能分析、软件优化和系统级调优，Vera 已被部署到其未来处理器开发的 EDA 工作流中。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/830.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 08:53",
-      "published_at": "2026-07-27 08:53",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/830.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/830.htm 🛰RSS · 2026 年 7 月 27 日 08:53",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2382,
-          "url": "https://www.ithome.com/0/981/830.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3305,
-          "text": "IT之家 7 月 27 日消息，英伟达今日在官方博客发文，随着工程团队致力于开发越来越复杂的 CPU、GPU 和人工智能系统，现代芯片设计的复杂性也在不断增加。",
-          "source_url": "https://www.ithome.com/0/981/830.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3306,
-          "text": "为应对这一挑战，英伟达正与楷登电子和新思科技合作， 优化 NVIDIA Vera CPU 的关键电子设计自动化（EDA）应用 。",
-          "source_url": "https://www.ithome.com/0/981/830.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3307,
-          "text": "英伟达现正部署 Vera 应用于其下一代 CPU 和 GPU 开发的 EDA 工作流程，展示了高性能 CPU 架构如何帮助加速行业中一些最具挑战性的工程工作负载。",
-          "source_url": "https://www.ithome.com/0/981/830.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3417,
-          "text": "英伟达在官方博客中介绍，公司正与楷登电子、新思科技合作，将 NVIDIA Vera CPU 部署到下一代 CPU、GPU 开发所用的电子设计自动化流程中。逻辑仿真、形式验证和部分数字实现仍高度依赖 CPU 的单核性能、内存系统和整体吞吐量。",
-          "source_url": "https://www.ithome.com/0/981/830.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3418,
-          "text": "英伟达初步测试显示，Cadence Jasper 形式验证平台和 Synopsys VCS 功能验证解决方案在部分工作负载上的性能最高提升 1.5 倍。Vera 包含 88 个定制 Olympus CPU 核心、LPDDR5X 内存子系统和第二代 NVIDIA 可扩展相干结构；下一代 Rosa 处理器计划采用 NVIDIA Rigel 核心。",
-          "source_url": "https://www.ithome.com/0/981/830.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3419,
-          "text": "这两类工具分别用于设计早期的形式验证和制造前的功能验证。英伟达称，测试期间还与两家公司进行了应用性能分析、软件优化和系统级调优，Vera 已被部署到其未来处理器开发的 EDA 工作流中。",
-          "source_url": "https://www.ithome.com/0/981/830.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:07:38+00:00"
-    },
     {
       "id": "0d377321-582d-52a0-9305-3adc7592c5f1",
       "issue_id": "ifanr-daily-20260728",
@@ -364,101 +195,6 @@
           "id": 3425,
           "text": "SK 电信将以全资子公司方式运营 SK Hyper，并通过股权投资持续注资。公司把数据中心建设、变电站运营和商业化列为同一业务范围，同时负责基础设施运营和相关服务销售。",
           "source_url": "https://www.ithome.com/0/981/828.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:07:38+00:00"
-    },
-    {
-      "id": "f065c7e8-75ac-56f1-89ce-cc1d1d103978",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "ff7f50b6e057fd990045ff34ccd3d3b8820e6b9a",
-      "title": "「数字空间一号」启动试验星工程，验证卫星自主感知与决策",
-      "body": "「数字空间战略」发展大会暨「数字空间一号」试验星启航大会 7 月 26 日在北京举行。中国科学院院士魏奉思提出，面对轨道资源拥挤和大规模星座协同运行，空间基础设施需要从地面指挥、星上执行，逐步走向风险场景下的有限自主和星地协同。\n\n数字太空提出「卫星智驾+太空智管」方案：星侧增加感知层和智能载荷，地面通过 SpaceOmni 平台进行环境监测、风险预警、星座运营、数字孪生推演和任务决策。「数字空间一号」将把「感知—认知—行为」架构搬到轨道上验证；数字太空还与 12 家商业航天企业签署了合作协议。\n\n数字太空还提出用物理世界模型承载航天规则和工程经验，把轨道环境、碰撞风险和卫星状态纳入可推演的约束。合作企业将参与试验星研制、智能载荷搭载、平台适配、在轨试验和应用场景拓展。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0.0,
-      "source_url": "https://36kr.com/p/3912546487637378?f=rss",
-      "source_name": "36kr.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:00",
-      "published_at": "2026-07-27 09:00",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://36kr.com/p/3912546487637378?f=rss"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://36kr.com/p/3912546487637378?f=rss 📮Folo · 2026 年 7 月 27 日 09:00",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2388,
-          "url": "https://36kr.com/p/3912546487637378?f=rss",
-          "title": "",
-          "publisher": "36kr.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3315,
-          "text": "文｜阿至 过去十年，中国商业航天完成了“造得出、送得上”的第一阶段目标，卫星产能快速爬坡，可回收火箭验证走向密集验证节点。但当轨道资源从宽松走向拥挤，各国之间的竞争焦点也从发射能力转向运行能力的比拼，“管得住、用得好”至关重要。",
-          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3316,
-          "text": "根据国防科技大学的测算，在卫星之间保持50千米最小安全间距的前提下，300-2000公里的全低轨空间最多只能安全容纳约17.5万颗卫星。当卫星数量从几千颗变成上万颗时，地面站排队上下行指令的传统方式就会难以为继，现有的卫星管控模式也正在失效。",
-          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3317,
-          "text": "“未来十年，航天发展的主旋律，应该是空间的数字化和智能化。”中国科学院院士魏奉思在上个月的科技创新院士报告厅演讲中曾提及这一核心观点。",
-          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3426,
-          "text": "「数字空间战略」发展大会暨「数字空间一号」试验星启航大会 7 月 26 日在北京举行。中国科学院院士魏奉思提出，面对轨道资源拥挤和大规模星座协同运行，空间基础设施需要从地面指挥、星上执行，逐步走向风险场景下的有限自主和星地协同。",
-          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3427,
-          "text": "数字太空提出「卫星智驾+太空智管」方案：星侧增加感知层和智能载荷，地面通过 SpaceOmni 平台进行环境监测、风险预警、星座运营、数字孪生推演和任务决策。「数字空间一号」将把「感知—认知—行为」架构搬到轨道上验证；数字太空还与 12 家商业航天企业签署了合作协议。",
-          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3428,
-          "text": "数字太空还提出用物理世界模型承载航天规则和工程经验，把轨道环境、碰撞风险和卫星状态纳入可推演的约束。合作企业将参与试验星研制、智能载荷搭载、平台适配、在轨试验和应用场景拓展。",
-          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
           "status": "supported",
           "evidence": ""
         }
@@ -1144,6 +880,117 @@
         }
       ],
       "updated_at": "2026-07-27T08:07:38+00:00"
+    },
+    {
+      "id": "b4d4743f-c530-5510-a636-4f88f2fc9379",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "cf9c89fe2d174d37208e880ee541cae7ec6fded7",
+      "title": "英伟达据报拟为 OpenAI 数据中心项目提供 2500 亿美元融资担保",
+      "body": "据《华尔街日报》报道，英伟达正在与 OpenAI 洽谈，为后者在美国俄亥俄州南部租用软银旗下能源公司的 10GW 级数据中心项目提供约 2500 亿美元融资担保。该项目若计入芯片等成本，总投资额可能超过 5000 亿美元。\n\n报道称，项目所需电力由美国政府控制，日本方面提供资金支持；Anthropic、微软和谷歌近期也与美国商务部长霍华德·卢特尼克沟通过该项目。截至报道发布，英伟达和 OpenAI 未回应置评请求。\n\n这项安排仍处在谈判阶段，报道把英伟达的角色描述为融资担保方，而不是已经完成的数据中心投资。项目的规模、租赁结构和电力来源都与美国、日本及软银相关方的协商有关。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 13,
+      "score": 0.0,
+      "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+      "source_name": "bloomberg.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 07:31",
+      "published_at": "2026-07-27 07:31",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "摘要信息不足，成稿前必须打开原文补料",
+      "metadata": {
+        "_manual_fields": [
+          "category",
+          "position"
+        ],
+        "all_urls": [
+          "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "https://www.ithome.com/0/981/835.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says；https://www.ithome.com/0/981/835.htm 📮Folo · 2026 年 7 月 27 日 09:04",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2523,
+          "url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "title": "",
+          "publisher": "bloomberg.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true,
+          "fetched_at": null
+        },
+        {
+          "id": 2527,
+          "url": "https://www.ithome.com/0/981/835.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3339,
+          "text": "IT之家 7 月 27 日消息，据《华尔街日报》昨日报道，英伟达正在与人工智能企业 OpenAI 谈判，拟为其提供约 2500 亿美元（IT之家注：现汇率约合 1.69 万亿元人民币）的融资担保。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3340,
+          "text": "据报道，英伟达提供的担保资金，将帮助 OpenAI 租用软银旗下能源公司在美国俄亥俄州南部的 10GW 级数据中心项目。如果算上芯片等成本，该数据中心的投资总额将超过 5000 亿美元（现汇率约合 3.39 万亿元人民币），成为全世界迄今为止规划规模最大的数据中心。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3341,
+          "text": "知情人士透露，该项目所需的电力由美国政府控制，并由日本方面提供资金支持。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3408,
+          "text": "据《华尔街日报》报道，英伟达正在与 OpenAI 洽谈，为后者在美国俄亥俄州南部租用软银旗下能源公司的 10GW 级数据中心项目提供约 2500 亿美元融资担保。该项目若计入芯片等成本，总投资额可能超过 5000 亿美元。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3409,
+          "text": "报道称，项目所需电力由美国政府控制，日本方面提供资金支持；Anthropic、微软和谷歌近期也与美国商务部长霍华德·卢特尼克沟通过该项目。截至报道发布，英伟达和 OpenAI 未回应置评请求。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3410,
+          "text": "这项安排仍处在谈判阶段，报道把英伟达的角色描述为融资担保方，而不是已经完成的数据中心投资。项目的规模、租赁结构和电力来源都与美国、日本及软银相关方的协商有关。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:09:24+00:00"
     },
     {
       "id": "a574b022-8eb7-51c7-bf35-d31c128c4842",
@@ -3304,122 +3151,15 @@
       "updated_at": "2026-07-27T08:07:37+00:00"
     },
     {
-      "id": "b4d4743f-c530-5510-a636-4f88f2fc9379",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "cf9c89fe2d174d37208e880ee541cae7ec6fded7",
-      "title": "英伟达据报拟为 OpenAI 数据中心项目提供 2500 亿美元融资担保",
-      "body": "据《华尔街日报》报道，英伟达正在与 OpenAI 洽谈，为后者在美国俄亥俄州南部租用软银旗下能源公司的 10GW 级数据中心项目提供约 2500 亿美元融资担保。该项目若计入芯片等成本，总投资额可能超过 5000 亿美元。\n\n报道称，项目所需电力由美国政府控制，日本方面提供资金支持；Anthropic、微软和谷歌近期也与美国商务部长霍华德·卢特尼克沟通过该项目。截至报道发布，英伟达和 OpenAI 未回应置评请求。\n\n这项安排仍处在谈判阶段，报道把英伟达的角色描述为融资担保方，而不是已经完成的数据中心投资。项目的规模、租赁结构和电力来源都与美国、日本及软银相关方的协商有关。",
-      "category": "重磅",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0.0,
-      "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-      "source_name": "bloomberg.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 07:31",
-      "published_at": "2026-07-27 07:31",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "摘要信息不足，成稿前必须打开原文补料",
-      "metadata": {
-        "all_urls": [
-          "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "https://www.ithome.com/0/981/835.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says；https://www.ithome.com/0/981/835.htm 📮Folo · 2026 年 7 月 27 日 09:04",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2523,
-          "url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "title": "",
-          "publisher": "bloomberg.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true,
-          "fetched_at": null
-        },
-        {
-          "id": 2527,
-          "url": "https://www.ithome.com/0/981/835.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3339,
-          "text": "IT之家 7 月 27 日消息，据《华尔街日报》昨日报道，英伟达正在与人工智能企业 OpenAI 谈判，拟为其提供约 2500 亿美元（IT之家注：现汇率约合 1.69 万亿元人民币）的融资担保。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3340,
-          "text": "据报道，英伟达提供的担保资金，将帮助 OpenAI 租用软银旗下能源公司在美国俄亥俄州南部的 10GW 级数据中心项目。如果算上芯片等成本，该数据中心的投资总额将超过 5000 亿美元（现汇率约合 3.39 万亿元人民币），成为全世界迄今为止规划规模最大的数据中心。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3341,
-          "text": "知情人士透露，该项目所需的电力由美国政府控制，并由日本方面提供资金支持。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3408,
-          "text": "据《华尔街日报》报道，英伟达正在与 OpenAI 洽谈，为后者在美国俄亥俄州南部租用软银旗下能源公司的 10GW 级数据中心项目提供约 2500 亿美元融资担保。该项目若计入芯片等成本，总投资额可能超过 5000 亿美元。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3409,
-          "text": "报道称，项目所需电力由美国政府控制，日本方面提供资金支持；Anthropic、微软和谷歌近期也与美国商务部长霍华德·卢特尼克沟通过该项目。截至报道发布，英伟达和 OpenAI 未回应置评请求。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3410,
-          "text": "这项安排仍处在谈判阶段，报道把英伟达的角色描述为融资担保方，而不是已经完成的数据中心投资。项目的规模、租赁结构和电力来源都与美国、日本及软银相关方的协商有关。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:07:38+00:00"
-    },
-    {
       "id": "04d0eea3-98db-5a8d-93c6-f2f39357b108",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "63655b5eb5ba3dcf8f37a045e699fe04c675f024",
       "title": "SHEIN 通过港交所聆讯，2026 年一季度收入增速降至 1.1%",
       "body": "据财新报道，SHEIN 7 月 26 日晚间通过港交所上市聆讯。公司披露，收入同比增速从 2019 年的 40%、2020 年的 140%、2021 年的 208% 和 2022 年的 98%，放缓至 2023 年的 41.1%、2024 年的 20.7%、2025 年的 8%，2026 年一季度进一步降至 1.1%。\n\n路透社报道显示，SHEIN 同期公布季度亏损，并将关税列为主要原因之一。公司仍在推进香港上市流程，具体发行规模和时间以港交所文件为准。\n\n收入增速放缓与季度亏损同时出现在上市前披露中，关税成本成为公司解释业绩压力的因素之一；这组数据构成 SHEIN 此次上市聆讯前的主要经营背景。",
-      "category": "重磅",
+      "category": "新消费",
       "status": "needs_review",
       "selected": true,
-      "position": 1,
+      "position": 6,
       "score": 0.0,
       "source_url": "https://www.caixin.com/2026-07-26/102468263.html",
       "source_name": "caixin.com",
@@ -3432,12 +3172,16 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
+      "changed_since_review": false,
       "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_manual_fields": [
+          "category",
+          "position"
+        ],
         "all_urls": [
           "https://www.caixin.com/2026-07-26/102468263.html",
           "https://www.reuters.com/legal/transactional/shein-reveals-key-financials-ahead-hong-kong-ipo-2026-07-26"
@@ -3501,7 +3245,295 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:07:38+00:00"
+      "updated_at": "2026-07-27T08:09:20+00:00"
+    },
+    {
+      "id": "4fcfa1a2-656f-5c78-962a-0b96cc494a3f",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "ce96d96f43f960aa129fe99b1965fcd7804d84db",
+      "title": "哈啰助力车故障致用户十级伤残，法院调解赔偿 21.5 万元",
+      "body": "厦门一名博士生 2025 年 6 月骑行哈啰校园助力车时，车辆突然断电、后轮锁死并侧翻，造成右胫骨平台外侧撕脱骨折、前交叉韧带断裂和半月板撕裂。厦门市交警部门随后出具事故证明，哈啰方面的故障排查报告确认涉事车辆存在断电故障，并与摔倒受伤有关联。\n\n厦门市翔安区人民法院民事调解文书显示，双方于 2026 年 7 月 17 日达成协议，上海哈啰普惠科技有限公司在 7 月 31 日前一次性支付 21.5 万元。报道还称，事发后交警曾尝试调取平台后台数据但未成功，最终通过校园监控还原事故经过；截至发稿，哈啰方面未回应。\n\n调解协议还约定，当事人放弃对上海哈啰普惠科技有限公司的其余诉讼请求，双方确认本案不再有其他争议。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 0,
+      "score": 0.0,
+      "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:00",
+      "published_at": "2026-07-27 09:00",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:09:30.499Z",
+        "_trash_previous_position": 0,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw 🧭飞书群 · 2026 年 7 月 27 日 09:00",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2524,
+          "url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3343,
+          "text": "厦门一名博士生 2025 年 6 月骑行哈啰校园助力车时，车辆突然断电、后轮锁死并侧翻，造成右胫骨平台外侧撕脱骨折、前交叉韧带断裂和半月板撕裂。厦门市交警部门随后出具事故证明，哈啰方面的故障排查报告确认涉事车辆存在断电故障，并与摔倒受伤有关联。",
+          "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3344,
+          "text": "厦门市翔安区人民法院民事调解文书显示，双方于 2026 年 7 月 17 日达成协议，上海哈啰普惠科技有限公司在 7 月 31 日前一次性支付 21.5 万元。报道还称，事发后交警曾尝试调取平台后台数据但未成功，最终通过校园监控还原事故经过；截至发稿，哈啰方面未回应。",
+          "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3345,
+          "text": "调解协议还约定，当事人放弃对上海哈啰普惠科技有限公司的其余诉讼请求，双方确认本案不再有其他争议。",
+          "source_url": "https://mp.weixin.qq.com/s/Qc9CMd5CwSqo62lKdsMJLw",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:09:30+00:00"
+    },
+    {
+      "id": "1a00fee6-4bad-5981-a2a2-9cddcd346164",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "45d392fd6b1750cd5f48f56809a319cc9239a424",
+      "title": "英伟达将 Vera 部署到下一代芯片设计流程，部分 EDA 应用提速 1.5 倍",
+      "body": "英伟达在官方博客中介绍，公司正与楷登电子、新思科技合作，将 NVIDIA Vera CPU 部署到下一代 CPU、GPU 开发所用的电子设计自动化流程中。逻辑仿真、形式验证和部分数字实现仍高度依赖 CPU 的单核性能、内存系统和整体吞吐量。\n\n英伟达初步测试显示，Cadence Jasper 形式验证平台和 Synopsys VCS 功能验证解决方案在部分工作负载上的性能最高提升 1.5 倍。Vera 包含 88 个定制 Olympus CPU 核心、LPDDR5X 内存子系统和第二代 NVIDIA 可扩展相干结构；下一代 Rosa 处理器计划采用 NVIDIA Rigel 核心。\n\n这两类工具分别用于设计早期的形式验证和制造前的功能验证。英伟达称，测试期间还与两家公司进行了应用性能分析、软件优化和系统级调优，Vera 已被部署到其未来处理器开发的 EDA 工作流中。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 1,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/830.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 08:53",
+      "published_at": "2026-07-27 08:53",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:09:37.549Z",
+        "_trash_previous_position": 1,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/830.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/830.htm 🛰RSS · 2026 年 7 月 27 日 08:53",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2382,
+          "url": "https://www.ithome.com/0/981/830.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3305,
+          "text": "IT之家 7 月 27 日消息，英伟达今日在官方博客发文，随着工程团队致力于开发越来越复杂的 CPU、GPU 和人工智能系统，现代芯片设计的复杂性也在不断增加。",
+          "source_url": "https://www.ithome.com/0/981/830.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3306,
+          "text": "为应对这一挑战，英伟达正与楷登电子和新思科技合作， 优化 NVIDIA Vera CPU 的关键电子设计自动化（EDA）应用 。",
+          "source_url": "https://www.ithome.com/0/981/830.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3307,
+          "text": "英伟达现正部署 Vera 应用于其下一代 CPU 和 GPU 开发的 EDA 工作流程，展示了高性能 CPU 架构如何帮助加速行业中一些最具挑战性的工程工作负载。",
+          "source_url": "https://www.ithome.com/0/981/830.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3417,
+          "text": "英伟达在官方博客中介绍，公司正与楷登电子、新思科技合作，将 NVIDIA Vera CPU 部署到下一代 CPU、GPU 开发所用的电子设计自动化流程中。逻辑仿真、形式验证和部分数字实现仍高度依赖 CPU 的单核性能、内存系统和整体吞吐量。",
+          "source_url": "https://www.ithome.com/0/981/830.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3418,
+          "text": "英伟达初步测试显示，Cadence Jasper 形式验证平台和 Synopsys VCS 功能验证解决方案在部分工作负载上的性能最高提升 1.5 倍。Vera 包含 88 个定制 Olympus CPU 核心、LPDDR5X 内存子系统和第二代 NVIDIA 可扩展相干结构；下一代 Rosa 处理器计划采用 NVIDIA Rigel 核心。",
+          "source_url": "https://www.ithome.com/0/981/830.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3419,
+          "text": "这两类工具分别用于设计早期的形式验证和制造前的功能验证。英伟达称，测试期间还与两家公司进行了应用性能分析、软件优化和系统级调优，Vera 已被部署到其未来处理器开发的 EDA 工作流中。",
+          "source_url": "https://www.ithome.com/0/981/830.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:09:37+00:00"
+    },
+    {
+      "id": "f065c7e8-75ac-56f1-89ce-cc1d1d103978",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "ff7f50b6e057fd990045ff34ccd3d3b8820e6b9a",
+      "title": "「数字空间一号」启动试验星工程，验证卫星自主感知与决策",
+      "body": "「数字空间战略」发展大会暨「数字空间一号」试验星启航大会 7 月 26 日在北京举行。中国科学院院士魏奉思提出，面对轨道资源拥挤和大规模星座协同运行，空间基础设施需要从地面指挥、星上执行，逐步走向风险场景下的有限自主和星地协同。\n\n数字太空提出「卫星智驾+太空智管」方案：星侧增加感知层和智能载荷，地面通过 SpaceOmni 平台进行环境监测、风险预警、星座运营、数字孪生推演和任务决策。「数字空间一号」将把「感知—认知—行为」架构搬到轨道上验证；数字太空还与 12 家商业航天企业签署了合作协议。\n\n数字太空还提出用物理世界模型承载航天规则和工程经验，把轨道环境、碰撞风险和卫星状态纳入可推演的约束。合作企业将参与试验星研制、智能载荷搭载、平台适配、在轨试验和应用场景拓展。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 4,
+      "score": 0.0,
+      "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+      "source_name": "36kr.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:00",
+      "published_at": "2026-07-27 09:00",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:09:56.182Z",
+        "_trash_previous_position": 4,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://36kr.com/p/3912546487637378?f=rss"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://36kr.com/p/3912546487637378?f=rss 📮Folo · 2026 年 7 月 27 日 09:00",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2388,
+          "url": "https://36kr.com/p/3912546487637378?f=rss",
+          "title": "",
+          "publisher": "36kr.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3315,
+          "text": "文｜阿至 过去十年，中国商业航天完成了“造得出、送得上”的第一阶段目标，卫星产能快速爬坡，可回收火箭验证走向密集验证节点。但当轨道资源从宽松走向拥挤，各国之间的竞争焦点也从发射能力转向运行能力的比拼，“管得住、用得好”至关重要。",
+          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3316,
+          "text": "根据国防科技大学的测算，在卫星之间保持50千米最小安全间距的前提下，300-2000公里的全低轨空间最多只能安全容纳约17.5万颗卫星。当卫星数量从几千颗变成上万颗时，地面站排队上下行指令的传统方式就会难以为继，现有的卫星管控模式也正在失效。",
+          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3317,
+          "text": "“未来十年，航天发展的主旋律，应该是空间的数字化和智能化。”中国科学院院士魏奉思在上个月的科技创新院士报告厅演讲中曾提及这一核心观点。",
+          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3426,
+          "text": "「数字空间战略」发展大会暨「数字空间一号」试验星启航大会 7 月 26 日在北京举行。中国科学院院士魏奉思提出，面对轨道资源拥挤和大规模星座协同运行，空间基础设施需要从地面指挥、星上执行，逐步走向风险场景下的有限自主和星地协同。",
+          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3427,
+          "text": "数字太空提出「卫星智驾+太空智管」方案：星侧增加感知层和智能载荷，地面通过 SpaceOmni 平台进行环境监测、风险预警、星座运营、数字孪生推演和任务决策。「数字空间一号」将把「感知—认知—行为」架构搬到轨道上验证；数字太空还与 12 家商业航天企业签署了合作协议。",
+          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3428,
+          "text": "数字太空还提出用物理世界模型承载航天规则和工程经验，把轨道环境、碰撞风险和卫星状态纳入可推演的约束。合作企业将参与试验星研制、智能载荷搭载、平台适配、在轨试验和应用场景拓展。",
+          "source_url": "https://36kr.com/p/3912546487637378?f=rss",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:09:56+00:00"
     },
     {
       "id": "69b77b05-ffa4-520d-817c-8ad796916526",
@@ -22478,8 +22510,8 @@
       "selected_article_enrichment": 3852
     },
     "public_snapshot": {
-      "digest": "3ae36c25bd78a56ff843978b442ddebd101fed038aa390be94d5f6aaf2f29289",
-      "generated_at": "2026-07-27T08:08:27+00:00",
+      "digest": "d4ead395e589c3b153e5119cb8c41116f614e03c3621c6a01c210127cebf4300",
+      "generated_at": "2026-07-27T08:10:57+00:00",
       "image_count": 0,
       "mode": "explicit_review_operations"
     }
