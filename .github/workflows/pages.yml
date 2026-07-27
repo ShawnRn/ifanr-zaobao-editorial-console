@@ -32,6 +32,7 @@ jobs:
       - run: pnpm build
         env:
           VITE_BASE_PATH: /ifanr-zaobao-editorial-console/
+          VITE_EDITORIAL_DEPLOYMENT: pages
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
