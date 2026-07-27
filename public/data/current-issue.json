@@ -5,11 +5,11 @@
   "state": "editing",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 21,
+  "revision": 27,
   "selected_count": 41,
   "review_count": 36,
   "ready_count": 5,
-  "updated_at": "2026-07-27T08:19:18+00:00",
+  "updated_at": "2026-07-27T08:21:35+00:00",
   "stories": [
     {
       "id": "0d377321-582d-52a0-9305-3adc7592c5f1",
@@ -280,7 +280,7 @@
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "d4782d9c6d15426835a093c1cc2236c8daaa77df",
       "title": "长鑫科技收盘 49 元、上涨 465.82%，朱一明拟向员工分配 7.68 亿股",
-      "body": "据财新报道，长鑫科技 7 月 27 日在科创板上市，开盘报 49.50 元，较 8.66 元发行价上涨 471.59%，对应市值 3.31 万亿元，超过此前 A 股市值最高的工商银行。收盘后，雪球页面显示其报 49.00 元，较发行价上涨 465.82%，当日最高 55.03 元、最低 38.11 元，总市值为 3.28 万亿元，成交额 1411.87 亿元。\n\n长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。\n\n搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。该报道提到，股票机会主要面向主管及以上员工，普通员工的奖金与加班安排则来自匿名员工的个人陈述。",
+      "body": "长鑫科技昨日在科创板上市，开盘报 49.50 元，较 8.66 元发行价上涨 471.59%，对应市值 3.31 万亿元，超过此前 A 股市值最高的工商银行。\n\n收盘后，报 49.00 元，较发行价上涨 465.82%，当日最高 55.03 元、最低 38.11 元，总市值为 3.28 万亿元，成交额 1411.87 亿元。\n\n长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。\n\n搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
@@ -297,12 +297,15 @@
       "cross_day_status": "ready",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
+      "changed_since_review": false,
       "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_manual_fields": [
+          "body"
+        ],
         "all_urls": [
           "https://finance.caixin.com/2026-07-27/102468332.html",
           "https://xueqiu.com/S/SH688825",
@@ -393,7 +396,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:16+00:00"
+      "updated_at": "2026-07-27T08:21:35+00:00"
     },
     {
       "id": "beaac9f2-1a26-5cfb-a046-9aaac50c6078",
@@ -22572,8 +22575,8 @@
       "selected_article_enrichment": 3852
     },
     "public_snapshot": {
-      "digest": "0f48fd4323f6aeeade37068c3545bc61ce0d1b3bf0f002ded0834b121221a2a2",
-      "generated_at": "2026-07-27T08:20:07+00:00",
+      "digest": "306ff2abbd95cd95b5ce070a355031a78630ca08a646cb5e1058e8bb0ccaffd8",
+      "generated_at": "2026-07-27T08:24:28+00:00",
       "image_count": 0,
       "mode": "explicit_review_operations"
     }
