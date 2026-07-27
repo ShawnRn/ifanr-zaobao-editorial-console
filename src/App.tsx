@@ -2264,7 +2264,7 @@ export function App() {
           <div className="settings-divider" /></> : null}
           <label className="settings-theme-row"><span>界面主题</span><select aria-label="界面主题" value={theme} onChange={(event) => setTheme(event.target.value as 'system' | 'light' | 'dark')}><option value="system">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label>
           <div className="settings-divider" />
-          <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
+          <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
           <label><span>Gemini 模型</span><input aria-label="Gemini 模型" list="gemini-model-list" autoComplete="off" value={geminiModel} placeholder={defaultGeminiModel} onChange={(event) => setGeminiModel(event.target.value)} /></label>
           <datalist id="gemini-model-list">{geminiModels.map((model) => <option key={model.name} value={model.name}>{model.displayName}</option>)}</datalist>
           <div className="settings-actions"><button type="button" disabled={geminiModelsLoading || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void loadGeminiModels()}>{geminiModelsLoading ? '正在读取模型…' : '读取可用模型'}</button><button type="button" disabled={!geminiModel.trim() || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void saveGeminiKey()}>保存配置</button></div>
