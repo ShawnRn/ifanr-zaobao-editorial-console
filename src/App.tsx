@@ -44,7 +44,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, describeWorkerError, getApiUrl, resolveApiAssetUrl, setAuthToken } from './api'
+import { api, describeWorkerError, getApiUrl, isPagesDeployment, resolveApiAssetUrl, setAuthToken } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
 import { generateQrSvgDataUri } from './totp'
@@ -1126,7 +1126,7 @@ export function App() {
   const [profileMessage, setProfileMessage] = useState('')
   const [showAuthDialog, setShowAuthDialog] = useState(false)
   const [authUser, setAuthUser] = useState('Shawn Rain')
-  const [isReadOnly, setIsReadOnly] = useState(false)
+  const [isReadOnly, setIsReadOnly] = useState(isPagesDeployment)
   const [authBusy, setAuthBusy] = useState(false)
   const [authMessage, setAuthMessage] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
@@ -1171,6 +1171,13 @@ export function App() {
   }
 
   const checkAuthStatus = useCallback(async () => {
+    if (isPagesDeployment) {
+      setAuthToken('')
+      setIsReadOnly(true)
+      setHas2FA(false)
+      setAvatarUrl(null)
+      return
+    }
     try {
       const status = await api.authStatus()
       setIsReadOnly(status.read_only)
@@ -1204,6 +1211,7 @@ export function App() {
   }, [checkAuthStatus, dataMode])
 
   const doAuthLogin = async (usernameInput: string, passwordInput: string, totpInput?: string) => {
+    if (isPagesDeployment) return
     if (!usernameInput.trim() || !passwordInput.trim()) return
     setAuthBusy(true)
     setAuthMessage('正在验证安全登录…')
@@ -1224,6 +1232,7 @@ export function App() {
   }
 
   const doAuthLogout = async () => {
+    if (isPagesDeployment) return
     try {
       await api.authLogout()
     } catch {
@@ -1389,7 +1398,7 @@ export function App() {
     setLoading(true)
     setError('')
     const workerUrl = getApiUrl()
-    const forceStatic = !preferWorker && new URLSearchParams(window.location.search).get('static') === '1'
+    const forceStatic = isPagesDeployment || (!preferWorker && new URLSearchParams(window.location.search).get('static') === '1')
     const showPagesFallback = async (detail: string) => {
       const snapshot = await api.staticIssue()
       const fallback = issueWithMetrics(snapshot, snapshot.stories)
@@ -2215,7 +2224,7 @@ export function App() {
           <button className={activeView === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
-          {!isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
+          {!isPagesDeployment && !isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
             <span className="status-mode-tag unlocked"><Unlock size={12} />编辑中</span>
@@ -2224,8 +2233,7 @@ export function App() {
           <IconButton title="刷新" onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
           <IconButton title={theme === 'system' ? `跟随系统（当前${effectiveTheme === 'dark' ? '深色' : '浅色'}）` : theme === 'dark' ? '深色模式' : '浅色模式'} onClick={() => setTheme((current) => current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system')}><>{theme === 'system' ? <Monitor size={17} /> : theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}</></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="设置" aria-label="设置" onClick={toggleSettings}><Settings size={17} /></button>
-          {/* Avatar button */}
-          <button
+          {!isPagesDeployment ? <button
             ref={avatarTriggerRef}
             className={`avatar-button ${showAvatarMenu && !avatarMenuClosing ? 'active' : ''}`}
             type="button"
@@ -2239,16 +2247,16 @@ export function App() {
             {avatarUrl
               ? <img src={avatarUrl} alt="头像" />
               : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
-          </button>
+          </button> : null}
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
         {showSettings ? <div ref={settingsPopoverRef} className={`settings-popover ${settingsClosing ? 'closing' : ''}`} onAnimationEnd={() => { if (settingsClosing) finishSettingsClose() }}>
-          <div className={`connection-summary connection-${workerConnection.status}`}>
+          {!isPagesDeployment ? <><div className={`connection-summary connection-${workerConnection.status}`}>
             <div>{workerConnection.status === 'checking' ? <LoaderCircle size={16} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={15} /> : <CloudOff size={16} />}</div>
             <span><strong>{connectionLabel}</strong><small>{workerConnection.detail}</small></span>
           </div>
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void loadIssue(true)}>{workerConnection.status === 'checking' ? '正在检测…' : '重新检测连接'}</button></div>
-          <div className="settings-divider" />
+          <div className="settings-divider" /></> : null}
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
           <label><span>Gemini 模型</span><input aria-label="Gemini 模型" list="gemini-model-list" autoComplete="off" value={geminiModel} placeholder={defaultGeminiModel} onChange={(event) => setGeminiModel(event.target.value)} /></label>
           <datalist id="gemini-model-list">{geminiModels.map((model) => <option key={model.name} value={model.name}>{model.displayName}</option>)}</datalist>
@@ -2258,7 +2266,7 @@ export function App() {
           {profileMessage ? <p className="settings-message">{profileMessage}</p> : null}
         </div> : null}
         {/* Avatar menu */}
-        {showAvatarMenu ? <div ref={avatarMenuRef} className={`avatar-menu ${avatarMenuClosing ? 'closing' : ''}`}>
+        {!isPagesDeployment && showAvatarMenu ? <div ref={avatarMenuRef} className={`avatar-menu ${avatarMenuClosing ? 'closing' : ''}`}>
           <div className="avatar-menu-profile">
             <div className="avatar-menu-avatar">
               {avatarUrl ? <img src={avatarUrl} alt="头像" /> : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
@@ -2396,7 +2404,7 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
-      {showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
+      {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>

@@ -2,6 +2,9 @@ import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryCreateInp
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://111.228.56.220:8765'
 export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://111.228.56.220:8765'
+// GitHub Pages is a public, static delivery target. This build-time flag keeps
+// its security boundary explicit instead of inferring it from mutable browser state.
+export const isPagesDeployment = import.meta.env.VITE_EDITORIAL_DEPLOYMENT === 'pages'
 
 const isWorkerOrigin = () => window.location.hostname.endsWith('.ts.net') || window.location.port === '8765'
 
