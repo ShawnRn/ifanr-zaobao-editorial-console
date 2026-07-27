@@ -2169,12 +2169,12 @@ export function App() {
   }
 
   const saveGeminiKey = async () => {
-    if (!geminiKey.trim()) {
+    if (!geminiKey.trim() && !geminiConfigured) {
       setProfileMessage('请输入 Gemini API Key')
       return
     }
     try {
-      persistGeminiKey(geminiKey)
+      if (geminiKey.trim()) persistGeminiKey(geminiKey)
       saveGeminiModel(geminiModel)
       setGeminiConfigured(true)
       setGeminiKey('')
@@ -2260,7 +2260,7 @@ export function App() {
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
           <label><span>Gemini 模型</span><input aria-label="Gemini 模型" list="gemini-model-list" autoComplete="off" value={geminiModel} placeholder={defaultGeminiModel} onChange={(event) => setGeminiModel(event.target.value)} /></label>
           <datalist id="gemini-model-list">{geminiModels.map((model) => <option key={model.name} value={model.name}>{model.displayName}</option>)}</datalist>
-          <div className="settings-actions"><button type="button" disabled={geminiModelsLoading || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void loadGeminiModels()}>{geminiModelsLoading ? '正在读取模型…' : '读取可用模型'}</button><button type="button" disabled={!geminiKey.trim() || !geminiModel.trim()} onClick={() => void saveGeminiKey()}>保存配置</button></div>
+          <div className="settings-actions"><button type="button" disabled={geminiModelsLoading || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void loadGeminiModels()}>{geminiModelsLoading ? '正在读取模型…' : '读取可用模型'}</button><button type="button" disabled={!geminiModel.trim() || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void saveGeminiKey()}>保存配置</button></div>
           <p className="settings-hint">Key 仅保存在当前浏览器本地；请求也由当前设备直接发出，不经过服务器。</p>
           <button type="button" disabled={workerConnection.status !== 'connected'} onClick={() => { setProfileMessage('正在归纳本周编辑决策…'); void api.proposeProfile().then((proposal) => setProfileMessage(proposal.status === 'pending' ? '已生成待确认的偏好差异提案' : '本周暂无需更新的偏好')).catch((profileError) => setProfileMessage(profileError instanceof Error ? profileError.message : '提案生成失败')) }}>生成本周偏好提案</button>
           {profileMessage ? <p className="settings-message">{profileMessage}</p> : null}
