@@ -5,11 +5,11 @@
   "state": "editing",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 3,
+  "revision": 4,
   "selected_count": 37,
   "review_count": 36,
   "ready_count": 1,
-  "updated_at": "2026-07-27T05:11:38+00:00",
+  "updated_at": "2026-07-27T06:12:35+00:00",
   "stories": [
     {
       "id": "4fcfa1a2-656f-5c78-962a-0b96cc494a3f",
@@ -12466,23 +12466,11 @@
   "brand_packages": {
     "appso": {
       "headline_options": [
-        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 美团 CatPaw 上线，已覆盖 9 万名员工并搭建 3 万个 Agent",
-        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 美团 CatPaw 上线，已覆盖 9 万名员工并搭建 3 万个 Agent / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
-        "腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 美团 CatPaw 上线，已覆盖 9 万名员工并搭建 3 万个 Agent / 千问办公上线，Windows、macOS Beta 版月费 78 元起"
+        "QQ 宠物 3D 版正式回归并接入大模型 / 微信输入法鸿蒙版 1.0.0 上线 / 小米汽车澎程将发布两款增程 SUV",
+        "英伟达拟为 OpenAI 数据中心提供 2500 亿美元融资担保 / 美团发布全场景 Agent 平台 CatPaw / 长鑫科技科创板上市首日股价一度大涨 472%",
+        "千问办公客户端上线月费 78 元起 / 腾讯 WorkBuddy 鸿蒙 PC 版支持碰一碰分享 / 杭州机器人学校开学迎来首批 30 台机器人"
       ],
-      "selected_headline": "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 美团 CatPaw 上线，已覆盖 9 万名员工并搭建 3 万个 Agent",
-      "cover_candidates": [],
-      "selected_cover": ""
-    },
-    "ifanr": {
-      "headline_options": [
-        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
-        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享 / SHEIN 通过港交所聆讯，2026 年一季度收入增速降至 1.1%",
-        "腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享 / 千问办公上线，Windows、macOS Beta 版月费 78 元起"
-      ],
-      "selected_headline": "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
-      "cover_candidates": [],
-      "selected_cover": ""
+      "selected_headline": "QQ 宠物 3D 版正式回归并接入大模型 / 微信输入法鸿蒙版 1.0.0 上线 / 小米汽车澎程将发布两款增程 SUV"
     }
   },
   "diagnostics": {
@@ -12960,8 +12948,8 @@
       "selected_article_enrichment": 5649
     },
     "public_snapshot": {
-      "digest": "07727ea18269a370f67d08f5922cba5fb727150179044daff3b05dee9739dcf2",
-      "generated_at": "2026-07-27T05:12:07+00:00",
+      "digest": "f4ad30586d9cbc31c3a8871a771d17e7118764e48e77c446ecab1717de70361b",
+      "generated_at": "2026-07-27T06:14:10+00:00",
       "image_count": 0,
       "mode": "explicit_review_operations"
     }
