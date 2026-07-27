@@ -659,7 +659,7 @@ function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
   issue: Issue
   onSave: (brand: 'appso' | 'ifanr', patch: Partial<BrandPackage>) => Promise<void>
   onGenerate: (brand: 'appso' | 'ifanr') => Promise<void>
-  generating: 'appso' | 'ifanr' | null
+  generating: Record<'appso' | 'ifanr', boolean>
 }) {
   return (
     <div className="brand-workspace">
@@ -667,7 +667,7 @@ function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
         const pack = issue.brand_packages[brand]
         return (
           <section className="brand-section" key={brand}>
-            <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating !== null} onClick={() => void onGenerate(brand)}>{generating === brand ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}{(pack?.headline_options || []).length ? '重新生成标题' : '生成标题'}</button></header>
+            <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating[brand]} onClick={() => void onGenerate(brand)}>{generating[brand] ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}{(pack?.headline_options || []).length ? '重新生成标题' : '生成标题'}</button></header>
             <p className="brand-note">从当前共享母稿生成 3 组「三个消息 / 分隔」标题，两个品牌可使用同一选题，但表达分别调整。</p>
             <div className="headline-options">{(pack?.headline_options || []).map((headline) => <label key={headline} className={pack.selected_headline === headline ? 'selected' : ''}><input type="radio" name={`${brand}-headline`} checked={pack.selected_headline === headline} onChange={() => void onSave(brand, { selected_headline: headline })} /><span>{headline}</span></label>)}</div>
             <label className="field-label" htmlFor={`${brand}-headline-custom`}>最终大标题</label>
@@ -1115,7 +1115,8 @@ export function App() {
   const [undoToastCycle, setUndoToastCycle] = useState(0)
   const [handoff, setHandoff] = useState<AutomationHandoff | null>(null)
   const [exporting, setExporting] = useState(false)
-  const [generatingBrand, setGeneratingBrand] = useState<'appso' | 'ifanr' | null>(null)
+  const [generatingBrand, setGeneratingBrand] = useState<Record<'appso' | 'ifanr', boolean>>({ appso: false, ifanr: false })
+  const [brandToast, setBrandToast] = useState<{ brand: 'appso' | 'ifanr'; message: string } | null>(null)
   const [showSettings, setShowSettings] = useState(false)
   const [settingsClosing, setSettingsClosing] = useState(false)
   const [geminiKey, setGeminiKey] = useState('')
@@ -1348,6 +1349,7 @@ export function App() {
   const detailCloseTimerRef = useRef<number | null>(null)
   const overlayCloseTimerRef = useRef<number | null>(null)
   const viewExitTimerRef = useRef<number | null>(null)
+  const brandToastTimerRef = useRef<number | null>(null)
   const viewEnterTimerRef = useRef<number | null>(null)
   const issueRef = useRef<Issue | null>(null)
   const dataModeRef = useRef(dataMode)
@@ -1614,6 +1616,7 @@ export function App() {
     if (overlayCloseTimerRef.current !== null) window.clearTimeout(overlayCloseTimerRef.current)
     if (viewExitTimerRef.current !== null) window.clearTimeout(viewExitTimerRef.current)
     if (viewEnterTimerRef.current !== null) window.clearTimeout(viewEnterTimerRef.current)
+    if (brandToastTimerRef.current !== null) window.clearTimeout(brandToastTimerRef.current)
   }, [])
 
   useEffect(() => {
@@ -2073,7 +2076,7 @@ export function App() {
 
   const generateBrand = async (brand: 'appso' | 'ifanr') => {
     if (!issue) return
-    setGeneratingBrand(brand)
+    setGeneratingBrand((current) => ({ ...current, [brand]: true }))
     setOperationError('')
     try {
       const generated = await generateBrandHeadlines(issue, brand)
@@ -2083,7 +2086,13 @@ export function App() {
         await api.patchBrand(issue.id, brand, patch)
         setIssue(await api.getIssue(issue.id))
       }
-    } catch (brandError) { showOperationError(brandError instanceof Error ? brandError.message : '品牌包装生成失败') } finally { setGeneratingBrand(null) }
+      setBrandToast({ brand, message: `${brand === 'appso' ? 'APPSO' : 'IFANR'} 标题已生成` })
+      if (brandToastTimerRef.current !== null) window.clearTimeout(brandToastTimerRef.current)
+      brandToastTimerRef.current = window.setTimeout(() => {
+        setBrandToast(null)
+        brandToastTimerRef.current = null
+      }, 3200)
+    } catch (brandError) { showOperationError(brandError instanceof Error ? brandError.message : '品牌包装生成失败') } finally { setGeneratingBrand((current) => ({ ...current, [brand]: false })) }
   }
 
   const createStory = async (input: StoryCreateInput) => {
@@ -2406,6 +2415,7 @@ export function App() {
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
       {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
+      {brandToast ? <div className="brand-toast" role="status"><Check size={15} /><span>{brandToast.message}</span></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )

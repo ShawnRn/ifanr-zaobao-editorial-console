@@ -5,11 +5,11 @@
   "state": "editing",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 4,
+  "revision": 5,
   "selected_count": 37,
   "review_count": 36,
   "ready_count": 1,
-  "updated_at": "2026-07-27T06:12:35+00:00",
+  "updated_at": "2026-07-27T06:47:35+00:00",
   "stories": [
     {
       "id": "4fcfa1a2-656f-5c78-962a-0b96cc494a3f",
@@ -12473,14 +12473,14 @@
       "selected_headline": "QQ 宠物 3D 版正式回归并接入大模型 / 微信输入法鸿蒙版 1.0.0 上线 / 小米汽车澎程将发布两款增程 SUV"
     },
     "ifanr": {
-      "headline_options": [
-        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
-        "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享 / SHEIN 通过港交所聆讯，2026 年一季度收入增速降至 1.1%",
-        "腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享 / 千问办公上线，Windows、macOS Beta 版月费 78 元起"
-      ],
-      "selected_headline": "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练 / 腾讯 QQ 宠物正式回归，升级为 3D 形象并接入大模型 / 腾讯 WorkBuddy 鸿蒙 PC 版上线，支持「碰一碰」分享",
       "cover_candidates": [],
-      "selected_cover": ""
+      "headline_options": [
+        "QQ 宠物正式回归并接入大模型 / 长鑫科技登陆科创板首日一度大涨 472% / 小米汽车将发布两款增程 SUV",
+        "英伟达据报拟为 OpenAI 数据中心提供 2500 亿美元担保 / QQ 宠物升级 3D 形象回归 / SHEIN 通过港交所上市聆讯",
+        "长鑫科技挂牌科创板，首日股价一度大涨 472% / 小米汽车「澎程」预告两款增程 SUV / 软银为投资 OpenAI 400 亿美元贷款引入 21 家机构"
+      ],
+      "selected_cover": "",
+      "selected_headline": "QQ 宠物正式回归并接入大模型 / 长鑫科技登陆科创板首日一度大涨 472% / 小米汽车将发布两款增程 SUV"
     }
   },
   "diagnostics": {
@@ -12958,8 +12958,8 @@
       "selected_article_enrichment": 5649
     },
     "public_snapshot": {
-      "digest": "8e2580e9fe3de739262adbe413ef6a2da95aaaba63b02dc6f90e1546968c3795",
-      "generated_at": "2026-07-27T06:32:53+00:00",
+      "digest": "14830b17697b4e03a3f36ffbfd6119001619eda10af417b55aab945d2418d20e",
+      "generated_at": "2026-07-27T06:51:05+00:00",
       "image_count": 0,
       "mode": "explicit_review_operations"
     }

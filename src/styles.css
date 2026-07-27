@@ -529,6 +529,8 @@ kbd { padding: 1px 5px; border: 1px solid #adb5b0; border-radius: 3px; backgroun
 .operation-error-toast > span { min-width: 0; flex: 1; font-size: 12px; line-height: 1.5; }
 .operation-error-toast > button { width: 28px; height: 28px; border: 0; border-radius: 6px; background: transparent; color: #e5b7b1; font-size: 20px; line-height: 1; cursor: pointer; }
 .operation-error-toast > button:hover { background: #ffffff12; color: #fff; }
+.brand-toast { position: fixed; z-index: 111; left: 50%; bottom: 28px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #3a4640; border-radius: 10px; background: #131916; color: #d8ece0; box-shadow: 0 16px 48px #0009; transform: translateX(-50%); animation: toast-in .2s ease-out; font-size: 12px; font-weight: 700; }
+.brand-toast svg { color: #79c995; }
 
 /* 深色模式最终覆盖层：这些界面历史上直接写入了浅色值，必须在规则末尾统一收口。 */
 :root[data-theme="dark"] .connection-connected { border-color: #52745d; background: #27352b; color: #b8d7c0; }
