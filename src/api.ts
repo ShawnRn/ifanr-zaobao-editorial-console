@@ -54,6 +54,12 @@ export const getApiUrl = () => isWorkerOrigin()
   ? window.location.origin
   : localStorage.getItem('editorial-api-url') || runtimeDefaultUrl()
 
+export const resolveApiAssetUrl = (path: string) => {
+  if (!path) return ''
+  if (/^https?:\/\//i.test(path)) return path
+  return `${getApiUrl().replace(/\/$/, '')}/${path.replace(/^\/+/, '')}`
+}
+
 // The Tailscale address is tailnet-specific. Do not keep a bare 100.x IP as
 // a fallback: it cannot present Tailscale's HTTPS certificate and would make
 // the "direct console" escape hatch fail from GitHub Pages.
@@ -173,7 +179,8 @@ async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
 
 export const api = {
   health: () => request<WorkerHealth>('/health'),
-  currentIssue: () => request<Issue>('/api/issues/current'),
+  currentIssue: (scope: 'full' | 'draft' = 'full') => request<Issue>(`/api/issues/current${scope === 'draft' ? '?scope=draft' : ''}`),
+  currentIssueVersion: () => request<{ id: string; publication_date: string; revision: number; updated_at: string }>('/api/issues/current/version'),
   staticIssue: async () => {
     const response = await fetch(`${staticAssetUrl('data/current-issue.json')}?v=${Date.now()}`, { cache: 'no-store' })
     if (!response.ok) throw new Error('Pages 尚未生成当天早报快照')
@@ -242,8 +249,23 @@ export const api = {
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
   proposeProfile: () => request<Record<string, unknown>>('/api/editorial-profile/propose', { method: 'POST' }),
   profileProposals: () => request<Array<Record<string, unknown>>>('/api/editorial-profile/proposals'),
-  authStatus: () => request<{ require_auth: boolean; authenticated: boolean; read_only: boolean; username?: string | null }>('/api/auth/status'),
-  authLogin: (username: string, passwordHash: string) => request<{ ok: boolean; token: string; username?: string; read_only: boolean; message?: string }>('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password_hash: passwordHash }) }),
+  authStatus: () => request<{ require_auth: boolean; authenticated: boolean; read_only: boolean; username?: string | null; has_2fa: boolean; recovery_codes_remaining?: number | null; avatar_url?: string | null }>('/api/auth/status'),
+  authUploadAvatar: (file: File) => mediaRequest<{ ok: boolean; avatar_url: string }>('/api/auth/avatar', {
+    method: 'POST',
+    headers: { 'Content-Type': file.type || 'application/octet-stream' },
+    body: file,
+  }),
+  authDeleteAvatar: () => mediaRequest<{ ok: boolean; avatar_url: null }>('/api/auth/avatar', { method: 'DELETE' }),
+  authLogin: (username: string, passwordHash: string, totpCode = '') => request<{ ok: boolean; token: string; username?: string; read_only: boolean; message?: string }>('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password_hash: passwordHash, totp_code: totpCode }) }),
+  authSetup2FA: () => request<{ secret: string; otpauth_url: string }>('/api/auth/2fa/setup', { method: 'POST' }),
+  authEnable2FA: (code: string) => request<{ ok: boolean; has_2fa: boolean; token: string; recovery_codes: string[]; recovery_codes_remaining: number }>('/api/auth/2fa/enable', {
+    method: 'POST',
+    body: JSON.stringify({ code }),
+  }),
+  authDisable2FA: (code: string) => request<{ ok: boolean; has_2fa: boolean; token: string }>('/api/auth/2fa/disable', {
+    method: 'POST',
+    body: JSON.stringify({ code }),
+  }),
   authChangePassword: (username: string, currentPasswordHash: string, newPasswordHash: string) =>
     request<{ ok: boolean; token: string; username?: string; read_only: boolean }>('/api/auth/change-password', {
       method: 'POST',

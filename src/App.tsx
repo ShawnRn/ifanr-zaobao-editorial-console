@@ -9,6 +9,7 @@ import {
   ChevronRight,
   CircleDot,
   CloudOff,
+  Copy,
   Download,
   ExternalLink,
   Eye,
@@ -18,6 +19,7 @@ import {
   Gamepad2,
   GripVertical,
   Image,
+  KeyRound,
   Library,
   LoaderCircle,
   Lock,
@@ -26,10 +28,12 @@ import {
   Moon,
   PanelRightClose,
   Plus,
+  QrCode,
   RefreshCw,
   RotateCcw,
   Search,
   Settings,
+  Shield,
   ShieldCheck,
   Sparkles,
   Sun,
@@ -40,22 +44,45 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, apiUrlProblem, describeWorkerError, getApiUrl, getTailscaleConsoleUrl, lanConsoleUrl, normalizeApiUrl, setApiUrl, setAuthToken } from './api'
+import { api, apiUrlProblem, describeWorkerError, getApiUrl, getTailscaleConsoleUrl, lanConsoleUrl, normalizeApiUrl, resolveApiAssetUrl, setApiUrl, setAuthToken } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { generateBrandHeadlines, hasGeminiKey, saveGeminiKey as persistGeminiKey } from './gemini'
+import { generateQrSvgDataUri } from './totp'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
 import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
 import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
 import ifanrMarkUrl from './assets/ifanr-mark.png'
-const AVATAR_STORAGE_KEY = 'ifanr-editorial-avatar'
+const LEGACY_AVATAR_STORAGE_KEY = 'ifanr-editorial-avatar'
 
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
 const weekendDraftCategories = ['周末也值得一看的新闻', 'One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
 const weekendStorageCategory = '好看的'
 const workerRefreshIntervalMs = 25_000
+
+function legacyAvatarFile(dataUrl: string): File | null {
+  const match = dataUrl.match(/^data:(image\/(?:jpeg|png|gif|webp));base64,(.+)$/)
+  if (!match) return null
+  try {
+    const binary = window.atob(match[2])
+    const bytes = new Uint8Array(binary.length)
+    for (let index = 0; index < binary.length; index++) bytes[index] = binary.charCodeAt(index)
+    return new File([bytes], 'legacy-avatar', { type: match[1] })
+  } catch {
+    return null
+  }
+}
+
+function IfanrMarkIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg role="img" aria-label="ifanr" width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flex: '0 0 auto' }}>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" stroke="#ec1700" strokeWidth="1.8" />
+      <path d="M8 8L16 16" stroke="#ec1700" strokeWidth="3.6" strokeLinecap="square" />
+    </svg>
+  )
+}
 
 function isSaturdayPublication(publicationDate?: string) {
   if (!publicationDate) return false
@@ -838,66 +865,182 @@ async function hashPassword(username: string, password: string): Promise<string>
   return sha256(str)
 }
 
-function AuthDialog({ isReadOnly, authUser, busy, error, closing = false, onClose, onLogin, onChangePassword, onLogout }: {
+function AuthDialog({
+  isReadOnly, authUser, busy, error, closing = false, has2FA, onClose, onLogin,
+  onChangePassword, onStart2FA, onEnable2FA, onDisable2FA, onLogout,
+}: {
   isReadOnly: boolean
   authUser: string
   busy: boolean
   error: string
   closing?: boolean
+  has2FA: boolean
   onClose: () => void
-  onLogin: (username: string, password: string) => void
+  onLogin: (username: string, password: string, totpCode?: string) => void
   onChangePassword: (currentPassword: string, newPassword: string) => void
+  onStart2FA: () => Promise<{ secret: string; otpauth_url: string }>
+  onEnable2FA: (totpCode: string) => Promise<string[]>
+  onDisable2FA: (totpCode: string) => Promise<void>
   onLogout: () => void
 }) {
   const [username, setUsername] = useState('Shawn Rain')
   const [password, setPassword] = useState('')
+  const [totpCode, setTotpCode] = useState('')
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const passwordChangeReady = Boolean(
-    currentPassword.trim()
-    && newPassword.length >= 12
-    && newPassword === confirmPassword,
-  )
+  const [showPasswordForm, setShowPasswordForm] = useState(false)
+  const [twoFactorView, setTwoFactorView] = useState<'idle' | 'setup' | 'recovery' | 'disable'>('idle')
+  const [setupPayload, setSetupPayload] = useState<{ secret: string; otpauth_url: string } | null>(null)
+  const [verifyTotpInput, setVerifyTotpInput] = useState('')
+  const [twoFactorError, setTwoFactorError] = useState('')
+  const [twoFactorBusy, setTwoFactorBusy] = useState(false)
+  const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
+  const [recoverySaved, setRecoverySaved] = useState(false)
+  const [copyMessage, setCopyMessage] = useState('')
+
+  const passwordChangeReady = Boolean(currentPassword.trim() && newPassword.length >= 12 && newPassword === confirmPassword)
+  const cleanTotp = (value: string) => value.replace(/\D/g, '').slice(0, 6)
+  const cleanSecondFactor = (value: string) => value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 9)
+  const secondFactorReady = (value: string) => /^\d{6}$/.test(value) || /^[A-Z0-9]{4}-?[A-Z0-9]{4}$/.test(value)
+  const qrSvgData = setupPayload ? generateQrSvgDataUri(setupPayload.otpauth_url) : ''
+  const recoveryText = `ifanr 早报编辑台备用码\n账号：${authUser || 'Shawn Rain'}\n\n${recoveryCodes.join('\n')}\n\n每个备用码只能使用一次，请离线妥善保存。`
+
+  const startSetup = async () => {
+    setTwoFactorBusy(true)
+    setTwoFactorError('')
+    setVerifyTotpInput('')
+    setCopyMessage('')
+    try {
+      setSetupPayload(await onStart2FA())
+      setTwoFactorView('setup')
+    } catch (setupError) {
+      setTwoFactorError(setupError instanceof Error ? setupError.message : '无法生成绑定二维码')
+    } finally {
+      setTwoFactorBusy(false)
+    }
+  }
+
+  const enableTwoFactor = async () => {
+    if (!/^\d{6}$/.test(verifyTotpInput) || !setupPayload) return
+    setTwoFactorBusy(true)
+    setTwoFactorError('')
+    try {
+      setRecoveryCodes(await onEnable2FA(verifyTotpInput))
+      setRecoverySaved(false)
+      setTwoFactorView('recovery')
+      setSetupPayload(null)
+      setVerifyTotpInput('')
+    } catch (enableError) {
+      setTwoFactorError(enableError instanceof Error ? enableError.message : '动态验证码不正确或已过期')
+    } finally {
+      setTwoFactorBusy(false)
+    }
+  }
+
+  const disableTwoFactor = async () => {
+    if (!secondFactorReady(verifyTotpInput)) return
+    setTwoFactorBusy(true)
+    setTwoFactorError('')
+    try {
+      await onDisable2FA(verifyTotpInput)
+      setTwoFactorView('idle')
+      setVerifyTotpInput('')
+    } catch (disableError) {
+      setTwoFactorError(disableError instanceof Error ? disableError.message : '无法关闭两步验证')
+    } finally {
+      setTwoFactorBusy(false)
+    }
+  }
+
+  const copyText = async (text: string, message: string) => {
+    const copied = await writeClipboardText(text)
+    setCopyMessage(copied ? message : '复制失败，请手动选择文本')
+  }
+
+  const resetTwoFactorView = () => {
+    setTwoFactorView('idle')
+    setSetupPayload(null)
+    setVerifyTotpInput('')
+    setTwoFactorError('')
+    setCopyMessage('')
+  }
 
   return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}>
-    <form className={`auth-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onSubmit={(event) => {
+    <form className={`auth-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="auth-dialog-title" onSubmit={(event) => {
       event.preventDefault()
-      if (isReadOnly) onLogin(username, password)
+      if (isReadOnly) onLogin(username, password, totpCode)
       else if (passwordChangeReady) onChangePassword(currentPassword, newPassword)
     }} onMouseDown={(event) => event.stopPropagation()}>
       <header>
-        <div><span>管理员鉴权</span><h2>{isReadOnly ? '解锁编辑权限' : '已获得编辑权限'}</h2></div>
+        <div><span>管理员鉴权</span><h2 id="auth-dialog-title">{isReadOnly ? '解锁编辑权限' : '账号与安全'}</h2></div>
         <IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton>
       </header>
       <div className="auth-dialog-body">
         {isReadOnly ? <>
-          <p className="auth-desc">工作台当前处于只读模式。请输入管理员账号与密码解锁编辑与提交权限。</p>
-          <label><span>用户名</span><input autoFocus type="text" value={username} placeholder="Shawn Rain" onChange={(e) => setUsername(e.target.value)} /></label>
-          <label><span>密码</span><input type="password" value={password} placeholder="请输入管理员密码" onChange={(e) => setPassword(e.target.value)} /></label>
+          <div className="auth-login-intro"><div className="auth-login-icon"><Lock size={18} /></div><div><strong>工作台当前为只读</strong><p>验证管理员身份后可恢复编辑、提交与发布操作。</p></div></div>
+          <label><span>用户名</span><input autoFocus autoComplete="username" type="text" value={username} placeholder="Shawn Rain" onChange={(event) => setUsername(event.target.value)} /></label>
+          <label><span>密码</span><input autoComplete="current-password" type="password" value={password} placeholder="请输入管理员密码" onChange={(event) => setPassword(event.target.value)} /></label>
+          {has2FA ? <label><span>安全验证码</span><input className="auth-code-input" autoComplete="one-time-code" maxLength={9} value={totpCode} placeholder="6 位动态验证码或备用码" onChange={(event) => setTotpCode(cleanSecondFactor(event.target.value))} /><small>打开身份验证器查看验证码；手机不在身边时可使用备用码。</small></label> : null}
         </> : <>
-          <div className="auth-unlocked-info">
-            <div className="unlocked-badge"><Unlock size={24} /></div>
-            <p>当前以管理员 <strong>{authUser || 'Shawn Rain'}</strong> 身份登录，已解锁全量编辑权限。</p>
+          <div className="auth-account-card">
+            <div className="auth-account-identity"><div className="unlocked-badge"><Unlock size={17} /></div><div><strong>{authUser || 'Shawn Rain'}</strong><span>管理员权限已解锁</span></div></div>
+            <button type="button" className="auth-text-button" disabled={busy} onClick={onLogout}>退出登录</button>
           </div>
-          <div className="auth-password-section">
-            <strong>修改密码</strong>
-            <label><span>当前密码</span><input autoFocus type="password" autoComplete="current-password" value={currentPassword} placeholder="输入当前密码" onChange={(event) => setCurrentPassword(event.target.value)} /></label>
-            <label><span>新密码</span><input type="password" autoComplete="new-password" minLength={12} value={newPassword} placeholder="至少 12 个字符" onChange={(event) => setNewPassword(event.target.value)} /></label>
-            <label><span>确认新密码</span><input type="password" autoComplete="new-password" minLength={12} value={confirmPassword} placeholder="再次输入新密码" onChange={(event) => setConfirmPassword(event.target.value)} /></label>
-            {confirmPassword && newPassword !== confirmPassword ? <p className="auth-error-msg">两次输入的新密码不一致</p> : null}
-          </div>
+
+          <section className="auth-security-section" aria-labelledby="two-factor-title">
+            <div className="auth-section-heading">
+              <div className="auth-section-icon"><ShieldCheck size={18} /></div>
+              <div><strong id="two-factor-title">两步验证</strong><span>使用兼容 TOTP 的身份验证器保护账号</span></div>
+              {has2FA ? <span className="auth-2fa-badge enabled"><ShieldCheck size={12} />已开启</span> : <span className="auth-2fa-badge"><Shield size={12} />未开启</span>}
+            </div>
+
+            {twoFactorView === 'setup' && setupPayload ? <div className="auth-2fa-panel">
+              <div className="auth-step-title"><span>1</span><div><strong>绑定身份验证器</strong><p>用 Google Authenticator、1Password 或其他 TOTP 应用扫描二维码。</p></div></div>
+              <div className="auth-2fa-qr-container">
+                <img src={qrSvgData} className="auth-2fa-qr-img" alt="2FA 二维码" />
+                <div className="auth-2fa-qr-info"><span>无法扫码？手动输入密钥</span><div className="auth-secret-row"><code>{setupPayload.secret}</code><button type="button" aria-label="复制设置密钥" onClick={() => void copyText(setupPayload.secret, '设置密钥已复制')}><Copy size={14} /></button></div><button type="button" className="auth-inline-link" onClick={() => void startSetup()}>重新生成二维码</button></div>
+              </div>
+              <div className="auth-step-title"><span>2</span><div><strong>验证绑定</strong><p>输入应用中显示的 6 位动态验证码。</p></div></div>
+              <label><span>动态验证码</span><input className="auth-code-input" autoFocus autoComplete="one-time-code" inputMode="numeric" maxLength={6} value={verifyTotpInput} placeholder="000 000" onChange={(event) => setVerifyTotpInput(cleanTotp(event.target.value))} /></label>
+              {copyMessage ? <p className="auth-success-msg" role="status">{copyMessage}</p> : null}
+              {twoFactorError ? <p className="auth-error-msg" role="alert">{twoFactorError}</p> : null}
+              <div className="auth-panel-actions"><button type="button" className="secondary-button" onClick={resetTwoFactorView}>取消</button><button type="button" className="primary-button" disabled={twoFactorBusy || verifyTotpInput.length !== 6} onClick={() => void enableTwoFactor()}>{twoFactorBusy ? <LoaderCircle size={15} className="spin" /> : <ShieldCheck size={15} />}确认开启</button></div>
+            </div> : twoFactorView === 'recovery' ? <div className="auth-2fa-panel recovery">
+              <div className="auth-step-title success"><span><Check size={15} /></span><div><strong>两步验证已开启</strong><p>请立即保存备用码。每个只能使用一次，关闭此窗口后将不再显示。</p></div></div>
+              <div className="auth-recovery-grid">{recoveryCodes.map((code) => <code key={code}>{code}</code>)}</div>
+              <div className="auth-panel-actions spread"><div><button type="button" className="secondary-button" onClick={() => void copyText(recoveryText, '全部备用码已复制')}><Copy size={14} />复制全部</button><button type="button" className="secondary-button" onClick={() => downloadText('ifanr-2fa-recovery-codes.txt', recoveryText, 'text/plain;charset=utf-8')}><Download size={14} />下载</button></div>{copyMessage ? <span className="auth-copy-note" role="status">{copyMessage}</span> : null}</div>
+              <label className="auth-confirm-check"><input type="checkbox" checked={recoverySaved} onChange={(event) => setRecoverySaved(event.target.checked)} /><span>我已把备用码保存在安全的位置</span></label>
+              <button type="button" className="primary-button auth-finish-2fa" disabled={!recoverySaved} onClick={() => { resetTwoFactorView(); setRecoveryCodes([]) }}>完成设置</button>
+            </div> : twoFactorView === 'disable' ? <div className="auth-2fa-panel danger">
+              <div className="auth-step-title"><span><KeyRound size={15} /></span><div><strong>关闭两步验证？</strong><p>之后只需密码即可登录。输入当前动态验证码或一个备用码确认。</p></div></div>
+              <label><span>安全验证码</span><input autoFocus className="auth-code-input" autoComplete="one-time-code" maxLength={9} value={verifyTotpInput} placeholder="6 位动态验证码或备用码" onChange={(event) => setVerifyTotpInput(cleanSecondFactor(event.target.value))} /></label>
+              {twoFactorError ? <p className="auth-error-msg" role="alert">{twoFactorError}</p> : null}
+              <div className="auth-panel-actions"><button type="button" className="secondary-button" onClick={resetTwoFactorView}>取消</button><button type="button" className="danger-button" disabled={twoFactorBusy || !secondFactorReady(verifyTotpInput)} onClick={() => void disableTwoFactor()}>{twoFactorBusy ? <LoaderCircle size={15} className="spin" /> : null}关闭两步验证</button></div>
+            </div> : <div className="auth-2fa-summary">
+              <p>{has2FA ? '登录时需要密码和动态验证码，备用码可在无法使用手机时应急登录。' : '开启后，即使密码泄露，仍需要手机上的动态验证码才能登录。'}</p>
+              {has2FA ? <button type="button" className="auth-inline-link danger-link" onClick={() => { setTwoFactorView('disable'); setVerifyTotpInput(''); setTwoFactorError('') }}>关闭两步验证</button> : <button type="button" className="primary-button" disabled={twoFactorBusy} onClick={() => void startSetup()}>{twoFactorBusy ? <LoaderCircle size={15} className="spin" /> : <QrCode size={15} />}开始设置</button>}
+              {twoFactorError ? <p className="auth-error-msg" role="alert">{twoFactorError}</p> : null}
+            </div>}
+          </section>
+
+          <section className="auth-security-section auth-password-section" aria-labelledby="password-title">
+            <div className="auth-section-heading"><div className="auth-section-icon"><KeyRound size={18} /></div><div><strong id="password-title">登录密码</strong><span>建议定期更新，并避免与其他账号重复</span></div>{!showPasswordForm ? <button type="button" className="auth-text-button" onClick={() => setShowPasswordForm(true)}>修改</button> : null}</div>
+            {showPasswordForm ? <>
+              <div className="auth-password-fields">
+                <label><span>当前密码</span><input autoFocus type="password" autoComplete="current-password" value={currentPassword} placeholder="输入当前密码" onChange={(event) => setCurrentPassword(event.target.value)} /></label>
+                <label><span>新密码</span><input type="password" autoComplete="new-password" minLength={12} value={newPassword} placeholder="至少 12 个字符" onChange={(event) => setNewPassword(event.target.value)} /></label>
+                <label><span>确认新密码</span><input type="password" autoComplete="new-password" minLength={12} value={confirmPassword} placeholder="再次输入新密码" onChange={(event) => setConfirmPassword(event.target.value)} /></label>
+              </div>
+              {confirmPassword && newPassword !== confirmPassword ? <p className="auth-error-msg">两次输入的新密码不一致</p> : null}
+              <div className="auth-panel-actions"><button type="button" className="secondary-button" onClick={() => { setShowPasswordForm(false); setCurrentPassword(''); setNewPassword(''); setConfirmPassword('') }}>取消</button><button type="submit" className="primary-button" disabled={busy || !passwordChangeReady}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}保存新密码</button></div>
+            </> : null}
+          </section>
         </>}
-        {error ? <p className={error.startsWith('密码已更新') ? 'auth-success-msg' : 'auth-error-msg'}>{error}</p> : null}
+        {error ? <p className={error.startsWith('密码已更新') || error.includes('成功') ? 'auth-success-msg auth-global-message' : 'auth-error-msg auth-global-message'}>{error}</p> : null}
       </div>
       <footer>
-        <button type="button" className="secondary-button" onClick={onClose}>取消</button>
-        {isReadOnly
-          ? <button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim()}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}验证登录</button>
-          : <>
-            <button type="button" className="danger-button" disabled={busy} onClick={onLogout}>退出登录</button>
-            <button type="submit" className="primary-button" disabled={busy || !passwordChangeReady}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}保存新密码</button>
-          </>}
+        {isReadOnly ? <><button type="button" className="secondary-button" onClick={onClose}>取消</button><button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim() || (has2FA && !secondFactorReady(totpCode))}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}安全登录</button></> : <button type="button" className="primary-button" onClick={onClose}>完成</button>}
       </footer>
     </form>
   </div>
@@ -920,7 +1063,9 @@ function issueWithMetrics(issue: Issue, stories: Story[]): Issue {
     stories: normalizedStories,
     selected_count: normalizedStories.filter((story) => story.selected && story.status !== 'excluded').length,
     ready_count: normalizedStories.filter((story) => story.selected && story.status === 'ready').length,
-    review_count: normalizedStories.filter((story) => story.status === 'needs_review' || story.changed_since_review).length,
+    review_count: issue.diagnostics?._story_scope
+      ? issue.review_count
+      : normalizedStories.filter((story) => story.status === 'needs_review' || story.changed_since_review).length,
   }
 }
 
@@ -937,6 +1082,7 @@ export function App() {
   const [dataMode, setDataMode] = useState<'worker' | 'static' | 'offline'>('offline')
   const [repoRuntimeAccess, setRepoRuntimeAccess] = useState(true)
   const [loading, setLoading] = useState(true)
+  const [loadingIssueDetails, setLoadingIssueDetails] = useState(false)
   const [error, setError] = useState('')
   const [operationError, setOperationError] = useState('')
   const [query, setQuery] = useState('')
@@ -979,13 +1125,16 @@ export function App() {
   const [isReadOnly, setIsReadOnly] = useState(false)
   const [authBusy, setAuthBusy] = useState(false)
   const [authMessage, setAuthMessage] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(() => localStorage.getItem(AVATAR_STORAGE_KEY))
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
+  const [avatarBusy, setAvatarBusy] = useState(false)
+  const [avatarMessage, setAvatarMessage] = useState('')
   const [showAvatarMenu, setShowAvatarMenu] = useState(false)
   const [avatarMenuClosing, setAvatarMenuClosing] = useState(false)
   const avatarFileRef = useRef<HTMLInputElement | null>(null)
   const avatarMenuRef = useRef<HTMLDivElement | null>(null)
   const avatarTriggerRef = useRef<HTMLButtonElement | null>(null)
   const avatarCloseTimerRef = useRef<number | null>(null)
+  const avatarMigrationRef = useRef(false)
   const sidebarItemRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
   useEffect(() => {
@@ -998,11 +1147,49 @@ export function App() {
     }
   }, [activeStoryId, selectedStoryId])
 
+  const [has2FA, setHas2FA] = useState(false)
+
+  const doStart2FA = () => api.authSetup2FA()
+
+  const doEnable2FA = async (totpInput: string): Promise<string[]> => {
+    const result = await api.authEnable2FA(totpInput)
+    setAuthToken(result.token)
+    setHas2FA(true)
+    setAuthMessage('两步验证设置成功')
+    return result.recovery_codes
+  }
+
+  const doDisable2FA = async (totpInput: string): Promise<void> => {
+    const result = await api.authDisable2FA(totpInput)
+    setAuthToken(result.token)
+    setHas2FA(false)
+    setAuthMessage('两步验证已关闭')
+  }
+
   const checkAuthStatus = useCallback(async () => {
     try {
       const status = await api.authStatus()
       setIsReadOnly(status.read_only)
+      setHas2FA(status.has_2fa)
       if (status.username) setAuthUser(status.username)
+      const serverAvatarUrl = status.avatar_url ? resolveApiAssetUrl(status.avatar_url) : null
+      const legacyAvatar = localStorage.getItem(LEGACY_AVATAR_STORAGE_KEY)
+      setAvatarUrl(serverAvatarUrl || (status.authenticated ? legacyAvatar : null))
+      if (serverAvatarUrl && legacyAvatar) {
+        localStorage.removeItem(LEGACY_AVATAR_STORAGE_KEY)
+      } else if (status.authenticated && legacyAvatar && !avatarMigrationRef.current) {
+        const legacyFile = legacyAvatarFile(legacyAvatar)
+        if (legacyFile) {
+          avatarMigrationRef.current = true
+          try {
+            const migrated = await api.authUploadAvatar(legacyFile)
+            setAvatarUrl(resolveApiAssetUrl(migrated.avatar_url))
+            localStorage.removeItem(LEGACY_AVATAR_STORAGE_KEY)
+          } catch {
+            avatarMigrationRef.current = false
+          }
+        }
+      }
     } catch {
       // ignore
     }
@@ -1012,16 +1199,17 @@ export function App() {
     void checkAuthStatus()
   }, [checkAuthStatus, dataMode])
 
-  const doAuthLogin = async (usernameInput: string, passwordInput: string) => {
+  const doAuthLogin = async (usernameInput: string, passwordInput: string, totpInput?: string) => {
     if (!usernameInput.trim() || !passwordInput.trim()) return
     setAuthBusy(true)
     setAuthMessage('正在验证安全登录…')
     try {
       const pHash = await hashPassword(usernameInput, passwordInput)
-      const res = await api.authLogin(usernameInput.trim(), pHash)
+      const res = await api.authLogin(usernameInput.trim(), pHash, totpInput || '')
       setAuthToken(res.token)
       setIsReadOnly(false)
       if (res.username) setAuthUser(res.username)
+      await checkAuthStatus()
       setAuthMessage('')
       closeOverlay('auth')
     } catch (err) {
@@ -1032,14 +1220,16 @@ export function App() {
   }
 
   const doAuthLogout = async () => {
-    setAuthToken('')
-    setIsReadOnly(true)
-    setAuthMessage('')
-    closeOverlay('auth')
     try {
       await api.authLogout()
     } catch {
       // ignore
+    } finally {
+      setAuthToken('')
+      setIsReadOnly(true)
+      setAvatarUrl(null)
+      setAuthMessage('')
+      closeOverlay('auth')
     }
   }
 
@@ -1059,6 +1249,49 @@ export function App() {
       setAuthMessage(err instanceof Error ? err.message : '密码修改失败')
     } finally {
       setAuthBusy(false)
+    }
+  }
+
+  const uploadAccountAvatar = async (file: File) => {
+    if (isReadOnly) {
+      setAvatarMessage('请先登录，再更换账号头像')
+      return
+    }
+    if (!['image/jpeg', 'image/png', 'image/gif', 'image/webp'].includes(file.type)) {
+      setAvatarMessage('请选择 JPEG、PNG、GIF 或 WebP 图片')
+      return
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setAvatarMessage('头像不能超过 5 MB')
+      return
+    }
+    setAvatarBusy(true)
+    setAvatarMessage('正在保存到账号…')
+    try {
+      const result = await api.authUploadAvatar(file)
+      setAvatarUrl(resolveApiAssetUrl(result.avatar_url))
+      localStorage.removeItem(LEGACY_AVATAR_STORAGE_KEY)
+      setAvatarMessage('头像已保存到服务器账号')
+    } catch (error) {
+      setAvatarMessage(error instanceof Error ? error.message : '头像上传失败')
+    } finally {
+      setAvatarBusy(false)
+    }
+  }
+
+  const resetAccountAvatar = async () => {
+    if (isReadOnly) return
+    setAvatarBusy(true)
+    setAvatarMessage('正在恢复默认头像…')
+    try {
+      await api.authDeleteAvatar()
+      setAvatarUrl(null)
+      localStorage.removeItem(LEGACY_AVATAR_STORAGE_KEY)
+      setAvatarMessage('已恢复默认头像')
+    } catch (error) {
+      setAvatarMessage(error instanceof Error ? error.message : '无法恢复默认头像')
+    } finally {
+      setAvatarBusy(false)
     }
   }
   const [workerConnection, setWorkerConnection] = useState<WorkerConnection>({
@@ -1104,6 +1337,7 @@ export function App() {
   const issueRef = useRef<Issue | null>(null)
   const dataModeRef = useRef(dataMode)
   const workerRefreshInFlightRef = useRef(false)
+  const fullIssueLoadRef = useRef<Promise<void> | null>(null)
 
   useEffect(() => { issueRef.current = issue }, [issue])
   useEffect(() => { dataModeRef.current = dataMode }, [dataMode])
@@ -1176,11 +1410,12 @@ export function App() {
     }
     setWorkerConnection({ status: 'checking', detail: '正在测试 Worker 连接', url: workerUrl })
     try {
-      const health = await api.health()
+      const [health, current] = await Promise.all([
+        api.health(),
+        api.currentIssue('draft').catch(() => api.importLatest()),
+      ])
       setDataMode('worker')
       setRepoRuntimeAccess(health.repo_runtime_access)
-      let current: Issue
-      try { current = await api.currentIssue() } catch { current = await api.importLatest() }
       const normalizedIssue = issueWithMetrics(current, current.stories)
       setIssue(normalizedIssue)
       setBaseIssue(structuredClone(normalizedIssue))
@@ -1210,6 +1445,29 @@ export function App() {
     } finally { setLoading(false) }
   }, [])
 
+  const loadFullIssue = useCallback(async () => {
+    const currentIssue = issueRef.current
+    if (!currentIssue?.diagnostics?._story_scope || dataModeRef.current !== 'worker') return
+    if (fullIssueLoadRef.current) return fullIssueLoadRef.current
+    setLoadingIssueDetails(true)
+    const task = api.currentIssue()
+      .then((fullIssue) => {
+        const normalized = issueWithMetrics(fullIssue, fullIssue.stories)
+        if (issueRef.current?.id === normalized.id) issueRef.current = normalized
+        setIssue((current) => current?.id === normalized.id ? normalized : current)
+        setBaseIssue((current) => current?.id === normalized.id ? structuredClone(normalized) : current)
+      })
+      .catch((detailError) => {
+        showOperationError(detailError instanceof Error ? detailError.message : '完整刊期读取失败')
+      })
+      .finally(() => {
+        setLoadingIssueDetails(false)
+        fullIssueLoadRef.current = null
+      })
+    fullIssueLoadRef.current = task
+    return task
+  }, [showOperationError])
+
   useEffect(() => {
     void loadIssue(false)
   }, [loadIssue])
@@ -1219,8 +1477,9 @@ export function App() {
     if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || workerRefreshInFlightRef.current) return
     workerRefreshInFlightRef.current = true
     try {
+      const latestVersion = await api.currentIssueVersion()
+      if (latestVersion.id === currentIssue.id && latestVersion.revision === currentIssue.revision) return
       const latest = await api.currentIssue()
-      if (latest.id === currentIssue.id && latest.revision === currentIssue.revision) return
       const refreshed = issueWithMetrics(latest, latest.stories)
       const scrollTop = draftScrollRef.current?.scrollTop
       setIssue(refreshed)
@@ -1838,10 +2097,19 @@ export function App() {
     finally { setExporting(false) }
   }
 
-  const switchView = (next: View) => { setView(next); setSelectedStoryId(null); setCategory('全部'); setActiveDraftSection('全部'); setQuery('') }
+  const switchView = (next: View) => {
+    setView(next)
+    setSelectedStoryId(null)
+    setCategory('全部')
+    setActiveDraftSection('全部')
+    setQuery('')
+    if (next === 'candidates' || next === 'trash') void loadFullIssue()
+  }
 
-  const jumpToReview = () => {
-    const target = issue?.stories.find((story) => story.status === 'needs_review' || story.changed_since_review)
+  const jumpToReview = async () => {
+    await loadFullIssue()
+    const currentIssue = issueRef.current
+    const target = currentIssue?.stories.find((story) => story.status === 'needs_review' || story.changed_since_review)
     if (!target) return
     setDetailClosing(false)
     setSelectedStoryId(target.id)
@@ -1928,11 +2196,11 @@ export function App() {
           <button className={view === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
         </nav>
         <div className="topbar-actions">
-          <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
+          {!isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
-            {isReadOnly ? <span className="status-mode-tag read-only"><Lock size={12} />只读</span> : <span className="status-mode-tag unlocked"><Unlock size={12} />编辑中</span>}
-          </button>
+            <span className="status-mode-tag unlocked"><Unlock size={12} />编辑中</span>
+          </button> : null}
           <IconButton title="新增条目" onClick={() => { setClosingOverlay(null); setShowCreateStory(true) }} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
           <IconButton title="刷新" onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
           <IconButton title={theme === 'system' ? `跟随系统（当前${effectiveTheme === 'dark' ? '深色' : '浅色'}）` : theme === 'dark' ? '深色模式' : '浅色模式'} onClick={() => setTheme((current) => current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system')}><>{theme === 'system' ? <Monitor size={17} /> : theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}</></IconButton>
@@ -1942,7 +2210,7 @@ export function App() {
             ref={avatarTriggerRef}
             className={`avatar-button ${showAvatarMenu && !avatarMenuClosing ? 'active' : ''}`}
             type="button"
-            title={isReadOnly ? '未登录' : authUser}
+            title={isReadOnly ? 'ifanr' : authUser}
             aria-label="账号"
             onClick={() => {
               if (showAvatarMenu && !avatarMenuClosing) closeAvatarMenu()
@@ -1978,17 +2246,18 @@ export function App() {
               {avatarUrl ? <img src={avatarUrl} alt="头像" /> : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
             </div>
             <div className="avatar-menu-info">
-              <strong>{isReadOnly ? '未登录' : (authUser || 'Shawn Rain')}</strong>
+              <strong>{isReadOnly ? 'ifanr' : (authUser || 'Shawn Rain')}</strong>
               <span>{isReadOnly ? '只读模式' : '编辑权限已解锁'}</span>
             </div>
           </div>
           <div className="avatar-menu-divider" />
-          <button type="button" className="avatar-menu-item" onClick={() => { avatarFileRef.current?.click() }}>
-            <Upload size={14} />更换头像
-          </button>
-          {avatarUrl ? <button type="button" className="avatar-menu-item" onClick={() => { localStorage.removeItem(AVATAR_STORAGE_KEY); setAvatarUrl(null) }}>
+          {!isReadOnly ? <button type="button" className="avatar-menu-item" disabled={avatarBusy} onClick={() => { setAvatarMessage(''); avatarFileRef.current?.click() }}>
+            {avatarBusy ? <LoaderCircle size={14} className="spin" /> : <Upload size={14} />}更换头像
+          </button> : null}
+          {!isReadOnly && avatarUrl ? <button type="button" className="avatar-menu-item" disabled={avatarBusy} onClick={() => void resetAccountAvatar()}>
             <X size={14} />恢复默认头像
           </button> : null}
+          {avatarMessage ? <p className="avatar-menu-status" role="status">{avatarMessage}</p> : null}
           <div className="avatar-menu-divider" />
           <button type="button" className="avatar-menu-item" onClick={() => {
             closeAvatarMenu()
@@ -2008,17 +2277,12 @@ export function App() {
             type="file"
             accept="image/jpeg,image/png,image/gif,image/webp"
             className="visually-hidden"
+            disabled={avatarBusy || isReadOnly}
             onChange={(event) => {
               const file = event.target.files?.[0]
               if (!file) return
-              const reader = new FileReader()
-              reader.onload = (e) => {
-                const dataUrl = e.target?.result as string
-                localStorage.setItem(AVATAR_STORAGE_KEY, dataUrl)
-                setAvatarUrl(dataUrl)
-              }
-              reader.readAsDataURL(file)
               event.target.value = ''
+              void uploadAccountAvatar(file)
             }}
           />
         </div> : null}
@@ -2081,22 +2345,23 @@ export function App() {
             </div>
 
             <div className="sidebar-footer">
-              <div className="issue-metrics"><button type="button" onClick={() => switchView('draft')}><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></button><button type="button" onClick={() => { setView('candidates'); setCandidateStatus('all'); setCategory('全部'); setQuery('') }}><strong>{issue?.ready_count || 0}</strong><span>可用</span></button><button type="button" onClick={jumpToReview} disabled={!issue?.review_count}><strong>{issue?.review_count || 0}</strong><span>待复核</span></button></div>
+              <div className="issue-metrics"><button type="button" onClick={() => switchView('draft')}><strong>{issue?.selected_count || 0}</strong><span>Bot 成稿</span></button><button type="button" onClick={() => { switchView('candidates'); setCandidateStatus('all') }}><strong>{issue?.ready_count || 0}</strong><span>可用</span></button><button type="button" onClick={() => void jumpToReview()} disabled={!issue?.review_count}><strong>{issue?.review_count || 0}</strong><span>待复核</span></button></div>
             </div>
           </aside>
 
           <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
+            {!loading && loadingIssueDetails && (view === 'candidates' || view === 'trash') ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在载入完整候选库</span></div> : null}
             {!loading && issue && view === 'draft' ? <div className="draft-stage">
               <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void (isSaturdayIssue ? moveStoryToWeekendSection(story.id, target) : moveStoryToCategory(story.id, target))} moveOptions={isSaturdayIssue ? weekendDraftCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendDraftSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDragEnd={clearOutlineDrag} onDrop={(after) => void handleDrop(story.id, after)} />)}</section>)}</div></div>
             </div> : null}
-            {!loading && issue && view === 'candidates' ? <>
+            {!loading && !loadingIssueDetails && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、正文或来源" /></div></div>
               <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => requestDeleteStory(story)} />)}</div>
             </> : null}
-            {!loading && issue && view === 'trash' ? <>
+            {!loading && !loadingIssueDetails && issue && view === 'trash' ? <>
               <header className="candidate-masthead trash-masthead"><div><span>当前刊期</span><h1>回收站</h1><p>仅保留当天被移出的选题，恢复后回到原栏目末尾。</p></div><strong>{trashStories.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索已删除的选题" /></div></div>
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
@@ -2111,9 +2376,40 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
-      {showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onLogout={doAuthLogout} /> : null}
+      {showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )
+}
+export async function writeClipboardText(text: string): Promise<boolean> {
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch {
+      // Fall through to the synchronous copy path. It remains available on
+      // the HTTP-hosted editorial console where Clipboard API is restricted.
+    }
+  }
+
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.readOnly = true
+  textarea.setAttribute('aria-hidden', 'true')
+  textarea.style.position = 'fixed'
+  textarea.style.left = '-9999px'
+  textarea.style.top = '0'
+  document.body.appendChild(textarea)
+  textarea.focus()
+  textarea.select()
+  textarea.setSelectionRange(0, textarea.value.length)
+
+  try {
+    return typeof document.execCommand === 'function' && document.execCommand('copy')
+  } catch {
+    return false
+  } finally {
+    textarea.remove()
+  }
 }
