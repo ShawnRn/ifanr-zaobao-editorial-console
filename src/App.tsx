@@ -24,8 +24,6 @@ import {
   LoaderCircle,
   Lock,
   Menu,
-  Monitor,
-  Moon,
   PanelRightClose,
   Plus,
   QrCode,
@@ -36,7 +34,6 @@ import {
   Shield,
   ShieldCheck,
   Sparkles,
-  Sun,
   Trash2,
   Unlock,
   Upload,
@@ -724,8 +721,9 @@ function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
   const [error, setError] = useState('')
 
   const submit = async () => {
-    if (!title.trim()) {
-      setError('请填写标题')
+    const urls = sourceUrls.split(/\r?\n|；/).map((item) => item.trim()).filter(Boolean)
+    if (!urls.length) {
+      setError('请至少填写一个来源 URL')
       return
     }
     setError('')
@@ -734,8 +732,8 @@ function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
         title: title.trim(),
         body: body.trim(),
         category,
-        selected,
-        source_urls: sourceUrls.split(/\r?\n|；/).map((item) => item.trim()).filter(Boolean),
+        selected: title.trim() ? selected : false,
+        source_urls: urls,
         source_name: '手动添加',
         source_type: 'manual',
         source_quality: 'unknown',
@@ -754,11 +752,11 @@ function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
     <form className={`story-create-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onSubmit={(event) => { event.preventDefault(); void submit() }} onMouseDown={(event) => event.stopPropagation()}>
       <header><div><span>人工补充</span><h2>手动添加选题</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header>
       <div className="story-create-fields">
-        <label className="wide"><span>标题</span><input autoFocus value={title} onChange={(event) => setTitle(event.target.value)} placeholder="输入正式早报标题" /></label>
+        <label className="wide"><span>标题（可留空）</span><input autoFocus value={title} onChange={(event) => setTitle(event.target.value)} placeholder="可只填来源 URL，后续由 AI 主编补写" /></label>
         <label><span>栏目</span><select value={category} onChange={(event) => setCategory(event.target.value)}>{publicationCategories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>
         <label><span>事件发生日</span><input type="date" value={eventDate} onChange={(event) => setEventDate(event.target.value)} /></label>
         <label className="wide"><span>正文</span><textarea rows={7} value={body} onChange={(event) => setBody(event.target.value)} placeholder="按早报 prompt 写入正文；也可以只填标题，稍后追源成稿" /></label>
-        <label className="wide"><span>来源 URL</span><textarea rows={3} value={sourceUrls} onChange={(event) => setSourceUrls(event.target.value)} placeholder="每行一个 URL，第一条作为主来源" /></label>
+        <label className="wide"><span>来源 URL（必填）</span><textarea rows={3} value={sourceUrls} onChange={(event) => setSourceUrls(event.target.value)} placeholder="每行一个 URL，第一条作为主来源" /></label>
         <label className="wide"><span>首次披露时间</span><input value={disclosedAt} onChange={(event) => setDisclosedAt(event.target.value)} placeholder="例如 2026-07-22 09:30" /></label>
         <label className="story-create-check wide"><input type="checkbox" checked={selected} onChange={(event) => setSelected(event.target.checked)} /><span>直接加入当前早报稿</span></label>
         {error ? <p className="story-create-error wide">{error}</p> : null}
@@ -2236,11 +2234,9 @@ export function App() {
           {!isPagesDeployment && !isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
             {workerConnection.status === 'checking' ? <LoaderCircle size={14} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={13} /> : <CloudOff size={14} />}
             <span>{connectionLabel}</span>
-            <span className="status-mode-tag unlocked"><Unlock size={12} />编辑中</span>
           </button> : null}
           <IconButton title="新增条目" onClick={() => { setClosingOverlay(null); setShowCreateStory(true) }} disabled={!issue || dataMode !== 'worker'}><Plus size={17} /></IconButton>
           <IconButton title="刷新" onClick={() => void refresh(false)} disabled={!issue}><RefreshCw size={17} /></IconButton>
-          <IconButton title={theme === 'system' ? `跟随系统（当前${effectiveTheme === 'dark' ? '深色' : '浅色'}）` : theme === 'dark' ? '深色模式' : '浅色模式'} onClick={() => setTheme((current) => current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system')}><>{theme === 'system' ? <Monitor size={17} /> : theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}</></IconButton>
           <button ref={settingsTriggerRef} className={`icon-button ${showSettings && !settingsClosing ? 'active' : ''}`} type="button" title="设置" aria-label="设置" onClick={toggleSettings}><Settings size={17} /></button>
           {!isPagesDeployment ? <button
             ref={avatarTriggerRef}
@@ -2266,6 +2262,8 @@ export function App() {
           </div>
           <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void loadIssue(true)}>{workerConnection.status === 'checking' ? '正在检测…' : '重新检测连接'}</button></div>
           <div className="settings-divider" /></> : null}
+          <label className="settings-theme-row"><span>界面主题</span><select aria-label="界面主题" value={theme} onChange={(event) => setTheme(event.target.value as 'system' | 'light' | 'dark')}><option value="system">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label>
+          <div className="settings-divider" />
           <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置 · Gemini 3.5 Flash' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
           <label><span>Gemini 模型</span><input aria-label="Gemini 模型" list="gemini-model-list" autoComplete="off" value={geminiModel} placeholder={defaultGeminiModel} onChange={(event) => setGeminiModel(event.target.value)} /></label>
           <datalist id="gemini-model-list">{geminiModels.map((model) => <option key={model.name} value={model.name}>{model.displayName}</option>)}</datalist>
