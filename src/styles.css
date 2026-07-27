@@ -340,7 +340,7 @@ a { color: inherit; }
 /* Drop indicator for main-area drag */
 .issue-article.drag-over-top::before { top: 0; bottom: auto; height: 3px; left: 0; right: 0; background: var(--brand); box-shadow: 0 0 8px var(--brand); }
 .issue-article.drag-over-bottom::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--brand); box-shadow: 0 0 8px var(--brand); }
-.issue-article h3 { margin: 0; color: var(--highlight-text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "苹方-简", "Segoe UI", sans-serif; font-size: 23px; line-height: 1.45; font-weight: 700; letter-spacing: 0; overflow-wrap: anywhere; }
+.issue-article h3 { margin: 0; color: var(--highlight-text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "苹方-简", "Segoe UI", sans-serif; font-size: 23px; line-height: 1.45; font-weight: 750; letter-spacing: 0; overflow-wrap: anywhere; -webkit-text-stroke: .15px currentColor; }
 .article-layout-with-image { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 34%); align-items: start; gap: 28px; }
 .article-copy { min-width: 0; }
 .article-side-image { width: 100%; height: auto; max-height: 190px; display: block; object-fit: contain; }

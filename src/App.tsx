@@ -485,17 +485,19 @@ function DetailPanel({
     else timerRef.current = window.setTimeout(submit, 600)
   }, [persist])
 
-  const flushPending = useCallback(() => {
+  const flushPending = useCallback(async () => {
+    const requests: Promise<unknown>[] = []
     if (titleSaveTimerRef.current !== null) {
       window.clearTimeout(titleSaveTimerRef.current)
       titleSaveTimerRef.current = null
-      if (title !== story.title) void persist({ title })
+      if (title !== story.title) requests.push(persist({ title }))
     }
     if (bodySaveTimerRef.current !== null) {
       window.clearTimeout(bodySaveTimerRef.current)
       bodySaveTimerRef.current = null
-      if (body !== story.body) void persist({ body })
+      if (body !== story.body) requests.push(persist({ body }))
     }
+    await Promise.all(requests)
   }, [body, persist, story.body, story.title, title])
 
   useEffect(() => () => {
@@ -504,11 +506,19 @@ function DetailPanel({
   }, [])
 
   return (
-    <aside className={`detail-panel ${closing ? 'closing' : ''}`}>
+    <aside className={`detail-panel ${closing ? 'closing' : ''}`} onKeyDownCapture={(event) => {
+      if (event.key !== 'Escape') return
+      event.preventDefault()
+      event.stopPropagation()
+      void (async () => {
+        await flushPending()
+        onClose()
+      })()
+    }}>
       <div className="detail-toolbar">
         <span className="detail-kicker">稿件与来源</span>
         <span className={`autosave-state ${saveState}`} aria-live="polite">{saveState === 'saving' ? '正在保存' : saveState === 'error' ? '保存失败' : staticMode ? '本地审稿' : '已保存'}</span>
-        <IconButton title="关闭详情" onClick={() => { flushPending(); onClose() }}><PanelRightClose size={18} /></IconButton>
+        <IconButton title="关闭详情" onClick={() => { void (async () => { await flushPending(); onClose() })() }}><PanelRightClose size={18} /></IconButton>
       </div>
       <div className="detail-scroll">
         <label className="field-label" htmlFor="story-title">标题</label>

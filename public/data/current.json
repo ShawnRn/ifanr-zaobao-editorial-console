@@ -5,11 +5,11 @@
   "state": "editing",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 27,
-  "selected_count": 41,
-  "review_count": 36,
+  "revision": 71,
+  "selected_count": 28,
+  "review_count": 23,
   "ready_count": 5,
-  "updated_at": "2026-07-27T08:21:35+00:00",
+  "updated_at": "2026-07-27T08:33:32+00:00",
   "stories": [
     {
       "id": "0d377321-582d-52a0-9305-3adc7592c5f1",
@@ -34,7 +34,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/67e9d17812a3634253c4.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -129,7 +129,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/3dc151fa40362be454fc.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -224,7 +224,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/b76fc76e803730d62603.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -279,7 +279,7 @@
       "id": "45b56358-e45f-57ca-9e9a-daa7b083dfc4",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "d4782d9c6d15426835a093c1cc2236c8daaa77df",
-      "title": "长鑫科技收盘 49 元、上涨 465.82%，朱一明拟向员工分配 7.68 亿股",
+      "title": "长鑫科技上市首日上涨 465.82%，创始人拟向员工分配 7.68 亿股",
       "body": "长鑫科技昨日在科创板上市，开盘报 49.50 元，较 8.66 元发行价上涨 471.59%，对应市值 3.31 万亿元，超过此前 A 股市值最高的工商银行。\n\n收盘后，报 49.00 元，较发行价上涨 465.82%，当日最高 55.03 元、最低 38.11 元，总市值为 3.28 万亿元，成交额 1411.87 亿元。\n\n长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。\n\n搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。",
       "category": "大公司",
       "status": "needs_review",
@@ -298,13 +298,14 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": false,
-      "image_url": "",
+      "image_url": "data/images/d6b5cdc37ab6e140831e.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
         "_manual_fields": [
-          "body"
+          "body",
+          "title"
         ],
         "all_urls": [
           "https://finance.caixin.com/2026-07-27/102468332.html",
@@ -396,144 +397,13 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:21:35+00:00"
-    },
-    {
-      "id": "beaac9f2-1a26-5cfb-a046-9aaac50c6078",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "7ab0583ded517477968b7e49efca03f62dbebf01",
-      "title": "长鑫科技上市首日股价一度上涨 472%，创始人拟向员工分配 7.68 亿股",
-      "body": "长鑫存储昨日在上海证券交易所科创板挂牌，发行规模约 98 亿美元，首日交易中股价一度较发行价上涨 472%。公司是中国主要 DRAM 厂商之一，上市募集资金将用于存储器研发、产能建设和补充流动资金。\n\n长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。\n\n搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。该报道提到，股票机会主要面向主管及以上员工，普通员工的奖金与加班安排则来自匿名员工的个人陈述。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 6,
-      "score": 0.0,
-      "source_url": "",
-      "source_name": "7ab0583ded517477968b7e49efca03f62dbebf01",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 12:04",
-      "published_at": "2026-07-27 12:04",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
-      "metadata": {
-        "_manual_fields": [
-          "body",
-          "title"
-        ],
-        "all_urls": [],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2466,
-          "url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
-          "title": "",
-          "publisher": "bloomberg.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true,
-          "fetched_at": null
-        },
-        {
-          "id": 2537,
-          "url": "https://photos.caixin.com/2026-07-26/102468234.html",
-          "title": "",
-          "publisher": "photos.caixin.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2683,
-          "url": "https://mp.weixin.qq.com/s/fR8SCHop0sBmM8UvFzLHxQ",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2684,
-          "url": "https://mp.weixin.qq.com/s/hhgPlNNdiNdDull4vJQgLA",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 3167,
-          "url": "https://weibo.com/ttarticle/p/show?id=2309405325295263023167",
-          "title": "",
-          "publisher": "weibo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 3236,
-          "url": "runtime://7ab0583ded517477968b7e49efca03f62dbebf01",
-          "title": "",
-          "publisher": "7ab0583ded517477968b7e49efca03f62dbebf01",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3361,
-          "text": "据彭博报道，中国存储芯片厂商长鑫科技 7 月 27 日在上海证券交易所科创板挂牌，发行规模约 98 亿美元，首日交易中股价一度较发行价上涨 472%。公司是中国主要 DRAM 厂商之一，上市募集资金将用于存储器研发、产能建设和补充流动资金。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3362,
-          "text": "长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 4087,
-          "text": "搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。该报道提到，股票机会主要面向主管及以上员工，普通员工的奖金与加班安排则来自匿名员工的个人陈述。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:16:17+00:00"
+      "updated_at": "2026-07-27T08:29:34+00:00"
     },
     {
       "id": "a281f9e7-aa28-59d2-a1fe-a9be286791ba",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "325337759723cbece528415f2a88a95b4be0a227",
-      "title": "小米汽车「澎程」将发布两款增程 SUV，7 月 30 日公布技术架构",
+      "title": "小米澎程将发布两款增程 SUV，7 月 30 日公布技术架构",
       "body": "小米澎程宣布 7 月 30 日晚 7 点举行技术发布，内容包括小米昆仑平台、小米昆仑超级增程和小米昆仑全域安全；两款智能可变大空间 SUV 也将亮相，分别是大七座旗舰增程 SUV 澎程 N90 Max 和大五座四驱增程 SUV 澎程 N70 Max。\n\n官方数据显示，截至 6 月 30 日，两款车型累计道路测试 626 天，投入测试车辆 566 台，实测里程 428 万公里。\n\n小米澎程是小米汽车的第二个系列，官方此前将其定位为智能可变大空间 SUV；两款车型都采用增程动力，发布会将进一步说明昆仑技术架构。",
       "category": "大公司",
       "status": "needs_review",
@@ -551,12 +421,15 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
+      "changed_since_review": false,
+      "image_url": "data/images/f4a2e23d6f0bb27d8d38.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_manual_fields": [
+          "title"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/824.htm"
         ],
@@ -608,102 +481,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "73b2660f-e96f-58e9-a1c0-b0dcfffca758",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "734975ae528ac3ee1c10008985c1567670eaff13",
-      "title": "三星计划在 HBM5 中采用 2nm 基础裸片",
-      "body": "三星半导体技术负责人确认，三星计划在 HBM5 世代引入 2nm 基础裸片。三星称，HBM5 运行速率预计比 HBM4E 提升 50% 以上，基础裸片将支持更高密度的硅通孔，以满足更高带宽需求。\n\n三星目前的 HBM4 和 HBM4E 都采用 4nm 基础裸片，但 HBM4E 通过高密度、高性能器件达到 14Gbps 以上速率，并重新排列金属层以降低功耗、改善散热。\n\n基础裸片位于 HBM 堆栈底部，负责连接内存堆栈与计算芯片；三星此次把工艺节点和 TSV 密度同时列为 HBM5 的升级方向。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 8,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/836.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:12",
-      "published_at": "2026-07-27 09:12",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "观点线索可能只有人物态度，入选前需确认原文有论点、理由、例子、行业语境或可引用原话",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/836.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/836.htm 🛰RSS · 2026 年 7 月 27 日 09:12",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2396,
-          "url": "https://www.ithome.com/0/981/836.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3324,
-          "text": "IT之家 7 月 27 日消息，根据三星半导体官方今日发布的人物访谈，三星电子晶圆代工业务技术开发负责人구자흠进一步确认， 三星计划在 HBM5 世代应用 2nm 的基础裸片 。三星电子存储器业务开发副总裁 황상준 今年 3 月也 进行了类似表态 。",
-          "source_url": "https://www.ithome.com/0/981/836.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3325,
-          "text": "구자흠提到， HBM5 的运行速率预计将较 HBM4E 提升 50% 以上 ，其基础裸片将支持更高密度的硅通孔 (TSV) 以满足行业需求。该内存堆栈选择 2nm 作为基础裸片工艺 旨在于性能和能效两方面实现重大改进 。",
-          "source_url": "https://www.ithome.com/0/981/836.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3326,
-          "text": "三星电子的 HBM4 和 HBM4E 上均配备 4nm 基础裸片，但这两个版本的基础裸片有所区别。三星电子发挥了其 4nm 节点的灵活性优势， 在 HBM4E 基础裸片上应用了高密度、超高性能器件 ，实现了 14+ Gbps 高速运行，而 金属层的更有效排列 则在降低功耗的同时优化散热路径。",
-          "source_url": "https://www.ithome.com/0/981/836.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3437,
-          "text": "三星半导体技术负责人确认，三星计划在 HBM5 世代引入 2nm 基础裸片。三星称，HBM5 运行速率预计比 HBM4E 提升 50% 以上，基础裸片将支持更高密度的硅通孔，以满足更高带宽需求。",
-          "source_url": "https://www.ithome.com/0/981/836.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3438,
-          "text": "三星目前的 HBM4 和 HBM4E 都采用 4nm 基础裸片，但 HBM4E 通过高密度、高性能器件达到 14Gbps 以上速率，并重新排列金属层以降低功耗、改善散热。",
-          "source_url": "https://www.ithome.com/0/981/836.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3439,
-          "text": "基础裸片位于 HBM 堆栈底部，负责连接内存堆栈与计算芯片；三星此次把工艺节点和 TSV 密度同时列为 HBM5 的升级方向。",
-          "source_url": "https://www.ithome.com/0/981/836.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:25:50+00:00"
     },
     {
       "id": "d14a580c-df1e-5b1a-b284-bcd1ffb3cf2f",
@@ -780,170 +558,10 @@
       "updated_at": "2026-07-27T08:19:18+00:00"
     },
     {
-      "id": "9910207b-c1df-5b9d-8ece-910708a8ce09",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "8afef88c4b75f6f92c314437bfe39ca3aad9415c",
-      "title": "💡 赫尔佐格：AI 下一次突破来自多个小型专业智能体协作",
-      "body": "德国人工智能专家、中国工程院外籍院士赫尔佐格近日接受央视《高端访谈》采访时表示，AI 下一次重大突破不一定来自单一、规模更大的系统，而可能来自多个小型专业化智能体的协同运作。\n\n他认为，小型智能体可以分别处理明确任务，再通过协作完成复杂工作；这种架构能够按需要增减组件，适配不同场景。赫尔佐格获得 2025 年度中华人民共和国国际科学技术合作奖。\n\n赫尔佐格的判断是把任务拆给多个专业组件，再由组件之间交换结果。采访中，他把可组合性和按场景调整规模列为这种路线的主要特点。\n\n在他的表述中，专业化组件的优势是可以根据任务调整组合，而不是让一个系统承担所有工作；这也是他把「小型智能体协作」称为下一步突破方向的理由。\n\n> 人工智能下一次重大突破将来自众多小型专业化智能体的协同运作。\n\n这句话把他的观点落在系统组织方式上：每个组件承担边界更清楚的任务，再由协作关系扩展整体能力。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 10,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/813.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 23:25",
-      "published_at": "2026-07-26 23:25",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/813.htm",
-          "https://weibo.com/1826017320/Rawew3qoz"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 来源：https://www.ithome.com/0/981/813.htm；https://weibo.com/1826017320/Rawew3qoz 🛰RSS · 2026 年 7 月 26 日 23:25",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2406,
-          "url": "https://www.ithome.com/0/981/813.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2541,
-          "url": "https://weibo.com/1826017320/Rawew3qoz",
-          "title": "",
-          "publisher": "weibo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3367,
-          "text": "德国人工智能专家、中国工程院外籍院士赫尔佐格近日接受央视《高端访谈》采访时表示，AI 下一次重大突破不一定来自单一、规模更大的系统，而可能来自多个小型专业化智能体的协同运作。",
-          "source_url": "https://www.ithome.com/0/981/813.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3368,
-          "text": "他认为，小型智能体可以分别处理明确任务，再通过协作完成复杂工作；这种架构能够按需要增减组件，适配不同场景。赫尔佐格获得 2025 年度中华人民共和国国际科学技术合作奖。",
-          "source_url": "https://www.ithome.com/0/981/813.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3369,
-          "text": "赫尔佐格的判断是把任务拆给多个专业组件，再由组件之间交换结果。采访中，他把可组合性和按场景调整规模列为这种路线的主要特点。",
-          "source_url": "https://www.ithome.com/0/981/813.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "606d590e-046d-517e-9267-29be64da3cbc",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "124d8830fdc966c1946ab1c0489228613944ec2d",
-      "title": "💡 林纳斯·托瓦兹：不喜欢 AI 就从项目中分叉出去",
-      "body": "Linux 创始人林纳斯·托瓦兹在接受 Business Insider 采访时谈到开发者对 AI 的抵触。他表示，开源软件的特点是任何人都可以复制、修改和分叉项目；如果开发者不接受项目加入 AI 功能，可以选择建立自己的分支，原项目仍可继续变化。\n\n这番话对应的是 Linux 社区围绕 AI 辅助开发和代码维护的争论。托瓦兹的判断建立在开源项目允许不同实现并存的机制上。\n\n他把开源软件的分叉机制视为解决分歧的实际办法：上游项目可以继续采用新的开发工具，反对者则可以保留自己的代码分支。这个回答并不要求整个社区对 AI 形成同一立场。\n\n他的回答把争议落到开源协作的具体规则上：项目维护者可以选择工具，社区成员也可以通过复制和修改代码形成独立路线。\n\n这也是标题中「fork off」的含义：不同意见可以通过代码分支保留下来，而不必先取得整个项目的统一同意。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 11,
-      "score": 0.0,
-      "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
-      "source_name": "businessinsider.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 21:01",
-      "published_at": "2026-07-26 21:01",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
-      "metadata": {
-        "all_urls": [
-          "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7 📮Folo · 2026 年 7 月 27 日 05:01",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2404,
-          "url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
-          "title": "",
-          "publisher": "businessinsider.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3370,
-          "text": "Linux 创始人林纳斯·托瓦兹在接受 Business Insider 采访时谈到开发者对 AI 的抵触。他表示，开源软件的特点是任何人都可以复制、修改和分叉项目；如果开发者不接受项目加入 AI 功能，可以选择建立自己的分支，原项目仍可继续变化。",
-          "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3371,
-          "text": "这番话对应的是 Linux 社区围绕 AI 辅助开发和代码维护的争论。托瓦兹的判断建立在开源项目允许不同实现并存的机制上。",
-          "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3372,
-          "text": "他把开源软件的分叉机制视为解决分歧的实际办法：上游项目可以继续采用新的开发工具，反对者则可以保留自己的代码分支。这个回答并不要求整个社区对 AI 形成同一立场。",
-          "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
       "id": "fab3c032-813d-5298-8f2f-f886bd86e039",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "bf323dd754a22a41ece9c7cdc2f5aff5558db588",
-      "title": "💡 Sam Altman：AI 未必会带来更短工时，竞争会填满空出来的时间",
+      "title": "💡 奥特曼：AI 未必会带来更短工时，竞争会填满空出来的时间",
       "body": "OpenAI CEO Sam Altman 在接受 Business Insider 采访时谈到，AI 带来的生产率提升并没有自动变成更短的工作周。他把原因归于人的竞争性：当技术释放出时间，个人和企业往往会把它重新投入竞争，而不是把它固定为休息时间。\n\nAltman 的说法把「技术进步」与「社会如何分配新增效率」分开：工具可以缩短完成任务所需时间，但工作制度是否改变，还取决于企业和个人的选择。采访讨论的是他对 AI 与工作时间的判断，并非 OpenAI 的工时制度安排。\n\n这一判断也没有把 AI 视为单独决定就业或工时的变量。他谈到的核心是，生产率提高之后，人们仍会为更多产出、职位和机会展开竞争，因此不会自然进入短工时状态。\n\nAltman 的回答没有把「四天工作周」当作技术部署后的必然结果，而是把它放在人的行为和组织激励之中讨论。AI 负责改变完成工作的效率，竞争仍会决定这些效率最终被用来增加产出，还是转化为更少的工作时间。\n\n他由此把对 AI 的判断从单纯的工具能力，延伸到技术进入劳动力市场后的使用方式：同一套自动化能力可以减少重复劳动，也可能提高对工作速度和产出的要求。",
       "category": "大公司",
       "status": "needs_review",
@@ -961,12 +579,15 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
+      "changed_since_review": false,
+      "image_url": "data/images/0ca2218b5f0506b8cca0.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
       "metadata": {
+        "_manual_fields": [
+          "title"
+        ],
         "all_urls": [
           "https://www.businessinsider.com/sam-altman-ai-4-hour-workweeks-people-competitive-2026-7"
         ],
@@ -1011,13 +632,13 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:26:46+00:00"
     },
     {
       "id": "b4d4743f-c530-5510-a636-4f88f2fc9379",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "cf9c89fe2d174d37208e880ee541cae7ec6fded7",
-      "title": "英伟达据报拟为 OpenAI 数据中心项目提供 2500 亿美元融资担保",
+      "title": "曝英伟达拟为 OpenAI 数据中心项目提供 2500 亿美元融资担保",
       "body": "据《华尔街日报》报道，英伟达正在与 OpenAI 洽谈，为后者在美国俄亥俄州南部租用软银旗下能源公司的 10GW 级数据中心项目提供约 2500 亿美元融资担保。该项目若计入芯片等成本，总投资额可能超过 5000 亿美元。\n\n报道称，项目所需电力由美国政府控制，日本方面提供资金支持；Anthropic、微软和谷歌近期也与美国商务部长霍华德·卢特尼克沟通过该项目。截至报道发布，英伟达和 OpenAI 未回应置评请求。\n\n这项安排仍处在谈判阶段，报道把英伟达的角色描述为融资担保方，而不是已经完成的数据中心投资。项目的规模、租赁结构和电力来源都与美国、日本及软银相关方的协商有关。",
       "category": "大公司",
       "status": "needs_review",
@@ -1043,7 +664,8 @@
       "metadata": {
         "_manual_fields": [
           "category",
-          "position"
+          "position",
+          "title"
         ],
         "all_urls": [
           "https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says",
@@ -1122,7 +744,175 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:15+00:00"
+      "updated_at": "2026-07-27T08:26:26+00:00"
+    },
+    {
+      "id": "11e87b8a-7c5a-55bd-862b-d0c20851f2fa",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "678dae6365533694a43eaad9623a8fc95540e7a9",
+      "title": "OPPO 启动小布 Next 共创计划，首批覆盖 Find X8、X9 与一加旗舰",
+      "body": "OPPO 宣布启动「小布 Next 计划」首轮共创招募。官方将其描述为面向下一代 AI 形态的技术探索，重点包括端侧全域记忆、全时意图感知和多智能体协作；入选用户可抢先体验相关能力及端侧优先的隐私方案。\n\n首批支持的机型包括 OPPO Find X8、Find X9 系列和一加 13、13T、15、15T 等机型。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 14,
+      "score": 0.0,
+      "source_url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/558c4c4a37931bcef23a.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "已进入当前 Bot 正式稿",
+      "metadata": {
+        "_manual_fields": [
+          "body",
+          "category",
+          "position"
+        ],
+        "all_urls": [
+          "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
+          "https://mp.weixin.qq.com/s/64tCZ5txJ-8QVlsHhl5crA",
+          "https://www.ithome.com/0/981/989.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2；https://mp.weixin.qq.com/s/64tCZ5txJ-8QVlsHhl5crA；https://www.ithome.com/0/981/989.htm 🧭飞书群 · 2026 年 7 月 27 日 15:17",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2952,
+          "url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2953,
+          "url": "https://mp.weixin.qq.com/s/64tCZ5txJ-8QVlsHhl5crA",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2954,
+          "url": "https://www.ithome.com/0/981/989.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3820,
+          "text": "OPPO 宣布启动「小布 Next 计划」首轮共创招募。官方将其描述为面向下一代 AI 形态的技术探索，重点包括端侧全域记忆、全时意图感知和多智能体协作；入选用户可抢先体验相关能力及端侧优先的隐私方案。",
+          "source_url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3821,
+          "text": "首批支持 OPPO Find X8、Find X9 系列和一加 13、13T、15、15T 等机型。用户可在系统「设置—帮助与反馈—共创」入口查看招募信息；该计划目前是共创体验，并非面向所有用户的正式功能推送。",
+          "source_url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:31:52+00:00"
+    },
+    {
+      "id": "73ccacd2-36c0-5cd0-baa3-71f31b7d12fb",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "b43f0f035d8d9a03f9cb51b954aaf1ca7ea258f7",
+      "title": "Pixel Watch 或加入「手机解锁手表」功能",
+      "body": "Android Authority 在 Google 的 Connected Phone & Watch 服务应用中发现「Phone to Watch Unlock」相关代码。按代码描述，用户先解锁配对的 Pixel 手机，Pixel Watch 可自动解除锁定；首次设置仍需在手表上验证现有 PIN 或图案。\n\n现有 Watch Unlock 的方向是由手表协助解锁手机，新功能则反向让手机解锁手表。相关代码还显示，受信任关系可能可从旧手表迁移到新手表。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 15,
+      "score": 0.0,
+      "source_url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
+      "source_name": "androidauthority.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "已进入当前 Bot 正式稿",
+      "metadata": {
+        "_manual_fields": [
+          "body",
+          "category",
+          "position"
+        ],
+        "all_urls": [
+          "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/ 🧭飞书群 · 2026 年 7 月 27 日 14:32",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2949,
+          "url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
+          "title": "",
+          "publisher": "androidauthority.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3816,
+          "text": "Android Authority 在 Google 的 Connected Phone & Watch 服务应用中发现「Phone to Watch Unlock」相关代码。按代码描述，用户先解锁配对的 Pixel 手机，Pixel Watch 可自动解除锁定；首次设置仍需在手表上验证现有 PIN 或图案。",
+          "source_url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3817,
+          "text": "现有 Watch Unlock 的方向是由手表协助解锁手机，新功能则反向让手机解锁手表。相关代码还显示，受信任关系可能可从旧手表迁移到新手表；该功能尚未上线，是否发布及时间仍未公布。",
+          "source_url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:29+00:00"
     },
     {
       "id": "a574b022-8eb7-51c7-bf35-d31c128c4842",
@@ -1214,7 +1004,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/8af7d32102c39f618955.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -1281,7 +1071,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/ccc7eab00597b82a8cf2.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
@@ -1372,7 +1162,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/59fe8046e169425eef71.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -1508,140 +1298,6 @@
       "updated_at": "2026-07-27T08:19:18+00:00"
     },
     {
-      "id": "46728f2d-a364-556a-a5cd-ebf62e5a4f94",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "b28f9e294856e4e604a2d2c10b918f50a3bf8734",
-      "title": "微信输入法鸿蒙版 1.0.0 上线，支持文字整理与跨设备复制图片",
-      "body": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。\n\n输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。官方发布版本号为 1.0.0。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/789.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 20:01",
-      "published_at": "2026-07-26 20:01",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/789.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/789.htm 🛰RSS · 2026 年 7 月 26 日 20:01",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2455,
-          "url": "https://www.ithome.com/0/981/789.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3373,
-          "text": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。",
-          "source_url": "https://www.ithome.com/0/981/789.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3374,
-          "text": "输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。官方发布版本号为 1.0.0。",
-          "source_url": "https://www.ithome.com/0/981/789.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "5ff7ae4a-4183-50e5-a6c5-adbfef3feb49",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "cdf927b75572ecde022c725fc651eec048d93e1c",
-      "title": "小米米家桌面照片打印机 2 开售，799 元起支持三种相纸尺寸",
-      "body": "米家桌面照片打印机 2 正式开售，单机 799 元、套装 999 元。设备采用四色热升华打印，支持 4 英寸、6 英寸和方形即贴三种相纸，并提供高光、磨砂等纹理覆膜；4 英寸相纸单张成本最低 0.99 元。\n\n打印机支持最高 300dpi、1670 万色和 256 级灰阶，加入 AR 动态照片功能；通过米家 App 扫描纸质照片，可以查看与照片关联的动态内容。设备支持蓝牙 5.2、多终端连接和最多 3 人共享共印。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/832.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:00",
-      "published_at": "2026-07-27 09:00",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/832.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/832.htm 🛰RSS · 2026 年 7 月 27 日 09:00",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2431,
-          "url": "https://www.ithome.com/0/981/832.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3375,
-          "text": "米家桌面照片打印机 2 正式开售，单机 799 元、套装 999 元。设备采用四色热升华打印，支持 4 英寸、6 英寸和方形即贴三种相纸，并提供高光、磨砂等纹理覆膜；4 英寸相纸单张成本最低 0.99 元。",
-          "source_url": "https://www.ithome.com/0/981/832.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3376,
-          "text": "打印机支持最高 300dpi、1670 万色和 256 级灰阶，加入 AR 动态照片功能；通过米家 App 扫描纸质照片，可以查看与照片关联的动态内容。设备支持蓝牙 5.2、多终端连接和最多 3 人共享共印。",
-          "source_url": "https://www.ithome.com/0/981/832.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
       "id": "6913230d-cd79-5318-ace7-a3db0c326fc0",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "9c567bf131d4ce000899016ea1e2ee2d4eb090c3",
@@ -1650,7 +1306,7 @@
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 2,
+      "position": 0,
       "score": 0.0,
       "source_url": "https://www.ithome.com/0/981/838.htm",
       "source_name": "ithome.com",
@@ -1664,7 +1320,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/2361bdd4ec3417db75c8.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -1706,612 +1362,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "0d3f1bef-62ca-5cec-b8a6-16b6187788cf",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "7f841bb19fda6d3cdc4468d345932c7126a25e03",
-      "title": "宝马摩托发布三款新品，活动礼遇价 19.99 万元起",
-      "body": "宝马摩托车发布 BMW R 12 S、BMW R 1300 GS 探险版自动挡和 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元和 33.79 万元。\n\n其中 R 1300 GS 探险版提供自动挡配置，R 1300 RT Option 719 版属于 R 1300 RT 的个性化版本，三款车型覆盖复古街车、探险旅行和豪华旅行等不同用途。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 3,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/799.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 21:17",
-      "published_at": "2026-07-26 21:17",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/799.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/799.htm 🛰RSS · 2026 年 7 月 26 日 21:17",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2397,
-          "url": "https://www.ithome.com/0/981/799.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3327,
-          "text": "IT之家 7 月 26 日消息，宝马摩托车今日发布三款新品 —— 全新 BMW R 12 S、全新 BMW R 1300 GS 探险版自动挡、全新 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元、33.79 万元。",
-          "source_url": "https://www.ithome.com/0/981/799.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3452,
-          "text": "宝马摩托车发布 BMW R 12 S、BMW R 1300 GS 探险版自动挡和 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元和 33.79 万元。",
-          "source_url": "https://www.ithome.com/0/981/799.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3453,
-          "text": "其中 R 1300 GS 探险版提供自动挡配置，R 1300 RT Option 719 版属于 R 1300 RT 的个性化版本，三款车型覆盖复古街车、探险旅行和豪华旅行等不同用途。",
-          "source_url": "https://www.ithome.com/0/981/799.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "69d69070-8153-579a-b354-612e42203109",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "e6b7366c5d8e4761d8e4daa584e4b687ba50273b",
-      "title": "Xbox Insider 测试带广告的免费云游戏，每次串流限时 1 小时",
-      "body": "微软开始面向 Xbox Insider 测试带广告的免费云游戏服务。玩家可以串流已购买的游戏或精选免费游戏，不需要额外付费；广告在游戏开始前播放，不插入游戏过程，但每次游玩限制为 1 小时，结束后需要重新排队并观看广告。\n\n测试可在 Xbox Series X|S、Xbox One 或 Windows PC 上通过 Xbox Insider Hub 申请。微软称，这种模式可以让用户无需购买新硬件即可体验 Xbox 云游戏。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0.0,
-      "source_url": "https://www.gcores.com/articles/217583",
-      "source_name": "gcores.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:15",
-      "published_at": "2026-07-27 09:15",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.gcores.com/articles/217583"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.gcores.com/articles/217583 📮Folo · 2026 年 7 月 27 日 09:15",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2395,
-          "url": "https://www.gcores.com/articles/217583",
-          "title": "",
-          "publisher": "gcores.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3322,
-          "text": "微软现已正式开始面向 Xbox Insider 测试带广告的免费云游戏服务。在限时测试期间，玩家可以串流已购买的游戏或本体免费的精选游戏，无需任何额外费用。单次游玩时长限制为1小时，但总时长不限（每次均需重新排队并观看广告）。",
-          "source_url": "https://www.gcores.com/articles/217583",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3323,
-          "text": "据悉，广告仅在游戏开始前播放，不会打扰游戏进程…",
-          "source_url": "https://www.gcores.com/articles/217583",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3454,
-          "text": "微软开始面向 Xbox Insider 测试带广告的免费云游戏服务。玩家可以串流已购买的游戏或精选免费游戏，不需要额外付费；广告在游戏开始前播放，不插入游戏过程，但每次游玩限制为 1 小时，结束后需要重新排队并观看广告。",
-          "source_url": "https://www.gcores.com/articles/217583",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3455,
-          "text": "测试可在 Xbox Series X|S、Xbox One 或 Windows PC 上通过 Xbox Insider Hub 申请。微软称，这种模式可以让用户无需购买新硬件即可体验 Xbox 云游戏。",
-          "source_url": "https://www.gcores.com/articles/217583",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "2f143192-104a-5a9c-875d-4c97ddad67d5",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "1c70a8796e5c3e165a9c46a64c5b02dfdbf2e16b",
-      "title": "BIGME 大我 B7 Pro 增加 8GB+128GB 版本，首发价 2299 元",
-      "body": "BIGME 大我为彩色墨水屏电纸书 B7 Pro 增加 8GB+128GB 版本，定价 2399 元，首发价 2299 元。\n\n这次更新只涉及存储和内存组合，产品仍属于 B7 Pro 彩色墨水屏电纸书系列；此前版本的屏幕和阅读功能没有在本次信息中发生变化。\n\n8GB 内存和 128GB 存储空间主要改变多任务运行与本地文件容量，首发价比定价低 100 元。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 5,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/810.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 22:25",
-      "published_at": "2026-07-26 22:25",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/810.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/810.htm 🛰RSS · 2026 年 7 月 26 日 22:25",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2444,
-          "url": "https://www.ithome.com/0/981/810.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3382,
-          "text": "BIGME 大我为彩色墨水屏电纸书 B7 Pro 增加 8GB+128GB 版本，定价 2399 元，首发价 2299 元。",
-          "source_url": "https://www.ithome.com/0/981/810.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3383,
-          "text": "这次更新只涉及存储和内存组合，产品仍属于 B7 Pro 彩色墨水屏电纸书系列；此前版本的屏幕和阅读功能没有在本次信息中发生变化。",
-          "source_url": "https://www.ithome.com/0/981/810.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3384,
-          "text": "8GB 内存和 128GB 存储空间主要改变多任务运行与本地文件容量，首发价比定价低 100 元。",
-          "source_url": "https://www.ithome.com/0/981/810.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "a201eeb8-a841-58cf-b78c-d944f91da142",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "14a109c1d7ed1a77f1d3b2c19a1428703c960b32",
-      "title": "HKC 猎鹰 24Q260 显示器上市，2K 260Hz 售价 999 元",
-      "body": "HKC 推出猎鹰 24Q260 显示器，采用 23.8 英寸 2K 面板，刷新率 260Hz，售价 999 元。\n\n这款显示器把较高刷新率与 2K 分辨率放在 23.8 英寸尺寸上，定位是高刷桌面显示器。\n\n260Hz 刷新率面向需要高刷新画面的桌面使用场景，2K 分辨率则对应 2560×1440 级别的显示规格；产品售价为 999 元。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 6,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/802.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 21:32",
-      "published_at": "2026-07-26 21:32",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/802.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/802.htm 🛰RSS · 2026 年 7 月 26 日 21:32",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2445,
-          "url": "https://www.ithome.com/0/981/802.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3385,
-          "text": "HKC 推出猎鹰 24Q260 显示器，采用 23.8 英寸 2K 面板，刷新率 260Hz，售价 999 元。",
-          "source_url": "https://www.ithome.com/0/981/802.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3386,
-          "text": "这款显示器把较高刷新率与 2K 分辨率放在 23.8 英寸尺寸上，定位是高刷桌面显示器。",
-          "source_url": "https://www.ithome.com/0/981/802.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3387,
-          "text": "260Hz 刷新率面向需要高刷新画面的桌面使用场景，2K 分辨率则对应 2560×1440 级别的显示规格；产品售价为 999 元。",
-          "source_url": "https://www.ithome.com/0/981/802.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "73ccacd2-36c0-5cd0-baa3-71f31b7d12fb",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "b43f0f035d8d9a03f9cb51b954aaf1ca7ea258f7",
-      "title": "Pixel Watch 或加入「手机解锁手表」功能",
-      "body": "Android Authority 在 Google 的 Connected Phone & Watch 服务应用中发现「Phone to Watch Unlock」相关代码。按代码描述，用户先解锁配对的 Pixel 手机，Pixel Watch 可自动解除锁定；首次设置仍需在手表上验证现有 PIN 或图案。\n\n现有 Watch Unlock 的方向是由手表协助解锁手机，新功能则反向让手机解锁手表。相关代码还显示，受信任关系可能可从旧手表迁移到新手表；该功能尚未上线，是否发布及时间仍未公布。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 7,
-      "score": 0.0,
-      "source_url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
-      "source_name": "androidauthority.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "已进入当前 Bot 正式稿",
-      "metadata": {
-        "all_urls": [
-          "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/ 🧭飞书群 · 2026 年 7 月 27 日 14:32",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2949,
-          "url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
-          "title": "",
-          "publisher": "androidauthority.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3816,
-          "text": "Android Authority 在 Google 的 Connected Phone & Watch 服务应用中发现「Phone to Watch Unlock」相关代码。按代码描述，用户先解锁配对的 Pixel 手机，Pixel Watch 可自动解除锁定；首次设置仍需在手表上验证现有 PIN 或图案。",
-          "source_url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3817,
-          "text": "现有 Watch Unlock 的方向是由手表协助解锁手机，新功能则反向让手机解锁手表。相关代码还显示，受信任关系可能可从旧手表迁移到新手表；该功能尚未上线，是否发布及时间仍未公布。",
-          "source_url": "https://www.androidauthority.com/google-pixel-phone-to-watch-unlock-3691338/",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:16+00:00"
-    },
-    {
-      "id": "51f1b004-70af-53bf-a835-a9423d290c4c",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "318c18bf1fb3aa3220f702dc5a279e48b9ab9a37",
-      "title": "AppleCare One 将扩展至英国、法国、德国和澳大利亚",
-      "body": "AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。\n\n英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 8,
-      "score": 0.0,
-      "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-      "source_name": "appleinsider.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "已进入当前 Bot 正式稿",
-      "metadata": {
-        "all_urls": [
-          "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 来源：https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries；https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/ 🧭飞书群 · 2026 年 7 月 27 日 14:31",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2950,
-          "url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "title": "",
-          "publisher": "appleinsider.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2951,
-          "url": "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/",
-          "title": "",
-          "publisher": "9to5mac.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3818,
-          "text": "AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。",
-          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3819,
-          "text": "英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
-          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:16+00:00"
-    },
-    {
-      "id": "11e87b8a-7c5a-55bd-862b-d0c20851f2fa",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "678dae6365533694a43eaad9623a8fc95540e7a9",
-      "title": "OPPO 启动小布 Next 共创计划，首批覆盖 Find X8、X9 与一加旗舰",
-      "body": "OPPO 宣布启动「小布 Next 计划」首轮共创招募。官方将其描述为面向下一代 AI 形态的技术探索，重点包括端侧全域记忆、全时意图感知和多智能体协作；入选用户可抢先体验相关能力及端侧优先的隐私方案。\n\n首批支持 OPPO Find X8、Find X9 系列和一加 13、13T、15、15T 等机型。用户可在系统「设置—帮助与反馈—共创」入口查看招募信息；该计划目前是共创体验，并非面向所有用户的正式功能推送。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 9,
-      "score": 0.0,
-      "source_url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "已进入当前 Bot 正式稿",
-      "metadata": {
-        "all_urls": [
-          "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
-          "https://mp.weixin.qq.com/s/64tCZ5txJ-8QVlsHhl5crA",
-          "https://www.ithome.com/0/981/989.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2；https://mp.weixin.qq.com/s/64tCZ5txJ-8QVlsHhl5crA；https://www.ithome.com/0/981/989.htm 🧭飞书群 · 2026 年 7 月 27 日 15:17",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2952,
-          "url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2953,
-          "url": "https://mp.weixin.qq.com/s/64tCZ5txJ-8QVlsHhl5crA",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        },
-        {
-          "id": 2954,
-          "url": "https://www.ithome.com/0/981/989.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3820,
-          "text": "OPPO 宣布启动「小布 Next 计划」首轮共创招募。官方将其描述为面向下一代 AI 形态的技术探索，重点包括端侧全域记忆、全时意图感知和多智能体协作；入选用户可抢先体验相关能力及端侧优先的隐私方案。",
-          "source_url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3821,
-          "text": "首批支持 OPPO Find X8、Find X9 系列和一加 13、13T、15、15T 等机型。用户可在系统「设置—帮助与反馈—共创」入口查看招募信息；该计划目前是共创体验，并非面向所有用户的正式功能推送。",
-          "source_url": "https://mp.weixin.qq.com/s/k0fZQZpEuu2PJrJVyP1b0w?scene=1&click_id=2",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:16+00:00"
-    },
-    {
-      "id": "e2730a3b-2d3f-5ceb-b0d5-fdb39b5f3184",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "21a5e411df0017aed6162da2bf9ca6591923f6d5",
-      "title": "TCL 发布 Q 系列回音壁，Q95K 采用 11.1.4 声道系统",
-      "body": "TCL 发布 Q95K、Q85K、Q75K 三款 Q 系列高端回音壁，首发价格覆盖 4699 元至 7999 元。旗舰 Q95K 由主条形音箱、独立无线低音炮和一对无线环绕音箱组成，采用 22 个独立扬声器单元的 11.1.4 声道物理架构。\n\n该机配备三分频单元、360° 全向声场、Dolby Atmos 与 DTS:X，并支持 HDMI 2.1 eARC、AirPlay 2、蓝牙 5.2、Wi-Fi 6 及与 TCL 电视联动的「T 和弦」功能。TCL 称其与 Bang & Olufsen 团队共同参与声学开发与调校。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 10,
-      "score": 0.0,
-      "source_url": "",
-      "source_name": "21a5e411df0017aed6162da2bf9ca6591923f6d5",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "已进入当前 Bot 正式稿",
-      "metadata": {
-        "all_urls": [],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 来源：新闻稿《TCL 发布 Q 系列旗舰回音壁：打破海外垄断，高端影音迎来中国声音》 📝新闻稿 · 2026 年 7 月 27 日 15:45",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2955,
-          "url": "runtime://21a5e411df0017aed6162da2bf9ca6591923f6d5",
-          "title": "",
-          "publisher": "21a5e411df0017aed6162da2bf9ca6591923f6d5",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3822,
-          "text": "TCL 发布 Q95K、Q85K、Q75K 三款 Q 系列高端回音壁，首发价格覆盖 4699 元至 7999 元。旗舰 Q95K 由主条形音箱、独立无线低音炮和一对无线环绕音箱组成，采用 22 个独立扬声器单元的 11.1.4 声道物理架构。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3823,
-          "text": "该机配备三分频单元、360° 全向声场、Dolby Atmos 与 DTS:X，并支持 HDMI 2.1 eARC、AirPlay 2、蓝牙 5.2、Wi-Fi 6 及与 TCL 电视联动的「T 和弦」功能。TCL 称其与 Bang & Olufsen 团队共同参与声学开发与调校。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:16+00:00"
+      "updated_at": "2026-07-27T08:33:32+00:00"
     },
     {
       "id": "a806c4c3-3b65-5584-a308-9edc3766176d",
@@ -2322,7 +1373,7 @@
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 11,
+      "position": 1,
       "score": 0.0,
       "source_url": "https://mp.weixin.qq.com/s/QTKfbW7s4wX9K8L7Sb4kOA",
       "source_name": "mp.weixin.qq.com",
@@ -2336,7 +1387,7 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/7a4f2cd0f958435cf193.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "已进入当前 Bot 正式稿",
@@ -2390,7 +1441,298 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:33:32+00:00"
+    },
+    {
+      "id": "46728f2d-a364-556a-a5cd-ebf62e5a4f94",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "b28f9e294856e4e604a2d2c10b918f50a3bf8734",
+      "title": "微信输入法鸿蒙版 1.0.0 上线，支持文字整理与跨设备复制图片",
+      "body": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。\n\n输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/789.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 20:01",
+      "published_at": "2026-07-26 20:01",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/18f2b60bf4a24e73795d.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "body"
+        ],
+        "all_urls": [
+          "https://www.ithome.com/0/981/789.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/789.htm 🛰RSS · 2026 年 7 月 26 日 20:01",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2455,
+          "url": "https://www.ithome.com/0/981/789.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3373,
+          "text": "微信输入法 1.0.0 for HarmonyOS 已在官网上线，新增悬浮键盘、文字整理和「问 AI」等功能，并支持跨设备复制粘贴图片、排版成图等操作。悬浮键盘可以自由拖动，适配单手输入；文字整理用于压缩和调整表达。",
+          "source_url": "https://www.ithome.com/0/981/789.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3374,
+          "text": "输入法还支持语音转文字、剪贴板管理和多设备协同等基础能力，鸿蒙版的新增功能集中在文字处理、图片复制和 AI 问答。官方发布版本号为 1.0.0。",
+          "source_url": "https://www.ithome.com/0/981/789.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:32+00:00"
+    },
+    {
+      "id": "0d3f1bef-62ca-5cec-b8a6-16b6187788cf",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "7f841bb19fda6d3cdc4468d345932c7126a25e03",
+      "title": "宝马摩托发布三款新品，活动礼遇价 19.99 万元起",
+      "body": "宝马摩托车发布 BMW R 12 S、BMW R 1300 GS 探险版自动挡和 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元和 33.79 万元。\n\n其中 R 1300 GS 探险版提供自动挡配置，R 1300 RT Option 719 版属于 R 1300 RT 的个性化版本，三款车型覆盖复古街车、探险旅行和豪华旅行等不同用途。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/799.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 21:17",
+      "published_at": "2026-07-26 21:17",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/ce878b3316d294a23ce7.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "all_urls": [
+          "https://www.ithome.com/0/981/799.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/799.htm 🛰RSS · 2026 年 7 月 26 日 21:17",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2397,
+          "url": "https://www.ithome.com/0/981/799.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3327,
+          "text": "IT之家 7 月 26 日消息，宝马摩托车今日发布三款新品 —— 全新 BMW R 12 S、全新 BMW R 1300 GS 探险版自动挡、全新 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元、33.79 万元。",
+          "source_url": "https://www.ithome.com/0/981/799.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3452,
+          "text": "宝马摩托车发布 BMW R 12 S、BMW R 1300 GS 探险版自动挡和 BMW R 1300 RT Option 719 版，活动礼遇价分别为 19.99 万元、23.99 万元和 33.79 万元。",
+          "source_url": "https://www.ithome.com/0/981/799.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3453,
+          "text": "其中 R 1300 GS 探险版提供自动挡配置，R 1300 RT Option 719 版属于 R 1300 RT 的个性化版本，三款车型覆盖复古街车、探险旅行和豪华旅行等不同用途。",
+          "source_url": "https://www.ithome.com/0/981/799.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:32+00:00"
+    },
+    {
+      "id": "51f1b004-70af-53bf-a835-a9423d290c4c",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "318c18bf1fb3aa3220f702dc5a279e48b9ab9a37",
+      "title": "AppleCare One 将扩展至英国、法国、德国和澳大利亚",
+      "body": "据 Apple Insider 报道，AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。\n\n英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0.0,
+      "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+      "source_name": "appleinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/d81ef0b917d03264e922.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "已进入当前 Bot 正式稿",
+      "metadata": {
+        "_manual_fields": [
+          "body"
+        ],
+        "all_urls": [
+          "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 来源：https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries；https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/ 🧭飞书群 · 2026 年 7 月 27 日 14:31",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2950,
+          "url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "title": "",
+          "publisher": "appleinsider.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2951,
+          "url": "https://9to5mac.com/2026/07/26/applecare-one-launching-in-the-uk-as-theft-and-loss-coverage-expands/",
+          "title": "",
+          "publisher": "9to5mac.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3818,
+          "text": "AppleCare One 将从美国扩展至英国、法国、德国和澳大利亚，计划于 8 月 4 日上线。该方案可为最多 3 台设备提供 AppleCare+ 权益，iPhone、iPad 和 Apple Watch 可纳入失窃与遗失保障；每年全设备合计最多提出 3 次失窃或遗失理赔。",
+          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3819,
+          "text": "英国价格为每月 16.99 英镑覆盖 3 台设备，额外设备每月 4.99 英镑。当地 AppleCare+ 的失窃与遗失保障也将从 iPhone 扩展至 iPad 和 Apple Watch。",
+          "source_url": "https://appleinsider.com/articles/26/07/27/applecare-one-expands-to-four-more-countries",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:32+00:00"
+    },
+    {
+      "id": "e2730a3b-2d3f-5ceb-b0d5-fdb39b5f3184",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "21a5e411df0017aed6162da2bf9ca6591923f6d5",
+      "title": "TCL 发布 Q 系列回音壁，Q95K 采用 11.1.4 声道系统",
+      "body": "TCL 发布 Q95K、Q85K、Q75K 三款 Q 系列高端回音壁，首发价格覆盖 4699 元至 7999 元。旗舰 Q95K 由主条形音箱、独立无线低音炮和一对无线环绕音箱组成，采用 22 个独立扬声器单元的 11.1.4 声道物理架构。\n\n该机配备三分频单元、360° 全向声场、Dolby Atmos 与 DTS:X，并支持 HDMI 2.1 eARC、AirPlay 2、蓝牙 5.2、Wi-Fi 6 及与 TCL 电视联动的「T 和弦」功能。TCL 称其与 Bang & Olufsen 团队共同参与声学开发与调校。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 5,
+      "score": 0.0,
+      "source_url": "",
+      "source_name": "21a5e411df0017aed6162da2bf9ca6591923f6d5",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "已进入当前 Bot 正式稿",
+      "metadata": {
+        "all_urls": [],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 来源：新闻稿《TCL 发布 Q 系列旗舰回音壁：打破海外垄断，高端影音迎来中国声音》 📝新闻稿 · 2026 年 7 月 27 日 15:45",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2955,
+          "url": "runtime://21a5e411df0017aed6162da2bf9ca6591923f6d5",
+          "title": "",
+          "publisher": "21a5e411df0017aed6162da2bf9ca6591923f6d5",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3822,
+          "text": "TCL 发布 Q95K、Q85K、Q75K 三款 Q 系列高端回音壁，首发价格覆盖 4699 元至 7999 元。旗舰 Q95K 由主条形音箱、独立无线低音炮和一对无线环绕音箱组成，采用 22 个独立扬声器单元的 11.1.4 声道物理架构。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3823,
+          "text": "该机配备三分频单元、360° 全向声场、Dolby Atmos 与 DTS:X，并支持 HDMI 2.1 eARC、AirPlay 2、蓝牙 5.2、Wi-Fi 6 及与 TCL 电视联动的「T 和弦」功能。TCL 称其与 Bang & Olufsen 团队共同参与声学开发与调校。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:32+00:00"
     },
     {
       "id": "bb9eec0c-dca6-5810-bb8a-4c358b028b58",
@@ -2401,7 +1743,7 @@
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 12,
+      "position": 6,
       "score": 0.0,
       "source_url": "https://mp.weixin.qq.com/s/2fk6KQr4Nw-TZtOS4vrJeg",
       "source_name": "mp.weixin.qq.com",
@@ -2415,7 +1757,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/fc84d77ef91f6f9901fc.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
@@ -2523,18 +1865,18 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:33:32+00:00"
     },
     {
       "id": "21e9528a-bdfd-5498-95ac-b87ca87b56ed",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "611b8a515cc919b8467ef5b988bad4a60418de6d",
-      "title": "美团 CatPaw 上线，已覆盖 9 万名员工并搭建 3 万个 Agent",
+      "title": "美团上线 CatPaw AI Agent 平台",
       "body": "美团发布全场景 AI Agent 平台 CatPaw，提供移动端 App、PC 客户端和企业级 Agent 开发托管能力。平台支持双端任务同步，PC 端可以操作本地文件、浏览器和终端，云端模式则可在设备关机或断网时继续运行长程任务和定时任务。\n\nCatPaw 已在美团内部大规模落地，覆盖 9 万名员工并搭建 3 万个 Agent。平台还把门店经营、评价诊断、营销物料、经营数据分析等本地生活场景封装成专家和技能，并提供多 Agent 并发执行、长期记忆、权限管理和私有化部署能力。",
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 13,
+      "position": 7,
       "score": 0.0,
       "source_url": "https://www.ithome.com/0/981/934.htm",
       "source_name": "ithome.com",
@@ -2547,12 +1889,15 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
+      "changed_since_review": false,
+      "image_url": "data/images/5479c8775ef7a9abf043.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_manual_fields": [
+          "title"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/934.htm"
         ],
@@ -2590,18 +1935,18 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:33:32+00:00"
     },
     {
       "id": "8fcac1e4-8541-5846-b33b-6865fe45b98b",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "c955d7b377b9884f8da48ea9dcf9b2aaccca21fd",
-      "title": "千问办公上线，Windows、macOS Beta 版月费 78 元起",
+      "title": "78 元/月起，千问办公上线 Windows、macOS Beta 版",
       "body": "千问办公官网上线，Windows 和 macOS Beta 版现已开放下载，系统要求为 Windows 10 及以上或 macOS 14 及以上。产品提供企业 IM 写作、Office 产物生成与编辑、多模态内容理解、全栈网页生成、专业数据源接入、自定义技能与专家套件六项能力。\n\n个人版包括免费版、标准版和高级版，标准版原价 98 元/月，优惠价 78 元/月；高级版原价 198 元/月，优惠价 158 元/月。鸿蒙电脑 Beta 版也已上架 AppGallery，支持 AI 写作、生成 PPT、多格式文档互转、多模型切换和实时语音转写。",
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 14,
+      "position": 8,
       "score": 0.0,
       "source_url": "https://www.ithome.com/0/981/982.htm",
       "source_name": "ithome.com",
@@ -2614,12 +1959,15 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
+      "changed_since_review": false,
+      "image_url": "data/images/799fddd415c3d09fbb24.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
+        "_manual_fields": [
+          "title"
+        ],
         "all_urls": [
           "https://www.ithome.com/0/981/982.htm"
         ],
@@ -2678,18 +2026,18 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:33:32+00:00"
     },
     {
       "id": "e3333fdc-d1cd-5bea-8d3b-189991c4eb35",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "17e874bf9f016fe9f7a13d90aae52db406137c0b",
       "title": "杭州机器人学校开学，30 台机器人和机器狗开始接受技能训练",
-      "body": "杭州机器人学校近日举行开学典礼，首批 30 台来自不同厂家的机器人和机器狗入学。学校由浙江大学机器人研究院牵头，浙江省质量科学研究院与杭州城西科创大走廊共同推进，面向机器人本体开展职业技能培养与认证。\n\n中国移动灵犀机器狗已在学校的具身智能未来岛智能咖啡厅工作，每天服务 13 张餐桌、日均接待约 100 人次，能够自主完成接单、取餐、送达，不需要人工或遥控操作。",
+      "body": "据中国移动官微消息，杭州机器人学校近日举行开学典礼，首批 30 台来自不同厂家的机器人和机器狗入学。学校由浙江大学机器人研究院牵头，浙江省质量科学研究院与杭州城西科创大走廊共同推进，面向机器人本体开展职业技能培养与认证。\n\n中国移动灵犀机器狗已在学校的具身智能未来岛智能咖啡厅工作，每天服务 13 张餐桌、日均接待约 100 人次，能够自主完成接单、取餐、送达，不需要人工或遥控操作。",
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 15,
+      "position": 9,
       "score": 0.0,
       "source_url": "https://mp.weixin.qq.com/s/PQX6REhc3E7nhgI7tVd6dQ?isappinstalled=0&scene=1&clicktime=1785126346&enterid=1785126346",
       "source_name": "mp.weixin.qq.com",
@@ -2702,12 +2050,15 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
+      "changed_since_review": false,
+      "image_url": "data/images/6c7e531c0a0c796e003b.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "标题只有网址或域名；必须打开原文并改写为中文新闻标题",
       "metadata": {
+        "_manual_fields": [
+          "body"
+        ],
         "all_urls": [
           "https://mp.weixin.qq.com/s/PQX6REhc3E7nhgI7tVd6dQ?isappinstalled=0&scene=1&clicktime=1785126346&enterid=1785126346"
         ],
@@ -2745,74 +2096,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "af307de8-6077-571e-a5ba-729d3a8c499b",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "fa75c032b8817107add5b2ed2b8a44bfc6da36cd",
-      "title": "酷比魔方 iPlay 70 Max Pro 上市，13 英寸 4G 平板售价 1399 元",
-      "body": "酷比魔方 iPlay 70 Max Pro 已在京东开售，售价 1399 元。平板采用 13 英寸 2560×1600 LCD 屏幕、紫光展锐 T7300 芯片、8GB 内存和 128GB 存储，支持 4G 全网通双卡双待、Wi-Fi 6 和最高 512GB microSD 卡扩容。\n\n设备厚约 7.1mm、重 684g，配备 10000mAh 电池和 30W PD 快充，运行基于 Android 16 的 ALLDOCUBE OS 5.0L，并可选配磁吸键盘与手写笔。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 16,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/980.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 12:13",
-      "published_at": "2026-07-27 12:13",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/980.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/980.htm 🛰RSS · 2026 年 7 月 27 日 12:13",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2658,
-          "url": "https://www.ithome.com/0/981/980.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3590,
-          "text": "酷比魔方 iPlay 70 Max Pro 已在京东开售，售价 1399 元。平板采用 13 英寸 2560×1600 LCD 屏幕、紫光展锐 T7300 芯片、8GB 内存和 128GB 存储，支持 4G 全网通双卡双待、Wi-Fi 6 和最高 512GB microSD 卡扩容。",
-          "source_url": "https://www.ithome.com/0/981/980.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3591,
-          "text": "设备厚约 7.1mm、重 684g，配备 10000mAh 电池和 30W PD 快充，运行基于 Android 16 的 ALLDOCUBE OS 5.0L，并可选配磁吸键盘与手写笔。",
-          "source_url": "https://www.ithome.com/0/981/980.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
+      "updated_at": "2026-07-27T08:33:32+00:00"
     },
     {
       "id": "b59f3dca-cab6-5d0d-a00d-d3c82295a615",
@@ -2837,7 +2121,7 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "",
+      "image_url": "data/images/f2364fa897202ec409bf.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "已进入当前 Bot 正式稿",
@@ -2906,161 +2190,6 @@
       "updated_at": "2026-07-27T08:19:16+00:00"
     },
     {
-      "id": "6b179ac5-d36e-5eca-b3c0-ffb442355ddd",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "2fb84de826a7f7ed15fbf311785c4e98c14175b1",
-      "title": "MORROR ART 完成亿元级 B+ 轮融资，计划扩展电子家居产品矩阵",
-      "body": "家居音频品牌 MORROR ART 的母公司无锡未来镜显示科技近日完成亿元级 B+ 轮融资，日初资本投资、零一创投跟投。资金将用于扩充电子家居产品矩阵、建设视觉音乐内容和软件系统、拓展国内线下体验渠道，并推动海外子品牌 MorningBlues 发展。\n\n品牌目前约有 8 个 SKU，计划扩展至约 20 个，价格带从 1000 多元延伸到接近 2 万元。其海外子品牌的 SonicGlass A1 在 Kickstarter 众筹金额已超过 120 万美元；MORROR ART 计划于 7 月 28 日在中国发布全透明歌词音响 A2。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0.0,
-      "source_url": "https://36kr.com/p/3910655616521348?f=rss",
-      "source_name": "36kr.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:20",
-      "published_at": "2026-07-27 09:20",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://36kr.com/p/3910655616521348?f=rss"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://36kr.com/p/3910655616521348?f=rss 📮Folo · 2026 年 7 月 27 日 09:20",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2386,
-          "url": "https://36kr.com/p/3910655616521348?f=rss",
-          "title": "",
-          "publisher": "36kr.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3312,
-          "text": "36氪获悉，家居音频品牌「MORROR ART」母公司无锡未来镜显示科技有限公司近日完成亿元级B+轮融资，由日初资本投资，老股东零一创投继续跟投，心流资本FlowCapital担任财务顾问。本轮资金将主要用于电子家居产品矩阵扩充、视觉音乐内容与软件系统建设、国内线下体验渠道拓展，以及旗下海外子品牌MorningBlues的全球化发展。",
-          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3313,
-          "text": "2024年，36氪曾率先报道MORROR ART的近亿元B轮融资，由海控天程基金领投、零一创投跟投。其后，MORROR ART营收继续保持高速增长，2025年增速显著高于音频行业平均水平。",
-          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3314,
-          "text": "与此同时，MORROR ART面向海外市场孵化子品牌「MorningBlues」，其推出的新一代产品SonicGlass A1，在Kickstarter获得来自欧美等主要市场用户的支持。项目众筹金额已突破120万美元，成为公司验证全球市场的重要节点。",
-          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3462,
-          "text": "家居音频品牌 MORROR ART 的母公司无锡未来镜显示科技近日完成亿元级 B+ 轮融资，日初资本投资、零一创投跟投。资金将用于扩充电子家居产品矩阵、建设视觉音乐内容和软件系统、拓展国内线下体验渠道，并推动海外子品牌 MorningBlues 发展。",
-          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3463,
-          "text": "品牌目前约有 8 个 SKU，计划扩展至约 20 个，价格带从 1000 多元延伸到接近 2 万元。其海外子品牌的 SonicGlass A1 在 Kickstarter 众筹金额已超过 120 万美元；MORROR ART 计划于 7 月 28 日在中国发布全透明歌词音响 A2。",
-          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "29c75ac9-899e-58e8-ba1c-28f2103201e7",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "728397dbac1898054133269d686bb2cfa833210f",
-      "title": "尊界 V800、V680 将于 8 月 5 日发布，预售价最高 120 万元",
-      "body": "鸿蒙智行宣布，尊界时代旗舰 MPV 及华为全场景新品发布会将于 8 月 5 日举行。尊界 V800、V680 此前已亮相，预售价分别为 80 万—120 万元、65 万—90 万元；V800 车身长 5495mm、轴距 3430mm，V680 车身长 5320mm、轴距 3290mm。\n\n余承东 7 月 17 日称，两款车型开启预售 23 天订单突破 1 万台，其中 V800 占比约 80%。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 2,
-      "score": 0.0,
-      "source_url": "https://www.ithome.com/0/981/837.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:13",
-      "published_at": "2026-07-27 09:13",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://www.ithome.com/0/981/837.htm"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/837.htm 🛰RSS · 2026 年 7 月 27 日 09:13",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2442,
-          "url": "https://www.ithome.com/0/981/837.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3391,
-          "text": "鸿蒙智行宣布，尊界时代旗舰 MPV 及华为全场景新品发布会将于 8 月 5 日举行。尊界 V800、V680 此前已亮相，预售价分别为 80 万—120 万元、65 万—90 万元；V800 车身长 5495mm、轴距 3430mm，V680 车身长 5320mm、轴距 3290mm。",
-          "source_url": "https://www.ithome.com/0/981/837.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3392,
-          "text": "余承东 7 月 17 日称，两款车型开启预售 23 天订单突破 1 万台，其中 V800 占比约 80%。",
-          "source_url": "https://www.ithome.com/0/981/837.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
       "id": "3d95c5dd-800f-589e-a1ed-064367bcce7f",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "f1bee64e8da00d2061b90580b049c2ec239d59a1",
@@ -3083,7 +2212,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "",
+      "image_url": "data/images/ba52ee652c2448e29eb2.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -3142,147 +2271,6 @@
       "updated_at": "2026-07-27T08:19:18+00:00"
     },
     {
-      "id": "3df0e6ef-e65b-5cff-ab8e-7129de56601b",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "15c047d5106c24d3d170fb68a2259c6425b7feab",
-      "title": "B&O Beoplay H100 售价 2200 美元，评测关注高端耳机的差异",
-      "body": "Business Insider 试用 Bang & Olufsen Beoplay H100 后，重点比较了它与更便宜耳机在用料、佩戴、降噪和声音表现上的差异。这款耳机售价 2200 美元，定位高端无线耳机，评测也讨论了其高价对应的实际体验变化。\n\n评测从实际佩戴和日常使用出发，比较了耳罩、控制方式、降噪和音质，而不是只列参数。文章把 Beoplay H100 放在高价无线耳机与普通降噪耳机的价格差中讨论。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0.0,
-      "source_url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
-      "source_name": "businessinsider.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-07-26 23:00",
-      "published_at": "2026-07-26 23:00",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
-      "metadata": {
-        "all_urls": [
-          "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review 📮Folo · 2026 年 7 月 27 日 07:00",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2443,
-          "url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
-          "title": "",
-          "publisher": "businessinsider.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3395,
-          "text": "Business Insider 试用 Bang & Olufsen Beoplay H100 后，重点比较了它与更便宜耳机在用料、佩戴、降噪和声音表现上的差异。这款耳机售价 2200 美元，定位高端无线耳机，评测也讨论了其高价对应的实际体验变化。",
-          "source_url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3396,
-          "text": "评测从实际佩戴和日常使用出发，比较了耳罩、控制方式、降噪和音质，而不是只列参数。文章把 Beoplay H100 放在高价无线耳机与普通降噪耳机的价格差中讨论。",
-          "source_url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
-      "id": "96ca92e8-6a91-5325-8984-5b6f61b0d13a",
-      "issue_id": "ifanr-daily-20260728",
-      "fingerprint": "5ed5ef1677d304e65d2e8e3dfcf8191a84bda128",
-      "title": "国金证券：美妆消费进入精细化运营，彩妆与香氛是增量品类",
-      "body": "国金证券研报称，美妆行业进入存量精细化运营阶段，618 规模略有下降但品类结构发生变化，品牌更重视复购和利润；彩妆、香氛等升级品类成为增量。报告还提到，淘天仍是国货基本盘，抖音成为外资品牌竞争更集中的渠道，AI 已用于素材生成和投放托管。\n\n研报还把政策补贴、功效护肤和国风彩妆列为观察方向，并将品牌经营重点概括为复购、利润和渠道效率。这里的判断来自证券机构行业报告，文中没有对应到具体品牌的销售预测。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 5,
-      "score": 0.0,
-      "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
-      "source_name": "36kr.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-07-27 09:05",
-      "published_at": "2026-07-27 09:05",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "all_urls": [
-          "https://36kr.com/newsflashes/3913184272176512?f=rss"
-        ],
-        "origin": "bot_draft",
-        "runtime_matches": 0,
-        "source_line": "🔗 原文链接：https://36kr.com/newsflashes/3913184272176512?f=rss 📮Folo · 2026 年 7 月 27 日 09:05",
-        "title_quality_warning": ""
-      },
-      "sources": [
-        {
-          "id": 2385,
-          "url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
-          "title": "",
-          "publisher": "36kr.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false,
-          "fetched_at": null
-        }
-      ],
-      "claims": [
-        {
-          "id": 3311,
-          "text": "36氪获悉，国金证券研报表示，美妆行业步入存量精细化运营，618规模微降但结构优化，品牌转向复购与利润导向，彩妆、香氛等升级品类成增量。政策首纳美妆补贴，定向扶持头部国货与高端功效品牌。AI全链路降本增效兑现，素材生成、投放托管显著提升利润率。渠道端淘天为国货基本盘，抖音成外资反扑主战场，国货需深耕功效护肤、国风彩妆等细分赛道建立壁垒。建议关注Q2业绩修复、高端心智稳固及大众性价比突出的三类...",
-          "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3470,
-          "text": "国金证券研报称，美妆行业进入存量精细化运营阶段，618 规模略有下降但品类结构发生变化，品牌更重视复购和利润；彩妆、香氛等升级品类成为增量。报告还提到，淘天仍是国货基本盘，抖音成为外资品牌竞争更集中的渠道，AI 已用于素材生成和投放托管。",
-          "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "id": 3471,
-          "text": "研报还把政策补贴、功效护肤和国风彩妆列为观察方向，并将品牌经营重点概括为复购、利润和渠道效率。这里的判断来自证券机构行业报告，文中没有对应到具体品牌的销售预测。",
-          "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-07-27T08:19:18+00:00"
-    },
-    {
       "id": "04d0eea3-98db-5a8d-93c6-f2f39357b108",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "63655b5eb5ba3dcf8f37a045e699fe04c675f024",
@@ -3305,7 +2293,7 @@
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": false,
-      "image_url": "",
+      "image_url": "data/images/4af769d3204007f61d0f.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -3668,6 +2656,340 @@
       "updated_at": "2026-07-27T08:19:16+00:00"
     },
     {
+      "id": "beaac9f2-1a26-5cfb-a046-9aaac50c6078",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "7ab0583ded517477968b7e49efca03f62dbebf01",
+      "title": "长鑫科技上市首日股价一度上涨 472%，创始人拟向员工分配 7.68 亿股",
+      "body": "长鑫存储昨日在上海证券交易所科创板挂牌，发行规模约 98 亿美元，首日交易中股价一度较发行价上涨 472%。公司是中国主要 DRAM 厂商之一，上市募集资金将用于存储器研发、产能建设和补充流动资金。\n\n长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。\n\n搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。该报道提到，股票机会主要面向主管及以上员工，普通员工的奖金与加班安排则来自匿名员工的个人陈述。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 6,
+      "score": 0.0,
+      "source_url": "",
+      "source_name": "7ab0583ded517477968b7e49efca03f62dbebf01",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 12:04",
+      "published_at": "2026-07-27 12:04",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
+      "metadata": {
+        "_manual_fields": [
+          "body",
+          "selected",
+          "status",
+          "title"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:28:57.196Z",
+        "_trash_previous_position": 6,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2466,
+          "url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
+          "title": "",
+          "publisher": "bloomberg.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true,
+          "fetched_at": null
+        },
+        {
+          "id": 2537,
+          "url": "https://photos.caixin.com/2026-07-26/102468234.html",
+          "title": "",
+          "publisher": "photos.caixin.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2683,
+          "url": "https://mp.weixin.qq.com/s/fR8SCHop0sBmM8UvFzLHxQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2684,
+          "url": "https://mp.weixin.qq.com/s/hhgPlNNdiNdDull4vJQgLA",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 3167,
+          "url": "https://weibo.com/ttarticle/p/show?id=2309405325295263023167",
+          "title": "",
+          "publisher": "weibo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 3236,
+          "url": "runtime://7ab0583ded517477968b7e49efca03f62dbebf01",
+          "title": "",
+          "publisher": "7ab0583ded517477968b7e49efca03f62dbebf01",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3361,
+          "text": "据彭博报道，中国存储芯片厂商长鑫科技 7 月 27 日在上海证券交易所科创板挂牌，发行规模约 98 亿美元，首日交易中股价一度较发行价上涨 472%。公司是中国主要 DRAM 厂商之一，上市募集资金将用于存储器研发、产能建设和补充流动资金。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3362,
+          "text": "长鑫科技的上市规模使其成为中国近年来规模较大的 IPO 之一。公司主营 DRAM 研发、设计、生产和销售，产品覆盖消费电子、服务器和汽车等存储场景。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 4087,
+          "text": "搜狐科技援引招股书与员工说法称，上市前员工持股平台合肥集鑫持有长鑫科技 50.37 亿股，公司两次员工持股计划累计授予 6760 人次；创始人、董事长朱一明还承诺把其持有的 7.68 亿股全部分配给员工。该报道提到，股票机会主要面向主管及以上员工，普通员工的奖金与加班安排则来自匿名员工的个人陈述。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-07-26/china-memory-champion-cxmt-set-to-debut-after-9-8-billion-ipo",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:28:57+00:00"
+    },
+    {
+      "id": "73b2660f-e96f-58e9-a1c0-b0dcfffca758",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "734975ae528ac3ee1c10008985c1567670eaff13",
+      "title": "三星计划在 HBM5 中采用 2nm 基础裸片",
+      "body": "三星半导体技术负责人确认，三星计划在 HBM5 世代引入 2nm 基础裸片。三星称，HBM5 运行速率预计比 HBM4E 提升 50% 以上，基础裸片将支持更高密度的硅通孔，以满足更高带宽需求。\n\n三星目前的 HBM4 和 HBM4E 都采用 4nm 基础裸片，但 HBM4E 通过高密度、高性能器件达到 14Gbps 以上速率，并重新排列金属层以降低功耗、改善散热。\n\n基础裸片位于 HBM 堆栈底部，负责连接内存堆栈与计算芯片；三星此次把工艺节点和 TSV 密度同时列为 HBM5 的升级方向。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 8,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/836.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:12",
+      "published_at": "2026-07-27 09:12",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "观点线索可能只有人物态度，入选前需确认原文有论点、理由、例子、行业语境或可引用原话",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:26:16.296Z",
+        "_trash_previous_position": 8,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/836.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/836.htm 🛰RSS · 2026 年 7 月 27 日 09:12",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2396,
+          "url": "https://www.ithome.com/0/981/836.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3324,
+          "text": "IT之家 7 月 27 日消息，根据三星半导体官方今日发布的人物访谈，三星电子晶圆代工业务技术开发负责人구자흠进一步确认， 三星计划在 HBM5 世代应用 2nm 的基础裸片 。三星电子存储器业务开发副总裁 황상준 今年 3 月也 进行了类似表态 。",
+          "source_url": "https://www.ithome.com/0/981/836.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3325,
+          "text": "구자흠提到， HBM5 的运行速率预计将较 HBM4E 提升 50% 以上 ，其基础裸片将支持更高密度的硅通孔 (TSV) 以满足行业需求。该内存堆栈选择 2nm 作为基础裸片工艺 旨在于性能和能效两方面实现重大改进 。",
+          "source_url": "https://www.ithome.com/0/981/836.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3326,
+          "text": "三星电子的 HBM4 和 HBM4E 上均配备 4nm 基础裸片，但这两个版本的基础裸片有所区别。三星电子发挥了其 4nm 节点的灵活性优势， 在 HBM4E 基础裸片上应用了高密度、超高性能器件 ，实现了 14+ Gbps 高速运行，而 金属层的更有效排列 则在降低功耗的同时优化散热路径。",
+          "source_url": "https://www.ithome.com/0/981/836.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3437,
+          "text": "三星半导体技术负责人确认，三星计划在 HBM5 世代引入 2nm 基础裸片。三星称，HBM5 运行速率预计比 HBM4E 提升 50% 以上，基础裸片将支持更高密度的硅通孔，以满足更高带宽需求。",
+          "source_url": "https://www.ithome.com/0/981/836.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3438,
+          "text": "三星目前的 HBM4 和 HBM4E 都采用 4nm 基础裸片，但 HBM4E 通过高密度、高性能器件达到 14Gbps 以上速率，并重新排列金属层以降低功耗、改善散热。",
+          "source_url": "https://www.ithome.com/0/981/836.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3439,
+          "text": "基础裸片位于 HBM 堆栈底部，负责连接内存堆栈与计算芯片；三星此次把工艺节点和 TSV 密度同时列为 HBM5 的升级方向。",
+          "source_url": "https://www.ithome.com/0/981/836.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:26:16+00:00"
+    },
+    {
+      "id": "9910207b-c1df-5b9d-8ece-910708a8ce09",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "8afef88c4b75f6f92c314437bfe39ca3aad9415c",
+      "title": "💡 赫尔佐格：AI 下一次突破来自多个小型专业智能体协作",
+      "body": "德国人工智能专家、中国工程院外籍院士赫尔佐格近日接受央视《高端访谈》采访时表示，AI 下一次重大突破不一定来自单一、规模更大的系统，而可能来自多个小型专业化智能体的协同运作。\n\n他认为，小型智能体可以分别处理明确任务，再通过协作完成复杂工作；这种架构能够按需要增减组件，适配不同场景。赫尔佐格获得 2025 年度中华人民共和国国际科学技术合作奖。\n\n赫尔佐格的判断是把任务拆给多个专业组件，再由组件之间交换结果。采访中，他把可组合性和按场景调整规模列为这种路线的主要特点。\n\n在他的表述中，专业化组件的优势是可以根据任务调整组合，而不是让一个系统承担所有工作；这也是他把「小型智能体协作」称为下一步突破方向的理由。\n\n> 人工智能下一次重大突破将来自众多小型专业化智能体的协同运作。\n\n这句话把他的观点落在系统组织方式上：每个组件承担边界更清楚的任务，再由协作关系扩展整体能力。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 10,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/813.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 23:25",
+      "published_at": "2026-07-26 23:25",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:28:10.113Z",
+        "_trash_previous_position": 10,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/813.htm",
+          "https://weibo.com/1826017320/Rawew3qoz"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 来源：https://www.ithome.com/0/981/813.htm；https://weibo.com/1826017320/Rawew3qoz 🛰RSS · 2026 年 7 月 26 日 23:25",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2406,
+          "url": "https://www.ithome.com/0/981/813.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        },
+        {
+          "id": 2541,
+          "url": "https://weibo.com/1826017320/Rawew3qoz",
+          "title": "",
+          "publisher": "weibo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3367,
+          "text": "德国人工智能专家、中国工程院外籍院士赫尔佐格近日接受央视《高端访谈》采访时表示，AI 下一次重大突破不一定来自单一、规模更大的系统，而可能来自多个小型专业化智能体的协同运作。",
+          "source_url": "https://www.ithome.com/0/981/813.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3368,
+          "text": "他认为，小型智能体可以分别处理明确任务，再通过协作完成复杂工作；这种架构能够按需要增减组件，适配不同场景。赫尔佐格获得 2025 年度中华人民共和国国际科学技术合作奖。",
+          "source_url": "https://www.ithome.com/0/981/813.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3369,
+          "text": "赫尔佐格的判断是把任务拆给多个专业组件，再由组件之间交换结果。采访中，他把可组合性和按场景调整规模列为这种路线的主要特点。",
+          "source_url": "https://www.ithome.com/0/981/813.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:28:10+00:00"
+    },
+    {
       "id": "69b77b05-ffa4-520d-817c-8ad796916526",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "bc203718fa08b5b8ffc9bc492d04a3d5b75cf075",
@@ -3784,6 +3106,88 @@
       ],
       "claims": [],
       "updated_at": "2026-07-27T01:31:11+00:00"
+    },
+    {
+      "id": "606d590e-046d-517e-9267-29be64da3cbc",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "124d8830fdc966c1946ab1c0489228613944ec2d",
+      "title": "💡 林纳斯·托瓦兹：不喜欢 AI 就从项目中分叉出去",
+      "body": "Linux 创始人林纳斯·托瓦兹在接受 Business Insider 采访时谈到开发者对 AI 的抵触。他表示，开源软件的特点是任何人都可以复制、修改和分叉项目；如果开发者不接受项目加入 AI 功能，可以选择建立自己的分支，原项目仍可继续变化。\n\n这番话对应的是 Linux 社区围绕 AI 辅助开发和代码维护的争论。托瓦兹的判断建立在开源项目允许不同实现并存的机制上。\n\n他把开源软件的分叉机制视为解决分歧的实际办法：上游项目可以继续采用新的开发工具，反对者则可以保留自己的代码分支。这个回答并不要求整个社区对 AI 形成同一立场。\n\n他的回答把争议落到开源协作的具体规则上：项目维护者可以选择工具，社区成员也可以通过复制和修改代码形成独立路线。\n\n这也是标题中「fork off」的含义：不同意见可以通过代码分支保留下来，而不必先取得整个项目的统一同意。",
+      "category": "大公司",
+      "status": "excluded",
+      "selected": false,
+      "position": 11,
+      "score": 0.0,
+      "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
+      "source_name": "businessinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 21:01",
+      "published_at": "2026-07-26 21:01",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:26:34.830Z",
+        "_trash_previous_position": 11,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7 📮Folo · 2026 年 7 月 27 日 05:01",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2404,
+          "url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
+          "title": "",
+          "publisher": "businessinsider.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3370,
+          "text": "Linux 创始人林纳斯·托瓦兹在接受 Business Insider 采访时谈到开发者对 AI 的抵触。他表示，开源软件的特点是任何人都可以复制、修改和分叉项目；如果开发者不接受项目加入 AI 功能，可以选择建立自己的分支，原项目仍可继续变化。",
+          "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3371,
+          "text": "这番话对应的是 Linux 社区围绕 AI 辅助开发和代码维护的争论。托瓦兹的判断建立在开源项目允许不同实现并存的机制上。",
+          "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3372,
+          "text": "他把开源软件的分叉机制视为解决分歧的实际办法：上游项目可以继续采用新的开发工具，反对者则可以保留自己的代码分支。这个回答并不要求整个社区对 AI 形成同一立场。",
+          "source_url": "https://www.businessinsider.com/linux-creator-linus-torvalds-ai-holdouts-fork-off-2026-7",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:26:35+00:00"
     },
     {
       "id": "90742e71-7306-54d2-88bc-c69cc9571234",
@@ -13922,6 +13326,334 @@
       "updated_at": "2026-07-27T08:19:18+00:00"
     },
     {
+      "id": "5ff7ae4a-4183-50e5-a6c5-adbfef3feb49",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "cdf927b75572ecde022c725fc651eec048d93e1c",
+      "title": "小米米家桌面照片打印机 2 开售，799 元起支持三种相纸尺寸",
+      "body": "米家桌面照片打印机 2 正式开售，单机 799 元、套装 999 元。设备采用四色热升华打印，支持 4 英寸、6 英寸和方形即贴三种相纸，并提供高光、磨砂等纹理覆膜；4 英寸相纸单张成本最低 0.99 元。\n\n打印机支持最高 300dpi、1670 万色和 256 级灰阶，加入 AR 动态照片功能；通过米家 App 扫描纸质照片，可以查看与照片关联的动态内容。设备支持蓝牙 5.2、多终端连接和最多 3 人共享共印。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 2,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/832.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:00",
+      "published_at": "2026-07-27 09:00",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:33:25.496Z",
+        "_trash_previous_position": 2,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/832.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/832.htm 🛰RSS · 2026 年 7 月 27 日 09:00",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2431,
+          "url": "https://www.ithome.com/0/981/832.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3375,
+          "text": "米家桌面照片打印机 2 正式开售，单机 799 元、套装 999 元。设备采用四色热升华打印，支持 4 英寸、6 英寸和方形即贴三种相纸，并提供高光、磨砂等纹理覆膜；4 英寸相纸单张成本最低 0.99 元。",
+          "source_url": "https://www.ithome.com/0/981/832.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3376,
+          "text": "打印机支持最高 300dpi、1670 万色和 256 级灰阶，加入 AR 动态照片功能；通过米家 App 扫描纸质照片，可以查看与照片关联的动态内容。设备支持蓝牙 5.2、多终端连接和最多 3 人共享共印。",
+          "source_url": "https://www.ithome.com/0/981/832.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:25+00:00"
+    },
+    {
+      "id": "69d69070-8153-579a-b354-612e42203109",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "e6b7366c5d8e4761d8e4daa584e4b687ba50273b",
+      "title": "Xbox Insider 测试带广告的免费云游戏，每次串流限时 1 小时",
+      "body": "微软开始面向 Xbox Insider 测试带广告的免费云游戏服务。玩家可以串流已购买的游戏或精选免费游戏，不需要额外付费；广告在游戏开始前播放，不插入游戏过程，但每次游玩限制为 1 小时，结束后需要重新排队并观看广告。\n\n测试可在 Xbox Series X|S、Xbox One 或 Windows PC 上通过 Xbox Insider Hub 申请。微软称，这种模式可以让用户无需购买新硬件即可体验 Xbox 云游戏。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 4,
+      "score": 0.0,
+      "source_url": "https://www.gcores.com/articles/217583",
+      "source_name": "gcores.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:15",
+      "published_at": "2026-07-27 09:15",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:30:17.946Z",
+        "_trash_previous_position": 4,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.gcores.com/articles/217583"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.gcores.com/articles/217583 📮Folo · 2026 年 7 月 27 日 09:15",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2395,
+          "url": "https://www.gcores.com/articles/217583",
+          "title": "",
+          "publisher": "gcores.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3322,
+          "text": "微软现已正式开始面向 Xbox Insider 测试带广告的免费云游戏服务。在限时测试期间，玩家可以串流已购买的游戏或本体免费的精选游戏，无需任何额外费用。单次游玩时长限制为1小时，但总时长不限（每次均需重新排队并观看广告）。",
+          "source_url": "https://www.gcores.com/articles/217583",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3323,
+          "text": "据悉，广告仅在游戏开始前播放，不会打扰游戏进程…",
+          "source_url": "https://www.gcores.com/articles/217583",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3454,
+          "text": "微软开始面向 Xbox Insider 测试带广告的免费云游戏服务。玩家可以串流已购买的游戏或精选免费游戏，不需要额外付费；广告在游戏开始前播放，不插入游戏过程，但每次游玩限制为 1 小时，结束后需要重新排队并观看广告。",
+          "source_url": "https://www.gcores.com/articles/217583",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3455,
+          "text": "测试可在 Xbox Series X|S、Xbox One 或 Windows PC 上通过 Xbox Insider Hub 申请。微软称，这种模式可以让用户无需购买新硬件即可体验 Xbox 云游戏。",
+          "source_url": "https://www.gcores.com/articles/217583",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:30:18+00:00"
+    },
+    {
+      "id": "2f143192-104a-5a9c-875d-4c97ddad67d5",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "1c70a8796e5c3e165a9c46a64c5b02dfdbf2e16b",
+      "title": "BIGME 大我 B7 Pro 增加 8GB+128GB 版本，首发价 2299 元",
+      "body": "BIGME 大我为彩色墨水屏电纸书 B7 Pro 增加 8GB+128GB 版本，定价 2399 元，首发价 2299 元。\n\n这次更新只涉及存储和内存组合，产品仍属于 B7 Pro 彩色墨水屏电纸书系列；此前版本的屏幕和阅读功能没有在本次信息中发生变化。\n\n8GB 内存和 128GB 存储空间主要改变多任务运行与本地文件容量，首发价比定价低 100 元。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 5,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/810.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 22:25",
+      "published_at": "2026-07-26 22:25",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:30:21.179Z",
+        "_trash_previous_position": 5,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/810.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/810.htm 🛰RSS · 2026 年 7 月 26 日 22:25",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2444,
+          "url": "https://www.ithome.com/0/981/810.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3382,
+          "text": "BIGME 大我为彩色墨水屏电纸书 B7 Pro 增加 8GB+128GB 版本，定价 2399 元，首发价 2299 元。",
+          "source_url": "https://www.ithome.com/0/981/810.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3383,
+          "text": "这次更新只涉及存储和内存组合，产品仍属于 B7 Pro 彩色墨水屏电纸书系列；此前版本的屏幕和阅读功能没有在本次信息中发生变化。",
+          "source_url": "https://www.ithome.com/0/981/810.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3384,
+          "text": "8GB 内存和 128GB 存储空间主要改变多任务运行与本地文件容量，首发价比定价低 100 元。",
+          "source_url": "https://www.ithome.com/0/981/810.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:30:21+00:00"
+    },
+    {
+      "id": "a201eeb8-a841-58cf-b78c-d944f91da142",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "14a109c1d7ed1a77f1d3b2c19a1428703c960b32",
+      "title": "HKC 猎鹰 24Q260 显示器上市，2K 260Hz 售价 999 元",
+      "body": "HKC 推出猎鹰 24Q260 显示器，采用 23.8 英寸 2K 面板，刷新率 260Hz，售价 999 元。\n\n这款显示器把较高刷新率与 2K 分辨率放在 23.8 英寸尺寸上，定位是高刷桌面显示器。\n\n260Hz 刷新率面向需要高刷新画面的桌面使用场景，2K 分辨率则对应 2560×1440 级别的显示规格；产品售价为 999 元。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 6,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/802.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 21:32",
+      "published_at": "2026-07-26 21:32",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:30:25.029Z",
+        "_trash_previous_position": 6,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/802.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/802.htm 🛰RSS · 2026 年 7 月 26 日 21:32",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2445,
+          "url": "https://www.ithome.com/0/981/802.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3385,
+          "text": "HKC 推出猎鹰 24Q260 显示器，采用 23.8 英寸 2K 面板，刷新率 260Hz，售价 999 元。",
+          "source_url": "https://www.ithome.com/0/981/802.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3386,
+          "text": "这款显示器把较高刷新率与 2K 分辨率放在 23.8 英寸尺寸上，定位是高刷桌面显示器。",
+          "source_url": "https://www.ithome.com/0/981/802.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3387,
+          "text": "260Hz 刷新率面向需要高刷新画面的桌面使用场景，2K 分辨率则对应 2560×1440 级别的显示规格；产品售价为 999 元。",
+          "source_url": "https://www.ithome.com/0/981/802.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:30:25+00:00"
+    },
+    {
       "id": "ca6590d6-4535-519c-ae8d-5dcfa6a5ef89",
       "issue_id": "ifanr-daily-20260728",
       "fingerprint": "43dc91d2fe788a1f077f0a0bfd5af0032605e544",
@@ -13994,6 +13726,81 @@
         }
       ],
       "updated_at": "2026-07-27T05:11:37+00:00"
+    },
+    {
+      "id": "af307de8-6077-571e-a5ba-729d3a8c499b",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "fa75c032b8817107add5b2ed2b8a44bfc6da36cd",
+      "title": "酷比魔方 iPlay 70 Max Pro 上市，13 英寸 4G 平板售价 1399 元",
+      "body": "酷比魔方 iPlay 70 Max Pro 已在京东开售，售价 1399 元。平板采用 13 英寸 2560×1600 LCD 屏幕、紫光展锐 T7300 芯片、8GB 内存和 128GB 存储，支持 4G 全网通双卡双待、Wi-Fi 6 和最高 512GB microSD 卡扩容。\n\n设备厚约 7.1mm、重 684g，配备 10000mAh 电池和 30W PD 快充，运行基于 Android 16 的 ALLDOCUBE OS 5.0L，并可选配磁吸键盘与手写笔。",
+      "category": "新产品",
+      "status": "excluded",
+      "selected": false,
+      "position": 13,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/980.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 12:13",
+      "published_at": "2026-07-27 12:13",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:33:14.996Z",
+        "_trash_previous_position": 13,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/980.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/980.htm 🛰RSS · 2026 年 7 月 27 日 12:13",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2658,
+          "url": "https://www.ithome.com/0/981/980.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3590,
+          "text": "酷比魔方 iPlay 70 Max Pro 已在京东开售，售价 1399 元。平板采用 13 英寸 2560×1600 LCD 屏幕、紫光展锐 T7300 芯片、8GB 内存和 128GB 存储，支持 4G 全网通双卡双待、Wi-Fi 6 和最高 512GB microSD 卡扩容。",
+          "source_url": "https://www.ithome.com/0/981/980.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3591,
+          "text": "设备厚约 7.1mm、重 684g，配备 10000mAh 电池和 30W PD 快充，运行基于 Android 16 的 ALLDOCUBE OS 5.0L，并可选配磁吸键盘与手写笔。",
+          "source_url": "https://www.ithome.com/0/981/980.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:33:15+00:00"
     },
     {
       "id": "9c593540-503a-5604-9697-467a9990a698",
@@ -17919,6 +17726,334 @@
       ],
       "claims": [],
       "updated_at": "2026-07-27T08:19:18+00:00"
+    },
+    {
+      "id": "6b179ac5-d36e-5eca-b3c0-ffb442355ddd",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "2fb84de826a7f7ed15fbf311785c4e98c14175b1",
+      "title": "MORROR ART 完成亿元级 B+ 轮融资，计划扩展电子家居产品矩阵",
+      "body": "家居音频品牌 MORROR ART 的母公司无锡未来镜显示科技近日完成亿元级 B+ 轮融资，日初资本投资、零一创投跟投。资金将用于扩充电子家居产品矩阵、建设视觉音乐内容和软件系统、拓展国内线下体验渠道，并推动海外子品牌 MorningBlues 发展。\n\n品牌目前约有 8 个 SKU，计划扩展至约 20 个，价格带从 1000 多元延伸到接近 2 万元。其海外子品牌的 SonicGlass A1 在 Kickstarter 众筹金额已超过 120 万美元；MORROR ART 计划于 7 月 28 日在中国发布全透明歌词音响 A2。",
+      "category": "新消费",
+      "status": "excluded",
+      "selected": false,
+      "position": 1,
+      "score": 0.0,
+      "source_url": "https://36kr.com/p/3910655616521348?f=rss",
+      "source_name": "36kr.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:20",
+      "published_at": "2026-07-27 09:20",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:27:49.996Z",
+        "_trash_previous_position": 1,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://36kr.com/p/3910655616521348?f=rss"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://36kr.com/p/3910655616521348?f=rss 📮Folo · 2026 年 7 月 27 日 09:20",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2386,
+          "url": "https://36kr.com/p/3910655616521348?f=rss",
+          "title": "",
+          "publisher": "36kr.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3312,
+          "text": "36氪获悉，家居音频品牌「MORROR ART」母公司无锡未来镜显示科技有限公司近日完成亿元级B+轮融资，由日初资本投资，老股东零一创投继续跟投，心流资本FlowCapital担任财务顾问。本轮资金将主要用于电子家居产品矩阵扩充、视觉音乐内容与软件系统建设、国内线下体验渠道拓展，以及旗下海外子品牌MorningBlues的全球化发展。",
+          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3313,
+          "text": "2024年，36氪曾率先报道MORROR ART的近亿元B轮融资，由海控天程基金领投、零一创投跟投。其后，MORROR ART营收继续保持高速增长，2025年增速显著高于音频行业平均水平。",
+          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3314,
+          "text": "与此同时，MORROR ART面向海外市场孵化子品牌「MorningBlues」，其推出的新一代产品SonicGlass A1，在Kickstarter获得来自欧美等主要市场用户的支持。项目众筹金额已突破120万美元，成为公司验证全球市场的重要节点。",
+          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3462,
+          "text": "家居音频品牌 MORROR ART 的母公司无锡未来镜显示科技近日完成亿元级 B+ 轮融资，日初资本投资、零一创投跟投。资金将用于扩充电子家居产品矩阵、建设视觉音乐内容和软件系统、拓展国内线下体验渠道，并推动海外子品牌 MorningBlues 发展。",
+          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3463,
+          "text": "品牌目前约有 8 个 SKU，计划扩展至约 20 个，价格带从 1000 多元延伸到接近 2 万元。其海外子品牌的 SonicGlass A1 在 Kickstarter 众筹金额已超过 120 万美元；MORROR ART 计划于 7 月 28 日在中国发布全透明歌词音响 A2。",
+          "source_url": "https://36kr.com/p/3910655616521348?f=rss",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:27:50+00:00"
+    },
+    {
+      "id": "29c75ac9-899e-58e8-ba1c-28f2103201e7",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "728397dbac1898054133269d686bb2cfa833210f",
+      "title": "尊界 V800、V680 将于 8 月 5 日发布，预售价最高 120 万元",
+      "body": "鸿蒙智行宣布，尊界时代旗舰 MPV 及华为全场景新品发布会将于 8 月 5 日举行。尊界 V800、V680 此前已亮相，预售价分别为 80 万—120 万元、65 万—90 万元；V800 车身长 5495mm、轴距 3430mm，V680 车身长 5320mm、轴距 3290mm。\n\n余承东 7 月 17 日称，两款车型开启预售 23 天订单突破 1 万台，其中 V800 占比约 80%。",
+      "category": "新消费",
+      "status": "excluded",
+      "selected": false,
+      "position": 2,
+      "score": 0.0,
+      "source_url": "https://www.ithome.com/0/981/837.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:13",
+      "published_at": "2026-07-27 09:13",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:27:45.829Z",
+        "_trash_previous_position": 2,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.ithome.com/0/981/837.htm"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/981/837.htm 🛰RSS · 2026 年 7 月 27 日 09:13",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2442,
+          "url": "https://www.ithome.com/0/981/837.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3391,
+          "text": "鸿蒙智行宣布，尊界时代旗舰 MPV 及华为全场景新品发布会将于 8 月 5 日举行。尊界 V800、V680 此前已亮相，预售价分别为 80 万—120 万元、65 万—90 万元；V800 车身长 5495mm、轴距 3430mm，V680 车身长 5320mm、轴距 3290mm。",
+          "source_url": "https://www.ithome.com/0/981/837.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3392,
+          "text": "余承东 7 月 17 日称，两款车型开启预售 23 天订单突破 1 万台，其中 V800 占比约 80%。",
+          "source_url": "https://www.ithome.com/0/981/837.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:27:45+00:00"
+    },
+    {
+      "id": "3df0e6ef-e65b-5cff-ab8e-7129de56601b",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "15c047d5106c24d3d170fb68a2259c6425b7feab",
+      "title": "B&O Beoplay H100 售价 2200 美元，评测关注高端耳机的差异",
+      "body": "Business Insider 试用 Bang & Olufsen Beoplay H100 后，重点比较了它与更便宜耳机在用料、佩戴、降噪和声音表现上的差异。这款耳机售价 2200 美元，定位高端无线耳机，评测也讨论了其高价对应的实际体验变化。\n\n评测从实际佩戴和日常使用出发，比较了耳罩、控制方式、降噪和音质，而不是只列参数。文章把 Beoplay H100 放在高价无线耳机与普通降噪耳机的价格差中讨论。",
+      "category": "新消费",
+      "status": "excluded",
+      "selected": false,
+      "position": 4,
+      "score": 0.0,
+      "source_url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
+      "source_name": "businessinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-07-26 23:00",
+      "published_at": "2026-07-26 23:00",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "标题为纯英文；必须核对原文后改写为中文新闻标题",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:27:38.529Z",
+        "_trash_previous_position": 4,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review 📮Folo · 2026 年 7 月 27 日 07:00",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2443,
+          "url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
+          "title": "",
+          "publisher": "businessinsider.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3395,
+          "text": "Business Insider 试用 Bang & Olufsen Beoplay H100 后，重点比较了它与更便宜耳机在用料、佩戴、降噪和声音表现上的差异。这款耳机售价 2200 美元，定位高端无线耳机，评测也讨论了其高价对应的实际体验变化。",
+          "source_url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3396,
+          "text": "评测从实际佩戴和日常使用出发，比较了耳罩、控制方式、降噪和音质，而不是只列参数。文章把 Beoplay H100 放在高价无线耳机与普通降噪耳机的价格差中讨论。",
+          "source_url": "https://www.businessinsider.com/guides/tech/bang-and-olufsen-beoplay-h100-premium-headphones-review",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:27:38+00:00"
+    },
+    {
+      "id": "96ca92e8-6a91-5325-8984-5b6f61b0d13a",
+      "issue_id": "ifanr-daily-20260728",
+      "fingerprint": "5ed5ef1677d304e65d2e8e3dfcf8191a84bda128",
+      "title": "国金证券：美妆消费进入精细化运营，彩妆与香氛是增量品类",
+      "body": "国金证券研报称，美妆行业进入存量精细化运营阶段，618 规模略有下降但品类结构发生变化，品牌更重视复购和利润；彩妆、香氛等升级品类成为增量。报告还提到，淘天仍是国货基本盘，抖音成为外资品牌竞争更集中的渠道，AI 已用于素材生成和投放托管。\n\n研报还把政策补贴、功效护肤和国风彩妆列为观察方向，并将品牌经营重点概括为复购、利润和渠道效率。这里的判断来自证券机构行业报告，文中没有对应到具体品牌的销售预测。",
+      "category": "新消费",
+      "status": "excluded",
+      "selected": false,
+      "position": 5,
+      "score": 0.0,
+      "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
+      "source_name": "36kr.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-07-27 09:05",
+      "published_at": "2026-07-27 09:05",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "_manual_fields": [
+          "selected",
+          "status"
+        ],
+        "_trash_deleted_at": "2026-07-27T08:27:34.362Z",
+        "_trash_previous_position": 5,
+        "_trash_previous_status": "needs_review",
+        "_trash_state": "deleted",
+        "all_urls": [
+          "https://36kr.com/newsflashes/3913184272176512?f=rss"
+        ],
+        "origin": "bot_draft",
+        "runtime_matches": 0,
+        "source_line": "🔗 原文链接：https://36kr.com/newsflashes/3913184272176512?f=rss 📮Folo · 2026 年 7 月 27 日 09:05",
+        "title_quality_warning": ""
+      },
+      "sources": [
+        {
+          "id": 2385,
+          "url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
+          "title": "",
+          "publisher": "36kr.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false,
+          "fetched_at": null
+        }
+      ],
+      "claims": [
+        {
+          "id": 3311,
+          "text": "36氪获悉，国金证券研报表示，美妆行业步入存量精细化运营，618规模微降但结构优化，品牌转向复购与利润导向，彩妆、香氛等升级品类成增量。政策首纳美妆补贴，定向扶持头部国货与高端功效品牌。AI全链路降本增效兑现，素材生成、投放托管显著提升利润率。渠道端淘天为国货基本盘，抖音成外资反扑主战场，国货需深耕功效护肤、国风彩妆等细分赛道建立壁垒。建议关注Q2业绩修复、高端心智稳固及大众性价比突出的三类...",
+          "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3470,
+          "text": "国金证券研报称，美妆行业进入存量精细化运营阶段，618 规模略有下降但品类结构发生变化，品牌更重视复购和利润；彩妆、香氛等升级品类成为增量。报告还提到，淘天仍是国货基本盘，抖音成为外资品牌竞争更集中的渠道，AI 已用于素材生成和投放托管。",
+          "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "id": 3471,
+          "text": "研报还把政策补贴、功效护肤和国风彩妆列为观察方向，并将品牌经营重点概括为复购、利润和渠道效率。这里的判断来自证券机构行业报告，文中没有对应到具体品牌的销售预测。",
+          "source_url": "https://36kr.com/newsflashes/3913184272176512?f=rss",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-07-27T08:27:34+00:00"
     },
     {
       "id": "6edae691-d409-5da7-aa92-2971551d1f2c",
@@ -22575,9 +22710,11 @@
       "selected_article_enrichment": 3852
     },
     "public_snapshot": {
-      "digest": "306ff2abbd95cd95b5ce070a355031a78630ca08a646cb5e1058e8bb0ccaffd8",
-      "generated_at": "2026-07-27T08:24:28+00:00",
+      "digest": "b3e4f1a778bea6b50575fdfff5f5c42fdfc166db33d4cc7d24e3679ccfe40f96",
+      "generated_at": "2026-07-27T08:38:30+00:00",
       "image_count": 0,
+      "selected_count": 28,
+      "selected_image_count": 22,
       "mode": "explicit_review_operations"
     }
   }
