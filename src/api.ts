@@ -249,6 +249,8 @@ export const api = {
   deleteStoryImage: (storyId: string) => mediaRequest<Story>(`/api/stories/${storyId}/image`, { method: 'DELETE' }),
   handoff: (issueId: string) =>
     request<AutomationHandoff>(`/api/issues/${issueId}/handoff`, { method: 'POST' }),
+  publishToLark: (issueId: string) =>
+    request<Job>(`/api/issues/${issueId}/lark-publish`, { method: 'POST' }),
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
   proposeProfile: () => request<Record<string, unknown>>('/api/editorial-profile/propose', { method: 'POST' }),
   profileProposals: () => request<Array<Record<string, unknown>>>('/api/editorial-profile/proposals'),

@@ -248,6 +248,12 @@ export function renderIssueMarkdown(issue: Issue): string {
   return [`# 早报｜${issue.publication_date}`, ...sections].join('\n\n').trim() + '\n'
 }
 
+/** Markdown shell for direct paste into the Feishu Bot document. */
+export function renderFeishuCloudMarkdown(issue: Issue): string {
+  const body = renderIssueMarkdown(issue).replace(/^# 早报｜[^\n]*\n\n?/, '')
+  return `早报｜\n\n插入头图\n插入日期\n\nappso 头图\n\n插入目录\n\n${body}`.trim() + '\n'
+}
+
 export function downloadText(filename: string, content: string, type = 'application/json;charset=utf-8') {
   const blob = new Blob([content], { type })
   const url = URL.createObjectURL(blob)

@@ -9,6 +9,7 @@ import {
   ChevronRight,
   CircleDot,
   CloudOff,
+  CloudUpload,
   Copy,
   Download,
   ExternalLink,
@@ -41,7 +42,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, describeWorkerError, getApiUrl, isPagesDeployment, resolveApiAssetUrl, setAuthToken } from './api'
+import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, resolveApiAssetUrl, setAuthToken } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
 import { generateQrSvgDataUri } from './totp'
@@ -695,7 +696,7 @@ function WeekendWorkspace({ data }: { data: Record<string, { label: string; cand
   })}</div>
 }
 
-function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closing = false, onClose, onMarkdown, onHandoff }: {
+function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closing = false, onClose, onMarkdown, onHandoff, onCopyToFeishu, onPublishToLark }: {
   issue: Issue
   handoff: AutomationHandoff | null
   busy: boolean
@@ -705,14 +706,40 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
   onClose: () => void
   onMarkdown: () => void
   onHandoff: () => void
+  onCopyToFeishu: () => Promise<boolean>
+  onPublishToLark: () => Promise<Job>
 }) {
+  const [copied, setCopied] = useState(false)
+  const [publishing, setPublishing] = useState(false)
+  const [publishMessage, setPublishMessage] = useState('')
   const headlineRewriteNotice = handoff?.requires_ai_headline_rewrite
     ? `已保存，但仍有 ${handoff.headline_quality_warnings?.length || 1} 条标题待 AI 主编根据原文改写；在改写前不能发布。`
     : ''
   const bodyWriteNotice = handoff?.requires_ai_body_write
     ? `已保存，但仍有 ${handoff.empty_body_titles?.length || 1} 条选题待 AI 主编补全正文；在补全前不能发布。`
     : ''
-  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options"><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。{headlineRewriteNotice ? ` ${headlineRewriteNotice}` : ''}{bodyWriteNotice ? ` ${bodyWriteNotice}` : ''}</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
+  const copyToFeishu = async () => {
+    const ok = await onCopyToFeishu()
+    if (ok) {
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2600)
+    }
+  }
+  const publishToLark = async () => {
+    setPublishing(true)
+    setPublishMessage('正在启动同步…')
+    try {
+      const queued = await onPublishToLark()
+      const completed = await api.watchJob(queued.id, (job) => setPublishMessage(job.message))
+      if (completed.state === 'failed') throw new Error(completed.error || '飞书 Bot 同步失败')
+      setPublishMessage(completed.message || '已同步飞书 Bot 同刊期文档')
+    } catch (error) {
+      setPublishMessage(error instanceof Error ? error.message : '飞书 Bot 同步失败')
+    } finally {
+      setPublishing(false)
+    }
+  }
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options">{!staticMode ? <button className="export-option" type="button" disabled={publishing} onClick={() => void publishToLark()}>{publishing ? <LoaderCircle size={19} className="spin" /> : <CloudUpload size={19} />}<span><strong>同步飞书 Bot 同刊期文档</strong><small>{publishMessage || '覆盖当前同刊期 Bot 文档，并回读校验标题、正文、分栏和图片'}</small></span></button> : null}<button className="export-option" type="button" onClick={() => void copyToFeishu()}><Copy size={19} /><span><strong>{copied ? '已复制，可粘贴到飞书云文档' : '复制到飞书云文档'}</strong><small>复制当前标题、正文、分类和排序，打开飞书云文档后直接粘贴</small></span></button><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。{headlineRewriteNotice ? ` ${headlineRewriteNotice}` : ''}{bodyWriteNotice ? ` ${bodyWriteNotice}` : ''}</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
 }
 
 function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
@@ -2419,7 +2446,7 @@ export function App() {
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
       </div>
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
-      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onHandoff={() => void createHandoff()} /> : null}
+      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onCopyToFeishu={() => copyIssueToFeishu(issue)} onPublishToLark={() => api.publishToLark(issue.id)} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
       {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
@@ -2458,4 +2485,42 @@ export async function writeClipboardText(text: string): Promise<boolean> {
   } finally {
     textarea.remove()
   }
+}
+
+function escapeClipboardHtml(value: string) {
+  return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character] || character)
+}
+
+async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
+  const stories = issue.stories.filter((story) => story.selected && story.status !== 'excluded').sort(comparePublicationStories)
+  const imageCache = new Map<string, string>()
+  const htmlParts = ['<h1>早报｜</h1>', '<p>插入头图</p>', '<p>插入日期</p>', '<p>appso 头图</p>', '<p>插入目录</p>']
+  const textParts = ['早报｜', '', '插入头图', '插入日期', '', 'appso 头图', '', '插入目录', '']
+  for (const story of stories) {
+    let imageData = imageCache.get(story.id) || ''
+    if (!imageData && story.image_path) {
+      try {
+        const response = await fetch(api.storyImageUrl(story.id), { headers: getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {} })
+        if (response.ok) {
+          const blob = await response.blob()
+          imageData = `data:${blob.type || 'image/png'};base64,${await new Promise<string>((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result).split(',')[1] || ''); reader.onerror = reject; reader.readAsDataURL(blob) })}`
+          imageCache.set(story.id, imageData)
+        }
+      } catch { /* 图片不可读时仍复制正文 */ }
+    }
+    htmlParts.push(`<h2>${escapeClipboardHtml(story.title)}</h2>`)
+    const imageSource = story.image_url || imageData
+    if (imageSource) htmlParts.push(`<p><img src="${escapeClipboardHtml(imageSource)}" alt="" style="max-width:100%;height:auto" /></p>`)
+    htmlParts.push(...story.body.split(/\n\s*\n/).filter(Boolean).map((paragraph) => `<p>${escapeClipboardHtml(paragraph).replace(/\n/g, '<br>')}</p>`))
+    textParts.push(story.title, story.body.trim(), '')
+  }
+  const html = htmlParts.join('')
+  const plain = textParts.join('\n')
+  if (typeof ClipboardItem !== 'undefined' && navigator.clipboard?.write) {
+    try {
+      await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([plain], { type: 'text/plain' }) })])
+      return true
+    } catch { /* fall through to plain text */ }
+  }
+  return writeClipboardText(plain)
 }
