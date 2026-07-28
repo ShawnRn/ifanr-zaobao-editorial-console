@@ -410,6 +410,8 @@ a { color: inherit; }
 .autosave-state { margin-left: auto; margin-right: 8px; color: var(--quiet); font-size: 9px; font-weight: 700; letter-spacing: .3px; transition: color .16s ease; }
 .autosave-state.saving { color: var(--amber); }
 .autosave-state.error { color: var(--red); }
+.detail-save-button { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 4px; padding: 5px 7px; background: var(--control); color: var(--muted); font-size: 10px; cursor: pointer; }
+.detail-save-button:hover { border-color: #7d8881; color: var(--ink); }
 .detail-scroll { height: calc(100% - 50px); overflow-y: auto; padding: 18px 18px 52px; }
 .field-label { display: block; margin: 0 0 7px; color: var(--quiet); font-size: 9px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; }
 .title-editor, .body-editor, .brand-section textarea { width: 100%; resize: vertical; border: 1px solid var(--line); border-radius: 5px; outline: 0; background: #fff; color: var(--ink); }
@@ -422,6 +424,18 @@ a { color: inherit; }
 .action-strip button { min-width: 0; min-height: 35px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: #545c57; font-size: 10px; cursor: pointer; }
 .action-strip button:hover { border-color: #7d8881; color: var(--ink); }
 .action-strip button:disabled { cursor: not-allowed; opacity: .42; }
+.related-links-editor { margin: 14px 0; border-top: 1px solid var(--line); padding-top: 13px; }
+.related-links-editor > p { margin: 5px 0 8px; color: var(--quiet); font-size: 11px; line-height: 1.5; }
+.related-link-item { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+.related-link-item a { overflow: hidden; color: #3b82f6; font-size: 12px; text-decoration: none; text-overflow: ellipsis; white-space: nowrap; }
+.related-link-display { margin: 14px 0 0; color: var(--muted); font-size: 13px; }
+.related-link-display a { color: #3b82f6; text-decoration: none; }
+.related-link-display a:hover { text-decoration: underline; }
+.related-link-item button { display: inline-flex; flex: 0 0 auto; border: 0; background: transparent; color: var(--quiet); cursor: pointer; }
+.related-link-inputs { display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 6px; }
+.related-link-inputs input, .related-link-inputs button { min-width: 0; border: 1px solid var(--line); border-radius: 4px; background: var(--control); color: var(--ink); font-size: 11px; padding: 7px; }
+.related-link-inputs button { display: inline-flex; align-items: center; gap: 3px; cursor: pointer; }
+.related-link-inputs button:disabled { cursor: not-allowed; opacity: .45; }
 .static-mode-note { margin: 2px 0 18px; padding: 10px 12px; border-left: 2px solid var(--accent); background: #f4f5f3; color: var(--muted); font-size: 11px; line-height: 1.55; }
 .job-banner { min-height: 38px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; margin: 10px 0; padding: 8px 10px; border: 1px solid #84a9b6; border-radius: 4px; background: #e2f0f4; color: #276172; font-size: 11px; }
 .job-banner.failed { border-color: #c3938f; background: #f5e5e3; color: #8e3d37; }
@@ -503,6 +517,10 @@ a { color: inherit; }
 .export-option strong, .export-option small { display: block; }
 .export-option strong { font-size: 13px; font-weight: 700; }
 .export-option small { margin-top: 5px; color: var(--quiet); font-size: 10px; line-height: 1.55; }
+.publish-progress { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.publish-progress i { display: block; flex: 1; height: 4px; overflow: hidden; border-radius: 999px; background: rgba(118, 183, 151, .22); }
+.publish-progress b { display: block; height: 100%; border-radius: inherit; background: #69ad88; transition: width .25s ease; }
+.publish-progress em { min-width: 31px; color: #8fc8a8; font-size: 10px; font-style: normal; font-variant-numeric: tabular-nums; }
 .handoff-success { display: flex; align-items: flex-start; gap: 9px; margin: 0 22px 18px; padding: 12px 14px; border: 1px solid #b8d0c0; border-radius: 8px; background: #eef5f0; color: #2b6044; font-size: 11px; line-height: 1.55; }
 .review-safety { display: flex; align-items: flex-start; gap: 9px; margin: 0 22px 18px; padding: 12px 14px; border: 1px solid #c6d8cd; border-radius: 8px; background: #f2f7f3; color: #416151; font-size: 11px; line-height: 1.55; }
 .review-safety svg { flex: 0 0 auto; }

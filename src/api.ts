@@ -200,6 +200,8 @@ export const api = {
     }),
   patchStory: (id: string, patch: Partial<Story> & { status?: StoryStatus }) =>
     request<Story>(`/api/stories/${id}`, { method: 'PATCH', body: JSON.stringify(patch) }),
+  resolveRelatedLink: (id: string, url: string) =>
+    request<{ title: string; url: string }>(`/api/stories/${id}/related-link`, { method: 'POST', body: JSON.stringify({ url }) }),
   reorder: (issueId: string, storyIds: string[], category?: string) =>
     request<Issue>(`/api/issues/${issueId}/reorder`, {
       method: 'POST',

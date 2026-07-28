@@ -31,6 +31,7 @@ import {
   RefreshCw,
   RotateCcw,
   Search,
+  Save,
   Settings,
   Shield,
   ShieldCheck,
@@ -59,6 +60,28 @@ const categoryOrder = publicationCategoryOrder
 const weekendDraftCategories = ['周末也值得一看的新闻', 'One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
 const weekendStorageCategory = '好看的'
 const workerRefreshIntervalMs = 25_000
+const draftRecoveryKey = (storyId: string) => `ifanr-editorial-draft-recovery:${storyId}`
+
+type DraftRecovery = { title: string; body: string; baseTitle: string; baseBody: string; savedAt: string }
+
+function loadDraftRecovery(story: Story): DraftRecovery | null {
+  try {
+    const raw = localStorage.getItem(draftRecoveryKey(story.id))
+    if (!raw) return null
+    const value = JSON.parse(raw) as DraftRecovery
+    return value.baseTitle === story.title && value.baseBody === story.body ? value : null
+  } catch {
+    return null
+  }
+}
+
+function storeDraftRecovery(story: Story, title: string, body: string) {
+  try {
+    localStorage.setItem(draftRecoveryKey(story.id), JSON.stringify({ title, body, baseTitle: story.title, baseBody: story.body, savedAt: new Date().toISOString() }))
+  } catch {
+    // Private browsing or a full storage quota must not interrupt editing.
+  }
+}
 
 function legacyAvatarFile(dataUrl: string): File | null {
   const match = dataUrl.match(/^data:(image\/(?:jpeg|png|gif|webp));base64,(.+)$/)
@@ -308,6 +331,7 @@ export function IssueArticle({
 }) {
   const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
   const awaitingAiEditor = pendingAiEditorRequest(story)
+  const relatedLinks = clipboardRelatedLinks(story)
   return (
     <article
       id={`story-${story.id}`}
@@ -340,9 +364,10 @@ export function IssueArticle({
           </header>
           {hasMeaningfulBody(story.body)
             ? <div className="article-body"><BodyBlocks body={story.body} /></div>
-            : awaitingAiEditor
+              : awaitingAiEditor
               ? <p className="pending-editorial-copy">已提交给 AI 主编，等待下一轮追源、核验并按早报 prompt 成稿。</p>
               : null}
+          {relatedLinks.map((link) => <p className="related-link-display" key={link.url}>🔗 相关阅读：<a href={link.url} target="_blank" rel="noreferrer">{link.title}</a></p>)}
           <LinkedSourceLine story={story} />
         </div>
         {image ? <img className="article-side-image" src={image} alt="" /> : null}
@@ -452,59 +477,107 @@ function DetailPanel({
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
+  const [relatedTitle, setRelatedTitle] = useState('')
+  const [relatedUrl, setRelatedUrl] = useState('')
+  const [relatedBusy, setRelatedBusy] = useState(false)
   const [saveState, setSaveState] = useState<'saved' | 'saving' | 'error'>('saved')
-  const titleSaveTimerRef = useRef<number | null>(null)
-  const bodySaveTimerRef = useRef<number | null>(null)
+  const saveTimerRef = useRef<number | null>(null)
   const pendingPatchRef = useRef<Partial<Story>>({})
+  const saveQueueRef = useRef<Promise<unknown>>(Promise.resolve())
+  const titleRef = useRef(title)
+  const bodyRef = useRef(body)
 
   useEffect(() => {
-    setTitle(story.title)
-    setBody(story.body)
+    const recovery = !staticMode ? loadDraftRecovery(story) : null
+    setTitle(recovery?.title ?? story.title)
+    setBody(recovery?.body ?? story.body)
+    titleRef.current = recovery?.title ?? story.title
+    bodyRef.current = recovery?.body ?? story.body
     pendingPatchRef.current = {}
-    setSaveState('saved')
+    if (recovery) {
+      pendingPatchRef.current = { title: recovery.title, body: recovery.body }
+      setSaveState('error')
+      window.setTimeout(() => { void flushPending() }, 0)
+    } else setSaveState('saved')
   }, [story.id])
 
-  const persist = useCallback(async (patch: Partial<Story>) => {
-    pendingPatchRef.current = { ...pendingPatchRef.current, ...patch }
+  const flushPending = useCallback(async () => {
+    if (saveTimerRef.current !== null) {
+      window.clearTimeout(saveTimerRef.current)
+      saveTimerRef.current = null
+    }
+    const patch = pendingPatchRef.current
+    pendingPatchRef.current = {}
+    if (!Object.keys(patch).length) return
     setSaveState('saving')
+    const request = saveQueueRef.current.then(() => onPatch(patch))
+    saveQueueRef.current = request.catch(() => undefined)
     try {
-      await onPatch(patch)
-      setSaveState('saved')
+      await request
+      if (!Object.keys(pendingPatchRef.current).length) {
+        try { localStorage.removeItem(draftRecoveryKey(story.id)) } catch { /* no-op */ }
+        setSaveState('saved')
+      }
     } catch {
+      pendingPatchRef.current = { ...patch, ...pendingPatchRef.current }
+      storeDraftRecovery(story, titleRef.current, bodyRef.current)
       setSaveState('error')
     }
-  }, [onPatch])
+  }, [onPatch, story])
 
   const schedulePersist = useCallback((field: 'title' | 'body', value: string, immediate = false) => {
-    const timerRef = field === 'title' ? titleSaveTimerRef : bodySaveTimerRef
-    if (timerRef.current !== null) window.clearTimeout(timerRef.current)
-    const submit = () => {
-      timerRef.current = null
-      void persist({ [field]: value })
-    }
-    if (immediate) submit()
-    else timerRef.current = window.setTimeout(submit, 600)
-  }, [persist])
+    pendingPatchRef.current = { ...pendingPatchRef.current, [field]: value }
+    if (field === 'title') titleRef.current = value
+    else bodyRef.current = value
+    if (!staticMode) storeDraftRecovery(story, titleRef.current, bodyRef.current)
+    setSaveState('saving')
+    if (saveTimerRef.current !== null) window.clearTimeout(saveTimerRef.current)
+    if (immediate) void flushPending()
+    else saveTimerRef.current = window.setTimeout(() => { saveTimerRef.current = null; void flushPending() }, 600)
+  }, [flushPending, staticMode, story])
 
-  const flushPending = useCallback(async () => {
-    const requests: Promise<unknown>[] = []
-    if (titleSaveTimerRef.current !== null) {
-      window.clearTimeout(titleSaveTimerRef.current)
-      titleSaveTimerRef.current = null
-      if (title !== story.title) requests.push(persist({ title }))
-    }
-    if (bodySaveTimerRef.current !== null) {
-      window.clearTimeout(bodySaveTimerRef.current)
-      bodySaveTimerRef.current = null
-      if (body !== story.body) requests.push(persist({ body }))
-    }
-    await Promise.all(requests)
-  }, [body, persist, story.body, story.title, title])
+  const relatedLinks = Array.isArray(story.metadata.related_links)
+    ? story.metadata.related_links.filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && typeof (item as { url?: unknown }).url === 'string'))
+    : []
+  const saveRelatedLinks = (links: { title: string; url: string }[]) => void onPatch({ metadata: { ...story.metadata, related_links: links } })
+  const addRelatedLink = async () => {
+    if (!/^https?:\/\//.test(relatedUrl.trim())) return
+    setRelatedBusy(true)
+    try {
+      const resolved = await api.resolveRelatedLink(story.id, relatedUrl.trim())
+      saveRelatedLinks([...relatedLinks, resolved])
+      setRelatedTitle('')
+      setRelatedUrl('')
+    } catch {
+      // A title field remains as a deliberate fallback for paywalls or JS-only pages.
+      if (relatedTitle.trim()) {
+        saveRelatedLinks([...relatedLinks, { title: relatedTitle.trim(), url: relatedUrl.trim() }])
+        setRelatedTitle('')
+        setRelatedUrl('')
+      }
+    } finally { setRelatedBusy(false) }
+  }
 
-  useEffect(() => () => {
-    if (titleSaveTimerRef.current !== null) window.clearTimeout(titleSaveTimerRef.current)
-    if (bodySaveTimerRef.current !== null) window.clearTimeout(bodySaveTimerRef.current)
-  }, [])
+  useEffect(() => {
+    const flushOnLeave = () => { void flushPending() }
+    const onVisibility = () => { if (document.visibilityState === 'hidden') flushOnLeave() }
+    const onShortcut = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === 's') {
+        event.preventDefault()
+        flushOnLeave()
+      }
+    }
+    window.addEventListener('beforeunload', flushOnLeave)
+    window.addEventListener('keydown', onShortcut)
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      if (saveTimerRef.current !== null) window.clearTimeout(saveTimerRef.current)
+      window.removeEventListener('beforeunload', flushOnLeave)
+      window.removeEventListener('keydown', onShortcut)
+      document.removeEventListener('visibilitychange', onVisibility)
+      flushOnLeave()
+    }
+  }, [flushPending])
 
   return (
     <aside className={`detail-panel ${closing ? 'closing' : ''}`} onKeyDownCapture={(event) => {
@@ -519,6 +592,7 @@ function DetailPanel({
       <div className="detail-toolbar">
         <span className="detail-kicker">稿件与来源</span>
         <span className={`autosave-state ${saveState}`} aria-live="polite">{saveState === 'saving' ? '正在保存' : saveState === 'error' ? '保存失败' : staticMode ? '本地审稿' : '已保存'}</span>
+        <button type="button" className="detail-save-button" title="立即保存（⌘S）" onClick={() => void flushPending()}><Save size={15} />⌘S 保存</button>
         <IconButton title="关闭详情" onClick={() => { void (async () => { await flushPending(); onClose() })() }}><PanelRightClose size={18} /></IconButton>
       </div>
       <div className="detail-scroll">
@@ -543,6 +617,16 @@ function DetailPanel({
         {activeJob ? <div className={`job-banner ${activeJob.state}`}><LoaderCircle size={16} className={activeJob.state === 'running' ? 'spin' : ''} /><span>{activeJob.message || activeJob.action}</span><strong>{activeJob.progress}%</strong></div> : null}
         <label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
         <textarea id="story-body" className="body-editor" value={body} onChange={(event) => { const value = event.target.value; setBody(value); schedulePersist('body', value) }} onBlur={() => body !== story.body && schedulePersist('body', body, true)} />
+        <section className="related-links-editor" aria-label="相关阅读">
+          <span className="field-label">相关阅读</span>
+          <p>粘贴链接后自动抓取文章标题；仅在抓取失败时手动补标题。发布时会自动置于正文末尾。</p>
+          {relatedLinks.map((link, index) => <div className="related-link-item" key={`${link.url}-${index}`}><a href={link.url} target="_blank" rel="noreferrer">{link.title}</a><button type="button" aria-label={`删除相关阅读：${link.title}`} onClick={() => saveRelatedLinks(relatedLinks.filter((_, itemIndex) => itemIndex !== index))}><X size={14} /></button></div>)}
+          <div className="related-link-inputs">
+            <input value={relatedTitle} onChange={(event) => setRelatedTitle(event.target.value)} placeholder="抓取失败时手动填标题" aria-label="相关阅读标题" />
+            <input value={relatedUrl} onChange={(event) => setRelatedUrl(event.target.value)} placeholder="https://…" aria-label="相关阅读链接" />
+            <button type="button" disabled={relatedBusy || !/^https?:\/\//.test(relatedUrl.trim())} onClick={() => void addRelatedLink()}><Plus size={15} />{relatedBusy ? '抓取中' : '添加'}</button>
+          </div>
+        </section>
         <DetailSources story={story} staticMode={staticMode} onImageChange={onImageChange} />
       </div>
     </aside>
@@ -712,6 +796,7 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
   const [copied, setCopied] = useState(false)
   const [publishing, setPublishing] = useState(false)
   const [publishMessage, setPublishMessage] = useState('')
+  const [publishProgress, setPublishProgress] = useState(0)
   const headlineRewriteNotice = handoff?.requires_ai_headline_rewrite
     ? `已保存，但仍有 ${handoff.headline_quality_warnings?.length || 1} 条标题待 AI 主编根据原文改写；在改写前不能发布。`
     : ''
@@ -727,11 +812,14 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
   }
   const publishToLark = async () => {
     setPublishing(true)
+    setPublishProgress(0)
     setPublishMessage('正在启动同步…')
     try {
       const queued = await onPublishToLark()
-      const completed = await api.watchJob(queued.id, (job) => setPublishMessage(job.message))
+      setPublishProgress(queued.progress || 0)
+      const completed = await api.watchJob(queued.id, (job) => { setPublishMessage(job.message); setPublishProgress(job.progress) })
       if (completed.state === 'failed') throw new Error(completed.error || '飞书 Bot 同步失败')
+      setPublishProgress(100)
       setPublishMessage(completed.message || '已同步飞书 Bot 同刊期文档')
     } catch (error) {
       setPublishMessage(error instanceof Error ? error.message : '飞书 Bot 同步失败')
@@ -739,7 +827,7 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
       setPublishing(false)
     }
   }
-  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options">{!staticMode ? <button className="export-option" type="button" disabled={publishing} onClick={() => void publishToLark()}>{publishing ? <LoaderCircle size={19} className="spin" /> : <CloudUpload size={19} />}<span><strong>同步飞书 Bot 同刊期文档</strong><small>{publishMessage || '覆盖当前同刊期 Bot 文档，并回读校验标题、正文、分栏和图片'}</small></span></button> : null}<button className="export-option" type="button" onClick={() => void copyToFeishu()}><Copy size={19} /><span><strong>{copied ? '已复制，可粘贴到飞书云文档' : '复制到飞书云文档'}</strong><small>复制当前标题、正文、分类和排序，打开飞书云文档后直接粘贴</small></span></button><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。{headlineRewriteNotice ? ` ${headlineRewriteNotice}` : ''}{bodyWriteNotice ? ` ${bodyWriteNotice}` : ''}</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options">{!staticMode ? <button className="export-option" type="button" disabled={publishing} onClick={() => void publishToLark()}>{publishing ? <LoaderCircle size={19} className="spin" /> : <CloudUpload size={19} />}<span><strong>同步飞书 Bot 同刊期文档</strong><small>{publishMessage || '覆盖当前同刊期 Bot 文档，并回读校验标题、正文、分栏和图片'}</small>{publishing ? <span className="publish-progress" aria-live="polite"><i><b style={{ width: `${Math.max(2, publishProgress)}%` }} /></i><em>{Math.round(publishProgress)}%</em></span> : null}</span></button> : null}<button className="export-option" type="button" onClick={() => void copyToFeishu()}><Copy size={19} /><span><strong>{copied ? '已复制，可粘贴到飞书云文档' : '复制到飞书云文档'}</strong><small>复制当前标题、正文、分类和排序，打开飞书云文档后直接粘贴</small></span></button><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。{headlineRewriteNotice ? ` ${headlineRewriteNotice}` : ''}{bodyWriteNotice ? ` ${bodyWriteNotice}` : ''}</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
 }
 
 function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
@@ -2491,11 +2579,20 @@ function escapeClipboardHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character] || character)
 }
 
+function clipboardRelatedLinks(story: Story): Array<{ title: string; url: string }> {
+  return Array.isArray(story.metadata.related_links)
+    ? story.metadata.related_links.filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && /^https?:\/\//.test(String((item as { url?: unknown }).url || ''))))
+    : []
+}
+
 async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
   const stories = issue.stories.filter((story) => story.selected && story.status !== 'excluded').sort(comparePublicationStories)
   const imageCache = new Map<string, string>()
+  // This mirrors the hand-edited Bot document shell so a direct Feishu paste
+  // lands in the same order and leaves the manual visual slots intact.
   const htmlParts = ['<h1>早报｜</h1>', '<p>插入头图</p>', '<p>插入日期</p>', '<p>appso 头图</p>', '<p>插入目录</p>']
   const textParts = ['早报｜', '', '插入头图', '插入日期', '', 'appso 头图', '', '插入目录', '']
+  let currentCategory = ''
   for (const story of stories) {
     let imageData = imageCache.get(story.id) || ''
     if (!imageData && story.image_path) {
@@ -2508,11 +2605,21 @@ async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
         }
       } catch { /* 图片不可读时仍复制正文 */ }
     }
-    htmlParts.push(`<h2>${escapeClipboardHtml(story.title)}</h2>`)
-    const imageSource = story.image_url || imageData
-    if (imageSource) htmlParts.push(`<p><img src="${escapeClipboardHtml(imageSource)}" alt="" style="max-width:100%;height:auto" /></p>`)
+    if (story.category !== currentCategory) {
+      currentCategory = story.category
+      htmlParts.push(`<h2>${escapeClipboardHtml(currentCategory)}</h2>`)
+      textParts.push(`## ${currentCategory}`, '')
+    }
+    htmlParts.push(`<h3>${escapeClipboardHtml(story.title)}</h3>`)
+    // Only paste locally fetched image bytes. Remote source URLs frequently
+    // fail Feishu's server-side fetch or violate a source's anti-hotlink rule.
+    if (imageData) htmlParts.push(`<p><img src="${escapeClipboardHtml(imageData)}" alt="" style="max-width:100%;height:auto" /></p>`)
     htmlParts.push(...story.body.split(/\n\s*\n/).filter(Boolean).map((paragraph) => `<p>${escapeClipboardHtml(paragraph).replace(/\n/g, '<br>')}</p>`))
-    textParts.push(story.title, story.body.trim(), '')
+    const relatedLinks = clipboardRelatedLinks(story)
+    for (const link of relatedLinks) {
+      htmlParts.push(`<p>🔗 相关阅读：<a href="${escapeClipboardHtml(link.url)}">${escapeClipboardHtml(link.title)}</a></p>`)
+    }
+    textParts.push(`### ${story.title}`, story.body.trim(), ...relatedLinks.map((link) => `🔗 相关阅读：${link.title}（${link.url}）`), '')
   }
   const html = htmlParts.join('')
   const plain = textParts.join('\n')

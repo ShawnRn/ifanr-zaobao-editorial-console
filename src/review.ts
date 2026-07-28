@@ -241,7 +241,12 @@ export function renderIssueMarkdown(issue: Issue): string {
         const sourceLine = typeof story.metadata.source_line === 'string'
           ? story.metadata.source_line
           : story.source_url ? `🔗 原文链接：${story.source_url}` : ''
-        return [`### ${story.title}`, story.body.trim(), sourceLine].filter(Boolean).join('\n\n')
+        const relatedLinks = Array.isArray(story.metadata.related_links)
+          ? story.metadata.related_links
+            .filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && typeof (item as { url?: unknown }).url === 'string'))
+            .map((item) => `🔗 相关阅读：[${item.title}](${item.url})`)
+          : []
+        return [`### ${story.title}`, story.body.trim(), ...relatedLinks, sourceLine].filter(Boolean).join('\n\n')
       })
     return [`## ${category}`, ...blocks].join('\n\n')
   })
