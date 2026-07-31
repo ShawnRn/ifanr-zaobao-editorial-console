@@ -57,8 +57,9 @@ const LEGACY_AVATAR_STORAGE_KEY = 'ifanr-editorial-avatar'
 
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
-const weekendDraftCategories = ['周末也值得一看的新闻', 'One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
-const weekendStorageCategory = '好看的'
+// Saturday keeps the familiar editorial buckets in the workbench.  The Bot
+// renderer deliberately collapses them into one reader-facing weekend section.
+const weekendWorkbenchCategories = ['大公司', '新产品', '新消费', '好看的'] as const
 const workerRefreshIntervalMs = 25_000
 const draftRecoveryKey = (storyId: string) => `ifanr-editorial-draft-recovery:${storyId}`
 
@@ -111,31 +112,19 @@ function isSaturdayPublication(publicationDate?: string) {
   return new Date(Date.UTC(year, month - 1, day)).getUTCDay() === 6
 }
 
-function weekendDraftSection(story: Story) {
-  const title = story.title.trim()
-  if (/^One Fun Thing[｜|]/i.test(title)) return 'One Fun Thing'
-  if (/^周末看什么[｜|]/.test(title)) return '周末看什么'
-  if (/^买书不读指南[｜|]/.test(title)) return '买书不读指南'
-  if (/^游戏推荐[｜|]/.test(title)) return '游戏推荐'
-  return '周末也值得一看的新闻'
-}
-
-function moveToWeekendDraftSection(story: Story, section: string) {
-  const match = story.title.match(/^(One Fun Thing|周末看什么|买书不读指南|游戏推荐)｜(主选|备选)｜(.+)$/i)
-  const plainTitle = match ? match[3] : story.title.replace(/^周末也值得一看的新闻｜/, '')
-  if (section === '周末也值得一看的新闻') return plainTitle
-  const slot = match?.[2] || '主选'
-  return `${section}｜${slot}｜${plainTitle}`
+function weekendWorkbenchSection(story: Story) {
+  // Saturday does not expose a 重磅 column, but never hide a legacy item.
+  return story.category === '重磅' ? '大公司' : story.category
 }
 
 function groupDraftStories(stories: Story[], isSaturday: boolean): Array<readonly [string, Story[]]> {
   if (!isSaturday) return groupPublicationStories(stories)
   const groups = new Map<string, Story[]>()
   stories.forEach((story) => {
-    const section = weekendDraftSection(story)
+    const section = weekendWorkbenchSection(story)
     groups.set(section, [...(groups.get(section) || []), story])
   })
-  return weekendDraftCategories.map((section) => [section, groups.get(section) || []] as const)
+  return weekendWorkbenchCategories.map((section) => [section, groups.get(section) || []] as const)
 }
 
 const statusLabel: Record<string, string> = {
@@ -1803,14 +1792,14 @@ export function App() {
   const draftCounts = useMemo(() => {
     const counts: Record<string, number> = { 全部: draftStories.length }
     draftStories.forEach((story) => {
-      const section = isSaturdayIssue ? weekendDraftSection(story) : story.category
+      const section = isSaturdayIssue ? weekendWorkbenchSection(story) : story.category
       counts[section] = (counts[section] || 0) + 1
     })
     return counts
   }, [draftStories, isSaturdayIssue])
 
   const sidebarCategories = view === 'draft' && isSaturdayIssue
-    ? ['全部', ...weekendDraftCategories]
+    ? ['全部', ...weekendWorkbenchCategories]
     : categories
 
   const pendingAiEditorCount = useMemo(
@@ -1821,10 +1810,12 @@ export function App() {
   const selectedStory = mobileReadOnly ? null : issue?.stories.find((story) => story.id === selectedStoryId) || null
   const selectedJob = selectedStory ? jobs[selectedStory.id] : undefined
 
-  const updateStory = async (storyId: string, patch: Partial<Story>) => {
+  const updateStory = async (storyId: string, patch: Partial<Story> & { confirm_delete?: boolean }) => {
     const existing = issue?.stories.find((story) => story.id === storyId)
     if (!existing) throw new Error('选题不存在')
-    const updated = dataMode === 'static' ? { ...existing, ...patch } : await api.patchStory(storyId, patch)
+    const updated = dataMode === 'static'
+      ? { ...existing, ...patch }
+      : await api.patchStory(storyId, { ...patch, expected_updated_at: existing.updated_at || '' })
     setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
     return updated
   }
@@ -1833,6 +1824,7 @@ export function App() {
     await updateStory(story.id, {
       selected: false,
       status: 'excluded',
+      confirm_delete: true,
       metadata: {
         ...story.metadata,
         _trash_state: 'deleted',
@@ -1948,7 +1940,7 @@ export function App() {
     if (!issue || !draggedStoryId || targetId === draggedStoryId) return false
     const target = issue.stories.find((story) => story.id === targetId)
     const dragged = issue.stories.find((story) => story.id === draggedStoryId)
-    return Boolean(target && dragged && (isSaturdayIssue ? weekendDraftSection(target) === weekendDraftSection(dragged) : target.category === dragged.category))
+    return Boolean(target && dragged && (isSaturdayIssue ? weekendWorkbenchSection(target) === weekendWorkbenchSection(dragged) : target.category === dragged.category))
   }
 
   const updateOutlineDrop = (event: DragEvent<HTMLButtonElement>, targetId: string) => {
@@ -1979,9 +1971,9 @@ export function App() {
     const activeId = draggedStoryId
     const target = issue.stories.find((story) => story.id === targetId)
     const dragged = issue.stories.find((story) => story.id === draggedStoryId)
-    if (!target || !dragged || (isSaturdayIssue ? weekendDraftSection(target) !== weekendDraftSection(dragged) : target.category !== dragged.category)) return
-    const targetCategory = isSaturdayIssue ? weekendStorageCategory : target.category
-    const ordered = issue.stories.filter((story) => story.selected && (isSaturdayIssue ? weekendDraftSection(story) === weekendDraftSection(target) : story.category === target.category)).sort((a, b) => a.position - b.position)
+    if (!target || !dragged || (isSaturdayIssue ? weekendWorkbenchSection(target) !== weekendWorkbenchSection(dragged) : target.category !== dragged.category)) return
+    const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(target) : target.category
+    const ordered = issue.stories.filter((story) => story.selected && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === target.category)).sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((story) => story.id === activeId)
     const [moved] = ordered.splice(from, 1)
     const targetIndex = ordered.findIndex((story) => story.id === targetId)
@@ -2017,7 +2009,7 @@ export function App() {
     const story = issue.stories.find((item) => item.id === storyId)
     if (!story) return
     const ordered = issue.stories
-      .filter((item) => item.selected && item.status !== 'excluded' && (isSaturdayIssue ? weekendDraftSection(item) === weekendDraftSection(story) : item.category === story.category))
+      .filter((item) => item.selected && item.status !== 'excluded' && (isSaturdayIssue ? weekendWorkbenchSection(item) === weekendWorkbenchSection(story) : item.category === story.category))
       .sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((item) => item.id === storyId)
     const to = target === 'first' ? 0 : target === 'last' ? ordered.length - 1 : from + target
@@ -2025,13 +2017,14 @@ export function App() {
     const [moved] = ordered.splice(from, 1)
     ordered.splice(to, 0, moved)
     const positions = new Map(ordered.map((item, index) => [item.id, index]))
-    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, category: isSaturdayIssue ? weekendStorageCategory : item.category, position: positions.get(item.id) ?? item.position } : item))
+    const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(story) : story.category
+    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, category: targetCategory, position: positions.get(item.id) ?? item.position } : item))
     setIssue(optimistic)
     setMovingStoryId(storyId)
     window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 440)
     if (dataMode === 'static') return
     try {
-      const remoteIssue = await api.reorder(issue.id, ordered.map((item) => item.id), isSaturdayIssue ? weekendStorageCategory : story.category)
+      const remoteIssue = await api.reorder(issue.id, ordered.map((item) => item.id), targetCategory)
       // Only update if remote order differs
       const remoteOrder = remoteIssue.stories.map((s) => s.id).join(',')
       const localOrder = optimistic.stories.map((s) => s.id).join(',')
@@ -2064,26 +2057,6 @@ export function App() {
     }
   }
 
-  const moveStoryToWeekendSection = async (storyId: string, targetSection: string) => {
-    if (!issue || !weekendDraftCategories.includes(targetSection as typeof weekendDraftCategories[number])) return
-    const story = issue.stories.find((item) => item.id === storyId)
-    if (!story || weekendDraftSection(story) === targetSection) return
-    const title = moveToWeekendDraftSection(story, targetSection)
-    const position = issue.stories.filter((item) => item.selected && weekendDraftSection(item) === targetSection).reduce((maximum, item) => Math.max(maximum, item.position), -1) + 1
-    const previous = issue
-    setIssue(issueWithMetrics(issue, issue.stories.map((item) => item.id === storyId ? { ...item, title, category: weekendStorageCategory, position } : item)))
-    setMovingStoryId(storyId)
-    window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
-    if (dataMode === 'static') return
-    try {
-      const updated = await api.patchStory(storyId, { title, category: weekendStorageCategory, position })
-      setIssue((current) => current ? issueWithMetrics(current, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
-    } catch (moveError) {
-      setIssue(previous)
-      showOperationError(moveError instanceof Error ? moveError.message : '移动周末栏目失败')
-    }
-  }
-
   const scrollToDraftSection = (section: string) => {
     setActiveDraftSection(section)
     if (query) setQuery('')
@@ -2103,7 +2076,7 @@ export function App() {
   }
 
   const scrollToStory = (story: Story) => {
-    setActiveDraftSection(isSaturdayIssue ? weekendDraftSection(story) : story.category)
+    setActiveDraftSection(isSaturdayIssue ? weekendWorkbenchSection(story) : story.category)
     setActiveStoryId(story.id)
     const performScroll = () => {
       const container = draftScrollRef.current
@@ -2292,7 +2265,7 @@ export function App() {
     setQuery('')
     if (target.selected) {
       setView('draft')
-      window.requestAnimationFrame(() => scrollToDraftSection(isSaturdayIssue ? weekendDraftSection(target) : target.category))
+      window.requestAnimationFrame(() => scrollToDraftSection(isSaturdayIssue ? weekendWorkbenchSection(target) : target.category))
     } else {
       setView('candidates')
       setCategory('全部')
@@ -2513,7 +2486,7 @@ export function App() {
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && loadingIssueDetails && (view === 'candidates' || view === 'trash') ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在载入完整候选库</span></div> : null}
             {!loading && issue && view === 'draft' ? <div className="draft-stage">
-              <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>早报</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void (isSaturdayIssue ? moveStoryToWeekendSection(story.id, target) : moveStoryToCategory(story.id, target))} moveOptions={isSaturdayIssue ? weekendDraftCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendDraftSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDragEnd={clearOutlineDrag} onDrop={(after) => void handleDrop(story.id, after)} />)}</section>)}</div></div>
+              <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDragEnd={clearOutlineDrag} onDrop={(after) => void handleDrop(story.id, after)} />)}</section>)}</div></div>
             </div> : null}
             {!loading && !loadingIssueDetails && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>

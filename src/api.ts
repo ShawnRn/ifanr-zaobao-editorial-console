@@ -198,7 +198,7 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ edition: 'noon', run_preflight: runPreflight, max_candidates: 320 }),
     }),
-  patchStory: (id: string, patch: Partial<Story> & { status?: StoryStatus }) =>
+  patchStory: (id: string, patch: Partial<Story> & { status?: StoryStatus; confirm_delete?: boolean; expected_updated_at?: string }) =>
     request<Story>(`/api/stories/${id}`, { method: 'PATCH', body: JSON.stringify(patch) }),
   resolveRelatedLink: (id: string, url: string) =>
     request<{ title: string; url: string }>(`/api/stories/${id}/related-link`, { method: 'POST', body: JSON.stringify({ url }) }),

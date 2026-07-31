@@ -388,56 +388,20 @@
     "label": "周末看什么",
     "candidates": [
       {
-        "id": "8b57f963ee2e",
-        "title": "Heartstopper Forever",
+        "id": "79fda6a339f1",
+        "title": "纪录片《时间与水》",
         "urls": [
-          "https://media.netflix.com/en/only-on-netflix/82040750"
+          "https://deadline.com/2026/07/time-and-water-director-sara-dosa-interview-1237006139"
         ],
-        "discovered_at": "2026-07-17T09:10:46+08:00",
-        "source_date": null,
-        "why": "三季剧集用一部电影收束，7 月 17 日已上线 Netflix，主创与剧情承接明确。",
+        "discovered_at": "2026-07-29T15:25:00+08:00",
+        "source_date": "2026-07-29",
+        "why": "从冰岛冰川消退切入家族记忆、神话与文学，适合作为周末纪录片深读入口。",
         "facts": [
-          "Alice Oseman 编剧，Kit Connor 与 Joe Locke 回归。"
+          "Sara Dosa 执导，已在圣丹斯、SXSW、CPH:DOX 与 Hot Docs 展映，本周五在 National Geographic 播出、周六上线 Disney+。"
         ],
-        "score": 0.0,
-        "status": "used",
-        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
-        "issue_date": "2026-07-18"
-      },
-      {
-        "id": "29658888d651",
-        "title": "Miroirs No. 3",
-        "urls": [
-          "https://mubi.com/en/us/films/miroirs-no-3"
-        ],
-        "discovered_at": "2026-07-17T09:10:46+08:00",
-        "source_date": null,
-        "why": "Christian Petzold 与 Paula Beer 第四次合作，7 月 17 日上线 MUBI，平台评分与可观看信息齐全。",
-        "facts": [
-          "MUBI 用户评分 7.4/10，片长 86 分钟。"
-        ],
-        "score": 0.0,
-        "status": "used",
-        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
-        "issue_date": "2026-07-18"
-      },
-      {
-        "id": "7fb47c1a0423",
-        "title": "《孽欲杀人夜》4K 修复最终剪辑版",
-        "urls": [
-          "https://variety.com/2026/film/columns/manhunter-the-final-cut-the-greatest-thriller-of-our-time-1236815424"
-        ],
-        "discovered_at": "2026-07-19T09:11:34+08:00",
-        "source_date": "2026-07-19",
-        "why": "7 月 24 日小规模院线上映，40 周年 4K 修复，具备明确可观看时间、主创与版本差异。",
-        "facts": [
-          "Michael Mann 监督的 4K 修复最终剪辑版于 7 月 24 日小规模上映；版本沿用 2003 年导演剪辑结构。"
-        ],
-        "score": 8.5,
-        "status": "used",
-        "last_reviewed_at": "2026-07-24T09:24:34+08:00",
-        "issue_date": "2026-07-25",
-        "review_note": "作为周末看什么可见备选发布"
+        "score": 8.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-29T15:23:33+08:00"
       }
     ]
   },
@@ -445,38 +409,20 @@
     "label": "游戏推荐",
     "candidates": [
       {
-        "id": "9725a906ef9e",
-        "title": "加利宅邸悬案",
+        "id": "ee24a04843ef",
+        "title": "Xbox 测试带广告的免费云游戏服务",
         "urls": [
-          "https://store.steampowered.com/app/3641000/The_Incident_at_Galley_House"
+          "https://www.gcores.com/articles/217583"
         ],
-        "discovered_at": "2026-07-17T09:10:47+08:00",
-        "source_date": null,
-        "why": "用回声机器重建 1936 年密室事件，调查机制、平台、评分和现行售价完整。",
+        "discovered_at": "2026-07-27T09:32:44+08:00",
+        "source_date": "2026-07-27",
+        "why": "当前可参与的 Xbox Insider 测试，具有明确玩法限制与商业模式变化，适合周末游戏栏目补充。",
         "facts": [
-          "7 月 14 日上线 Steam；简体中文商店页显示 697 篇购买用户评价中 96% 为好评，Metacritic 82 分。"
+          "每次串流游玩时长限制为 1 小时，开始前播放广告；可串流已购买游戏或精选免费游戏，单次结束后需重新排队。"
         ],
-        "score": 0.0,
-        "status": "used",
-        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
-        "issue_date": "2026-07-18"
-      },
-      {
-        "id": "7632af8da909",
-        "title": "Palworld 1.0",
-        "urls": [
-          "https://www.metacritic.com/game/palworld"
-        ],
-        "discovered_at": "2026-07-17T09:10:47+08:00",
-        "source_date": null,
-        "why": "正式版把探索、基地建设、伙伴培养和后期内容收束成完整循环，当前可玩且有媒体评价。",
-        "facts": [
-          "7 月 10 日发布 1.0，支持 PC、Xbox 与 PS5。"
-        ],
-        "score": 0.0,
-        "status": "used",
-        "last_reviewed_at": "2026-07-17T09:27:00+08:00",
-        "issue_date": "2026-07-18"
+        "score": 72.0,
+        "status": "active",
+        "last_reviewed_at": "2026-07-27T09:32:44+08:00"
       }
     ]
   }
