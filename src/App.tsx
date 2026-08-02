@@ -43,7 +43,7 @@ import {
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
-import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, resolveApiAssetUrl, setAuthToken } from './api'
+import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, resolveApiAssetUrl, setAuthToken, WorkerRequestError } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
 import { generateQrSvgDataUri } from './totp'
@@ -196,6 +196,10 @@ function pendingAiEditorRequest(story: Story) {
     && !Array.isArray(request)
     && (request as Record<string, unknown>).state === 'pending',
   )
+}
+
+function isDraftStory(story: Story) {
+  return (story.selected && story.status !== 'excluded' && hasMeaningfulBody(story.body)) || pendingAiEditorRequest(story)
 }
 
 function IconButton({
@@ -408,8 +412,8 @@ function CandidateItem({
         </div>
       </div>
       <div className="candidate-actions">
-        <button type="button" className="adopt-button" title="提交给 AI 主编撰写" onClick={(event) => { event.stopPropagation(); onAdopt() }}><Check size={16} /></button>
-        <button type="button" className="inline-icon" title="排除" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={15} /></button>
+        <button type="button" className="candidate-action-button adopt-button" title="提交给 AI 主编撰写" onClick={(event) => { event.stopPropagation(); onAdopt() }}><Check size={16} /></button>
+        <button type="button" className="candidate-action-button exclude-button" title="排除" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={16} /></button>
         <ChevronRight size={16} />
       </div>
     </article>
@@ -1466,6 +1470,8 @@ export function App() {
   const issueRef = useRef<Issue | null>(null)
   const dataModeRef = useRef(dataMode)
   const workerRefreshInFlightRef = useRef(false)
+  const reorderInFlightRef = useRef(false)
+  const dragJustEndedAtRef = useRef(0)
   const fullIssueLoadRef = useRef<Promise<void> | null>(null)
 
   useEffect(() => { issueRef.current = issue }, [issue])
@@ -1606,7 +1612,7 @@ export function App() {
 
   const refreshWorkerIssue = useCallback(async () => {
     const currentIssue = issueRef.current
-    if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || workerRefreshInFlightRef.current) return
+    if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || workerRefreshInFlightRef.current || reorderInFlightRef.current) return
     workerRefreshInFlightRef.current = true
     try {
       const latestVersion = await api.currentIssueVersion()
@@ -1747,10 +1753,7 @@ export function App() {
 
   const draftStories = useMemo(() => {
     if (!issue) return []
-    return issue.stories.filter((story) => (
-      (story.selected && story.status !== 'excluded' && hasMeaningfulBody(story.body))
-      || pendingAiEditorRequest(story)
-    ))
+    return issue.stories.filter(isDraftStory)
       .filter((story) => matchesStoryQuery(story, query))
       .sort(comparePublicationStories)
   }, [issue, query])
@@ -1813,9 +1816,49 @@ export function App() {
   const updateStory = async (storyId: string, patch: Partial<Story> & { confirm_delete?: boolean }) => {
     const existing = issue?.stories.find((story) => story.id === storyId)
     if (!existing) throw new Error('选题不存在')
-    const updated = dataMode === 'static'
-      ? { ...existing, ...patch }
-      : await api.patchStory(storyId, { ...patch, expected_updated_at: existing.updated_at || '' })
+    let updated: Story
+    if (dataMode === 'static') {
+      updated = { ...existing, ...patch }
+    } else {
+      const patchFields = Object.keys(patch).filter((field) => field !== 'confirm_delete' && field !== 'expected_updated_at')
+      const expectedFields = Object.fromEntries(patchFields.map((field) => [field, existing[field as keyof Story]]))
+      try {
+        updated = await api.patchStory(storyId, {
+          ...patch,
+          expected_updated_at: existing.updated_at || '',
+          expected_fields: expectedFields,
+        })
+      } catch (error) {
+        if (!(error instanceof WorkerRequestError) || error.status !== 409 || !issue) throw error
+
+        // Auto-save requests are serialized, but a completed request can update
+        // the server timestamp before React supplies the next closure. Re-read
+        // once and retry only when the pending fields have not been changed by
+        // somebody else. This preserves the user's draft instead of reporting a
+        // misleading save failure for an unrelated version bump.
+        const latestIssue = await api.getIssue(issue.id)
+        const latestStory = latestIssue.stories.find((story) => story.id === storyId)
+        if (!latestStory) throw new Error('选题已不存在，未覆盖当前编辑内容')
+        const fields = Object.entries(patch).filter(([field]) => field !== 'confirm_delete' && field !== 'expected_updated_at')
+        const matches = (left: unknown, right: unknown) => left === right || JSON.stringify(left) === JSON.stringify(right)
+        const realConflicts = fields.filter(([field, value]) => {
+          const latestValue = latestStory[field as keyof Story]
+          const originalValue = existing[field as keyof Story]
+          return !matches(latestValue, originalValue) && !matches(latestValue, value)
+        })
+        if (realConflicts.length) {
+          throw new Error(`保存冲突：${realConflicts.map(([field]) => field === 'title' ? '标题' : field === 'body' ? '正文' : '当前字段').join('、')} 已在另一处被修改；你的输入仍保留在本机，请确认后再保存`)
+        }
+        const alreadySaved = fields.every(([field, value]) => matches(latestStory[field as keyof Story], value))
+        updated = alreadySaved
+          ? latestStory
+          : await api.patchStory(storyId, {
+            ...patch,
+            expected_updated_at: latestStory.updated_at || '',
+            expected_fields: Object.fromEntries(fields.map(([field]) => [field, latestStory[field as keyof Story]])),
+          })
+      }
+    }
     setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
     return updated
   }
@@ -1958,6 +2001,7 @@ export function App() {
   }
 
   const clearOutlineDrag = () => {
+    dragJustEndedAtRef.current = Date.now()
     setDraggedStoryId(null)
     setOutlineDrop(null)
   }
@@ -1967,22 +2011,26 @@ export function App() {
   const SCROLL_SPEED = 26
 
   const handleDrop = async (targetId: string, after = false) => {
-    if (!issue || !draggedStoryId || draggedStoryId === targetId) return
+    const currentIssue = issueRef.current || issue
+    if (!currentIssue || !draggedStoryId || draggedStoryId === targetId || reorderInFlightRef.current) return
     const activeId = draggedStoryId
-    const target = issue.stories.find((story) => story.id === targetId)
-    const dragged = issue.stories.find((story) => story.id === draggedStoryId)
+    const target = currentIssue.stories.find((story) => story.id === targetId)
+    const dragged = currentIssue.stories.find((story) => story.id === draggedStoryId)
     if (!target || !dragged || (isSaturdayIssue ? weekendWorkbenchSection(target) !== weekendWorkbenchSection(dragged) : target.category !== dragged.category)) return
     const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(target) : target.category
-    const ordered = issue.stories.filter((story) => story.selected && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === target.category)).sort((a, b) => a.position - b.position)
+    const ordered = currentIssue.stories.filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === target.category)).sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((story) => story.id === activeId)
+    if (from < 0) return
     const [moved] = ordered.splice(from, 1)
     const targetIndex = ordered.findIndex((story) => story.id === targetId)
+    if (targetIndex < 0) return
     ordered.splice(targetIndex + (after ? 1 : 0), 0, moved)
 
     // Synchronous optimistic UI update (<1ms response time)
     const positions = new Map(ordered.map((story, index) => [story.id, index]))
-    const updatedStories = issue.stories.map((story) => positions.has(story.id) ? { ...story, category: targetCategory, position: positions.get(story.id) || 0 } : story)
-    const optimisticIssue = issueWithMetrics(issue, updatedStories)
+    const updatedStories = currentIssue.stories.map((story) => positions.has(story.id) ? { ...story, category: targetCategory, position: positions.get(story.id) || 0 } : story)
+    const optimisticIssue = issueWithMetrics(currentIssue, updatedStories)
+    issueRef.current = optimisticIssue
     setIssue(optimisticIssue)
     setMovingStoryId(activeId)
     setActiveStoryId(activeId)
@@ -1991,15 +2039,19 @@ export function App() {
 
     // Background server sync — only apply remote response if it differs meaningfully
     if (dataMode !== 'static') {
+      reorderInFlightRef.current = true
       try {
-        const remoteIssue = await api.reorder(issue.id, ordered.map((story) => story.id), targetCategory)
+        const remoteIssue = await api.reorder(currentIssue.id, ordered.map((story) => story.id), targetCategory)
         // Only update if remote positions differ from our optimistic state (avoids re-render jank)
         const remoteOrder = remoteIssue.stories.map((s) => s.id).join(',')
         const localOrder = optimisticIssue.stories.map((s) => s.id).join(',')
         if (remoteOrder !== localOrder) setIssue(remoteIssue)
       } catch (reorderError) {
         showOperationError(reorderError instanceof Error ? reorderError.message : '保存排版顺序失败')
-        void loadIssue()
+        issueRef.current = currentIssue
+        setIssue(currentIssue)
+      } finally {
+        reorderInFlightRef.current = false
       }
     }
   }
@@ -2009,7 +2061,7 @@ export function App() {
     const story = issue.stories.find((item) => item.id === storyId)
     if (!story) return
     const ordered = issue.stories
-      .filter((item) => item.selected && item.status !== 'excluded' && (isSaturdayIssue ? weekendWorkbenchSection(item) === weekendWorkbenchSection(story) : item.category === story.category))
+      .filter((item) => isDraftStory(item) && (isSaturdayIssue ? weekendWorkbenchSection(item) === weekendWorkbenchSection(story) : item.category === story.category))
       .sort((a, b) => a.position - b.position)
     const from = ordered.findIndex((item) => item.id === storyId)
     const to = target === 'first' ? 0 : target === 'last' ? ordered.length - 1 : from + target
@@ -2121,7 +2173,6 @@ export function App() {
   }
 
   const adoptCandidate = async (story: Story) => {
-    setSelectedStoryId(story.id)
     try {
       const targetPosition = issue?.stories
         .filter((item) => item.category === story.category && (
@@ -2144,8 +2195,6 @@ export function App() {
           },
         },
       })
-      setView('draft')
-      window.requestAnimationFrame(() => scrollToDraftSection(story.category))
     } catch (adoptError) {
       showOperationError(adoptError instanceof Error ? adoptError.message : '提交 AI 主编失败')
     }
@@ -2448,9 +2497,15 @@ export function App() {
                         draggable
                         className={`sidebar-outline-item ${isSelected ? 'active ' : ''}${isDragging ? 'dragging ' : ''}${movingStoryId === story.id ? 'moving ' : ''}${dropPositionClass}`}
                         onClick={() => {
+                          if (Date.now() - dragJustEndedAtRef.current < 250) return
                           scrollToStory(story)
                         }}
                         onDragStart={(event) => {
+                          const source = event.target instanceof Element ? event.target : null
+                          if (!source?.closest('.drag-handle')) {
+                            event.preventDefault()
+                            return
+                          }
                           event.dataTransfer.effectAllowed = 'move'
                           event.dataTransfer.setData('text/plain', story.id)
                           setDraggedStoryId(story.id)
@@ -2459,8 +2514,9 @@ export function App() {
                         onDragOver={(event) => updateOutlineDrop(event, story.id)}
                         onDrop={(event) => {
                           event.preventDefault()
-                          const drop = outlineDrop
-                          void handleDrop(story.id, drop?.targetId === story.id ? drop.after : false)
+                          event.stopPropagation()
+                          const rect = event.currentTarget.getBoundingClientRect()
+                          void handleDrop(story.id, event.clientY >= rect.top + rect.height / 2)
                         }}
                         onDragEnd={clearOutlineDrag}
                       >

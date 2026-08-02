@@ -128,6 +128,16 @@ export const setAuthToken = (token: string) => {
   }
 }
 
+export class WorkerRequestError extends Error {
+  status: number
+
+  constructor(message: string, status: number) {
+    super(message)
+    this.name = 'WorkerRequestError'
+    this.status = status
+  }
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), 10000)
@@ -147,7 +157,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
-      throw new Error(payload.detail || response.statusText)
+      throw new WorkerRequestError(payload.detail || response.statusText, response.status)
     }
     return response.json() as Promise<T>
   } finally {
@@ -172,7 +182,7 @@ async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
     })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
-      throw new Error(payload.detail || response.statusText)
+      throw new WorkerRequestError(payload.detail || response.statusText, response.status)
     }
     return response.json() as Promise<T>
   } finally {
@@ -198,7 +208,7 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ edition: 'noon', run_preflight: runPreflight, max_candidates: 320 }),
     }),
-  patchStory: (id: string, patch: Partial<Story> & { status?: StoryStatus; confirm_delete?: boolean; expected_updated_at?: string }) =>
+  patchStory: (id: string, patch: Partial<Story> & { status?: StoryStatus; confirm_delete?: boolean; expected_updated_at?: string; expected_fields?: Record<string, unknown> }) =>
     request<Story>(`/api/stories/${id}`, { method: 'PATCH', body: JSON.stringify(patch) }),
   resolveRelatedLink: (id: string, url: string) =>
     request<{ title: string; url: string }>(`/api/stories/${id}/related-link`, { method: 'POST', body: JSON.stringify({ url }) }),

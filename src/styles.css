@@ -387,10 +387,12 @@ a { color: inherit; }
 .status-needs_review, .status-fact_checking, .quality-secondary { color: #835916; background: #f1e8d5; }
 .status-excluded { color: #8d938f; text-decoration: line-through; }
 .quality-lead, .quality-unknown { color: #9e3e38; background: #f2dfdd; }
-.candidate-actions { display: flex; align-items: center; justify-content: flex-end; gap: 3px; color: var(--quiet); }
-.candidate-actions .inline-icon { color: var(--quiet); }
-.adopt-button { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #a8b0ab; border-radius: 4px; background: #fff; color: var(--green); cursor: pointer; }
-.adopt-button:hover { border-color: var(--green); background: #e9f3ed; }
+.candidate-actions { display: flex; align-items: center; justify-content: flex-end; gap: 6px; color: var(--quiet); }
+.candidate-action-button { width: 30px; height: 30px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: var(--control); cursor: pointer; }
+.candidate-action-button.adopt-button { color: var(--green); }
+.candidate-action-button.adopt-button:hover { border-color: var(--green); background: #e9f3ed; }
+.candidate-action-button.exclude-button { color: var(--quiet); }
+.candidate-action-button.exclude-button:hover { border-color: #b95c52; background: #f6e4e1; color: #a13e35; }
 .restore-button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #91aa99; border-radius: 4px; background: #eef5f0; color: var(--green); cursor: pointer; }
 .restore-button:hover { border-color: var(--green); background: #dfeee4; }
 .trash-row { opacity: .84; }
