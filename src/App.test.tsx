@@ -222,9 +222,9 @@ describe('App', () => {
 
     await waitFor(() => expect(patch).toHaveBeenCalled())
     expect(action).not.toHaveBeenCalled()
-    expect(await screen.findByText('待 AI 主编撰写')).toBeInTheDocument()
-    expect(screen.getByText('已提交给 AI 主编，等待下一轮追源、核验并按早报 prompt 成稿。')).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: '等待主编撰写的候选' })).toBeInTheDocument()
+    // 提交后保留在候选库，不自动跳转到早报稿或打开详情侧栏。
+    expect(screen.getByRole('heading', { name: '待追源与待复核' })).toBeInTheDocument()
+    expect(screen.queryByText('待 AI 主编撰写')).not.toBeInTheDocument()
     const changes = patch.mock.calls[0][1]
     expect(changes.selected).toBe(false)
     expect(changes.status).toBe('drafting')
