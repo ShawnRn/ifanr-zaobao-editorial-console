@@ -309,7 +309,7 @@ export function IssueArticle({
   onOpen: () => void
   onExclude: () => void
   onDragStart: () => void
-  onDrop: (after: boolean) => void
+  onDrop: (after: boolean, droppedStoryId?: string) => void
   onDragEnd: () => void
   canMoveUp?: boolean
   canMoveDown?: boolean
@@ -333,6 +333,10 @@ export function IssueArticle({
       draggable
       onDragStart={(event) => {
         event.dataTransfer.effectAllowed = 'move'
+        // Keep a native payload as well as React state.  Browsers are allowed
+        // to emit dragend before React flushes the drop handler, so state on
+        // its own can lose the source id and make a valid drop a no-op.
+        event.dataTransfer.setData('text/plain', story.id)
         onDragStart()
       }}
       onDragOver={(event) => {
@@ -344,7 +348,7 @@ export function IssueArticle({
         event.stopPropagation()
         const rect = event.currentTarget.getBoundingClientRect()
         const after = event.clientY >= rect.top + rect.height / 2
-        onDrop(after)
+        onDrop(after, event.dataTransfer.getData('text/plain'))
       }}
       onDragEnd={onDragEnd}
     >
@@ -1472,6 +1476,7 @@ export function App() {
   const workerRefreshInFlightRef = useRef(false)
   const reorderInFlightRef = useRef(false)
   const dragJustEndedAtRef = useRef(0)
+  const draggedStoryIdRef = useRef<string | null>(null)
   const fullIssueLoadRef = useRef<Promise<void> | null>(null)
 
   useEffect(() => { issueRef.current = issue }, [issue])
@@ -1980,9 +1985,10 @@ export function App() {
   }
 
   const canOutlineReorder = (targetId: string) => {
-    if (!issue || !draggedStoryId || targetId === draggedStoryId) return false
+    const activeId = draggedStoryIdRef.current || draggedStoryId
+    if (!issue || !activeId || targetId === activeId) return false
     const target = issue.stories.find((story) => story.id === targetId)
-    const dragged = issue.stories.find((story) => story.id === draggedStoryId)
+    const dragged = issue.stories.find((story) => story.id === activeId)
     return Boolean(target && dragged && (isSaturdayIssue ? weekendWorkbenchSection(target) === weekendWorkbenchSection(dragged) : target.category === dragged.category))
   }
 
@@ -2002,6 +2008,7 @@ export function App() {
 
   const clearOutlineDrag = () => {
     dragJustEndedAtRef.current = Date.now()
+    draggedStoryIdRef.current = null
     setDraggedStoryId(null)
     setOutlineDrop(null)
   }
@@ -2010,12 +2017,12 @@ export function App() {
   const SCROLL_EDGE = 52
   const SCROLL_SPEED = 26
 
-  const handleDrop = async (targetId: string, after = false) => {
+  const handleDrop = async (targetId: string, after = false, droppedStoryId = '') => {
     const currentIssue = issueRef.current || issue
-    if (!currentIssue || !draggedStoryId || draggedStoryId === targetId || reorderInFlightRef.current) return
-    const activeId = draggedStoryId
+    const activeId = droppedStoryId || draggedStoryIdRef.current || draggedStoryId
+    if (!currentIssue || !activeId || activeId === targetId || reorderInFlightRef.current) return
     const target = currentIssue.stories.find((story) => story.id === targetId)
-    const dragged = currentIssue.stories.find((story) => story.id === draggedStoryId)
+    const dragged = currentIssue.stories.find((story) => story.id === activeId)
     if (!target || !dragged || (isSaturdayIssue ? weekendWorkbenchSection(target) !== weekendWorkbenchSection(dragged) : target.category !== dragged.category)) return
     const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(target) : target.category
     const ordered = currentIssue.stories.filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === target.category)).sort((a, b) => a.position - b.position)
@@ -2043,9 +2050,19 @@ export function App() {
       try {
         const remoteIssue = await api.reorder(currentIssue.id, ordered.map((story) => story.id), targetCategory)
         // Only update if remote positions differ from our optimistic state (avoids re-render jank)
-        const remoteOrder = remoteIssue.stories.map((s) => s.id).join(',')
-        const localOrder = optimisticIssue.stories.map((s) => s.id).join(',')
-        if (remoteOrder !== localOrder) setIssue(remoteIssue)
+        const sectionOrder = (value: Issue) => value.stories
+          .filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory))
+          .sort((a, b) => a.position - b.position)
+          .map((story) => story.id)
+          .join(',')
+        // The API groups its full response by category, while the console
+        // keeps a single story array.  Compare the moved section only; a raw
+        // full-array comparison falsely looked different and reverted a
+        // successful optimistic drop.
+        if (sectionOrder(remoteIssue) !== sectionOrder(optimisticIssue)) {
+          issueRef.current = remoteIssue
+          setIssue(remoteIssue)
+        }
       } catch (reorderError) {
         showOperationError(reorderError instanceof Error ? reorderError.message : '保存排版顺序失败')
         issueRef.current = currentIssue
@@ -2078,9 +2095,15 @@ export function App() {
     try {
       const remoteIssue = await api.reorder(issue.id, ordered.map((item) => item.id), targetCategory)
       // Only update if remote order differs
-      const remoteOrder = remoteIssue.stories.map((s) => s.id).join(',')
-      const localOrder = optimistic.stories.map((s) => s.id).join(',')
-      if (remoteOrder !== localOrder) setIssue(remoteIssue)
+      const sectionOrder = (value: Issue) => value.stories
+        .filter((item) => isDraftStory(item) && (isSaturdayIssue ? weekendWorkbenchSection(item) === targetCategory : item.category === targetCategory))
+        .sort((a, b) => a.position - b.position)
+        .map((item) => item.id)
+        .join(',')
+      if (sectionOrder(remoteIssue) !== sectionOrder(optimistic)) {
+        issueRef.current = remoteIssue
+        setIssue(remoteIssue)
+      }
     } catch (moveError) {
       setIssue(issue)
       showOperationError(moveError instanceof Error ? moveError.message : '调整顺序失败')
@@ -2501,13 +2524,9 @@ export function App() {
                           scrollToStory(story)
                         }}
                         onDragStart={(event) => {
-                          const source = event.target instanceof Element ? event.target : null
-                          if (!source?.closest('.drag-handle')) {
-                            event.preventDefault()
-                            return
-                          }
                           event.dataTransfer.effectAllowed = 'move'
                           event.dataTransfer.setData('text/plain', story.id)
+                          draggedStoryIdRef.current = story.id
                           setDraggedStoryId(story.id)
                           setOutlineDrop(null)
                         }}
@@ -2516,7 +2535,7 @@ export function App() {
                           event.preventDefault()
                           event.stopPropagation()
                           const rect = event.currentTarget.getBoundingClientRect()
-                          void handleDrop(story.id, event.clientY >= rect.top + rect.height / 2)
+                          void handleDrop(story.id, event.clientY >= rect.top + rect.height / 2, event.dataTransfer.getData('text/plain'))
                         }}
                         onDragEnd={clearOutlineDrag}
                       >
@@ -2542,7 +2561,7 @@ export function App() {
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && loadingIssueDetails && (view === 'candidates' || view === 'trash') ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在载入完整候选库</span></div> : null}
             {!loading && issue && view === 'draft' ? <div className="draft-stage">
-              <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => setDraggedStoryId(story.id)} onDragEnd={clearOutlineDrag} onDrop={(after) => void handleDrop(story.id, after)} />)}</section>)}</div></div>
+            <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => { draggedStoryIdRef.current = story.id; setDraggedStoryId(story.id) }} onDragEnd={clearOutlineDrag} onDrop={(after, droppedStoryId) => void handleDrop(story.id, after, droppedStoryId)} />)}</section>)}</div></div>
             </div> : null}
             {!loading && !loadingIssueDetails && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
