@@ -1,0 +1,2006 @@
+{
+  "id": "ifanr-daily-20260810",
+  "publication_date": "2026-08-10",
+  "title": "20260810 早报",
+  "state": "static_snapshot",
+  "runtime_path": "",
+  "draft_path": "",
+  "revision": 158,
+  "selected_count": 27,
+  "review_count": 20,
+  "ready_count": 7,
+  "updated_at": "2026-08-09T09:17:06+00:00",
+  "stories": [
+    {
+      "id": "ed609a2a-a411-5e03-a4e1-5b3f5539555b",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "797827b6243a985c77fb87f8d12496a1a1a32b57",
+      "title": "苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下",
+      "body": "8 月 8 日，苹果中国官网 Mac 简体中文使用手册中出现一篇《在 Mac 上配合 Apple 智能使用千问》支持文档，首次以官方形式确认国行 Apple 智能将与阿里千问合作：\n\nMac 用户可在「系统设置」的「Apple 智能与 Siri」菜单「扩展」中配置千问，登录千问账户或使用 Apple 登录后，即可通过写作工具和 Siri 调用千问能力，例如向 Siri 发出「让千问写一首关于龙的诗」「让千问帮我总结这个文稿」等指令。\n\n文档显示，千问扩展适用于 macOS 26.6 或更高版本，满足中国大陆 Apple 账户、中国大陆版本 Mac 机型或身处中国大陆且未登录 Apple 账户三种情形之一即可开启。\n\n**截至 8 月 9 日上午，这份中文手册已从苹果官网撤下，原链接无法访问。**",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.36kr.com/p/3930992127458695",
+      "source_name": "36氪 - 24小时热榜",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 09:01",
+      "published_at": "2026-08-09 09:01",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/f617da05c1da-fb81e8a9784f9c0afdd0.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.36kr.com/p/3930992127458695；https://www.ithome.com/0/987/467.htm；https://mp.weixin.qq.com/s/ZaGm0ZnhhB74LyLb4QwOyQ 📮Folo · 2026 年 8 月 9 日 07:33",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.36kr.com/p/3930992127458695",
+          "title": "",
+          "publisher": "36氪 - 24小时热榜",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/987/467.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/ZaGm0ZnhhB74LyLb4QwOyQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "智东西8月8日消息，苹果官方悄悄更新了Mac使用手册，新增《在Mac上配合Apple智能使用千问》这一章节，这是苹果首次官方确认关于国行Apple智能合作的具体信息，意味着苹果国行Apple智能正式进入落地环节。",
+          "source_url": "https://www.36kr.com/p/3930992127458695",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "此前，智东西从阿里巴巴方面获悉，阿里千问将作为AI能力集成至…",
+          "source_url": "https://www.36kr.com/p/3930992127458695",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "424fea6d-8d09-520c-abed-f86bbfe03ad4",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "2876fc8d5c90c7945163472f978741ba8bd77ece",
+      "title": "OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损",
+      "body": "OpenAI 产品负责人 Tibo 此前公开介绍，用户可以保留 Claude Code 的 harness，把底层模型换成 GPT。开发者 Alex Getman 照此配置后 Claude 账号很快被封，他公开向 Tibo 和 Anthropic 求证该用法是否违规。\n\nTibo 回应称「我很想帮你，可惜我不在 Anthropic 工作」，并表示因为给 harness 搭配其他模型就封号「确实挺奇怪」。\n\n随后，Claude Code 负责人 Boris Cherny 澄清，Anthropic 不会因为 harness 搭配其他模型就封号，这次几乎可以肯定是其他风控误触发，账号随后恢复。\n\n两人随后在 X 上互相打趣，Boris 邀请 Tibo「如果你想来 Anthropic，我们正在招人」，Tibo 则回应自己很喜欢现在的团队，接下来几周还有不少新产品要发。\n\n事件解决后，Tibo 又发帖称 GPT-5.6 Sol 几乎哪里都能用，包括 Claude Code harness，并重置了 ChatGPT Work 和 Codex 所有付费用户的使用额度。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.theblockbeats.info/flash/360580",
+      "source_name": "theblockbeats.info",
+      "source_type": "draft_source",
+      "source_quality": "lead",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 10:40",
+      "published_at": "2026-08-09 10:40",
+      "cross_day_status": "ai_source_lead",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/8eada0272b47-7000050f69ea1226983d.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.theblockbeats.info/flash/360580；https://t.me/OneMillion_AI/3759 🛰网页 · 2026 年 8 月 8 日 16:00",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.theblockbeats.info/flash/360580",
+          "title": "",
+          "publisher": "theblockbeats.info",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://t.me/OneMillion_AI/3759",
+          "title": "",
+          "publisher": "动察Beating AI News - Telegram Channel",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "OpenAI教用户给Claude Code换上GPT模型，误封后两边员工现场互损 OpenAI 产品负责人 Tibo 此前公开教用户给 Claude Code「换脑」：保留 Claude Code 的 harness，把底层模型换成 GPT。",
+          "source_url": "https://www.theblockbeats.info/flash/360580",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "fd6c29b8-2e2a-5142-954e-724725b85008",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "dc5c72da60936dfbf01d95497fef7069545408cc",
+      "title": "宇树科技今日开启科创板申购，A 股「人形机器人第一股」登场",
+      "body": "8 月 10 日，宇树科技在科创板开启申购，网上申购代码 787836，发行价 150.8 元/股，对应发行市值约 610 亿元，成为 A 股「人形机器人第一股」。本次发行 4044.64 万股，拟募资约 42 亿元，其中智能机器人模型研发拟投入 20.22 亿元，首次超过本体研发投入（11.1 亿元）。\n\n据财联社报道，具身智能正在经历集中资本化窗口：截至 8 月 8 日，中国机器人领域今年获投金额达 1217.03 亿元，已超过 2025 年全年（726.39 亿元）；港股排队名单中，主营业务覆盖工业机器人、服务机器人、具身智能的企业共 51 家。宇树科技 2023 至 2025 年营收从 1.59 亿元增至 16.99 亿元。\n\n工信部科技司副司长甘小斌此前在 WAIC 发布会上介绍，今年人形机器人全年整机产量将突破 10 万台。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 00:43",
+      "published_at": "2026-08-09 00:43",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/1798d9029789906d87f3.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg 🧭飞书群 · 2026 年 8 月 9 日 00:43",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "> 来源：https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "![image](https://mmbiz.qpic.cn/mmbiz_gif/XTEsK8xsZk0401ibvgEMyNBicZcOoLBjKnNpMr4loic2lL6Ilyg6aGzyzoTGcs87waW1ATkOP5SjOrVdWm4GiamoqQ/640?wx_fmt=gif)",
+          "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "8月10日，宇树科技将在科创板开启申购，A股“人形机器人第一股”正式登场。但聚光灯下，远不止一家——港股51家具身智能企业排队。此外，机器人赛道仅今年8个月融资额已达1217亿元，超过去年全年67%。",
+          "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "8 月 10 日，宇树科技在科创板开启申购，网上申购代码 787836，发行价 150.8 元/股，对应发行市值约 610 亿元，成为 A 股「人形机器人第一股」。本次发行 4044.64 万股，拟募资约 42 亿元，其中智能机器人模型研发拟投入 20.22 亿元，首次超过本体研发投入（11.1 亿元）。",
+          "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据财联社报道，具身智能正在经历集中资本化窗口：截至 8 月 8 日，中国机器人领域今年获投金额达 1217.03 亿元，已超过 2025 年全年（726.39 亿元）；港股排队名单中，主营业务覆盖工业机器人、服务机器人、具身智能的企业共 51 家。宇树科技 2023 至 2025 年营收从 1.59 亿元增至 16.99 亿元。",
+          "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "工信部科技司副司长甘小斌此前在 WAIC 发布会上介绍，今年人形机器人全年整机产量将突破 10 万台。",
+          "source_url": "https://mp.weixin.qq.com/s/Bc5ZhzyLVTTfjITYmKTwFg",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "16802dc4-2424-596b-a9cf-b64c7ffb9dd5",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "82c5b8b28a2f60056c3c8f80a7be6b772b590541",
+      "title": "SpaceX 收购 Cursor 临近落地：60 亿美元全股票交易，Cursor 品牌将逐步退出新产品",
+      "body": "据 The Information 报道，SpaceX 对 AI 编程工具公司 Cursor 的收购最快本周末完成，交易以 60 亿美元全股票方式进行。Cursor 已向员工通报，品牌名称将在未来几个月内逐步退出新产品，团队可能并入 SpaceX 的 AI 业务。\n\n报道称，Cursor 即将推出的通用型智能体产品内部代号为 Sand，可能以 Grok Bot 的品牌亮相。TechCrunch 在报道企业 AI 支出时也已直接表述为「SpaceX 现已拥有 Cursor」。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://feature.theinformation.com/articles/cursor-maps-branding-changes-spacex-acquisition-nears",
+      "source_name": "feature.theinformation.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/8df5c8ea92e1-ce7d90ea45aedbeb5bd0.avif",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://feature.theinformation.com/articles/cursor-maps-branding-changes-spacex-acquisition-nears；https://www.edgen.tech/zh/news/post/spacex-to-close-60-billion-cursor-deal-by-next-weekend；https://techcrunch.com/2026/08/07/after-rippling-blew-millions-on-ai-in-months-it-built-an-employee-roi-tool/ 📮Folo · 2026 年 8 月 8 日 03:20",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://feature.theinformation.com/articles/cursor-maps-branding-changes-spacex-acquisition-nears",
+          "title": "",
+          "publisher": "feature.theinformation.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://techcrunch.com/2026/08/07/after-rippling-blew-millions-on-ai-in-months-it-built-an-employee-roi-tool/",
+          "title": "",
+          "publisher": "techcrunch.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://www.edgen.tech/zh/news/post/spacex-to-close-60-billion-cursor-deal-by-next-weekend",
+          "title": "",
+          "publisher": "edgen.tech",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据 The Information 报道，SpaceX 对 AI 编程工具公司 Cursor 的收购最快本周末完成，交易以 60 亿美元全股票方式进行。Cursor 已向员工通报，品牌名称将在未来几个月内逐步退出新产品，团队可能并入 SpaceX 的 AI 业务。",
+          "source_url": "https://feature.theinformation.com/articles/cursor-maps-branding-changes-spacex-acquisition-nears",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "报道称，Cursor 即将推出的通用型智能体产品内部代号为 Sand，可能以 Grok Bot 的品牌亮相。TechCrunch 在报道企业 AI 支出时也已直接表述为「SpaceX 现已拥有 Cursor」。",
+          "source_url": "https://feature.theinformation.com/articles/cursor-maps-branding-changes-spacex-acquisition-nears",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "5d2ce7a6-4415-54e3-a300-e0651f2be5a8",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "9dd9231d38cef220ecb748aeb0d1ae409e920950",
+      "title": "原字节机器人总监孔涛加盟小米，负责具身智能基座模型研发",
+      "body": "据《21世纪经济报道》获悉，原字节跳动机器人研究总监、机器人「一号位」孔涛已加盟小米机器人事业部，负责具身智能基座模型研发。孔涛 2019 年博士毕业于清华大学计算机系，是字节跳动首位专注于机器人方向的员工，曾从 0 到 1 组建并带领字节 AI Lab 机器人团队，后于 2025 年 6 月离职。\n\n小米机器人事业部目前已扩充至约 200 人，近期先后发布了 Xiaomi-Robotics-0 和 Xiaomi-Robotics-1 大模型，主打「大脑+小脑」范式。随着孔涛及多名前字节团队成员加入，小米机器人在具身智能模型层补充了关键的研发实力。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/3DJCPxFEnWBRKQLgHgFifw",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "https://mmbiz.qpic.cn/mmbiz_jpg/nnLrwYqZfyH7SMGicxicKU5mm0DZusR3IA2QFhvTKAAODw2JFk8vmDGjFdo5bZa4KyZt4Yx4ObiajwOHBgAHdhCYj8jFEtftKKfbDVqbBJQuSM/640?wx_fmt=jpeg&from=appmsg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/3DJCPxFEnWBRKQLgHgFifw 🧭飞书群 · 2026 年 8 月 9 日 17:00",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/3DJCPxFEnWBRKQLgHgFifw",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据《21世纪经济报道》获悉，原字节跳动机器人研究总监、机器人「一号位」孔涛已加盟小米机器人事业部，负责具身智能基座模型研发。孔涛 2019 年博士毕业于清华大学计算机系，是字节跳动首位专注于机器人方向的员工，曾从 0 到 1 组建并带领字节 AI Lab 机器人团队，后于 2025 年 6 月离职。",
+          "source_url": "https://mp.weixin.qq.com/s/3DJCPxFEnWBRKQLgHgFifw",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "小米机器人事业部目前已扩充至约 200 人，近期先后发布了 Xiaomi-Robotics-0 和 Xiaomi-Robotics-1 大模型，主打「大脑+小脑」范式。随着孔涛及多名前字节团队成员加入，小米机器人在具身智能模型层补充了关键的研发实力。",
+          "source_url": "https://mp.weixin.qq.com/s/3DJCPxFEnWBRKQLgHgFifw",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "7e5dae76-b0c5-54c8-9658-9dd46910f732",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "d48144bd6105e5329be5c4a08935d0022e74af0f",
+      "title": "67 岁农民误信 AI 除草方案，150 亩芝麻苗一夜枯萎",
+      "body": "据荔枝新闻报道，安徽滁州 67 岁农户吴大伯一年多前接触 AI 软件后逐渐事事询问 AI。\n\n7 月 10 日，他向 AI 询问芝麻田除草除虫方案，AI 生成「百亩芝麻飞防除草 + 除虫全套方案」，推荐了高效氟吡甲禾灵、氟磺胺草醚两种除草剂和噻虫嗪、甲维盐两种除虫剂。\n\n吴大伯按方案用无人机全田喷洒，次日 150 亩芝麻苗全部枯萎，草和苗一同死亡，预计损失约 15 万元。\n\n农技人员证实，AI 推荐的氟磺胺草醚专用于大豆田阔叶除草，严禁用于芝麻田，更不能全田喷洒。涉事 AI 软件客服回应称，软件本身没有独立知识库，答复系根据网络公开信息整合生成，将核查具体信息来源，并已登记吴大伯的损失反馈。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/474.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 07:48",
+      "published_at": "2026-08-09 07:48",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/f6446ac3626d7d7dfbac.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/474.htm；https://mp.weixin.qq.com/s/FTRqERVhTAwSRknIWih2Rw 📮Folo · 2026 年 8 月 9 日 07:48",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/474.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/FTRqERVhTAwSRknIWih2Rw",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 9 日消息，据荔枝新闻报道，安徽滁州 67 岁农户吴大伯在一年多前接触 AI 软件后，逐渐从将信将疑变为完全依赖，什么事情都询问 AI。",
+          "source_url": "https://www.ithome.com/0/987/474.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "2026 年 7 月 10 日，他向 AI 询问芝麻田除草除虫方案，AI 生成了“百亩芝麻飞防除草 + 除虫全套方案…",
+          "source_url": "https://www.ithome.com/0/987/474.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "ec5b7e7e-79b4-53a8-ba48-b8fb56d55402",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "125b660f7515b583162c06374ab4808418acf446",
+      "title": "苹果 Mac Pro 问世 20 周年：今年 3 月已停售，Mac Studio 接棒",
+      "body": "20 年前的 2006 年 8 月 7 日，苹果在 WWDC 发布初代 Mac Pro，用 Intel 平台接替 Power Mac G5，成为新的旗舰桌面工作站。乔布斯当时称苹果仅用 210 天完成向英特尔处理器的过渡，顶配版本使用两颗双核 Intel Xeon 处理器。\n\nMac Pro 的高光时刻止于 2013 年的「垃圾桶」造型：激进圆柱设计取消了 PCIe 插槽，无法加装大型显卡，苹果最终向专业用户致歉，2019 年才回归传统塔式机箱并配 8 个 PCIe 插槽。过去 13 年间，该系列仅经历三次换代，最后一次更新停留在 2023 年（M2 Ultra），起售价 6999 美元。\n\n苹果已于今年 3 月确认 Mac Pro 停产，暂无推出后续硬件的计划。现款 Mac Studio 已接替它成为专业桌面产品线旗舰，搭载 M3 Ultra 芯片，预计今年晚些时候升级 M5 Ultra。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+      "source_name": "macrumors.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 07:59",
+      "published_at": "2026-08-08 07:59",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/e4057bf10aba-b27b0bb7fa162c158873.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today；https://www.ithome.com/0/987/233.htm 🛰网页 · 2026 年 8 月 8 日 07:59",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+          "title": "",
+          "publisher": "macrumors.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://www.ithome.com/0/987/233.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 8 日消息，科技媒体 MacRumors 昨日（8 月 7 日）发布博文，报道称 20 年前（2006 年 8 月 7 日）苹果发布其首款 Mac Pro，不过该系列已于今年 3 月按下“暂停键”。",
+          "source_url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "定位方面，Mac Pro 主要面向需要极致性能的专业用户，在…",
+          "source_url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "20 年前的 2006 年 8 月 7 日，苹果在 WWDC 发布初代 Mac Pro，用 Intel 平台接替 Power Mac G5，成为新的旗舰桌面工作站。乔布斯当时称苹果仅用 210 天完成向英特尔处理器的过渡，顶配版本使用两颗双核 Intel Xeon 处理器。",
+          "source_url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Mac Pro 的高光时刻止于 2013 年的「垃圾桶」造型：激进圆柱设计取消了 PCIe 插槽，无法加装大型显卡，苹果最终向专业用户致歉，2019 年才回归传统塔式机箱并配 8 个 PCIe 插槽。过去 13 年间，该系列仅经历三次换代，最后一次更新停留在 2023 年（M2 Ultra），起售价 6999 美元。",
+          "source_url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "苹果已于今年 3 月确认 Mac Pro 停产，暂无推出后续硬件的计划。现款 Mac Studio 已接替它成为专业桌面产品线旗舰，搭载 M3 Ultra 芯片，预计今年晚些时候升级 M5 Ultra。",
+          "source_url": "https://www.macrumors.com/2026/08/07/mac-pro-turns-20-today",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "cca1f26a-ed63-5747-8b41-0a21a8614baf",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "9aad7e416a7dae0413ff5aa014e631b2cd242b44",
+      "title": "💡 Akamai CEO 莱顿：AI 驱动经济需要新的云基础设施",
+      "body": "Akamai 在 8 月 6 日发布第二季度财报。CEO 汤姆·莱顿（Tom Leighton）在财报电话会上的公开发言，把公司定位为「AI 驱动经济的关键基础设施提供商」，并确认公司已与美国一家科技公司签署为期四年、金额超过 6 亿美元的云基础设施服务协议，用于支持对方机器人业务开发。客户身份未披露，订单从今年开始逐步交付。\n\n莱顿称，这笔订单证明公司正在成为「AI 驱动经济的关键基础设施提供商」。\n\n他给出的支撑包括：安全业务预计 2026 年全年收入将超过 24 亿美元；云业务正从传统内容分发转向 AI 推理与边缘计算负载；机器人和自动驾驶公司需要把低延迟计算部署在靠近现场的位置。\n\n财报公布后，Akamai 股价明显上涨，市场将这份协议解读为 AI 基础设施需求向边缘厂商外溢的信号。莱顿同时说明，公司的计划是把新订单收入投入边缘节点扩容与安全产品研发，而不是回到传统的 CDN 价格战。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 7,
+      "score": 0,
+      "source_url": "https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/",
+      "source_name": "marketbeat.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/e55af713cd73-58dc5981dc132892a7ce.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/；https://www.investing.com/news/stock-market-news/why-is-akamai-technologies-stock-surging-today-93CH-4845336 🛰网页 · 2026 年 8 月 8 日 04:35",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/",
+          "title": "",
+          "publisher": "marketbeat.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.investing.com/news/stock-market-news/why-is-akamai-technologies-stock-surging-today-93CH-4845336",
+          "title": "",
+          "publisher": "investing.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Akamai 在 8 月 6 日发布第二季度财报。CEO 汤姆·莱顿（Tom Leighton）在财报电话会上的公开发言，把公司定位为「AI 驱动经济的关键基础设施提供商」，并确认公司已与美国一家科技公司签署为期四年、金额超过 6 亿美元的云基础设施服务协议，用于支持对方机器人业务开发。客户身份未披露，订单从今年开始逐步交付。",
+          "source_url": "https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "莱顿称，这笔订单证明公司正在成为「AI 驱动经济的关键基础设施提供商」。",
+          "source_url": "https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "他给出的支撑包括：安全业务预计 2026 年全年收入将超过 24 亿美元；云业务正从传统内容分发转向 AI 推理与边缘计算负载；机器人和自动驾驶公司需要把低延迟计算部署在靠近现场的位置。",
+          "source_url": "https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Akamai 在 8 月 6 日发布第二季度财报。CEO 汤姆·莱顿（Tom Leighton）在财报电话会上的公开发言，把公司定位为「AI 驱动经济的关键基础设施提供商」，并确认公司已与美国一家科技公司签署为期四年、金额超过 6 亿美元的云基础设施服务协议，用于支持对方机器人业务开发。客户身份没有公开，订单从今年开始逐步交付。",
+          "source_url": "https://www.marketbeat.com/instant-alerts/akamai-technologies-q2-earnings-call-highlights-2026-08-06/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "8ec251e2-d47c-5211-9d78-312363976b25",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "9633deb9b7acc84116296df6c3534b422df7a118",
+      "title": "乘联分会更新 7 月出口数据：中国汽车出口 109.2 万台，同比增长 57%",
+      "body": "乘联分会秘书长崔东树 8 月 7 日更新 7 月出口数据：2026 年 1 月至 7 月汽车出口 640 万台，同比增长 54%；其中 7 月出口 109.2 万台，同比增长 57%，环比增长 2%。\n\n金额上，1 月至 7 月汽车出口总额 1108 亿美元，同比增长 55%；7 月整车出口 190 亿美元，同比增长 60%、环比增长 4%，打破 2023 至 2025 年「7 月低于 5 月」的规律。同期零部件出口总额 607 亿美元、同比增长 8%，7 月单月出口 93.8 亿美元、同比增长 14%。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 8,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/272.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 11:30",
+      "published_at": "2026-08-08 11:30",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/6516e7e14b9a06af4b5f.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/272.htm 📮Folo · 2026 年 8 月 8 日 11:30",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/272.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 8 日消息，乘联分会秘书长崔东树昨日发文，2026 年 1-7 月汽车出口 640 万台，同比大增 54%，大幅甩开往年同期水平。其中 7 月出口 109.2 万台，同比增长 57%，环比增长 2%。",
+          "source_url": "https://www.ithome.com/0/987/272.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "2026 年 1-7 月汽车出口总额 1,108 亿美元（IT…",
+          "source_url": "https://www.ithome.com/0/987/272.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "乘联分会秘书长崔东树 8 月 7 日更新 7 月出口数据：2026 年 1 月至 7 月汽车出口 640 万台，同比增长 54%；其中 7 月出口 109.2 万台，同比增长 57%，环比增长 2%。",
+          "source_url": "https://www.ithome.com/0/987/272.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "金额上，1 月至 7 月汽车出口总额 1108 亿美元，同比增长 55%；7 月整车出口 190 亿美元，同比增长 60%、环比增长 4%，打破 2023 至 2025 年「7 月低于 5 月」的规律。同期零部件出口总额 607 亿美元、同比增长 8%，7 月单月出口 93.8 亿美元、同比增长 14%。",
+          "source_url": "https://www.ithome.com/0/987/272.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "ba3cc888-c13e-5000-9d85-77841134065d",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "c07b2f51020be6847a9e468c68d3f11c55757eb1",
+      "title": "中国代表队首次参加国际核科学奥赛，4 名高中生摘得一金三银",
+      "body": "据新华社报道，2026 年国际核科学奥林匹克竞赛 8 月 8 日晚在沙特阿拉伯吉达闭幕，中国代表队首次参赛，4 名选手获得一金三银，总成绩居参赛国家前列。\n\n该赛事是在国际原子能机构支持下举办的全球首个以核科学为主题的国际青少年奥林匹克赛事，创办于 2024 年，本届为第三届，共有 19 个国家代表队参赛。赛程为期 8 天，设理论考试与实验考试，涵盖核物理、辐射防护、核燃料等方向。中国队的选拔依托「小荷之声」INSO 高中组活动，经中国国家原子能机构批准，由中核战略规划研究总院中国原子能出版社主办、清华大学核学科协办。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 9,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/484.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 08:58",
+      "published_at": "2026-08-09 08:58",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/c9c95cd14c92e58920ea.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/484.htm 📮Folo · 2026 年 8 月 9 日 08:58",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/484.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据新华社报道，2026 年国际核科学奥林匹克竞赛 8 月 8 日晚在沙特阿拉伯吉达闭幕，中国代表队首次参赛，4 名选手获得一金三银，总成绩居参赛国家前列。",
+          "source_url": "https://www.ithome.com/0/987/484.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "该赛事是在国际原子能机构支持下举办的全球首个以核科学为主题的国际青少年奥林匹克赛事，创办于 2024 年，本届为第三届，共有 19 个国家代表队参赛。赛程为期 8 天，设理论考试与实验考试，涵盖核物理、辐射防护、核燃料等方向。中国队的选拔依托「小荷之声」INSO 高中组活动，经中国国家原子能机构批准，由中核战略规划研究总院中国原子能出版社主办、清华大学核学科协办。",
+          "source_url": "https://www.ithome.com/0/987/484.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "26e2b268-bc82-52a1-bb8c-ea0356323b0e",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "d27e6ca313f65665a6e33c994370b18a9b9d9337",
+      "title": "Harvey 洽谈新一轮融资：至少 5 亿美元、估值 155 亿美元",
+      "body": "据 The Information 报道，面向律师的 AI 初创公司 Harvey 正在洽谈新一轮融资，拟募集至少 5 亿美元，含新资金在内的估值达到 155 亿美元，较 5 个月前上一轮的 110 亿美元高出约 40%。\n\n报道称，Harvey 目前年化收入超过 3.5 亿美元。这家公司为律师提供合同审查、法律研究等场景的 AI 工具，是法律垂直领域估值最高的 AI 创业公司之一。上一轮融资在 3 月完成，此后约五个月内估值增长四成，主要靠企业客户数量和订阅收入扩张支撑。\n\n目前谈判仍在进行，最终金额与估值可能变化。The Information 称，本轮由现有投资方领投的可能性较大，新资金将用于扩充销售团队和覆盖更多法律细分市场。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 10,
+      "score": 0,
+      "source_url": "https://feature.theinformation.com/articles/harvey-talks-raise-funding-15-5-billion-valuation",
+      "source_name": "feature.theinformation.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/cc7b241d9f42-d2131cd99bf5201e3cbb.avif",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://feature.theinformation.com/articles/harvey-talks-raise-funding-15-5-billion-valuation；https://thenextweb.com/news/harvey-legal-ai-15-5bn-valuation-500m-raise-vertical-ai 📮Folo · 2026 年 8 月 8 日 01:25",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://feature.theinformation.com/articles/harvey-talks-raise-funding-15-5-billion-valuation",
+          "title": "",
+          "publisher": "feature.theinformation.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://thenextweb.com/news/harvey-legal-ai-15-5bn-valuation-500m-raise-vertical-ai",
+          "title": "",
+          "publisher": "thenextweb.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据 The Information 报道，面向律师的 AI 初创公司 Harvey 正在洽谈新一轮融资，拟募集至少 5 亿美元，含新资金在内的估值达到 155 亿美元，较 5 个月前上一轮的 110 亿美元高出约 40%。",
+          "source_url": "https://feature.theinformation.com/articles/harvey-talks-raise-funding-15-5-billion-valuation",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "报道称，Harvey 目前年化收入超过 3.5 亿美元。这家公司为律师提供合同审查、法律研究等场景的 AI 工具，是法律垂直领域估值最高的 AI 创业公司之一。上一轮融资在 3 月完成，此后约五个月内估值增长四成，主要靠企业客户数量和订阅收入扩张支撑。",
+          "source_url": "https://feature.theinformation.com/articles/harvey-talks-raise-funding-15-5-billion-valuation",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "目前谈判仍在进行，最终金额与估值可能变化。The Information 称，本轮由现有投资方领投的可能性较大，新资金将用于扩充销售团队和覆盖更多法律细分市场。",
+          "source_url": "https://feature.theinformation.com/articles/harvey-talks-raise-funding-15-5-billion-valuation",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "3955edd2-33e1-52d0-b2b6-8f7dfae9dad2",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "e3da66e4b91356510e2432c0ffa033043612e288",
+      "title": "传音控股赴港上市获证监会备案，拟发行不超过 1.32 亿股 H 股",
+      "body": "传音控股 8 月 7 日发布公告，公司正在进行申请发行境外上市股份（H 股）并在港交所主板挂牌上市的工作，近日收到中国证监会出具的境外发行上市备案通知书，拟发行不超过 1.32 亿股境外上市普通股。公司表示，本次发行尚需取得香港证监会和港交所等机构的批准，仍存在不确定性。\n\n传音控股今年 6 月向港交所提交上市申请，独家保荐人为中信证券。2025 年公司营业收入 655.91 亿元，同比下降 4.55%；净利润 25.81 亿元，同比下降 53.49%。公告称，利润下滑主要受市场竞争、存储等元器件价格上涨影响，同时研发和销售费用增加。\n\n出货量方面，传音 2025 年手机出货量约 1.69 亿部；据 IDC 数据，其在非洲智能机市场份额约 40% 排名第一，在巴基斯坦超过 40% 排名第一，在孟加拉国为 35% 排名第一。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 11,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/541.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 13:42",
+      "published_at": "2026-08-09 13:42",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/4a165fa910392137634b.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/541.htm 📮Folo · 2026 年 8 月 9 日 13:42",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/541.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 9 日消息，传音控股于 8 月 7 日发布公告称，公司正在进行申请发行境外上市股份（H 股）并在香港联合交易所主板挂牌上市的相关工作，于近日收到中国证监会出具的《关于深圳传音控股股份有限公司境外发行上市备案通知书》。",
+          "source_url": "https://www.ithome.com/0/987/541.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "根据备案通知书，传音控股拟发行不超过 1.32…",
+          "source_url": "https://www.ithome.com/0/987/541.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "传音控股 8 月 7 日发布公告，公司正在进行申请发行境外上市股份（H 股）并在港交所主板挂牌上市的工作，近日收到中国证监会出具的境外发行上市备案通知书，拟发行不超过 1.32 亿股境外上市普通股。公司表示，本次发行尚需取得香港证监会和港交所等机构的批准，仍存在不确定性。",
+          "source_url": "https://www.ithome.com/0/987/541.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "传音控股今年 6 月向港交所提交上市申请，独家保荐人为中信证券。2025 年公司营业收入 655.91 亿元，同比下降 4.55%；净利润 25.81 亿元，同比下降 53.49%。公告称，利润下滑主要受市场竞争、存储等元器件价格上涨影响，同时研发和销售费用增加。",
+          "source_url": "https://www.ithome.com/0/987/541.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "出货量方面，传音 2025 年手机出货量约 1.69 亿部；据 IDC 数据，其在非洲智能机市场份额约 40% 排名第一，在巴基斯坦超过 40% 排名第一，在孟加拉国为 35% 排名第一。",
+          "source_url": "https://www.ithome.com/0/987/541.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "c9266b30-e1c3-5710-969d-8acb62db7b15",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "cd00d50fa18367e60e74b2c3fdaef57d04bc56f9",
+      "title": "伯克希尔二季度运营利润增 16%，回购提速、现金储备从纪录高位回落",
+      "body": "据路透社报道，伯克希尔-哈撒韦周六发布二季度财报：运营利润同比增长 16% 至 129.8 亿美元，约合每股 A 类股 9068 美元，高于分析师预期；受股权投资市值上涨推动，净利润同比翻倍。\n\n财报显示，公司二季度回购约 45 亿美元自家股票，7 月又追加逾 33 亿美元，延续 3 月重启、此前近两年暂停的回购节奏。截至季末，现金储备仍高达约 3590 亿美元，但已从创纪录高点小幅回落，公司同期为美股净卖出方。\n\nBusiness Insider 报道称，随着巴菲特退出日常决策、CEO 格雷格·阿贝尔主导投资与资本配置，伯克希尔开始把巨额现金重新投入回购。伯克希尔能源业务当季运营利润增长 27%。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 12,
+      "score": 0,
+      "source_url": "https://www.reuters.com/pt/negocio/DOWGWCOQIJOPBJD3IXUOHJD37E-2026-08-08",
+      "source_name": "reuters.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 01:18",
+      "published_at": "2026-08-09 01:18",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/ee4f9a560432-8407133792e82019149f.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.reuters.com/pt/negocio/DOWGWCOQIJOPBJD3IXUOHJD37E-2026-08-08；https://www.investing.com/news/stock-market-news/berkshire-says-operating-profit-rises-conducts-stock-buybacks-4847654；https://www.businessinsider.com/berkshire-hathaway-warren-buffett-greg-abel-spending-cash-pile-2026-8 📮Folo · 2026 年 8 月 9 日 02:22",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.reuters.com/pt/negocio/DOWGWCOQIJOPBJD3IXUOHJD37E-2026-08-08",
+          "title": "",
+          "publisher": "reuters.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.businessinsider.com/berkshire-hathaway-warren-buffett-greg-abel-spending-cash-pile-2026-8",
+          "title": "",
+          "publisher": "businessinsider.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.investing.com/news/stock-market-news/berkshire-says-operating-profit-rises-conducts-stock-buybacks-4847654",
+          "title": "",
+          "publisher": "investing.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据路透社报道，伯克希尔-哈撒韦周六发布二季度财报：运营利润同比增长 16% 至 129.8 亿美元，约合每股 A 类股 9068 美元，高于分析师预期；受股权投资市值上涨推动，净利润同比翻倍。",
+          "source_url": "https://www.reuters.com/pt/negocio/DOWGWCOQIJOPBJD3IXUOHJD37E-2026-08-08",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "财报显示，公司二季度回购约 45 亿美元自家股票，7 月又追加逾 33 亿美元，延续 3 月重启、此前近两年暂停的回购节奏。截至季末，现金储备仍高达约 3590 亿美元，但已从创纪录高点小幅回落，公司同期为美股净卖出方。",
+          "source_url": "https://www.reuters.com/pt/negocio/DOWGWCOQIJOPBJD3IXUOHJD37E-2026-08-08",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Business Insider 报道称，随着巴菲特退出日常决策、CEO 格雷格·阿贝尔主导投资与资本配置，伯克希尔开始把巨额现金重新投入回购。伯克希尔能源业务当季运营利润增长 27%。",
+          "source_url": "https://www.reuters.com/pt/negocio/DOWGWCOQIJOPBJD3IXUOHJD37E-2026-08-08",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:53+00:00"
+    },
+    {
+      "id": "4077dbc4-32d9-5b6a-bff2-a3e10079afb2",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "917a0ace38d54d0403d00e814840925c79ffb5f3",
+      "title": "《八仙！》票房破 12 亿登顶 2026 动画电影票房榜",
+      "body": "国产喜剧动画《八仙！》上映 17 天总票房突破 12 亿元，超过《熊出没 · 年年有熊》，登顶 2026 年动画电影票房榜。影片以传统八仙故事为灵感：八个凡人在蓬莱仙境内假扮神仙，闯入只有神仙能通行的藏宝阁寻宝求财。\n\n影片目前正在院线热映，豆瓣评分 8.2，其中 5 星评分占比 35.6%、4 星占比 44.0%。",
+      "category": "好看的",
+      "status": "ready",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/985/238.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/47792b18d3181f00b55d.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/985/238.htm 🛰网页 · 2026 年 8 月 3 日 22:28",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/985/238.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "国产喜剧动画《八仙！》上映 17 天总票房突破 12 亿元，超过《熊出没 · 年年有熊》，登顶 2026 年动画电影票房榜。影片以传统八仙故事为灵感：八个凡人在蓬莱仙境内假扮神仙，闯入只有神仙能通行的藏宝阁寻宝求财。",
+          "source_url": "https://www.ithome.com/0/985/238.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "影片目前正在院线热映，豆瓣评分 8.2，其中 5 星评分占比 35.6%、4 星占比 44.0%。",
+          "source_url": "https://www.ithome.com/0/985/238.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:31+00:00"
+    },
+    {
+      "id": "2a492462-b4f0-5901-b594-f35aac0cfd4f",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "095a94e3f264e2e1aa9333bc50daff142f190af7",
+      "title": "Bella Thorne 将自编自导自演《春假》续集",
+      "body": "Bella Thorne 在播客 Call Her Daddy 中透露，她正在担任《春假》（Spring Breakers）续集的编剧和导演，并继续出演。她表示，制片方看过她执导的首部长片后，邀请她同时接手剧本与导演工作，并形容续集「火力全开」。\n\n2012 年 Harmony Korine 执导的原版《春假》由 James Franco、Selena Gomez、Vanessa Hudgens 和 Ashley Benson 主演。Thorne 2025 年已宣布出演续集，此次升级为编剧兼导演。续集具体档期尚未公布。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://deadline.com/2026/08/bella-thorne-spring-breakers-2-tapped-write-direct-star-1237029133",
+      "source_name": "deadline.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 09:03",
+      "published_at": "2026-08-08 09:03",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/7987015d86b8-f3b6eaf40b12b9a1ca22.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://deadline.com/2026/08/bella-thorne-spring-breakers-2-tapped-write-direct-star-1237029133；https://ew.com/bella-thorne-says-she-s-directing-the-sequel-to-spring-breakers-12036939 🛰网页 · 2026 年 8 月 8 日 09:03",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://deadline.com/2026/08/bella-thorne-spring-breakers-2-tapped-write-direct-star-1237029133",
+          "title": "",
+          "publisher": "deadline.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://ew.com/bella-thorne-says-she-s-directing-the-sequel-to-spring-breakers-12036939",
+          "title": "",
+          "publisher": "ew.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Bella Thorne 在播客 Call Her Daddy 中透露，她正在担任《春假》（Spring Breakers）续集的编剧和导演，并继续出演。她表示，制片方看过她执导的首部长片后，邀请她同时接手剧本与导演工作，并形容续集「火力全开」。",
+          "source_url": "https://deadline.com/2026/08/bella-thorne-spring-breakers-2-tapped-write-direct-star-1237029133",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "2012 年 Harmony Korine 执导的原版《春假》由 James Franco、Selena Gomez、Vanessa Hudgens 和 Ashley Benson 主演。Thorne 2025 年已宣布出演续集，此次升级为编剧兼导演。续集具体档期尚未公布。",
+          "source_url": "https://deadline.com/2026/08/bella-thorne-spring-breakers-2-tapped-write-direct-star-1237029133",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:31+00:00"
+    },
+    {
+      "id": "3b3e2912-db1e-5d78-a8b0-aaf47430b049",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "9c76b69eb44ce8074a9e4cda9608f8fe9b763507",
+      "title": "Olivia Rodrigo 布鲁克林惊喜演出首唱新专辑多首新歌",
+      "body": "Olivia Rodrigo 在纽约布鲁克林仅 1100 人容量的 Warsaw 场馆举办惊喜演出，首度现场演唱新专辑《You Seem Pretty Sad for a Girl So in Love》中的多首歌曲，包括开场的首支单曲 Drop Dead 以及 Maggie for Brains、The Cure 等新作。\n\n据 Variety 现场评论，演出还穿插了 Drivers License 等旧作，歌单以 Good 4 U 和 Déjà Vu 收尾。Rodrigo 的 Unraveled 巡演将于 9 月 25 日启动，月底她还将举办自己的 Daisy Chain Fields 音乐节。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://variety.com/2026/music/reviews/olivia-rodrigo-debuts-pretty-sad-songs-brooklyn-surprise-concert-review-1236830406",
+      "source_name": "variety.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 05:28",
+      "published_at": "2026-08-08 05:28",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/8abadaa6b5bf-ba2130f70c9261d2a562.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://variety.com/2026/music/reviews/olivia-rodrigo-debuts-pretty-sad-songs-brooklyn-surprise-concert-review-1236830406 🛰网页 · 2026 年 8 月 8 日 05:28",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://variety.com/2026/music/reviews/olivia-rodrigo-debuts-pretty-sad-songs-brooklyn-surprise-concert-review-1236830406",
+          "title": "",
+          "publisher": "variety.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        }
+      ],
+      "claims": [
+        {
+          "text": "Olivia Rodrigo 在纽约布鲁克林仅 1100 人容量的 Warsaw 场馆举办惊喜演出，首度现场演唱新专辑《You Seem Pretty Sad for a Girl So in Love》中的多首歌曲，包括开场的首支单曲 Drop Dead 以及 Maggie for Brains、The Cure 等新作。",
+          "source_url": "https://variety.com/2026/music/reviews/olivia-rodrigo-debuts-pretty-sad-songs-brooklyn-surprise-concert-review-1236830406",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据 Variety 现场评论，演出还穿插了 Drivers License 等旧作，歌单以 Good 4 U 和 Déjà Vu 收尾。Rodrigo 的 Unraveled 巡演将于 9 月 25 日启动，月底她还将举办自己的 Daisy Chain Fields 音乐节。",
+          "source_url": "https://variety.com/2026/music/reviews/olivia-rodrigo-debuts-pretty-sad-songs-brooklyn-surprise-concert-review-1236830406",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:31+00:00"
+    },
+    {
+      "id": "6ce0b096-c38b-5f81-9002-55d940cf3e49",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "e63426c9be7de4000a6b42a41f4528c98d999982",
+      "title": "Pixel 11 Pro 真机曝光：沙丘色、哑光黑，改用圆形长焦开孔",
+      "body": "据 X 账号 @PixelNewsHub 爆料，谷歌 Pixel 11 Pro 演示机已提前抵达运营商渠道，包装盒与上手照流出，提供沙丘色与哑光黑色两种外观。照片显示，黑色版本长焦区域采用圆形开孔，与上月渲染图一致——Pixel 11 Pro 将用圆形长焦开孔取代 Pixel 10 Pro 的方形潜望模组。\n\n谷歌预计在 8 月 13 日举行的 Made by Google 活动上正式发布 Pixel 11 系列，目前尚未公布售价与完整上市信息。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/476.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 07:52",
+      "published_at": "2026-08-09 07:52",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/527d2e5dc467a77f6bef.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/476.htm 🛰RSS · 2026 年 8 月 9 日 07:52",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/476.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 9 日消息，X 账号 @PixelNewsHub 曝光了一台装在包装盒中的谷歌 Pixel 11 Pro 演示机，采用沙丘色外观，此外还有一张哑光黑色演示机的上手照片。据称，这些照片来自运营商，这批设备在谷歌 Made by Google 活动举行前已经抵达。",
+          "source_url": "https://www.ithome.com/0/987/476.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家注意到，黑色版本的照片显示，长焦镜头区域出现了一个圆形开孔，与上月曝光的渲染图一致，Pixel 11 Pro 将采用圆形长焦镜头开孔，取代 Pixel 10 Pro 上使用的方形潜望式长焦镜头模组。",
+          "source_url": "https://www.ithome.com/0/987/476.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "谷歌预计将在 2026 年 8 月 13 日举行的 Made by Google 活动上正式发布 Pixel 11 系列。目前，官方尚未公布具体售价以及完整的上市信息。",
+          "source_url": "https://www.ithome.com/0/987/476.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据 X 账号 @PixelNewsHub 爆料，谷歌 Pixel 11 Pro 演示机已提前抵达运营商渠道，包装盒与上手照流出，提供沙丘色与哑光黑色两种外观。照片显示，黑色版本长焦区域采用圆形开孔，与上月渲染图一致——Pixel 11 Pro 将用圆形长焦开孔取代 Pixel 10 Pro 的方形潜望模组。",
+          "source_url": "https://www.ithome.com/0/987/476.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "谷歌预计在 8 月 13 日举行的 Made by Google 活动上正式发布 Pixel 11 系列，目前尚未公布售价与完整上市信息。",
+          "source_url": "https://www.ithome.com/0/987/476.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "e69f1ae0-d48e-5b3d-abdc-5fc70e1a965f",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "1df89a6df33ffed0bb14cf2d0c1655fd477a3978",
+      "title": "三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500",
+      "body": "据 Sammyguru 曝光的渲染图，三星预计 9 月发布的旗舰平板 Galaxy Tab S12+ 与 S12 Ultra 正面外观延续上一代设计，边框厚度基本不变；Ultra 版本仍保留刘海式前置摄像头，而不是此前传闻的挖孔方案。\n\n配置方面，两款平板预计均搭载联发科天玑 9500 芯片，运行 One UI 9，获最多 7 代 Android 系统更新与 7 年安全更新。S12+ 配备 12.4 英寸 Dynamic AMOLED 2X 屏（120Hz）与 10600mAh 电池，S12 Ultra 沿用 14.6 英寸屏幕、电池容量 11600mAh，预计均附赠 S Pen。配色可能提供灰色与银色两种，并随新机推出蓝紫色渐变、带字母「S」的新壁纸。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/470.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-09 07:41",
+      "published_at": "2026-08-09 07:41",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/f3b807421b9027ae019e.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/470.htm 📮Folo · 2026 年 8 月 9 日 07:41",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/470.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 9 日消息，三星预计将在今年 9 月推出 Galaxy Tab S12 系列，作为其年度旗舰平板产品线。在新品发布前，Sammyguru 已经获得了 Galaxy Tab S12+ 和 Galaxy Tab S12 Ultra 的渲染图，可以清晰看到两款平板的正面设计以及全新的壁纸。",
+          "source_url": "https://www.ithome.com/0/987/470.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "从外观来看，Galaxy Tab S12+ 和 Tab S12 Ultra 将延续上一代 Tab S11 系列的设计风格。两款平板的边框厚度以及整体正面外观基本没有明显变化。",
+          "source_url": "https://www.ithome.com/0/987/470.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "值得一提的是，Ultra 版本这次依然保留了刘海设计，尽管此前有传闻称三星可能会改用挖孔式前置摄像头。不过目前看来，三星仍然选择了保留刘海，希望这一设计能在明年有所改变。",
+          "source_url": "https://www.ithome.com/0/987/470.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家 8 月 9 日消息，三星预计将在今年 9 月推出 Galaxy Tab S12 系列，作为其年度旗舰平板产品线。在新品发布前，Sammyguru 已经获得了 Galaxy Tab S12+ 和 Galaxy Tab S12 Ultra 的渲染图…",
+          "source_url": "https://www.ithome.com/0/987/470.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据 Sammyguru 曝光的渲染图，三星预计 9 月发布的旗舰平板 Galaxy Tab S12+ 与 S12 Ultra 正面外观延续上一代设计，边框厚度基本不变；Ultra 版本仍保留刘海式前置摄像头，而不是此前传闻的挖孔方案。",
+          "source_url": "https://www.ithome.com/0/987/470.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "配置方面，两款平板预计均搭载联发科天玑 9500 芯片，运行 One UI 9，获最多 7 代 Android 系统更新与 7 年安全更新。S12+ 配备 12.4 英寸 Dynamic AMOLED 2X 屏（120Hz）与 10600mAh 电池，S12 Ultra 沿用 14.6 英寸屏幕、电池容量 11600mAh，预计均附赠 S Pen。配色可能提供灰色与银色两种，并随新机推出蓝紫色渐变、带字母「S」的新壁纸。",
+          "source_url": "https://www.ithome.com/0/987/470.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "a6c5d402-b77f-5524-afd6-5a260fea2dfe",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "dd27916cb4b2bf3a7e15db3f4ac47894c45c1430",
+      "title": "微软继续给 Outlook 加 Copilot：经典版推送 Explain This，新版拟上线「每日小结」",
+      "body": "据 Windows Latest 报道，微软开始面向 Windows 10 / 11 经典版 Outlook 推送名为 Explain This 的 Copilot 功能：用户选中邮件中的任意文本，Copilot 会结合整封邮件内容给出上下文解释。微软称该功能预计 9 月底前完成推送，多数用户 9 月初即可看到。\n\n面向新版 Outlook，微软计划把「每日小结」（Wrap up your day）放进收件箱：点击后右侧打开 Copilot，基于过去 8 小时收件箱（含 Focused、Other）与已发送邮件生成晚间简报，按「今天完成了什么」「前 3 个关注重点」「明天前 3 个优先事项」组织，并以一句激励短语结尾。Windows Latest 指出，该功能读取邮件前没有单独征求许可，也没有找到关闭入口，只能通过关闭 Copilot 或改用经典版规避；现阶段经典版不含此项功能。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.windowslatest.com/2026/08/08/outlook-classic-will-now-let-you-highlight-any-text-for-ai-explanations-and-its-actually-useful/",
+      "source_name": "windowslatest.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 11:39",
+      "published_at": "2026-08-08 11:39",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/ae13fc309320-f914a770360052189fcf.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.windowslatest.com/2026/08/08/outlook-classic-will-now-let-you-highlight-any-text-for-ai-explanations-and-its-actually-useful/；https://www.windowslatest.com/2026/08/07/microsoft-found-another-way-to-force-copilot-on-you-in-outlook-and-its-called-wrap-up-your-day/；https://www.ithome.com/0/987/274.htm 📮Folo · 2026 年 8 月 8 日 11:29",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.windowslatest.com/2026/08/08/outlook-classic-will-now-let-you-highlight-any-text-for-ai-explanations-and-its-actually-useful/",
+          "title": "",
+          "publisher": "windowslatest.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.windowslatest.com/2026/08/07/microsoft-found-another-way-to-force-copilot-on-you-in-outlook-and-its-called-wrap-up-your-day/",
+          "title": "",
+          "publisher": "windowslatest.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/987/274.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 8 日消息，科技媒体 Windows Latest 昨日（8 月 7 日）发布博文，报道称面向 Windows 10、Windows 11 经典版 Outlook 应用，微软开始推送名为 Explain This 的 Copilot AI 功能。",
+          "source_url": "https://www.windowslatest.com/2026/08/08/outlook-classic-will-now-let-you-highlight-any-text-for-ai-explanations-and-its-actually-useful/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据 Windows Latest 报道，微软开始面向 Windows 10 / 11 经典版 Outlook 推送名为 Explain This 的 Copilot 功能：用户选中邮件中的任意文本，Copilot 会结合整封邮件内容给出上下文解释。微软称该功能预计 9 月底前完成推送，多数用户 9 月初即可看到。",
+          "source_url": "https://www.windowslatest.com/2026/08/08/outlook-classic-will-now-let-you-highlight-any-text-for-ai-explanations-and-its-actually-useful/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "面向新版 Outlook，微软计划把「每日小结」（Wrap up your day）放进收件箱：点击后右侧打开 Copilot，基于过去 8 小时收件箱（含 Focused、Other）与已发送邮件生成晚间简报，按「今天完成了什么」「前 3 个关注重点」「明天前 3 个优先事项」组织，并以一句激励短语结尾。Windows Latest 指出，该功能读取邮件前没有单独征求许可，也没有找到关闭入口，只能通过关闭 Copilot 或改用经典版规避；现阶段经典版不含此项功能。",
+          "source_url": "https://www.windowslatest.com/2026/08/08/outlook-classic-will-now-let-you-highlight-any-text-for-ai-explanations-and-its-actually-useful/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "3fe069f5-5fb5-51ff-96be-ffdef346227a",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "8cf8b992658f8edc9f829b61e3fbd65814a9eb49",
+      "title": "蓝思科技、中科慧灵成立中科慧思，发布三款灵巧手并预告 37 自由度 F 系列",
+      "body": "据财联社报道蓝思科技、中科慧灵与湖南华夏投资集团共同发起成立中科慧思具身智能（湖南）有限公司。新公司落户湘江新区，现场发布 L1、D1、M1 三款灵巧手，并预发布 F 系列绳驱仿生灵巧手，同时宣布将建设灵巧手技能训练场和数据采集中心。\n\n其中，L1 采用 6 个主动自由度，价格为千元级，定位现有夹爪的升级替代，已用于 CASBOT BAND 机器人乐队演奏吉他、贝斯和电子琴；D1 是面向真机数据采集的高自由度通用五指手；M1 采用模块化设计，面向工业场景。F 系列拥有 37 个关节自由度，可完成拇指与食指对捏瓶盖等动作。\n\n中科慧灵创始人、中科慧思董事长张正涛称，全系列产品支持 100 万次往复运动零故障。中科慧思 CEO 杨平表示，灵巧手训练数据采集仍受手指遮挡、触觉数据稳定性和多传感器毫秒级时间对齐影响；工人采集 10 小时数据，通常只有 2 至 3 小时可用于基模训练。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/lsFq3OsT96CP2KhgFn2zqQ",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/fa0494978c87974e7581.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 原文链接：https://mp.weixin.qq.com/s/lsFq3OsT96CP2KhgFn2zqQ 🧭飞书群 · 2026 年 8 月 9 日 15:36",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/lsFq3OsT96CP2KhgFn2zqQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "蓝思科技、中科慧灵与湖南华夏投资集团共同发起成立中科慧思具身智能（湖南）有限公司。新公司落户湘江新区，现场发布 L1、D1、M1 三款灵巧手，并预发布 F 系列绳驱仿生灵巧手，同时宣布将建设灵巧手技能训练场和数据采集中心。",
+          "source_url": "https://mp.weixin.qq.com/s/lsFq3OsT96CP2KhgFn2zqQ",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "其中，L1 采用 6 个主动自由度，价格为千元级，定位现有夹爪的升级替代，已用于 CASBOT BAND 机器人乐队演奏吉他、贝斯和电子琴；D1 是面向真机数据采集的高自由度通用五指手；M1 采用模块化设计，面向工业场景。F 系列拥有 37 个关节自由度，可完成拇指与食指对捏瓶盖等动作。",
+          "source_url": "https://mp.weixin.qq.com/s/lsFq3OsT96CP2KhgFn2zqQ",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "中科慧灵创始人、中科慧思董事长张正涛称，全系列产品支持 100 万次往复运动零故障。中科慧思 CEO 杨平表示，灵巧手训练数据采集仍受手指遮挡、触觉数据稳定性和多传感器毫秒级时间对齐影响；工人采集 10 小时数据，通常只有 2 至 3 小时可用于基模训练。",
+          "source_url": "https://mp.weixin.qq.com/s/lsFq3OsT96CP2KhgFn2zqQ",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:37+00:00"
+    },
+    {
+      "id": "7bb6e78d-db06-5e23-801b-349bfcaea79c",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "07a82fd783b11ab1523d8c45e278a21a84a4b106",
+      "title": "1499 元，CHERRY MX10.1 FOR MAC 矮轴机械键盘开启预约",
+      "body": "CHERRY 推出面向 Mac 生态的 MX10.1 FOR MAC 矮轴机械键盘，定价 1499 元，8 月 10 日 10:00 开启预约，8 月 15 日 10:00 开售。键盘采用 CNC 铝合金外壳，最薄处 9 mm，支持蓝牙、USB 与 2.4G 三模连接。\n\n有线模式最高支持 8000 Hz 回报率，无线模式 4000 Hz；内置 4000 mAh 电池，官方标称续航最高 800 小时。键盘配备智控旋钮与 LCD 彩屏，可显示电量、连接方式并自定义待机壁纸，键帽为 PBT 热升华，使用第二代 MX-LP 红轴 V2 矮轴。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/226.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 07:24",
+      "published_at": "2026-08-08 07:24",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/6bd9afa0f921afa54a09.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/226.htm 📮Folo · 2026 年 8 月 8 日 07:24",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/226.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 8 日消息，CHERRY 樱桃推出 MX10.1 FOR MAC 矮轴机械键盘，定价为 1499 元，将于 8 月 10 日 10:00 开启预约，8 月 15 日 10:00 开售。",
+          "source_url": "https://www.ithome.com/0/987/226.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这款键盘为高端商务无线机械键盘，适配苹果 Mac 生态系统，采用极简设计语言…",
+          "source_url": "https://www.ithome.com/0/987/226.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "CHERRY 推出面向 Mac 生态的 MX10.1 FOR MAC 矮轴机械键盘，定价 1499 元，8 月 10 日 10:00 开启预约，8 月 15 日 10:00 开售。键盘采用 CNC 铝合金外壳，最薄处 9 mm，支持蓝牙、USB 与 2.4G 三模连接。",
+          "source_url": "https://www.ithome.com/0/987/226.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "有线模式最高支持 8000 Hz 回报率，无线模式 4000 Hz；内置 4000 mAh 电池，官方标称续航最高 800 小时。键盘配备智控旋钮与 LCD 彩屏，可显示电量、连接方式并自定义待机壁纸，键帽为 PBT 热升华，使用第二代 MX-LP 红轴 V2 矮轴。",
+          "source_url": "https://www.ithome.com/0/987/226.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "de5e15df-e0b8-578e-873f-90f6d973a47d",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "704ad32d5e872c8f5364ba98a2dcd5b4e9c7ed3c",
+      "title": "千问闪购首次上车：极狐阿尔法 T7 支持「一句话点奶茶」",
+      "body": "极狐汽车 8 月 7 日确认，千问闪购首次上车，阿尔法 T7 支持车内「一句话点奶茶」。新车搭载 17.3 英寸 3K 中控屏与 1.1 米全景 PHUD，除与千问合作外，还有华为乾崑、宁德时代、麦格纳三方加持，将于 8 月 26 日开启预售。\n\n该车此前已出现在工信部申报目录，可选纯电或增程动力，尺寸 5020×1996×1685mm、轴距 3040mm，最高车速 180km/h。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/247.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 09:08",
+      "published_at": "2026-08-08 09:08",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/6f47268a086e3a29437f.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/247.htm 📮Folo · 2026 年 8 月 8 日 09:08",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/247.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 8 日消息，极狐汽车 8 月 7 日宣布千问闪购首次上车，极狐阿尔法 T7 支持“一句话点奶茶”。",
+          "source_url": "https://www.ithome.com/0/987/247.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "根据官方此前预热，极狐阿尔法 T7 搭载 17.3 英寸同级最大 3K 中控屏 + 1.1m 同级唯一超宽全景 PHUD。除了与千问达成合作外，新车还有华为乾崑…",
+          "source_url": "https://www.ithome.com/0/987/247.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "极狐汽车 8 月 7 日确认，千问闪购首次上车，阿尔法 T7 支持车内「一句话点奶茶」。新车搭载 17.3 英寸 3K 中控屏与 1.1 米全景 PHUD，除与千问合作外，还有华为乾崑、宁德时代、麦格纳三方加持，将于 8 月 26 日开启预售。",
+          "source_url": "https://www.ithome.com/0/987/247.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "该车此前已出现在工信部申报目录，可选纯电或增程动力，尺寸 5020×1996×1685mm、轴距 3040mm，最高车速 180km/h。",
+          "source_url": "https://www.ithome.com/0/987/247.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "1af55e1e-5bab-50a9-a58b-cafc4d4d1228",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "cbc0133ad1a04e672c44eb78246b65e135dfa925",
+      "title": "18999 元，微星泰坦 18 新增 Ultra 9 275HX + RTX 5070Ti 版本",
+      "body": "2026 款微星泰坦 18 笔记本新增「Ultra 9 275HX + RTX 5070Ti」配置，16GB 内存加 1TB 硬盘，售价 18999 元，8 月 11 日 10:00 开售。处理器为 24 核 24 线程的酷睿 Ultra 9 275HX，显卡为 140W 满功耗 GeForce RTX 5070Ti，超增压模式最高可双烤 225W。\n\n机器配备 18 英寸 16:10 屏幕，2560×1600 分辨率、240 Hz 刷新率，覆盖 100% DCI-P3；内置 90Whr 电池，支持 140W PD 3.1 快充，接口包括双雷电 5 与 HDMI 2.1。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/241.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 08:35",
+      "published_at": "2026-08-08 08:35",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/43b6e62a097b2d08298d.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/241.htm 📮Folo · 2026 年 8 月 8 日 08:35",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/241.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "2026 款微星泰坦 18 笔记本新增「Ultra 9 275HX + RTX 5070Ti」配置，16GB 内存加 1TB 硬盘，售价 18999 元，8 月 11 日 10:00 开售。处理器为 24 核 24 线程的酷睿 Ultra 9 275HX，显卡为 140W 满功耗 GeForce RTX 5070Ti，超增压模式最高可双烤 225W。",
+          "source_url": "https://www.ithome.com/0/987/241.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "机器配备 18 英寸 16:10 屏幕，2560×1600 分辨率、240 Hz 刷新率，覆盖 100% DCI-P3；内置 90Whr 电池，支持 140W PD 3.1 快充，接口包括双雷电 5 与 HDMI 2.1。",
+          "source_url": "https://www.ithome.com/0/987/241.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "2c345994-0383-5d6e-9244-2ef30b46516a",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "9baffe9b3bac41aaa8d49ab77e41bddba8eaf806",
+      "title": "工信部第 410 批新车公示：零跑 Lafa5、大众速腾 L HEV、魏牌高山 8 亮相",
+      "body": "工信部发布第 410 批《道路机动车辆生产企业及产品公告》新产品公示，多款新能源与混动车型完成申报。零跑 Lafa5 纯电轿车共申报三款配置，轴距 2735 mm，电机峰值功率最高 185 kW，均采用磷酸铁锂电池，部分版本可选装激光雷达。\n\n一汽-大众速腾 L HEV 为油电混动版本，不允许外接充电，1.5L 发动机加驱动电机组合，最高车速 163 km/h。长城魏牌全新高山 8 Hi4 为 7 座混动 MPV，车长 5280 mm，搭载 175 kW 发动机，储能电池由蜂巢能源提供。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 7,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/987/230.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 08:15",
+      "published_at": "2026-08-08 08:15",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/f1af791a2bff1ca506c6.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/987/230.htm；https://www.ithome.com/0/987/220.htm；https://www.ithome.com/0/987/236.htm 📮Folo · 2026 年 8 月 8 日 07:44",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/987/230.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/987/220.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/987/236.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 8 日消息，工信部发布第 410 批《道路机动车辆生产企业及产品公告》新产品公示，新款零跑 Lafa5 纯电动轿车完成申报。",
+          "source_url": "https://www.ithome.com/0/987/230.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "本次申报共有三款零跑 Lafa5 纯电动轿车，均采用承载式车身，额定载客 5 人，轴距为 2735 mm，最高车速 180 km/h…",
+          "source_url": "https://www.ithome.com/0/987/230.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家 8 月 8 日消息，工信部发布第 410 批《道路机动车辆生产企业及产品公告》新产品公示，一汽-大众速腾 L HEV 完成申报。",
+          "source_url": "https://www.ithome.com/0/987/230.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家注意到，本次申报共有两个配置版本，两款车型均为汽油 / 电混合动力，且不允许外接充电，储能装置种类为镍钴锰三元锂蓄电池…",
+          "source_url": "https://www.ithome.com/0/987/230.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "工信部发布第 410 批《道路机动车辆生产企业及产品公告》新产品公示，多款新能源与混动车型完成申报。零跑 Lafa5 纯电轿车共申报三款配置，轴距 2735 mm，电机峰值功率最高 185 kW，均采用磷酸铁锂电池，部分版本可选装激光雷达。",
+          "source_url": "https://www.ithome.com/0/987/230.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "一汽-大众速腾 L HEV 为油电混动版本，不允许外接充电，1.5L 发动机加驱动电机组合，最高车速 163 km/h。长城魏牌全新高山 8 Hi4 为 7 座混动 MPV，车长 5280 mm，搭载 175 kW 发动机，储能电池由蜂巢能源提供。",
+          "source_url": "https://www.ithome.com/0/987/230.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:18+00:00"
+    },
+    {
+      "id": "6c161ea1-75ec-567a-a3ce-cc634f47cf8b",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "eef5c2ee8938e11011081b768c5e90be688ca2d1",
+      "title": "肯德基蜡笔小新联名套餐 8 月 8 日上线门店，五款声光互动玩具随机送",
+      "body": "肯德基官宣与《蜡笔小新》联名，以「和小新一起开开心心过夏天」为主题推出五款联名玩具，围绕小新、小白、阿呆和肥嘟嘟左卫门四个角色设计，均带声光或互动玩法：发条吃瓜的小新小白、会滋水的泡泡鱼水枪、旋转鼻涕的阿呆、复刻「叉烧饭」名场面的左卫门干饭英雄，以及带语音和灯光的左卫门泡澡汤锅。\n\n8 月 4 日起，品牌开启线上预售，预售限量 50 万份，下单加赠蛋挞一只；8 月 8 日，线下门店正式上线联名套餐，两档套餐仅限堂食，玩具随机发放。",
+      "category": "新消费",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://socialbeta.com/campaign/28102",
+      "source_name": "socialbeta.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/b6c53c631fd1-762df677367991623b82.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://socialbeta.com/campaign/28102；https://www.ganhuoku.cn/archives/366025 🛰网页 · 2026 年 8 月 4 日 16:00",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://socialbeta.com/campaign/28102",
+          "title": "",
+          "publisher": "socialbeta.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ganhuoku.cn/archives/366025",
+          "title": "",
+          "publisher": "ganhuoku.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "肯德基官宣与《蜡笔小新》联名，以「和小新一起开开心心过夏天」为主题推出五款联名玩具，围绕小新、小白、阿呆和肥嘟嘟左卫门四个角色设计，均带声光或互动玩法：发条吃瓜的小新小白、会滋水的泡泡鱼水枪、旋转鼻涕的阿呆、复刻「叉烧饭」名场面的左卫门干饭英雄，以及带语音和灯光的左卫门泡澡汤锅。",
+          "source_url": "https://socialbeta.com/campaign/28102",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "8 月 4 日起，品牌开启线上预售，预售限量 50 万份，下单加赠蛋挞一只；8 月 8 日，线下门店正式上线联名套餐，两档套餐仅限堂食，玩具随机发放。",
+          "source_url": "https://socialbeta.com/campaign/28102",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:16:55+00:00"
+    },
+    {
+      "id": "009180a2-98f7-5f31-8983-c2c320b8dbcb",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "d235c23fde7ac2865a4e75cd856f185ae31fbfc2",
+      "title": "AI 短剧女主方桃子美瞳广告被下架，虚拟人代言争议持续",
+      "body": "8 月 6 日，AI 短剧《被裁掉的女孩》女主角方桃子的抖音主页上，一条美妆品类美瞳广告视频被下架。该剧全网播放量达 2.6 亿，运营团队为方桃子搭建独立账号后一个月内积累数十万粉丝，「AI 短剧女主 60 秒广告报价 25 万 8」曾登上热搜。\n\n广告中第一人称口播「我的美瞳戴了一天都很舒服」引发争议。法律界人士向北京日报客户端表示，AI 虚拟人不具备民事主体资格，不适用广告代言人「未使用不得代言」的规定，但以第一人称宣称亲测体验即属虚构使用感受，涉嫌违反广告法关于虚假广告的规定；美瞳属于第三类医疗器械，医疗器械广告不得利用代言人作推荐、证明。",
+      "category": "新消费",
+      "status": "ready",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://news.bjd.com.cn/2026/08/06/11903301.shtml",
+      "source_name": "news.bjd.com.cn",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/a17702c185f3-f8bac9e8c019169d0e4d.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://news.bjd.com.cn/2026/08/06/11903301.shtml 🛰网页 · 2026 年 8 月 6 日 13:03",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://news.bjd.com.cn/2026/08/06/11903301.shtml",
+          "title": "",
+          "publisher": "news.bjd.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "8 月 6 日，AI 短剧《被裁掉的女孩》女主角方桃子的抖音主页上，一条美妆品类美瞳广告视频被下架。该剧全网播放量达 2.6 亿，运营团队为方桃子搭建独立账号后一个月内积累数十万粉丝，「AI 短剧女主 60 秒广告报价 25 万 8」曾登上热搜。",
+          "source_url": "https://news.bjd.com.cn/2026/08/06/11903301.shtml",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "广告中第一人称口播「我的美瞳戴了一天都很舒服」引发争议。法律界人士向北京日报客户端表示，AI 虚拟人不具备民事主体资格，不适用广告代言人「未使用不得代言」的规定，但以第一人称宣称亲测体验即属虚构使用感受，涉嫌违反广告法关于虚假广告的规定；美瞳属于第三类医疗器械，医疗器械广告不得利用代言人作推荐、证明。",
+          "source_url": "https://news.bjd.com.cn/2026/08/06/11903301.shtml",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:15:31+00:00"
+    },
+    {
+      "id": "1bae9448-289b-5513-ab71-01c11136e1b4",
+      "issue_id": "ifanr-daily-20260810",
+      "fingerprint": "0de2f380d6384634829b944d170ad2c0ff044c19",
+      "title": "Airbnb 财报超预期股价涨 15%，Chesky 称 AI 投入将「多得多」",
+      "body": "据 CNBC 报道，Airbnb 发布第二季度财报并上调全年指引，股价当日上涨约 15%，创下四年新高。CEO Brian Chesky 在财报电话会上表示，公司将把今年 AI 支出提高到远超最初预测的水平，因为推理成本与获得的收入和生产力提升相比「不值一提」。\n\nChesky 称，AI 显著缩短了产品开发周期，帮助公司年度功能交付量增加约 80%，并把 AI 称作本季业绩超预期的主要推动力。他举例说，只要 AI 让转化率提高一点点，带来的增量订单就足以覆盖全部推理成本。\n\n管理层同时强调，增加 AI 投入不会带来同等规模的人员扩张，公司计划保持员工人数不变。Airbnb 还在测试用 AI 改善搜索与客服场景，相关支出会计入今年的运营成本。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://www.cnbc.com/2026/08/07/chesky-airbnb-ai-earnings.html",
+      "source_name": "cnbc.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-08 00:28",
+      "published_at": "2026-08-08 00:28",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/0a4ceea56aa8-8b60201fbebad019d45e.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.cnbc.com/2026/08/07/chesky-airbnb-ai-earnings.html；https://www.barchart.com/story/news/3727688/airbnb-stock-hit-4-year-high-after-earnings-what-to-know 🛰网页 · 2026 年 8 月 8 日 00:28",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.cnbc.com/2026/08/07/chesky-airbnb-ai-earnings.html",
+          "title": "",
+          "publisher": "cnbc.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.barchart.com/story/news/3727688/airbnb-stock-hit-4-year-high-after-earnings-what-to-know",
+          "title": "",
+          "publisher": "barchart.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Airbnb 发布第二季度财报并上调全年指引，股价当日上涨约 15%，创下四年新高。CEO Brian Chesky 在财报电话会上表示，公司将把今年 AI 支出提高到远超最初预测的水平，因为推理成本与获得的收入和生产力提升相比「不值一提」。",
+          "source_url": "https://www.cnbc.com/2026/08/07/chesky-airbnb-ai-earnings.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Chesky 称，AI 显著缩短了产品开发周期，帮助公司年度功能交付量增加约 80%，并把 AI 称作本季业绩超预期的主要推动力。他举例说，只要 AI 让转化率提高一点点，带来的增量订单就足以覆盖全部推理成本。",
+          "source_url": "https://www.cnbc.com/2026/08/07/chesky-airbnb-ai-earnings.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "管理层同时强调，增加 AI 投入不会带来同等规模的人员扩张，公司计划保持员工人数不变。Airbnb 还在测试用 AI 改善搜索与客服场景，相关支出会计入今年的运营成本。",
+          "source_url": "https://www.cnbc.com/2026/08/07/chesky-airbnb-ai-earnings.html",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-09T09:17:06+00:00"
+    }
+  ],
+  "brand_packages": {
+    "appso": {
+      "headline_options": [
+        "苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下 / OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损 / 三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500",
+        "苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下 / 三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500 / Pixel 11 Pro 真机曝光：沙丘色、哑光黑，改用圆形长焦开孔",
+        "OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损 / 三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500 / 67 岁农民误信 AI 除草方案，150 亩芝麻苗一夜枯萎"
+      ],
+      "selected_headline": "苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下 / OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损 / 三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500",
+      "cover_candidates": [
+        {
+          "id": "story:ed609a2a-a411-5e03-a4e1-5b3f5539555b",
+          "story_id": "ed609a2a-a411-5e03-a4e1-5b3f5539555b",
+          "url": "",
+          "source": "story",
+          "title": "苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下"
+        },
+        {
+          "id": "story:424fea6d-8d09-520c-abed-f86bbfe03ad4",
+          "story_id": "424fea6d-8d09-520c-abed-f86bbfe03ad4",
+          "url": "",
+          "source": "story",
+          "title": "OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损"
+        }
+      ],
+      "selected_cover": "story:ed609a2a-a411-5e03-a4e1-5b3f5539555b"
+    },
+    "ifanr": {
+      "headline_options": [
+        "三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500 / Pixel 11 Pro 真机曝光：沙丘色、哑光黑，改用圆形长焦开孔 / 苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下",
+        "三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500 / 苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下 / 传音控股赴港上市获证监会备案，拟发行不超过 1.32 亿股 H 股",
+        "Pixel 11 Pro 真机曝光：沙丘色、哑光黑，改用圆形长焦开孔 / 苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下 / OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损"
+      ],
+      "selected_headline": "三星 Galaxy Tab S12+/S12 Ultra 渲染图曝光：延续刘海设计，搭载天玑 9500 / Pixel 11 Pro 真机曝光：沙丘色、哑光黑，改用圆形长焦开孔 / 苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下",
+      "cover_candidates": [
+        {
+          "id": "story:ed609a2a-a411-5e03-a4e1-5b3f5539555b",
+          "story_id": "ed609a2a-a411-5e03-a4e1-5b3f5539555b",
+          "url": "",
+          "source": "story",
+          "title": "苹果国行 Apple 智能首次官宣牵手阿里千问，官网使用手册上线后又被撤下"
+        },
+        {
+          "id": "story:424fea6d-8d09-520c-abed-f86bbfe03ad4",
+          "story_id": "424fea6d-8d09-520c-abed-f86bbfe03ad4",
+          "url": "",
+          "source": "story",
+          "title": "OpenAI 产品负责人教用户给 Claude Code「换脑」，账号被误封后双方员工 X 上互损"
+        }
+      ],
+      "selected_cover": "story:ed609a2a-a411-5e03-a4e1-5b3f5539555b"
+    }
+  },
+  "diagnostics": {
+    "static_snapshot": true,
+    "source_issue_revision": 158,
+    "snapshot_generated_at": "2026-08-09T11:35:47+00:00",
+    "public_snapshot": {
+      "digest": "89e0aaa3e765223a5720d6da03c578177363ed5cfd7773c8dba5961119bd861c",
+      "generated_at": "2026-08-09T11:35:47+00:00",
+      "image_count": 23,
+      "selected_count": 27,
+      "selected_image_count": 27,
+      "mode": "explicit_review_operations"
+    }
+  }
+}
