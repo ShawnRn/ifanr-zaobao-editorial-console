@@ -1,6 +1,19 @@
 import type { Issue, Story } from './types'
 import { comparePublicationStories, publicationCategories } from './categories'
 
+export function currentHeadlineOptions(issue: Issue, brand: 'ifanr' | 'appso'): string[] {
+  const options = issue.brand_packages?.[brand]?.headline_options || []
+  return [...options.slice(0, 3), ...Array(Math.max(0, 3 - options.length)).fill('')]
+}
+
+export function renderHeadlineCandidatesMarkdown(issue: Issue): string {
+  const section = (brand: 'ifanr' | 'appso', label: string) => [
+    `#### ${label}`,
+    ...currentHeadlineOptions(issue, brand).map((headline, index) => `${index + 1}. ${headline}`),
+  ].join('\n')
+  return ['### 备选标题', section('ifanr', '爱范儿'), section('appso', 'APPSO')].join('\n\n')
+}
+
 export type ReviewOperation =
   | {
     op: 'exclude'
@@ -256,7 +269,7 @@ export function renderIssueMarkdown(issue: Issue): string {
 /** Markdown shell for direct paste into the Feishu Bot document. */
 export function renderFeishuCloudMarkdown(issue: Issue): string {
   const body = renderIssueMarkdown(issue).replace(/^# 早报｜[^\n]*\n\n?/, '')
-  return `早报｜\n\n插入头图\n插入日期\n\nappso 头图\n\n插入目录\n\n${body}`.trim() + '\n'
+  return `${renderHeadlineCandidatesMarkdown(issue)}\n\n早报｜\n\n插入头图\n插入日期\n\nappso 头图\n\n插入目录\n\n${body}`.trim() + '\n'
 }
 
 export function downloadText(filename: string, content: string, type = 'application/json;charset=utf-8') {

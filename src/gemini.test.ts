@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey, saveGeminiModel } from './gemini'
+import { generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, normalizeGeneratedHeadline, saveGeminiKey, saveGeminiModel } from './gemini'
 import type { Issue } from './types'
 
 const storage = new Map<string, string>()
@@ -26,6 +26,11 @@ const issue = {
 
 describe('Gemini headline generation', () => {
   beforeEach(() => storage.clear())
+
+  it('normalizes compact mixed-script boundaries and half-width punctuation', () => {
+    expect(normalizeGeneratedHeadline('GPT-5.6 快了 14 倍:长回答不用等 / iPhone 涨价,用户受影响 / Apple Watch 旧表带或淘汰'))
+      .toBe('GPT-5.6快了14倍:长回答不用等 / iPhone涨价,用户受影响 / Apple Watch旧表带或淘汰')
+  })
 
   it('keeps the key in browser storage and sends the request from the page', async () => {
     saveGeminiKey('AIzaSyExampleKey123456789')

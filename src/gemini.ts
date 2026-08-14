@@ -29,6 +29,21 @@ export const saveGeminiModel = (value: string) => {
   localStorage.setItem(modelNameKey, model)
 }
 
+const headlinePunctuation: Record<string, string> = {
+  '，': ',', '。': '.', '、': ',', '：': ':', '；': ';', '！': '!', '？': '?',
+  '（': '(', '）': ')', '［': '[', '］': ']', '％': '%', '＋': '+', '＝': '=', '／': '/', '—': '-',
+}
+
+export function normalizeGeneratedHeadline(value: string) {
+  const halfWidth = value.replace(/[，。、：；！？（）［］％＋＝／—]/g, (character) => headlinePunctuation[character] || character)
+  return halfWidth.split(/\s*\/\s*/).map((segment) => segment
+    .replace(/\s+([,:;.!?%+)=\]}>-])/g, '$1')
+    .replace(/([(\[<{])\s+/g, '$1')
+    .replace(/([\u3400-\u9fff])\s+([A-Za-z0-9@#%+&])/g, '$1$2')
+    .replace(/([A-Za-z0-9@#%+&])\s+([\u3400-\u9fff])/g, '$1$2')
+    .trim()).filter(Boolean).join(' / ')
+}
+
 export async function listGeminiModels(apiKeyInput?: string): Promise<GeminiModel[]> {
   const apiKey = apiKeyInput?.trim() || localStorage.getItem(keyName)?.trim()
   if (!apiKey) throw new Error('请先填写 Gemini API Key')
@@ -96,7 +111,7 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
     const text = payload?.candidates?.[0]?.content?.parts?.map((part: { text?: string }) => part.text || '').join('')
     if (!text) throw new Error('Gemini 没有返回标题')
     const result = JSON.parse(text) as { headline_options?: unknown[] }
-    const options = (result.headline_options || []).map(String).map((item) => item.trim())
+    const options = (result.headline_options || []).map(String).map(normalizeGeneratedHeadline)
     if (options.length !== 3 || options.some((item) => item.split(' / ').length !== 3)) {
       throw new Error('Gemini 返回的标题不符合三个消息格式')
     }

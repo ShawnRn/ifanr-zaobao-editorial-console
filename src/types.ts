@@ -86,9 +86,22 @@ export type CoverCandidate = {
   title?: string
 }
 
+export type HeadlineHistoryEntry = {
+  id: string
+  created_at: string
+  source: string
+  model?: string
+  headline_options: string[]
+  selected_headline: string
+}
+
 export type BrandPackage = {
   headline_options: string[]
   selected_headline: string
+  headline_history?: HeadlineHistoryEntry[]
+  generation_source?: string
+  generation_model?: string
+  generated_at?: string
   cover_candidates: CoverCandidate[]
   selected_cover: string
 }

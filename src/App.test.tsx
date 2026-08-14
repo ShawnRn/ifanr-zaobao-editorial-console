@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { App, IssueArticle, StoryImageEditor, TrashItem } from './App'
+import { App, BrandWorkspace, IssueArticle, StoryImageEditor, TrashItem } from './App'
 import { api } from './api'
 import type { Issue, Story } from './types'
 
@@ -39,6 +39,21 @@ afterEach(() => {
 })
 
 describe('App', () => {
+  it('keeps generated headline history in a separate secondary view and restores a version', async () => {
+    const onSave = vi.fn().mockResolvedValue(undefined)
+    const issue = structuredClone(staticIssue)
+    issue.brand_packages.ifanr.headline_history = [{
+      id: 'history-1', created_at: '2026-07-21T10:00:00Z', source: 'ai_editor_batch', model: 'codex',
+      headline_options: ['历史一', '历史二', '历史三'], selected_headline: '历史一',
+    }]
+    render(<BrandWorkspace issue={issue} onSave={onSave} onGenerate={vi.fn().mockResolvedValue(undefined)} generating={{ appso: false, ifanr: false }} />)
+    expect(screen.queryByText('历史一')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: '历史版本' }))
+    expect(screen.getByText('历史一')).toBeInTheDocument()
+    fireEvent.click(screen.getAllByRole('button', { name: '恢复为当期' })[0])
+    expect(onSave).toHaveBeenCalledWith('ifanr', expect.objectContaining({ headline_options: ['历史一', '历史二', '历史三'], generation_source: 'history_restore' }))
+  })
+
   it('falls back to the current real Bot draft snapshot while the worker is offline', async () => {
     render(<App />)
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()

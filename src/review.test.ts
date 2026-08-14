@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { applyReviewOperations, buildReviewExport, createClientId } from './review'
+import { applyReviewOperations, buildReviewExport, createClientId, renderFeishuCloudMarkdown } from './review'
 import type { Issue, Story } from './types'
 
 vi.stubGlobal('crypto', { randomUUID: () => '12345678-1234-1234-1234-123456789abc' })
@@ -56,6 +56,16 @@ function issue(stories: Story[]): Issue {
 }
 
 describe('buildReviewExport', () => {
+  it('renders both current brand candidate groups before the fixed Feishu shell', () => {
+    const current = issue([story()])
+    current.brand_packages.ifanr.headline_options = ['爱范儿一', '爱范儿二', '爱范儿三']
+    current.brand_packages.appso.headline_options = ['APPSO一', 'APPSO二', 'APPSO三']
+    const markdown = renderFeishuCloudMarkdown(current)
+    expect(markdown.indexOf('### 备选标题')).toBeLessThan(markdown.indexOf('早报｜'))
+    expect(markdown).toContain('#### 爱范儿\n\n1. 爱范儿一\n2. 爱范儿二\n3. 爱范儿三')
+    expect(markdown).toContain('#### APPSO\n\n1. APPSO一\n2. APPSO二\n3. APPSO三')
+  })
+
   it('creates ids when randomUUID is unavailable on a local HTTP origin', () => {
     const originalCrypto = globalThis.crypto
     vi.stubGlobal('crypto', {

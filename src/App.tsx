@@ -47,7 +47,7 @@ import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, r
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
 import { generateQrSvgDataUri } from './totp'
-import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
+import { buildReviewExport, currentHeadlineOptions, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
 import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
@@ -759,14 +759,29 @@ function DetailSources({ story, staticMode, onImageChange }: { story: Story; sta
   )
 }
 
-function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
+export function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
   issue: Issue
   onSave: (brand: 'appso' | 'ifanr', patch: Partial<BrandPackage>) => Promise<void>
   onGenerate: (brand: 'appso' | 'ifanr') => Promise<void>
   generating: Record<'appso' | 'ifanr', boolean>
 }) {
+  const [section, setSection] = useState<'current' | 'history'>('current')
+  const sourceLabel: Record<string, string> = {
+    ai_editor_batch: 'AI主编班次',
+    gemini_workbench: '工作台手动生成',
+    history_restore: '历史恢复',
+    legacy_current: '原当期版',
+  }
+  const navigation = <nav className="brand-subnav" aria-label="标题二级导航"><button type="button" className={section === 'current' ? 'active' : ''} onClick={() => setSection('current')}>当期候选</button><button type="button" className={section === 'history' ? 'active' : ''} onClick={() => setSection('history')}>历史版本</button></nav>
+  if (section === 'history') {
+    return <div className="brand-workspace-shell">{navigation}<div className="brand-workspace brand-workspace-history">{(['appso', 'ifanr'] as const).map((brand) => {
+      const pack = issue.brand_packages[brand]
+      const history = [...(pack?.headline_history || [])].reverse()
+      return <section className="brand-section" key={brand}><header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI与产品入口' : '消费电子与生活方式'}</h2></div></header><p className="brand-note">保留当期每次真实生成或恢复过的版本; 恢复不会删除新版本。</p><div className="headline-history">{history.length ? history.map((entry) => <article key={entry.id}><header><span>{new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date(entry.created_at))}</span><em>{sourceLabel[entry.source] || entry.source}{entry.model ? ` · ${entry.model}` : ''}</em><button type="button" onClick={() => void onSave(brand, { headline_options: entry.headline_options, selected_headline: entry.selected_headline, generation_source: 'history_restore' })}>恢复为当期</button></header><ol>{entry.headline_options.map((headline) => <li key={headline}>{headline}</li>)}</ol></article>) : <div className="headline-history-empty">尚无历史版本</div>}</div></section>
+    })}</div></div>
+  }
   return (
-    <div className="brand-workspace">
+    <div className="brand-workspace-shell">{navigation}<div className="brand-workspace">
       {(['appso', 'ifanr'] as const).map((brand) => {
         const pack = issue.brand_packages[brand]
         return (
@@ -779,7 +794,7 @@ function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
           </section>
         )
       })}
-    </div>
+    </div></div>
   )
 }
 
@@ -2267,7 +2282,7 @@ export function App() {
     setOperationError('')
     try {
       const generated = await generateBrandHeadlines(issue, brand)
-      const patch = { headline_options: generated.headline_options, selected_headline: generated.selected_headline }
+      const patch = { headline_options: generated.headline_options, selected_headline: generated.selected_headline, generation_source: 'gemini_workbench', generation_model: generated.model }
       setIssue((current) => current ? { ...current, brand_packages: { ...current.brand_packages, [brand]: { ...current.brand_packages[brand], ...patch } } } : current)
       if (dataMode === 'worker') {
         await api.patchBrand(issue.id, brand, patch)
@@ -2657,8 +2672,9 @@ async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
   const imageCache = new Map<string, string>()
   // This mirrors the hand-edited Bot document shell so a direct Feishu paste
   // lands in the same order and leaves the manual visual slots intact.
-  const htmlParts = ['<h1>早报｜</h1>', '<p>插入头图</p>', '<p>插入日期</p>', '<p>appso 头图</p>', '<p>插入目录</p>']
-  const textParts = ['早报｜', '', '插入头图', '插入日期', '', 'appso 头图', '', '插入目录', '']
+  const candidateHtml = (brand: 'ifanr' | 'appso', label: string) => [`<h4>${label}</h4>`, `<ol>${currentHeadlineOptions(issue, brand).map((headline) => `<li>${escapeClipboardHtml(headline)}</li>`).join('')}</ol>`]
+  const htmlParts = ['<h3>备选标题</h3>', ...candidateHtml('ifanr', '爱范儿'), ...candidateHtml('appso', 'APPSO'), '<h1>早报｜</h1>', '<p>插入头图</p>', '<p>插入日期</p>', '<p>appso 头图</p>', '<p>插入目录</p>']
+  const textParts = ['### 备选标题', '', '#### 爱范儿', ...currentHeadlineOptions(issue, 'ifanr').map((headline, index) => `${index + 1}. ${headline}`), '', '#### APPSO', ...currentHeadlineOptions(issue, 'appso').map((headline, index) => `${index + 1}. ${headline}`), '', '早报｜', '', '插入头图', '插入日期', '', 'appso 头图', '', '插入目录', '']
   let currentCategory = ''
   for (const story of stories) {
     let imageData = imageCache.get(story.id) || ''
