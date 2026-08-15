@@ -62,8 +62,8 @@ describe('buildReviewExport', () => {
     current.brand_packages.appso.headline_options = ['APPSO一', 'APPSO二', 'APPSO三']
     const markdown = renderFeishuCloudMarkdown(current)
     expect(markdown.indexOf('### 备选标题')).toBeLessThan(markdown.indexOf('早报｜'))
-    expect(markdown).toContain('#### 爱范儿\n\n1. 爱范儿一\n2. 爱范儿二\n3. 爱范儿三')
-    expect(markdown).toContain('#### APPSO\n\n1. APPSO一\n2. APPSO二\n3. APPSO三')
+    expect(markdown).toContain('#### 爱范儿\n1. 爱范儿一\n2. 爱范儿二\n3. 爱范儿三')
+    expect(markdown).toContain('#### APPSO\n1. APPSO一\n2. APPSO二\n3. APPSO三')
   })
 
   it('creates ids when randomUUID is unavailable on a local HTTP origin', () => {

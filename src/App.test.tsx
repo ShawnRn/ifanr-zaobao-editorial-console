@@ -47,6 +47,7 @@ describe('App', () => {
       headline_options: ['历史一', '历史二', '历史三'], selected_headline: '历史一',
     }]
     render(<BrandWorkspace issue={issue} onSave={onSave} onGenerate={vi.fn().mockResolvedValue(undefined)} generating={{ appso: false, ifanr: false }} />)
+    expect(screen.getAllByText(/38字标题Skill:每组3条不同新闻/)).toHaveLength(2)
     expect(screen.queryByText('历史一')).not.toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: '历史版本' }))
     expect(screen.getByText('历史一')).toBeInTheDocument()

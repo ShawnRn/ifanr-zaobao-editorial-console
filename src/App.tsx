@@ -767,6 +767,7 @@ export function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
 }) {
   const [section, setSection] = useState<'current' | 'history'>('current')
   const sourceLabel: Record<string, string> = {
+    ifanr_morning_title_optimizer: '38字标题Skill',
     ai_editor_batch: 'AI主编班次',
     gemini_workbench: '工作台手动生成',
     history_restore: '历史恢复',
@@ -787,7 +788,7 @@ export function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
         return (
           <section className="brand-section" key={brand}>
             <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating[brand]} onClick={() => void onGenerate(brand)}>{generating[brand] ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}{(pack?.headline_options || []).length ? '重新生成标题' : '生成标题'}</button></header>
-            <p className="brand-note">从当前共享母稿生成 3 组「三个消息 / 分隔」标题，两个品牌可使用同一选题，但表达分别调整。</p>
+            <p className="brand-note">38字标题Skill:每组3条不同新闻,单段10-14字,总长35-38字;重新生成会把当前版本存入历史。</p>
             <div className="headline-options">{(pack?.headline_options || []).map((headline) => <label key={headline} className={pack.selected_headline === headline ? 'selected' : ''}><input type="radio" name={`${brand}-headline`} checked={pack.selected_headline === headline} onChange={() => void onSave(brand, { selected_headline: headline })} /><span>{headline}</span></label>)}</div>
             <label className="field-label" htmlFor={`${brand}-headline-custom`}>最终大标题</label>
             <textarea key={`${brand}-${pack?.selected_headline || ''}`} id={`${brand}-headline-custom`} rows={3} defaultValue={pack?.selected_headline || ''} onBlur={(event) => event.target.value !== pack?.selected_headline && void onSave(brand, { selected_headline: event.target.value })} />
@@ -2282,7 +2283,7 @@ export function App() {
     setOperationError('')
     try {
       const generated = await generateBrandHeadlines(issue, brand)
-      const patch = { headline_options: generated.headline_options, selected_headline: generated.selected_headline, generation_source: 'gemini_workbench', generation_model: generated.model }
+      const patch = { headline_options: generated.headline_options, selected_headline: generated.selected_headline, generation_source: 'ifanr_morning_title_optimizer', generation_model: `gemini:${generated.model}` }
       setIssue((current) => current ? { ...current, brand_packages: { ...current.brand_packages, [brand]: { ...current.brand_packages[brand], ...patch } } } : current)
       if (dataMode === 'worker') {
         await api.patchBrand(issue.id, brand, patch)

@@ -1,8 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, normalizeGeneratedHeadline, saveGeminiKey, saveGeminiModel } from './gemini'
+import { generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, normalizeGeneratedHeadline, saveGeminiKey, saveGeminiModel, validateGeneratedHeadline } from './gemini'
 import type { Issue } from './types'
 
 const storage = new Map<string, string>()
+const validOptions = [
+  '朋友圈编辑被微信否决 / 曝苹果联手阿里训练中国AI / 曝谷歌AI十亿用户后仍裁员',
+  '曝苹果联手阿里训练中国AI / 曝谷歌AI十亿用户后仍裁员 / 朋友圈编辑被微信否决',
+  '曝谷歌AI十亿用户后仍裁员 / 朋友圈编辑被微信否决 / 曝苹果联手阿里训练中国AI',
+]
 vi.stubGlobal('localStorage', {
   getItem: (key: string) => storage.get(key) || null,
   setItem: (key: string, value: string) => storage.set(key, value),
@@ -32,14 +37,17 @@ describe('Gemini headline generation', () => {
       .toBe('GPT-5.6快了14倍:长回答不用等 / iPhone涨价,用户受影响 / Apple Watch旧表带或淘汰')
   })
 
+  it('enforces the 35-38 character title skill gate', () => {
+    expect(validateGeneratedHeadline(validOptions[0])).toBe(validOptions[0])
+    expect(() => validateGeneratedHeadline('消息一 / 消息二 / 消息三')).toThrow('标题Skill长度校验失败')
+  })
+
   it('keeps the key in browser storage and sends the request from the page', async () => {
     saveGeminiKey('AIzaSyExampleKey123456789')
     expect(hasGeminiKey()).toBe(true)
     const fetchMock = vi.fn(async (_url: string, init: RequestInit) => ({
       ok: true,
-      json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify({ headline_options: [
-        '消息一 / 消息二 / 消息三', '消息四 / 消息五 / 消息六', '消息七 / 消息八 / 消息九',
-      ] }) }] } }] }),
+      json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify({ headline_options: validOptions }) }] } }] }),
       status: 200,
       statusText: 'OK',
       requestInit: init,
@@ -63,9 +71,7 @@ describe('Gemini headline generation', () => {
           { name: 'models/gemini-2.5-flash', displayName: 'Gemini 2.5 Flash', supportedGenerationMethods: ['generateContent'] },
           { name: 'models/embedding-001', supportedGenerationMethods: ['embedContent'] },
         ] }
-        : { candidates: [{ content: { parts: [{ text: JSON.stringify({ headline_options: [
-          '消息一 / 消息二 / 消息三', '消息四 / 消息五 / 消息六', '消息七 / 消息八 / 消息九',
-        ] }) }] } }] },
+        : { candidates: [{ content: { parts: [{ text: JSON.stringify({ headline_options: validOptions }) }] } }] },
       status: 200,
       statusText: 'OK',
     }))

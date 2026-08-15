@@ -44,6 +44,17 @@ export function normalizeGeneratedHeadline(value: string) {
     .trim()).filter(Boolean).join(' / ')
 }
 
+export function validateGeneratedHeadline(value: string) {
+  const normalized = normalizeGeneratedHeadline(value)
+  const segments = normalized.split(' / ')
+  const total = normalized.replace(/\s/g, '').length
+  const segmentLengths = segments.map((segment) => segment.replace(/\s/g, '').length)
+  if (segments.length !== 3 || total < 35 || total > 38 || segmentLengths.some((length) => length < 10 || length > 14)) {
+    throw new Error(`标题Skill长度校验失败:${total}字/${segmentLengths.join('-')}`)
+  }
+  return normalized
+}
+
 export async function listGeminiModels(apiKeyInput?: string): Promise<GeminiModel[]> {
   const apiKey = apiKeyInput?.trim() || localStorage.getItem(keyName)?.trim()
   if (!apiKey) throw new Error('请先填写 Gemini API Key')
@@ -71,11 +82,12 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
       id: story.id,
       category: story.category,
       title: story.title,
-      body: story.body,
+      body: story.body.slice(0, 800),
       score: story.score,
       fact_status: story.fact_status,
+      sources: story.sources.slice(0, 2).map((source) => ({ publisher: source.publisher, authority: source.authority })),
     }))
-  const prompt = `${brand === 'appso' ? appsoPrompt : ifanrPrompt}\n\n## 本刊期共享母稿\n\n${JSON.stringify(selected, null, 2)}`
+  const prompt = `${brand === 'appso' ? appsoPrompt : ifanrPrompt}\n\n## 本刊期共享母稿\n\n${JSON.stringify(selected)}`
   const controller = new AbortController()
   const timeout = window.setTimeout(() => controller.abort(), 90_000)
   try {
@@ -111,10 +123,8 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
     const text = payload?.candidates?.[0]?.content?.parts?.map((part: { text?: string }) => part.text || '').join('')
     if (!text) throw new Error('Gemini 没有返回标题')
     const result = JSON.parse(text) as { headline_options?: unknown[] }
-    const options = (result.headline_options || []).map(String).map(normalizeGeneratedHeadline)
-    if (options.length !== 3 || options.some((item) => item.split(' / ').length !== 3)) {
-      throw new Error('Gemini 返回的标题不符合三个消息格式')
-    }
+    const options = (result.headline_options || []).map(String).map(validateGeneratedHeadline)
+    if (options.length !== 3) throw new Error('标题Skill必须返回恰好3组候选')
     return { headline_options: options, selected_headline: options[0], model: modelName }
   } finally {
     window.clearTimeout(timeout)
