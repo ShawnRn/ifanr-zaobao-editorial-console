@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { App, BrandWorkspace, IssueArticle, StoryImageEditor, TrashItem } from './App'
+import { App, BrandWorkspace, IssueArticle, sortCandidatesNewestFirst, StoryImageEditor, TrashItem } from './App'
 import { api } from './api'
 import type { Issue, Story } from './types'
 
@@ -39,6 +39,22 @@ afterEach(() => {
 })
 
 describe('App', () => {
+  it('sorts candidates from newest to oldest and leaves undated items last', () => {
+    const stories: Story[] = [
+      { ...staticStory, id: 'undated', published_at: undefined },
+      { ...staticStory, id: 'older', published_at: '2026-08-15 20:00' },
+      { ...staticStory, id: 'newer', published_at: '2026-08-16T09:00:00+08:00' },
+      { ...staticStory, id: 'event-date-fallback', published_at: undefined, event_date: '2026-08-16' },
+    ]
+
+    expect(sortCandidatesNewestFirst(stories).map((story) => story.id)).toEqual([
+      'newer',
+      'event-date-fallback',
+      'older',
+      'undated',
+    ])
+  })
+
   it('keeps generated headline history in a separate secondary view and restores a version', async () => {
     const onSave = vi.fn().mockResolvedValue(undefined)
     const issue = structuredClone(staticIssue)

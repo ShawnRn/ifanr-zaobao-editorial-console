@@ -188,6 +188,23 @@ function matchesStoryQuery(story: Story, query: string) {
   return terms.every((term) => searchable.includes(term))
 }
 
+function candidatePublishedTimestamp(story: Story) {
+  for (const value of [story.published_at, story.disclosed_at, story.event_date]) {
+    const normalized = String(value || '').trim().replace(' ', 'T')
+    if (!normalized) continue
+    const timestamp = Date.parse(normalized)
+    if (Number.isFinite(timestamp)) return timestamp
+  }
+  return Number.NEGATIVE_INFINITY
+}
+
+export function sortCandidatesNewestFirst(stories: Story[]) {
+  return stories
+    .map((story, index) => ({ story, index, timestamp: candidatePublishedTimestamp(story) }))
+    .sort((a, b) => b.timestamp - a.timestamp || a.index - b.index)
+    .map(({ story }) => story)
+}
+
 function pendingAiEditorRequest(story: Story) {
   const request = story.metadata._ai_editor_request
   return Boolean(
@@ -1816,11 +1833,10 @@ export function App() {
 
   const candidates = useMemo(() => {
     if (!issue) return []
-    return issue.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story))
+    return sortCandidatesNewestFirst(issue.stories.filter((story) => !story.selected && !pendingAiEditorRequest(story))
       .filter((story) => category === '全部' || story.category === category)
       .filter((story) => candidateStatus === 'all' ? story.status !== 'excluded' : candidateStatus === 'excluded' ? story.status === 'excluded' : story.status === candidateStatus)
-      .filter((story) => matchesStoryQuery(story, query))
-      .sort((a, b) => b.score - a.score)
+      .filter((story) => matchesStoryQuery(story, query)))
   }, [issue, query, category, candidateStatus])
 
   const trashStories = useMemo(() => {

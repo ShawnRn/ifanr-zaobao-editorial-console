@@ -5,48 +5,465 @@
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 33,
-  "selected_count": 27,
-  "review_count": 21,
-  "ready_count": 6,
-  "updated_at": "2026-08-15T09:16:34+00:00",
+  "revision": 153,
+  "selected_count": 25,
+  "review_count": 22,
+  "ready_count": 3,
+  "updated_at": "2026-08-16T09:21:12+00:00",
   "stories": [
     {
-      "id": "78e54371-ea18-5d3e-a4aa-6651c6e3cf2b",
+      "id": "e4f096eb-c187-54bc-a22a-95dcb3b2e1cd",
       "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "c2a09056cc96b4b5f122174641cee00301a6b6ec",
-      "title": "Google 将 Gemini 接入 Classroom，中小学生可在课程材料内使用 AI",
-      "body": "据《纽约时报》报道，Google 本周开始把 Gemini 接入 Classroom。此前 Classroom 只会为年满 18 岁的学生自动启用 Gemini；新的 Gemini 标签页覆盖获学校授权的各年龄段学生，可围绕教师提供的课程材料和作业提问。\n\n学生可以用它获得数学题和写作任务帮助，也可生成学习指南、测验、抽认卡和图片。该功能只会出现在已经允许学生使用 Gemini 或 NotebookLM 的学校，管理员可按全校或具体年级组开启、关闭访问权限。\n\nGoogle Classroom 在全球拥有逾 1.5 亿名师生用户。此次更新把生成式 AI 从独立聊天工具直接嵌入作业发布、提交和课程资料所在的学习管理系统，教师与管理员仍掌握学生账户的启用范围。",
+      "fingerprint": "fa5ec8da14f19584e37ee7bc9938385f256d1916",
+      "title": "Anthropic 第二季度营收超 115 亿美元，首次实现调整后运营盈利",
+      "body": "据彭博社报道，Anthropic 向潜在投资者披露，2026 年第二季度初步营收超过 115 亿美元，较 2025 年同期的 7.87 亿美元增长至少 14 倍，也高于今年第一季度的 47.3 亿美元。文件还显示，Anthropic 当季首次录得正的调整后运营利润。\n\n上述数字仍在审议，后续可能调整；Anthropic 拒绝置评。公司 5 月的年化营收运行率已超过 470 亿美元，彭博社称这一指标与 OpenAI 超过 400 亿美元的年化收入未必采用相同计算口径。\n\nAnthropic 正在为潜在的大型 IPO 与投资者会面。彭博社此前报道，公司已秘密提交上市申请，并与摩根士丹利、高盛和摩根大通合作推进 IPO；若今年秋季完成上市，时间将早于 OpenAI 和 DeepSeek 正在准备的上市计划。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+      "source_name": "bloomberg.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/09d43dd06f39-fba0f2e2df4ffe3471ee.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter；https://finance.yahoo.com/technology/ai/articles/anthropic-revenue-surges-over-11-210857853.html 📮Folo · 2026 年 8 月 15 日 05:08",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "title": "",
+          "publisher": "bloomberg.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-revenue-surges-over-11-210857853.html",
+          "title": "",
+          "publisher": "finance.yahoo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据彭博社报道，Anthropic 向潜在投资者披露，2026 年第二季度初步营收超过 115 亿美元，较 2025 年同期的 7.87 亿美元增长至少 14 倍，也高于今年第一季度的 47.3 亿美元。文件还显示，Anthropic 当季首次录得正的调整后运营利润。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "上述数字仍在审议，后续可能调整；Anthropic 拒绝置评。公司 5 月的年化营收运行率已超过 470 亿美元，彭博社称这一指标与 OpenAI 超过 400 亿美元的年化收入未必采用相同计算口径。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Anthropic 正在为潜在的大型 IPO 与投资者会面。彭博社此前报道，公司已秘密提交上市申请，并与摩根士丹利、高盛和摩根大通合作推进 IPO；若今年秋季完成上市，时间将早于 OpenAI 和 DeepSeek 正在准备的上市计划。",
+          "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "73512664-e863-53c8-a99e-40a10d79a79e",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "180b32ed1b7332592e28d400aa67005b9927b2fa",
+      "title": "高盛开始为英伟达 5000 亿美元 AI 基建融资计划寻找投资人",
+      "body": "据路透社报道，高盛正在接触潜在投资人，希望参与英伟达规模超过 5000 亿美元的 AI 基础设施融资计划。英伟达 8 月 10 日宣布与 Apollo、贝莱德、黑石、Brookfield、高盛和 KKR 合作，由六家机构分别建立融资平台，为购买 GPU、建设数据中心的客户引入第三方长期资本。\n\n这些平台并非由英伟达一次性投入 5000 亿美元，而是计划逐步汇集保险公司、养老金、主权财富基金等机构资金，并以 GPU 和算力基础设施等资产支持融资。英伟达希望借此降低客户部署算力的资金门槛，高盛则凭借与英伟达的长期关系获得了六个平台中的一个席位。\n\n路透社称，高盛已开始讨论具体参与方式；相关结构把 AI 算力从企业资本开支进一步带入信贷市场，也让芯片折旧、设备残值和算力需求成为投资人需要评估的核心变量。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+      "source_name": "reuters.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/d37ef3dd4064-bf598da838a9e0710c21.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/；https://www.axios.com/2026/08/10/nvidia-financing-ai-goldman-sachs-blackrock 📮Folo · 2026 年 8 月 15 日 03:22",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "title": "",
+          "publisher": "reuters.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.axios.com/2026/08/10/nvidia-financing-ai-goldman-sachs-blackrock",
+          "title": "",
+          "publisher": "axios.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据路透社报道，高盛正在接触潜在投资人，希望参与英伟达规模超过 5000 亿美元的 AI 基础设施融资计划。英伟达 8 月 10 日宣布与 Apollo、贝莱德、黑石、Brookfield、高盛和 KKR 合作，由六家机构分别建立融资平台，为购买 GPU、建设数据中心的客户引入第三方长期资本。",
+          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这些平台并非由英伟达一次性投入 5000 亿美元，而是计划逐步汇集保险公司、养老金、主权财富基金等机构资金，并以 GPU 和算力基础设施等资产支持融资。英伟达希望借此降低客户部署算力的资金门槛，高盛则凭借与英伟达的长期关系获得了六个平台中的一个席位。",
+          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "路透社称，高盛已开始讨论具体参与方式；相关结构把 AI 算力从企业资本开支进一步带入信贷市场，也让芯片折旧、设备残值和算力需求成为投资人需要评估的核心变量。",
+          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "1ccec2ef-dbd8-5311-a866-de2a12b9e7fe",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "bbbca720ce356614f2d80ce8feca642a1b7c79a8",
+      "title": "于东来：胖东来首批刑释员工无人离职，将再招 20 人",
+      "body": "8 月 15 日凌晨，胖东来创始人于东来在社交平台发文称，首批刑释人员进入岗位后「没有一个离开」，目前都在稳定工作和生活；他同时表示，公司准备再招聘 20 名刑释人员。于东来暂未说明新一轮招聘的岗位、门店和时间安排。\n\n胖东来在 2025 年首次公开定向招聘刑释人员。最初计划录用 20 人，面试后实际录用了 30 人，并为入职者设置 6 个月双向选择期。于东来当时称，希望给已经承担法律责任的人重新融入社会的机会。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
       "position": 2,
       "score": 0,
-      "source_url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
-      "source_name": "nytimes.com",
+      "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+      "source_name": "weibo.com",
       "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_quality": "unknown",
+      "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-15 02:54",
-      "published_at": "2026-08-15 02:54",
+      "disclosed_at": "2026-08-15 13:55",
+      "published_at": "2026-08-15 13:55",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
+      "image_url": "data/images/b58fbc32b864-d5e131420e29c4fbc80e.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://weibo.com/1642634100/Rdv2QF7Vo；https://xinwen.bjd.com.cn/content/s68d402c2e4b0221b9bed552f.html；https://news.cctv.com/2025/08/08/ARTIWzzrJsChXzqHB2V6UbGR250808.shtml 📮Folo · 2026 年 8 月 15 日 13:55",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "title": "",
+          "publisher": "weibo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://xinwen.bjd.com.cn/content/s68d402c2e4b0221b9bed552f.html",
+          "title": "",
+          "publisher": "xinwen.bjd.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://news.cctv.com/2025/08/08/ARTIWzzrJsChXzqHB2V6UbGR250808.shtml",
+          "title": "",
+          "publisher": "news.cctv.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "8 月 15 日凌晨，胖东来创始人于东来在社交平台发文称，首批刑释人员进入岗位后「没有一个离开」，目前都在稳定工作和生活；他同时表示，公司准备再招聘 20 名刑释人员。于东来暂未说明新一轮招聘的岗位、门店和时间安排。",
+          "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "胖东来在 2025 年首次公开定向招聘刑释人员。最初计划录用 20 人，面试后实际录用了 30 人，并为入职者设置 6 个月双向选择期。于东来当时称，希望给已经承担法律责任的人重新融入社会的机会。",
+          "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "8 月 15 日凌晨，胖东来创始人于东来在社交平台发文称，首批刑释人员进入岗位后「没有一个离开」，目前都在稳定工作和生活；他同时表示，公司准备再招聘 20 名刑释人员。",
+          "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "53a23007-6330-5776-84f5-72f28369c424",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "218cd89aa4e9c8331edca7b524782a248bbd147d",
+      "title": "小米手机 15 周年，卢伟冰称未来全面拥抱 AI",
+      "body": "8 月 16 日是小米手机发布 15 周年。小米集团合伙人、总裁兼手机部总裁卢伟冰发文回顾称，小米手机从最初的「为发烧而生」走向全球市场，下一阶段将全面拥抱 AI。\n\n第一代小米手机于 2011 年 8 月 16 日发布。市场研究机构 Omdia 的数据称，小米 2025 年智能手机出货量为 1.654 亿部，市场份额约 13%，连续 5 年位列全球前三。小米接下来会如何把 AI 战略落到手机系统、端侧模型和跨设备体验，仍要看具体产品更新。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/990/250.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 10:36",
+      "published_at": "2026-08-16 10:36",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/a8f635ea843b195dcde0.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/250.htm 📮Folo · 2026-08-16 10:36",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/990/250.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 16 日消息，小米集团合伙人 / 总裁、手机部总裁、小米品牌总经理卢伟冰刚刚发文庆祝小米手机 15 周岁生日。",
+          "source_url": "https://www.ithome.com/0/990/250.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "从“为发烧而生”到“让全球每个人都能享受科技带来的美好生活”； 从应用创新，到目标成为全球硬核科技领导者； 从中国到全球； 未来全面拥抱 AI。",
+          "source_url": "https://www.ithome.com/0/990/250.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "0706acd6-9eb1-569a-9e42-7ed69f2d8925",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "aa3165a0b7d4d673a0f8fdf951480829949706a5",
+      "title": "REDMI K100 Pro 首销约为上代 65%，与官方口径不同",
+      "body": "数码博主「RD 观测」发布的第三方统计称，REDMI K100 Pro 系列首销期销量约为 K90 系列同期的 65%。其中，K100 Pro 约为 K90 的 50%，K100 Pro Max 约为 K90 Pro Max 的 85%。\n\n小米此前公布的口径则是，K100 Pro Max 开售当天销量达到上代同期的 150%。两组数字统计对象和截止时间不同：第三方数据计算「发布当晚加次日」的整个系列，小米数据只针对 Pro Max 的开售当天，因此不能直接互相否定。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/990/263.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 11:52",
+      "published_at": "2026-08-16 11:52",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
       "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html 📮Folo · 2026 年 8 月 15 日 02:54",
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/263.htm 📮Folo · 2026-08-16 11:52",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
+          "url": "https://www.ithome.com/0/990/263.htm",
           "title": "",
-          "publisher": "nytimes.com",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 16 日消息，长期关注国内手机市场份额的数码博主 @RD观测 今日发文，分享了 REDMI K100 Pro 系列手机的首销情况。",
+          "source_url": "https://www.ithome.com/0/990/263.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "REDMI K100 系列（K100 Pro / Pro Max）首销日（首销当晚 + 次日）SO 约为 REDMI K90 系列…",
+          "source_url": "https://www.ithome.com/0/990/263.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "d511f709-fa8d-53d1-a825-556bb699c73e",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "fe40a2c0d01bcec89f8a6383308f1926bb4694cf",
+      "title": "2056 台机器人将同场比跳远、举重和拧螺丝",
+      "body": "第二届世界人形机器人运动会将于 8 月 22 日至 26 日在北京国家速滑馆举行。北京市政府新闻发布会公布，本届赛事吸引来自六大洲、16 个国家的 666 支队伍，共有 2056 台机器人参赛；队伍数量较首届增长 138%，机器人数量约为首届的 4 倍。\n\n赛项由首届的 26 项增加至 51 项，比赛场次从 487 场增至 1301 场。竞技赛新增跳远、举重、拔河和乒乓球，百米、足球和舞蹈项目也会继续举行；机器人足球将加入带球跑动和大力抽射，舞蹈则首次设置由两台机器人完成的华尔兹与桑巴。\n\n工业、酒店、家庭和物流等场景赛新增灵巧手项目，机器人要完成夹豆子、拧螺丝等 8 项「微操」。与上届单机完成任务不同，本届场景赛会让两台机器人同场比拼效率和可靠性。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+      "source_name": "beijing.gov.cn",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 09:04",
+      "published_at": "2026-08-16 09:04",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/53d51cafb181-34067a39700e6606fd14.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html；https://www.ithome.com/0/990/230.htm 📮Folo · 2026 年 8 月 16 日 09:04",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "title": "",
+          "publisher": "beijing.gov.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/990/230.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "第二届世界人形机器人运动会将于 8 月 22 日至 26 日在北京国家速滑馆举行。北京市政府新闻发布会公布，本届赛事吸引来自六大洲、16 个国家的 666 支队伍，共有 2056 台机器人参赛；队伍数量较首届增长 138%，机器人数量约为首届的 4 倍。",
+          "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "赛项由首届的 26 项增加至 51 项，比赛场次从 487 场增至 1301 场。竞技赛新增跳远、举重、拔河和乒乓球，百米、足球和舞蹈项目也会继续举行；机器人足球将加入带球跑动和大力抽射，舞蹈则首次设置由两台机器人完成的华尔兹与桑巴。",
+          "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "工业、酒店、家庭和物流等场景赛新增灵巧手项目，机器人要完成夹豆子、拧螺丝等 8 项「微操」。与上届单机完成任务不同，本届场景赛会让两台机器人同场比拼效率和可靠性。",
+          "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "da602405-96d3-5be2-aebd-3cbb597ba9fa",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "d2752c3f09e665f14a0badc96476a971212e2d7b",
+      "title": "Booking.com CEO 也受够了旅行折腾，想让 AI 自动改行程",
+      "body": "Booking.com CEO Glenn Fogel 接受《华尔街日报》采访时说，航班延误、长时间困在停机坪以及客服等待，让他有时也会怀疑一趟旅行是否值得。Booking.com 及旗下 Priceline、Kayak 和 OpenTable 正把 AI 视为减少这些摩擦的工具。\n\nFogel 设想，未来的旅行助手不仅能回答问题，还能根据天气主动判断游船和博物馆行程是否需要对调，先征求用户同意，再自动完成改签。这个目标目前仍是产品方向，而不是已经普遍上线的完整能力。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
+      "source_name": "wsj.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-15 02:17",
+      "published_at": "2026-08-15 02:17",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/095f4675bd266f8031ca.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 原文链接：https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology 📮Folo · 2026 年 8 月 15 日 02:17",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
+          "title": "",
+          "publisher": "wsj.com",
           "source_type": "draft_source",
           "authority": "strong",
           "is_paywalled": true,
@@ -55,74 +472,83 @@
       ],
       "claims": [
         {
-          "text": "features for K-12 schools that have allowed student access to Gemini.",
-          "source_url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
+          "text": "Booking.com CEO Glenn Fogel 接受《华尔街日报》采访时说，航班延误、长时间困在停机坪以及客服等待，让他有时也会怀疑一趟旅行是否值得。Booking.com 及旗下 Priceline、Kayak 和 OpenTable 正把 AI 视为减少这些摩擦的工具。",
+          "source_url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Until this week, Google automatically enabled…",
-          "source_url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据《纽约时报》报道，Google 本周开始把 Gemini 接入 Classroom。此前 Classroom 只会为年满 18 岁的学生自动启用 Gemini；新的 Gemini 标签页覆盖获学校授权的各年龄段学生，可围绕教师提供的课程材料和作业提问。",
-          "source_url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "学生可以用它获得数学题和写作任务帮助，也可生成学习指南、测验、抽认卡和图片。该功能只会出现在已经允许学生使用 Gemini 或 NotebookLM 的学校，管理员可按全校或具体年级组开启、关闭访问权限。",
-          "source_url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Google Classroom 在全球拥有逾 1.5 亿名师生用户。此次更新把生成式 AI 从独立聊天工具直接嵌入作业发布、提交和课程资料所在的学习管理系统，教师与管理员仍掌握学生账户的启用范围。",
-          "source_url": "https://www.nytimes.com/2026/08/14/business/google-gemini-ai-schools.html",
+          "text": "Fogel 设想，未来的旅行助手不仅能回答问题，还能根据天气主动判断游船和博物馆行程是否需要对调，先征求用户同意，再自动完成改签。这个目标目前仍是产品方向，而不是已经普遍上线的完整能力。",
+          "source_url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:37+00:00"
     },
     {
-      "id": "1c0d2c1b-cd8e-5b92-a1ed-2381be5bf1c1",
+      "id": "592d771e-b4e6-5de1-bd8f-f44e143f3bb8",
       "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "570d896ae698317db077c4a53f9203976719225e",
-      "title": "Waymo 获准在萨克拉门托和圣迭戈提供无人出租车服务",
-      "body": "据 Engadget 报道，Waymo 已获得加州公用事业委员会批准，可首次在萨克拉门托和圣迭戈提供自动驾驶叫车服务，并继续扩大旧金山湾区和洛杉矶的覆盖范围。\n\n这项许可覆盖加州南北部共 18 个县，但 Waymo 表示会依照安全框架逐步扩张，不会立即在所有地区投入车辆。公司去年 11 月宣布进入圣迭戈，今年 2 月宣布进入萨克拉门托，7 月已开始为圣迭戈的无安全员测试做准备。\n\n许可范围包括现有的捷豹 I-Pace 车队，以及与极氪合作开发的 Ojai 定制小型货车。Waymo 今年 1 月提交扩区安全计划后，监管机构曾要求补充反馈，如今相关程序已经完成。",
+      "fingerprint": "d7546d8b230c8e7a2f08fa6b392528614b940a8a",
+      "title": "千问模型半年下载量破 30 亿，Hugging Face 上超过 Google 与 Meta",
+      "body": "阿里巴巴称，千问模型家族过去 6 个月在各个平台的累计下载量已超过 30 亿次。Hugging Face 的最新统计显示，千问在该平台同期下载约 20.45 亿次，高于 Google 的约 4.18 亿次和 Meta 的约 2.27 亿次。\n\n千问目前已公开超过 460 个模型，并衍生出大量社区微调版本。Hugging Face 的开源模型报告也把千问列为衍生模型数量领先的家族。不过，下载次数包含重复下载，也不覆盖闭源 API 和私有部署，因此更适合衡量开源生态活跃度，不能直接等同于真实用户数或模型质量排名。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 3,
+      "position": 7,
       "score": 0,
-      "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
-      "source_name": "engadget.com",
+      "source_url": "https://www.ithome.com/0/990/187.htm",
+      "source_name": "ithome.com",
       "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
+      "source_quality": "secondary",
+      "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-15 06:50",
-      "published_at": "2026-08-15 06:50",
+      "disclosed_at": "2026-08-15 23:10",
+      "published_at": "2026-08-15 23:10",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "data/images/4110a09a8ad3-d98187511b2930e7a6e3.jpg",
+      "image_url": "data/images/44a29466b325-3270c984a9e9b3407784.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego 📮Folo · 2026 年 8 月 15 日 06:50",
+        "source_line": "🔗 来源：https://www.ithome.com/0/990/187.htm；https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026；https://huggingface.co/Qwen/models?p=0；https://weibo.com/1642634100/RdswW18g3 📮Folo · 2026 年 8 月 15 日 23:10",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
+          "url": "https://www.ithome.com/0/990/187.htm",
           "title": "",
-          "publisher": "engadget.com",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026",
+          "title": "",
+          "publisher": "huggingface.co",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://huggingface.co/Qwen/models?p=0",
+          "title": "",
+          "publisher": "huggingface.co",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://weibo.com/1642634100/RdswW18g3",
+          "title": "",
+          "publisher": "weibo.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -131,89 +557,86 @@
       ],
       "claims": [
         {
-          "text": "EVs and Transportation",
-          "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
+          "text": "IT之家 8 月 15 日消息，据彭博社今日报道，阿里旗下开源 AI 模型千问家族在过去六个月内全球累计下载量突破 30 亿次，超越 Meta、Alphabet 等一众竞争对手，成为全球下载量第一的 AI 模型。",
+          "source_url": "https://www.ithome.com/0/990/187.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "根据开源 AI 社区 Hugging Face 于当地时间 8 月…",
+          "source_url": "https://www.ithome.com/0/990/187.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "阿里巴巴称，千问模型家族过去 6 个月在各个平台的累计下载量已超过 30 亿次。Hugging Face 的最新统计显示，千问在该平台同期下载约 20.45 亿次，高于 Google 的约 4.18 亿次和 Meta 的约 2.27 亿次。",
+          "source_url": "https://www.ithome.com/0/990/187.htm",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Waymo receives permission to offer rides in Sacramento and San Diego",
-          "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "The company will also be able to expand its fleet across more of the San Francisco Bay Area and Los Angeles.",
-          "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 Engadget 报道，Waymo 已获得加州公用事业委员会批准，可首次在萨克拉门托和圣迭戈提供自动驾驶叫车服务，并继续扩大旧金山湾区和洛杉矶的覆盖范围。",
-          "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这项许可覆盖加州南北部共 18 个县，但 Waymo 表示会依照安全框架逐步扩张，不会立即在所有地区投入车辆。公司去年 11 月宣布进入圣迭戈，今年 2 月宣布进入萨克拉门托，7 月已开始为圣迭戈的无安全员测试做准备。",
-          "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "许可范围包括现有的捷豹 I-Pace 车队，以及与极氪合作开发的 Ojai 定制小型货车。Waymo 今年 1 月提交扩区安全计划后，监管机构曾要求补充反馈，如今相关程序已经完成。",
-          "source_url": "https://www.engadget.com/2237530/waymo-receives-permission-to-offer-rides-in-sacramento-and-san-diego",
+          "text": "千问目前已公开超过 460 个模型，并衍生出大量社区微调版本。Hugging Face 的开源模型报告也把千问列为衍生模型数量领先的家族。不过，下载次数包含重复下载，也不覆盖闭源 API 和私有部署，因此更适合衡量开源生态活跃度，不能直接等同于真实用户数或模型质量排名。",
+          "source_url": "https://www.ithome.com/0/990/187.htm",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:37+00:00"
     },
     {
-      "id": "5758dfdf-f239-5fc0-97b2-8d4222aa14c6",
+      "id": "b10b13e7-d654-5e02-9584-47933711ebdf",
       "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "2abd063644152f62f77c5c395094f3538c66e8eb",
-      "title": "Anthropic 披露内部模型 Model 2，暂无对外发布计划",
-      "body": "Anthropic 在 8 月风险报告中首次详细披露未发布的内部模型 Model 2。公司称，它在许多内部任务上相比 Claude Mythos 5 有明显提升，但提升幅度不及 Claude Opus 4.6 到 Mythos Preview 的跨度。Anthropic 暂无将 Model 2 对外发布的计划，也尚未跑完通常的全套发布前评估。\n\nModel 2 和 Mythos 5 已在 Anthropic 内部大量用于编程、生成数据和 Agent 任务，也被用于研究、工程及持续运行的 Agent 部署。报告称，Model 2 在内部部署审查期间没有出现超出 Mythos 5 已知范围的更严重对齐问题；它首先在带有更强危险行为拦截的内部界面上分阶段试用，再扩大到不受限的内部部署。\n\nAnthropic 对 Model 2 与 Mythos 5 在高风险场景中的失配灾难风险评级为「低」。报告同时承认，公司对 Model 2 的能力判断信心低于已完成更广泛评估的模型。",
+      "fingerprint": "4d19f59fca6e66f74acf4ff09e04d705e8b73e18",
+      "title": "清华与伯克利提出 ODEWorld，用连续时间轨迹指导机器人行动",
+      "body": "据 MIT 科技评论中文网报道，清华大学智能产业研究院与加州大学伯克利分校团队提出连续世界模型 ODEWorld。它不再只根据当前画面预测下一帧，而是用物理时间流 PT-Flow 学习状态随真实时间变化的方向和速度，让模型可以推演两个观测帧之间没有被拍下的中间状态。\n\nODEWorld 先用 DINOv2 提取图像特征，再把相对稳定的背景和初始状态与动态信息解耦。模型通过雅可比向量积把图像变化映射到压缩空间，并由常微分方程求解器累积变化，因此既能预测任意时间点，也能反向推演过去状态。在 64 帧长程预测中，它在单张 A100 GPU 上的延迟为 0.072 秒，V-JEPA 2 和 LDP 分别为 0.619 秒和 3.953 秒。\n\n研究团队把连续轨迹转成一组隐空间子目标，作为机器人执行长任务时的「中途路标」。在 LIBERO-LONG 的 10 项任务中，连续子目标方案平均成功率为 83.6%；部署到真实双臂机器人后，夹虾入锅、鼠标收纳、插笔和双臂整理物体 4 项任务的平均成功率从 55% 提高到 80%。团队表示，当前模型尚未处理接触、碰撞、摩擦和力等更复杂的物理规律。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 3,
+      "position": 8,
       "score": 0,
-      "source_url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf",
-      "source_name": "www-cdn.anthropic.com",
+      "source_url": "https://www.mittrchina.com/news/detail/16790",
+      "source_name": "mittrchina.com",
       "source_type": "draft_source",
       "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-15 09:39",
-      "published_at": "2026-08-15 09:39",
+      "disclosed_at": "2026-08-15 19:07",
+      "published_at": "2026-08-15 19:07",
       "cross_day_status": "current",
       "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "data/images/4de63765122b-7962804df0b4138763d5.jpg",
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/3384c7545a22-181c9e2be44aff70e6d2.gif",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf；https://t.me/OneMillion_AI/3908 📮Folo · 2026 年 8 月 15 日 09:39",
+        "source_line": "🔗 来源：https://www.mittrchina.com/news/detail/16790；https://dstate.github.io/odeworld_website/；https://arxiv.org/abs/2607.27924 📮Folo · 2026 年 8 月 15 日 19:07",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf",
+          "url": "https://www.mittrchina.com/news/detail/16790",
           "title": "",
-          "publisher": "www-cdn.anthropic.com",
+          "publisher": "mittrchina.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         },
         {
-          "url": "https://t.me/OneMillion_AI/3908",
+          "url": "https://dstate.github.io/odeworld_website/",
           "title": "",
-          "publisher": "t.me",
+          "publisher": "dstate.github.io",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://arxiv.org/abs/2607.27924",
+          "title": "",
+          "publisher": "arxiv.org",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -222,801 +645,329 @@
       ],
       "claims": [
         {
-          "text": "Anthropic自曝Model 2：强过Mythos 5，暂不发布 Anthropic 最新风险报告首次披露内部模型「Model 2」。它整体比 Mythos 5 更强，在不少内部任务上有明显提升，现在已经大量用于写代码、生成数据和跑 Agent。不过 Anthropic…",
-          "source_url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf",
+          "text": "在具身智能的演进中，世界模型被寄予厚望：它不仅要生成未来画面，更要帮助机器人理解世界如何连续变化。然而，当前主流的视频生成与部分机器人世界模型，它们的底层架构大多仍受制于一个固有的思维定式：离散的下一步预测（Discrete Next-step Prediction）。",
+          "source_url": "https://www.mittrchina.com/news/detail/16790",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Anthropic 在 8 月风险报告中首次详细披露未发布的内部模型 Model 2。公司称，它在许多内部任务上相比 Claude Mythos 5 有明显提升，但提升幅度不及 Claude Opus 4.6 到 Mythos Preview 的跨度。Anthropic 暂无将 Model 2 对外发布的计划，也尚未跑完通常的全套发布前评估。",
-          "source_url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf",
+          "text": "据 MIT 科技评论中文网报道，清华大学智能产业研究院与加州大学伯克利分校团队提出连续世界模型 ODEWorld。它不再只根据当前画面预测下一帧，而是用物理时间流 PT-Flow 学习状态随真实时间变化的方向和速度，让模型可以推演两个观测帧之间没有被拍下的中间状态。",
+          "source_url": "https://www.mittrchina.com/news/detail/16790",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Model 2 和 Mythos 5 已在 Anthropic 内部大量用于编程、生成数据和 Agent 任务，也被用于研究、工程及持续运行的 Agent 部署。报告称，Model 2 在内部部署审查期间没有出现超出 Mythos 5 已知范围的更严重对齐问题；它首先在带有更强危险行为拦截的内部界面上分阶段试用，再扩大到不受限的内部部署。",
-          "source_url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf",
+          "text": "ODEWorld 先用 DINOv2 提取图像特征，再把相对稳定的背景和初始状态与动态信息解耦。模型通过雅可比向量积把图像变化映射到压缩空间，并由常微分方程求解器累积变化，因此既能预测任意时间点，也能反向推演过去状态。在 64 帧长程预测中，它在单张 A100 GPU 上的延迟为 0.072 秒，V-JEPA 2 和 LDP 分别为 0.619 秒和 3.953 秒。",
+          "source_url": "https://www.mittrchina.com/news/detail/16790",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Anthropic 对 Model 2 与 Mythos 5 在高风险场景中的失配灾难风险评级为「低」。报告同时承认，公司对 Model 2 的能力判断信心低于已完成更广泛评估的模型。",
-          "source_url": "https://www-cdn.anthropic.com/f61d49fa5596956a5dec75fea0e973bf6a6a8378/Redacted%20Risk%20Report%20August%202026%20.pdf",
+          "text": "研究团队把连续轨迹转成一组隐空间子目标，作为机器人执行长任务时的「中途路标」。在 LIBERO-LONG 的 10 项任务中，连续子目标方案平均成功率为 83.6%；部署到真实双臂机器人后，夹虾入锅、鼠标收纳、插笔和双臂整理物体 4 项任务的平均成功率从 55% 提高到 80%。团队表示，当前模型尚未处理接触、碰撞、摩擦和力等更复杂的物理规律。",
+          "source_url": "https://www.mittrchina.com/news/detail/16790",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:34+00:00"
+      "updated_at": "2026-08-16T09:20:37+00:00"
     },
     {
-      "id": "527166be-2b5c-530d-a494-6e4365ea879b",
+      "id": "b3536c8b-37a4-55d6-bf19-e3ea2679196f",
       "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "dbf89cd3ccdd60ae27c5d3cc3a03560874dfa395",
-      "title": "宇树 G1 在海外成为「机器人网红」，多数公开表演仍靠遥控",
-      "body": "据《连线》报道，身高约 1.2 米的宇树 G1 正被活动公司包装成线下与社交媒体上的机器人角色。波兰 MERA Robotics 已运营约 20 台人形机器人，并让其中多台共享名为 Edward 的人物设定；其余机器人则在中东和东南亚扮演不同角色。\n\n这些机器人可借助大模型自由对话，但公开活动中的行走和舞蹈大多仍由工作人员遥控，以免自主运动失误伤及围观者。G1 出厂时内置约 20 种手势和 15 段舞蹈，新动作需要额外编程；有运营者还为它加入了足球球迷的「Viking Row」手势。\n\n报道记录的一场世界杯球迷节活动中，数百人围着机器人拍摄和欢呼，而遥控者混在人群中操作。G1 的吸引力目前更多来自可移动、可对话的角色表演，距离能够独立完成稳定工作仍有明显差距。",
+      "fingerprint": "4dba6e7ae71f216e47e04dcf805327d839574084",
+      "title": "💡 王祖贤：新的世界必须有新的东西，但应该由人使用 AI",
+      "body": "8 月 15 日，在网易游戏《天下》18 周年玩家生态大会的公开发言与圆桌对话中，王祖贤现身交流，首次公开回应为何接受 AI 数字影像短片《倩影》的形象授权，并分享了她对经典作品、技术边界与人机关系的看法。\n\n面对外界关于 AI 生成形象与真人演绎差异的争议与关注，短片《倩影》采用「王祖贤授权 AI 形象出演、配音演员苏柏丽配音」的方式制作，展现了黑发至白发跨越时光的数字形象。王祖贤表示，从黑发到白发的变化让她感受到岁月感，但这次合作不仅是让过去的银幕形象重现，更是让留在观众记忆里的经典作品借助新媒介与当下重新连接。\n\n谈及为何愿意授权与人机边界，王祖贤指出，经典始终在那里，AI 带来的是另一种观看和表达的可能，希望外界给新技术更多探索空间：\n\n> 其实我没有想太多。我觉得新的世界必须要有新的东西，旧的世界也很好，它也会成为新世界的根基。但是我们是用 AI，不是被 AI 用。\n\n她强调，AI 技术可以让观众多一种选择，但无论尝试何种呈现形式，希望借此表达什么最终仍然应该来自人的主动决定。同台制作人也回应称，无论出现怎样的新艺术形式，使用一个人的形象都必须以获得本人同意为前提，故事与情感内核依然取决于人的判断。",
       "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 9,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/c411b143b6b9ff3a288a.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w 🧭飞书群 · 2026 年 8 月 16 日 16:03",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "王祖贤 8 月 15 日在游戏 IP《天下》18 周年玩家生态大会上首次回应 AI 形象授权。她与杨迪、《天下》IP 制作人星一围绕 AI 数字影像短片《倩影》交流；这部短片采用「王祖贤授权 AI 形象出演、苏柏丽配音」的方式制作，数字形象从黑发跨越到白发。",
+          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "王祖贤表示，自己年轻时也喜欢玩游戏，希望借这次合作「跟现在的年轻人在游戏世界里相会」。重新观看从黑发到白发的数字形象时，她感到「人生仿如隔世」，并将自己概括为「喜新念旧」。",
+          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "> 新的世界必须要有新的东西，旧的世界也很好，它也会成为新世界的根基。",
+          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "8 月 15 日，在网易游戏《天下》18 周年玩家生态大会的公开发言与圆桌对话中，王祖贤现身交流，首次公开回应为何接受 AI 数字影像短片《倩影》的形象授权，并分享了她对经典作品、技术边界与人机关系的看法。",
+          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "面对外界关于 AI 生成形象与真人演绎差异的争议与关注，短片《倩影》采用「王祖贤授权 AI 形象出演、配音演员苏柏丽配音」的方式制作，展现了黑发至白发跨越时光的数字形象。王祖贤表示，从黑发到白发的变化让她感受到岁月感，但这次合作不仅是让过去的银幕形象重现，更是让留在观众记忆里的经典作品借助新媒介与当下重新连接。",
+          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "谈及为何愿意授权与人机边界，王祖贤指出，经典始终在那里，AI 带来的是另一种观看和表达的可能，希望外界给新技术更多探索空间：",
+          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "d8fea53c-2da8-5825-be4a-595d1b42f2bc",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "e53e942933c2e89505d24a557240122077957ac0",
+      "title": "《牛来》从 1.1 万元涨到 330 万元，排片两天翻了 1900 倍",
+      "body": "国产动画电影《牛来》8 月 5 日上映后，前 10 天累计票房仅 1.1 万元，8 月 14 日前的全国日排片一度降至 6 场。影片随后因粗糙的 3D 建模、卡顿动作和精致水墨海报之间的反差在社交平台走红，大量观众以猎奇和玩梗方式购票。\n\n灯塔专业版数据显示，8 月 16 日 11 时 45 分，影片当日票房已超过 225 万元，累计综合票房含预售超过 330 万元；全国排片由最低 6 场增加至 11959 场，增幅超过 1900 倍。猫眼当时给出的预测总票房已升至 1837 万元。\n\n《牛来》由导演信雨萌与母亲用 5 年完成，片尾曲也由其母亲演唱。出品公司大连璟园文化影视传媒有限公司原名大连璟园装饰工程有限公司，2021 年更名后转向影视业务。\n\n影片走红后，制作团队又发布声明，称多个社交平台出现冒充官方团队的账号，部分账号未经授权发布信息甚至开展商业活动。团队列出的唯一官方账号均使用「牛来电影官方团队」名称，并表示将追究冒用者的法律责任。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 14:24",
+      "published_at": "2026-08-16 14:24",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/ec2129547237a882c589.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA；https://mp.weixin.qq.com/s/T0bH523JRe1gsNueOFmDDQ 🧭飞书群 · 2026-08-16 14:24",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/T0bH523JRe1gsNueOFmDDQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "国产动画电影《牛来》8 月 5 日上映后，前 10 天累计票房仅 1.1 万元，8 月 14 日前的全国日排片一度降至 6 场。影片随后因粗糙的 3D 建模、卡顿动作和精致水墨海报之间的反差在社交平台走红，大量观众以猎奇和玩梗方式购票。",
+          "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "灯塔专业版数据显示，8 月 16 日 11 时 45 分，影片当日票房已超过 225 万元，累计综合票房含预售超过 330 万元；全国排片由最低 6 场增加至 11959 场，增幅超过 1900 倍。猫眼当时给出的预测总票房已升至 1837 万元。",
+          "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "《牛来》由导演信雨萌与母亲用 5 年完成，片尾曲也由其母亲演唱。出品公司大连璟园文化影视传媒有限公司原名大连璟园装饰工程有限公司，2021 年更名后转向影视业务。",
+          "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:56+00:00"
+    },
+    {
+      "id": "7ccbe3eb-eeee-5854-b764-52bb8724ca43",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "dd8c0351bc4ae08172b09113627a54646ee9255b",
+      "title": "《蜘蛛侠：崭新之日》延长放映至 9 月 28 日",
+      "body": "「蜘蛛侠系列电影」官方微博宣布，漫威与索尼联合出品的《蜘蛛侠:崭新之日》将延长放映至 9 月 28 日。官方同时称，影片目前观影人次已超过 3400 万。\n\n影片由德斯汀·丹尼尔·克雷顿执导，汤姆·赫兰德、赞达亚、萨迪·辛克、乔·博恩瑟和马克·鲁法洛等出演。延期后，影片将跨过暑期档继续留在院线，具体排片由各地影院安排。",
+      "category": "好看的",
       "status": "needs_review",
       "selected": true,
       "position": 4,
       "score": 0,
-      "source_url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
-      "source_name": "wired.com",
+      "source_url": "https://www.ithome.com/0/990/006.htm",
+      "source_name": "ithome.com",
       "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_quality": "secondary",
+      "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-15 04:59",
-      "published_at": "2026-08-15 04:59",
+      "disclosed_at": "2026-08-15 10:08",
+      "published_at": "2026-08-15 10:08",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/b96c57a71856-53ca8e7343c839f28c7f.webp",
+      "changed_since_review": false,
+      "image_url": "data/images/34a6fce4edef-61c07a6db3ab7d966419.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china 📮Folo · 2026 年 8 月 15 日 04:59",
+        "source_line": "🔗 来源：https://www.ithome.com/0/990/006.htm；https://weibo.com/2724964653/Rdktkkwgk；https://www.sonypictures.com/movies/spidermanbrandnewday 📮Folo · 2026 年 8 月 15 日 10:08",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
+          "url": "https://www.ithome.com/0/990/006.htm",
           "title": "",
-          "publisher": "wired.com",
+          "publisher": "ithome.com",
           "source_type": "draft_source",
-          "authority": "strong",
+          "authority": "secondary",
           "is_paywalled": false,
-          "is_original": true
+          "is_original": false
+        },
+        {
+          "url": "https://weibo.com/2724964653/Rdktkkwgk",
+          "title": "",
+          "publisher": "weibo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.sonypictures.com/movies/spidermanbrandnewday",
+          "title": "",
+          "publisher": "sonypictures.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
         }
       ],
       "claims": [
         {
-          "text": "The Unitree G1 has found online fame as a relatively affordable robot that can charm a crowd.",
-          "source_url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
+          "text": "「蜘蛛侠系列电影」官方微博宣布，漫威与索尼联合出品的《蜘蛛侠:崭新之日》将延长放映至 9 月 28 日。官方同时称，影片目前观影人次已超过 3400 万。",
+          "source_url": "https://www.ithome.com/0/990/006.htm",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "But can it ever hold down a real job?",
-          "source_url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据《连线》报道，身高约 1.2 米的宇树 G1 正被活动公司包装成线下与社交媒体上的机器人角色。波兰 MERA Robotics 已运营约 20 台人形机器人，并让其中多台共享名为 Edward 的人物设定；其余机器人则在中东和东南亚扮演不同角色。",
-          "source_url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这些机器人可借助大模型自由对话，但公开活动中的行走和舞蹈大多仍由工作人员遥控，以免自主运动失误伤及围观者。G1 出厂时内置约 20 种手势和 15 段舞蹈，新动作需要额外编程；有运营者还为它加入了足球球迷的「Viking Row」手势。",
-          "source_url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "报道记录的一场世界杯球迷节活动中，数百人围着机器人拍摄和欢呼，而遥控者混在人群中操作。G1 的吸引力目前更多来自可移动、可对话的角色表演，距离能够独立完成稳定工作仍有明显差距。",
-          "source_url": "https://www.wired.com/story/unitree-influencer-4-foot-robot-from-china",
+          "text": "影片由德斯汀·丹尼尔·克雷顿执导，汤姆·赫兰德、赞达亚、萨迪·辛克、乔·博恩瑟和马克·鲁法洛等出演。延期后，影片将跨过暑期档继续留在院线，具体排片由各地影院安排。",
+          "source_url": "https://www.ithome.com/0/990/006.htm",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:38+00:00"
     },
     {
-      "id": "e88afc21-43bc-5b24-9b68-a670e4193048",
+      "id": "466cf373-9633-5955-9ebe-851209c89915",
       "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "9e57faf86d128ee1d445e7dc82b8454c9a81bf1d",
-      "title": "💡 Joshua Kushner：AI 热潮不能削弱投资纪律",
-      "body": "据 TechCrunch 报道，Thrive Capital 创始人 Joshua Kushner 在公司首封投资人信中表示，AI 的机会规模「很难被高估」，但如果兴奋情绪削弱投资纪律，同样会构成严重错误。他批评硅谷过度关注增量式技术变化，而忽略技术最终会把行业带向哪里。\n\nKushner 反对广撒网式投资。Thrive 约 90% 的资本集中在每只基金的前 15 项投资，公司希望跨阶段、行业和地区寻找机会，但把时间、资本和工程资源集中在少数团队。Thrive Holdings 已收购 70 多家公司，并配备 35 名工程师，为被投企业引入 OpenAI 技术；其中一套会计平台用智能体把报税速度提高 30%，IT 服务公司则让智能体独立处理一半服务台工单。\n\n> 市场会在恐惧与热情之间摆动，但两者都不能代替判断。\n\n他还强调，高增长不等于卓越公司，卓越公司也不一定在任何价格都值得投资。Thrive 的集中策略依赖其在 OpenAI、Anduril、SpaceX、Wiz、Ramp 和 Stripe 等公司的长期持仓，Kushner 以这些案例说明自己主张的「集中资本、持续加码」路径。",
-      "category": "大公司",
+      "fingerprint": "6ff49aa9828ad943e27fcf3b5ea5e96a6c5a4f6e",
+      "title": "《魔发奇缘》真人版定档 2028 年 3 月 31 日",
+      "body": "迪士尼在 D23 全球粉丝大会上宣布，真人版《魔发奇缘》将于 2028 年 3 月 31 日在北美上映，并在现场首次播放先导预告、公开主演造型。影片已于今年 6 月在西班牙开拍。\n\n蒂根·克罗夫特饰演乐佩，麦洛·曼海姆饰演弗林·莱德，凯瑟琳·哈恩饰演葛朵妈妈，迭戈·卢纳将出演真人电影新增角色。影片由《马戏之王》导演迈克尔·格雷西执导。",
+      "category": "好看的",
       "status": "needs_review",
       "selected": true,
       "position": 5,
       "score": 0,
-      "source_url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
-      "source_name": "techcrunch.com",
+      "source_url": "https://www.ithome.com/0/990/169.htm",
+      "source_name": "ithome.com",
       "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_quality": "secondary",
+      "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-15 03:33",
-      "published_at": "2026-08-15 03:33",
+      "disclosed_at": "2026-08-15 20:27",
+      "published_at": "2026-08-15 20:27",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/aaa0df32ac2d-48a4621f59c49dcf5170.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria 📮Folo · 2026 年 8 月 15 日 03:33",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
-          "title": "",
-          "publisher": "techcrunch.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": false,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "The AI opportunity is huge, but \"it would also be a grave error in our minds to let excitement weaken our investment discipline,\" Kushner…",
-          "source_url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 TechCrunch 报道，Thrive Capital 创始人 Joshua Kushner 在公司首封投资人信中表示，AI 的机会规模「很难被高估」，但如果兴奋情绪削弱投资纪律，同样会构成严重错误。他批评硅谷过度关注增量式技术变化，而忽略技术最终会把行业带向哪里。",
-          "source_url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Kushner 反对广撒网式投资。Thrive 约 90% 的资本集中在每只基金的前 15 项投资，公司希望跨阶段、行业和地区寻找机会，但把时间、资本和工程资源集中在少数团队。Thrive Holdings 已收购 70 多家公司，并配备 35 名工程师，为被投企业引入 OpenAI 技术；其中一套会计平台用智能体把报税速度提高 30%，IT 服务公司则让智能体独立处理一半服务台工单。",
-          "source_url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "> 市场会在恐惧与热情之间摆动，但两者都不能代替判断。",
-          "source_url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
-    },
-    {
-      "id": "068744f8-4a6c-522f-8120-dc70863fde64",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "ace0511f1e7f66d1c888530af937cc1eb4d85809",
-      "title": "💡 Bernie Sanders：美国应暂停新建数据中心，先评估公共代价",
-      "body": "据《纽约客》报道，美国佛蒙特州参议员 Bernie Sanders 与众议员 Alexandria Ocasio-Cortez 联合提出法案，要求全国暂停新建数据中心，为环境研究和公众参与留出时间。\n\nSanders 把电力、用水、就业和隐私列为核心问题。纽约州已经暂停新项目，另有 14 个州讨论限制措施；他认为地方反对者横跨保守派、进步派和温和派，关注点包括数据中心占用公共资源、推高公用事业账单，以及 AI 对工作岗位的冲击。\n\n> 人们在问：这会不会让我的孩子找不到工作？会不会让我失去隐私？为什么我要帮助那些由最富有的人控制、却不关心我的大公司？\n\nSanders 主张在继续扩建前先回答这些问题，并把地方社区在选址、能源和水资源分配中的意见纳入决策，而不是只由科技公司和基础设施投资方决定建设节奏。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 6,
-      "score": 0,
-      "source_url": "https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers",
-      "source_name": "newyorker.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 02:18",
-      "published_at": "2026-08-15 02:18",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/e44307652651-4f692246b43d35b4714d.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers 📮Folo · 2026 年 8 月 15 日 02:18",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers",
-          "title": "",
-          "publisher": "newyorker.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Bernie Sanders Takes on Data Centers - The Vermont senator co-sponsored a bill that calls for a moratorium on building data centers.",
-          "source_url": "https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据《纽约客》报道，美国佛蒙特州参议员 Bernie Sanders 与众议员 Alexandria Ocasio-Cortez 联合提出法案，要求全国暂停新建数据中心，为环境研究和公众参与留出时间。",
-          "source_url": "https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Sanders 把电力、用水、就业和隐私列为核心问题。纽约州已经暂停新项目，另有 14 个州讨论限制措施；他认为地方反对者横跨保守派、进步派和温和派，关注点包括数据中心占用公共资源、推高公用事业账单，以及 AI 对工作岗位的冲击。",
-          "source_url": "https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "> 人们在问：这会不会让我的孩子找不到工作？会不会让我失去隐私？为什么我要帮助那些由最富有的人控制、却不关心我的大公司？",
-          "source_url": "https://www.newyorker.com/culture/the-new-yorker-interview/bernie-sanders-takes-on-data-centers",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
-    },
-    {
-      "id": "092abd2b-9c77-5355-a416-57354e641f57",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "3bda1239dbc85894ad72b43ab912dad45a28e90b",
-      "title": "《王国之心》将推出原创动画剧集，野村哲也与史克威尔艾尼克斯参与开发",
-      "body": "据 Variety 报道，Disney+ 与 Disney Channel 已订购改编自《王国之心》的动画剧集。项目暂以《王国之心》为工作名，将以全新故事扩展游戏世界；首张概念图出现了索拉和键刃。\n\n剧集由迪士尼与游戏创作者野村哲也、开发商史克威尔艾尼克斯共同开发。《王国之心》系列从 2002 年的 PlayStation 2 首作起，已推出十余款游戏，全球累计销量超过 3900 万份。\n\n迪士尼在 D23 活动上公布该项目时还确认，Benjamin Bratt 将在预计 2027 年末推出的《王国之心4》中继续为《寻梦环游记》角色 Ernesto de la Cruz 配音。动画剧集尚未公布上线时间和完整主创名单。",
-      "category": "好看的",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://variety.com/2026/tv/news/kingdom-hearts-anime-series-disney-plus-1236835104",
-      "source_name": "Variety",
-      "source_type": "folo",
-      "source_quality": "strong",
-      "confidence": 0.86,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 11:02",
-      "published_at": "2026-08-15 11:02",
-      "cross_day_status": "needs_title_rewrite",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/53f608eedb9e-97c2221aea54d508004d.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://variety.com/2026/tv/news/kingdom-hearts-anime-series-disney-plus-1236835104",
-          "title": "",
-          "publisher": "Variety",
-          "source_type": "folo",
-          "authority": "strong",
-          "is_paywalled": false,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "据 Variety 报道，Disney+ 与 Disney Channel 已订购改编自《王国之心》的动画剧集。项目暂以《王国之心》为工作名，将以全新故事扩展游戏世界；首张概念图出现了索拉和键刃。",
-          "source_url": "https://variety.com/2026/tv/news/kingdom-hearts-anime-series-disney-plus-1236835104",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "剧集由迪士尼与游戏创作者野村哲也、开发商史克威尔艾尼克斯共同开发。《王国之心》系列从 2002 年的 PlayStation 2 首作起，已推出十余款游戏，全球累计销量超过 3900 万份。",
-          "source_url": "https://variety.com/2026/tv/news/kingdom-hearts-anime-series-disney-plus-1236835104",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "迪士尼在 D23 活动上公布该项目时还确认，Benjamin Bratt 将在预计 2027 年末推出的《王国之心4》中继续为《寻梦环游记》角色 Ernesto de la Cruz 配音。动画剧集尚未公布上线时间和完整主创名单。",
-          "source_url": "https://variety.com/2026/tv/news/kingdom-hearts-anime-series-disney-plus-1236835104",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:34+00:00"
-    },
-    {
-      "id": "c132b887-fc17-5f83-90ad-bf12303a726a",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "c972054c29b41700af59e7312824168c26d5d666",
-      "title": "《玛戈闯祸记》用 100 多盒眼影把艾丽·范宁涂成绿色外星人",
-      "body": "据《好莱坞报道》报道，剧集《玛戈闯祸记》的化妆团队为了塑造女主角 Margo 的 OnlyFans 化身 HungryGhost，用深青色膏状眼影手工涂满艾丽·范宁全身。每次上妆最长需要两个半小时，卸妆同样费时，第一季累计用掉 100 多盒眼影。\n\n这套造型分成两个版本：Margo 自己能做出的日常版本，只使用网购的廉价粉色假发；幻想段落则把三顶假发组合成带有 1960 年代风格的巨大造型，并用扎带固定内部结构。团队刻意保留两者的制作差距，让视觉奇观也符合人物的经济处境和动手能力。\n\n日常妆发同样服务人物。化妆师只用眼线和唇彩暗示 Margo 受母亲影响，发型则从凌乱、没洗、随手扎起，逐渐过渡到更精心的状态。HungryGhost 的夸张外形由这名年轻母亲的经济压力和网络身份共同塑造。",
-      "category": "好看的",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://www.hollywoodreporter.com/tv/tv-features/margos-got-money-troubles-elle-fanning-green-1236672635",
-      "source_name": "hollywoodreporter.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 03:00",
-      "published_at": "2026-08-15 03:00",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/9cb94a313f09-96cb0d6f3b4103b8eff6.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.hollywoodreporter.com/tv/tv-features/margos-got-money-troubles-elle-fanning-green-1236672635 📮Folo · 2026 年 8 月 15 日 03:00",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.hollywoodreporter.com/tv/tv-features/margos-got-money-troubles-elle-fanning-green-1236672635",
-          "title": "",
-          "publisher": "hollywoodreporter.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "据《好莱坞报道》报道，剧集《玛戈闯祸记》的化妆团队为了塑造女主角 Margo 的 OnlyFans 化身 HungryGhost，用深青色膏状眼影手工涂满艾丽·范宁全身。每次上妆最长需要两个半小时，卸妆同样费时，第一季累计用掉 100 多盒眼影。",
-          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/margos-got-money-troubles-elle-fanning-green-1236672635",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这套造型分成两个版本：Margo 自己能做出的日常版本，只使用网购的廉价粉色假发；幻想段落则把三顶假发组合成带有 1960 年代风格的巨大造型，并用扎带固定内部结构。团队刻意保留两者的制作差距，让视觉奇观也符合人物的经济处境和动手能力。",
-          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/margos-got-money-troubles-elle-fanning-green-1236672635",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "日常妆发同样服务人物。化妆师只用眼线和唇彩暗示 Margo 受母亲影响，发型则从凌乱、没洗、随手扎起，逐渐过渡到更精心的状态。HungryGhost 的夸张外形由这名年轻母亲的经济压力和网络身份共同塑造。",
-          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/margos-got-money-troubles-elle-fanning-green-1236672635",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "2896a054-b211-59a0-929d-74e135c8847d",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "5d89de31554561efbcbcc97545d23c5976a5fbb9",
-      "title": "《怒呛人生》第二季的一场夫妻争吵，来自主创和演员反复排练",
-      "body": "据《好莱坞报道》报道，《怒呛人生》主创李成真在采访中复盘第二季的创作。新一季今年早些时候上线，并获得 16 项艾美奖提名；第一季曾获得包括最佳限定剧或选集剧、男女主角、编剧和导演在内的 8 项艾美奖。\n\n第二季中 Lindsay 与 Josh 的争吵戏最初来自编剧室，随后由 Oscar Isaac 和 Carey Mulligan 结合各自观察继续补写。剧组花费数小时讨论并反复排练，持续删除演员认为不真实的句子，让这场冲突保留来自不同生活经验的细节。\n\n李成真把第二季主题概括为「享乐适应」：人会迅速习惯新的生活状态。他表示，今后的写作仍会从人物不愿公开的念头、羞耻和日常纹理出发，用足够具体的私人经验建立观众的共同感受。",
-      "category": "好看的",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0,
-      "source_url": "https://www.hollywoodreporter.com/tv/tv-features/lee-sung-jin-beef-season-two-emmys-1236672641",
-      "source_name": "hollywoodreporter.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 03:30",
-      "published_at": "2026-08-15 03:30",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/0d00a4fa0319-b1442e85b03bdcaf66dc.gif",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.hollywoodreporter.com/tv/tv-features/lee-sung-jin-beef-season-two-emmys-1236672641 📮Folo · 2026 年 8 月 15 日 03:30",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.hollywoodreporter.com/tv/tv-features/lee-sung-jin-beef-season-two-emmys-1236672641",
-          "title": "",
-          "publisher": "hollywoodreporter.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "据《好莱坞报道》报道，《怒呛人生》主创李成真在采访中复盘第二季的创作。新一季今年早些时候上线，并获得 16 项艾美奖提名；第一季曾获得包括最佳限定剧或选集剧、男女主角、编剧和导演在内的 8 项艾美奖。",
-          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/lee-sung-jin-beef-season-two-emmys-1236672641",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "第二季中 Lindsay 与 Josh 的争吵戏最初来自编剧室，随后由 Oscar Isaac 和 Carey Mulligan 结合各自观察继续补写。剧组花费数小时讨论并反复排练，持续删除演员认为不真实的句子，让这场冲突保留来自不同生活经验的细节。",
-          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/lee-sung-jin-beef-season-two-emmys-1236672641",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "李成真把第二季主题概括为「享乐适应」：人会迅速习惯新的生活状态。他表示，今后的写作仍会从人物不愿公开的念头、羞耻和日常纹理出发，用足够具体的私人经验建立观众的共同感受。",
-          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/lee-sung-jin-beef-season-two-emmys-1236672641",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "bc855ddd-e6a9-5b33-a42a-ed396f11d544",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "80abf32cd9b346d752d67d137918ef34025f86a8",
-      "title": "安妮·海瑟薇回应新片中的爱犬命运",
-      "body": "据《好莱坞报道》报道，安妮·海瑟薇在接受 Complex 采访时回应新片 The End of Oak Street 中爱犬 Starbuck 的命运。她说，凡是让狗死亡的电影都应该自动定为 R 级，并暗示这部影片不会跨过这条线。\n\n影片由海瑟薇和 Ewan McGregor 饰演一对父母，一家人突然被转移到一个有恐龙出没的地点。《好莱坞报道》影评人 David Rooney 认为，海瑟薇饰演的 Denise 是整部电影维持家庭关系与情节推进的核心人物。\n\n这也是海瑟薇今年密集上映计划中的一部作品。她此前已有《奥德赛》《穿普拉达的女王 2》和《圣母玛利亚》上映，改编自 Colleen Hoover 小说的电影 Verity 计划于 10 月推出。",
-      "category": "好看的",
-      "status": "needs_review",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062",
-      "source_name": "hollywoodreporter.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 08:06",
-      "published_at": "2026-08-15 08:06",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/abe1ae6aab9c-4f59bf28a80a06fe7cb7.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062 📮Folo · 2026 年 8 月 15 日 08:06",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062",
-          "title": "",
-          "publisher": "hollywoodreporter.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "The actress said she's seen comments made by fans who are worried that the dog in 'The End of Oak Street' may not make it.",
-          "source_url": "https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据《好莱坞报道》报道，安妮·海瑟薇在接受 Complex 采访时回应新片 The End of Oak Street 中爱犬 Starbuck 的命运。她说，凡是让狗死亡的电影都应该自动定为 R 级，并暗示这部影片不会跨过这条线。",
-          "source_url": "https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "影片由海瑟薇和 Ewan McGregor 饰演一对父母，一家人突然被转移到一个有恐龙出没的地点。《好莱坞报道》影评人 David Rooney 认为，海瑟薇饰演的 Denise 是整部电影维持家庭关系与情节推进的核心人物。",
-          "source_url": "https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这也是海瑟薇今年密集上映计划中的一部作品。她此前已有《奥德赛》《穿普拉达的女王 2》和《圣母玛利亚》上映，改编自 Colleen Hoover 小说的电影 Verity 计划于 10 月推出。",
-          "source_url": "https://www.hollywoodreporter.com/movies/movie-news/anne-hathaway-films-dogs-die-rated-r-1236674062",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "b0d1c7d9-dfd4-5709-87c5-0870e7355bd9",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "d8d7bcdd45275bb4ec990c22fbb6b8b00b00432d",
-      "title": "ChatGPT 可直接打开并编辑 Google Drive 文件",
-      "body": "据 9to5Mac 报道，OpenAI 正向 ChatGPT 付费用户推出更深入的 Google Drive 集成。用户可以从输入框左侧的「+」按钮把 Drive 文件加入 ChatGPT Library，在对话中提问、打开文件并直接修改原文件，不需要先复制为静态副本。\n\n编辑完成后，文件仍保存在 Google Drive 中，用户也可以跳回 Google Docs 或 Google Sheets 继续处理。此次功能更新还包括按主题自动生成互动测验，测验支持选择题、题目导航和提示按钮；另外，ChatGPT 已接入 Yelp 的订位与候位功能。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat",
-      "source_name": "9to5mac.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 04:31",
-      "published_at": "2026-08-15 04:31",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/dbbbce101008-3a6b8e778d8050a6f54b.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat 📮Folo · 2026 年 8 月 15 日 04:31",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat",
-          "title": "",
-          "publisher": "9to5mac.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "ChatGPT is rolling out a deeper integration with Google Drive, allowing users to add Google Drive files to their ChatGPT Library and edit…",
-          "source_url": "https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 9to5Mac 报道，OpenAI 正向 ChatGPT 付费用户推出更深入的 Google Drive 集成。用户可以从输入框左侧的「+」按钮把 Drive 文件加入 ChatGPT Library，在对话中提问、打开文件并直接修改原文件，不需要先复制为静态副本。",
-          "source_url": "https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "编辑完成后，文件仍保存在 Google Drive 中，用户也可以跳回 Google Docs 或 Google Sheets 继续处理。此次功能更新还包括按主题自动生成互动测验，测验支持选择题、题目导航和提示按钮；另外，ChatGPT 已接入 Yelp 的订位与候位功能。",
-          "source_url": "https://9to5mac.com/2026/08/14/chatgpt-subscribers-can-now-open-and-edit-google-drive-files-from-inside-the-chat",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
-    },
-    {
-      "id": "c47c4b9d-ff35-5b58-8a12-7dd06c464b68",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "517a3cbfb9a74f194fc65ebcdb40fbe9d340d824",
-      "title": "阿里发布 Qwen3.8 开放权重模型，原生支持 26.2 万 token 上下文",
-      "body": "据 The Decoder 报道，阿里 Qwen 团队发布 Qwen3.8 系列开放权重。核心型号 Qwen3.8-27B 是 270 亿参数的多模态 Dense 模型，可处理文本、图片、文档、图表和多小时视频，原生上下文长度为 262144 token，并可通过 YaRN 扩展到 100 万 token。\n\nQwen 团队称，新模型在编程和办公任务上超过体量更大的 Qwen3.7-Plus，并改进了智能体规划与任务完成稳定性。模型默认启用可切换的思考模式，用户可针对单次请求开启或关闭。\n\n团队同时发布 Qwen3.8-2.4T-A95B 的权重，两款模型均采用 Apache 2.0 许可证，已在 Hugging Face 和 ModelScope 上线；Qwen Cloud 后续将提供支持 100 万 token 上下文的托管版本。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0,
-      "source_url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-      "source_name": "the-decoder.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 01:01",
-      "published_at": "2026-08-15 01:01",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/0efc9f534980-077e647d763522b1be46.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license 📮Folo · 2026 年 8 月 15 日 01:01",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-          "title": "",
-          "publisher": "the-decoder.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Alibaba's AI team Qwen has released new open model weights under the Apache 2.0 license with Qwen 3.8.",
-          "source_url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "The dense 27-billion…",
-          "source_url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 The Decoder 报道，阿里 Qwen 团队发布 Qwen3.8 系列开放权重。核心型号 Qwen3.8-27B 是 270 亿参数的多模态 Dense 模型，可处理文本、图片、文档、图表和多小时视频，原生上下文长度为 262144 token，并可通过 YaRN 扩展到 100 万 token。",
-          "source_url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Qwen 团队称，新模型在编程和办公任务上超过体量更大的 Qwen3.7-Plus，并改进了智能体规划与任务完成稳定性。模型默认启用可切换的思考模式，用户可针对单次请求开启或关闭。",
-          "source_url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "团队同时发布 Qwen3.8-2.4T-A95B 的权重，两款模型均采用 Apache 2.0 许可证，已在 Hugging Face 和 ModelScope 上线；Qwen Cloud 后续将提供支持 100 万 token 上下文的托管版本。",
-          "source_url": "https://the-decoder.com/alibabas-qwen-team-releases-qwen-3-8-models-with-open-weights-under-the-apache-2-0-license",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
-    },
-    {
-      "id": "1e3f1605-e154-5069-93d4-6c8208f003b2",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "d61af7181ba7d707f57f1daf00de7dfc4be3dbd4",
-      "title": "DeepSeek Harness Star 数更新：8 月 15 日突破 10 万",
-      "body": "8 月 15 日，DeepSeek Harness 的 GitHub Star 数更新至 10 万以上，距仓库创建约 42 小时。GitHub 数据显示，该仓库创建于 8 月 13 日 19:56；截至本轮核验时，Star 数约为 10.5 万，Fork 数超过 1 万。\n\nDeepSeek Harness 把模型适配器、工具注册、会话日志和 Agent Loop 都设计成可替换插件，底层由 Cordis 提供组合式运行时。开发者可用 `npx @deepseek-ai/dsh web` 启动本地 Web UI，也可以从源码构建。\n\n项目目前仍处于开发者预览阶段。DeepSeek 明确提示其正在快速迭代，后续会出现破坏兼容性的改动；代码采用 MIT 许可证开放。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://github.com/deepseek-ai/deepseek-harness",
-      "source_name": "github.com",
-      "source_type": "draft_source",
-      "source_quality": "lead",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 13:58",
-      "published_at": "2026-08-15 13:58",
-      "cross_day_status": "ai_source_lead",
-      "rumor": false,
-      "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/0d1c8722d552-606a1e522a8f48a4abb0.png",
+      "image_url": "data/images/69659a804cac-5ebfde96e514b5e633d4.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://github.com/deepseek-ai/deepseek-harness；https://github.com/cordiverse/cordis；https://t.me/OneMillion_AI/3917 📮Folo · 2026 年 8 月 15 日 13:58",
+        "source_line": "🔗 来源：https://www.ithome.com/0/990/169.htm；https://thewaltdisneycompany.com/news/d23-programming-2026/ 📮Folo · 2026 年 8 月 15 日 20:27",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://github.com/deepseek-ai/deepseek-harness",
+          "url": "https://www.ithome.com/0/990/169.htm",
           "title": "",
-          "publisher": "github.com",
+          "publisher": "ithome.com",
           "source_type": "draft_source",
-          "authority": "unknown",
+          "authority": "secondary",
           "is_paywalled": false,
           "is_original": false
         },
         {
-          "url": "https://github.com/cordiverse/cordis",
+          "url": "https://thewaltdisneycompany.com/news/d23-programming-2026/",
           "title": "",
-          "publisher": "github.com",
+          "publisher": "thewaltdisneycompany.com",
           "source_type": "draft_source",
           "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3917",
-          "title": "",
-          "publisher": "动察Beating AI News - Telegram Channel",
-          "source_type": "folo",
-          "authority": "lead",
           "is_paywalled": false,
           "is_original": false
         }
       ],
       "claims": [
         {
-          "text": "8 月 15 日，DeepSeek Harness 的 GitHub Star 数更新至 10 万以上，距仓库创建约 42 小时。GitHub 数据显示，该仓库创建于 8 月 13 日 19:56；截至本轮核验时，Star 数约为 10.5 万，Fork 数超过 1 万。",
-          "source_url": "https://github.com/deepseek-ai/deepseek-harness",
+          "text": "迪士尼在 D23 全球粉丝大会上宣布，真人版《魔发奇缘》将于 2028 年 3 月 31 日在北美上映，并在现场首次播放先导预告、公开主演造型。影片已于今年 6 月在西班牙开拍。",
+          "source_url": "https://www.ithome.com/0/990/169.htm",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "DeepSeek Harness 把模型适配器、工具注册、会话日志和 Agent Loop 都设计成可替换插件，底层由 Cordis 提供组合式运行时。开发者可用 `npx @deepseek-ai/dsh web` 启动本地 Web UI，也可以从源码构建。",
-          "source_url": "https://github.com/deepseek-ai/deepseek-harness",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "项目目前仍处于开发者预览阶段。DeepSeek 明确提示其正在快速迭代，后续会出现破坏兼容性的改动；代码采用 MIT 许可证开放。",
-          "source_url": "https://github.com/deepseek-ai/deepseek-harness",
+          "text": "蒂根·克罗夫特饰演乐佩，麦洛·曼海姆饰演弗林·莱德，凯瑟琳·哈恩饰演葛朵妈妈，迭戈·卢纳将出演真人电影新增角色。影片由《马戏之王》导演迈克尔·格雷西执导。",
+          "source_url": "https://www.ithome.com/0/990/169.htm",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:20+00:00"
-    },
-    {
-      "id": "12ea9b7d-f9ba-5e93-ae4c-1a1f715ffb6c",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "84208238d1dc159d02d47146bfadd6249d6885fb",
-      "title": "Hermes Agent 加入 `/loop`，可在当前会话定时重复任务",
-      "body": "Nous Research 为 Hermes Agent 加入 `/loop` 循环命令。用户可以让 Agent 在当前会话中按固定间隔重新执行一段提示词或斜杠命令，用于轮询部署状态、监控 CI、反复修复测试，或在长会话中定期做状态摘要。每次唤醒都是一个新的 Agent 回合，会重新读取当前状态后执行任务。\n\n`/loop` 提供固定间隔和自适应两种节奏。自适应模式从默认 1 分钟开始，回复没有变化时依次退避到 2、4、8 分钟，上限默认为 15 分钟；一旦状态变化，立即回到最短间隔。用户还可以设定执行次数、证据型停止条件，或让 Agent 在任务完成时输出 `LOOP_COMPLETE` 自动结束。\n\n这项功能存活于当前会话，可跨越会话恢复和上下文压缩；需要隔夜、端末重启后继续或无人值守的定时任务时，官方建议改用 cron。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-      "source_name": "hermes-agent.nousresearch.com",
-      "source_type": "draft_source",
-      "source_quality": "lead",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 11:41",
-      "published_at": "2026-08-15 11:41",
-      "cross_day_status": "ai_source_lead",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/8578bfe86c65-75e85ef6fecf5a622798.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://hermes-agent.nousresearch.com/docs/user-guide/features/loops；https://github.com/NousResearch/hermes-agent；https://t.me/OneMillion_AI/3912 📮Folo · 2026 年 8 月 15 日 11:41",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "title": "",
-          "publisher": "hermes-agent.nousresearch.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://github.com/NousResearch/hermes-agent",
-          "title": "",
-          "publisher": "github.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3912",
-          "title": "",
-          "publisher": "动察Beating AI News - Telegram Channel",
-          "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Hermes Agent跟进Claude Code的/loop：Agent能定时自己醒来干活 Nous Research 给 Hermes Agent 加入 /loop。用户可以让 Agent 在当前会话里反复执行同一个任务，比如盯 CI、检查部署状态，或者反复修代码直到测试通过…",
-          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:38+00:00"
     },
     {
       "id": "23262b43-8254-53ff-9ee7-954d582f6353",
@@ -1027,7 +978,7 @@
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 2,
+      "position": 0,
       "score": 0,
       "source_url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
       "source_name": "the-decoder.com",
@@ -1086,7 +1037,180 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "f258454e-0697-56a5-9115-7d73886a13f9",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "41c116d89a71f7b8356409dffd089e639778f7c8",
+      "title": "激光灭蚊「防空系统」开始量产，售价 988 美元起",
+      "body": "Photon Matrix 宣布激光灭蚊设备进入量产，首批产品计划于 8 月下旬发货。面向室内的红外激光版售价 988 美元，蓝激光版售价 1088 美元，均已在官方商店开放购买。\n\n设备用激光雷达持续扫描背景距离，当 2—20mm、移动速度不超过 1m/s 的飞行目标进入约 6 米半径和 90 度扫描范围时，系统会确认目标尺寸，再沿同一光路发射短脉冲激光破坏蚊虫翅膀。若背景超出有效范围、没有实体背景，或目标尺寸明显大于蚊虫，激光不会启动。\n\n蓝激光版灭蚊效率更高，但夜间可见光可能干扰室内使用；红外版的激光不可见，更适合卧室和育儿空间。官方表示，约 4500 份订单正在排队等待交付；产品的实际识别率、安全性和长期稳定性仍需要量产设备的独立测试验证。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
+      "source_name": "store.photonmatrixlab.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 07:51",
+      "published_at": "2026-08-16 07:51",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/1028c381da42-0407adc7476177e775e9.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense；https://store.photonmatrixlab.com/products/photon-matrix-laser-mosquito-air-defense；https://photonmatrixlab.com/faq/；https://www.indiegogo.com/en/projects/jimwong-38623042/worlds-first-portable-mosquito-air-defense；https://www.ithome.com/0/990/213.htm 📮Folo · 2026 年 8 月 16 日 07:51",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
+          "title": "",
+          "publisher": "store.photonmatrixlab.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://store.photonmatrixlab.com/products/photon-matrix-laser-mosquito-air-defense",
+          "title": "",
+          "publisher": "store.photonmatrixlab.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://photonmatrixlab.com/faq/",
+          "title": "",
+          "publisher": "photonmatrixlab.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.indiegogo.com/en/projects/jimwong-38623042/worlds-first-portable-mosquito-air-defense",
+          "title": "",
+          "publisher": "indiegogo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/990/213.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://photonmatrixlab.com/",
+          "title": "",
+          "publisher": "photonmatrixlab.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Photon Matrix 宣布激光灭蚊设备进入量产，首批产品计划于 8 月下旬发货。面向室内的红外激光版售价 988 美元，蓝激光版售价 1088 美元，均已在官方商店开放购买。",
+          "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "设备用激光雷达持续扫描背景距离，当 2—20mm、移动速度不超过 1m/s 的飞行目标进入约 6 米半径和 90 度扫描范围时，系统会确认目标尺寸，再沿同一光路发射短脉冲激光破坏蚊虫翅膀。若背景超出有效范围、没有实体背景，或目标尺寸明显大于蚊虫，激光不会启动。",
+          "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "蓝激光版灭蚊效率更高，但夜间可见光可能干扰室内使用；红外版的激光不可见，更适合卧室和育儿空间。官方表示，约 4500 份订单正在排队等待交付；产品的实际识别率、安全性和长期稳定性仍需要量产设备的独立测试验证。",
+          "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:37+00:00"
+    },
+    {
+      "id": "25ef25d6-2789-5e27-81ef-990b0fcc6c85",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "ca2fcb0ed356b119e8d98d01f2e0209f8123298e",
+      "title": "Miora 上线连接器，可读写 Notion、腾讯文档和 GitHub",
+      "body": "腾讯设计妙境 Miora 上线连接器功能，授权后可直接从外部工具读取文档、需求和表格，并将生成的内容写回原有工具，无需在多个窗口间重复复制粘贴。\n\n目前内置的 7 款连接器分为三类：Notion、腾讯文档和 Airtable 负责提供资料；Linear 与 GitHub 可接收任务、需求和代码仓库结果；Resend 与 Brevo 可发送邮件、短信并管理营销触达。连接后，Miora 可执行读取、写回、新建和发送四类操作。\n\n此外，用户还可添加符合通用接口标准的自定义连接器，并在外部平台的授权页面选择开放范围。官方展示的工作流包括从 Notion 取出灵感文档后生成视频，以及联动 Notion、腾讯文档、GitHub 和 Resend 完成电商营销方案与物料投递。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 14:27",
+      "published_at": "2026-08-16 14:27",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/05c43009a4ede78eed4a.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 原文链接：https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg 🧭飞书群 · 2026-08-16 14:27",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "腾讯设计妙境 Miora 上线连接器功能，授权后可直接从外部工具读取文档、需求和表格，并将生成的内容写回原有工具，无需在多个窗口间重复复制粘贴。",
+          "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "目前内置的 7 款连接器分为三类：Notion、腾讯文档和 Airtable 负责提供资料；Linear 与 GitHub 可接收任务、需求和代码仓库结果；Resend 与 Brevo 可发送邮件、短信并管理营销触达。连接后，Miora 可执行读取、写回、新建和发送四类操作。",
+          "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "此外，用户还可添加符合通用接口标准的自定义连接器，并在外部平台的授权页面选择开放范围。官方展示的工作流包括从 Notion 取出灵感文档后生成视频，以及联动 Notion、腾讯文档、GitHub 和 Resend 完成电商营销方案与物料投递。",
+          "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:38+00:00"
     },
     {
       "id": "73aef9b8-5789-5e0f-b552-9b11bd8bb398",
@@ -1156,144 +1280,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
-    },
-    {
-      "id": "97faf0bd-b013-5f1b-ba76-8a6453b0196f",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "bc88559891a1a0f76df82fc102a5d8dad15ea13a",
-      "title": "Anthropic 给出 Claude Code 节省额度指南：任务切换先清理上下文",
-      "body": "Anthropic 发布 Claude Code 会话效率指南，解释上下文长度、模型选择、提示词缓存和命令输出如何共同影响额度消耗。官方建议在切换任务时使用 `/clear`，同一任务进入新阶段时再用 `/compact` 压缩历史；若只需撤销最近几轮，应优先使用 `/rewind`，避免重写整段对话。\n\n- 在会话开始时确定模型、推理强度和 Fast mode，中途切换会使下一轮重新处理上下文；\n- 用 `@文件名` 直接附加文件，减少一次读取或搜索；测试、构建和日志命令尽量只输出错误或截取必要部分；\n- 用 `/context` 检查 `CLAUDE.md`、MCP 与工具定义的启动占用，把专项流程放入按需加载的 Skill；\n- 暂停工作前先 `/compact`。订阅用户的提示词缓存约 1 小时过期，API Key 默认约 5 分钟；\n- 大量日志可交给独立上下文的 subagent，但小任务可能因重复读取文件而增加开销。\n\nAnthropic 还建议把 `/loop` 放进单独的干净会话，因为每次循环都会携带当前会话的全部上下文；如果间隔超过缓存时间，还会触发重新处理。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions",
-      "source_name": "claude.com",
-      "source_type": "draft_source",
-      "source_quality": "lead",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 13:45",
-      "published_at": "2026-08-15 13:45",
-      "cross_day_status": "ai_source_lead",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/044a512124f6-79bf55977603d50dd673.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions；https://t.me/OneMillion_AI/3916 📮Folo · 2026 年 8 月 15 日 13:45",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions",
-          "title": "",
-          "publisher": "claude.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3916",
-          "title": "",
-          "publisher": "动察Beating AI News - Telegram Channel",
-          "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Claude Code官方省Token指南：11个技巧让额度用得更久 Anthropic 发布 Claude Code 省 Token 指南。核心就一句：上下文越长，后面每一轮越贵。",
-          "source_url": "https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "聊天、文件和命令输出都会继续占用 Token，也会因此更快消耗额度。",
-          "source_url": "https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:20+00:00"
-    },
-    {
-      "id": "c262499f-24ec-5035-bce8-c76560ccd84c",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "e2df40145fcca0cff0088eeb979b96e34b2cbeb9",
-      "title": "Liquid AI 推出本地隐私过滤器 ShieldFlow",
-      "body": "Liquid AI 推出 ShieldFlow 早期试用版。它作为本地代理运行在电脑上，在提示词发送到 AI 服务前检测并替换姓名、身份证号、信用卡、API Key、医疗信息和地址等敏感内容，收到回复后再在安全范围内恢复上下文。检测、删改和日志都留在本机，支持 ChatGPT、Claude 和 OpenRouter 等服务。\n\nShieldFlow 支持 40 多种敏感实体，每个分类可独立开关并调节检测灵敏度。Liquid AI 同时在 Hugging Face 公开 LFM2.5-Encoder-350M-PII-Detector：该 3.5 亿参数模型面向 token classification，覆盖 11 个领域的 40 种个人信息类型和 16 种语言，可在 CPU 环境中运行。\n\nShieldFlow v0.4.3 个人版免费，支持 Apple Silicon Mac 与 Windows 10/11，应用和分类模型约占 500MB 磁盘空间，运行不需要 GPU。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://www.liquid.ai/shieldflow",
-      "source_name": "liquid.ai",
-      "source_type": "draft_source",
-      "source_quality": "lead",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 12:01",
-      "published_at": "2026-08-15 12:01",
-      "cross_day_status": "ai_source_lead",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/e930c5e49f90-92fd9bf54397e3c21c17.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.liquid.ai/shieldflow；https://huggingface.co/LiquidAI/LFM2.5-Encoder-350M-PII-Detector；https://t.me/OneMillion_AI/3913 📮Folo · 2026 年 8 月 15 日 12:01",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.liquid.ai/shieldflow",
-          "title": "",
-          "publisher": "liquid.ai",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://huggingface.co/LiquidAI/LFM2.5-Encoder-350M-PII-Detector",
-          "title": "",
-          "publisher": "huggingface.co",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3913",
-          "title": "",
-          "publisher": "动察Beating AI News - Telegram Channel",
-          "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Liquid AI做了个本地隐私过滤器：16种语言，40类敏感信息一次清掉 Liquid AI 推出一个只有 3.5 亿参数的隐私过滤模型。它能一次扫完整段文字，找出姓名、电话、证件号、银行卡、API Key 等 40 类敏感信息，支持 16 种语言，还能直接在本地运行。",
-          "source_url": "https://www.liquid.ai/shieldflow",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:38+00:00"
     },
     {
       "id": "67bd537b-91da-5c9d-a7b8-890001069731",
@@ -1369,7 +1356,95 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
+      "updated_at": "2026-08-16T09:20:38+00:00"
+    },
+    {
+      "id": "12ea9b7d-f9ba-5e93-ae4c-1a1f715ffb6c",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "84208238d1dc159d02d47146bfadd6249d6885fb",
+      "title": "Hermes Agent 加入 `/loop`，可在当前会话定时重复任务",
+      "body": "Nous Research 为 Hermes Agent 加入 `/loop` 循环命令。用户可以让 Agent 在当前会话中按固定间隔重新执行一段提示词或斜杠命令，用于轮询部署状态、监控 CI、反复修复测试，或在长会话中定期做状态摘要。每次唤醒都是一个新的 Agent 回合，会重新读取当前状态后执行任务。\n\n`/loop` 提供固定间隔和自适应两种节奏。自适应模式从默认 1 分钟开始，回复没有变化时依次退避到 2、4、8 分钟，上限默认为 15 分钟；一旦状态变化，立即回到最短间隔。用户还可以设定执行次数、证据型停止条件，或让 Agent 在任务完成时输出 `LOOP_COMPLETE` 自动结束。\n\n这项功能存活于当前会话，可跨越会话恢复和上下文压缩；需要隔夜、端末重启后继续或无人值守的定时任务时，官方建议改用 cron。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
+      "source_name": "hermes-agent.nousresearch.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-15 11:41",
+      "published_at": "2026-08-15 11:41",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/8578bfe86c65-75e85ef6fecf5a622798.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://hermes-agent.nousresearch.com/docs/user-guide/features/loops；https://github.com/NousResearch/hermes-agent；https://t.me/OneMillion_AI/3912 📮Folo · 2026 年 8 月 15 日 11:41",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
+          "title": "",
+          "publisher": "hermes-agent.nousresearch.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent",
+          "title": "",
+          "publisher": "github.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://t.me/OneMillion_AI/3912",
+          "title": "",
+          "publisher": "t.me",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Hermes Agent跟进Claude Code的/loop：Agent能定时自己醒来干活 Nous Research 给 Hermes Agent 加入 /loop。用户可以让 Agent 在当前会话里反复执行同一个任务，比如盯 CI、检查部署状态，或者反复修代码直到测试通过…",
+          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Nous Research 为 Hermes Agent 加入 `/loop` 循环命令。用户可以让 Agent 在当前会话中按固定间隔重新执行一段提示词或斜杠命令，用于轮询部署状态、监控 CI、反复修复测试，或在长会话中定期做状态摘要。每次唤醒都是一个新的 Agent 回合，会重新读取当前状态后执行任务。",
+          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "`/loop` 提供固定间隔和自适应两种节奏。自适应模式从默认 1 分钟开始，回复没有变化时依次退避到 2、4、8 分钟，上限默认为 15 分钟；一旦状态变化，立即回到最短间隔。用户还可以设定执行次数、证据型停止条件，或让 Agent 在任务完成时输出 `LOOP_COMPLETE` 自动结束。",
+          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这项功能存活于当前会话，可跨越会话恢复和上下文压缩；需要隔夜、端末重启后继续或无人值守的定时任务时，官方建议改用 cron。",
+          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:38+00:00"
     },
     {
       "id": "3e9d3e0f-1fac-5cc7-ae7e-ffcf1a47c10d",
@@ -1378,22 +1453,22 @@
       "title": "OpenRouter 上线搜索基准，可同时比较准确率、成本和速度",
       "body": "OpenRouter 上线新的基准测试页面，把模型、搜索服务、工具预算和推理强度纳入同一套可复现实验配置。页面目前汇总 6 项基准、超过 246 万次任务评估，其中 BrowseComp、DeepSearchQA、HLE 和 WideSearch 四项专门测试联网搜索。\n\n每个结果都可继续查看模型、搜索服务、成本和运行耗时。以 BrowseComp 为例，页面当前最佳配置为 Perplexity 搜索搭配高推理强度的 Claude Opus 5，准确率为 89%，单题成本约 0.99 美元，耗时约 1.9 分钟；WideSearch 的最高准确率为 84%，由 Perplexity 搜索搭配 GPT-5.6 Sol 获得。\n\nOpenRouter 将页面定位为持续运行的基准，而不是一次性排行榜；测试结果会随模型、搜索服务和评测任务更新，开发者可据此比较搜索质量与成本、延迟之间的取舍。",
       "category": "新产品",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
-      "position": 5,
+      "position": 6,
       "score": 0,
       "source_url": "https://openrouter.ai/benchmarks",
       "source_name": "openrouter.ai",
       "source_type": "draft_source",
-      "source_quality": "lead",
+      "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
       "disclosed_at": "2026-08-15 13:12",
       "published_at": "2026-08-15 13:12",
-      "cross_day_status": "ai_source_lead",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
       "image_url": "data/images/c3732542fcda-c0d0c614a2a4bd1276a6.png",
       "image_path": "",
       "image_token": "",
@@ -1415,9 +1490,9 @@
         {
           "url": "https://t.me/OneMillion_AI/3914",
           "title": "",
-          "publisher": "动察Beating AI News - Telegram Channel",
-          "source_type": "folo",
-          "authority": "lead",
+          "publisher": "t.me",
+          "source_type": "draft_source",
+          "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         }
@@ -1428,445 +1503,386 @@
           "source_url": "https://openrouter.ai/benchmarks",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "OpenRouter 上线新的基准测试页面，把模型、搜索服务、工具预算和推理强度纳入同一套可复现实验配置。页面目前汇总 6 项基准、超过 246 万次任务评估，其中 BrowseComp、DeepSearchQA、HLE 和 WideSearch 四项专门测试联网搜索。",
+          "source_url": "https://openrouter.ai/benchmarks",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "每个结果都可继续查看模型、搜索服务、成本和运行耗时。以 BrowseComp 为例，页面当前最佳配置为 Perplexity 搜索搭配高推理强度的 Claude Opus 5，准确率为 89%，单题成本约 0.99 美元，耗时约 1.9 分钟；WideSearch 的最高准确率为 84%，由 Perplexity 搜索搭配 GPT-5.6 Sol 获得。",
+          "source_url": "https://openrouter.ai/benchmarks",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "OpenRouter 将页面定位为持续运行的基准，而不是一次性排行榜；测试结果会随模型、搜索服务和评测任务更新，开发者可据此比较搜索质量与成本、延迟之间的取舍。",
+          "source_url": "https://openrouter.ai/benchmarks",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:20+00:00"
+      "updated_at": "2026-08-16T09:20:38+00:00"
     },
     {
-      "id": "d21cba6d-3461-530f-b59f-ae7dcdb6c442",
+      "id": "c262499f-24ec-5035-bce8-c76560ccd84c",
       "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "2f59b51451c39a9795ff363d9c7d071259c39c1d",
-      "title": "三星 Galaxy Wearable 代码出现头戴耳机 Galaxy H1",
-      "body": "据 The Verge 报道，三星 Galaxy Wearable 应用的代码中出现名为 Galaxy H1 的头戴式无线耳机，以及对应的连接状态图标。若项目按计划推进，它可能在 2027 年发布，成为三星自 2015 年 Level On 之后首款新的头戴式耳机。\n\n现有图标只能确认设备类型，不能代表最终外观。三星目前以 Galaxy Buds 真无线系列为主，尚没有直接对应 AirPods Max 和索尼 XM 系列的高端头戴产品。报道预计 Galaxy H1 会支持三星 SSC UHQ 编解码器，并延续 Galaxy Buds 4 Pro 对 Gemini 与 Bixby 的语音能力，但这些功能尚未由三星正式公布。",
+      "fingerprint": "e2df40145fcca0cff0088eeb979b96e34b2cbeb9",
+      "title": "Liquid AI 推出本地隐私过滤器 ShieldFlow",
+      "body": "Liquid AI 推出 ShieldFlow 早期试用版。它作为本地代理运行在电脑上，在提示词发送到 AI 服务前检测并替换姓名、身份证号、信用卡、API Key、医疗信息和地址等敏感内容，收到回复后再在安全范围内恢复上下文。检测、删改和日志都留在本机，支持 ChatGPT、Claude 和 OpenRouter 等服务。\n\nShieldFlow 支持 40 多种敏感实体，每个分类可独立开关并调节检测灵敏度。Liquid AI 同时在 Hugging Face 公开 LFM2.5-Encoder-350M-PII-Detector：该 3.5 亿参数模型面向 token classification，覆盖 11 个领域的 40 种个人信息类型和 16 种语言，可在 CPU 环境中运行。\n\nShieldFlow v0.4.3 个人版免费，支持 Apple Silicon Mac 与 Windows 10/11，应用和分类模型约占 500MB 磁盘空间，运行不需要 GPU。",
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 5,
+      "position": 7,
       "score": 0,
-      "source_url": "https://www.theverge.com/gadgets/980547/samsung-galaxy-h1-over-ear-headphones",
-      "source_name": "theverge.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 03:18",
-      "published_at": "2026-08-15 03:18",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/ec29dd31fce6-9ef67a9cb8f5fe90b411.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.theverge.com/gadgets/980547/samsung-galaxy-h1-over-ear-headphones 📮Folo · 2026 年 8 月 15 日 03:18",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.theverge.com/gadgets/980547/samsung-galaxy-h1-over-ear-headphones",
-          "title": "",
-          "publisher": "theverge.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": false,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "据 The Verge 报道，三星 Galaxy Wearable 应用的代码中出现名为 Galaxy H1 的头戴式无线耳机，以及对应的连接状态图标。若项目按计划推进，它可能在 2027 年发布，成为三星自 2015 年 Level On 之后首款新的头戴式耳机。",
-          "source_url": "https://www.theverge.com/gadgets/980547/samsung-galaxy-h1-over-ear-headphones",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "现有图标只能确认设备类型，不能代表最终外观。三星目前以 Galaxy Buds 真无线系列为主，尚没有直接对应 AirPods Max 和索尼 XM 系列的高端头戴产品。报道预计 Galaxy H1 会支持三星 SSC UHQ 编解码器，并延续 Galaxy Buds 4 Pro 对 Gemini 与 Bixby 的语音能力，但这些功能尚未由三星正式公布。",
-          "source_url": "https://www.theverge.com/gadgets/980547/samsung-galaxy-h1-over-ear-headphones",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "a60bb465-4974-5821-8f15-ddbdc09cf6bb",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "567b286a4e89627f2b16349444fe584614b2bb70",
-      "title": "i 茅台上半年营收增长逾 270%，直营电商成为茅台增长主线",
-      "body": "据财新报道，贵州茅台今年上半年继续把核心产品调价与 To C 直售转向 i 茅台，平台营收同比增长超过 270%。同期茅台酒实现营收 777.24 亿元，同比增长 2.82%；茅台王子酒、茅台迎宾酒、赖茅等系列酒实现营收 129.34 亿元，同比下降 6.02%。\n\n茅台酒与系列酒表现分化，显示公司增长更多来自核心产品和直营渠道。公司今年把官方电商从补充渠道推到价格与消费者运营前台，通过 i 茅台直接承接飞天茅台等核心产品销售，减少对传统经销体系的单一依赖。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://www.caixin.com/2026-08-15/102474338.html",
-      "source_name": "caixin.com",
+      "source_url": "https://www.liquid.ai/shieldflow",
+      "source_name": "liquid.ai",
       "source_type": "draft_source",
       "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-15 08:13",
-      "published_at": "2026-08-15 08:13",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/aaccbcef4a64-f66b5ee3f2972f7987d1.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.caixin.com/2026-08-15/102474338.html 📮Folo · 2026 年 8 月 15 日 08:13",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.caixin.com/2026-08-15/102474338.html",
-          "title": "",
-          "publisher": "caixin.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "2026年是贵州茅台发力直营电商、核心产品调价为To C直售 2026年上半年，茅台酒实现营收777.24亿元，同比增长2.82%；系列酒（包括茅台王子酒、茅台迎宾酒、赖茅等非核心产品线）实现营收129.34亿元，同比下滑6.02%。图：视觉中国…",
-          "source_url": "https://www.caixin.com/2026-08-15/102474338.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据财新报道，贵州茅台今年上半年继续把核心产品调价与 To C 直售转向 i 茅台，平台营收同比增长超过 270%。同期茅台酒实现营收 777.24 亿元，同比增长 2.82%；茅台王子酒、茅台迎宾酒、赖茅等系列酒实现营收 129.34 亿元，同比下降 6.02%。",
-          "source_url": "https://www.caixin.com/2026-08-15/102474338.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "茅台酒与系列酒表现分化，显示公司增长更多来自核心产品和直营渠道。公司今年把官方电商从补充渠道推到价格与消费者运营前台，通过 i 茅台直接承接飞天茅台等核心产品销售，减少对传统经销体系的单一依赖。",
-          "source_url": "https://www.caixin.com/2026-08-15/102474338.html",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "bd60be3d-2551-5415-b1f7-0cc6fd9d789e",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "1dd3e2d1fc693d5d1ef75d82c6405d77a8163c21",
-      "title": "继苏州后，美团「红灯停表」新增北京试点",
-      "body": "IT之家 8 月 15 日报道，继 7 月在苏州完成道路测试后，美团骑手「红灯停表」功能 8 月 13 日新增北京试点，首批覆盖朝阳区、通州区和经济技术开发区部分已接入交通数据的道路。骑手遇到红灯时，等待时长会计入后台，并顺延订单的最晚送达时间。\n\n骑手端会显示红灯倒计时和累计等待时长，配送结束后再提示本单延长的时间。美团还计划把实时信息同步给用户，让收货方知道配送延迟来自等红灯，而不是把压力继续转给骑手。\n\n美团称，这项外卖平台配送功能还在无锡、上海、杭州、成都、南昌、兰州等 20 余座城市评估接入，预计今年内覆盖超过 100 万名骑手。北京成为苏州之后第二个进入实际试点阶段的城市。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0,
-      "source_url": "https://www.ithome.com/0/989/977.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 07:32",
-      "published_at": "2026-08-15 07:32",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/5d13ccc347cf-1ed1e50627d83771411f.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/0/989/977.htm；https://www.meituan.com/news/NN260717198006386 📮Folo · 2026 年 8 月 15 日 07:32",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/0/989/977.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.meituan.com/news/NN260717198006386",
-          "title": "",
-          "publisher": "meituan.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 8 月 15 日报道，继 7 月在苏州完成道路测试后，美团骑手「红灯停表」功能 8 月 13 日新增北京试点，首批覆盖朝阳区、通州区和经济技术开发区部分已接入交通数据的道路。骑手遇到红灯时，等待时长会计入后台，并顺延订单的最晚送达时间。",
-          "source_url": "https://www.ithome.com/0/989/977.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "骑手端会显示红灯倒计时和累计等待时长，配送结束后再提示本单延长的时间。美团还计划把实时信息同步给用户，让收货方知道配送延迟来自等红灯，而不是把压力继续转给骑手。",
-          "source_url": "https://www.ithome.com/0/989/977.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "美团称，这项外卖平台配送功能还在无锡、上海、杭州、成都、南昌、兰州等 20 余座城市评估接入，预计今年内覆盖超过 100 万名骑手。北京成为苏州之后第二个进入实际试点阶段的城市。",
-          "source_url": "https://www.ithome.com/0/989/977.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "5acd4c4b-9531-5b05-b6b1-e6de4818cb27",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "b036e17fb34e57778e8e1baf086cec9a826f266d",
-      "title": "苹果在米兰撤下「幼儿手持 iPhone」广告",
-      "body": "IT之家援引意大利媒体 la Repubblica 报道，苹果已撤下在米兰投放的一幅争议广告，并换成 Find My 功能宣传。原广告展示一名幼儿手持 iPhone，旁边写着「Tutto ok, è iPhone」（都没事，是 iPhone）。\n\n广告属于苹果长期运行的「Relax, it's iPhone」系列，同批创意还包括暴雨中使用 iPhone、手机被猫推下桌子和被狗叼住等场景。家长投诉该画面会把手机交给幼儿的「电子保姆」行为正常化，意大利监管部门随后介入调查。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://www.ithome.com/0/989/982.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 07:59",
-      "published_at": "2026-08-15 07:59",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/6281a8f70721-b62e88d8a44280de3fc4.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/0/989/982.htm；https://www.orizzontescuola.it/pubblicita-con-bambino-e-smarthone-messaggio-disastroso-scoppia-la-polemica-lesperto-cosi-si-negano-le-prove-sui-danni-ai-minori/ 📮Folo · 2026 年 8 月 15 日 07:59",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/0/989/982.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.orizzontescuola.it/pubblicita-con-bambino-e-smarthone-messaggio-disastroso-scoppia-la-polemica-lesperto-cosi-si-negano-le-prove-sui-danni-ai-minori/",
-          "title": "",
-          "publisher": "orizzontescuola.it",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家援引意大利媒体 la Repubblica 报道，苹果已撤下在米兰投放的一幅争议广告，并换成 Find My 功能宣传。原广告展示一名幼儿手持 iPhone，旁边写着「Tutto ok, è iPhone」（都没事，是 iPhone）。",
-          "source_url": "https://www.ithome.com/0/989/982.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "广告属于苹果长期运行的「Relax, it's iPhone」系列，同批创意还包括暴雨中使用 iPhone、手机被猫推下桌子和被狗叼住等场景。家长投诉该画面会把手机交给幼儿的「电子保姆」行为正常化，意大利监管部门随后介入调查。",
-          "source_url": "https://www.ithome.com/0/989/982.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "842f01a9-6534-5f3c-8899-27c6ad537364",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "869b489679805e8d556cab7dd5eac4acdd895298",
-      "title": "苹果美国官翻店新增 M5 Mac 与 iPhone 16 Plus",
-      "body": "据 9to5Mac 报道，苹果本周扩充美国官方翻新商店，新增多种 M5 MacBook Air、M5 与 M5 Pro/Max MacBook Pro 配置，以及 iPhone 16 Plus、Apple Watch Series 11、Apple Watch SE 3 和 Apple TV 4K。\n\n其中，iPhone 16 Plus 的 512GB 版本已不再以新品形式由苹果销售，目前只能从官翻渠道购买。官翻设备经过苹果整备，享有一年有限保修和 14 天退货政策，也可以购买 AppleCare；库存会随回收和整备进度变化。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "https://9to5mac.com/2026/08/14/apple-adds-new-macbook-air-iphone-16-plus-refurb-store",
-      "source_name": "9to5mac.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 04:57",
-      "published_at": "2026-08-15 04:57",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/cae05240c992-f9cbf0494d1f2afd17ae.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://9to5mac.com/2026/08/14/apple-adds-new-macbook-air-iphone-16-plus-refurb-store 📮Folo · 2026 年 8 月 15 日 04:57",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://9to5mac.com/2026/08/14/apple-adds-new-macbook-air-iphone-16-plus-refurb-store",
-          "title": "",
-          "publisher": "9to5mac.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Apple has expanded its Certified Refurbished Store this week with a handful of new MacBook Air and MacBook Pro configurations.",
-          "source_url": "https://9to5mac.com/2026/08/14/apple-adds-new-macbook-air-iphone-16-plus-refurb-store",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 9to5Mac 报道，苹果本周扩充美国官方翻新商店，新增多种 M5 MacBook Air、M5 与 M5 Pro/Max MacBook Pro 配置，以及 iPhone 16 Plus、Apple Watch Series 11、Apple Watch SE 3 和 Apple TV 4K。",
-          "source_url": "https://9to5mac.com/2026/08/14/apple-adds-new-macbook-air-iphone-16-plus-refurb-store",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "其中，iPhone 16 Plus 的 512GB 版本已不再以新品形式由苹果销售，目前只能从官翻渠道购买。官翻设备经过苹果整备，享有一年有限保修和 14 天退货政策，也可以购买 AppleCare；库存会随回收和整备进度变化。",
-          "source_url": "https://9to5mac.com/2026/08/14/apple-adds-new-macbook-air-iphone-16-plus-refurb-store",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "e387b3a0-d158-5b2d-b0b4-e2a9ae6a2883",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "65d8b45d0acda13c4c48cc0b05426a5f279a1e4e",
-      "title": "TerraMow V1000 用三摄像头自动画草坪地图",
-      "body": "据 9to5Mac 体验，TerraMow V1000 割草机器人使用三颗摄像头和 TerraVision 2.0 系统自动识别草坪，不需要埋设边界线、安装 RTK 天线，也不要求用户先遥控机器沿院子走一圈。\n\n摄像头还会把机器人视角实时传回 iPhone，用户可查看它为何减速或绕开障碍，并用单手摇杆补割遗漏区域。应用支持定时任务、分区、禁行区域和远程控制；自动建图耗时较长，没有围栏的相邻草坪也可能被误识别，需要手动划出禁区。\n\n视觉导航依赖日光，连续降雨后形成的积水和高草还可能被系统当成长期障碍。体验者连续使用数周后认为，它降低了首次安装门槛，但自适应地图仍需要用户在模糊边界和异常草况下介入修正。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://9to5mac.com/2026/08/14/review-terramow-v1000-is-the-easiest-iphone-controlled-robot-lawn-mower-ive-tested",
-      "source_name": "9to5mac.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 01:15",
-      "published_at": "2026-08-15 01:15",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/885aadac95db-1ddda2dee21094f4d059.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://9to5mac.com/2026/08/14/review-terramow-v1000-is-the-easiest-iphone-controlled-robot-lawn-mower-ive-tested 📮Folo · 2026 年 8 月 15 日 01:15",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://9to5mac.com/2026/08/14/review-terramow-v1000-is-the-easiest-iphone-controlled-robot-lawn-mower-ive-tested",
-          "title": "",
-          "publisher": "9to5mac.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "据 9to5Mac 体验，TerraMow V1000 割草机器人使用三颗摄像头和 TerraVision 2.0 系统自动识别草坪，不需要埋设边界线、安装 RTK 天线，也不要求用户先遥控机器沿院子走一圈。",
-          "source_url": "https://9to5mac.com/2026/08/14/review-terramow-v1000-is-the-easiest-iphone-controlled-robot-lawn-mower-ive-tested",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "摄像头还会把机器人视角实时传回 iPhone，用户可查看它为何减速或绕开障碍，并用单手摇杆补割遗漏区域。应用支持定时任务、分区、禁行区域和远程控制；自动建图耗时较长，没有围栏的相邻草坪也可能被误识别，需要手动划出禁区。",
-          "source_url": "https://9to5mac.com/2026/08/14/review-terramow-v1000-is-the-easiest-iphone-controlled-robot-lawn-mower-ive-tested",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "视觉导航依赖日光，连续降雨后形成的积水和高草还可能被系统当成长期障碍。体验者连续使用数周后认为，它降低了首次安装门槛，但自适应地图仍需要用户在模糊边界和异常草况下介入修正。",
-          "source_url": "https://9to5mac.com/2026/08/14/review-terramow-v1000-is-the-easiest-iphone-controlled-robot-lawn-mower-ive-tested",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-15T09:16:33+00:00"
-    },
-    {
-      "id": "73512664-e863-53c8-a99e-40a10d79a79e",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "180b32ed1b7332592e28d400aa67005b9927b2fa",
-      "title": "高盛开始为英伟达 5000 亿美元 AI 基建融资计划寻找投资人",
-      "body": "据路透社报道，高盛正在接触潜在投资人，希望参与英伟达规模超过 5000 亿美元的 AI 基础设施融资计划。英伟达 8 月 10 日宣布与 Apollo、贝莱德、黑石、Brookfield、高盛和 KKR 合作，由六家机构分别建立融资平台，为购买 GPU、建设数据中心的客户引入第三方长期资本。\n\n这些平台并非由英伟达一次性投入 5000 亿美元，而是计划逐步汇集保险公司、养老金、主权财富基金等机构资金，并以 GPU 和算力基础设施等资产支持融资。英伟达希望借此降低客户部署算力的资金门槛，高盛则凭借与英伟达的长期关系获得了六个平台中的一个席位。\n\n路透社称，高盛已开始讨论具体参与方式；相关结构把 AI 算力从企业资本开支进一步带入信贷市场，也让芯片折旧、设备残值和算力需求成为投资人需要评估的核心变量。",
-      "category": "重磅",
-      "status": "ready",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
-      "source_name": "reuters.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
+      "disclosed_at": "2026-08-15 12:01",
+      "published_at": "2026-08-15 12:01",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
+      "image_url": "data/images/e930c5e49f90-92fd9bf54397e3c21c17.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.liquid.ai/shieldflow；https://huggingface.co/LiquidAI/LFM2.5-Encoder-350M-PII-Detector；https://t.me/OneMillion_AI/3913 📮Folo · 2026 年 8 月 15 日 12:01",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.liquid.ai/shieldflow",
+          "title": "",
+          "publisher": "liquid.ai",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://huggingface.co/LiquidAI/LFM2.5-Encoder-350M-PII-Detector",
+          "title": "",
+          "publisher": "huggingface.co",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://t.me/OneMillion_AI/3913",
+          "title": "",
+          "publisher": "t.me",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Liquid AI做了个本地隐私过滤器：16种语言，40类敏感信息一次清掉 Liquid AI 推出一个只有 3.5 亿参数的隐私过滤模型。它能一次扫完整段文字，找出姓名、电话、证件号、银行卡、API Key 等 40 类敏感信息，支持 16 种语言，还能直接在本地运行。",
+          "source_url": "https://www.liquid.ai/shieldflow",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Liquid AI 推出 ShieldFlow 早期试用版。它作为本地代理运行在电脑上，在提示词发送到 AI 服务前检测并替换姓名、身份证号、信用卡、API Key、医疗信息和地址等敏感内容，收到回复后再在安全范围内恢复上下文。检测、删改和日志都留在本机，支持 ChatGPT、Claude 和 OpenRouter 等服务。",
+          "source_url": "https://www.liquid.ai/shieldflow",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "ShieldFlow 支持 40 多种敏感实体，每个分类可独立开关并调节检测灵敏度。Liquid AI 同时在 Hugging Face 公开 LFM2.5-Encoder-350M-PII-Detector：该 3.5 亿参数模型面向 token classification，覆盖 11 个领域的 40 种个人信息类型和 16 种语言，可在 CPU 环境中运行。",
+          "source_url": "https://www.liquid.ai/shieldflow",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "ShieldFlow v0.4.3 个人版免费，支持 Apple Silicon Mac 与 Windows 10/11，应用和分类模型约占 500MB 磁盘空间，运行不需要 GPU。",
+          "source_url": "https://www.liquid.ai/shieldflow",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:38+00:00"
+    },
+    {
+      "id": "b7a8586a-17a2-5d1b-ab02-dd89208ab720",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "7cdf405fa1af3c1d46b5b21a66fbbf61fdfb5d93",
+      "title": "Suno Studio 2.0 加入 MIDI 编辑与 AI 插件生成",
+      "body": "据 MusicRadar 报道，Suno 已推出浏览器端数字音频工作站 Studio 2.0，在生成式音乐能力之外补入 MIDI、参数自动化和延迟补偿等传统制作工具，并新增可直接控制项目的 Studio Chat。\n\n新版允许用户在时间线或独立编辑器中导入、录制和修改 MIDI，也能把音频转换为 MIDI。反向操作时，Suno 的生成引擎可把 MIDI 片段转换为指定乐器、音色或风格的音频，同时保留原始音高、节奏和力度；Studio Chat 还可以根据文字指令生成旋律、和弦与鼓点。\n\n每条轨道现在都有横向通道条，可加载内置 Wavetable 合成器，以及混响、延迟、压缩、失真、均衡器和噪声门等效果。Studio Chat 可以生成声音、整理工程、编辑 MIDI 与音频，并按提示制作自定义音频效果；Studio 2.0 已向 Premier 订阅用户开放。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 8,
+      "score": 0,
+      "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+      "source_name": "musicradar.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-15 23:28",
+      "published_at": "2026-08-15 23:28",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/ca8cccfa1b53-901ba6b9a1935fccefd6.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins；https://www.ithome.com/0/990/190.htm 📮Folo · 2026 年 8 月 15 日 23:28",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+          "title": "",
+          "publisher": "musicradar.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/990/190.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 15 日消息，当地时间 14 日，Suno 正式推出了 Studio 2.0，通过一系列大幅升级进一步向“真正的数字音频工作站（DAW）靠拢”，而非只是带有生成式 AI 功能的简易音频编辑器。",
+          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "其中最重要的升级无疑是加入 MIDI 支持。Suno 称，MIDI…",
+          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据 MusicRadar 报道，Suno 已推出浏览器端数字音频工作站 Studio 2.0，在生成式音乐能力之外补入 MIDI、参数自动化和延迟补偿等传统制作工具，并新增可直接控制项目的 Studio Chat。",
+          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "新版允许用户在时间线或独立编辑器中导入、录制和修改 MIDI，也能把音频转换为 MIDI。反向操作时，Suno 的生成引擎可把 MIDI 片段转换为指定乐器、音色或风格的音频，同时保留原始音高、节奏和力度；Studio Chat 还可以根据文字指令生成旋律、和弦与鼓点。",
+          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "每条轨道现在都有横向通道条，可加载内置 Wavetable 合成器，以及混响、延迟、压缩、失真、均衡器和噪声门等效果。Studio Chat 可以生成声音、整理工程、编辑 MIDI 与音频，并按提示制作自定义音频效果；Studio 2.0 已向 Premier 订阅用户开放。",
+          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:38+00:00"
+    },
+    {
+      "id": "dbbdf10d-3632-5d07-8d84-7f792b004f87",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "c37aca3b81f85030787aa8296aad198ea981ee78",
+      "title": "福特发布 Mustang Dark Horse SC 敞篷版：795 马力，明年春季交付",
+      "body": "据 IT 之家援引 Carscoops 报道，福特已发布 Mustang Dark Horse SC 敞篷版。这款新车采用软顶敞篷结构和针对公路驾驶重新调校的 MagneRide 悬架，是福特迄今动力最强的敞篷 Mustang。\n\n动力系统沿用硬顶版的 5.2L 机械增压 V8 发动机，最大功率 795 马力，峰值扭矩 894N·m，匹配 7 速双离合变速箱并采用后轮驱动。座舱提供缟玛瑙黑与太空灰配色，驾驶席支持 6 向电动调节，副驾驶席支持 4 向电动调节；车内还可看到碳纤维饰板、旋钮式换挡机构和平底方向盘。\n\nMustang Dark Horse SC 敞篷版将于今年秋季开放订购，首批车辆计划在明年春季交付。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 9,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/990/173.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-15 21:31",
+      "published_at": "2026-08-15 21:31",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
       "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/；https://www.axios.com/2026/08/10/nvidia-financing-ai-goldman-sachs-blackrock 📮Folo · 2026 年 8 月 15 日 03:22",
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/173.htm 📮Folo · 2026 年 8 月 15 日 21:31",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "url": "https://www.ithome.com/0/990/173.htm",
           "title": "",
-          "publisher": "reuters.com",
+          "publisher": "ithome.com",
           "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 15 日消息，据外媒 Carscoop 今天（15 日）报道，福特正式发布 Mustang Dark Horse SC 敞篷版。新车比硬顶版晚 7 个月亮相，并成为福特迄今动力最强的敞篷 Mustang。",
+          "source_url": "https://www.ithome.com/0/990/173.htm",
+          "status": "supported",
+          "evidence": ""
         },
         {
-          "url": "https://www.axios.com/2026/08/10/nvidia-financing-ai-goldman-sachs-blackrock",
+          "text": "福特希望把 Dark Horse SC 敞篷版打造成…",
+          "source_url": "https://www.ithome.com/0/990/173.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据 IT 之家援引 Carscoops 报道，福特已发布 Mustang Dark Horse SC 敞篷版。这款新车采用软顶敞篷结构和针对公路驾驶重新调校的 MagneRide 悬架，是福特迄今动力最强的敞篷 Mustang。",
+          "source_url": "https://www.ithome.com/0/990/173.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "动力系统沿用硬顶版的 5.2L 机械增压 V8 发动机，最大功率 795 马力，峰值扭矩 894N·m，匹配 7 速双离合变速箱并采用后轮驱动。座舱提供缟玛瑙黑与太空灰配色，驾驶席支持 6 向电动调节，副驾驶席支持 4 向电动调节；车内还可看到碳纤维饰板、旋钮式换挡机构和平底方向盘。",
+          "source_url": "https://www.ithome.com/0/990/173.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Mustang Dark Horse SC 敞篷版将于今年秋季开放订购，首批车辆计划在明年春季交付。",
+          "source_url": "https://www.ithome.com/0/990/173.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:38+00:00"
+    },
+    {
+      "id": "d1490859-09c8-583a-8e55-87fa31896612",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "16e000feb424e168631d926b3ee77dd0b2d2464a",
+      "title": "共享充电宝「撞脸」主流品牌，误还后还要交跑腿费",
+      "body": "据中央广播电视总台中国之声报道，一些小品牌共享充电宝开始模仿主流品牌的机柜颜色和外观，并紧邻主流品牌设备摆放，让消费者在扫码时产生误认。\n\n四川消费者甘女士借用一款外观近似主流品牌的共享充电宝，归还时才发现设备属于另一平台。客服要求她支付 30 元跑腿费取出误还的充电宝，或自行拆取；第二天她准备按网上教程取出时，设备已经不见，平台随后以「遗失」为由要求支付 99 元。\n\n一名共享充电宝从业者称，部分机柜换成与主流品牌相似的黄色后，使用率可从约 20% 提高至 40%。中国政法大学知识产权研究中心特约研究员赵占领表示，颜色本身未必能注册为商标，但模仿包装、弱化真实经营者并诱导误认，可能构成混淆行为；误借误还后持续计费或收取买断费，也可能侵犯消费者的知情权和自主选择权。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/990/239.htm",
+      "source_name": "IT之家",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 09:53",
+      "published_at": "2026-08-16 09:53",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/239.htm 📮Folo · 2026-08-16 09:53",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/990/239.htm",
           "title": "",
-          "publisher": "axios.com",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据中央广播电视总台中国之声报道，一些小品牌共享充电宝开始模仿主流品牌的机柜颜色和外观，并紧邻主流品牌设备摆放，让消费者在扫码时产生误认。",
+          "source_url": "https://www.ithome.com/0/990/239.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "四川消费者甘女士借用一款外观近似主流品牌的共享充电宝，归还时才发现设备属于另一平台。客服要求她支付 30 元跑腿费取出误还的充电宝，或自行拆取；第二天她准备按网上教程取出时，设备已经不见，平台随后以「遗失」为由要求支付 99 元。",
+          "source_url": "https://www.ithome.com/0/990/239.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "一名共享充电宝从业者称，部分机柜换成与主流品牌相似的黄色后，使用率可从约 20% 提高至 40%。中国政法大学知识产权研究中心特约研究员赵占领表示，颜色本身未必能注册为商标，但模仿包装、弱化真实经营者并诱导误认，可能构成混淆行为；误借误还后持续计费或收取买断费，也可能侵犯消费者的知情权和自主选择权。",
+          "source_url": "https://www.ithome.com/0/990/239.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-16T09:20:40+00:00"
+    },
+    {
+      "id": "e0542dd9-7ea1-54dd-b344-27afdb2b8598",
+      "issue_id": "ifanr-daily-20260817",
+      "fingerprint": "8fe4a4c3a2fc339b526bdd66f573f706b4daea3c",
+      "title": "《塞尔达传说》40 周年 Switch 2 手柄包装曝光",
+      "body": "消息人士 @XX_750000 分享的照片显示，一款《塞尔达传说》40 周年主题 Switch 2 Pro 手柄已经出现正反面包装；同一批照片中还有一个尺寸接近手柄包装、但被打码的第三款任天堂产品。\n\n此前流出的包装还包括黑金配色、带有三角力量标志的限定 Switch 2 主机。目前任天堂尚未公布这套硬件，也没有确认图片真伪、发售时间、售价以及是否会与《塞尔达传说:时之笛》重制版同步推出。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/990/160.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-15 19:28",
+      "published_at": "2026-08-15 19:28",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/3f6dcbf2db635fa7a512.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/990/160.htm；https://www.reddit.com/r/GamingLeaksAndRumours/comments/1voa9xv/xx_750000_has_shared_more_photos_of_the_zelda/ 📮Folo · 2026 年 8 月 15 日 19:28",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/990/160.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.reddit.com/r/GamingLeaksAndRumours/comments/1voa9xv/xx_750000_has_shared_more_photos_of_the_zelda/",
+          "title": "",
+          "publisher": "reddit.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -1875,25 +1891,19 @@
       ],
       "claims": [
         {
-          "text": "据路透社报道，高盛正在接触潜在投资人，希望参与英伟达规模超过 5000 亿美元的 AI 基础设施融资计划。英伟达 8 月 10 日宣布与 Apollo、贝莱德、黑石、Brookfield、高盛和 KKR 合作，由六家机构分别建立融资平台，为购买 GPU、建设数据中心的客户引入第三方长期资本。",
-          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "text": "消息人士 @XX_750000 分享的照片显示，一款《塞尔达传说》40 周年主题 Switch 2 Pro 手柄已经出现正反面包装；同一批照片中还有一个尺寸接近手柄包装、但被打码的第三款任天堂产品。",
+          "source_url": "https://www.ithome.com/0/990/160.htm",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "这些平台并非由英伟达一次性投入 5000 亿美元，而是计划逐步汇集保险公司、养老金、主权财富基金等机构资金，并以 GPU 和算力基础设施等资产支持融资。英伟达希望借此降低客户部署算力的资金门槛，高盛则凭借与英伟达的长期关系获得了六个平台中的一个席位。",
-          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "路透社称，高盛已开始讨论具体参与方式；相关结构把 AI 算力从企业资本开支进一步带入信贷市场，也让芯片折旧、设备残值和算力需求成为投资人需要评估的核心变量。",
-          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "text": "此前流出的包装还包括黑金配色、带有三角力量标志的限定 Switch 2 主机。目前任天堂尚未公布这套硬件，也没有确认图片真伪、发售时间、售价以及是否会与《塞尔达传说:时之笛》重制版同步推出。",
+          "source_url": "https://www.ithome.com/0/990/160.htm",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-15T09:16:32+00:00"
+      "updated_at": "2026-08-16T09:20:38+00:00"
     }
   ],
   "brand_packages": {
@@ -1914,16 +1924,16 @@
           "url": ""
         }
       ],
-      "generated_at": "2026-08-15T03:33:50+00:00",
-      "generation_model": "workbuddy",
+      "generated_at": "2026-08-16T09:19:31+00:00",
+      "generation_model": "codex_local_compact",
       "generation_source": "ifanr_morning_title_optimizer",
       "headline_options": [
-        "ChatGPT直改云文件 / 苹果官翻新增M5Mac / Gemini接入中小学课堂",
-        "PayPal出售谈判升温 / Waymo获准加州扩区 / 宇树G1表演仍靠遥控",
-        "苹果官翻上架M5Mac / ChatGPT直改云文件 / Gemini进入学生课堂"
+        "Miora跨应用读写资料/Claude文本将加入水印/本地AI隐私过滤器上线",
+        "Claude公司首次运营盈利/千问半年下载破30亿/AI搜索可同场比成本速度",
+        "连续世界模型教机器人/Miora让7款工具互通/Suno支持MIDI双向转换"
       ],
       "selected_cover": "story:967cc528-059c-53a5-b048-30e2d715f921",
-      "selected_headline": "ChatGPT直改云文件 / 苹果官翻新增M5Mac / Gemini接入中小学课堂"
+      "selected_headline": "Miora跨应用读写资料/Claude文本将加入水印/本地AI隐私过滤器上线"
     },
     "ifanr": {
       "cover_candidates": [
@@ -1942,28 +1952,28 @@
           "url": ""
         }
       ],
-      "generated_at": "2026-08-15T04:32:19+00:00",
-      "generation_model": "workbuddy",
+      "generated_at": "2026-08-16T09:19:31+00:00",
+      "generation_model": "codex_local_compact",
       "generation_source": "ifanr_morning_title_optimizer",
       "headline_options": [
-        "PayPal出售谈判升温/官方电商成茅台增长主线/红灯等待自动顺延配送时间",
-        "学生上课就能用Gemini/ChatGPT改云文件/骑手等红灯自动顺延送达",
-        "美团红灯停表新增北京试点/苹果撤下幼儿持手机广告/茅台电商营收增长逾270%"
+        "充电宝撞脸误还再收99元/胖东来再招20名刑释员工/激光灭蚊器988美元起售",
+        "《牛来》排片两天翻1900倍/机器人运动会同场拧螺丝/王祖贤谈AI授权边界",
+        "小米15周年拥抱AI/曝红米首销为上代65%/EV3美国起售价不到3.1万"
       ],
       "selected_cover": "story:967cc528-059c-53a5-b048-30e2d715f921",
-      "selected_headline": "PayPal出售谈判升温/官方电商成茅台增长主线/红灯等待自动顺延配送时间"
+      "selected_headline": "充电宝撞脸误还再收99元/胖东来再招20名刑释员工/激光灭蚊器988美元起售"
     }
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 33,
-    "snapshot_generated_at": "2026-08-15T09:17:35+00:00",
+    "source_issue_revision": 153,
+    "snapshot_generated_at": "2026-08-16T09:22:27+00:00",
     "public_snapshot": {
-      "digest": "84f0a4bad7886d7a9b6229e461de4f7f184644a599db5919538272725589793b",
-      "generated_at": "2026-08-15T09:17:35+00:00",
-      "image_count": 25,
-      "selected_count": 27,
-      "selected_image_count": 25,
+      "digest": "550efdea6769fef8019f1e9d5e1d779c5d301e97062d850cf9550302deac3a63",
+      "generated_at": "2026-08-16T09:22:27+00:00",
+      "image_count": 21,
+      "selected_count": 25,
+      "selected_image_count": 22,
       "mode": "explicit_review_operations"
     }
   }
