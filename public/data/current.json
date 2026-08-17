@@ -1,32 +1,32 @@
 {
-  "id": "ifanr-daily-20260817",
-  "publication_date": "2026-08-17",
-  "title": "20260817 早报",
+  "id": "ifanr-daily-20260818",
+  "publication_date": "2026-08-18",
+  "title": "20260818 早报",
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 153,
-  "selected_count": 25,
-  "review_count": 22,
-  "ready_count": 3,
-  "updated_at": "2026-08-16T09:21:12+00:00",
+  "revision": 35,
+  "selected_count": 33,
+  "review_count": 21,
+  "ready_count": 12,
+  "updated_at": "2026-08-17T09:17:26+00:00",
   "stories": [
     {
-      "id": "e4f096eb-c187-54bc-a22a-95dcb3b2e1cd",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "fa5ec8da14f19584e37ee7bc9938385f256d1916",
-      "title": "Anthropic 第二季度营收超 115 亿美元，首次实现调整后运营盈利",
-      "body": "据彭博社报道，Anthropic 向潜在投资者披露，2026 年第二季度初步营收超过 115 亿美元，较 2025 年同期的 7.87 亿美元增长至少 14 倍，也高于今年第一季度的 47.3 亿美元。文件还显示，Anthropic 当季首次录得正的调整后运营利润。\n\n上述数字仍在审议，后续可能调整；Anthropic 拒绝置评。公司 5 月的年化营收运行率已超过 470 亿美元，彭博社称这一指标与 OpenAI 超过 400 亿美元的年化收入未必采用相同计算口径。\n\nAnthropic 正在为潜在的大型 IPO 与投资者会面。彭博社此前报道，公司已秘密提交上市申请，并与摩根士丹利、高盛和摩根大通合作推进 IPO；若今年秋季完成上市，时间将早于 OpenAI 和 DeepSeek 正在准备的上市计划。",
+      "id": "c812baed-ec4a-501e-9476-6777df3102b5",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "d3bf6c1f5c965f88362f8a22c20b8f36cf5cfdea",
+      "title": "Qwen3.8-27B 开源两天下载破百万，登顶 Hugging Face 趋势榜",
+      "body": "阿里新闻稿称，Qwen3.8-27B 开源两天后下载量突破 100 万次，并升至 Hugging Face 全球大模型趋势榜第一。官方模型卡显示，它是一个 270 亿参数的稠密视觉语言模型，原生上下文长度为 262144 token，可扩展至 100 万 token。\n\n模型支持图像与视频理解，默认开启思考模式，并可通过 `reasoning_effort` 调整推理深度。官方提供 Transformers 格式权重，兼容 vLLM、SGLang 和 TokenSpeed 等推理框架，采用 Apache 2.0 许可证。\n\n新闻稿列出的社区适配包括英伟达、AMD、联发科等芯片厂商，以及 Ollama、Unsloth、LM Studio、Kilo、Cline 和 Hermes 等推理与智能体工具。Hugging Face 页面显示，模型发布后已有大量量化版本进入社区。",
       "category": "大公司",
       "status": "ready",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
-      "source_name": "bloomberg.com",
+      "source_url": "https://huggingface.co/Qwen/Qwen3.8-27B",
+      "source_name": "huggingface.co",
       "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_quality": "unknown",
+      "confidence": 0.55,
       "event_date": null,
       "disclosed_at": null,
       "published_at": null,
@@ -34,28 +34,19 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/09d43dd06f39-fba0f2e2df4ffe3471ee.webp",
+      "image_url": "data/images/db3058be7d9aa2565a37.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter；https://finance.yahoo.com/technology/ai/articles/anthropic-revenue-surges-over-11-210857853.html 📮Folo · 2026 年 8 月 15 日 05:08",
+        "source_line": "🔗 来源：https://huggingface.co/Qwen/Qwen3.8-27B；新闻稿《【新闻稿】阿里Qwen3.8登顶开源榜首！Hugging Face：千问成全球开源社区基座.docx》 📝新闻稿 · 2026 年 8 月 17 日 11:58",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "url": "https://huggingface.co/Qwen/Qwen3.8-27B",
           "title": "",
-          "publisher": "bloomberg.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        },
-        {
-          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-revenue-surges-over-11-210857853.html",
-          "title": "",
-          "publisher": "finance.yahoo.com",
+          "publisher": "huggingface.co",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -64,71 +55,80 @@
       ],
       "claims": [
         {
-          "text": "据彭博社报道，Anthropic 向潜在投资者披露，2026 年第二季度初步营收超过 115 亿美元，较 2025 年同期的 7.87 亿美元增长至少 14 倍，也高于今年第一季度的 47.3 亿美元。文件还显示，Anthropic 当季首次录得正的调整后运营利润。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "text": "阿里新闻稿称，Qwen3.8-27B 开源两天后下载量突破 100 万次，并升至 Hugging Face 全球大模型趋势榜第一。官方模型卡显示，它是一个 270 亿参数的稠密视觉语言模型，原生上下文长度为 262144 token，可扩展至 100 万 token。",
+          "source_url": "https://huggingface.co/Qwen/Qwen3.8-27B",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "上述数字仍在审议，后续可能调整；Anthropic 拒绝置评。公司 5 月的年化营收运行率已超过 470 亿美元，彭博社称这一指标与 OpenAI 超过 400 亿美元的年化收入未必采用相同计算口径。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "text": "模型支持图像与视频理解，默认开启思考模式，并可通过 `reasoning_effort` 调整推理深度。官方提供 Transformers 格式权重，兼容 vLLM、SGLang 和 TokenSpeed 等推理框架，采用 Apache 2.0 许可证。",
+          "source_url": "https://huggingface.co/Qwen/Qwen3.8-27B",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Anthropic 正在为潜在的大型 IPO 与投资者会面。彭博社此前报道，公司已秘密提交上市申请，并与摩根士丹利、高盛和摩根大通合作推进 IPO；若今年秋季完成上市，时间将早于 OpenAI 和 DeepSeek 正在准备的上市计划。",
-          "source_url": "https://www.bloomberg.com/news/articles/2026-08-14/anthropic-revenue-ahead-of-ipo-surges-over-14-fold-in-second-quarter",
+          "text": "新闻稿列出的社区适配包括英伟达、AMD、联发科等芯片厂商，以及 Ollama、Unsloth、LM Studio、Kilo、Cline 和 Hermes 等推理与智能体工具。Hugging Face 页面显示，模型发布后已有大量量化版本进入社区。",
+          "source_url": "https://huggingface.co/Qwen/Qwen3.8-27B",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "73512664-e863-53c8-a99e-40a10d79a79e",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "180b32ed1b7332592e28d400aa67005b9927b2fa",
-      "title": "高盛开始为英伟达 5000 亿美元 AI 基建融资计划寻找投资人",
-      "body": "据路透社报道，高盛正在接触潜在投资人，希望参与英伟达规模超过 5000 亿美元的 AI 基础设施融资计划。英伟达 8 月 10 日宣布与 Apollo、贝莱德、黑石、Brookfield、高盛和 KKR 合作，由六家机构分别建立融资平台，为购买 GPU、建设数据中心的客户引入第三方长期资本。\n\n这些平台并非由英伟达一次性投入 5000 亿美元，而是计划逐步汇集保险公司、养老金、主权财富基金等机构资金，并以 GPU 和算力基础设施等资产支持融资。英伟达希望借此降低客户部署算力的资金门槛，高盛则凭借与英伟达的长期关系获得了六个平台中的一个席位。\n\n路透社称，高盛已开始讨论具体参与方式；相关结构把 AI 算力从企业资本开支进一步带入信贷市场，也让芯片折旧、设备残值和算力需求成为投资人需要评估的核心变量。",
+      "id": "90be855b-eb54-5ddf-8240-26edb311f6c2",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "dfda21b633c9f743517b459690f549bb50bbf97a",
+      "title": "阿里与信宸资本达成交易，灵犀互娱将更换股东",
+      "body": "灵犀互娱 CEO 周炳枢在 8 月 17 日内部信中确认，阿里巴巴集团与信宸资本已经达成交易协议，阿里将出让所持灵犀互娱股份，信宸资本成为新股东。\n\n周炳枢表示，交易来自阿里整体战略聚焦。管理团队将继续带领公司运营并开发游戏产品；内部信没有宣布管理层更换或具体交割安排。\n\n灵犀互娱在阿里体系内曾多次调整组织归属：2017 年进入阿里大文娱，2020 年升格为独立事业群，2023 年被划入「1+6+N」架构中的 N 业务板块。此次内部信把此前的出售报道推进到双方已经签署协议的新阶段。",
       "category": "大公司",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
       "position": 1,
       "score": 0,
-      "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
-      "source_name": "reuters.com",
+      "source_url": "https://mp.weixin.qq.com/s/roSY6ZAznEr4NyruDCAzRw",
+      "source_name": "mp.weixin.qq.com",
       "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_quality": "unknown",
+      "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
+      "disclosed_at": "2026-08-17 11:48",
+      "published_at": "2026-08-17 11:48",
       "cross_day_status": "current",
       "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/d37ef3dd4064-bf598da838a9e0710c21.webp",
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/b46b5a7371c2b79fe792.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/；https://www.axios.com/2026/08/10/nvidia-financing-ai-goldman-sachs-blackrock 📮Folo · 2026 年 8 月 15 日 03:22",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/roSY6ZAznEr4NyruDCAzRw；https://mp.weixin.qq.com/s/JcmdljKXJJXuyfINRN8GHw 🧭飞书群 · 2026 年 8 月 17 日 10:36—11:48",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "url": "https://mp.weixin.qq.com/s/_f0b222teEbGGKErf3xSgQ",
           "title": "",
-          "publisher": "reuters.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
         },
         {
-          "url": "https://www.axios.com/2026/08/10/nvidia-financing-ai-goldman-sachs-blackrock",
+          "url": "https://mp.weixin.qq.com/s/roSY6ZAznEr4NyruDCAzRw",
           "title": "",
-          "publisher": "axios.com",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/JcmdljKXJJXuyfINRN8GHw",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -137,553 +137,331 @@
       ],
       "claims": [
         {
-          "text": "据路透社报道，高盛正在接触潜在投资人，希望参与英伟达规模超过 5000 亿美元的 AI 基础设施融资计划。英伟达 8 月 10 日宣布与 Apollo、贝莱德、黑石、Brookfield、高盛和 KKR 合作，由六家机构分别建立融资平台，为购买 GPU、建设数据中心的客户引入第三方长期资本。",
-          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "text": "灵犀互娱 CEO 周炳枢在 8 月 17 日内部信中确认，阿里巴巴集团与信宸资本已经达成交易协议，阿里将出让所持灵犀互娱股份，信宸资本成为新股东。",
+          "source_url": "https://mp.weixin.qq.com/s/roSY6ZAznEr4NyruDCAzRw",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "这些平台并非由英伟达一次性投入 5000 亿美元，而是计划逐步汇集保险公司、养老金、主权财富基金等机构资金，并以 GPU 和算力基础设施等资产支持融资。英伟达希望借此降低客户部署算力的资金门槛，高盛则凭借与英伟达的长期关系获得了六个平台中的一个席位。",
-          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "text": "周炳枢表示，交易来自阿里整体战略聚焦。管理团队将继续带领公司运营并开发游戏产品；内部信没有宣布管理层更换或具体交割安排。",
+          "source_url": "https://mp.weixin.qq.com/s/roSY6ZAznEr4NyruDCAzRw",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "路透社称，高盛已开始讨论具体参与方式；相关结构把 AI 算力从企业资本开支进一步带入信贷市场，也让芯片折旧、设备残值和算力需求成为投资人需要评估的核心变量。",
-          "source_url": "https://www.reuters.com/legal/transactional/goldman-talks-with-investors-nvidia-financing-deal-after-landing-prized-role-2026-08-14/",
+          "text": "灵犀互娱在阿里体系内曾多次调整组织归属：2017 年进入阿里大文娱，2020 年升格为独立事业群，2023 年被划入「1+6+N」架构中的 N 业务板块。此次内部信把此前的出售报道推进到双方已经签署协议的新阶段。",
+          "source_url": "https://mp.weixin.qq.com/s/roSY6ZAznEr4NyruDCAzRw",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:26+00:00"
     },
     {
-      "id": "1ccec2ef-dbd8-5311-a866-de2a12b9e7fe",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "bbbca720ce356614f2d80ce8feca642a1b7c79a8",
-      "title": "于东来：胖东来首批刑释员工无人离职，将再招 20 人",
-      "body": "8 月 15 日凌晨，胖东来创始人于东来在社交平台发文称，首批刑释人员进入岗位后「没有一个离开」，目前都在稳定工作和生活；他同时表示，公司准备再招聘 20 名刑释人员。于东来暂未说明新一轮招聘的岗位、门店和时间安排。\n\n胖东来在 2025 年首次公开定向招聘刑释人员。最初计划录用 20 人，面试后实际录用了 30 人，并为入职者设置 6 个月双向选择期。于东来当时称，希望给已经承担法律责任的人重新融入社会的机会。",
+      "id": "294d45a1-6766-5d45-9b7f-0e79aee3b162",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "5a54062aa056e5824213c03651ddc145b5949f0c",
+      "title": "Bob Iger 成为首位获评「Disney Legend」的公司高管",
+      "body": "迪士尼在 D23 活动上把 Bob Iger 评为「Disney Legend」。这是该荣誉首次授予公司高管；同届获奖者还包括 Anne Hathaway 和 Lin-Manuel Miranda。\n\nIger 1974 年以 ABC 片场杂务岗位进入媒体行业，2005 年首次出任迪士尼 CEO。在其任内，迪士尼先后收购 Pixar、Marvel 和 Lucasfilm。他 2021 年卸任后于 2022 年回归，并在 2026 年初再次交棒，目前仍担任高级顾问并留在董事会至年底。\n\n新任 CEO Josh D'Amaro 在现场介绍 Iger，Robert Downey Jr.、Harrison Ford、Ellen Pompeo 和 Diane Sawyer 等人也参与致意。这场仪式既是个人荣誉，也构成迪士尼完成领导层交接后的公开送别。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
       "position": 2,
       "score": 0,
-      "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
-      "source_name": "weibo.com",
+      "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
+      "source_name": "variety.com",
       "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
+      "source_quality": "strong",
+      "confidence": 0.92,
       "event_date": null,
-      "disclosed_at": "2026-08-15 13:55",
-      "published_at": "2026-08-15 13:55",
+      "disclosed_at": "2026-08-17 07:20",
+      "published_at": "2026-08-17 07:20",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "data/images/b58fbc32b864-d5e131420e29c4fbc80e.png",
+      "image_url": "data/images/baf6fbdbb373-a6f075548b6c5367226c.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://weibo.com/1642634100/Rdv2QF7Vo；https://xinwen.bjd.com.cn/content/s68d402c2e4b0221b9bed552f.html；https://news.cctv.com/2025/08/08/ARTIWzzrJsChXzqHB2V6UbGR250808.shtml 📮Folo · 2026 年 8 月 15 日 13:55",
+        "source_line": "🔗 来源：https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731 📮Folo · 2026 年 8 月 17 日 07:20",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
           "title": "",
-          "publisher": "weibo.com",
+          "publisher": "variety.com",
           "source_type": "draft_source",
-          "authority": "unknown",
+          "authority": "strong",
           "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://xinwen.bjd.com.cn/content/s68d402c2e4b0221b9bed552f.html",
-          "title": "",
-          "publisher": "xinwen.bjd.com.cn",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://news.cctv.com/2025/08/08/ARTIWzzrJsChXzqHB2V6UbGR250808.shtml",
-          "title": "",
-          "publisher": "news.cctv.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
+          "is_original": true
         }
       ],
       "claims": [
         {
-          "text": "8 月 15 日凌晨，胖东来创始人于东来在社交平台发文称，首批刑释人员进入岗位后「没有一个离开」，目前都在稳定工作和生活；他同时表示，公司准备再招聘 20 名刑释人员。于东来暂未说明新一轮招聘的岗位、门店和时间安排。",
-          "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "text": "Aug 16, 2026 4:20pm PT",
+          "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "胖东来在 2025 年首次公开定向招聘刑释人员。最初计划录用 20 人，面试后实际录用了 30 人，并为入职者设置 6 个月双向选择期。于东来当时称，希望给已经承担法律责任的人重新融入社会的机会。",
-          "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "text": "Bob Iger Gets All-Star Send-Off From Robert Downey Jr., Harrison Ford and New CEO Josh D’Amaro at D23 Disney Legends Ceremony",
+          "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "8 月 15 日凌晨，胖东来创始人于东来在社交平台发文称，首批刑释人员进入岗位后「没有一个离开」，目前都在稳定工作和生活；他同时表示，公司准备再招聘 20 名刑释人员。",
-          "source_url": "https://weibo.com/1642634100/Rdv2QF7Vo",
+          "text": "Matt Donnelly , Jack Dunn",
+          "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "迪士尼在 D23 活动上把 Bob Iger 评为「Disney Legend」。这是该荣誉首次授予公司高管；同届获奖者还包括 Anne Hathaway 和 Lin-Manuel Miranda。",
+          "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Iger 1974 年以 ABC 片场杂务岗位进入媒体行业，2005 年首次出任迪士尼 CEO。在其任内，迪士尼先后收购 Pixar、Marvel 和 Lucasfilm。他 2021 年卸任后于 2022 年回归，并在 2026 年初再次交棒，目前仍担任高级顾问并留在董事会至年底。",
+          "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "新任 CEO Josh D'Amaro 在现场介绍 Iger，Robert Downey Jr.、Harrison Ford、Ellen Pompeo 和 Diane Sawyer 等人也参与致意。这场仪式既是个人荣誉，也构成迪士尼完成领导层交接后的公开送别。",
+          "source_url": "https://variety.com/2026/film/news/bob-iger-robert-downey-jr-harrison-ford-d23-disney-legends-1236835731",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "53a23007-6330-5776-84f5-72f28369c424",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "218cd89aa4e9c8331edca7b524782a248bbd147d",
-      "title": "小米手机 15 周年，卢伟冰称未来全面拥抱 AI",
-      "body": "8 月 16 日是小米手机发布 15 周年。小米集团合伙人、总裁兼手机部总裁卢伟冰发文回顾称，小米手机从最初的「为发烧而生」走向全球市场，下一阶段将全面拥抱 AI。\n\n第一代小米手机于 2011 年 8 月 16 日发布。市场研究机构 Omdia 的数据称，小米 2025 年智能手机出货量为 1.654 亿部，市场份额约 13%，连续 5 年位列全球前三。小米接下来会如何把 AI 战略落到手机系统、端侧模型和跨设备体验，仍要看具体产品更新。",
+      "id": "557800fd-1d45-5dae-a618-00eb58bac322",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "82eb7c2bbeed11c42f306978578d33df33f95c7d",
+      "title": "💡 Josh D'Amaro：迪士尼下一步要把技术、故事与全球业务真正连起来",
+      "body": "出任迪士尼 CEO 5 个月后，Josh D'Amaro 在 D23 接受 Deadline 采访。他把自己的首要任务概括为持续产出最好的电影、乐园项目和百老汇作品，同时在技术与媒体交汇处寻找新的讲故事方式。\n\nD'Amaro 认为，迪士尼同时拥有 ESPN、流媒体、乐园、电影和 IP，真正的优势来自这些业务协同运转。一段故事可以从影院延伸到 Disney+、主题乐园和 D23 社群，覆盖多个渠道。\n\n> 其他媒体公司都在尝试变得像迪士尼。\n\n他也承认，这套组合只有在各部门真正协同时才成立。相比为单项业务设定孤立目标，他更关注如何用技术放大故事，并让全球不同市场共享同一套内容与体验能力。\n\nD'Amaro 1998 年从迪士尼乐园的基层岗位开始职业生涯，至今已在公司工作近 30 年。他把这种经历视为制定战略的基础：乐园员工每天直接面对游客，电影和流媒体团队则负责持续创造让游客愿意走进乐园的故事，两端必须互相理解。\n\n他没有把技术描述为独立产品线，也没有给出具体收购或平台计划。其边界很明确：技术应服务于故事与体验，衡量标准仍是观众是否愿意在不同场景里继续接触同一个迪士尼世界。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
       "position": 3,
       "score": 0,
-      "source_url": "https://www.ithome.com/0/990/250.htm",
-      "source_name": "IT之家",
-      "source_type": "folo",
-      "source_quality": "secondary",
-      "confidence": 0.74,
+      "source_url": "https://deadline.com/2026/08/disney-josh-damaro-ceo-opportunities-d23-1237042155",
+      "source_name": "deadline.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
       "event_date": null,
-      "disclosed_at": "2026-08-16 10:36",
-      "published_at": "2026-08-16 10:36",
-      "cross_day_status": "ready",
+      "disclosed_at": "2026-08-17 01:50",
+      "published_at": "2026-08-17 01:50",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/a8f635ea843b195dcde0.png",
+      "changed_since_review": true,
+      "image_url": "data/images/86c62169ad6c-e6f662bfc598f5e3bbfd.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/250.htm 📮Folo · 2026-08-16 10:36",
+        "source_line": "🔗 来源：https://deadline.com/2026/08/disney-josh-damaro-ceo-opportunities-d23-1237042155 📮Folo · 2026 年 8 月 17 日 01:50",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.ithome.com/0/990/250.htm",
+          "url": "https://deadline.com/2026/08/disney-josh-damaro-ceo-opportunities-d23-1237042155",
           "title": "",
-          "publisher": "IT之家",
-          "source_type": "folo",
-          "authority": "secondary",
+          "publisher": "deadline.com",
+          "source_type": "draft_source",
+          "authority": "strong",
           "is_paywalled": false,
-          "is_original": false
+          "is_original": true
         }
       ],
       "claims": [
         {
-          "text": "IT之家 8 月 16 日消息，小米集团合伙人 / 总裁、手机部总裁、小米品牌总经理卢伟冰刚刚发文庆祝小米手机 15 周岁生日。",
-          "source_url": "https://www.ithome.com/0/990/250.htm",
+          "text": "出任迪士尼 CEO 5 个月后，Josh D'Amaro 在 D23 接受 Deadline 采访。他把自己的首要任务概括为持续产出最好的电影、乐园项目和百老汇作品，同时在技术与媒体交汇处寻找新的讲故事方式。",
+          "source_url": "https://deadline.com/2026/08/disney-josh-damaro-ceo-opportunities-d23-1237042155",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "从“为发烧而生”到“让全球每个人都能享受科技带来的美好生活”； 从应用创新，到目标成为全球硬核科技领导者； 从中国到全球； 未来全面拥抱 AI。",
-          "source_url": "https://www.ithome.com/0/990/250.htm",
+          "text": "D'Amaro 认为，迪士尼同时拥有 ESPN、流媒体、乐园、电影和 IP，真正的优势来自这些业务协同运转。一段故事可以从影院延伸到 Disney+、主题乐园和 D23 社群，覆盖多个渠道。",
+          "source_url": "https://deadline.com/2026/08/disney-josh-damaro-ceo-opportunities-d23-1237042155",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "> 其他媒体公司都在尝试变得像迪士尼。",
+          "source_url": "https://deadline.com/2026/08/disney-josh-damaro-ceo-opportunities-d23-1237042155",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "0706acd6-9eb1-569a-9e42-7ed69f2d8925",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "aa3165a0b7d4d673a0f8fdf951480829949706a5",
-      "title": "REDMI K100 Pro 首销约为上代 65%，与官方口径不同",
-      "body": "数码博主「RD 观测」发布的第三方统计称，REDMI K100 Pro 系列首销期销量约为 K90 系列同期的 65%。其中，K100 Pro 约为 K90 的 50%，K100 Pro Max 约为 K90 Pro Max 的 85%。\n\n小米此前公布的口径则是，K100 Pro Max 开售当天销量达到上代同期的 150%。两组数字统计对象和截止时间不同：第三方数据计算「发布当晚加次日」的整个系列，小米数据只针对 Pro Max 的开售当天，因此不能直接互相否定。",
+      "id": "f6c329de-9247-5562-89d4-0d4a7f3e3aec",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "923b79790cb61dc4b182bdd871a1f930c021f130",
+      "title": "段永平基金重新买入阿里，英伟达持股数量环比减半",
+      "body": "H&H International Investment 向美国证券交易委员会提交的 13F 文件显示，截至 6 月 30 日，其美股持仓共有 18 项，总市值约 191.01 亿美元。\n\n与一季度相比，基金新建仓阿里巴巴 30.14 万股；拼多多持股由 1974.83 万股增至 2502.21 万股。苹果持股由 2894.56 万股降至 2709.87 万股，英伟达则由 1384.38 万股降至 628.07 万股。\n\n苹果仍是第一大持仓，期末市值约 78.41 亿美元；拼多多和英伟达的期末市值分别约为 19.09 亿美元和 12.57 亿美元。13F 反映的是季度末持仓快照，并不披露具体买卖价格或之后的变动。",
       "category": "大公司",
-      "status": "needs_review",
+      "status": "ready",
       "selected": true,
-      "position": 4,
+      "position": 3,
       "score": 0,
-      "source_url": "https://www.ithome.com/0/990/263.htm",
-      "source_name": "IT之家",
-      "source_type": "folo",
-      "source_quality": "secondary",
-      "confidence": 0.74,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/primary_doc.xml",
+      "source_name": "sec.gov",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-16 11:52",
-      "published_at": "2026-08-16 11:52",
-      "cross_day_status": "ready",
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
       "rumor": false,
-      "fact_status": "unverified",
+      "fact_status": "supported",
       "changed_since_review": false,
       "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/263.htm 📮Folo · 2026-08-16 11:52",
+        "source_line": "🔗 来源：https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/primary_doc.xml；https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/infotable.xml；https://www.sec.gov/Archives/edgar/data/1759760/000175976026000005/infotable.xml 📮Folo · 2026 年 8 月 16 日 22:55",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.ithome.com/0/990/263.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/primary_doc.xml",
           "title": "",
-          "publisher": "IT之家",
-          "source_type": "folo",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 8 月 16 日消息，长期关注国内手机市场份额的数码博主 @RD观测 今日发文，分享了 REDMI K100 Pro 系列手机的首销情况。",
-          "source_url": "https://www.ithome.com/0/990/263.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "REDMI K100 系列（K100 Pro / Pro Max）首销日（首销当晚 + 次日）SO 约为 REDMI K90 系列…",
-          "source_url": "https://www.ithome.com/0/990/263.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
-    },
-    {
-      "id": "d511f709-fa8d-53d1-a825-556bb699c73e",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "fe40a2c0d01bcec89f8a6383308f1926bb4694cf",
-      "title": "2056 台机器人将同场比跳远、举重和拧螺丝",
-      "body": "第二届世界人形机器人运动会将于 8 月 22 日至 26 日在北京国家速滑馆举行。北京市政府新闻发布会公布，本届赛事吸引来自六大洲、16 个国家的 666 支队伍，共有 2056 台机器人参赛；队伍数量较首届增长 138%，机器人数量约为首届的 4 倍。\n\n赛项由首届的 26 项增加至 51 项，比赛场次从 487 场增至 1301 场。竞技赛新增跳远、举重、拔河和乒乓球，百米、足球和舞蹈项目也会继续举行；机器人足球将加入带球跑动和大力抽射，舞蹈则首次设置由两台机器人完成的华尔兹与桑巴。\n\n工业、酒店、家庭和物流等场景赛新增灵巧手项目，机器人要完成夹豆子、拧螺丝等 8 项「微操」。与上届单机完成任务不同，本届场景赛会让两台机器人同场比拼效率和可靠性。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
-      "source_name": "beijing.gov.cn",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-16 09:04",
-      "published_at": "2026-08-16 09:04",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/53d51cafb181-34067a39700e6606fd14.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html；https://www.ithome.com/0/990/230.htm 📮Folo · 2026 年 8 月 16 日 09:04",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
-          "title": "",
-          "publisher": "beijing.gov.cn",
+          "publisher": "sec.gov",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         },
         {
-          "url": "https://www.ithome.com/0/990/230.htm",
+          "url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/infotable.xml",
           "title": "",
-          "publisher": "IT之家",
-          "source_type": "folo",
-          "authority": "secondary",
+          "publisher": "sec.gov",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000005/infotable.xml",
+          "title": "",
+          "publisher": "sec.gov",
+          "source_type": "draft_source",
+          "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         }
       ],
       "claims": [
         {
-          "text": "第二届世界人形机器人运动会将于 8 月 22 日至 26 日在北京国家速滑馆举行。北京市政府新闻发布会公布，本届赛事吸引来自六大洲、16 个国家的 666 支队伍，共有 2056 台机器人参赛；队伍数量较首届增长 138%，机器人数量约为首届的 4 倍。",
-          "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "text": "H&H International Investment 向美国证券交易委员会提交的 13F 文件显示，截至 6 月 30 日，其美股持仓共有 18 项，总市值约 191.01 亿美元。",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/primary_doc.xml",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "赛项由首届的 26 项增加至 51 项，比赛场次从 487 场增至 1301 场。竞技赛新增跳远、举重、拔河和乒乓球，百米、足球和舞蹈项目也会继续举行；机器人足球将加入带球跑动和大力抽射，舞蹈则首次设置由两台机器人完成的华尔兹与桑巴。",
-          "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "text": "与一季度相比，基金新建仓阿里巴巴 30.14 万股；拼多多持股由 1974.83 万股增至 2502.21 万股。苹果持股由 2894.56 万股降至 2709.87 万股，英伟达则由 1384.38 万股降至 628.07 万股。",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/primary_doc.xml",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "工业、酒店、家庭和物流等场景赛新增灵巧手项目，机器人要完成夹豆子、拧螺丝等 8 项「微操」。与上届单机完成任务不同，本届场景赛会让两台机器人同场比拼效率和可靠性。",
-          "source_url": "https://www.beijing.gov.cn/ywdt/yaowen/202607/t20260728_4793534.html",
+          "text": "苹果仍是第一大持仓，期末市值约 78.41 亿美元；拼多多和英伟达的期末市值分别约为 19.09 亿美元和 12.57 亿美元。13F 反映的是季度末持仓快照，并不披露具体买卖价格或之后的变动。",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1759760/000175976026000007/primary_doc.xml",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "da602405-96d3-5be2-aebd-3cbb597ba9fa",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "d2752c3f09e665f14a0badc96476a971212e2d7b",
-      "title": "Booking.com CEO 也受够了旅行折腾，想让 AI 自动改行程",
-      "body": "Booking.com CEO Glenn Fogel 接受《华尔街日报》采访时说，航班延误、长时间困在停机坪以及客服等待，让他有时也会怀疑一趟旅行是否值得。Booking.com 及旗下 Priceline、Kayak 和 OpenTable 正把 AI 视为减少这些摩擦的工具。\n\nFogel 设想，未来的旅行助手不仅能回答问题，还能根据天气主动判断游船和博物馆行程是否需要对调，先征求用户同意，再自动完成改签。这个目标目前仍是产品方向，而不是已经普遍上线的完整能力。",
+      "id": "33e1bb60-61b1-5e18-aef8-4922bbf4a7f1",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "9265e9294190db30ea207793467aa3a8bf7269ab",
+      "title": "💡 Kareem Rahma：宁愿在 YouTube 自己做节目，也不想让成熟创意困在开发流程里",
+      "body": "YouTube 节目《SubwayTakes》创作者 Kareem Rahma 接受 Deadline 采访时说，节目坚持在纽约地铁临场拍摄：主持人拿着 MetroCard 造型麦克风，受访者提出一个观点，他当场选择赞同或反对，不提前排练。\n\n选择地铁最初并非宏大创意，而是成本决定。Rahma 与联合创作者 Andrew Kuo 当时几乎没钱，坐地铁只需一张车票，打车却承受不起。这个限制最终变成了节目的视觉身份和节奏。\n\n他曾把另一档已验证有观众的节目 Keep the Meter Running 交给 CNN 开发，但项目长期停滞，最终主动退出。Rahma 仍愿意与传统电视合作，不过前提是流程能让创作者更快把作品做出来，避免让现成形式反复困在会议和审批里。\n\nKareem Rahma 表示，传统电视最吸引他的部分仍是制作规模、发行能力和更稳定的资源，但 YouTube 让他能直接验证一个想法：拍摄、发布、看观众反应，再迅速改进。两种体系的关键差别，在于创作者是否保有行动速度。\n\n《SubwayTakes》获得艾美奖提名后，他也没有把独立制作当成拒绝电视的姿态。他愿意让节目进入更大平台，只是希望合作方先承认它已经是一档成立的节目，再讨论如何放大，而非从头重做一轮漫长开发。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 6,
+      "position": 4,
       "score": 0,
-      "source_url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
-      "source_name": "wsj.com",
+      "source_url": "https://deadline.com/2026/08/subwaytakes-star-kareem-rahma-emmy-video-interview-1237041848",
+      "source_name": "deadline.com",
       "source_type": "draft_source",
       "source_quality": "strong",
       "confidence": 0.92,
       "event_date": null,
-      "disclosed_at": "2026-08-15 02:17",
-      "published_at": "2026-08-15 02:17",
+      "disclosed_at": "2026-08-17 03:40",
+      "published_at": "2026-08-17 03:40",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/095f4675bd266f8031ca.png",
+      "changed_since_review": true,
+      "image_url": "data/images/3e83cb3bb3b6-da9801e053f6b85d988c.webp",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology 📮Folo · 2026 年 8 月 15 日 02:17",
+        "source_line": "🔗 来源：https://deadline.com/2026/08/subwaytakes-star-kareem-rahma-emmy-video-interview-1237041848 📮Folo · 2026 年 8 月 17 日 03:40",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
+          "url": "https://deadline.com/2026/08/subwaytakes-star-kareem-rahma-emmy-video-interview-1237041848",
           "title": "",
-          "publisher": "wsj.com",
+          "publisher": "deadline.com",
           "source_type": "draft_source",
           "authority": "strong",
-          "is_paywalled": true,
+          "is_paywalled": false,
           "is_original": true
         }
       ],
       "claims": [
         {
-          "text": "Booking.com CEO Glenn Fogel 接受《华尔街日报》采访时说，航班延误、长时间困在停机坪以及客服等待，让他有时也会怀疑一趟旅行是否值得。Booking.com 及旗下 Priceline、Kayak 和 OpenTable 正把 AI 视为减少这些摩擦的工具。",
-          "source_url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
+          "text": "YouTube 节目《SubwayTakes》创作者 Kareem Rahma 接受 Deadline 采访时说，节目坚持在纽约地铁临场拍摄：主持人拿着 MetroCard 造型麦克风，受访者提出一个观点，他当场选择赞同或反对，不提前排练。",
+          "source_url": "https://deadline.com/2026/08/subwaytakes-star-kareem-rahma-emmy-video-interview-1237041848",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Fogel 设想，未来的旅行助手不仅能回答问题，还能根据天气主动判断游船和博物馆行程是否需要对调，先征求用户同意，再自动完成改签。这个目标目前仍是产品方向，而不是已经普遍上线的完整能力。",
-          "source_url": "https://www.wsj.com/lifestyle/travel/even-the-ceo-of-booking-com-is-fed-up-with-travel-these-days-66693920?mod=rss_Technology",
+          "text": "选择地铁最初并非宏大创意，而是成本决定。Rahma 与联合创作者 Andrew Kuo 当时几乎没钱，坐地铁只需一张车票，打车却承受不起。这个限制最终变成了节目的视觉身份和节奏。",
+          "source_url": "https://deadline.com/2026/08/subwaytakes-star-kareem-rahma-emmy-video-interview-1237041848",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "他曾把另一档已验证有观众的节目 Keep the Meter Running 交给 CNN 开发，但项目长期停滞，最终主动退出。Rahma 仍愿意与传统电视合作，不过前提是流程能让创作者更快把作品做出来，避免让现成形式反复困在会议和审批里。",
+          "source_url": "https://deadline.com/2026/08/subwaytakes-star-kareem-rahma-emmy-video-interview-1237041848",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "592d771e-b4e6-5de1-bd8f-f44e143f3bb8",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "d7546d8b230c8e7a2f08fa6b392528614b940a8a",
-      "title": "千问模型半年下载量破 30 亿，Hugging Face 上超过 Google 与 Meta",
-      "body": "阿里巴巴称，千问模型家族过去 6 个月在各个平台的累计下载量已超过 30 亿次。Hugging Face 的最新统计显示，千问在该平台同期下载约 20.45 亿次，高于 Google 的约 4.18 亿次和 Meta 的约 2.27 亿次。\n\n千问目前已公开超过 460 个模型，并衍生出大量社区微调版本。Hugging Face 的开源模型报告也把千问列为衍生模型数量领先的家族。不过，下载次数包含重复下载，也不覆盖闭源 API 和私有部署，因此更适合衡量开源生态活跃度，不能直接等同于真实用户数或模型质量排名。",
+      "id": "a72f9e58-dfe0-5b22-94f4-37df180ccd32",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "a5dbb690bdf8454ebd3f19c3068ecf96468691fd",
+      "title": "法国税务系统遭入侵，逾 60 万名纳税人和企业资料外泄",
+      "body": "法国财政部确认，税务总局 DGFiP 遭遇网络攻击并发生数据泄露。黑客在犯罪论坛出售的文件包含略多于 60 万条记录，每条对应一名纳税人或一家企业。\n\n《世界报》检查样本后发现，泄露内容包括姓名、家庭住址、电话号码、参考应税收入、税率和家庭受抚养人数。攻击者曾宣称影响数千万人，但这一说法更接近被访问数据库的总体规模，不能等同于已经外泄的记录数。\n\n财政部称，系统在 6 月底例行检查中切断了非法访问，但当时没有发现数据已被提取。部门将报案并向法国数据保护机构 CNIL 通报。",
       "category": "大公司",
-      "status": "needs_review",
+      "status": "ready",
       "selected": true,
-      "position": 7,
+      "position": 4,
       "score": 0,
-      "source_url": "https://www.ithome.com/0/990/187.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 23:10",
-      "published_at": "2026-08-15 23:10",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/44a29466b325-3270c984a9e9b3407784.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/0/990/187.htm；https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026；https://huggingface.co/Qwen/models?p=0；https://weibo.com/1642634100/RdswW18g3 📮Folo · 2026 年 8 月 15 日 23:10",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/0/990/187.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026",
-          "title": "",
-          "publisher": "huggingface.co",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://huggingface.co/Qwen/models?p=0",
-          "title": "",
-          "publisher": "huggingface.co",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://weibo.com/1642634100/RdswW18g3",
-          "title": "",
-          "publisher": "weibo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 8 月 15 日消息，据彭博社今日报道，阿里旗下开源 AI 模型千问家族在过去六个月内全球累计下载量突破 30 亿次，超越 Meta、Alphabet 等一众竞争对手，成为全球下载量第一的 AI 模型。",
-          "source_url": "https://www.ithome.com/0/990/187.htm",
-          "status": "unverified",
-          "evidence": ""
-        },
-        {
-          "text": "根据开源 AI 社区 Hugging Face 于当地时间 8 月…",
-          "source_url": "https://www.ithome.com/0/990/187.htm",
-          "status": "unverified",
-          "evidence": ""
-        },
-        {
-          "text": "阿里巴巴称，千问模型家族过去 6 个月在各个平台的累计下载量已超过 30 亿次。Hugging Face 的最新统计显示，千问在该平台同期下载约 20.45 亿次，高于 Google 的约 4.18 亿次和 Meta 的约 2.27 亿次。",
-          "source_url": "https://www.ithome.com/0/990/187.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "千问目前已公开超过 460 个模型，并衍生出大量社区微调版本。Hugging Face 的开源模型报告也把千问列为衍生模型数量领先的家族。不过，下载次数包含重复下载，也不覆盖闭源 API 和私有部署，因此更适合衡量开源生态活跃度，不能直接等同于真实用户数或模型质量排名。",
-          "source_url": "https://www.ithome.com/0/990/187.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
-    },
-    {
-      "id": "b10b13e7-d654-5e02-9584-47933711ebdf",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "4d19f59fca6e66f74acf4ff09e04d705e8b73e18",
-      "title": "清华与伯克利提出 ODEWorld，用连续时间轨迹指导机器人行动",
-      "body": "据 MIT 科技评论中文网报道，清华大学智能产业研究院与加州大学伯克利分校团队提出连续世界模型 ODEWorld。它不再只根据当前画面预测下一帧，而是用物理时间流 PT-Flow 学习状态随真实时间变化的方向和速度，让模型可以推演两个观测帧之间没有被拍下的中间状态。\n\nODEWorld 先用 DINOv2 提取图像特征，再把相对稳定的背景和初始状态与动态信息解耦。模型通过雅可比向量积把图像变化映射到压缩空间，并由常微分方程求解器累积变化，因此既能预测任意时间点，也能反向推演过去状态。在 64 帧长程预测中，它在单张 A100 GPU 上的延迟为 0.072 秒，V-JEPA 2 和 LDP 分别为 0.619 秒和 3.953 秒。\n\n研究团队把连续轨迹转成一组隐空间子目标，作为机器人执行长任务时的「中途路标」。在 LIBERO-LONG 的 10 项任务中，连续子目标方案平均成功率为 83.6%；部署到真实双臂机器人后，夹虾入锅、鼠标收纳、插笔和双臂整理物体 4 项任务的平均成功率从 55% 提高到 80%。团队表示，当前模型尚未处理接触、碰撞、摩擦和力等更复杂的物理规律。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 8,
-      "score": 0,
-      "source_url": "https://www.mittrchina.com/news/detail/16790",
-      "source_name": "mittrchina.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 19:07",
-      "published_at": "2026-08-15 19:07",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/3384c7545a22-181c9e2be44aff70e6d2.gif",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.mittrchina.com/news/detail/16790；https://dstate.github.io/odeworld_website/；https://arxiv.org/abs/2607.27924 📮Folo · 2026 年 8 月 15 日 19:07",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.mittrchina.com/news/detail/16790",
-          "title": "",
-          "publisher": "mittrchina.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://dstate.github.io/odeworld_website/",
-          "title": "",
-          "publisher": "dstate.github.io",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://arxiv.org/abs/2607.27924",
-          "title": "",
-          "publisher": "arxiv.org",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "在具身智能的演进中，世界模型被寄予厚望：它不仅要生成未来画面，更要帮助机器人理解世界如何连续变化。然而，当前主流的视频生成与部分机器人世界模型，它们的底层架构大多仍受制于一个固有的思维定式：离散的下一步预测（Discrete Next-step Prediction）。",
-          "source_url": "https://www.mittrchina.com/news/detail/16790",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 MIT 科技评论中文网报道，清华大学智能产业研究院与加州大学伯克利分校团队提出连续世界模型 ODEWorld。它不再只根据当前画面预测下一帧，而是用物理时间流 PT-Flow 学习状态随真实时间变化的方向和速度，让模型可以推演两个观测帧之间没有被拍下的中间状态。",
-          "source_url": "https://www.mittrchina.com/news/detail/16790",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "ODEWorld 先用 DINOv2 提取图像特征，再把相对稳定的背景和初始状态与动态信息解耦。模型通过雅可比向量积把图像变化映射到压缩空间，并由常微分方程求解器累积变化，因此既能预测任意时间点，也能反向推演过去状态。在 64 帧长程预测中，它在单张 A100 GPU 上的延迟为 0.072 秒，V-JEPA 2 和 LDP 分别为 0.619 秒和 3.953 秒。",
-          "source_url": "https://www.mittrchina.com/news/detail/16790",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "研究团队把连续轨迹转成一组隐空间子目标，作为机器人执行长任务时的「中途路标」。在 LIBERO-LONG 的 10 项任务中，连续子目标方案平均成功率为 83.6%；部署到真实双臂机器人后，夹虾入锅、鼠标收纳、插笔和双臂整理物体 4 项任务的平均成功率从 55% 提高到 80%。团队表示，当前模型尚未处理接触、碰撞、摩擦和力等更复杂的物理规律。",
-          "source_url": "https://www.mittrchina.com/news/detail/16790",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
-    },
-    {
-      "id": "b3536c8b-37a4-55d6-bf19-e3ea2679196f",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "4dba6e7ae71f216e47e04dcf805327d839574084",
-      "title": "💡 王祖贤：新的世界必须有新的东西，但应该由人使用 AI",
-      "body": "8 月 15 日，在网易游戏《天下》18 周年玩家生态大会的公开发言与圆桌对话中，王祖贤现身交流，首次公开回应为何接受 AI 数字影像短片《倩影》的形象授权，并分享了她对经典作品、技术边界与人机关系的看法。\n\n面对外界关于 AI 生成形象与真人演绎差异的争议与关注，短片《倩影》采用「王祖贤授权 AI 形象出演、配音演员苏柏丽配音」的方式制作，展现了黑发至白发跨越时光的数字形象。王祖贤表示，从黑发到白发的变化让她感受到岁月感，但这次合作不仅是让过去的银幕形象重现，更是让留在观众记忆里的经典作品借助新媒介与当下重新连接。\n\n谈及为何愿意授权与人机边界，王祖贤指出，经典始终在那里，AI 带来的是另一种观看和表达的可能，希望外界给新技术更多探索空间：\n\n> 其实我没有想太多。我觉得新的世界必须要有新的东西，旧的世界也很好，它也会成为新世界的根基。但是我们是用 AI，不是被 AI 用。\n\n她强调，AI 技术可以让观众多一种选择，但无论尝试何种呈现形式，希望借此表达什么最终仍然应该来自人的主动决定。同台制作人也回应称，无论出现怎样的新艺术形式，使用一个人的形象都必须以获得本人同意为前提，故事与情感内核依然取决于人的判断。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 9,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
-      "source_name": "mp.weixin.qq.com",
+      "source_url": "https://www.lemonde.fr/en/pixels/article/2026/08/14/french-taxpayers-data-stolen-in-hack-of-finance-ministry_6756510_13.html",
+      "source_name": "lemonde.fr",
       "source_type": "draft_source",
       "source_quality": "unknown",
       "confidence": 0.55,
@@ -694,19 +472,19 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/c411b143b6b9ff3a288a.png",
+      "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w 🧭飞书群 · 2026 年 8 月 16 日 16:03",
+        "source_line": "🔗 来源：https://www.lemonde.fr/en/pixels/article/2026/08/14/french-taxpayers-data-stolen-in-hack-of-finance-ministry_6756510_13.html 📮Folo · 2026 年 8 月 17 日 04:40",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "url": "https://www.lemonde.fr/en/pixels/article/2026/08/14/french-taxpayers-data-stolen-in-hack-of-finance-ministry_6756510_13.html",
           "title": "",
-          "publisher": "mp.weixin.qq.com",
+          "publisher": "lemonde.fr",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -715,294 +493,127 @@
       ],
       "claims": [
         {
-          "text": "王祖贤 8 月 15 日在游戏 IP《天下》18 周年玩家生态大会上首次回应 AI 形象授权。她与杨迪、《天下》IP 制作人星一围绕 AI 数字影像短片《倩影》交流；这部短片采用「王祖贤授权 AI 形象出演、苏柏丽配音」的方式制作，数字形象从黑发跨越到白发。",
-          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "text": "法国财政部确认，税务总局 DGFiP 遭遇网络攻击并发生数据泄露。黑客在犯罪论坛出售的文件包含略多于 60 万条记录，每条对应一名纳税人或一家企业。",
+          "source_url": "https://www.lemonde.fr/en/pixels/article/2026/08/14/french-taxpayers-data-stolen-in-hack-of-finance-ministry_6756510_13.html",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "王祖贤表示，自己年轻时也喜欢玩游戏，希望借这次合作「跟现在的年轻人在游戏世界里相会」。重新观看从黑发到白发的数字形象时，她感到「人生仿如隔世」，并将自己概括为「喜新念旧」。",
-          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "text": "《世界报》检查样本后发现，泄露内容包括姓名、家庭住址、电话号码、参考应税收入、税率和家庭受抚养人数。攻击者曾宣称影响数千万人，但这一说法更接近被访问数据库的总体规模，不能等同于已经外泄的记录数。",
+          "source_url": "https://www.lemonde.fr/en/pixels/article/2026/08/14/french-taxpayers-data-stolen-in-hack-of-finance-ministry_6756510_13.html",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "> 新的世界必须要有新的东西，旧的世界也很好，它也会成为新世界的根基。",
-          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "8 月 15 日，在网易游戏《天下》18 周年玩家生态大会的公开发言与圆桌对话中，王祖贤现身交流，首次公开回应为何接受 AI 数字影像短片《倩影》的形象授权，并分享了她对经典作品、技术边界与人机关系的看法。",
-          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "面对外界关于 AI 生成形象与真人演绎差异的争议与关注，短片《倩影》采用「王祖贤授权 AI 形象出演、配音演员苏柏丽配音」的方式制作，展现了黑发至白发跨越时光的数字形象。王祖贤表示，从黑发到白发的变化让她感受到岁月感，但这次合作不仅是让过去的银幕形象重现，更是让留在观众记忆里的经典作品借助新媒介与当下重新连接。",
-          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "谈及为何愿意授权与人机边界，王祖贤指出，经典始终在那里，AI 带来的是另一种观看和表达的可能，希望外界给新技术更多探索空间：",
-          "source_url": "https://mp.weixin.qq.com/s/WwjtEvH30KPaATbQW02E4w",
+          "text": "财政部称，系统在 6 月底例行检查中切断了非法访问，但当时没有发现数据已被提取。部门将报案并向法国数据保护机构 CNIL 通报。",
+          "source_url": "https://www.lemonde.fr/en/pixels/article/2026/08/14/french-taxpayers-data-stolen-in-hack-of-finance-ministry_6756510_13.html",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "d8fea53c-2da8-5825-be4a-595d1b42f2bc",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "e53e942933c2e89505d24a557240122077957ac0",
-      "title": "《牛来》从 1.1 万元涨到 330 万元，排片两天翻了 1900 倍",
-      "body": "国产动画电影《牛来》8 月 5 日上映后，前 10 天累计票房仅 1.1 万元，8 月 14 日前的全国日排片一度降至 6 场。影片随后因粗糙的 3D 建模、卡顿动作和精致水墨海报之间的反差在社交平台走红，大量观众以猎奇和玩梗方式购票。\n\n灯塔专业版数据显示，8 月 16 日 11 时 45 分，影片当日票房已超过 225 万元，累计综合票房含预售超过 330 万元；全国排片由最低 6 场增加至 11959 场，增幅超过 1900 倍。猫眼当时给出的预测总票房已升至 1837 万元。\n\n《牛来》由导演信雨萌与母亲用 5 年完成，片尾曲也由其母亲演唱。出品公司大连璟园文化影视传媒有限公司原名大连璟园装饰工程有限公司，2021 年更名后转向影视业务。\n\n影片走红后，制作团队又发布声明，称多个社交平台出现冒充官方团队的账号，部分账号未经授权发布信息甚至开展商业活动。团队列出的唯一官方账号均使用「牛来电影官方团队」名称，并表示将追究冒用者的法律责任。",
-      "category": "好看的",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-16 14:24",
-      "published_at": "2026-08-16 14:24",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/ec2129547237a882c589.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA；https://mp.weixin.qq.com/s/T0bH523JRe1gsNueOFmDDQ 🧭飞书群 · 2026-08-16 14:24",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/T0bH523JRe1gsNueOFmDDQ",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "国产动画电影《牛来》8 月 5 日上映后，前 10 天累计票房仅 1.1 万元，8 月 14 日前的全国日排片一度降至 6 场。影片随后因粗糙的 3D 建模、卡顿动作和精致水墨海报之间的反差在社交平台走红，大量观众以猎奇和玩梗方式购票。",
-          "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "灯塔专业版数据显示，8 月 16 日 11 时 45 分，影片当日票房已超过 225 万元，累计综合票房含预售超过 330 万元；全国排片由最低 6 场增加至 11959 场，增幅超过 1900 倍。猫眼当时给出的预测总票房已升至 1837 万元。",
-          "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "《牛来》由导演信雨萌与母亲用 5 年完成，片尾曲也由其母亲演唱。出品公司大连璟园文化影视传媒有限公司原名大连璟园装饰工程有限公司，2021 年更名后转向影视业务。",
-          "source_url": "https://mp.weixin.qq.com/s/PBoeG-wX1XPT7ES7kWzOQA",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:56+00:00"
-    },
-    {
-      "id": "7ccbe3eb-eeee-5854-b764-52bb8724ca43",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "dd8c0351bc4ae08172b09113627a54646ee9255b",
-      "title": "《蜘蛛侠：崭新之日》延长放映至 9 月 28 日",
-      "body": "「蜘蛛侠系列电影」官方微博宣布，漫威与索尼联合出品的《蜘蛛侠:崭新之日》将延长放映至 9 月 28 日。官方同时称，影片目前观影人次已超过 3400 万。\n\n影片由德斯汀·丹尼尔·克雷顿执导，汤姆·赫兰德、赞达亚、萨迪·辛克、乔·博恩瑟和马克·鲁法洛等出演。延期后，影片将跨过暑期档继续留在院线，具体排片由各地影院安排。",
-      "category": "好看的",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://www.ithome.com/0/990/006.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 10:08",
-      "published_at": "2026-08-15 10:08",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/34a6fce4edef-61c07a6db3ab7d966419.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/0/990/006.htm；https://weibo.com/2724964653/Rdktkkwgk；https://www.sonypictures.com/movies/spidermanbrandnewday 📮Folo · 2026 年 8 月 15 日 10:08",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/0/990/006.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://weibo.com/2724964653/Rdktkkwgk",
-          "title": "",
-          "publisher": "weibo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.sonypictures.com/movies/spidermanbrandnewday",
-          "title": "",
-          "publisher": "sonypictures.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "「蜘蛛侠系列电影」官方微博宣布，漫威与索尼联合出品的《蜘蛛侠:崭新之日》将延长放映至 9 月 28 日。官方同时称，影片目前观影人次已超过 3400 万。",
-          "source_url": "https://www.ithome.com/0/990/006.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "影片由德斯汀·丹尼尔·克雷顿执导，汤姆·赫兰德、赞达亚、萨迪·辛克、乔·博恩瑟和马克·鲁法洛等出演。延期后，影片将跨过暑期档继续留在院线，具体排片由各地影院安排。",
-          "source_url": "https://www.ithome.com/0/990/006.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "466cf373-9633-5955-9ebe-851209c89915",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "6ff49aa9828ad943e27fcf3b5ea5e96a6c5a4f6e",
-      "title": "《魔发奇缘》真人版定档 2028 年 3 月 31 日",
-      "body": "迪士尼在 D23 全球粉丝大会上宣布，真人版《魔发奇缘》将于 2028 年 3 月 31 日在北美上映，并在现场首次播放先导预告、公开主演造型。影片已于今年 6 月在西班牙开拍。\n\n蒂根·克罗夫特饰演乐佩，麦洛·曼海姆饰演弗林·莱德，凯瑟琳·哈恩饰演葛朵妈妈，迭戈·卢纳将出演真人电影新增角色。影片由《马戏之王》导演迈克尔·格雷西执导。",
-      "category": "好看的",
+      "id": "28694dc1-37db-5f71-b6d9-156793996b87",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "351ee48571b1f52f98a1b7437bfe5f8cc501c30f",
+      "title": "小米 SU7 系列交付突破 50 万台，用时 28.5 个月",
+      "body": "小米汽车 8 月 17 日宣布，SU7 系列累计交付突破 50 万台，从首款车型上市到达成这一里程碑用时 28.5 个月。\n\nSU7 系列的产品时间线包括：第一代小米 SU7 于 2024 年 3 月 28 日上市，小米 SU7 Ultra 于 2025 年 2 月 27 日上市，新一代小米 SU7 于今年 3 月 19 日发布。小米汽车 7 月披露，SU7 与 YU7 两个系列累计交付量已超过 70 万台。",
+      "category": "大公司",
       "status": "needs_review",
       "selected": true,
       "position": 5,
       "score": 0,
-      "source_url": "https://www.ithome.com/0/990/169.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
+      "source_url": "https://weibo.com/1642634100/RdNLswtTe",
+      "source_name": "新浪科技的微博",
+      "source_type": "folo",
       "source_quality": "secondary",
       "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-15 20:27",
-      "published_at": "2026-08-15 20:27",
-      "cross_day_status": "current",
+      "disclosed_at": "2026-08-17 13:32",
+      "published_at": "2026-08-17 13:32",
+      "cross_day_status": "ready",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/69659a804cac-5ebfde96e514b5e633d4.png",
+      "changed_since_review": true,
+      "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/0/990/169.htm；https://thewaltdisneycompany.com/news/d23-programming-2026/ 📮Folo · 2026 年 8 月 15 日 20:27",
+        "source_line": "🔗 来源：https://weibo.com/1642634100/RdNLswtTe；https://www.ithome.com/0/990/593.htm 📮Folo · 2026 年 8 月 17 日 13:32—13:34",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.ithome.com/0/990/169.htm",
+          "url": "https://weibo.com/1642634100/RdNLswtTe",
           "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
+          "publisher": "新浪科技的微博",
+          "source_type": "folo",
+          "authority": "lead",
           "is_paywalled": false,
           "is_original": false
         },
         {
-          "url": "https://thewaltdisneycompany.com/news/d23-programming-2026/",
+          "url": "https://www.ithome.com/0/990/593.htm",
           "title": "",
-          "publisher": "thewaltdisneycompany.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
           "is_paywalled": false,
           "is_original": false
         }
       ],
       "claims": [
         {
-          "text": "迪士尼在 D23 全球粉丝大会上宣布，真人版《魔发奇缘》将于 2028 年 3 月 31 日在北美上映，并在现场首次播放先导预告、公开主演造型。影片已于今年 6 月在西班牙开拍。",
-          "source_url": "https://www.ithome.com/0/990/169.htm",
+          "text": "IT之家 8 月 17 日消息，小米汽车今日宣布，小米 SU7 系列 28.5 个月交付突破 50 万台，感谢每一位车主的信任与支持。",
+          "source_url": "https://weibo.com/1642634100/RdNLswtTe",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "蒂根·克罗夫特饰演乐佩，麦洛·曼海姆饰演弗林·莱德，凯瑟琳·哈恩饰演葛朵妈妈，迭戈·卢纳将出演真人电影新增角色。影片由《马戏之王》导演迈克尔·格雷西执导。",
-          "source_url": "https://www.ithome.com/0/990/169.htm",
+          "text": "2024/3/28，第一代小米 SU7 上市 2025/2/27，小米 SU7 Ultra 上市 2026/3/19，新一代小米 SU7 焕新发布 今年…",
+          "source_url": "https://weibo.com/1642634100/RdNLswtTe",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
+      "updated_at": "2026-08-17T09:17:26+00:00"
     },
     {
-      "id": "23262b43-8254-53ff-9ee7-954d582f6353",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "27ad0a546f17d46cd30a202d2c13e6c3ac91ec83",
-      "title": "Anthropic 为 Claude 文本加入水印，并将开放检测 API",
-      "body": "据 The Decoder 报道，Anthropic 将为 Claude 生成文本加入水印，并提供检测 API，允许第三方应用检查一段文本是否可能由 Claude 参与生成。其方案基于 Google DeepMind 公开的 SynthID Text 方法，通过调整选词时的随机数源，在文本中留下可追踪模式。\n\n水印对短文本、事实密集段落和代码的识别效果较弱；完全由人类选词的校对任务不会带水印，重度改写也可能移除水印。检测结果只能说明 Claude 可能参与创作，无法判断整段内容由 Claude 独立完成还是只经过编辑，也不能识别其他模型。\n\nAnthropic 为遵循欧盟《人工智能法案》和生成内容透明度实践准则，将在全球启用这项能力。2025 年 8 月 2 日之后发布的模型已具备水印支持，旧模型将在未来数月加入；图片等文件则使用 C2PA 元数据标准。",
-      "category": "新产品",
+      "id": "844333c1-eae7-5ef6-a664-e6b0924eaef4",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "374d2b4704fc59726cc21105f32d892d96e1e283",
+      "title": "💡 数学家：大模型擅长搜索已知路径，却仍不善于发明新的抽象",
+      "body": "菲尔兹奖得主 Timothy Gowers 与普林斯顿数学家 Peter Sarnak 在一组讨论中指出，大语言模型已经能组合既有方法、并行探索大量证明路径，但这与数学家凭直觉判断哪条路值得走仍有差距。\n\nGoogle DeepMind 研究员 Tom Zahavy 把核心瓶颈称为「操纵性溯因」：模型能在已有语言与概念空间中推导，却很难提出缺少现成文本先例的新基础假设。论文 LLMs Can't Jump 因此认为，单纯扩大搜索并不足以替代概念创造。\n\nGowers 和 Sarnak 并未否认模型在数学中的价值。他们更倾向把当前系统视为强大的计算器、检索器和合作工具；要从辅助推理跨到真正创造新框架，还需要更可靠的世界模型或其他能够形成新抽象的机制。\n\n两位数学家在公开讨论中关注的重点并非模型完成一道证明题的能力，而是它如何决定「下一步值得试什么」。当前行业争议集中在搜索规模与创造力的差别：例如穷举可以覆盖大量局部路径，数学研究却经常要求放弃原问题的表达方式，重新定义对象、类比或不变量，这正是当前系统较弱的环节。\n\n他们给出的使用边界也很实际：模型适合检查推导、寻找文献关联和生成候选路线，研究者仍需判断哪些路线具有解释力，并为新概念负责。评价数学 AI 时，完成题目的数量与是否提出可复用的新方法应分开衡量。",
+      "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 0,
+      "position": 5,
       "score": 0,
-      "source_url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
+      "source_url": "https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers",
       "source_name": "the-decoder.com",
       "source_type": "draft_source",
       "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-15 05:29",
-      "published_at": "2026-08-15 05:29",
+      "disclosed_at": "2026-08-16 23:31",
+      "published_at": "2026-08-16 23:31",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
-      "image_url": "data/images/a0d2aaf4a009-8973f328f6b0b52d87ab.png",
+      "image_url": "data/images/29702dc6e56b-0881c5a1c02bbaa26df3.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts 📮Folo · 2026 年 8 月 15 日 05:29",
+        "source_line": "🔗 来源：https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers 📮Folo · 2026 年 8 月 16 日 23:31",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
+          "url": "https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers",
           "title": "",
           "publisher": "the-decoder.com",
           "source_type": "draft_source",
@@ -1013,311 +624,77 @@
       ],
       "claims": [
         {
-          "text": "Anthropic will soon offer a watermark detection API that lets third parties check whether text was written by Claude.",
-          "source_url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
+          "text": "Two renowned mathematicians, Timothy Gowers and Peter Sarnak, say large language models are good at combining known methods but…",
+          "source_url": "https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "据 The Decoder 报道，Anthropic 将为 Claude 生成文本加入水印，并提供检测 API，允许第三方应用检查一段文本是否可能由 Claude 参与生成。其方案基于 Google DeepMind 公开的 SynthID Text 方法，通过调整选词时的随机数源，在文本中留下可追踪模式。",
-          "source_url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
+          "text": "菲尔兹奖得主 Timothy Gowers 与普林斯顿数学家 Peter Sarnak 在一组讨论中指出，大语言模型已经能组合既有方法、并行探索大量证明路径，但这与数学家凭直觉判断哪条路值得走仍有差距。",
+          "source_url": "https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "水印对短文本、事实密集段落和代码的识别效果较弱；完全由人类选词的校对任务不会带水印，重度改写也可能移除水印。检测结果只能说明 Claude 可能参与创作，无法判断整段内容由 Claude 独立完成还是只经过编辑，也不能识别其他模型。",
-          "source_url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
+          "text": "Google DeepMind 研究员 Tom Zahavy 把核心瓶颈称为「操纵性溯因」：模型能在已有语言与概念空间中推导，却很难提出缺少现成文本先例的新基础假设。论文 LLMs Can't Jump 因此认为，单纯扩大搜索并不足以替代概念创造。",
+          "source_url": "https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Anthropic 为遵循欧盟《人工智能法案》和生成内容透明度实践准则，将在全球启用这项能力。2025 年 8 月 2 日之后发布的模型已具备水印支持，旧模型将在未来数月加入；图片等文件则使用 C2PA 元数据标准。",
-          "source_url": "https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts",
+          "text": "Gowers 和 Sarnak 并未否认模型在数学中的价值。他们更倾向把当前系统视为强大的计算器、检索器和合作工具；要从辅助推理跨到真正创造新框架，还需要更可靠的世界模型或其他能够形成新抽象的机制。",
+          "source_url": "https://the-decoder.com/top-mathematicians-say-llms-are-strong-calculators-but-poor-creative-thinkers",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "f258454e-0697-56a5-9115-7d73886a13f9",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "41c116d89a71f7b8356409dffd089e639778f7c8",
-      "title": "激光灭蚊「防空系统」开始量产，售价 988 美元起",
-      "body": "Photon Matrix 宣布激光灭蚊设备进入量产，首批产品计划于 8 月下旬发货。面向室内的红外激光版售价 988 美元，蓝激光版售价 1088 美元，均已在官方商店开放购买。\n\n设备用激光雷达持续扫描背景距离，当 2—20mm、移动速度不超过 1m/s 的飞行目标进入约 6 米半径和 90 度扫描范围时，系统会确认目标尺寸，再沿同一光路发射短脉冲激光破坏蚊虫翅膀。若背景超出有效范围、没有实体背景，或目标尺寸明显大于蚊虫，激光不会启动。\n\n蓝激光版灭蚊效率更高，但夜间可见光可能干扰室内使用；红外版的激光不可见，更适合卧室和育儿空间。官方表示，约 4500 份订单正在排队等待交付；产品的实际识别率、安全性和长期稳定性仍需要量产设备的独立测试验证。",
-      "category": "新产品",
-      "status": "needs_review",
+      "id": "c8a3289a-3769-58a3-8503-73df9caa887d",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "cd501e6a4610431632648920bdad3d83228c24f3",
+      "title": "李书福将辞任吉利汽车董事会主席，安聪慧接任",
+      "body": "吉利汽车控股有限公司宣布调整管理层。自 8 月 18 日起，李书福将辞任公司董事会主席及执行董事，转任终身荣誉主席；他将继续担任浙江吉利控股集团董事长。\n\n安聪慧将接任吉利汽车董事会主席。安聪慧 1996 年加入吉利，历任工程总指挥、总经理、副总裁及总裁，目前同时担任浙江吉利控股集团 CEO；今年 6 月，他已重新获委任为吉利汽车执行董事。\n\n本次调整还涉及三项职位变动：李东辉辞任董事会副主席并继续担任执行董事；桂生悦由行政总裁转任董事会副主席；淦家阅接任行政总裁，负责公司日常运营与长期战略执行。",
+      "category": "大公司",
+      "status": "ready",
       "selected": true,
-      "position": 1,
+      "position": 6,
       "score": 0,
-      "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
-      "source_name": "store.photonmatrixlab.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-16 07:51",
-      "published_at": "2026-08-16 07:51",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "data/images/1028c381da42-0407adc7476177e775e9.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense；https://store.photonmatrixlab.com/products/photon-matrix-laser-mosquito-air-defense；https://photonmatrixlab.com/faq/；https://www.indiegogo.com/en/projects/jimwong-38623042/worlds-first-portable-mosquito-air-defense；https://www.ithome.com/0/990/213.htm 📮Folo · 2026 年 8 月 16 日 07:51",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
-          "title": "",
-          "publisher": "store.photonmatrixlab.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://store.photonmatrixlab.com/products/photon-matrix-laser-mosquito-air-defense",
-          "title": "",
-          "publisher": "store.photonmatrixlab.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://photonmatrixlab.com/faq/",
-          "title": "",
-          "publisher": "photonmatrixlab.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.indiegogo.com/en/projects/jimwong-38623042/worlds-first-portable-mosquito-air-defense",
-          "title": "",
-          "publisher": "indiegogo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.ithome.com/0/990/213.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://photonmatrixlab.com/",
-          "title": "",
-          "publisher": "photonmatrixlab.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Photon Matrix 宣布激光灭蚊设备进入量产，首批产品计划于 8 月下旬发货。面向室内的红外激光版售价 988 美元，蓝激光版售价 1088 美元，均已在官方商店开放购买。",
-          "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "设备用激光雷达持续扫描背景距离，当 2—20mm、移动速度不超过 1m/s 的飞行目标进入约 6 米半径和 90 度扫描范围时，系统会确认目标尺寸，再沿同一光路发射短脉冲激光破坏蚊虫翅膀。若背景超出有效范围、没有实体背景，或目标尺寸明显大于蚊虫，激光不会启动。",
-          "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "蓝激光版灭蚊效率更高，但夜间可见光可能干扰室内使用；红外版的激光不可见，更适合卧室和育儿空间。官方表示，约 4500 份订单正在排队等待交付；产品的实际识别率、安全性和长期稳定性仍需要量产设备的独立测试验证。",
-          "source_url": "https://store.photonmatrixlab.com/products/photon-matrix-infrared-laser-mosquito-air-defense",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:37+00:00"
-    },
-    {
-      "id": "25ef25d6-2789-5e27-81ef-990b0fcc6c85",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "ca2fcb0ed356b119e8d98d01f2e0209f8123298e",
-      "title": "Miora 上线连接器，可读写 Notion、腾讯文档和 GitHub",
-      "body": "腾讯设计妙境 Miora 上线连接器功能，授权后可直接从外部工具读取文档、需求和表格，并将生成的内容写回原有工具，无需在多个窗口间重复复制粘贴。\n\n目前内置的 7 款连接器分为三类：Notion、腾讯文档和 Airtable 负责提供资料；Linear 与 GitHub 可接收任务、需求和代码仓库结果；Resend 与 Brevo 可发送邮件、短信并管理营销触达。连接后，Miora 可执行读取、写回、新建和发送四类操作。\n\n此外，用户还可添加符合通用接口标准的自定义连接器，并在外部平台的授权页面选择开放范围。官方展示的工作流包括从 Notion 取出灵感文档后生成视频，以及联动 Notion、腾讯文档、GitHub 和 Resend 完成电商营销方案与物料投递。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+      "source_url": "https://mp.weixin.qq.com/s/Oip6lFfmYCjwQZphPmuayw",
       "source_name": "mp.weixin.qq.com",
       "source_type": "draft_source",
       "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-16 14:27",
-      "published_at": "2026-08-16 14:27",
+      "disclosed_at": null,
+      "published_at": null,
       "cross_day_status": "current",
       "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/05c43009a4ede78eed4a.jpg",
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/3a4863eb1311ebf0090e.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg 🧭飞书群 · 2026-08-16 14:27",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/Oip6lFfmYCjwQZphPmuayw；https://www.hkexnews.hk/listedco/listconews/sehk/2026/0605/2026060500410_c.pdf 🧭飞书群 · 2026 年 8 月 17 日 16:56",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
+          "url": "https://mp.weixin.qq.com/s/Oip6lFfmYCjwQZphPmuayw",
           "title": "",
           "publisher": "mp.weixin.qq.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "腾讯设计妙境 Miora 上线连接器功能，授权后可直接从外部工具读取文档、需求和表格，并将生成的内容写回原有工具，无需在多个窗口间重复复制粘贴。",
-          "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
-          "status": "supported",
-          "evidence": ""
         },
         {
-          "text": "目前内置的 7 款连接器分为三类：Notion、腾讯文档和 Airtable 负责提供资料；Linear 与 GitHub 可接收任务、需求和代码仓库结果；Resend 与 Brevo 可发送邮件、短信并管理营销触达。连接后，Miora 可执行读取、写回、新建和发送四类操作。",
-          "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "此外，用户还可添加符合通用接口标准的自定义连接器，并在外部平台的授权页面选择开放范围。官方展示的工作流包括从 Notion 取出灵感文档后生成视频，以及联动 Notion、腾讯文档、GitHub 和 Resend 完成电商营销方案与物料投递。",
-          "source_url": "https://mp.weixin.qq.com/s/D4K25oIxYUQ9JNQY-MA8Mg",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "73aef9b8-5789-5e0f-b552-9b11bd8bb398",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "e67f998a4a0f37740adcc96503904d025ee33fa4",
-      "title": "兰博基尼 Revuelto SV 发布：1050 马力，2.4 秒破百",
-      "body": "据 The Verge 报道，兰博基尼发布 Revuelto SV。SV 代表 Superveloce，这款车延续 6.5 升自然吸气 V12 与三电机混动结构，综合输出约 1050 马力，比标准版增加约 50 马力。\n\n- 电池容量增加 7.3kWh，使赛道连续高负载时的输出更稳定；\n- 变速箱换挡时间缩短 30%，大量使用碳纤维后，功率重量比从标准版的 1.75kg/CV 改善至 1.66kg/CV；\n- 新前保险杠和后翼把下压力提高 80%，车头下压力增加一倍，0—100km/h 加速为 2.4 秒；\n- 新增源自 GT 赛车的 Pilota 模式，驾驶者可用方向盘旋钮在五档稳定系统介入程度之间切换。\n\nRevuelto SV 还采用更厚、更大直径的 CCM-R Plus 制动盘，并用六维传感器读取车辆纵向、横向、垂向加速度及俯仰、侧倾等姿态。兰博基尼取消纯电跑车计划后，继续以混动系统承担扭矩矢量控制和动态性能提升。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance",
-      "source_name": "theverge.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 02:00",
-      "published_at": "2026-08-15 02:00",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/a72ed70e4beb-44514d13c8deaeaf2fa5.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance 📮Folo · 2026 年 8 月 15 日 02:00",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance",
+          "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0605/2026060500410_c.pdf",
           "title": "",
-          "publisher": "theverge.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": false,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "A lot of automakers talk about wanting to minimize or eliminate driver distractions so as to make the experience of driving…",
-          "source_url": "https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 The Verge 报道，兰博基尼发布 Revuelto SV。SV 代表 Superveloce，这款车延续 6.5 升自然吸气 V12 与三电机混动结构，综合输出约 1050 马力，比标准版增加约 50 马力。",
-          "source_url": "https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "- 电池容量增加 7.3kWh，使赛道连续高负载时的输出更稳定；\n- 变速箱换挡时间缩短 30%，大量使用碳纤维后，功率重量比从标准版的 1.75kg/CV 改善至 1.66kg/CV；\n- 新前保险杠和后翼把下压力提高 80%，车头下压力增加一倍，0—100km/h 加速为 2.4 秒；\n- 新增源自 GT 赛车的 Pilota 模式，驾驶者可用方向盘旋钮在五档稳定系统介入程度之间切换。",
-          "source_url": "https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Revuelto SV 还采用更厚、更大直径的 CCM-R Plus 制动盘，并用六维传感器读取车辆纵向、横向、垂向加速度及俯仰、侧倾等姿态。兰博基尼取消纯电跑车计划后，继续以混动系统承担扭矩矢量控制和动态性能提升。",
-          "source_url": "https://www.theverge.com/transportation/979807/lamborghini-revuelto-sv-specs-performance",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "67bd537b-91da-5c9d-a7b8-890001069731",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "2f14be90e5bab048d2e2662841ed50aafe277e8a",
-      "title": "起亚 EV3 美国起售价低于 3.1 万美元，续航最高 321 英里",
-      "body": "据 Engadget 报道，起亚公布 EV3 在美国的定价：车辆起售价为 29450 美元，加上 1495 美元目的地费用后为 30945 美元，低于公司今年 4 月提出的 3.5 万美元目标，也成为起亚在美国最便宜的纯电车型。\n\nEV3 提供前驱和四驱版本，纯电续航最高 321 英里，车身尺寸接近起亚 Niro，并沿用 EV9 的设计元素。车辆配备 NACS 充电口，可使用特斯拉超级充电网络；起亚称，在 350kW 直流快充下，电量从 10% 充至 80% 约需 31 分钟。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
-      "source_name": "engadget.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 04:39",
-      "published_at": "2026-08-15 04:39",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/98b35cdfdf13-1c1dbebc521e1da7a398.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us 📮Folo · 2026 年 8 月 15 日 04:39",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
-          "title": "",
-          "publisher": "engadget.com",
+          "publisher": "hkexnews.hk",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -1326,488 +703,69 @@
       ],
       "claims": [
         {
-          "text": "EVs and Transportation",
-          "source_url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
+          "text": "吉利汽车控股有限公司宣布调整管理层。自 8 月 18 日起，李书福将辞任公司董事会主席及执行董事，转任终身荣誉主席；他将继续担任浙江吉利控股集团董事长。",
+          "source_url": "https://mp.weixin.qq.com/s/Oip6lFfmYCjwQZphPmuayw",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Kia's EV3 will start under $31,000 in the US",
-          "source_url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
+          "text": "安聪慧将接任吉利汽车董事会主席。安聪慧 1996 年加入吉利，历任工程总指挥、总经理、副总裁及总裁，目前同时担任浙江吉利控股集团 CEO；今年 6 月，他已重新获委任为吉利汽车执行董事。",
+          "source_url": "https://mp.weixin.qq.com/s/Oip6lFfmYCjwQZphPmuayw",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "That makes it the cheapest EV in Kia's lineup.",
-          "source_url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 Engadget 报道，起亚公布 EV3 在美国的定价：车辆起售价为 29450 美元，加上 1495 美元目的地费用后为 30945 美元，低于公司今年 4 月提出的 3.5 万美元目标，也成为起亚在美国最便宜的纯电车型。",
-          "source_url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "EV3 提供前驱和四驱版本，纯电续航最高 321 英里，车身尺寸接近起亚 Niro，并沿用 EV9 的设计元素。车辆配备 NACS 充电口，可使用特斯拉超级充电网络；起亚称，在 350kW 直流快充下，电量从 10% 充至 80% 约需 31 分钟。",
-          "source_url": "https://www.engadget.com/2237429/kia-ev3-will-start-under-31-000-in-the-us",
+          "text": "本次调整还涉及三项职位变动：李东辉辞任董事会副主席并继续担任执行董事；桂生悦由行政总裁转任董事会副主席；淦家阅接任行政总裁，负责公司日常运营与长期战略执行。",
+          "source_url": "https://mp.weixin.qq.com/s/Oip6lFfmYCjwQZphPmuayw",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "12ea9b7d-f9ba-5e93-ae4c-1a1f715ffb6c",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "84208238d1dc159d02d47146bfadd6249d6885fb",
-      "title": "Hermes Agent 加入 `/loop`，可在当前会话定时重复任务",
-      "body": "Nous Research 为 Hermes Agent 加入 `/loop` 循环命令。用户可以让 Agent 在当前会话中按固定间隔重新执行一段提示词或斜杠命令，用于轮询部署状态、监控 CI、反复修复测试，或在长会话中定期做状态摘要。每次唤醒都是一个新的 Agent 回合，会重新读取当前状态后执行任务。\n\n`/loop` 提供固定间隔和自适应两种节奏。自适应模式从默认 1 分钟开始，回复没有变化时依次退避到 2、4、8 分钟，上限默认为 15 分钟；一旦状态变化，立即回到最短间隔。用户还可以设定执行次数、证据型停止条件，或让 Agent 在任务完成时输出 `LOOP_COMPLETE` 自动结束。\n\n这项功能存活于当前会话，可跨越会话恢复和上下文压缩；需要隔夜、端末重启后继续或无人值守的定时任务时，官方建议改用 cron。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-      "source_name": "hermes-agent.nousresearch.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 11:41",
-      "published_at": "2026-08-15 11:41",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "data/images/8578bfe86c65-75e85ef6fecf5a622798.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://hermes-agent.nousresearch.com/docs/user-guide/features/loops；https://github.com/NousResearch/hermes-agent；https://t.me/OneMillion_AI/3912 📮Folo · 2026 年 8 月 15 日 11:41",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "title": "",
-          "publisher": "hermes-agent.nousresearch.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://github.com/NousResearch/hermes-agent",
-          "title": "",
-          "publisher": "github.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3912",
-          "title": "",
-          "publisher": "t.me",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Hermes Agent跟进Claude Code的/loop：Agent能定时自己醒来干活 Nous Research 给 Hermes Agent 加入 /loop。用户可以让 Agent 在当前会话里反复执行同一个任务，比如盯 CI、检查部署状态，或者反复修代码直到测试通过…",
-          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Nous Research 为 Hermes Agent 加入 `/loop` 循环命令。用户可以让 Agent 在当前会话中按固定间隔重新执行一段提示词或斜杠命令，用于轮询部署状态、监控 CI、反复修复测试，或在长会话中定期做状态摘要。每次唤醒都是一个新的 Agent 回合，会重新读取当前状态后执行任务。",
-          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "`/loop` 提供固定间隔和自适应两种节奏。自适应模式从默认 1 分钟开始，回复没有变化时依次退避到 2、4、8 分钟，上限默认为 15 分钟；一旦状态变化，立即回到最短间隔。用户还可以设定执行次数、证据型停止条件，或让 Agent 在任务完成时输出 `LOOP_COMPLETE` 自动结束。",
-          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这项功能存活于当前会话，可跨越会话恢复和上下文压缩；需要隔夜、端末重启后继续或无人值守的定时任务时，官方建议改用 cron。",
-          "source_url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "3e9d3e0f-1fac-5cc7-ae7e-ffcf1a47c10d",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "007112dcdb68cb2036df1f87c9dfc73dad716aa3",
-      "title": "OpenRouter 上线搜索基准，可同时比较准确率、成本和速度",
-      "body": "OpenRouter 上线新的基准测试页面，把模型、搜索服务、工具预算和推理强度纳入同一套可复现实验配置。页面目前汇总 6 项基准、超过 246 万次任务评估，其中 BrowseComp、DeepSearchQA、HLE 和 WideSearch 四项专门测试联网搜索。\n\n每个结果都可继续查看模型、搜索服务、成本和运行耗时。以 BrowseComp 为例，页面当前最佳配置为 Perplexity 搜索搭配高推理强度的 Claude Opus 5，准确率为 89%，单题成本约 0.99 美元，耗时约 1.9 分钟；WideSearch 的最高准确率为 84%，由 Perplexity 搜索搭配 GPT-5.6 Sol 获得。\n\nOpenRouter 将页面定位为持续运行的基准，而不是一次性排行榜；测试结果会随模型、搜索服务和评测任务更新，开发者可据此比较搜索质量与成本、延迟之间的取舍。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 6,
-      "score": 0,
-      "source_url": "https://openrouter.ai/benchmarks",
-      "source_name": "openrouter.ai",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 13:12",
-      "published_at": "2026-08-15 13:12",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "data/images/c3732542fcda-c0d0c614a2a4bd1276a6.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://openrouter.ai/benchmarks；https://t.me/OneMillion_AI/3914 📮Folo · 2026 年 8 月 15 日 13:12",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://openrouter.ai/benchmarks",
-          "title": "",
-          "publisher": "openrouter.ai",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3914",
-          "title": "",
-          "publisher": "t.me",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "OpenRouter实测AI搜索：多搜几轮比换搜索引擎更重要 OpenRouter 上线 Web Search Benchmarks，专门测试 AI 联网搜索到底该怎么配。首批覆盖 Exa、Parallel、Perplexity 和模型自带搜索，并搭配 GPT-5.6 Sol…",
-          "source_url": "https://openrouter.ai/benchmarks",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "OpenRouter 上线新的基准测试页面，把模型、搜索服务、工具预算和推理强度纳入同一套可复现实验配置。页面目前汇总 6 项基准、超过 246 万次任务评估，其中 BrowseComp、DeepSearchQA、HLE 和 WideSearch 四项专门测试联网搜索。",
-          "source_url": "https://openrouter.ai/benchmarks",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "每个结果都可继续查看模型、搜索服务、成本和运行耗时。以 BrowseComp 为例，页面当前最佳配置为 Perplexity 搜索搭配高推理强度的 Claude Opus 5，准确率为 89%，单题成本约 0.99 美元，耗时约 1.9 分钟；WideSearch 的最高准确率为 84%，由 Perplexity 搜索搭配 GPT-5.6 Sol 获得。",
-          "source_url": "https://openrouter.ai/benchmarks",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "OpenRouter 将页面定位为持续运行的基准，而不是一次性排行榜；测试结果会随模型、搜索服务和评测任务更新，开发者可据此比较搜索质量与成本、延迟之间的取舍。",
-          "source_url": "https://openrouter.ai/benchmarks",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "c262499f-24ec-5035-bce8-c76560ccd84c",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "e2df40145fcca0cff0088eeb979b96e34b2cbeb9",
-      "title": "Liquid AI 推出本地隐私过滤器 ShieldFlow",
-      "body": "Liquid AI 推出 ShieldFlow 早期试用版。它作为本地代理运行在电脑上，在提示词发送到 AI 服务前检测并替换姓名、身份证号、信用卡、API Key、医疗信息和地址等敏感内容，收到回复后再在安全范围内恢复上下文。检测、删改和日志都留在本机，支持 ChatGPT、Claude 和 OpenRouter 等服务。\n\nShieldFlow 支持 40 多种敏感实体，每个分类可独立开关并调节检测灵敏度。Liquid AI 同时在 Hugging Face 公开 LFM2.5-Encoder-350M-PII-Detector：该 3.5 亿参数模型面向 token classification，覆盖 11 个领域的 40 种个人信息类型和 16 种语言，可在 CPU 环境中运行。\n\nShieldFlow v0.4.3 个人版免费，支持 Apple Silicon Mac 与 Windows 10/11，应用和分类模型约占 500MB 磁盘空间，运行不需要 GPU。",
-      "category": "新产品",
-      "status": "needs_review",
+      "id": "83aa6fe7-3bef-52ea-af0b-83979aba7371",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "bbc331ac43d82fbee9b977d831112f4c42aaf7fc",
+      "title": "大疆诉美国国防部案发回重审，法院要求重新检查列名依据",
+      "body": "据新浪科技与 IT 之家报道，美国哥伦比亚特区联邦巡回上诉法院 8 月 14 日裁定，将大疆挑战美国国防部「中国军事企业」列名的案件发回地区法院重新审理。\n\n上诉法院认为，下级法院在审查「大疆是否对中国国防工业基础作出贡献」这一核心问题时存在缺陷，现有证据不足以支撑原有审查结论。地区法院接下来需要重新检查行政记录，包括非公开的机密材料，再判断大疆是否符合列名条件。\n\n大疆于 2022 年 10 月首次被美国国防部列入相关清单，2024 年 10 月提起诉讼；地区法院在 2025 年判决美国国防部胜诉，大疆随后上诉。此次裁定撤回原有审查结果并启动重审，但不会直接把大疆移出清单。",
+      "category": "大公司",
+      "status": "ready",
       "selected": true,
       "position": 7,
       "score": 0,
-      "source_url": "https://www.liquid.ai/shieldflow",
-      "source_name": "liquid.ai",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 12:01",
-      "published_at": "2026-08-15 12:01",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "data/images/e930c5e49f90-92fd9bf54397e3c21c17.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.liquid.ai/shieldflow；https://huggingface.co/LiquidAI/LFM2.5-Encoder-350M-PII-Detector；https://t.me/OneMillion_AI/3913 📮Folo · 2026 年 8 月 15 日 12:01",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.liquid.ai/shieldflow",
-          "title": "",
-          "publisher": "liquid.ai",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://huggingface.co/LiquidAI/LFM2.5-Encoder-350M-PII-Detector",
-          "title": "",
-          "publisher": "huggingface.co",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://t.me/OneMillion_AI/3913",
-          "title": "",
-          "publisher": "t.me",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Liquid AI做了个本地隐私过滤器：16种语言，40类敏感信息一次清掉 Liquid AI 推出一个只有 3.5 亿参数的隐私过滤模型。它能一次扫完整段文字，找出姓名、电话、证件号、银行卡、API Key 等 40 类敏感信息，支持 16 种语言，还能直接在本地运行。",
-          "source_url": "https://www.liquid.ai/shieldflow",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Liquid AI 推出 ShieldFlow 早期试用版。它作为本地代理运行在电脑上，在提示词发送到 AI 服务前检测并替换姓名、身份证号、信用卡、API Key、医疗信息和地址等敏感内容，收到回复后再在安全范围内恢复上下文。检测、删改和日志都留在本机，支持 ChatGPT、Claude 和 OpenRouter 等服务。",
-          "source_url": "https://www.liquid.ai/shieldflow",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "ShieldFlow 支持 40 多种敏感实体，每个分类可独立开关并调节检测灵敏度。Liquid AI 同时在 Hugging Face 公开 LFM2.5-Encoder-350M-PII-Detector：该 3.5 亿参数模型面向 token classification，覆盖 11 个领域的 40 种个人信息类型和 16 种语言，可在 CPU 环境中运行。",
-          "source_url": "https://www.liquid.ai/shieldflow",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "ShieldFlow v0.4.3 个人版免费，支持 Apple Silicon Mac 与 Windows 10/11，应用和分类模型约占 500MB 磁盘空间，运行不需要 GPU。",
-          "source_url": "https://www.liquid.ai/shieldflow",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "b7a8586a-17a2-5d1b-ab02-dd89208ab720",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "7cdf405fa1af3c1d46b5b21a66fbbf61fdfb5d93",
-      "title": "Suno Studio 2.0 加入 MIDI 编辑与 AI 插件生成",
-      "body": "据 MusicRadar 报道，Suno 已推出浏览器端数字音频工作站 Studio 2.0，在生成式音乐能力之外补入 MIDI、参数自动化和延迟补偿等传统制作工具，并新增可直接控制项目的 Studio Chat。\n\n新版允许用户在时间线或独立编辑器中导入、录制和修改 MIDI，也能把音频转换为 MIDI。反向操作时，Suno 的生成引擎可把 MIDI 片段转换为指定乐器、音色或风格的音频，同时保留原始音高、节奏和力度；Studio Chat 还可以根据文字指令生成旋律、和弦与鼓点。\n\n每条轨道现在都有横向通道条，可加载内置 Wavetable 合成器，以及混响、延迟、压缩、失真、均衡器和噪声门等效果。Studio Chat 可以生成声音、整理工程、编辑 MIDI 与音频，并按提示制作自定义音频效果；Studio 2.0 已向 Premier 订阅用户开放。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 8,
-      "score": 0,
-      "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-      "source_name": "musicradar.com",
+      "source_url": "https://dockets.justia.com/docket/circuit-courts/cadc/25-5367",
+      "source_name": "dockets.justia.com",
       "source_type": "draft_source",
       "source_quality": "secondary",
       "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-15 23:28",
-      "published_at": "2026-08-15 23:28",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "data/images/ca8cccfa1b53-901ba6b9a1935fccefd6.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins；https://www.ithome.com/0/990/190.htm 📮Folo · 2026 年 8 月 15 日 23:28",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-          "title": "",
-          "publisher": "musicradar.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.ithome.com/0/990/190.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 8 月 15 日消息，当地时间 14 日，Suno 正式推出了 Studio 2.0，通过一系列大幅升级进一步向“真正的数字音频工作站（DAW）靠拢”，而非只是带有生成式 AI 功能的简易音频编辑器。",
-          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "其中最重要的升级无疑是加入 MIDI 支持。Suno 称，MIDI…",
-          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 MusicRadar 报道，Suno 已推出浏览器端数字音频工作站 Studio 2.0，在生成式音乐能力之外补入 MIDI、参数自动化和延迟补偿等传统制作工具，并新增可直接控制项目的 Studio Chat。",
-          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "新版允许用户在时间线或独立编辑器中导入、录制和修改 MIDI，也能把音频转换为 MIDI。反向操作时，Suno 的生成引擎可把 MIDI 片段转换为指定乐器、音色或风格的音频，同时保留原始音高、节奏和力度；Studio Chat 还可以根据文字指令生成旋律、和弦与鼓点。",
-          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "每条轨道现在都有横向通道条，可加载内置 Wavetable 合成器，以及混响、延迟、压缩、失真、均衡器和噪声门等效果。Studio Chat 可以生成声音、整理工程、编辑 MIDI 与音频，并按提示制作自定义音频效果；Studio 2.0 已向 Premier 订阅用户开放。",
-          "source_url": "https://www.musicradar.com/music-tech/sunos-studio-2-0-adds-an-ai-chatbot-that-can-control-your-project-transform-sounds-and-generate-custom-plugins",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "dbbdf10d-3632-5d07-8d84-7f792b004f87",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "c37aca3b81f85030787aa8296aad198ea981ee78",
-      "title": "福特发布 Mustang Dark Horse SC 敞篷版：795 马力，明年春季交付",
-      "body": "据 IT 之家援引 Carscoops 报道，福特已发布 Mustang Dark Horse SC 敞篷版。这款新车采用软顶敞篷结构和针对公路驾驶重新调校的 MagneRide 悬架，是福特迄今动力最强的敞篷 Mustang。\n\n动力系统沿用硬顶版的 5.2L 机械增压 V8 发动机，最大功率 795 马力，峰值扭矩 894N·m，匹配 7 速双离合变速箱并采用后轮驱动。座舱提供缟玛瑙黑与太空灰配色，驾驶席支持 6 向电动调节，副驾驶席支持 4 向电动调节；车内还可看到碳纤维饰板、旋钮式换挡机构和平底方向盘。\n\nMustang Dark Horse SC 敞篷版将于今年秋季开放订购，首批车辆计划在明年春季交付。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 9,
-      "score": 0,
-      "source_url": "https://www.ithome.com/0/990/173.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-15 21:31",
-      "published_at": "2026-08-15 21:31",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/173.htm 📮Folo · 2026 年 8 月 15 日 21:31",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/0/990/173.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 8 月 15 日消息，据外媒 Carscoop 今天（15 日）报道，福特正式发布 Mustang Dark Horse SC 敞篷版。新车比硬顶版晚 7 个月亮相，并成为福特迄今动力最强的敞篷 Mustang。",
-          "source_url": "https://www.ithome.com/0/990/173.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "福特希望把 Dark Horse SC 敞篷版打造成…",
-          "source_url": "https://www.ithome.com/0/990/173.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 IT 之家援引 Carscoops 报道，福特已发布 Mustang Dark Horse SC 敞篷版。这款新车采用软顶敞篷结构和针对公路驾驶重新调校的 MagneRide 悬架，是福特迄今动力最强的敞篷 Mustang。",
-          "source_url": "https://www.ithome.com/0/990/173.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "动力系统沿用硬顶版的 5.2L 机械增压 V8 发动机，最大功率 795 马力，峰值扭矩 894N·m，匹配 7 速双离合变速箱并采用后轮驱动。座舱提供缟玛瑙黑与太空灰配色，驾驶席支持 6 向电动调节，副驾驶席支持 4 向电动调节；车内还可看到碳纤维饰板、旋钮式换挡机构和平底方向盘。",
-          "source_url": "https://www.ithome.com/0/990/173.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Mustang Dark Horse SC 敞篷版将于今年秋季开放订购，首批车辆计划在明年春季交付。",
-          "source_url": "https://www.ithome.com/0/990/173.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
-    },
-    {
-      "id": "d1490859-09c8-583a-8e55-87fa31896612",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "16e000feb424e168631d926b3ee77dd0b2d2464a",
-      "title": "共享充电宝「撞脸」主流品牌，误还后还要交跑腿费",
-      "body": "据中央广播电视总台中国之声报道，一些小品牌共享充电宝开始模仿主流品牌的机柜颜色和外观，并紧邻主流品牌设备摆放，让消费者在扫码时产生误认。\n\n四川消费者甘女士借用一款外观近似主流品牌的共享充电宝，归还时才发现设备属于另一平台。客服要求她支付 30 元跑腿费取出误还的充电宝，或自行拆取；第二天她准备按网上教程取出时，设备已经不见，平台随后以「遗失」为由要求支付 99 元。\n\n一名共享充电宝从业者称，部分机柜换成与主流品牌相似的黄色后，使用率可从约 20% 提高至 40%。中国政法大学知识产权研究中心特约研究员赵占领表示，颜色本身未必能注册为商标，但模仿包装、弱化真实经营者并诱导误认，可能构成混淆行为；误借误还后持续计费或收取买断费，也可能侵犯消费者的知情权和自主选择权。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://www.ithome.com/0/990/239.htm",
-      "source_name": "IT之家",
-      "source_type": "folo",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-08-16 09:53",
-      "published_at": "2026-08-16 09:53",
+      "disclosed_at": "2026-08-17 15:46",
+      "published_at": "2026-08-17 15:46",
       "cross_day_status": "ready",
       "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
+      "fact_status": "supported",
+      "changed_since_review": false,
       "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 原文链接：https://www.ithome.com/0/990/239.htm 📮Folo · 2026-08-16 09:53",
+        "source_line": "🔗 来源：https://dockets.justia.com/docket/circuit-courts/cadc/25-5367；https://www.ithome.com/0/990/660.htm 📮Folo · 2026 年 8 月 17 日 15:46",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.ithome.com/0/990/239.htm",
+          "url": "https://dockets.justia.com/docket/circuit-courts/cadc/25-5367",
+          "title": "",
+          "publisher": "dockets.justia.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/990/660.htm",
           "title": "",
           "publisher": "IT之家",
           "source_type": "folo",
@@ -1818,71 +776,62 @@
       ],
       "claims": [
         {
-          "text": "据中央广播电视总台中国之声报道，一些小品牌共享充电宝开始模仿主流品牌的机柜颜色和外观，并紧邻主流品牌设备摆放，让消费者在扫码时产生误认。",
-          "source_url": "https://www.ithome.com/0/990/239.htm",
+          "text": "据新浪科技与 IT 之家报道，美国哥伦比亚特区联邦巡回上诉法院 8 月 14 日裁定，将大疆挑战美国国防部「中国军事企业」列名的案件发回地区法院重新审理。",
+          "source_url": "https://dockets.justia.com/docket/circuit-courts/cadc/25-5367",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "四川消费者甘女士借用一款外观近似主流品牌的共享充电宝，归还时才发现设备属于另一平台。客服要求她支付 30 元跑腿费取出误还的充电宝，或自行拆取；第二天她准备按网上教程取出时，设备已经不见，平台随后以「遗失」为由要求支付 99 元。",
-          "source_url": "https://www.ithome.com/0/990/239.htm",
+          "text": "上诉法院认为，下级法院在审查「大疆是否对中国国防工业基础作出贡献」这一核心问题时存在缺陷，现有证据不足以支撑原有审查结论。地区法院接下来需要重新检查行政记录，包括非公开的机密材料，再判断大疆是否符合列名条件。",
+          "source_url": "https://dockets.justia.com/docket/circuit-courts/cadc/25-5367",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "一名共享充电宝从业者称，部分机柜换成与主流品牌相似的黄色后，使用率可从约 20% 提高至 40%。中国政法大学知识产权研究中心特约研究员赵占领表示，颜色本身未必能注册为商标，但模仿包装、弱化真实经营者并诱导误认，可能构成混淆行为；误借误还后持续计费或收取买断费，也可能侵犯消费者的知情权和自主选择权。",
-          "source_url": "https://www.ithome.com/0/990/239.htm",
+          "text": "大疆于 2022 年 10 月首次被美国国防部列入相关清单，2024 年 10 月提起诉讼；地区法院在 2025 年判决美国国防部胜诉，大疆随后上诉。此次裁定撤回原有审查结果并启动重审，但不会直接把大疆移出清单。",
+          "source_url": "https://dockets.justia.com/docket/circuit-courts/cadc/25-5367",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:40+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
     },
     {
-      "id": "e0542dd9-7ea1-54dd-b344-27afdb2b8598",
-      "issue_id": "ifanr-daily-20260817",
-      "fingerprint": "8fe4a4c3a2fc339b526bdd66f573f706b4daea3c",
-      "title": "《塞尔达传说》40 周年 Switch 2 手柄包装曝光",
-      "body": "消息人士 @XX_750000 分享的照片显示，一款《塞尔达传说》40 周年主题 Switch 2 Pro 手柄已经出现正反面包装；同一批照片中还有一个尺寸接近手柄包装、但被打码的第三款任天堂产品。\n\n此前流出的包装还包括黑金配色、带有三角力量标志的限定 Switch 2 主机。目前任天堂尚未公布这套硬件，也没有确认图片真伪、发售时间、售价以及是否会与《塞尔达传说:时之笛》重制版同步推出。",
-      "category": "新消费",
-      "status": "needs_review",
+      "id": "e75c2953-d5c4-5096-9b59-bdfbf91552bd",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "5e643bdffe46720587456a344a711cf27c64cb67",
+      "title": "DeepSeek API 正式执行峰谷定价，高峰时段最高涨幅达 1100%",
+      "body": "DeepSeek API 自 8 月 17 日 00:00 起正式调整定价策略，引入峰谷定价机制。高峰时段设定为北京时间 9:00—12:00 与 14:00—18:00，其余时间为空闲时段，空闲时段调用价格为高峰时段的一半。\n\n以旗舰模型 DeepSeek-V4-Pro 为例，高峰时段每百万 token 输入（缓存未命中）价格由 3 元上调至 9 元，输出价格由 6 元上调至 27 元，缓存命中输入价格由 0.025 元调整至 0.3 元，涨幅达 1100%；空闲时段输入（缓存未命中）为 4.5 元，输出为 13.5 元，缓存命中输入为 0.15 元。轻量级模型 DeepSeek-V4-Flash 在高峰时段输入（缓存未命中）为 1.5 元，输出为 4.5 元，缓存命中输入为 0.10 元。\n\nDeepSeek 表示，推出峰谷定价旨在通过价格杠杆平衡日间算力拥堵，引导企业错峰调度大模型任务以保障平台运行稳定性。OpenRouter 数据显示，8 月 3 日至 8 月 9 日当周中国大模型 Token 调用量达 34.25 万亿，连续 15 周位居全球第一；其中 DeepSeek-V4-Flash 正式版当周调用量达 8.83 万亿 Token，位列全球榜首。",
+      "category": "大公司",
+      "status": "ready",
       "selected": true,
-      "position": 2,
+      "position": 8,
       "score": 0,
-      "source_url": "https://www.ithome.com/0/990/160.htm",
-      "source_name": "ithome.com",
+      "source_url": "https://mp.weixin.qq.com/s/1KksDkgKKpKDPlrFdcSUsA",
+      "source_name": "mp.weixin.qq.com",
       "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
+      "source_quality": "unknown",
+      "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-15 19:28",
-      "published_at": "2026-08-15 19:28",
+      "disclosed_at": null,
+      "published_at": null,
       "cross_day_status": "current",
       "rumor": false,
-      "fact_status": "unverified",
+      "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/3f6dcbf2db635fa7a512.png",
+      "image_url": "data/images/3074e5123191d4666b2a.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/0/990/160.htm；https://www.reddit.com/r/GamingLeaksAndRumours/comments/1voa9xv/xx_750000_has_shared_more_photos_of_the_zelda/ 📮Folo · 2026 年 8 月 15 日 19:28",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/1KksDkgKKpKDPlrFdcSUsA 🧭飞书群 · 2026 年 8 月 17 日 17:12",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.ithome.com/0/990/160.htm",
+          "url": "https://mp.weixin.qq.com/s/1KksDkgKKpKDPlrFdcSUsA",
           "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.reddit.com/r/GamingLeaksAndRumours/comments/1voa9xv/xx_750000_has_shared_more_photos_of_the_zelda/",
-          "title": "",
-          "publisher": "reddit.com",
+          "publisher": "mp.weixin.qq.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -1891,89 +840,1615 @@
       ],
       "claims": [
         {
-          "text": "消息人士 @XX_750000 分享的照片显示，一款《塞尔达传说》40 周年主题 Switch 2 Pro 手柄已经出现正反面包装；同一批照片中还有一个尺寸接近手柄包装、但被打码的第三款任天堂产品。",
-          "source_url": "https://www.ithome.com/0/990/160.htm",
+          "text": "DeepSeek API 自 8 月 17 日 00:00 起正式调整定价策略，引入峰谷定价机制。高峰时段设定为北京时间 9:00—12:00 与 14:00—18:00，其余时间为空闲时段，空闲时段调用价格为高峰时段的一半。",
+          "source_url": "https://mp.weixin.qq.com/s/1KksDkgKKpKDPlrFdcSUsA",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "此前流出的包装还包括黑金配色、带有三角力量标志的限定 Switch 2 主机。目前任天堂尚未公布这套硬件，也没有确认图片真伪、发售时间、售价以及是否会与《塞尔达传说:时之笛》重制版同步推出。",
-          "source_url": "https://www.ithome.com/0/990/160.htm",
+          "text": "以旗舰模型 DeepSeek-V4-Pro 为例，高峰时段每百万 token 输入（缓存未命中）价格由 3 元上调至 9 元，输出价格由 6 元上调至 27 元，缓存命中输入价格由 0.025 元调整至 0.3 元，涨幅达 1100%；空闲时段输入（缓存未命中）为 4.5 元，输出为 13.5 元，缓存命中输入为 0.15 元。轻量级模型 DeepSeek-V4-Flash 在高峰时段输入（缓存未命中）为 1.5 元，输出为 4.5 元，缓存命中输入为 0.10 元。",
+          "source_url": "https://mp.weixin.qq.com/s/1KksDkgKKpKDPlrFdcSUsA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "DeepSeek 表示，推出峰谷定价旨在通过价格杠杆平衡日间算力拥堵，引导企业错峰调度大模型任务以保障平台运行稳定性。OpenRouter 数据显示，8 月 3 日至 8 月 9 日当周中国大模型 Token 调用量达 34.25 万亿，连续 15 周位居全球第一；其中 DeepSeek-V4-Flash 正式版当周调用量达 8.83 万亿 Token，位列全球榜首。",
+          "source_url": "https://mp.weixin.qq.com/s/1KksDkgKKpKDPlrFdcSUsA",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-16T09:20:38+00:00"
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "ca31b57c-d3f7-5d29-a551-1cc8e3cfb834",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "e8f631b02979139ccc2e32019352a524af003de3",
+      "title": "💡 韩歆毅：智能体商业将在未来 6—12 个月进入爆发期",
+      "body": "蚂蚁集团 CEO 韩歆毅 8 月 17 日在支付宝 AI 生态大会上表示，智能体商业将在未来 6—12 个月进入爆发期。他把临界点归纳为三个条件同时成熟：AI 能力提升、用户需求跃迁，以及能够持续运转的价值闭环。\n\n韩歆毅把人与服务的连接方式分为三个阶段：搜索时代，人需要学习机器的语言；App 时代，服务被封装在各个应用里；智能体时代，机器开始用人的语言理解需求。他认为，这次变化会让商业竞争从争夺「被看见」转向争取「被理解」。\n\n> 过去二十年，人学着用机器的语言表达需求；未来二十年，机器学着用人的语言理解需求。\n\n在他的描述中，流量模式是一条从曝光、点击到转化逐层缩窄的漏斗；智能体则围绕用户意图持续组合服务，让需求被满足、延续或放大。价值分配因此会更多取决于理解深度与履约质量，并催生服务原子供给者、智能体编排者、信任与规则维护者等新角色。\n\n韩歆毅表示，支付宝将向行业开放信任设施、AI 支付、区块链、AI 数据库和隐私计算等基础设施。平台、商家、终端厂商、服务商与开发者需要共同建立连接和规则，才能让不同智能体完成安全协作与商业履约。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 12,
+      "score": 0,
+      "source_url": "",
+      "source_name": "e8f631b02979139ccc2e32019352a524af003de3",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 14:59",
+      "published_at": "2026-08-17 14:59",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/34cfd3b23029-95e0a6af63e2bd0f7727.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：新闻稿《蚂蚁集团 CEO 韩歆毅：智能体商业将在6至12个月内爆发.docx》 📝新闻稿 · 2026 年 8 月 17 日 16:09",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/990/636.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.nbd.com.cn/articles/2026-05-26/4408772.html",
+          "title": "",
+          "publisher": "nbd.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www3.xinhuanet.com/tech/20260717/0e191f98b2c346539768c195fc60574e/c.html",
+          "title": "",
+          "publisher": "www3.xinhuanet.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 8 月 17 日消息，据新浪科技报道，支付宝 AI 生态合作伙伴大会今天在杭州举行，蚂蚁集团首席执行官、执行董事韩歆毅现场发表主题演讲。",
+          "source_url": "https://www.ithome.com/0/990/636.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "韩歆毅认为，智能体商业将在未来 6-12 个月爆发，这一临界点的到来主要基于三大条件同时成熟：第一是 AI 技术能力的演进和提升…",
+          "source_url": "https://www.ithome.com/0/990/636.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "蚂蚁集团 CEO 韩歆毅 8 月 17 日在支付宝 AI 生态大会上表示，智能体商业将在未来 6—12 个月进入爆发期。他把临界点归纳为三个条件同时成熟：AI 能力提升、用户需求跃迁，以及能够持续运转的价值闭环。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "韩歆毅把人与服务的连接方式分为三个阶段：搜索时代，人需要学习机器的语言；App 时代，服务被封装在各个应用里；智能体时代，机器开始用人的语言理解需求。他认为，这次变化会让商业竞争从争夺「被看见」转向争取「被理解」。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "> 过去二十年，人学着用机器的语言表达需求；未来二十年，机器学着用人的语言理解需求。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:26+00:00"
+    },
+    {
+      "id": "33c4646c-0880-579f-9d5e-27c06e2483c4",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "1797d243d40a523337b65bfa6033c238955b5c88",
+      "title": "Ariana Grande 与 Cynthia Erivo 在伦敦合唱《For Good》",
+      "body": "Ariana Grande 在伦敦 O2 体育馆举行 Eternal Sunshine 巡演第二场英国演出时，请来《魔法坏女巫》搭档 Cynthia Erivo 登台。\n\n两人合唱了音乐剧中的《For Good》，也演唱了 Barbra Streisand 与 Judy Garland 的经典合作曲《Happy Days Are Here Again / Get Happy》。这次重聚发生在 Grande 第七张专辑巡演期间，把电影角色关系重新带回现场音乐舞台。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://variety.com/2026/music/news/ariana-grande-cynthia-erivo-eternal-sunshine-london-wicked-1236835738",
+      "source_name": "variety.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 05:27",
+      "published_at": "2026-08-17 05:27",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/d61830c06985-d5f1f3b0da80fba4514e.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://variety.com/2026/music/news/ariana-grande-cynthia-erivo-eternal-sunshine-london-wicked-1236835738 📮Folo · 2026 年 8 月 17 日 05:27",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://variety.com/2026/music/news/ariana-grande-cynthia-erivo-eternal-sunshine-london-wicked-1236835738",
+          "title": "",
+          "publisher": "variety.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        }
+      ],
+      "claims": [
+        {
+          "text": "Ariana Grande 在伦敦 O2 体育馆举行 Eternal Sunshine 巡演第二场英国演出时，请来《魔法坏女巫》搭档 Cynthia Erivo 登台。",
+          "source_url": "https://variety.com/2026/music/news/ariana-grande-cynthia-erivo-eternal-sunshine-london-wicked-1236835738",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "两人合唱了音乐剧中的《For Good》，也演唱了 Barbra Streisand 与 Judy Garland 的经典合作曲《Happy Days Are Here Again / Get Happy》。这次重聚发生在 Grande 第七张专辑巡演期间，把电影角色关系重新带回现场音乐舞台。",
+          "source_url": "https://variety.com/2026/music/news/ariana-grande-cynthia-erivo-eternal-sunshine-london-wicked-1236835738",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "27b718a6-6afb-5571-a430-e63000ab5d7f",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "ba0df71a4c3586a985ddbd0cdd4a39d674eac7e5",
+      "title": "《Love Story》主创：泄露造型照引来的 TikTok 风暴远超预期",
+      "body": "FX 限定剧《Love Story》制片人 Nina Jacobson 与 Brad Simpson 回顾称，剧集尚未正式亮相时，片场流出的 Carolyn Bessette 造型照就触发了 TikTok 粉丝的大规模批评。\n\n两人没有预料到，围绕这位时尚偶像的网络社群会把少量路透照当作完整成片判断，并迅速形成舆论。主创认为，服装、镜头和演员表演需要放在剧情语境中观看，单张偷拍照无法呈现最终效果。\n\n争议没有阻止剧集进入奖项赛季。《Love Story》随后获得 7 项艾美奖提名，也让这场由粉丝考据、怀旧和平台传播共同放大的风波成为作品之外的第二条叙事线。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651",
+      "source_name": "hollywoodreporter.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 03:30",
+      "published_at": "2026-08-17 03:30",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/360974b30588-ecfd53a3d5a0c2e455b6.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651 📮Folo · 2026 年 8 月 17 日 03:30",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651",
+          "title": "",
+          "publisher": "hollywoodreporter.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Nina Jacobson and Brad Simpson reveal how leaked photos sparked a social media firestorm — and how the FX limited series ultimately won over…",
+          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "FX 限定剧《Love Story》制片人 Nina Jacobson 与 Brad Simpson 回顾称，剧集尚未正式亮相时，片场流出的 Carolyn Bessette 造型照就触发了 TikTok 粉丝的大规模批评。",
+          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "两人没有预料到，围绕这位时尚偶像的网络社群会把少量路透照当作完整成片判断，并迅速形成舆论。主创认为，服装、镜头和演员表演需要放在剧情语境中观看，单张偷拍照无法呈现最终效果。",
+          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "争议没有阻止剧集进入奖项赛季。《Love Story》随后获得 7 项艾美奖提名，也让这场由粉丝考据、怀旧和平台传播共同放大的风波成为作品之外的第二条叙事线。",
+          "source_url": "https://www.hollywoodreporter.com/tv/tv-features/love-story-producers-react-carolyn-bessette-tiktok-1236672651",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "ca7a6903-c3d1-5e72-8708-2e36728295dd",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "38c601e6b7d6eae8237a51b6789bf6b8731626f3",
+      "title": "Open Mike Eagle 与 Kenny Segal 把分手写成一张黑色喜剧说唱专辑",
+      "body": "Open Mike Eagle 与制作人 Kenny Segal 发布合作专辑 DOOMED!。两人相识并合作近 20 年，这是他们第一次共同完成整张专辑。\n\n专辑以一段持续 5 年的关系结束为核心，把争吵、未听的语音留言和删除共同歌单等细节处理成带荒诞感的黑色喜剧。Kenny Segal 用失真钢琴、弦乐、萨克斯和迷幻合成器搭出低沉但不拖沓的背景，Open Mike Eagle 则继续以密集的流行文化引用缓冲私人经验。\n\nDOOMED! 共收录 15 首歌，并邀请 billy woods、Hemlock Ernst 等音乐人参与。专辑已在 Bandcamp 与主流流媒体上线，也发行黑胶、CD 和磁带版本。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+      "source_name": "theverge.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 04:31",
+      "published_at": "2026-08-17 04:31",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/25afe1631e33-3eb300254f734823ffaa.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review；https://pitchfork.com/news/open-mike-eagle-and-kenny-segal-team-for-new-album-doomed/ 📮Folo · 2026 年 8 月 17 日 04:31",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+          "title": "",
+          "publisher": "theverge.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://pitchfork.com/news/open-mike-eagle-and-kenny-segal-team-for-new-album-doomed/",
+          "title": "",
+          "publisher": "pitchfork.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "In every possible universe?",
+          "source_url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "| Image: Backwoodz Studioz “Breakups are… tough.” It’s the opening lines of an interlude…",
+          "source_url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Open Mike Eagle 与制作人 Kenny Segal 发布合作专辑 DOOMED!。两人相识并合作近 20 年，这是他们第一次共同完成整张专辑。",
+          "source_url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "专辑以一段持续 5 年的关系结束为核心，把争吵、未听的语音留言和删除共同歌单等细节处理成带荒诞感的黑色喜剧。Kenny Segal 用失真钢琴、弦乐、萨克斯和迷幻合成器搭出低沉但不拖沓的背景，Open Mike Eagle 则继续以密集的流行文化引用缓冲私人经验。",
+          "source_url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "DOOMED! 共收录 15 首歌，并邀请 billy woods、Hemlock Ernst 等音乐人参与。专辑已在 Bandcamp 与主流流媒体上线，也发行黑胶、CD 和磁带版本。",
+          "source_url": "https://www.theverge.com/entertainment/980799/open-mike-eagle-and-kenny-segal-doomed-review",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "d6436d1b-f790-5ef4-9655-dd47bdd201e9",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "4eb76b0729191ef3247ae3436838dbeafcae622d",
+      "title": "Octavia Spencer：要把阿拉斯加失踪原住民女性的声音还给她们",
+      "body": "Octavia Spencer 在纪录剧集 Lost Women of Alaska 中担任旁白和执行制片人。作品聚焦 Veronica Abouchuk 与 Kathleen Jo Henry 在 2018 年和 2019 年遇害的案件，并追问针对原住民女性的暴力为何长期被忽视。\n\nSpencer 在采访中说，参与项目源于她作为「世界公民」的责任感。创作目标不只是复述连环杀手 Brian Steven Smith 的罪行，更要恢复受害者的尊严，让家属和当地社群成为叙事中心。\n\n这部 3 集纪录剧已为 Spencer 带来 2026 年艾美奖「最佳旁白」提名。节目在 Investigation Discovery 播出，并可在 HBO Max 观看。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+      "source_name": "deadline.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 04:40",
+      "published_at": "2026-08-17 04:40",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/9f35cf34b17f-062c7fdb1995361d4b06.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780；https://www.televisionacademy.com/bios/octavia-spencer 📮Folo · 2026 年 8 月 17 日 04:40",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "title": "",
+          "publisher": "deadline.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://www.televisionacademy.com/bios/octavia-spencer",
+          "title": "",
+          "publisher": "televisionacademy.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Octavia Spencer has been following true crime stories since she was just 11 years old.",
+          "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Speaking at Deadline’s Contenders: The Nominees Studio, Spencer said, “I think there are a lot of people who are very new to the true crime genre.",
+          "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "I’m not, I’ve been studying it.",
+          "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Octavia Spencer 在纪录剧集 Lost Women of Alaska 中担任旁白和执行制片人。作品聚焦 Veronica Abouchuk 与 Kathleen Jo Henry 在 2018 年和 2019 年遇害的案件，并追问针对原住民女性的暴力为何长期被忽视。",
+          "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Spencer 在采访中说，参与项目源于她作为「世界公民」的责任感。创作目标不只是复述连环杀手 Brian Steven Smith 的罪行，更要恢复受害者的尊严，让家属和当地社群成为叙事中心。",
+          "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这部 3 集纪录剧已为 Spencer 带来 2026 年艾美奖「最佳旁白」提名。节目在 Investigation Discovery 播出，并可在 HBO Max 观看。",
+          "source_url": "https://deadline.com/2026/08/octavia-spencer-lost-women-of-alaska-emmy-interview-1237041780",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "3c74b687-bdc3-51a4-959e-c8a8a25ae891",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "ffd7d6d607737a0dfb5094141844879dd2f81bc4",
+      "title": "《Widow's Bay》第二季继续把威尔士小镇写进闹鬼岛屿",
+      "body": "剧集创作者 Katie Dippold 在 Deadline 采访中确认，Widow's Bay 第二季开发进展顺利。该剧把海岛小镇的社区喜剧与超自然事件放在一起，第一季的角色关系会继续延伸。\n\n主演 Matthew Rhys 说，片中岛屿让他想到自己的威尔士家乡：社区成员彼此熟悉、地方传统强烈，外来者也很容易被辨认。这种真实的小镇经验成为剧集处理荒诞事件时的生活底色。\n\n第二季目前仍处于创作阶段，主创尚未公布上线日期和完整剧情。Dippold 的表态确认项目正在推进，但没有承诺具体制作时间表。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+      "source_name": "deadline.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 02:40",
+      "published_at": "2026-08-17 02:40",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/57ced54a25e0-a37d88b13a39c7b46c04.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772 📮Folo · 2026 年 8 月 17 日 02:40",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "title": "",
+          "publisher": "deadline.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        }
+      ],
+      "claims": [
+        {
+          "text": "Widow’s Bay fans rejoice!",
+          "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Creator-showrunner Kate Dippold has a progress report on the Season 2 writers’ room.",
+          "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "“It’s great,” she said during a panel at Deadline’s Contenders Television: The Nominees Studio.",
+          "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "剧集创作者 Katie Dippold 在 Deadline 采访中确认，Widow's Bay 第二季开发进展顺利。该剧把海岛小镇的社区喜剧与超自然事件放在一起，第一季的角色关系会继续延伸。",
+          "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "主演 Matthew Rhys 说，片中岛屿让他想到自己的威尔士家乡：社区成员彼此熟悉、地方传统强烈，外来者也很容易被辨认。这种真实的小镇经验成为剧集处理荒诞事件时的生活底色。",
+          "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "第二季目前仍处于创作阶段，主创尚未公布上线日期和完整剧情。Dippold 的表态确认项目正在推进，但没有承诺具体制作时间表。",
+          "source_url": "https://deadline.com/2026/08/widows-bay-season-2-katie-dippold-matthew-rhys-interview-1237041772",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "f3794e47-50aa-58ad-9c85-a18c5d68383f",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "a9e168bcee0ffbab923aa09f03bd38f4d995f8e8",
+      "title": "ChatGPT 推出 Computer History，可按时间线回看电脑操作",
+      "body": "OpenAI 在 ChatGPT macOS 桌面端测试 Computer History。用户开启后，系统会把点击、输入和应用切换整理成事件时间线，让 ChatGPT 或 Codex 找回此前处理过的文件、网页和对话上下文。\n\n演示中，ChatGPT 能定位用户最后编辑的文档，检查是否已分享到 Slack，再汇总当天早上的操作。Computer History 还会根据重复行为建议自动化，并允许用户从中断处继续任务。\n\n这项功能默认关闭。用户可以排除特定应用和网站、删除记录；无痕或隐私浏览窗口不会被收集。OpenAI 表示它记录的是操作事件，不会截取图片、视频或音频，这一点与 Windows Recall 的持续截图方式不同。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+      "source_name": "theverge.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 22:56",
+      "published_at": "2026-08-16 22:56",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/f8d9c4e105a9-406e7e4f3f108e22c7ec.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes 📮Folo · 2026 年 8 月 16 日 22:57",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+          "title": "",
+          "publisher": "theverge.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        }
+      ],
+      "claims": [
+        {
+          "text": "OpenAI 在 ChatGPT macOS 桌面端测试 Computer History。用户开启后，系统会把点击、输入和应用切换整理成事件时间线，让 ChatGPT 或 Codex 找回此前处理过的文件、网页和对话上下文。",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "演示中，ChatGPT 能定位用户最后编辑的文档，检查是否已分享到 Slack，再汇总当天早上的操作。Computer History 还会根据重复行为建议自动化，并允许用户从中断处继续任务。",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这项功能默认关闭。用户可以排除特定应用和网站、删除记录；无痕或隐私浏览窗口不会被收集。OpenAI 表示它记录的是操作事件，不会截取图片、视频或音频，这一点与 Windows Recall 的持续截图方式不同。",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "70487981-114e-54a4-8d40-84cfe538c2e2",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "e942e5b319d948748c1ae1b8fbb810e461d3c037",
+      "title": "智象未来发布 HiDream-O1-World，可生成并编辑交互式世界",
+      "body": "智象未来发布交互式世界模型 HiDream-O1-World。用户可以通过文本、图像或交互指令生成场景，并以第一或第三人称视角漫游；模型还支持抓取、奔跑、跳跃、降雨和物体坠落等角色与环境编辑。\n\n模型基于智象自研 UiT 原生全模态架构。其空间记忆会保存场景几何结构与物体关系，推理阶段再用 Test-Time Training 动态调整适配器，以维持多轮视角切换后的 3D 一致性；训练数据还覆盖碰撞、流体、形变、重力和光影等物理过程。\n\n美团 LongCat 团队与复旦大学共同维护的 WBench 榜单显示，HiDream-O1-World 在 8 月 14 日提交的 Navi 评测中以 80.9 分排名第一，一致性和物理维度分别为 88.0 分与 73.3 分。该榜单覆盖 31 个模型，并从画质、场景、交互、一致性和物理五个维度评估导航式世界模型。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://github.com/meituan-longcat/WBench",
+      "source_name": "github.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/0e9ab9e45b63-521dbdc2bf5cc1f65eed.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://github.com/meituan-longcat/WBench；https://hidream.org/zh；新闻稿《原生全模态路线进阶，智象未来发布交互式世界模型HiDream-O1-World.docx》 📝新闻稿 · 2026 年 8 月 17 日 10:30",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://github.com/meituan-longcat/WBench",
+          "title": "",
+          "publisher": "github.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://hidream.org/zh",
+          "title": "",
+          "publisher": "hidream.org",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "智象未来发布交互式世界模型 HiDream-O1-World。用户可以通过文本、图像或交互指令生成场景，并以第一或第三人称视角漫游；模型还支持抓取、奔跑、跳跃、降雨和物体坠落等角色与环境编辑。",
+          "source_url": "https://github.com/meituan-longcat/WBench",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "模型基于智象自研 UiT 原生全模态架构。其空间记忆会保存场景几何结构与物体关系，推理阶段再用 Test-Time Training 动态调整适配器，以维持多轮视角切换后的 3D 一致性；训练数据还覆盖碰撞、流体、形变、重力和光影等物理过程。",
+          "source_url": "https://github.com/meituan-longcat/WBench",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "美团 LongCat 团队与复旦大学共同维护的 WBench 榜单显示，HiDream-O1-World 在 8 月 14 日提交的 Navi 评测中以 80.9 分排名第一，一致性和物理维度分别为 88.0 分与 73.3 分。该榜单覆盖 31 个模型，并从画质、场景、交互、一致性和物理五个维度评估导航式世界模型。",
+          "source_url": "https://github.com/meituan-longcat/WBench",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "8c3f8492-83c5-5254-923c-ef0d3b6ab743",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "0fcb55112ab1107b3f8c5ae5aa1128088963f899",
+      "title": "Claude 连续推理 54 小时，没解出黎曼猜想却改进了一项已知界限",
+      "body": "据《华尔街日报》报道，一名用户让 Claude 持续尝试证明黎曼猜想，并在模型准备停止时反复鼓励它继续。经过约 54 小时的推理，Claude 没有解决这一世纪难题，但在过程中得到了一项可由数学家检查的阶段性结果。\n\n该结果把黎曼 zeta 函数位于临界线上的已知零点比例下界，从约 41.6% 提高到 67.2%。这不是黎曼猜想的证明；后者要求所有非平凡零点都位于临界线上。\n\n事件说明，长时间推理可以让模型在明确问题上搜索更深，但「产生候选证明」与「通过同行验证」仍是两回事。最终结论需要独立数学审查，不能仅凭模型输出成立。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87",
+      "source_name": "wsj.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 06:35",
+      "published_at": "2026-08-17 06:35",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/343598f99ee6-f0b14f4a5d1959b05f9a.avif",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87；https://www.techmeme.com/260816/p11 📮Folo · 2026 年 8 月 17 日 06:35",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87",
+          "title": "",
+          "publisher": "wsj.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.techmeme.com/260816/p11",
+          "title": "",
+          "publisher": "techmeme.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Ben Cohen / Wall Street Journal: How a Claude model made a math breakthrough during its unsuccessful 54-hour attempt to solve the Riemann…",
+          "source_url": "https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据《华尔街日报》报道，一名用户让 Claude 持续尝试证明黎曼猜想，并在模型准备停止时反复鼓励它继续。经过约 54 小时的推理，Claude 没有解决这一世纪难题，但在过程中得到了一项可由数学家检查的阶段性结果。",
+          "source_url": "https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "该结果把黎曼 zeta 函数位于临界线上的已知零点比例下界，从约 41.6% 提高到 67.2%。这不是黎曼猜想的证明；后者要求所有非平凡零点都位于临界线上。",
+          "source_url": "https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "事件说明，长时间推理可以让模型在明确问题上搜索更深，但「产生候选证明」与「通过同行验证」仍是两回事。最终结论需要独立数学审查，不能仅凭模型输出成立。",
+          "source_url": "https://www.wsj.com/tech/ai/ai-math-riemann-hypothesis-anthropic-openai-22f98a87",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "567560da-ca17-5869-b35f-560f54b6e85e",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "2f867766f7d78c0e56c60d44b28e422f6bd5417c",
+      "title": "Face2Gene 用面部特征辅助罕见病初筛，但不能替代基因诊断",
+      "body": "越来越多患者、家属和医护人员开始使用 Face2Gene 等 AI 工具，为长期无法确诊的罕见疾病寻找线索。Face2Gene 会分析面部特征并生成可能的综合征排序，供临床人员结合症状与检查结果进一步判断。\n\n一项针对 118 个最终获得分子诊断病例的研究显示，正确诊断出现在工具前 10 个建议中的有 75 例，占 63.6%。它能帮助缩小搜索范围，但仍有相当一部分病例不会被准确排到前列。\n\n工具给出的只是候选方向，不是诊断结论。遗传检测、病史、体征和专业医生判断仍不可替代；尤其在面部影像质量、年龄与族群差异存在时，排序结果需要更谨慎地解释。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://www.wsj.com/health/ai-is-helping-patients-solve-medical-mysteries-3c2d7c25",
+      "source_name": "wsj.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/18f3fe32d54a-0a464089edf4bc456396.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.wsj.com/health/ai-is-helping-patients-solve-medical-mysteries-3c2d7c25；https://pubmed.ncbi.nlm.nih.gov/41593402/；https://www.face2gene.com/help/ 📮Folo · 2026 年 8 月 17 日 01:30",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.wsj.com/health/ai-is-helping-patients-solve-medical-mysteries-3c2d7c25",
+          "title": "",
+          "publisher": "wsj.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41593402/",
+          "title": "",
+          "publisher": "pubmed.ncbi.nlm.nih.gov",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.face2gene.com/help/",
+          "title": "",
+          "publisher": "face2gene.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "越来越多患者、家属和医护人员开始使用 Face2Gene 等 AI 工具，为长期无法确诊的罕见疾病寻找线索。Face2Gene 会分析面部特征并生成可能的综合征排序，供临床人员结合症状与检查结果进一步判断。",
+          "source_url": "https://www.wsj.com/health/ai-is-helping-patients-solve-medical-mysteries-3c2d7c25",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "一项针对 118 个最终获得分子诊断病例的研究显示，正确诊断出现在工具前 10 个建议中的有 75 例，占 63.6%。它能帮助缩小搜索范围，但仍有相当一部分病例不会被准确排到前列。",
+          "source_url": "https://www.wsj.com/health/ai-is-helping-patients-solve-medical-mysteries-3c2d7c25",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "工具给出的只是候选方向，不是诊断结论。遗传检测、病史、体征和专业医生判断仍不可替代；尤其在面部影像质量、年龄与族群差异存在时，排序结果需要更谨慎地解释。",
+          "source_url": "https://www.wsj.com/health/ai-is-helping-patients-solve-medical-mysteries-3c2d7c25",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "35d0323d-a1df-5a4d-8619-009b3f05cb60",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "7603e85200029871df0af97f4e5370199afd9a85",
+      "title": "斯坦福 AI Index：全球 AI 乐观情绪与焦虑同时上升",
+      "body": "斯坦福大学 2026 年 AI Index 公共舆论章节显示，2025 年全球认为 AI 产品「利大于弊」的受访者比例从 55% 升至 59%，与此同时，表示 AI 令自己紧张的人也增加到 52%。\n\n工作场景的地区差异更明显。全球有 58% 的员工表示会半定期或经常在工作中使用 AI；在印度、中国、尼日利亚、阿联酋、埃及和沙特，这一比例都超过 80%。\n\n美国公众与 AI 专家的判断存在明显距离：73% 的专家预计 AI 会改善工作方式，公众中持同样看法的只有 23%；对医疗的正面预期分别为 84% 和 44%。报告同时显示，64% 的美国人预计未来 20 年 AI 会减少就业岗位。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+      "source_name": "hai.stanford.edu",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/04fd29070163-ab77f287bd0ed6fd0a99.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion；https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_9_public_opinion.pdf 📮Folo · 2026 年 8 月 16 日 23:22",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+          "title": "",
+          "publisher": "hai.stanford.edu",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_9_public_opinion.pdf",
+          "title": "",
+          "publisher": "hai.stanford.edu",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "斯坦福大学 2026 年 AI Index 公共舆论章节显示，2025 年全球认为 AI 产品「利大于弊」的受访者比例从 55% 升至 59%，与此同时，表示 AI 令自己紧张的人也增加到 52%。",
+          "source_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "工作场景的地区差异更明显。全球有 58% 的员工表示会半定期或经常在工作中使用 AI；在印度、中国、尼日利亚、阿联酋、埃及和沙特，这一比例都超过 80%。",
+          "source_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "美国公众与 AI 专家的判断存在明显距离：73% 的专家预计 AI 会改善工作方式，公众中持同样看法的只有 23%；对医疗的正面预期分别为 84% 和 44%。报告同时显示，64% 的美国人预计未来 20 年 AI 会减少就业岗位。",
+          "source_url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/public-opinion",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "65ac4671-3ea2-5444-957f-5822b2917704",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "dc31e82b955742a8f2aab573087206cb9bb8a77c",
+      "title": "支付宝发布智能体商业底座，「阿宝」已接入万余项服务",
+      "body": "支付宝在 8 月 17 日举行的 AI 生态大会上发布全栈智能体商业底座，并推出 AHA 多智能体跨端互联协议体系。「阿宝」已完成万余项服务的 AI 化接入，覆盖出行、餐饮、文旅和政务民生等八类场景。\n\n这套底座面向不同数字化阶段的商家提供三层能力：AI 开放平台可以把页面、商品与服务流程转换为 Skills、MCP 和智能体单元；商家可自行完成智能体创建、技能编排、任务执行与运营管理；复杂服务则通过 A2A 能力联动多个商家智能体协同履约。蚂蚁数科 Agentar 生态版还提供超过 200 项商家高频场景技能。\n\nAHA 体系包含 Skills Interface Standards、Agent Hub Access 和 X User Interface 三部分，分别处理技能交互、智能体互联与设备感知执行。支付宝称，不同厂商的智能体可以通过分域授权和数据隔离完成协作，让用户用一句话触发跨智能体服务与交易。\n\n支付宝已与 5 家主流手机厂商打通跨端协同，车端服务覆盖 16 家主流车企，并与 60 余家车企达成定点合作。千问、华为、OPPO、vivo、小米、荣耀、比亚迪、吉利汽车、理想、蔚来等 20 余家企业参与 AHA 生态共建；部分商家开发需求已经排期到明年。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "",
+      "source_name": "dc31e82b955742a8f2aab573087206cb9bb8a77c",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：新闻稿《【新闻通稿】智能体将大规模进入生活服务场景，支付宝发布国内首个智能体商业底座.docx》 📝新闻稿 · 2026 年 8 月 17 日 16:09",
+        "static_snapshot": true
+      },
+      "sources": [],
+      "claims": [
+        {
+          "text": "支付宝在 8 月 17 日举行的 AI 生态大会上发布全栈智能体商业底座，并推出 AHA 多智能体跨端互联协议体系。「阿宝」已完成万余项服务的 AI 化接入，覆盖出行、餐饮、文旅和政务民生等八类场景。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这套底座面向不同数字化阶段的商家提供三层能力：AI 开放平台可以把页面、商品与服务流程转换为 Skills、MCP 和智能体单元；商家可自行完成智能体创建、技能编排、任务执行与运营管理；复杂服务则通过 A2A 能力联动多个商家智能体协同履约。蚂蚁数科 Agentar 生态版还提供超过 200 项商家高频场景技能。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "AHA 体系包含 Skills Interface Standards、Agent Hub Access 和 X User Interface 三部分，分别处理技能交互、智能体互联与设备感知执行。支付宝称，不同厂商的智能体可以通过分域授权和数据隔离完成协作，让用户用一句话触发跨智能体服务与交易。",
+          "source_url": "",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "775d51a2-3a02-5c66-9aa6-6aebce44118b",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "e23159b9206891866166352d9974b4e7f36df845",
+      "title": "Codex 开放 GPT-5.6 Sol 的 100 万 token 上下文选项",
+      "body": "OpenAI Codex 负责人 Thibault Sottiaux 介绍，用户现在可以为 GPT-5.6 Sol 手动启用 100 万 token 上下文窗口。Codex 默认仍会根据模型与任务自动设置更合适的上下文上限，超长窗口不是所有任务的默认值。\n\n这项设置适合一次性读取大型代码库、长日志或多份文档，但更长上下文也会增加推理成本和等待时间。对大多数开发任务，先让 Codex 自动管理上下文仍是更稳妥的选择。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://x.com/thsottiaux/status/2089082893804896524",
+      "source_name": "x.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 04:12",
+      "published_at": "2026-08-17 04:12",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/c9750d749808-f0dc527dbc54c40278d5.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://x.com/thsottiaux/status/2089082893804896524 📮Folo · 2026 年 8 月 17 日 04:12",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://x.com/thsottiaux/status/2089082893804896524",
+          "title": "",
+          "publisher": "x.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Here is how to enable a 1M-token context window in Codex for GPT-5.6 Sol.",
+          "source_url": "https://x.com/thsottiaux/status/2089082893804896524",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Even though we have tuned the context limit in Codex to be set…",
+          "source_url": "https://x.com/thsottiaux/status/2089082893804896524",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "OpenAI Codex 负责人 Thibault Sottiaux 介绍，用户现在可以为 GPT-5.6 Sol 手动启用 100 万 token 上下文窗口。Codex 默认仍会根据模型与任务自动设置更合适的上下文上限，超长窗口不是所有任务的默认值。",
+          "source_url": "https://x.com/thsottiaux/status/2089082893804896524",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这项设置适合一次性读取大型代码库、长日志或多份文档，但更长上下文也会增加推理成本和等待时间。对大多数开发任务，先让 Codex 自动管理上下文仍是更稳妥的选择。",
+          "source_url": "https://x.com/thsottiaux/status/2089082893804896524",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:26+00:00"
+    },
+    {
+      "id": "49b7fe97-776f-5254-8a36-57dd777af3e8",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "70bb4a6a701fe533ab1b7da1be029a891a6bdd77",
+      "title": "老游戏在 CRT 上更顺眼，不只来自怀旧滤镜",
+      "body": "旧主机以 CRT 的扫描方式为前提设计画面。电子枪逐行点亮荧光粉，天然形成扫描线和短暂余辉；这会把抖色图案融合成更平滑的渐变，也让低帧率或不稳定帧率的运动看起来更连贯。\n\n很多前高清时代主机输出 240p 或 480i。现代 LCD 和 OLED 电视常要先去隔行再放大到 4K，如果误把 240p 当作 480i 处理，会额外引入延迟与模糊；像素边缘、棋盘格和原本借助 CRT 融合的色彩技巧也会暴露出来。\n\n因此，CRT 的优势来自显示机制与内容创作方式的匹配，并不代表所有旧电视都更好。没有合适设备时，低延迟缩放器和准确的 CRT 着色器也能接近这种视觉效果。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.engadget.com/2236809/why-retro-games-look-better-old-crt-tv",
+      "source_name": "engadget.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 02:30",
+      "published_at": "2026-08-17 02:30",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/f7dcde9b9515-1987187415b8a50bdfc9.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.engadget.com/2236809/why-retro-games-look-better-old-crt-tv 📮Folo · 2026 年 8 月 17 日 02:30",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.engadget.com/2236809/why-retro-games-look-better-old-crt-tv",
+          "title": "",
+          "publisher": "engadget.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "旧主机以 CRT 的扫描方式为前提设计画面。电子枪逐行点亮荧光粉，天然形成扫描线和短暂余辉；这会把抖色图案融合成更平滑的渐变，也让低帧率或不稳定帧率的运动看起来更连贯。",
+          "source_url": "https://www.engadget.com/2236809/why-retro-games-look-better-old-crt-tv",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "很多前高清时代主机输出 240p 或 480i。现代 LCD 和 OLED 电视常要先去隔行再放大到 4K，如果误把 240p 当作 480i 处理，会额外引入延迟与模糊；像素边缘、棋盘格和原本借助 CRT 融合的色彩技巧也会暴露出来。",
+          "source_url": "https://www.engadget.com/2236809/why-retro-games-look-better-old-crt-tv",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "因此，CRT 的优势来自显示机制与内容创作方式的匹配，并不代表所有旧电视都更好。没有合适设备时，低延迟缩放器和准确的 CRT 着色器也能接近这种视觉效果。",
+          "source_url": "https://www.engadget.com/2236809/why-retro-games-look-better-old-crt-tv",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "94ea3fcf-8948-5fcc-bb5e-b0a196628f1b",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "043ce5996c1346b877efa37c455e4df8407a5f61",
+      "title": "宇树展示「超人」机器人，原地跳高 2 米、冲刺速度 12.66m/s",
+      "body": "宇树科技 8 月 17 日展示一款代号为「超人」的人形机器人新机。官方视频称，这台机器人原地跳高可达 2 米，在腿长 0.85 米的条件下，极限奔跑速度达到 12.66m/s。\n\n宇树表示，这台全新整机的研发周期为 3 个多月，当前仍属于预览阶段，未来几个月将继续完善。与此前 H1 机器人 10m/s 的公开演示相比，新机把速度指标进一步提高，同时加入原地跳高能力。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 8,
+      "score": 0,
+      "source_url": "https://weibo.com/1818617132/RdNUScST4",
+      "source_name": "weibo.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 14:18",
+      "published_at": "2026-08-17 14:18",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://weibo.com/1818617132/RdNUScST4；https://www.ithome.com/0/990/607.htm 📮Folo · 2026 年 8 月 17 日 13:57—14:18",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://weibo.com/1818617132/RdNUScST4",
+          "title": "",
+          "publisher": "weibo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/990/607.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "宇树科技 8 月 17 日展示一款代号为「超人」的人形机器人新机。官方视频称，这台机器人原地跳高可达 2 米，在腿长 0.85 米的条件下，极限奔跑速度达到 12.66m/s。",
+          "source_url": "https://weibo.com/1818617132/RdNUScST4",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "宇树表示，这台全新整机的研发周期为 3 个多月，当前仍属于预览阶段，未来几个月将继续完善。与此前 H1 机器人 10m/s 的公开演示相比，新机把速度指标进一步提高，同时加入原地跳高能力。",
+          "source_url": "https://weibo.com/1818617132/RdNUScST4",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "97a80ee8-eda3-5d07-ae75-5238f245bb0b",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "6e46c37120577252d8520fd3bc3a754875d4963c",
+      "title": "三星首款 24.5 英寸 OLED 电竞面板据报将在第四季度亮相",
+      "body": "据产业链消息，三星显示计划在第四季度推出首款 24.5 英寸 OLED 电竞面板，并准备 360Hz 与 560Hz 两种刷新率版本。\n\n24.5 英寸是职业电竞显示器常见尺寸，但 OLED 此前更多集中在 27 英寸及以上产品。更小尺寸若进入量产，可让厂商把 OLED 的响应速度与高刷新率带到主流电竞桌面，同时减少大尺寸面板对桌面空间和显卡输出的要求。\n\n目前披露的是面板规划，终端显示器品牌、接口方案、分辨率和上市价格尚未公布。第四季度亮相也不等同于零售产品会同步开卖。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 9,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/990/403.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 23:55",
+      "published_at": "2026-08-16 23:55",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/990/403.htm 📮Folo · 2026 年 8 月 16 日 23:55",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/990/403.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据产业链消息，三星显示计划在第四季度推出首款 24.5 英寸 OLED 电竞面板，并准备 360Hz 与 560Hz 两种刷新率版本。",
+          "source_url": "https://www.ithome.com/0/990/403.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "24.5 英寸是职业电竞显示器常见尺寸，但 OLED 此前更多集中在 27 英寸及以上产品。更小尺寸若进入量产，可让厂商把 OLED 的响应速度与高刷新率带到主流电竞桌面，同时减少大尺寸面板对桌面空间和显卡输出的要求。",
+          "source_url": "https://www.ithome.com/0/990/403.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "目前披露的是面板规划，终端显示器品牌、接口方案、分辨率和上市价格尚未公布。第四季度亮相也不等同于零售产品会同步开卖。",
+          "source_url": "https://www.ithome.com/0/990/403.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:26+00:00"
+    },
+    {
+      "id": "e2c20f96-2436-535a-9e4f-5deee1e6f177",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "0ee54da09166481a3cdfdb8ed5232593742371d8",
+      "title": "Retro 用订阅制把照片社交变成小圈层生活方式",
+      "body": "照片应用 Retro 把时间边界写进产品机制：用户通常只能发布元数据表明拍摄于本周的照片，再按日、周或月整理成个人日志。相册可以协作，也可以完全私密。\n\n它没有公开关注者和广告流，主要通过邀请码建立小规模好友关系。Memories 功能会从系统相册中回看过去同一天或同一时期的照片，让旧内容重新进入浏览路径。\n\n免费版覆盖核心照片日志；Premium 支持发布更早的照片、视频和更多邀请名额。邀请新用户还能换取限时或终身会员。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use",
+      "source_name": "engadget.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-16 23:30",
+      "published_at": "2026-08-16 23:30",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/46629f81ee90-c8a054fa96aaf566f4fc.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use 📮Folo · 2026 年 8 月 16 日 23:30",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use",
+          "title": "",
+          "publisher": "engadget.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Let's look at how to use the Retro app, whether it's free and whether it can compete with other social media apps.",
+          "source_url": "https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "照片应用 Retro 把时间边界写进产品机制：用户通常只能发布元数据表明拍摄于本周的照片，再按日、周或月整理成个人日志。相册可以协作，也可以完全私密。",
+          "source_url": "https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "它没有公开关注者和广告流，主要通过邀请码建立小规模好友关系。Memories 功能会从系统相册中回看过去同一天或同一时期的照片，让旧内容重新进入浏览路径。",
+          "source_url": "https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "免费版覆盖核心照片日志；Premium 支持发布更早的照片、视频和更多邀请名额。邀请新用户还能换取限时或终身会员。",
+          "source_url": "https://www.engadget.com/2234246/retro-app-what-is-it-how-to-use",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "eabbec9a-7954-5ec3-afdb-3fa1f2f5104c",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "e6398dd2aac4e0fca411f6b49322fb8f52c0fe9f",
+      "title": "迪士尼用限量徽章拉动 D23 现场零售",
+      "body": "路透社在 D23 现场采访了多名徽章收藏者。有人跨越多个州乃至从海外赶到阿纳海姆，在活动开始前长时间排队，只为购买数量有限的官方徽章。\n\n迪士尼今年设置了专门的 D23 Marketplace Pin Store，并推出 15 枚限量 Premier Collection 徽章。购买资格、虚拟排队和库存限制，让这些小型纪念品同时具有社交交换、身份展示和稀缺收藏的属性。\n\n徽章交易早已超出普通纪念品消费。粉丝会带着自己的收藏到现场交换，也会根据角色、发行批次和限量数量追踪价值；D23 则把这种长期社群文化进一步变成活动流量入口。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.reuters.com/lifestyle/disney-pin-fans-travel-far-wait-long-coveted-d23-collectibles-2026-08-16",
+      "source_name": "reuters.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 03:52",
+      "published_at": "2026-08-17 03:52",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/a5ed4013440b-dd09bc2df13194b7ff78.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.reuters.com/lifestyle/disney-pin-fans-travel-far-wait-long-coveted-d23-collectibles-2026-08-16；https://thewaltdisneycompany.com/news/d23-shopping-experiences-2026/ 📮Folo · 2026 年 8 月 17 日 03:52",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.reuters.com/lifestyle/disney-pin-fans-travel-far-wait-long-coveted-d23-collectibles-2026-08-16",
+          "title": "",
+          "publisher": "reuters.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://thewaltdisneycompany.com/news/d23-shopping-experiences-2026/",
+          "title": "",
+          "publisher": "thewaltdisneycompany.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "路透社在 D23 现场采访了多名徽章收藏者。有人跨越多个州乃至从海外赶到阿纳海姆，在活动开始前长时间排队，只为购买数量有限的官方徽章。",
+          "source_url": "https://www.reuters.com/lifestyle/disney-pin-fans-travel-far-wait-long-coveted-d23-collectibles-2026-08-16",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "迪士尼今年设置了专门的 D23 Marketplace Pin Store，并推出 15 枚限量 Premier Collection 徽章。购买资格、虚拟排队和库存限制，让这些小型纪念品同时具有社交交换、身份展示和稀缺收藏的属性。",
+          "source_url": "https://www.reuters.com/lifestyle/disney-pin-fans-travel-far-wait-long-coveted-d23-collectibles-2026-08-16",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "徽章交易早已超出普通纪念品消费。粉丝会带着自己的收藏到现场交换，也会根据角色、发行批次和限量数量追踪价值；D23 则把这种长期社群文化进一步变成活动流量入口。",
+          "source_url": "https://www.reuters.com/lifestyle/disney-pin-fans-travel-far-wait-long-coveted-d23-collectibles-2026-08-16",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "a6523e31-49d8-5b35-8c4b-fcdcab40ef06",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "762e520af77a37ef7ab673159a6e885e62142ed1",
+      "title": "法拉利把首辆 Luce 量产底盘做成慈善拍品",
+      "body": "法拉利在蒙特雷汽车周拍卖首辆 Luce 量产底盘「Chassis 0」。这辆车不设保留价，全部成交收入将通过 Ferrari Foundation 用于未来的教育项目。\n\n车辆由 Ferrari Tailor Made 定制，使用专属 Madreperla 半哑光珍珠白车漆；内饰采用 Perla Le Mans 金属质感皮革，并以 Grigio Corvara 作为辅助色。车轮、制动卡钳和白底法拉利徽标也采用专属处理。\n\n这辆车没有采用普通配置表中的量产规格。「第一辆生产底盘」、唯一配色和公益用途共同构成收藏属性，最终价值由现场竞价决定。",
+      "category": "新消费",
+      "status": "ready",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://rmsothebys.com/auctions/mo26/lots/r0150-2026-ferrari-luce-tailor-made/",
+      "source_name": "rmsothebys.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/80b79f58b167-b86f75a1d1146f12dca4.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://rmsothebys.com/auctions/mo26/lots/r0150-2026-ferrari-luce-tailor-made/ 📮Folo · 2026 年 8 月 17 日 06:50",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://rmsothebys.com/auctions/mo26/lots/r0150-2026-ferrari-luce-tailor-made/",
+          "title": "",
+          "publisher": "rmsothebys.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "法拉利在蒙特雷汽车周拍卖首辆 Luce 量产底盘「Chassis 0」。这辆车不设保留价，全部成交收入将通过 Ferrari Foundation 用于未来的教育项目。",
+          "source_url": "https://rmsothebys.com/auctions/mo26/lots/r0150-2026-ferrari-luce-tailor-made/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "车辆由 Ferrari Tailor Made 定制，使用专属 Madreperla 半哑光珍珠白车漆；内饰采用 Perla Le Mans 金属质感皮革，并以 Grigio Corvara 作为辅助色。车轮、制动卡钳和白底法拉利徽标也采用专属处理。",
+          "source_url": "https://rmsothebys.com/auctions/mo26/lots/r0150-2026-ferrari-luce-tailor-made/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这辆车没有采用普通配置表中的量产规格。「第一辆生产底盘」、唯一配色和公益用途共同构成收藏属性，最终价值由现场竞价决定。",
+          "source_url": "https://rmsothebys.com/auctions/mo26/lots/r0150-2026-ferrari-luce-tailor-made/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
+    },
+    {
+      "id": "a82fbaa8-b4fc-5d6d-b7b2-9710cd580814",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "95f22f95a32d03bf5c693df2b83629d50b83f329",
+      "title": "网民持续贬损胖东来，被判赔偿 30 万元并登报道歉",
+      "body": "胖东来 8 月 17 日发布侵权行为处理公示。公示列出的一起名誉权纠纷显示，宋某某先在胖东来相关微博超话评论该公司「没有什么核心竞争力，只能变着花样靠流量活着」，之后继续在多个平台发布贬损、诋毁言论。\n\n法院一审认定相关行为构成名誉权侵权，判决宋某某赔偿胖东来 30 万元并登报道歉。公示还列出另一起商标侵权及不正当竞争案件，但本次判决与上述名誉权案件相互独立。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/_f0b222teEbGGKErf3xSgQ",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 12:17",
+      "published_at": "2026-08-17 12:17",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/67a8dbc32807e25de791.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/_f0b222teEbGGKErf3xSgQ 🧭飞书群 · 2026 年 8 月 17 日 12:17",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/_f0b222teEbGGKErf3xSgQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "胖东来 8 月 17 日发布侵权行为处理公示。公示列出的一起名誉权纠纷显示，宋某某先在胖东来相关微博超话评论该公司「没有什么核心竞争力，只能变着花样靠流量活着」，之后继续在多个平台发布贬损、诋毁言论。",
+          "source_url": "https://mp.weixin.qq.com/s/_f0b222teEbGGKErf3xSgQ",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "法院一审认定相关行为构成名誉权侵权，判决宋某某赔偿胖东来 30 万元并登报道歉。公示还列出另一起商标侵权及不正当竞争案件，但本次判决与上述名誉权案件相互独立。",
+          "source_url": "https://mp.weixin.qq.com/s/_f0b222teEbGGKErf3xSgQ",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:26+00:00"
+    },
+    {
+      "id": "de5bea56-5a07-5643-b71f-56cfe3227ea1",
+      "issue_id": "ifanr-daily-20260818",
+      "fingerprint": "1487d731724ab5e255a0792bf6379c8ca0685b64",
+      "title": "OpenAI 解散 Preparedness 团队，安全评估职责拆入现有部门",
+      "body": "据《金融时报》与 The Verge 报道，OpenAI 已在 7 月底解散 Preparedness 团队。这个团队原本负责评估前沿模型可能带来的严重风险，并设计相应缓解措施。\n\n原团队承担的生物与网络安全评估已经拆分到 OpenAI 现有部门。团队负责人 Dylan Scandinaro 今年 2 月从 Anthropic 加入 OpenAI，目前转向研究能够递归自我改进的 AI 系统。\n\n这是 OpenAI 近年第三次撤销专门处理长期或前沿风险的团队。此前，AGI Readiness 与 Superalignment 团队也已解散；多名安全研究人员随后离职。组织调整后，相关职责仍然存在，但不再由一支独立团队集中承担。",
+      "category": "重磅",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+      "source_name": "theverge.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-08-17 08:43",
+      "published_at": "2026-08-17 08:43",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/7c889fcf0bdf-283eea2ff83195845d4c.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team；https://mlq.ai/news/openai-reportedly-shuts-down-preparedness-team-as-safety-work-moves-into-other-groups 🧭飞书群 · 2026-08-17 08:42—08:43",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "title": "",
+          "publisher": "theverge.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://mlq.ai/news/openai-reportedly-shuts-down-preparedness-team-as-safety-work-moves-into-other-groups",
+          "title": "",
+          "publisher": "mlq.ai",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "According to the Financial Times, OpenAI disbanded its preparedness team at the end of last month.",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "早报 Bot 私聊人工线索：OpenAI reportedly shuts down Preparedness team as safety work moves into other groups | MLQ News https://mlq.ai/news/openai-reportedly-shuts-down-preparedness-team-as-safety-work-move...",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据《金融时报》与 The Verge 报道，OpenAI 已在 7 月底解散 Preparedness 团队。这个团队原本负责评估前沿模型可能带来的严重风险，并设计相应缓解措施。",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "原团队承担的生物与网络安全评估已经拆分到 OpenAI 现有部门。团队负责人 Dylan Scandinaro 今年 2 月从 Anthropic 加入 OpenAI，目前转向研究能够递归自我改进的 AI 系统。",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这是 OpenAI 近年第三次撤销专门处理长期或前沿风险的团队。此前，AGI Readiness 与 Superalignment 团队也已解散；多名安全研究人员随后离职。组织调整后，相关职责仍然存在，但不再由一支独立团队集中承担。",
+          "source_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-17T09:17:24+00:00"
     }
   ],
   "brand_packages": {
     "appso": {
       "cover_candidates": [
         {
-          "id": "story:967cc528-059c-53a5-b048-30e2d715f921",
+          "id": "story:c812baed-ec4a-501e-9476-6777df3102b5",
           "source": "story",
-          "story_id": "967cc528-059c-53a5-b048-30e2d715f921",
-          "title": "PayPal 出售谈判升温，Stripe 与 Advent 仍在洽购",
+          "story_id": "c812baed-ec4a-501e-9476-6777df3102b5",
+          "title": "Qwen3.8-27B 开源两天下载破百万，登顶 Hugging Face 趋势榜",
           "url": ""
         },
         {
-          "id": "story:1c0d2c1b-cd8e-5b92-a1ed-2381be5bf1c1",
+          "id": "story:294d45a1-6766-5d45-9b7f-0e79aee3b162",
           "source": "story",
-          "story_id": "1c0d2c1b-cd8e-5b92-a1ed-2381be5bf1c1",
-          "title": "Waymo 获准在萨克拉门托和圣迭戈提供无人出租车服务",
+          "story_id": "294d45a1-6766-5d45-9b7f-0e79aee3b162",
+          "title": "Bob Iger 成为首位获评「Disney Legend」的公司高管",
           "url": ""
         }
       ],
-      "generated_at": "2026-08-16T09:19:31+00:00",
+      "generated_at": "2026-08-17T09:11:11+00:00",
       "generation_model": "codex_local_compact",
       "generation_source": "ifanr_morning_title_optimizer",
       "headline_options": [
-        "Miora跨应用读写资料/Claude文本将加入水印/本地AI隐私过滤器上线",
-        "Claude公司首次运营盈利/千问半年下载破30亿/AI搜索可同场比成本速度",
-        "连续世界模型教机器人/Miora让7款工具互通/Suno支持MIDI双向转换"
+        "Qwen两天下载破百万/支付宝智能体接入万项服务/Codex百万级上下文可选",
+        "ChatGPT测试操作回溯/世界模型可生成交互场景/AI看脸可辅助罕见病初筛",
+        "OpenAI再撤前沿安全团队/智能体商业或将迎爆发期/AI焦虑与乐观情绪齐升"
       ],
-      "selected_cover": "story:967cc528-059c-53a5-b048-30e2d715f921",
-      "selected_headline": "Miora跨应用读写资料/Claude文本将加入水印/本地AI隐私过滤器上线"
+      "selected_cover": "story:c812baed-ec4a-501e-9476-6777df3102b5",
+      "selected_headline": "Qwen两天下载破百万/支付宝智能体接入万项服务/Codex百万级上下文可选"
     },
     "ifanr": {
       "cover_candidates": [
         {
-          "id": "story:967cc528-059c-53a5-b048-30e2d715f921",
+          "id": "story:c812baed-ec4a-501e-9476-6777df3102b5",
           "source": "story",
-          "story_id": "967cc528-059c-53a5-b048-30e2d715f921",
-          "title": "PayPal 出售谈判升温，Stripe 与 Advent 仍在洽购",
+          "story_id": "c812baed-ec4a-501e-9476-6777df3102b5",
+          "title": "Qwen3.8-27B 开源两天下载破百万，登顶 Hugging Face 趋势榜",
           "url": ""
         },
         {
-          "id": "story:1c0d2c1b-cd8e-5b92-a1ed-2381be5bf1c1",
+          "id": "story:294d45a1-6766-5d45-9b7f-0e79aee3b162",
           "source": "story",
-          "story_id": "1c0d2c1b-cd8e-5b92-a1ed-2381be5bf1c1",
-          "title": "Waymo 获准在萨克拉门托和圣迭戈提供无人出租车服务",
+          "story_id": "294d45a1-6766-5d45-9b7f-0e79aee3b162",
+          "title": "Bob Iger 成为首位获评「Disney Legend」的公司高管",
           "url": ""
         }
       ],
-      "generated_at": "2026-08-16T09:19:31+00:00",
+      "generated_at": "2026-08-17T09:11:11+00:00",
       "generation_model": "codex_local_compact",
       "generation_source": "ifanr_morning_title_optimizer",
       "headline_options": [
-        "充电宝撞脸误还再收99元/胖东来再招20名刑释员工/激光灭蚊器988美元起售",
-        "《牛来》排片两天翻1900倍/机器人运动会同场拧螺丝/王祖贤谈AI授权边界",
-        "小米15周年拥抱AI/曝红米首销为上代65%/EV3美国起售价不到3.1万"
+        "小米SU7交付破50万台/胖东来维权获赔30万元/宇树机器人原地跳高2米",
+        "法国税务系统泄露60万条/阿里将灵犀互娱售予信宸/迪士尼用限量徽章撬动消费",
+        "大疆诉美清单案发回重审/Retro用订阅做小圈社交/CRT让老游戏画面更顺眼"
       ],
-      "selected_cover": "story:967cc528-059c-53a5-b048-30e2d715f921",
-      "selected_headline": "充电宝撞脸误还再收99元/胖东来再招20名刑释员工/激光灭蚊器988美元起售"
+      "selected_cover": "story:c812baed-ec4a-501e-9476-6777df3102b5",
+      "selected_headline": "小米SU7交付破50万台/胖东来维权获赔30万元/宇树机器人原地跳高2米"
     }
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 153,
-    "snapshot_generated_at": "2026-08-16T09:22:27+00:00",
+    "source_issue_revision": 35,
+    "snapshot_generated_at": "2026-08-17T09:18:38+00:00",
     "public_snapshot": {
-      "digest": "550efdea6769fef8019f1e9d5e1d779c5d301e97062d850cf9550302deac3a63",
-      "generated_at": "2026-08-16T09:22:27+00:00",
-      "image_count": 21,
-      "selected_count": 25,
-      "selected_image_count": 22,
+      "digest": "fa74c37dadc5c08645fda78a3ff7dda3fef8aed13ad4f002849ece275318c14a",
+      "generated_at": "2026-08-17T09:18:38+00:00",
+      "image_count": 22,
+      "selected_count": 33,
+      "selected_image_count": 26,
       "mode": "explicit_review_operations"
     }
   }
