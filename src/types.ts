@@ -149,3 +149,46 @@ export type AutomationHandoff = {
   requires_ai_body_write?: boolean
   empty_body_titles?: string[]
 }
+
+export type Permission =
+  | 'zaobao.view'
+  | 'zaobao.edit'
+  | 'zaobao.publish'
+  | 'flash.view'
+  | 'flash.create'
+  | 'flash.publish'
+  | 'brands.view'
+  | 'brands.generate'
+  | 'weekend.view'
+  | 'settings.manage'
+  | 'admin.users'
+
+export type UserRole =
+  | 'super_admin'
+  | 'morning_chief'
+  | 'morning_editor'
+  | 'flash_editor'
+  | 'full_editor'
+  | 'viewer'
+  | 'custom'
+
+export type User = {
+  id: string
+  username: string
+  display_name: string
+  feishu_user_id: string
+  feishu_name: string
+  avatar_url?: string | null
+  role: UserRole
+  permissions: Permission[]
+  is_active: boolean
+  is_admin: boolean
+  created_at: string
+  last_login_at?: string
+}
+
+export type RegistrationSettings = {
+  allow_registration: boolean
+  registration_invite_code: string
+}
+

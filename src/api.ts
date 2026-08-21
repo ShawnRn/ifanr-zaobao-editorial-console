@@ -263,16 +263,74 @@ export const api = {
     request<AutomationHandoff>(`/api/issues/${issueId}/handoff`, { method: 'POST' }),
   publishToLark: (issueId: string) =>
     request<Job>(`/api/issues/${issueId}/lark-publish`, { method: 'POST' }),
+  publishFlashNewsToLark: (payload: {
+    title: string
+    body: string
+    image_url?: string
+    image_path?: string
+    source_url?: string
+    related_links?: Array<[string, string]>
+  }) => request<{
+    ok: boolean
+    document_ref: string
+    document_url: string
+    document_title: string
+    permission?: Record<string, unknown>
+  }>('/api/flash-news/publish-lark', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  extractUrlsContent: (payload: { urls?: string[]; raw_text?: string }) =>
+    request<{
+      ok: boolean
+      items: Array<{
+        url: string
+        title: string
+        content: string
+        image_url: string
+        site_name: string
+      }>
+      merged_title: string
+      merged_content: string
+      primary_image_url: string
+      primary_source_url: string
+      errors?: Array<{ url: string; error: string }>
+    }>('/api/tools/extract-urls', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
   proposeProfile: () => request<Record<string, unknown>>('/api/editorial-profile/propose', { method: 'POST' }),
-  profileProposals: () => request<Array<Record<string, unknown>>>('/api/editorial-profile/proposals'),
-  authStatus: () => request<{ require_auth: boolean; authenticated: boolean; read_only: boolean; username?: string | null; has_2fa: boolean; recovery_codes_remaining?: number | null; avatar_url?: string | null }>('/api/auth/status'),
+  authStatus: () =>
+    request<{
+      require_auth: boolean
+      authenticated: boolean
+      read_only: boolean
+      username?: string | null
+      display_name?: string | null
+      feishu_user_id?: string | null
+      feishu_name?: string | null
+      role?: string | null
+      permissions?: string[] | null
+      has_2fa: boolean
+      recovery_codes_remaining?: number | null
+      avatar_url?: string | null
+    }>('/api/auth/status'),
   authUploadAvatar: (file: File) => mediaRequest<{ ok: boolean; avatar_url: string }>('/api/auth/avatar', {
     method: 'POST',
     headers: { 'Content-Type': file.type || 'application/octet-stream' },
     body: file,
   }),
   authDeleteAvatar: () => mediaRequest<{ ok: boolean; avatar_url: null }>('/api/auth/avatar', { method: 'DELETE' }),
+  authChangePassword: (username: string, currentPasswordHash: string, newPasswordHash: string) =>
+    request<{ ok: boolean; token: string }>('/api/auth/password', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        current_password_hash: currentPasswordHash,
+        new_password_hash: newPasswordHash,
+      }),
+    }),
   authLogin: (username: string, passwordHash: string, totpCode = '') => request<{ ok: boolean; token: string; username?: string; read_only: boolean; message?: string }>('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password_hash: passwordHash, totp_code: totpCode }) }),
   authSetup2FA: () => request<{ secret: string; otpauth_url: string }>('/api/auth/2fa/setup', { method: 'POST' }),
   authEnable2FA: (code: string) => request<{ ok: boolean; has_2fa: boolean; token: string; recovery_codes: string[]; recovery_codes_remaining: number }>('/api/auth/2fa/enable', {
@@ -283,14 +341,69 @@ export const api = {
     method: 'POST',
     body: JSON.stringify({ code }),
   }),
-  authChangePassword: (username: string, currentPasswordHash: string, newPasswordHash: string) =>
-    request<{ ok: boolean; token: string; username?: string; read_only: boolean }>('/api/auth/change-password', {
+  authFeishuUrl: () => request<{ ok: boolean; configured: boolean; url: string; message?: string }>('/api/auth/feishu/auth-url'),
+  authFeishuBind: (payload: { feishu_user_id: string; feishu_name?: string }) =>
+    request<{ ok: boolean; feishu_user_id: string; feishu_name: string }>('/api/auth/feishu/bind', {
       method: 'POST',
-      body: JSON.stringify({
-        username,
-        current_password_hash: currentPasswordHash,
-        new_password_hash: newPasswordHash,
-      }),
+      body: JSON.stringify(payload),
     }),
+  authFeishuUnbind: () => request<{ ok: boolean }>('/api/auth/feishu/unbind', { method: 'POST' }),
+  authRegister: (payload: {
+    username: string
+    password: string
+    display_name?: string
+    feishu_user_id?: string
+    feishu_name?: string
+    invite_code?: string
+  }) => request<{
+    ok: boolean
+    token: string
+    user: Record<string, unknown>
+    permissions: string[]
+    is_admin: boolean
+  }>('/api/auth/register', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  getUsers: () => request<Array<{
+    id: string
+    username: string
+    display_name: string
+    feishu_user_id: string
+    feishu_name: string
+    role: string
+    permissions: string[]
+    is_active: boolean
+    is_admin: boolean
+    created_at: string
+    last_login_at?: string
+  }>>('/api/admin/users'),
+  updateUser: (userId: string, patch: {
+    display_name?: string
+    role?: string
+    permissions?: string[]
+    feishu_user_id?: string
+    feishu_name?: string
+    is_active?: boolean
+    password?: string
+  }) => request<{ ok: boolean; user: Record<string, unknown> }>(`/api/admin/users/${userId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(patch),
+  }),
+  deleteUser: (userId: string) => request<{ ok: boolean }>(`/api/admin/users/${userId}`, {
+    method: 'DELETE',
+  }),
+  getRegistrationSettings: () => request<{
+    allow_registration: boolean
+    registration_invite_code: string
+  }>('/api/admin/registration-settings'),
+  updateRegistrationSettings: (payload: {
+    allow_registration: boolean
+    registration_invite_code: string
+  }) => request<{ ok: boolean; settings: Record<string, unknown> }>('/api/admin/registration-settings', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
   authLogout: () => request<{ ok: boolean }>('/api/auth/logout', { method: 'POST' }),
 }
+

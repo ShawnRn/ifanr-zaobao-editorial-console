@@ -1,132 +1,42 @@
-import appsoPrompt from '../prompts/appso_headline.md?raw'
-import ifanrPrompt from '../prompts/ifanr_headline.md?raw'
-import type { Issue } from './types'
+/**
+ * 向后兼容的 Gemini 模块适配层（代理到统一的 llm-gateway）
+ */
+export {
+  defaultGeminiModel,
+  getLLMConfig,
+  saveLLMConfig,
+  listGeminiModels,
+  normalizeGeneratedHeadline,
+  validateGeneratedHeadline,
+  generateBrandHeadlines,
+  generateFlashNews,
+} from './llm-gateway'
 
-const keyName = 'editorial-gemini-api-key'
-const modelNameKey = 'editorial-gemini-model'
-export const defaultGeminiModel = 'gemini-3.5-flash'
+import {
+  getLLMConfig,
+  saveLLMConfig,
+  defaultGeminiModel,
+} from './llm-gateway'
 
 export type GeminiModel = {
   name: string
   displayName: string
 }
 
-export const hasGeminiKey = () => Boolean(localStorage.getItem(keyName)?.trim())
-export const getGeminiModel = () => localStorage.getItem(modelNameKey)?.trim() || defaultGeminiModel
+export const hasGeminiKey = () => Boolean(getLLMConfig().geminiKey.trim())
+export const getGeminiModel = () => getLLMConfig().geminiModel.trim() || defaultGeminiModel
 
 export const saveGeminiKey = (value: string) => {
   const key = value.trim()
   if (key.length < 16) throw new Error('Gemini API Key 格式不正确')
-  localStorage.setItem(keyName, key)
+  saveLLMConfig({ geminiKey: key })
 }
 
-export const clearGeminiKey = () => localStorage.removeItem(keyName)
+export const clearGeminiKey = () => saveLLMConfig({ geminiKey: '' })
 
 export const saveGeminiModel = (value: string) => {
   const model = value.trim().replace(/^models\//, '')
   if (!model) throw new Error('请输入 Gemini 模型名称')
   if (!/^[a-zA-Z0-9._-]+$/.test(model)) throw new Error('Gemini 模型名称格式不正确')
-  localStorage.setItem(modelNameKey, model)
-}
-
-const headlinePunctuation: Record<string, string> = {
-  '，': ',', '。': '.', '、': ',', '：': ':', '；': ';', '！': '!', '？': '?',
-  '（': '(', '）': ')', '［': '[', '］': ']', '％': '%', '＋': '+', '＝': '=', '／': '/', '—': '-',
-}
-
-export function normalizeGeneratedHeadline(value: string) {
-  const halfWidth = value.replace(/[，。、：；！？（）［］％＋＝／—]/g, (character) => headlinePunctuation[character] || character)
-  return halfWidth.split(/\s*\/\s*/).map((segment) => segment
-    .replace(/\s+([,:;.!?%+)=\]}>-])/g, '$1')
-    .replace(/([(\[<{])\s+/g, '$1')
-    .replace(/([\u3400-\u9fff])\s+([A-Za-z0-9@#%+&])/g, '$1$2')
-    .replace(/([A-Za-z0-9@#%+&])\s+([\u3400-\u9fff])/g, '$1$2')
-    .trim()).filter(Boolean).join(' / ')
-}
-
-export function validateGeneratedHeadline(value: string) {
-  const normalized = normalizeGeneratedHeadline(value)
-  const segments = normalized.split(' / ')
-  const total = normalized.replace(/\s/g, '').length
-  const segmentLengths = segments.map((segment) => segment.replace(/\s/g, '').length)
-  if (segments.length !== 3 || total < 35 || total > 38 || segmentLengths.some((length) => length < 10 || length > 14)) {
-    throw new Error(`标题Skill长度校验失败:${total}字/${segmentLengths.join('-')}`)
-  }
-  return normalized
-}
-
-export async function listGeminiModels(apiKeyInput?: string): Promise<GeminiModel[]> {
-  const apiKey = apiKeyInput?.trim() || localStorage.getItem(keyName)?.trim()
-  if (!apiKey) throw new Error('请先填写 Gemini API Key')
-  const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
-    headers: { 'x-goog-api-key': apiKey },
-  })
-  if (!response.ok) {
-    const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
-    throw new Error(payload?.error?.message || `无法读取 Gemini 模型列表（${response.status}）`)
-  }
-  const payload = await response.json() as { models?: Array<{ name?: string; displayName?: string; supportedGenerationMethods?: string[] }> }
-  return (payload.models || [])
-    .filter((model) => model.name && model.supportedGenerationMethods?.includes('generateContent'))
-    .map((model) => ({ name: model.name!.replace(/^models\//, ''), displayName: model.displayName || model.name!.replace(/^models\//, '') }))
-    .sort((left, right) => left.name.localeCompare(right.name))
-}
-
-export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifanr') {
-  const apiKey = localStorage.getItem(keyName)?.trim()
-  if (!apiKey) throw new Error('请先在设置中填写 Gemini API Key')
-  const modelName = getGeminiModel()
-  const selected = issue.stories
-    .filter((story) => story.selected && story.status !== 'excluded')
-    .map((story) => ({
-      id: story.id,
-      category: story.category,
-      title: story.title,
-      body: story.body.slice(0, 800),
-      score: story.score,
-      fact_status: story.fact_status,
-      sources: story.sources.slice(0, 2).map((source) => ({ publisher: source.publisher, authority: source.authority })),
-    }))
-  const prompt = `${brand === 'appso' ? appsoPrompt : ifanrPrompt}\n\n## 本刊期共享母稿\n\n${JSON.stringify(selected)}`
-  const controller = new AbortController()
-  const timeout = window.setTimeout(() => controller.abort(), 90_000)
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modelName)}:generateContent`, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.7,
-          responseMimeType: 'application/json',
-          responseSchema: {
-            type: 'OBJECT',
-            properties: {
-              headline_options: {
-                type: 'ARRAY',
-                minItems: 3,
-                maxItems: 3,
-                items: { type: 'STRING' },
-              },
-            },
-            required: ['headline_options'],
-          },
-        },
-      }),
-    })
-    if (!response.ok) {
-      const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
-      throw new Error(payload?.error?.message || `Gemini 请求失败（${response.status}）`)
-    }
-    const payload = await response.json()
-    const text = payload?.candidates?.[0]?.content?.parts?.map((part: { text?: string }) => part.text || '').join('')
-    if (!text) throw new Error('Gemini 没有返回标题')
-    const result = JSON.parse(text) as { headline_options?: unknown[] }
-    const options = (result.headline_options || []).map(String).map(validateGeneratedHeadline)
-    if (options.length !== 3) throw new Error('标题Skill必须返回恰好3组候选')
-    return { headline_options: options, selected_headline: options[0], model: modelName }
-  } finally {
-    window.clearTimeout(timeout)
-  }
+  saveLLMConfig({ geminiModel: model })
 }

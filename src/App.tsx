@@ -21,6 +21,7 @@ import {
   GripVertical,
   Image,
   KeyRound,
+  LayoutDashboard,
   Library,
   LoaderCircle,
   Lock,
@@ -39,13 +40,19 @@ import {
   Trash2,
   Unlock,
   Upload,
+  Users,
   WandSparkles,
   X,
+  Zap,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
 import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, resolveApiAssetUrl, setAuthToken, WorkerRequestError } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
+import { defaultOpenaiBaseUrl, defaultOpenaiModel, getLLMConfig, isLLMConfigured, saveLLMConfig, type LLMProvider } from './llm-gateway'
+import { FlashWorkspace } from './FlashWorkspace'
+import { SettingsDialog } from './SettingsDialog'
+import { WelcomeWorkspace, type FlashDraftItem } from './WelcomeWorkspace'
 import { generateQrSvgDataUri } from './totp'
 import { buildReviewExport, currentHeadlineOptions, downloadText, renderIssueMarkdown } from './review'
 import type { EditorialReviewExport } from './review'
@@ -146,7 +153,7 @@ const sourceLabel: Record<string, string> = {
   unknown: '待追源',
 }
 
-type View = 'draft' | 'candidates' | 'trash' | 'brands' | 'weekend'
+type View = 'home' | 'draft' | 'candidates' | 'trash' | 'brands' | 'weekend' | 'flash'
 type WorkerConnection = {
   status: 'checking' | 'connected' | 'pages' | 'failed' | 'invalid'
   detail: string
@@ -225,16 +232,18 @@ function IconButton({
   children,
   active = false,
   disabled = false,
+  className = '',
 }: {
   title: string
   onClick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
   active?: boolean
   disabled?: boolean
+  className?: string
 }) {
   return (
     <button
-      className={`icon-button ${active ? 'active' : ''}`}
+      className={`icon-button ${active ? 'active' : ''} ${className}`}
       type="button"
       title={title}
       aria-label={title}
@@ -335,6 +344,7 @@ export function IssueArticle({
   moveOptions = categories.slice(1),
   currentMoveTarget = story.category,
   moving = false,
+  onOpenFlash,
 }: {
   story: Story
   active: boolean
@@ -353,6 +363,7 @@ export function IssueArticle({
   moveOptions?: readonly string[]
   currentMoveTarget?: string
   moving?: boolean
+  onOpenFlash?: () => void
 }) {
   const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
   const awaitingAiEditor = pendingAiEditorRequest(story)
@@ -414,6 +425,7 @@ export function IssueArticle({
         {canMoveDown ? <IconButton title="下移一位" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveDown?.() }}><ArrowDown size={15} /></IconButton> : null}
         {canMoveDown ? <IconButton title="置底到当前栏目" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onMoveBottom?.() }}><ArrowDownToLine size={15} /></IconButton> : null}
         {(canMoveUp || canMoveDown) ? <span className="article-tool-divider" /> : null}
+        {onOpenFlash ? <IconButton title="⚡️ 快速生成快讯" className="article-tool-flash" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onOpenFlash() }}><Zap size={15} /></IconButton> : null}
         <IconButton title="编辑与核验" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onOpen() }}><FileCheck2 size={15} /></IconButton>
         <IconButton title="移出早报稿" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onExclude() }}><Trash2 size={15} /></IconButton>
       </div>
@@ -427,12 +439,14 @@ function CandidateItem({
   onOpen,
   onAdopt,
   onExclude,
+  onOpenFlash,
 }: {
   story: Story
   active: boolean
   onOpen: () => void
   onAdopt: () => void
   onExclude: () => void
+  onOpenFlash?: () => void
 }) {
   return (
     <article className={`candidate-row ${active ? 'active' : ''}`} onClick={onOpen}>
@@ -448,6 +462,7 @@ function CandidateItem({
         </div>
       </div>
       <div className="candidate-actions">
+        {onOpenFlash ? <button type="button" className="candidate-action-button flash-button" title="⚡️ 提取并生成快讯" onClick={(event) => { event.stopPropagation(); onOpenFlash() }}><Zap size={16} /></button> : null}
         <button type="button" className="candidate-action-button adopt-button" title="提交给 AI 主编撰写" onClick={(event) => { event.stopPropagation(); onAdopt() }}><Check size={16} /></button>
         <button type="button" className="candidate-action-button exclude-button" title="排除" onClick={(event) => { event.stopPropagation(); onExclude() }}><Trash2 size={16} /></button>
         <ChevronRight size={16} />
@@ -494,6 +509,7 @@ function DetailPanel({
   staticMode,
   onImageChange,
   closing = false,
+  onOpenFlash,
 }: {
   story: Story
   onPatch: (patch: Partial<Story>) => Promise<unknown>
@@ -503,6 +519,7 @@ function DetailPanel({
   staticMode: boolean
   onImageChange: (story: Story) => void
   closing?: boolean
+  onOpenFlash?: () => void
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
@@ -636,6 +653,7 @@ function DetailPanel({
           <label><span className="field-label">首次披露</span><input value={story.disclosed_at || ''} onChange={(event) => void onPatch({ disclosed_at: event.target.value })} placeholder="来源首次披露时间" /></label>
         </div>
         <div className="action-strip">
+          {onOpenFlash ? <button type="button" className="article-tool-flash" title="⚡️ 快速提取并生成爱范儿独立快讯" onClick={() => onOpenFlash()}><Zap size={16} />生成快讯</button> : null}
           <button type="button" disabled={staticMode} title={staticMode ? 'AI 操作由主 Mac 的下一轮自动化执行' : ''} onClick={() => void onAction('source-chase')}><Search size={16} />追原始信源</button>
           <button type="button" disabled={staticMode} title={staticMode ? 'Chrome 补读只能在主 Mac 执行' : ''} onClick={() => void onAction('chrome-read', true)}><Eye size={16} />Chrome 补读</button>
           <button type="button" disabled={staticMode} title={staticMode ? '事实核验由主 Mac 的下一轮自动化执行' : ''} onClick={() => void onAction('fact-check')}><ShieldCheck size={16} />事实核验</button>
@@ -784,7 +802,8 @@ export function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
 }) {
   const [section, setSection] = useState<'current' | 'history'>('current')
   const sourceLabel: Record<string, string> = {
-    ifanr_morning_title_optimizer: '38字标题Skill',
+    ifanr_headline_editor: '标题编辑Skill',
+    ifanr_morning_title_optimizer: '旧38字标题Skill',
     ai_editor_batch: 'AI主编班次',
     gemini_workbench: '工作台手动生成',
     history_restore: '历史恢复',
@@ -805,7 +824,7 @@ export function BrandWorkspace({ issue, onSave, onGenerate, generating }: {
         return (
           <section className="brand-section" key={brand}>
             <header><div><span className="brand-code">{brand.toUpperCase()}</span><h2>{brand === 'appso' ? 'AI 与产品入口' : '消费电子与生活方式'}</h2></div><button type="button" className="generate-button" disabled={generating[brand]} onClick={() => void onGenerate(brand)}>{generating[brand] ? <LoaderCircle size={15} className="spin" /> : <Sparkles size={15} />}{(pack?.headline_options || []).length ? '重新生成标题' : '生成标题'}</button></header>
-            <p className="brand-note">38字标题Skill:每组3条不同新闻,单段10-14字,总长35-38字;重新生成会把当前版本存入历史。</p>
+            <p className="brand-note">标题编辑Skill:每组3条不同新闻,写清主体、动作与具体钩子;单段通常14-26字,信息完整需要时可放宽至32字,重新生成会把当前版本存入历史。</p>
             <div className="headline-options">{(pack?.headline_options || []).map((headline) => <label key={headline} className={pack.selected_headline === headline ? 'selected' : ''}><input type="radio" name={`${brand}-headline`} checked={pack.selected_headline === headline} onChange={() => void onSave(brand, { selected_headline: headline })} /><span>{headline}</span></label>)}</div>
             <label className="field-label" htmlFor={`${brand}-headline-custom`}>最终大标题</label>
             <textarea key={`${brand}-${pack?.selected_headline || ''}`} id={`${brand}-headline-custom`} rows={3} defaultValue={pack?.selected_headline || ''} onBlur={(event) => event.target.value !== pack?.selected_headline && void onSave(brand, { selected_headline: event.target.value })} />
@@ -1055,9 +1074,16 @@ function AuthDialog({
   onDisable2FA: (totpCode: string) => Promise<void>
   onLogout: () => void
 }) {
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login')
   const [username, setUsername] = useState('Shawn Rain')
+  const [displayName, setDisplayName] = useState('')
+  const [inviteCode, setInviteCode] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmRegisterPassword, setConfirmRegisterPassword] = useState('')
   const [totpCode, setTotpCode] = useState('')
+  const [registerBusy, setRegisterBusy] = useState(false)
+  const [registerError, setRegisterError] = useState('')
+
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -1077,6 +1103,39 @@ function AuthDialog({
   const secondFactorReady = (value: string) => /^\d{6}$/.test(value) || /^[A-Z0-9]{4}-?[A-Z0-9]{4}$/.test(value)
   const qrSvgData = setupPayload ? generateQrSvgDataUri(setupPayload.otpauth_url) : ''
   const recoveryText = `ifanr 早报编辑台备用码\n账号：${authUser || 'Shawn Rain'}\n\n${recoveryCodes.join('\n')}\n\n每个备用码只能使用一次，请离线妥善保存。`
+
+  const handleRegisterSubmit = async () => {
+    if (!username.trim() || !password.trim()) {
+      setRegisterError('请填写用户名与密码')
+      return
+    }
+    if (password.length < 6) {
+      setRegisterError('登录密码长度不能少于 6 位')
+      return
+    }
+    if (password !== confirmRegisterPassword) {
+      setRegisterError('两次输入的登录密码不一致')
+      return
+    }
+    setRegisterBusy(true)
+    setRegisterError('')
+    try {
+      const res = await api.authRegister({
+        username: username.trim(),
+        password: password.trim(),
+        display_name: displayName.trim() || username.trim(),
+        invite_code: inviteCode.trim(),
+      })
+      if (res.token) {
+        setAuthToken(res.token)
+        window.location.reload()
+      }
+    } catch (err) {
+      setRegisterError(err instanceof Error ? err.message : '注册失败，请检查邀请码或联系 Shawn Rain')
+    } finally {
+      setRegisterBusy(false)
+    }
+  }
 
   const startSetup = async () => {
     setTwoFactorBusy(true)
@@ -1141,22 +1200,64 @@ function AuthDialog({
   return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}>
     <form className={`auth-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="auth-dialog-title" onSubmit={(event) => {
       event.preventDefault()
-      if (isReadOnly) onLogin(username, password, totpCode)
-      else if (passwordChangeReady) onChangePassword(currentPassword, newPassword)
+      if (isReadOnly) {
+        if (authMode === 'login') onLogin(username, password, totpCode)
+        else void handleRegisterSubmit()
+      } else if (passwordChangeReady) onChangePassword(currentPassword, newPassword)
     }} onMouseDown={(event) => event.stopPropagation()}>
       <header>
-        <div><span>管理员鉴权</span><h2 id="auth-dialog-title">{isReadOnly ? '解锁编辑权限' : '账号与安全'}</h2></div>
+        <div>
+          <span>{isReadOnly ? '团队成员鉴权' : '管理员鉴权'}</span>
+          <h2 id="auth-dialog-title">{isReadOnly ? (authMode === 'login' ? '登录编辑台' : '注册新账号') : '账号与安全'}</h2>
+        </div>
         <IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton>
       </header>
+
       <div className="auth-dialog-body">
         {isReadOnly ? <>
-          <div className="auth-login-intro"><div className="auth-login-icon"><Lock size={18} /></div><div><strong>工作台当前为只读</strong><p>验证管理员身份后可恢复编辑、提交与发布操作。</p></div></div>
-          <label><span>用户名</span><input autoFocus autoComplete="username" type="text" value={username} placeholder="Shawn Rain" onChange={(event) => setUsername(event.target.value)} /></label>
-          <label><span>密码</span><input autoComplete="current-password" type="password" value={password} placeholder="请输入管理员密码" onChange={(event) => setPassword(event.target.value)} /></label>
-          {has2FA ? <label><span>安全验证码</span><input className="auth-code-input" autoComplete="one-time-code" maxLength={9} value={totpCode} placeholder="6 位动态验证码或备用码" onChange={(event) => setTotpCode(cleanSecondFactor(event.target.value))} /><small>打开身份验证器查看验证码；手机不在身边时可使用备用码。</small></label> : null}
+          {/* 登录 / 注册 Tab 切换 */}
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '14px', borderBottom: '1px solid var(--line)', paddingBottom: '8px' }}>
+            <button
+              type="button"
+              className={`auth-text-button ${authMode === 'login' ? 'active' : ''}`}
+              style={{ fontWeight: authMode === 'login' ? 700 : 400, color: authMode === 'login' ? 'var(--brand)' : 'var(--muted)', fontSize: '13px' }}
+              onClick={() => { setAuthMode('login'); setRegisterError('') }}
+            >
+              登录已有账号
+            </button>
+            <span style={{ color: 'var(--line)' }}>|</span>
+            <button
+              type="button"
+              className={`auth-text-button ${authMode === 'register' ? 'active' : ''}`}
+              style={{ fontWeight: authMode === 'register' ? 700 : 400, color: authMode === 'register' ? 'var(--brand)' : 'var(--muted)', fontSize: '13px' }}
+              onClick={() => { setAuthMode('register'); setRegisterError(''); setConfirmRegisterPassword(''); if (username === 'Shawn Rain') setUsername('') }}
+            >
+              注册新成员账号
+            </button>
+          </div>
+
+          {authMode === 'login' ? (
+            <>
+              <div className="auth-login-intro"><div className="auth-login-icon"><Lock size={18} /></div><div><strong>工作台当前为只读</strong><p>验证身份后可解锁快讯撰写、早报编辑与飞书发布权限。</p></div></div>
+              <label><span>用户名</span><input autoFocus autoComplete="username" type="text" value={username} placeholder="用户名（如 Shawn Rain）" onChange={(event) => setUsername(event.target.value)} /></label>
+              <label><span>密码</span><input autoComplete="current-password" type="password" value={password} placeholder="请输入登录密码" onChange={(event) => setPassword(event.target.value)} /></label>
+              {has2FA ? <label><span>安全验证码</span><input className="auth-code-input" autoComplete="one-time-code" maxLength={9} value={totpCode} placeholder="6 位动态验证码或备用码" onChange={(event) => setTotpCode(cleanSecondFactor(event.target.value))} /><small>打开身份验证器查看验证码；手机不在身边时可使用备用码。</small></label> : null}
+            </>
+          ) : (
+            <>
+              <div className="auth-login-intro"><div className="auth-login-icon"><Lock size={18} /></div><div><strong>加入早报与快讯采编团队</strong><p>注册后由 Shawn Rain 分配细粒度权限，飞书账号可在登录后于设置中随时绑定。</p></div></div>
+              <label><span>用户名 *</span><input autoFocus type="text" value={username} placeholder="例如：zhangsan" onChange={(event) => setUsername(event.target.value)} /></label>
+              <label><span>显示姓名</span><input type="text" value={displayName} placeholder="例如：张三" onChange={(event) => setDisplayName(event.target.value)} /></label>
+              <label><span>登录密码 *</span><input type="password" value={password} placeholder="设置不少于 6 位的登录密码" onChange={(event) => setPassword(event.target.value)} /></label>
+              <label><span>确认登录密码 *</span><input type="password" value={confirmRegisterPassword} placeholder="请再次输入登录密码" onChange={(event) => setConfirmRegisterPassword(event.target.value)} /></label>
+              {confirmRegisterPassword && password !== confirmRegisterPassword ? <p className="auth-error-msg">两次输入的登录密码不一致</p> : null}
+              <label><span>注册邀请码 (若管理员开启)</span><input type="text" value={inviteCode} placeholder="请输入团队注册邀请码" onChange={(event) => setInviteCode(event.target.value)} /></label>
+              {registerError ? <p className="auth-error-msg">{registerError}</p> : null}
+            </>
+          )}
         </> : <>
           <div className="auth-account-card">
-            <div className="auth-account-identity"><div className="unlocked-badge"><Unlock size={17} /></div><div><strong>{authUser || 'Shawn Rain'}</strong><span>管理员权限已解锁</span></div></div>
+            <div className="auth-account-identity"><div className="unlocked-badge"><Unlock size={17} /></div><div><strong>{authUser || 'Shawn Rain'}</strong><span>编辑权限已解锁</span></div></div>
             <button type="button" className="auth-text-button" disabled={busy} onClick={onLogout}>退出登录</button>
           </div>
 
@@ -1212,7 +1313,20 @@ function AuthDialog({
         {error ? <p className={error.startsWith('密码已更新') || error.includes('成功') ? 'auth-success-msg auth-global-message' : 'auth-error-msg auth-global-message'}>{error}</p> : null}
       </div>
       <footer>
-        {isReadOnly ? <><button type="button" className="secondary-button" onClick={onClose}>取消</button><button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim() || (has2FA && !secondFactorReady(totpCode))}>{busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}安全登录</button></> : <button type="button" className="primary-button" onClick={onClose}>完成</button>}
+        {isReadOnly ? (
+          <>
+            <button type="button" className="secondary-button" onClick={onClose}>取消</button>
+            {authMode === 'login' ? (
+              <button type="submit" className="primary-button" disabled={busy || !username.trim() || !password.trim() || (has2FA && !secondFactorReady(totpCode))}>
+                {busy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}安全登录
+              </button>
+            ) : (
+              <button type="submit" className="primary-button" disabled={registerBusy || !username.trim() || !password.trim() || !confirmRegisterPassword.trim() || password !== confirmRegisterPassword}>
+                {registerBusy ? <LoaderCircle size={15} className="spin" /> : <Lock size={15} />}立即注册
+              </button>
+            )}
+          </>
+        ) : <button type="button" className="primary-button" onClick={onClose}>完成</button>}
       </footer>
     </form>
   </div>
@@ -1261,10 +1375,18 @@ export function App() {
   const [category, setCategory] = useState('全部')
   const [activeDraftSection, setActiveDraftSection] = useState('全部')
   const [candidateStatus, setCandidateStatus] = useState('all')
-  const [view, setView] = useState<View>('draft')
-  const [activeView, setActiveView] = useState<View>('draft')
+  const [view, setView] = useState<View>('home')
+  const [activeView, setActiveView] = useState<View>('home')
+  const [settingsTab, setSettingsTab] = useState<'ai' | 'worker' | 'appearance' | 'users'>('ai')
   const [viewMotion, setViewMotion] = useState<'idle' | 'out' | 'in'>('idle')
   const [outlineCollapsed, setOutlineCollapsed] = useState(() => localStorage.getItem('ifanr-editorial-outline-collapsed') === '1')
+  const toggleOutlineCollapsed = () => {
+    setOutlineCollapsed((prev) => {
+      const next = !prev
+      localStorage.setItem('ifanr-editorial-outline-collapsed', next ? '1' : '0')
+      return next
+    })
+  }
   const [mobileReadOnly, setMobileReadOnly] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 760px)').matches)
   const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null)
   const [activeStoryId, setActiveStoryId] = useState<string | null>(null)
@@ -1289,13 +1411,68 @@ export function App() {
   const [exporting, setExporting] = useState(false)
   const [generatingBrand, setGeneratingBrand] = useState<Record<'appso' | 'ifanr', boolean>>({ appso: false, ifanr: false })
   const [brandToast, setBrandToast] = useState<{ brand: 'appso' | 'ifanr'; message: string } | null>(null)
+  const [brandToastClosing, setBrandToastClosing] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [settingsClosing, setSettingsClosing] = useState(false)
+  const [flashInitialStory, setFlashInitialStory] = useState<Story | null>(null)
+  const [activeDraft, setActiveDraft] = useState<FlashDraftItem | null>(null)
+  const [drafts, setDrafts] = useState<FlashDraftItem[]>(() => {
+    try {
+      const raw = localStorage.getItem('editorial_flash_drafts')
+      return raw ? JSON.parse(raw) : []
+    } catch {
+      return []
+    }
+  })
+
+  const saveDraft = (draft: FlashDraftItem) => {
+    setDrafts((prev) => {
+      const filtered = prev.filter((d) => d.id !== draft.id)
+      const next = [draft, ...filtered]
+      try {
+        localStorage.setItem('editorial_flash_drafts', JSON.stringify(next))
+      } catch {}
+      return next
+    })
+  }
+
+  const deleteDraft = (id: string) => {
+    setDrafts((prev) => {
+      const next = prev.filter((d) => d.id !== id)
+      try {
+        localStorage.setItem('editorial_flash_drafts', JSON.stringify(next))
+      } catch {}
+      return next
+    })
+  }
+
+  const handleOpenDraft = (draft: FlashDraftItem) => {
+    setActiveDraft(draft)
+    setFlashInitialStory(null)
+    switchView('flash')
+  }
+
+  const handleNewFlashNews = () => {
+    setActiveDraft(null)
+    setFlashInitialStory(null)
+    switchView('flash')
+  }
+
+  const handleCopyDraftMarkdown = async (draft: FlashDraftItem) => {
+    const md = `# ${draft.title}\n\n${draft.imageUrl ? `![](${draft.imageUrl})\n\n` : ''}${draft.body}\n\n${draft.sourceUrl ? `🔗 信息来源：${draft.sourceUrl}\n` : ''}`
+    await navigator.clipboard.writeText(md)
+    showBrandToast('已复制快讯 Markdown 到剪贴板')
+  }
+
+  const [llmProvider, setLlmProvider] = useState<LLMProvider>(() => getLLMConfig().provider)
   const [geminiKey, setGeminiKey] = useState('')
   const [geminiConfigured, setGeminiConfigured] = useState(hasGeminiKey())
   const [geminiModel, setGeminiModel] = useState(getGeminiModel())
   const [geminiModels, setGeminiModels] = useState<Array<{ name: string; displayName: string }>>([])
   const [geminiModelsLoading, setGeminiModelsLoading] = useState(false)
+  const [openaiBaseUrl, setOpenaiBaseUrl] = useState(() => getLLMConfig().openaiBaseUrl)
+  const [openaiKey, setOpenaiKey] = useState(() => getLLMConfig().openaiKey)
+  const [openaiModel, setOpenaiModel] = useState(() => getLLMConfig().openaiModel)
   const [profileMessage, setProfileMessage] = useState('')
   const [showAuthDialog, setShowAuthDialog] = useState(false)
   const [authUser, setAuthUser] = useState('Shawn Rain')
@@ -1537,6 +1714,20 @@ export function App() {
     if (viewMotion === 'idle') setActiveView(view)
   }, [view, viewMotion])
 
+  const showBrandToast = useCallback((message: string, brand: 'appso' | 'ifanr' = 'ifanr') => {
+    if (brandToastTimerRef.current !== null) window.clearTimeout(brandToastTimerRef.current)
+    setBrandToast({ brand, message })
+    setBrandToastClosing(false)
+    brandToastTimerRef.current = window.setTimeout(() => {
+      setBrandToastClosing(true)
+      brandToastTimerRef.current = window.setTimeout(() => {
+        setBrandToast(null)
+        setBrandToastClosing(false)
+        brandToastTimerRef.current = null
+      }, 240)
+    }, 3200)
+  }, [])
+
   const showOperationError = useCallback((message: string) => {
     if (operationErrorTimerRef.current !== null) window.clearTimeout(operationErrorTimerRef.current)
     setOperationError(message)
@@ -1714,8 +1905,9 @@ export function App() {
     return () => document.removeEventListener('keydown', closeOnEscape)
   }, [closeDetail, selectedStoryId])
 
-  const openSettings = useCallback(() => {
+  const openSettings = useCallback((tab: 'ai' | 'worker' | 'appearance' | 'users' = 'ai') => {
     if (settingsCloseTimerRef.current !== null) window.clearTimeout(settingsCloseTimerRef.current)
+    setSettingsTab(tab)
     setSettingsClosing(false)
     setShowSettings(true)
   }, [])
@@ -1740,16 +1932,9 @@ export function App() {
 
   useEffect(() => {
     if (!showSettings) return
-    const handlePointerDown = (event: PointerEvent) => {
-      const target = event.target as Node
-      if (settingsPopoverRef.current?.contains(target) || settingsTriggerRef.current?.contains(target) || connectionTriggerRef.current?.contains(target)) return
-      closeSettings()
-    }
     const handleKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') closeSettings() }
-    document.addEventListener('pointerdown', handlePointerDown)
     document.addEventListener('keydown', handleKeyDown)
     return () => {
-      document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [closeSettings, showSettings])
@@ -1821,15 +2006,7 @@ export function App() {
     return groupDraftStories(draftStories, isSaturdayIssue)
   }, [draftStories, isSaturdayIssue])
 
-  const outlineGroupedDraft = useMemo(() => groupedDraft.map(([section, stories]) => {
-    if (!draggedStoryId || !outlineDrop || !stories.some((story) => story.id === draggedStoryId) || !stories.some((story) => story.id === outlineDrop.targetId)) return [section, stories] as const
-    const reordered = [...stories]
-    const from = reordered.findIndex((story) => story.id === draggedStoryId)
-    const [dragged] = reordered.splice(from, 1)
-    const targetIndex = reordered.findIndex((story) => story.id === outlineDrop.targetId)
-    reordered.splice(targetIndex + (outlineDrop.after ? 1 : 0), 0, dragged)
-    return [section, reordered] as const
-  }), [draggedStoryId, groupedDraft, outlineDrop])
+  const outlineGroupedDraft = groupedDraft
 
   const candidates = useMemo(() => {
     if (!issue) return []
@@ -2040,12 +2217,13 @@ export function App() {
     if (!issue || !activeId || targetId === activeId) return false
     const target = issue.stories.find((story) => story.id === targetId)
     const dragged = issue.stories.find((story) => story.id === activeId)
-    return Boolean(target && dragged && (isSaturdayIssue ? weekendWorkbenchSection(target) === weekendWorkbenchSection(dragged) : target.category === dragged.category))
+    return Boolean(target && dragged)
   }
 
   const updateOutlineDrop = (event: DragEvent<HTMLButtonElement>, targetId: string) => {
     if (!canOutlineReorder(targetId)) return
     event.preventDefault()
+    event.stopPropagation()
     event.dataTransfer.dropEffect = 'move'
     const rect = event.currentTarget.getBoundingClientRect()
     const after = event.clientY >= rect.top + rect.height / 2
@@ -2074,52 +2252,89 @@ export function App() {
     if (!currentIssue || !activeId || activeId === targetId || reorderInFlightRef.current) return
     const target = currentIssue.stories.find((story) => story.id === targetId)
     const dragged = currentIssue.stories.find((story) => story.id === activeId)
-    if (!target || !dragged || (isSaturdayIssue ? weekendWorkbenchSection(target) !== weekendWorkbenchSection(dragged) : target.category !== dragged.category)) return
+    if (!target || !dragged) return
+
     const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(target) : target.category
-    const ordered = currentIssue.stories.filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === target.category)).sort((a, b) => a.position - b.position)
-    const from = ordered.findIndex((story) => story.id === activeId)
-    if (from < 0) return
-    const [moved] = ordered.splice(from, 1)
-    const targetIndex = ordered.findIndex((story) => story.id === targetId)
-    if (targetIndex < 0) return
-    ordered.splice(targetIndex + (after ? 1 : 0), 0, moved)
+    const draggedCategory = isSaturdayIssue ? weekendWorkbenchSection(dragged) : dragged.category
+    const isSameCategory = targetCategory === draggedCategory
 
-    // Synchronous optimistic UI update (<1ms response time)
-    const positions = new Map(ordered.map((story, index) => [story.id, index]))
-    const updatedStories = currentIssue.stories.map((story) => positions.has(story.id) ? { ...story, category: targetCategory, position: positions.get(story.id) || 0 } : story)
-    const optimisticIssue = issueWithMetrics(currentIssue, updatedStories)
-    issueRef.current = optimisticIssue
-    setIssue(optimisticIssue)
-    setMovingStoryId(activeId)
-    setActiveStoryId(activeId)
-    clearOutlineDrag()
-    window.setTimeout(() => setMovingStoryId(null), 440)
+    if (isSameCategory) {
+      const ordered = currentIssue.stories.filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory)).sort((a, b) => a.position - b.position)
+      const from = ordered.findIndex((story) => story.id === activeId)
+      if (from < 0) return
+      const [moved] = ordered.splice(from, 1)
+      const targetIndex = ordered.findIndex((story) => story.id === targetId)
+      if (targetIndex < 0) return
+      ordered.splice(targetIndex + (after ? 1 : 0), 0, moved)
 
-    // Background server sync — only apply remote response if it differs meaningfully
-    if (dataMode !== 'static') {
-      reorderInFlightRef.current = true
-      try {
-        const remoteIssue = await api.reorder(currentIssue.id, ordered.map((story) => story.id), targetCategory)
-        // Only update if remote positions differ from our optimistic state (avoids re-render jank)
-        const sectionOrder = (value: Issue) => value.stories
-          .filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory))
-          .sort((a, b) => a.position - b.position)
-          .map((story) => story.id)
-          .join(',')
-        // The API groups its full response by category, while the console
-        // keeps a single story array.  Compare the moved section only; a raw
-        // full-array comparison falsely looked different and reverted a
-        // successful optimistic drop.
-        if (sectionOrder(remoteIssue) !== sectionOrder(optimisticIssue)) {
+      const positions = new Map(ordered.map((story, index) => [story.id, index]))
+      const updatedStories = currentIssue.stories.map((story) => positions.has(story.id) ? { ...story, category: targetCategory, position: positions.get(story.id) || 0 } : story)
+      const optimisticIssue = issueWithMetrics(currentIssue, updatedStories)
+      issueRef.current = optimisticIssue
+      setIssue(optimisticIssue)
+      setMovingStoryId(activeId)
+      setActiveStoryId(activeId)
+      clearOutlineDrag()
+      window.setTimeout(() => setMovingStoryId(null), 440)
+
+      if (dataMode !== 'static') {
+        reorderInFlightRef.current = true
+        try {
+          const remoteIssue = await api.reorder(currentIssue.id, ordered.map((story) => story.id), targetCategory)
+          const sectionOrder = (value: Issue) => value.stories
+            .filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory))
+            .sort((a, b) => a.position - b.position)
+            .map((story) => story.id)
+            .join(',')
+          if (sectionOrder(remoteIssue) !== sectionOrder(optimisticIssue)) {
+            issueRef.current = remoteIssue
+            setIssue(remoteIssue)
+          }
+        } catch (reorderError) {
+          showOperationError(reorderError instanceof Error ? reorderError.message : '保存排版顺序失败')
+          issueRef.current = currentIssue
+          setIssue(currentIssue)
+        } finally {
+          reorderInFlightRef.current = false
+        }
+      }
+    } else {
+      // 跨栏目移动
+      const targetOrdered = currentIssue.stories
+        .filter((story) => isDraftStory(story) && story.id !== activeId && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory))
+        .sort((a, b) => a.position - b.position)
+      const targetIndex = targetOrdered.findIndex((story) => story.id === targetId)
+      const insertAt = targetIndex >= 0 ? targetIndex + (after ? 1 : 0) : targetOrdered.length
+      targetOrdered.splice(insertAt, 0, { ...dragged, category: targetCategory })
+
+      const positions = new Map(targetOrdered.map((story, index) => [story.id, index]))
+      const updatedStories = currentIssue.stories.map((story) => {
+        if (story.id === activeId) return { ...story, category: targetCategory, position: insertAt }
+        if (positions.has(story.id)) return { ...story, category: targetCategory, position: positions.get(story.id) || 0 }
+        return story
+      })
+      const optimisticIssue = issueWithMetrics(currentIssue, updatedStories)
+      issueRef.current = optimisticIssue
+      setIssue(optimisticIssue)
+      setMovingStoryId(activeId)
+      setActiveStoryId(activeId)
+      clearOutlineDrag()
+      window.setTimeout(() => setMovingStoryId(null), 440)
+
+      if (dataMode !== 'static') {
+        reorderInFlightRef.current = true
+        try {
+          await api.patchStory(activeId, { category: targetCategory, position: insertAt })
+          const remoteIssue = await api.reorder(currentIssue.id, targetOrdered.map((s) => s.id), targetCategory)
           issueRef.current = remoteIssue
           setIssue(remoteIssue)
+        } catch (moveError) {
+          showOperationError(moveError instanceof Error ? moveError.message : '跨栏目移动失败')
+          issueRef.current = currentIssue
+          setIssue(currentIssue)
+        } finally {
+          reorderInFlightRef.current = false
         }
-      } catch (reorderError) {
-        showOperationError(reorderError instanceof Error ? reorderError.message : '保存排版顺序失败')
-        issueRef.current = currentIssue
-        setIssue(currentIssue)
-      } finally {
-        reorderInFlightRef.current = false
       }
     }
   }
@@ -2396,6 +2611,21 @@ export function App() {
     }
   }
 
+  const openFlashForStory = (story: Story) => {
+    setFlashInitialStory(story)
+    switchView('flash')
+  }
+
+  const saveOpenAISettings = () => {
+    saveLLMConfig({
+      provider: 'openai',
+      openaiBaseUrl,
+      openaiKey,
+      openaiModel,
+    })
+    setProfileMessage(`OpenAI 兼容配置已保存（模型：${openaiModel.trim() || defaultOpenaiModel}）`)
+  }
+
   const saveGeminiKey = async () => {
     if (!geminiKey.trim() && !geminiConfigured) {
       setProfileMessage('请输入 Gemini API Key')
@@ -2404,6 +2634,7 @@ export function App() {
     try {
       if (geminiKey.trim()) persistGeminiKey(geminiKey)
       saveGeminiModel(geminiModel)
+      saveLLMConfig({ provider: 'gemini' })
       setGeminiConfigured(true)
       setGeminiKey('')
       setProfileMessage(`Gemini 已保存，当前模型：${geminiModel.trim() || defaultGeminiModel}`)
@@ -2445,11 +2676,13 @@ export function App() {
           <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
         </div>
         <nav className="view-switcher" aria-label="编辑台视图">
+          <button className={activeView === 'home' ? 'active' : ''} onClick={() => switchView('home')} type="button" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><LayoutDashboard size={13} style={{ color: activeView === 'home' ? 'inherit' : 'var(--brand)' }} />主页</button>
           <button className={activeView === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
           <button className={activeView === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
           <button className={activeView === 'trash' ? 'active' : ''} onClick={() => switchView('trash')} type="button">回收站</button>
           <button className={activeView === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">标题</button>
           <button className={activeView === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
+          <button className={activeView === 'flash' ? 'active' : ''} onClick={() => switchView('flash')} type="button" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Zap size={13} style={{ color: activeView === 'flash' ? 'inherit' : 'var(--brand)' }} />即时快讯</button>
         </nav>
         <div className="topbar-actions">
           {!isPagesDeployment && !isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
@@ -2476,23 +2709,6 @@ export function App() {
           </button> : null}
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
-        {showSettings ? <div ref={settingsPopoverRef} className={`settings-popover ${settingsClosing ? 'closing' : ''}`} onAnimationEnd={() => { if (settingsClosing) finishSettingsClose() }}>
-          {!isPagesDeployment ? <><div className={`connection-summary connection-${workerConnection.status}`}>
-            <div>{workerConnection.status === 'checking' ? <LoaderCircle size={16} className="spin" /> : workerConnection.status === 'connected' ? <CircleDot size={15} /> : <CloudOff size={16} />}</div>
-            <span><strong>{connectionLabel}</strong><small>{workerConnection.detail}</small></span>
-          </div>
-          <div className="settings-actions"><button type="button" disabled={workerConnection.status === 'checking'} onClick={() => void loadIssue(true)}>{workerConnection.status === 'checking' ? '正在检测…' : '重新检测连接'}</button></div>
-          <div className="settings-divider" /></> : null}
-          <label className="settings-theme-row"><span>界面主题</span><select aria-label="界面主题" value={theme} onChange={(event) => setTheme(event.target.value as 'system' | 'light' | 'dark')}><option value="system">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label>
-          <div className="settings-divider" />
-          <label><span>Gemini API Key</span><input type="password" aria-label="Gemini API Key" autoComplete="off" value={geminiKey} placeholder={geminiConfigured ? '已配置' : '用于双品牌标题生成'} onChange={(event) => setGeminiKey(event.target.value)} /></label>
-          <label><span>Gemini 模型</span><input aria-label="Gemini 模型" list="gemini-model-list" autoComplete="off" value={geminiModel} placeholder={defaultGeminiModel} onChange={(event) => setGeminiModel(event.target.value)} /></label>
-          <datalist id="gemini-model-list">{geminiModels.map((model) => <option key={model.name} value={model.name}>{model.displayName}</option>)}</datalist>
-          <div className="settings-actions"><button type="button" disabled={geminiModelsLoading || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void loadGeminiModels()}>{geminiModelsLoading ? '正在读取模型…' : '读取可用模型'}</button><button type="button" disabled={!geminiModel.trim() || (!geminiKey.trim() && !geminiConfigured)} onClick={() => void saveGeminiKey()}>保存配置</button></div>
-          <p className="settings-hint">Key 仅保存在当前浏览器本地；请求也由当前设备直接发出，不经过服务器。</p>
-          <button type="button" disabled={workerConnection.status !== 'connected'} onClick={() => { setProfileMessage('正在归纳本周编辑决策…'); void api.proposeProfile().then((proposal) => setProfileMessage(proposal.status === 'pending' ? '已生成待确认的偏好差异提案' : '本周暂无需更新的偏好')).catch((profileError) => setProfileMessage(profileError instanceof Error ? profileError.message : '提案生成失败')) }}>生成本周偏好提案</button>
-          {profileMessage ? <p className="settings-message">{profileMessage}</p> : null}
-        </div> : null}
         {/* Avatar menu */}
         {!isPagesDeployment && showAvatarMenu ? <div ref={avatarMenuRef} className={`avatar-menu ${avatarMenuClosing ? 'closing' : ''}`}>
           <div className="avatar-menu-profile">
@@ -2513,18 +2729,14 @@ export function App() {
           </button> : null}
           {avatarMessage ? <p className="avatar-menu-status" role="status">{avatarMessage}</p> : null}
           <div className="avatar-menu-divider" />
-          <button type="button" className="avatar-menu-item" onClick={() => {
-            closeAvatarMenu()
-            setClosingOverlay(null)
-            setShowAuthDialog(true)
-          }}>
-            {isReadOnly ? <><Lock size={14} />登录以解锁编辑</> : <><Unlock size={14} />账号与安全</>}
+          <button type="button" className="avatar-menu-item" onClick={() => { closeAvatarMenu(); openSettings('users') }}>
+            <Users size={14} />团队成员与权限管理
           </button>
-          {!isReadOnly ? <button type="button" className="avatar-menu-item danger" onClick={() => {
-            closeAvatarMenu()
-            void doAuthLogout()
-          }}>
-            退出登录
+          <button type="button" className="avatar-menu-item" onClick={() => { closeAvatarMenu(); setClosingOverlay(null); setShowAuthDialog(true) }}>
+            <KeyRound size={14} />{isReadOnly ? '登录 / 注册新账号' : '账号与安全'}
+          </button>
+          {!isReadOnly ? <button type="button" className="avatar-menu-item avatar-menu-danger" onClick={() => { closeAvatarMenu(); void doAuthLogout() }}>
+            <Lock size={14} />退出登录
           </button> : null}
           <input
             ref={avatarFileRef}
@@ -2543,12 +2755,27 @@ export function App() {
       </header>
 
       <div className={`view-content view-content-${viewMotion}`} aria-live="polite">
-      {(view === 'draft' || view === 'candidates' || view === 'trash') ? (
-        <div className={`editor-layout ${selectedStory ? 'with-detail' : ''}`}>
+      {view === 'home' ? (
+        <WelcomeWorkspace
+          issue={issue}
+          currentUserName={authUser || 'Shawn Rain'}
+          drafts={drafts}
+          onOpenDraft={handleOpenDraft}
+          onNewFlashNews={handleNewFlashNews}
+          onSwitchView={switchView}
+          onDeleteDraft={deleteDraft}
+          onCopyDraftMarkdown={handleCopyDraftMarkdown}
+          onOpenSettings={openSettings}
+          onOpenAuthDialog={() => { setClosingOverlay(null); setShowAuthDialog(true) }}
+        />
+      ) : null}
+
+      {view === 'draft' || view === 'candidates' || view === 'trash' ? (
+        <div className={`editor-layout ${outlineCollapsed ? 'outline-collapsed' : ''} ${selectedStory ? 'with-detail' : ''}`}>
           <aside className="sidebar">
             <div className="sidebar-header">
-              <div className="sidebar-title"><Menu size={16} /><span>{view === 'draft' ? '稿件目录' : '栏目'}</span></div>
-              <em className="sidebar-count">{view === 'draft' ? draftStories.length : candidates.length}</em>
+              <div className="sidebar-title"><Menu size={16} /><span>{view === 'draft' ? (isSaturdayIssue ? '周六早报' : '稿件目录') : (view === 'trash' ? '回收站' : '栏目')}</span></div>
+              <em className="sidebar-count">{view === 'draft' ? draftStories.length : (view === 'trash' ? trashStories.length : candidates.length)}</em>
             </div>
 
             <div className="sidebar-content" ref={outlineRef}>
@@ -2609,15 +2836,15 @@ export function App() {
 
           <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
-            {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={openSettings}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
+            {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={() => openSettings()}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && loadingIssueDetails && (view === 'candidates' || view === 'trash') ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在载入完整候选库</span></div> : null}
             {!loading && issue && view === 'draft' ? <div className="draft-stage">
-            <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onExclude={() => requestDeleteStory(story)} onDragStart={() => { draggedStoryIdRef.current = story.id; setDraggedStoryId(story.id) }} onDragEnd={clearOutlineDrag} onDrop={(after, droppedStoryId) => void handleDrop(story.id, after, droppedStoryId)} />)}</section>)}</div></div>
+            <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onOpenFlash={() => openFlashForStory(story)} onExclude={() => requestDeleteStory(story)} onDragStart={() => { draggedStoryIdRef.current = story.id; setDraggedStoryId(story.id) }} onDragEnd={clearOutlineDrag} onDrop={(after, droppedStoryId) => void handleDrop(story.id, after, droppedStoryId)} />)}</section>)}</div></div>
             </div> : null}
             {!loading && !loadingIssueDetails && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
               <div className="candidate-toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、正文或来源" /></div></div>
-              <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onAdopt={() => void adoptCandidate(story)} onExclude={() => requestDeleteStory(story)} />)}</div>
+              <div className="candidate-list">{candidates.map((story) => <CandidateItem key={story.id} story={story} active={selectedStoryId === story.id} onOpen={() => setSelectedStoryId(story.id)} onOpenFlash={() => openFlashForStory(story)} onAdopt={() => void adoptCandidate(story)} onExclude={() => requestDeleteStory(story)} />)}</div>
             </> : null}
             {!loading && !loadingIssueDetails && issue && view === 'trash' ? <>
               <header className="candidate-masthead trash-masthead"><div><span>当前刊期</span><h1>回收站</h1><p>仅保留当天被移出的选题，恢复后回到原栏目末尾。</p></div><strong>{trashStories.length}</strong></header>
@@ -2625,19 +2852,46 @@ export function App() {
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
-          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onOpenFlash={() => openFlashForStory(selectedStory)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 
+      {view === 'flash' ? (
+        <FlashWorkspace
+          issue={issue}
+          initialStory={flashInitialStory}
+          initialDraft={activeDraft}
+          onSaveDraft={saveDraft}
+          onSwitchToDraft={() => switchView('draft')}
+          onSwitchToHome={() => switchView('home')}
+          onOpenSettings={openSettings}
+        />
+      ) : null}
       {view === 'brands' && issue ? <BrandWorkspace issue={issue} generating={generatingBrand} onGenerate={generateBrand} onSave={async (brand, patch) => { if (dataMode === 'static') { setIssue({ ...issue, brand_packages: { ...issue.brand_packages, [brand]: { ...issue.brand_packages[brand], ...patch } } }); return } await api.patchBrand(issue.id, brand, patch); setIssue(await api.getIssue(issue.id)) }} /> : null}
       {view === 'weekend' ? <WeekendWorkspace data={weekend} /> : null}
       </div>
+      {showSettings ? (
+        <SettingsDialog
+          issue={issue}
+          theme={theme}
+          isAdmin={!isReadOnly && authUser?.toLowerCase() === 'shawn rain'}
+          currentUserName={authUser || 'Shawn Rain'}
+          avatarUrl={avatarUrl}
+          initialTab={settingsTab}
+          onOpenAuthDialog={() => { setClosingOverlay(null); setShowAuthDialog(true) }}
+          closing={settingsClosing}
+          workerStatus={workerConnection}
+          onClose={closeSettings}
+          onThemeChange={(newTheme) => setTheme(newTheme)}
+          onSaveNotice={(msg) => showBrandToast(msg)}
+        />
+      ) : null}
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onCopyToFeishu={() => copyIssueToFeishu(issue)} onPublishToLark={() => api.publishToLark(issue.id)} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
       {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
-      {brandToast ? <div className="brand-toast" role="status"><Check size={15} /><span>{brandToast.message}</span></div> : null}
+      {brandToast ? <div className={`brand-toast ${brandToastClosing ? 'is-closing' : ''}`} role="status"><Check size={15} /><span>{brandToast.message}</span></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )

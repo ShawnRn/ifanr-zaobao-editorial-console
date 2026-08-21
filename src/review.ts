@@ -2,8 +2,11 @@ import type { Issue, Story } from './types'
 import { comparePublicationStories, publicationCategories } from './categories'
 
 export function currentHeadlineOptions(issue: Issue, brand: 'ifanr' | 'appso'): string[] {
-  const options = issue.brand_packages?.[brand]?.headline_options || []
-  return [...options.slice(0, 3), ...Array(Math.max(0, 3 - options.length)).fill('')]
+  const pack = issue.brand_packages?.[brand]
+  const options = pack?.headline_options || []
+  const selected = pack?.selected_headline || ''
+  const ordered = [...(selected ? [selected] : []), ...options.filter((option) => option !== selected)]
+  return [...ordered.slice(0, 6), ...Array(Math.max(0, 6 - ordered.length)).fill('')]
 }
 
 export function renderHeadlineCandidatesMarkdown(issue: Issue): string {

@@ -58,12 +58,14 @@ function issue(stories: Story[]): Issue {
 describe('buildReviewExport', () => {
   it('renders both current brand candidate groups before the fixed Feishu shell', () => {
     const current = issue([story()])
-    current.brand_packages.ifanr.headline_options = ['爱范儿一', '爱范儿二', '爱范儿三']
-    current.brand_packages.appso.headline_options = ['APPSO一', 'APPSO二', 'APPSO三']
+    current.brand_packages.ifanr.headline_options = ['爱范儿一', '爱范儿二', '爱范儿三', '爱范儿四', '爱范儿五', '爱范儿六']
+    current.brand_packages.ifanr.selected_headline = '爱范儿四'
+    current.brand_packages.appso.headline_options = ['APPSO一', 'APPSO二', 'APPSO三', 'APPSO四', 'APPSO五', 'APPSO六']
+    current.brand_packages.appso.selected_headline = 'APPSO五'
     const markdown = renderFeishuCloudMarkdown(current)
     expect(markdown.indexOf('### 备选标题')).toBeLessThan(markdown.indexOf('早报｜'))
-    expect(markdown).toContain('#### 爱范儿\n1. 爱范儿一\n2. 爱范儿二\n3. 爱范儿三')
-    expect(markdown).toContain('#### APPSO\n1. APPSO一\n2. APPSO二\n3. APPSO三')
+    expect(markdown).toContain('#### 爱范儿\n1. 爱范儿四\n2. 爱范儿一\n3. 爱范儿二\n4. 爱范儿三\n5. 爱范儿五\n6. 爱范儿六')
+    expect(markdown).toContain('#### APPSO\n1. APPSO五\n2. APPSO一\n3. APPSO二\n4. APPSO三\n5. APPSO四\n6. APPSO六')
   })
 
   it('creates ids when randomUUID is unavailable on a local HTTP origin', () => {
