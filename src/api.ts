@@ -261,8 +261,11 @@ export const api = {
   deleteStoryImage: (storyId: string) => mediaRequest<Story>(`/api/stories/${storyId}/image`, { method: 'DELETE' }),
   handoff: (issueId: string) =>
     request<AutomationHandoff>(`/api/issues/${issueId}/handoff`, { method: 'POST' }),
-  publishToLark: (issueId: string) =>
-    request<Job>(`/api/issues/${issueId}/lark-publish`, { method: 'POST' }),
+  publishToLark: (issueId: string, expectedRevision: number) =>
+    request<Job>(`/api/issues/${issueId}/lark-publish`, {
+      method: 'POST',
+      body: JSON.stringify({ expected_revision: expectedRevision }),
+    }),
   publishFlashNewsToLark: (payload: {
     title: string
     body: string
@@ -406,4 +409,3 @@ export const api = {
   }),
   authLogout: () => request<{ ok: boolean }>('/api/auth/logout', { method: 'POST' }),
 }
-
