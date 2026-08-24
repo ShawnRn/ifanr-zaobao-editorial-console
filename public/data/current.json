@@ -5,11 +5,11 @@
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 63,
-  "selected_count": 21,
+  "revision": 68,
+  "selected_count": 20,
   "review_count": 10,
-  "ready_count": 11,
-  "updated_at": "2026-08-24T09:23:18+00:00",
+  "ready_count": 10,
+  "updated_at": "2026-08-24T09:42:52+00:00",
   "stories": [
     {
       "id": "a9faf729-c708-51fa-b2f6-753e46aac023",
@@ -830,7 +830,65 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
+      "updated_at": "2026-08-24T09:41:03+00:00"
+    },
+    {
+      "id": "3aedb94a-74ab-56e9-bd6d-1e37a0c465f9",
+      "issue_id": "ifanr-daily-20260825",
+      "fingerprint": "42a4cc84d1dc18b926f02ffe921e14e9dc18d1ff",
+      "title": "字节将 TRAE、扣子并入豆包，拟推「豆包工作」品牌",
+      "body": "据 36 氪旗下「智能涌现」报道，字节跳动已完成一轮 AI 办公产品团队整合：TRAE 和扣子团队将整体并入豆包体系，TRAE Work 与扣子的办公能力将和豆包整合，TRAE IDE 及 CLI 则继续作为豆包品牌下的编程产品线发展。相关产品和运营团队调整后向豆包产品负责人赵祺汇报。\n\n报道还称，字节最快将在本周推出独立 AI 办公产品「豆包工作」，作为面向办公场景的统一产品和品牌，并与飞书进一步整合。\n\n针对上述消息，字节方面回应称，此次调整旨在更好地协同产品和技术资源，为用户提供更优质的 AI 工作体验，现有用户权益不会受到影响。\n\n在 8 月的年中全员会上，字节 CEO 梁汝波将公司业务战略原则概括为「高度优先，粗主干，优化长期」，表示将精力聚焦于 AI、信息平台和交易服务三项核心业务，并称希望豆包未来也能成为一项「主干」AI 业务。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
+      "source_name": "eu.36kr.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/181ce0b01114-fdad04b357936e96c35b.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://eu.36kr.com/zh/p/3953230805876099；lark-text://lark_private/om_x100b678b887aacb8b39be2be01dd62f 🧭飞书群 · 2026 年 8 月 24 日 16:10",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://eu.36kr.com/zh/p/3953230805876099",
+          "title": "",
+          "publisher": "eu.36kr.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据 36 氪旗下「智能涌现」报道，字节跳动已完成一轮 AI 办公产品团队整合：TRAE 和扣子团队将整体并入豆包体系，TRAE Work 与扣子的办公能力将和豆包整合，TRAE IDE 及 CLI 则继续作为豆包品牌下的编程产品线发展。相关产品和运营团队调整后向豆包产品负责人赵祺汇报。",
+          "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "报道还称，字节最快将在本周推出独立 AI 办公产品「豆包工作」，作为面向办公场景的统一产品和品牌，并与飞书进一步整合。字节回应称，此次调整旨在协同产品和技术资源，现有用户权益不会受到影响。",
+          "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-24T09:42:52+00:00"
     },
     {
       "id": "2cd1b92c-7e98-51fa-94f8-20cddebaee0e",
@@ -841,7 +899,7 @@
       "category": "新产品",
       "status": "ready",
       "selected": true,
-      "position": 1,
+      "position": 2,
       "score": 0,
       "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
       "source_name": "mp.weixin.qq.com",
@@ -894,7 +952,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
+      "updated_at": "2026-08-24T09:41:03+00:00"
     },
     {
       "id": "4fda95c3-3f39-5692-8ac5-8484f36d3d7c",
@@ -905,7 +963,7 @@
       "category": "新产品",
       "status": "ready",
       "selected": true,
-      "position": 2,
+      "position": 3,
       "score": 0,
       "source_url": "",
       "source_name": "f9a4f42823dce797d6e6479d753256798bcac2b2",
@@ -948,65 +1006,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
-    },
-    {
-      "id": "d558d989-acbb-5a1a-8fb5-b9c9124bab62",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "c17d4a588f0c9bf74a47092c075c674511f90f38",
-      "title": "四川地震预警误报 7.7 级，省地震局称发布方冒用官方名义",
-      "body": "8 月 24 日 8 时 26 分，四川宜宾长宁县发生 4.7 级地震，震源深度 5 公里。成都高新减灾研究所随后通过荣耀、vivo 手机和小天才手表等渠道发布 7.7 级预警，引发用户关注。\n\n四川省地震局通报称，相关信息冒用了「中国地震预警网」名义；省地震局已于 7 月 22 日终止向该研究所提供中国地震预警网紧急地震信息服务的第三方授权。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "https://www.yicai.com/news/103330543.html",
-      "source_name": "yicai.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/a526b5166115-8541d0c29e0c730b539e.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.yicai.com/news/103330543.html 📮Folo · 2026 年 8 月 24 日 12:49",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.yicai.com/news/103330543.html",
-          "title": "",
-          "publisher": "yicai.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "8 月 24 日 8 时 26 分，四川宜宾长宁县发生 4.7 级地震，震源深度 5 公里。成都高新减灾研究所随后通过荣耀、vivo 手机和小天才手表等渠道发布 7.7 级预警，引发用户关注。",
-          "source_url": "https://www.yicai.com/news/103330543.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "四川省地震局通报称，相关信息冒用了「中国地震预警网」名义；省地震局已于 7 月 22 日终止向该研究所提供中国地震预警网紧急地震信息服务的第三方授权。",
-          "source_url": "https://www.yicai.com/news/103330543.html",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
+      "updated_at": "2026-08-24T09:41:03+00:00"
     },
     {
       "id": "1ddc984d-e41c-56de-be47-6630b69ed6c7",
@@ -1064,65 +1064,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
-    },
-    {
-      "id": "3aedb94a-74ab-56e9-bd6d-1e37a0c465f9",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "42a4cc84d1dc18b926f02ffe921e14e9dc18d1ff",
-      "title": "字节将 TRAE、扣子并入豆包，拟推「豆包工作」品牌",
-      "body": "据 36 氪旗下「智能涌现」报道，字节跳动已完成一轮 AI 办公产品团队整合：TRAE 和扣子团队将整体并入豆包体系，TRAE Work 与扣子的办公能力将和豆包整合，TRAE IDE 及 CLI 则继续作为豆包品牌下的编程产品线发展。相关产品和运营团队调整后向豆包产品负责人赵祺汇报。\n\n报道还称，字节最快将在本周推出独立 AI 办公产品「豆包工作」，作为面向办公场景的统一产品和品牌，并与飞书进一步整合。字节回应称，此次调整旨在协同产品和技术资源，现有用户权益不会受到影响。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
-      "source_name": "eu.36kr.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/181ce0b01114-fdad04b357936e96c35b.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://eu.36kr.com/zh/p/3953230805876099；lark-text://lark_private/om_x100b678b887aacb8b39be2be01dd62f 🧭飞书群 · 2026 年 8 月 24 日 16:10",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://eu.36kr.com/zh/p/3953230805876099",
-          "title": "",
-          "publisher": "eu.36kr.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "据 36 氪旗下「智能涌现」报道，字节跳动已完成一轮 AI 办公产品团队整合：TRAE 和扣子团队将整体并入豆包体系，TRAE Work 与扣子的办公能力将和豆包整合，TRAE IDE 及 CLI 则继续作为豆包品牌下的编程产品线发展。相关产品和运营团队调整后向豆包产品负责人赵祺汇报。",
-          "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "报道还称，字节最快将在本周推出独立 AI 办公产品「豆包工作」，作为面向办公场景的统一产品和品牌，并与飞书进一步整合。字节回应称，此次调整旨在协同产品和技术资源，现有用户权益不会受到影响。",
-          "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
+      "updated_at": "2026-08-24T09:41:03+00:00"
     },
     {
       "id": "14191816-118e-5490-8306-3569a932a450",
@@ -1133,7 +1075,7 @@
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 6,
+      "position": 5,
       "score": 0,
       "source_url": "https://www.ifanr.com/1676318",
       "source_name": "爱范儿",
@@ -1192,7 +1134,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:10+00:00"
+      "updated_at": "2026-08-24T09:41:03+00:00"
     },
     {
       "id": "7bb6e267-0bbd-5c8b-881d-78d1485a7296",
@@ -1492,14 +1434,14 @@
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 63,
-    "snapshot_generated_at": "2026-08-24T09:26:14+00:00",
+    "source_issue_revision": 68,
+    "snapshot_generated_at": "2026-08-24T09:45:58+00:00",
     "public_snapshot": {
-      "digest": "873578938be5a91fde1a43175776b0bbc8203de3e6b344e8c1bdcfc4edf06dd8",
-      "generated_at": "2026-08-24T09:26:14+00:00",
-      "image_count": 14,
-      "selected_count": 21,
-      "selected_image_count": 15,
+      "digest": "97f8042d774bb4e13412508247afccfe6d296cd4854a30adbdb311513b7c80e5",
+      "generated_at": "2026-08-24T09:45:58+00:00",
+      "image_count": 13,
+      "selected_count": 20,
+      "selected_image_count": 14,
       "mode": "explicit_review_operations"
     }
   }
