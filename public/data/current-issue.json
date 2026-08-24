@@ -5,11 +5,11 @@
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 57,
+  "revision": 56,
   "selected_count": 22,
   "review_count": 10,
   "ready_count": 12,
-  "updated_at": "2026-08-24T09:22:26+00:00",
+  "updated_at": "2026-08-24T09:22:19+00:00",
   "stories": [
     {
       "id": "a9faf729-c708-51fa-b2f6-753e46aac023",
@@ -422,7 +422,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:26+00:00"
+      "updated_at": "2026-08-24T09:22:19+00:00"
     },
     {
       "id": "e6bbbf1f-56db-55d6-aa44-6c0d3eee3594",
@@ -909,7 +909,7 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/a526b5166115-54bf0ac2c7c66ca9562e.png",
+      "image_url": "data/images/a526b5166115-8541d0c29e0c730b539e.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -1559,11 +1559,11 @@
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 57,
-    "snapshot_generated_at": "2026-08-24T09:23:41+00:00",
+    "source_issue_revision": 56,
+    "snapshot_generated_at": "2026-08-24T09:23:51+00:00",
     "public_snapshot": {
-      "digest": "46b526c8caa695e4ea0c5f27a1903e6f7d8151285349669880633ff5e6c35a3b",
-      "generated_at": "2026-08-24T09:23:41+00:00",
+      "digest": "dab87239daf32afe7d56587c5dc830bb3871c26a362123ebe7a80bdb48d91462",
+      "generated_at": "2026-08-24T09:23:51+00:00",
       "image_count": 15,
       "selected_count": 22,
       "selected_image_count": 16,
