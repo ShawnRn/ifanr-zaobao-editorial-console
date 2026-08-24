@@ -5,11 +5,11 @@
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 56,
-  "selected_count": 22,
+  "revision": 63,
+  "selected_count": 21,
   "review_count": 10,
-  "ready_count": 12,
-  "updated_at": "2026-08-24T09:22:19+00:00",
+  "ready_count": 11,
+  "updated_at": "2026-08-24T09:23:18+00:00",
   "stories": [
     {
       "id": "a9faf729-c708-51fa-b2f6-753e46aac023",
@@ -76,7 +76,74 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
+    },
+    {
+      "id": "e40e0595-aa2a-54c8-b042-b4f82a0a49cc",
+      "issue_id": "ifanr-daily-20260825",
+      "fingerprint": "e35504d4913387e2dc8a79b06e2ef4dda7c9357c",
+      "title": "小米调整售后规则，二手设备不再属于原厂三包范围",
+      "body": "小米近期更新手机、手表等产品的服务政策，在非保修条款中明确加入「产品属于二手商品」。发生回收、转售、赠予或转交第三方使用的设备，也无法继续享受与原购买者绑定的服务权益和电池保障。\n\n新规则针对的是厂商原始三包和增值权益，不等于二手交易中的卖方免责。公开司法解释显示，二手平台卖家如果长期从事经营性交易，仍可能被认定为经营者，并依据消费者权益保护规则承担售后责任。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
+      "source_name": "coolapk.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-08-24 12:06",
+      "published_at": "2026-08-24 12:06",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/fd100cf22683-dd6e2dc847c67fbb25ae.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657；https://mp.weixin.qq.com/s/gGLEllVp6HwHlkcfIz_Wvg 🧭飞书群 · 2026 年 8 月 24 日 11:57",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
+          "title": "",
+          "publisher": "coolapk.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/gGLEllVp6HwHlkcfIz_Wvg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "小米近期更新手机、手表等产品的服务政策，在非保修条款中明确加入「产品属于二手商品」。发生回收、转售、赠予或转交第三方使用的设备，也无法继续享受与原购买者绑定的服务权益和电池保障。",
+          "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "新规则针对的是厂商原始三包和增值权益，不等于二手交易中的卖方免责。公开司法解释显示，二手平台卖家如果长期从事经营性交易，仍可能被认定为经营者，并依据消费者权益保护规则承担售后责任。",
+          "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "45bb8638-4f5f-5491-a6fa-0b199deaef14",
@@ -87,7 +154,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 1,
+      "position": 2,
       "score": 0,
       "source_url": "",
       "source_name": "adae37446b0aecf59c63754db3a3adeb55c38866",
@@ -130,7 +197,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "0b0ee27e-c790-566d-8ae7-85eebf695d83",
@@ -141,7 +208,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 2,
+      "position": 3,
       "score": 0,
       "source_url": "https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026",
       "source_name": "counterpointresearch.com",
@@ -194,7 +261,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "851a2a98-d285-5bfb-b5bc-ff1019aad59b",
@@ -205,7 +272,7 @@
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 5,
+      "position": 4,
       "score": 0,
       "source_url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
       "source_name": "早报 Bot 私聊",
@@ -264,7 +331,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "54545166-75eb-5f86-bb40-e7b185f326f3",
@@ -275,7 +342,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 6,
+      "position": 5,
       "score": 0,
       "source_url": "https://www.nature.com/articles/s41591-026-04589-y",
       "source_name": "nature.com",
@@ -337,7 +404,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "da97a022-4e28-518d-afb3-2bdaf5b2ac40",
@@ -348,7 +415,7 @@
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 8,
+      "position": 6,
       "score": 0,
       "source_url": "https://www.davidsenra.com/",
       "source_name": "davidsenra.com",
@@ -422,7 +489,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:19+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "e6bbbf1f-56db-55d6-aa44-6c0d3eee3594",
@@ -433,7 +500,7 @@
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 9,
+      "position": 7,
       "score": 0,
       "source_url": "https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42",
       "source_name": "cn.wsj.com",
@@ -486,7 +553,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "e533a220-91ac-5590-94f6-10f959f3edbb",
@@ -497,7 +564,7 @@
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
-      "position": 10,
+      "position": 8,
       "score": 0,
       "source_url": "https://www.alibabagroup.com/en-US/ir-filings-hkex",
       "source_name": "alibabagroup.com",
@@ -568,7 +635,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "0cd46517-0ed8-55f3-b762-b06762584249",
@@ -579,7 +646,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 10,
+      "position": 9,
       "score": 0,
       "source_url": "https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA",
       "source_name": "mp.weixin.qq.com",
@@ -632,7 +699,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
+      "updated_at": "2026-08-24T09:23:06+00:00"
     },
     {
       "id": "afaae22e-aaaa-546a-a91f-344c26c6fcf7",
@@ -729,7 +796,7 @@
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
-      "changed_since_review": true,
+      "changed_since_review": false,
       "image_url": "data/images/e0ad4f5961fea4787cd0.png",
       "image_path": "",
       "image_token": "",
@@ -763,7 +830,71 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:17+00:00"
+      "updated_at": "2026-08-24T09:23:10+00:00"
+    },
+    {
+      "id": "2cd1b92c-7e98-51fa-94f8-20cddebaee0e",
+      "issue_id": "ifanr-daily-20260825",
+      "fingerprint": "58478815172339c0b2684ed94f261c648a8a3388",
+      "title": "阿里视频模型 Wan3.0 上线，可原生生成 30 秒视频",
+      "body": "8 月 24 日，阿里巴巴视频生成模型 Wan3.0 正式上线。新版本支持单次生成 30 秒视频，并首次接受 doc、xls、ppt、pdf 和 md 等文档输入，可从文字、图片和文档素材生成连续视频。\n\n模型重点改善长镜头中的人物、车辆、道具、声音和空间关系一致性。阿里称，公测期间 Wan3.0 已进入短剧、广告、文旅和音乐视频等生产流程，并接入 Flova、LibTV 等创作平台。\n\nWan3.0 现已在阿里云百炼、千问 AI 平台、万相官网和千问 App 上线，同时开放 API 调用。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/eea45ebd8c2d867fa23f.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ；lark-file://lark_private/file_v3_0014s_0ecf1f42-b74b-4015-af0c-d7fc08480a7g；新闻稿《【新闻稿】阿里视频大模型Wan3.0正式上线，行业评价「稳定、真实、有质感」(1).docx》 🧭飞书群 · 2026 年 8 月 24 日 12:47",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "8 月 24 日，阿里巴巴视频生成模型 Wan3.0 正式上线。新版本支持单次生成 30 秒视频，并首次接受 doc、xls、ppt、pdf 和 md 等文档输入，可从文字、图片和文档素材生成连续视频。",
+          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "模型重点改善长镜头中的人物、车辆、道具、声音和空间关系一致性。阿里称，公测期间 Wan3.0 已进入短剧、广告、文旅和音乐视频等生产流程，并接入 Flova、LibTV 等创作平台。",
+          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Wan3.0 现已在阿里云百炼、千问 AI 平台、万相官网和千问 App 上线，同时开放 API 调用。",
+          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-08-24T09:23:10+00:00"
     },
     {
       "id": "4fda95c3-3f39-5692-8ac5-8484f36d3d7c",
@@ -774,7 +905,7 @@
       "category": "新产品",
       "status": "ready",
       "selected": true,
-      "position": 1,
+      "position": 2,
       "score": 0,
       "source_url": "",
       "source_name": "f9a4f42823dce797d6e6479d753256798bcac2b2",
@@ -817,74 +948,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
-    },
-    {
-      "id": "e40e0595-aa2a-54c8-b042-b4f82a0a49cc",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "e35504d4913387e2dc8a79b06e2ef4dda7c9357c",
-      "title": "小米调整售后规则，二手设备不再属于原厂三包范围",
-      "body": "小米近期更新手机、手表等产品的服务政策，在非保修条款中明确加入「产品属于二手商品」。发生回收、转售、赠予或转交第三方使用的设备，也无法继续享受与原购买者绑定的服务权益和电池保障。\n\n新规则针对的是厂商原始三包和增值权益，不等于二手交易中的卖方免责。公开司法解释显示，二手平台卖家如果长期从事经营性交易，仍可能被认定为经营者，并依据消费者权益保护规则承担售后责任。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-      "source_name": "coolapk.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 12:06",
-      "published_at": "2026-08-24 12:06",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/fd100cf22683-dd6e2dc847c67fbb25ae.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657；https://mp.weixin.qq.com/s/gGLEllVp6HwHlkcfIz_Wvg 🧭飞书群 · 2026 年 8 月 24 日 11:57",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-          "title": "",
-          "publisher": "coolapk.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/gGLEllVp6HwHlkcfIz_Wvg",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "小米近期更新手机、手表等产品的服务政策，在非保修条款中明确加入「产品属于二手商品」。发生回收、转售、赠予或转交第三方使用的设备，也无法继续享受与原购买者绑定的服务权益和电池保障。",
-          "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "新规则针对的是厂商原始三包和增值权益，不等于二手交易中的卖方免责。公开司法解释显示，二手平台卖家如果长期从事经营性交易，仍可能被认定为经营者，并依据消费者权益保护规则承担售后责任。",
-          "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
+      "updated_at": "2026-08-24T09:23:10+00:00"
     },
     {
       "id": "d558d989-acbb-5a1a-8fb5-b9c9124bab62",
@@ -942,7 +1006,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
+      "updated_at": "2026-08-24T09:23:10+00:00"
     },
     {
       "id": "1ddc984d-e41c-56de-be47-6630b69ed6c7",
@@ -1000,71 +1064,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
-    },
-    {
-      "id": "2cd1b92c-7e98-51fa-94f8-20cddebaee0e",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "58478815172339c0b2684ed94f261c648a8a3388",
-      "title": "阿里视频模型 Wan3.0 上线，可原生生成 30 秒视频",
-      "body": "8 月 24 日，阿里巴巴视频生成模型 Wan3.0 正式上线。新版本支持单次生成 30 秒视频，并首次接受 doc、xls、ppt、pdf 和 md 等文档输入，可从文字、图片和文档素材生成连续视频。\n\n模型重点改善长镜头中的人物、车辆、道具、声音和空间关系一致性。阿里称，公测期间 Wan3.0 已进入短剧、广告、文旅和音乐视频等生产流程，并接入 Flova、LibTV 等创作平台。\n\nWan3.0 现已在阿里云百炼、千问 AI 平台、万相官网和千问 App 上线，同时开放 API 调用。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/eea45ebd8c2d867fa23f.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ；lark-file://lark_private/file_v3_0014s_0ecf1f42-b74b-4015-af0c-d7fc08480a7g；新闻稿《【新闻稿】阿里视频大模型Wan3.0正式上线，行业评价「稳定、真实、有质感」(1).docx》 🧭飞书群 · 2026 年 8 月 24 日 12:47",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "8 月 24 日，阿里巴巴视频生成模型 Wan3.0 正式上线。新版本支持单次生成 30 秒视频，并首次接受 doc、xls、ppt、pdf 和 md 等文档输入，可从文字、图片和文档素材生成连续视频。",
-          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "模型重点改善长镜头中的人物、车辆、道具、声音和空间关系一致性。阿里称，公测期间 Wan3.0 已进入短剧、广告、文旅和音乐视频等生产流程，并接入 Flova、LibTV 等创作平台。",
-          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Wan3.0 现已在阿里云百炼、千问 AI 平台、万相官网和千问 App 上线，同时开放 API 调用。",
-          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:10+00:00"
     },
     {
       "id": "3aedb94a-74ab-56e9-bd6d-1e37a0c465f9",
@@ -1075,7 +1075,7 @@
       "category": "新产品",
       "status": "ready",
       "selected": true,
-      "position": 6,
+      "position": 5,
       "score": 0,
       "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
       "source_name": "eu.36kr.com",
@@ -1122,7 +1122,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:10+00:00"
     },
     {
       "id": "14191816-118e-5490-8306-3569a932a450",
@@ -1133,7 +1133,7 @@
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
-      "position": 7,
+      "position": 6,
       "score": 0,
       "source_url": "https://www.ifanr.com/1676318",
       "source_name": "爱范儿",
@@ -1192,7 +1192,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:15+00:00"
+      "updated_at": "2026-08-24T09:23:10+00:00"
     },
     {
       "id": "7bb6e267-0bbd-5c8b-881d-78d1485a7296",
@@ -1424,73 +1424,6 @@
         }
       ],
       "updated_at": "2026-08-24T09:22:16+00:00"
-    },
-    {
-      "id": "c1fddba3-8ba3-5676-be69-b7a3e238455f",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "4eb8dac8b1a28599b987f5711f05efa50688aad0",
-      "title": "厦门通报消杀企业涉嫌违规使用药品，涉事场所已关闭",
-      "body": "8 月 24 日，厦门市湖里区联合调查组通报，一家场地消杀服务企业涉嫌违规开展消杀业务。当地此前接到群众举报，调查组已对该企业使用的消杀用品抽检取证，并查扣剩余库存药品；企业在湖里区的经营场所目前已经关闭。\n\n此前媒体报道称，该企业为多家连锁餐饮企业提供消杀服务，涉嫌长期使用敌敌畏，并将原液灌入矿泉水瓶、撕掉标签以规避检查，还使用「三无」杀鼠剂。湖里区表示，将根据调查结果依法处理，并对辖区消杀企业开展全面排查整治。",
-      "category": "新消费",
-      "status": "ready",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/mvYFwYxF2TMF409vIW9I4A",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/04fd8756124d-94b6c8d778ba31d53ebb.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/mvYFwYxF2TMF409vIW9I4A；https://news.dayoo.com/society/202608/24/140000_54994355.htm 🧭飞书群 · 2026 年 8 月 24 日 14:36",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/mvYFwYxF2TMF409vIW9I4A",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://news.dayoo.com/society/202608/24/140000_54994355.htm",
-          "title": "",
-          "publisher": "news.dayoo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "8 月 24 日，厦门市湖里区联合调查组通报，一家场地消杀服务企业涉嫌违规开展消杀业务。当地此前接到群众举报，调查组已对该企业使用的消杀用品抽检取证，并查扣剩余库存药品；企业在湖里区的经营场所目前已经关闭。",
-          "source_url": "https://mp.weixin.qq.com/s/mvYFwYxF2TMF409vIW9I4A",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "此前媒体报道称，该企业为多家连锁餐饮企业提供消杀服务，涉嫌长期使用敌敌畏，并将原液灌入矿泉水瓶、撕掉标签以规避检查，还使用「三无」杀鼠剂。湖里区表示，将根据调查结果依法处理，并对辖区消杀企业开展全面排查整治。",
-          "source_url": "https://mp.weixin.qq.com/s/mvYFwYxF2TMF409vIW9I4A",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
     }
   ],
   "brand_packages": {
@@ -1559,14 +1492,14 @@
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 56,
-    "snapshot_generated_at": "2026-08-24T09:23:51+00:00",
+    "source_issue_revision": 63,
+    "snapshot_generated_at": "2026-08-24T09:26:14+00:00",
     "public_snapshot": {
-      "digest": "dab87239daf32afe7d56587c5dc830bb3871c26a362123ebe7a80bdb48d91462",
-      "generated_at": "2026-08-24T09:23:51+00:00",
-      "image_count": 15,
-      "selected_count": 22,
-      "selected_image_count": 16,
+      "digest": "873578938be5a91fde1a43175776b0bbc8203de3e6b344e8c1bdcfc4edf06dd8",
+      "generated_at": "2026-08-24T09:26:14+00:00",
+      "image_count": 14,
+      "selected_count": 21,
+      "selected_image_count": 15,
       "mode": "explicit_review_operations"
     }
   }
