@@ -76,6 +76,7 @@ describe('App', () => {
     expect(screen.getByText('早报编辑台')).toBeInTheDocument()
     expect(screen.getByText('标题')).toBeInTheDocument()
     expect((await screen.findAllByText('Pages 快照')).length).toBeGreaterThan(0)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
     expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
     expect(screen.getByText('当天飞书 Bot 稿 · 1 条 · Pages 只读快照')).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: '设置' }).length).toBeGreaterThan(0)
@@ -114,6 +115,7 @@ describe('App', () => {
 
   it('asks for confirmation before deletion and restores it with Command-Z', async () => {
     render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
     expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
@@ -131,6 +133,7 @@ describe('App', () => {
 
   it('fades the deletion toast after 10 seconds without losing Command-Z history', async () => {
     render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
     expect(await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: '移出早报稿' }))
@@ -206,21 +209,19 @@ describe('App', () => {
     expect(onOpen).not.toHaveBeenCalled()
   })
 
-  it('closes settings after an outside click with an exit animation', async () => {
+  it('opens and closes settings dialog', async () => {
     render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: '设置' }))
-    const popover = document.querySelector('.settings-popover') as HTMLElement
-    expect(popover).toBeInTheDocument()
+    fireEvent.click(screen.getAllByRole('button', { name: '设置' })[0])
+    const card = document.querySelector('.settings-dialog-card') as HTMLElement
+    expect(card).toBeInTheDocument()
 
-    fireEvent.pointerDown(document.body)
-    expect(popover).toHaveClass('closing')
-    fireEvent.animationEnd(popover)
-
-    await waitFor(() => expect(document.querySelector('.settings-popover')).not.toBeInTheDocument())
+    fireEvent.click(screen.getByRole('button', { name: '取消' }))
+    await waitFor(() => expect(document.querySelector('.settings-dialog-card')).not.toBeInTheDocument())
   })
 
   it('uses corner quotes in visible UI copy', async () => {
     render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
     await screen.findByRole('heading', { name: '当天真实 Bot 稿标题' })
 
     fireEvent.click(screen.getByRole('button', { name: '候选库' }))

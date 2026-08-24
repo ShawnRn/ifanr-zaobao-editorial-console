@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, normalizeGeneratedHeadline, saveGeminiKey, saveGeminiModel, validateGeneratedHeadline } from './gemini'
+import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, normalizeGeneratedHeadline, saveGeminiKey, saveGeminiModel, validateGeneratedHeadline } from './gemini'
 import type { Issue } from './types'
 
 const storage = new Map<string, string>()
@@ -7,7 +7,7 @@ const validOptions = [
   '苹果摄像头AirPods延期至2027年 / 豆包进入特斯拉车机并支持语音唤醒 / 宇树科技上市首日股价大涨460%',
   'OpenAI为Codex补上防误删保护 / 豆包云电脑可在关闭本机后继续跑任务 / 苹果摄像头AirPods计划2027年推出',
   '特斯拉中国车机正式接入豆包大模型 / OpenAI承认模型失配并放慢训练 / 《GTA6》疑似开发画面和地图外泄',
-  '宇树人形机器人演示百米冲刺 / 苹果或将重新设计Siri入口 / 特斯拉车机增加豆包语音交互',
+  '宇树人形机器人演示百米冲刺极速 / 苹果或将为系统重新设计Siri入口 / 特斯拉中国车机全面增加豆包语音交互',
   '《黑神话：钟馗》释出首段实机演示 / OpenAI为Codex增加防误删保护 / 豆包云电脑关机后仍可跑任务',
   'Apple Watch旧表带面临兼容性变化 / 《GTA6》疑似开发画面外泄 / 特斯拉中国车机接入新语音助手',
 ]
@@ -66,7 +66,7 @@ describe('Gemini headline generation', () => {
     expect(result.headline_options).toHaveLength(6)
     expect(fetchMock).toHaveBeenCalledOnce()
     expect(fetchMock.mock.calls[0][1]?.headers).toMatchObject({ 'x-goog-api-key': 'AIzaSyExampleKey123456789' })
-    expect(String(fetchMock.mock.calls[0][0])).toContain('gemini-3.5-flash')
+    expect(String(fetchMock.mock.calls[0][0])).toContain('gemini-3.7-flash')
   })
 
   it('lists generate-capable models and uses a manually selected model', async () => {
