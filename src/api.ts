@@ -1,4 +1,4 @@
-import type { AutomationHandoff, BrandPackage, Issue, Job, Story, StoryCreateInput, StoryStatus } from './types'
+import type { AutomationHandoff, BrandPackage, FlashDraftItem, Issue, IssueSummary, Job, SocialPost, SocialPostInput, Story, StoryCreateInput, StoryStatus } from './types'
 
 const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://111.228.56.220:8765'
 export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://111.228.56.220:8765'
@@ -20,6 +20,42 @@ export type WorkerHealth = {
   identity?: string | null
   time?: string
 }
+
+type FlashDraftRecord = {
+  id: string
+  user_id: string
+  title: string
+  body: string
+  category: string
+  source_url: string
+  image_url: string
+  content: string
+  key_points: string[]
+  published_doc: { document_url?: string; document_title?: string }
+  author_name: string
+  updated_at_ms: number
+  created_at: string
+  updated_at: string
+}
+
+export const flashDraftFromRecord = (record: FlashDraftRecord): FlashDraftItem => ({
+  id: record.id,
+  title: record.title,
+  body: record.body,
+  category: record.category,
+  sourceUrl: record.source_url || undefined,
+  imageUrl: record.image_url || undefined,
+  content: record.content || undefined,
+  keyPoints: record.key_points || [],
+  publishedDoc: record.published_doc?.document_url && record.published_doc?.document_title
+    ? {
+        document_url: record.published_doc.document_url,
+        document_title: record.published_doc.document_title,
+      }
+    : undefined,
+  updatedAt: record.updated_at_ms,
+  authorName: record.author_name || undefined,
+})
 
 export const normalizeApiUrl = (value: string) => {
   const raw = value.trim()
@@ -130,11 +166,33 @@ export const setAuthToken = (token: string) => {
 
 export class WorkerRequestError extends Error {
   status: number
+  code: string
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, code = '') {
     super(message)
     this.name = 'WorkerRequestError'
     this.status = status
+    this.code = code
+  }
+}
+
+function requestError(payload: { detail?: unknown; code?: unknown }, status: number, statusText: string) {
+  const detail = payload.detail
+  const nested = detail && typeof detail === 'object' ? detail as { message?: unknown; code?: unknown } : null
+  const message = nested ? String(nested.message || statusText) : String(detail || statusText)
+  const code = String(nested?.code || payload.code || '')
+  return new WorkerRequestError(message, status, code)
+}
+
+async function readJsonResponse<T>(response: Response, source: string): Promise<T> {
+  const contentType = response.headers?.get?.('content-type') || ''
+  if (contentType && !/\b(?:application|text)\/(?:[\w.+-]*\+)?json\b/i.test(contentType)) {
+    throw new WorkerRequestError(`${source}返回了网页而不是 JSON；请检查 Worker URL 是否指向 API 根地址`, response.status)
+  }
+  try {
+    return await response.json() as T
+  } catch {
+    throw new WorkerRequestError(`${source}没有返回有效 JSON；请检查 Worker URL 是否指向 API 根地址`, response.status)
   }
 }
 
@@ -157,9 +215,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
-      throw new WorkerRequestError(payload.detail || response.statusText, response.status)
+      throw requestError(payload, response.status, response.statusText)
     }
-    return response.json() as Promise<T>
+    return readJsonResponse<T>(response, 'Worker')
   } finally {
     window.clearTimeout(timeout)
   }
@@ -182,9 +240,9 @@ async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
     })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
-      throw new WorkerRequestError(payload.detail || response.statusText, response.status)
+      throw requestError(payload, response.status, response.statusText)
     }
-    return response.json() as Promise<T>
+    return readJsonResponse<T>(response, 'Worker')
   } finally {
     window.clearTimeout(timeout)
   }
@@ -194,13 +252,48 @@ export const api = {
   health: () => request<WorkerHealth>('/health'),
   currentIssue: (scope: 'full' | 'draft' = 'full') => request<Issue>(`/api/issues/current${scope === 'draft' ? '?scope=draft' : ''}`),
   currentIssueVersion: () => request<{ id: string; publication_date: string; revision: number; updated_at: string }>('/api/issues/current/version'),
+  recentIssues: (days = 3) => request<IssueSummary[]>(`/api/issues/recent?days=${days}`),
   staticIssue: async () => {
     const response = await fetch(`${staticAssetUrl('data/current-issue.json')}?v=${Date.now()}`, { cache: 'no-store' })
     if (!response.ok) throw new Error('Pages 尚未生成当天早报快照')
-    return response.json() as Promise<Issue>
+    return readJsonResponse<Issue>(response, 'Pages 快照')
   },
   importLatest: () => request<Issue>('/api/issues/import', { method: 'POST', body: '{}' }),
   getIssue: (id: string) => request<Issue>(`/api/issues/${id}`),
+  socialPosts: (issueId: string) => request<SocialPost[]>(`/api/issues/${issueId}/social-posts?platform=weibo`),
+  flashDrafts: async () => (await request<FlashDraftRecord[]>('/api/flash-drafts')).map(flashDraftFromRecord),
+  upsertFlashDraft: async (draft: FlashDraftItem) => flashDraftFromRecord(await request<FlashDraftRecord>(`/api/flash-drafts/${encodeURIComponent(draft.id)}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      title: draft.title,
+      body: draft.body,
+      category: draft.category,
+      source_url: draft.sourceUrl || '',
+      image_url: draft.imageUrl || '',
+      content: draft.content || '',
+      key_points: draft.keyPoints || [],
+      published_doc: draft.publishedDoc || {},
+      updated_at_ms: draft.updatedAt,
+    }),
+  })),
+  deleteFlashDraft: (draftId: string) => request<{ ok: boolean }>(`/api/flash-drafts/${encodeURIComponent(draftId)}`, { method: 'DELETE' }),
+  upsertSocialPost: (issueId: string, post: SocialPostInput) =>
+    request<SocialPost>(`/api/issues/${issueId}/social-posts`, { method: 'POST', body: JSON.stringify({ platform: 'weibo', ...post }) }),
+  patchSocialPost: (postId: string, patch: Partial<SocialPostInput>) =>
+    request<SocialPost>(`/api/social-posts/${postId}`, { method: 'PATCH', body: JSON.stringify(patch) }),
+  markSocialPostPublished: (postId: string) =>
+    request<SocialPost>(`/api/social-posts/${postId}/publish`, { method: 'POST' }),
+  deleteSocialPost: (postId: string) => request<{ ok: boolean }>(`/api/social-posts/${postId}`, { method: 'DELETE' }),
+  recordSocialPostMetrics: (postId: string, metrics: {
+    published_url: string
+    published_at?: string
+    reposts_count?: number | null
+    comments_count?: number | null
+    attitudes_count?: number | null
+    reads_count?: number | null
+    captured_at?: string
+    source?: string
+  }) => request<SocialPost>(`/api/social-posts/${postId}/metrics`, { method: 'POST', body: JSON.stringify(metrics) }),
   createStory: (issueId: string, story: StoryCreateInput) =>
     request<Story>(`/api/issues/${issueId}/stories`, { method: 'POST', body: JSON.stringify(story) }),
   refreshIssue: (id: string, runPreflight: boolean) =>
@@ -284,7 +377,7 @@ export const api = {
     body: JSON.stringify(payload),
   }),
   extractUrlsContent: (payload: { urls?: string[]; raw_text?: string }) =>
-    request<{
+    mediaRequest<{
       ok: boolean
       items: Array<{
         url: string
@@ -300,6 +393,26 @@ export const api = {
       errors?: Array<{ url: string; error: string }>
     }>('/api/tools/extract-urls', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }),
+  researchStory: (payload: { title: string; source_urls?: string[]; max_results?: number }) =>
+    request<{
+      ok: boolean
+      query: string
+      search_provider: 'hub_web_search' | 'bing_news_fallback'
+      results: Array<{
+        title: string
+        url: string
+        snippet?: string
+        content?: string
+        image_url?: string
+        site_name?: string
+      }>
+      research_content: string
+      errors?: Array<{ url: string; error: string }>
+    }>('/api/tools/research-story', {
+      method: 'POST',
       body: JSON.stringify(payload),
     }),
   weekend: () => request<Record<string, { label: string; candidates: Array<Record<string, unknown>> }>>('/api/weekend-candidates'),
@@ -309,12 +422,14 @@ export const api = {
       require_auth: boolean
       authenticated: boolean
       read_only: boolean
+      user_id?: string | null
       username?: string | null
       display_name?: string | null
       feishu_user_id?: string | null
       feishu_name?: string | null
       role?: string | null
       permissions?: string[] | null
+      is_admin?: boolean
       has_2fa: boolean
       recovery_codes_remaining?: number | null
       avatar_url?: string | null
@@ -326,7 +441,7 @@ export const api = {
   }),
   authDeleteAvatar: () => mediaRequest<{ ok: boolean; avatar_url: null }>('/api/auth/avatar', { method: 'DELETE' }),
   authChangePassword: (username: string, currentPasswordHash: string, newPasswordHash: string) =>
-    request<{ ok: boolean; token: string }>('/api/auth/password', {
+    request<{ ok: boolean; token: string }>('/api/auth/change-password', {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -381,6 +496,18 @@ export const api = {
     created_at: string
     last_login_at?: string
   }>>('/api/admin/users'),
+  createUser: (payload: {
+    username: string
+    password: string
+    display_name?: string
+    feishu_user_id?: string
+    feishu_name?: string
+    role?: string
+    permissions?: string[]
+  }) => request<{ ok: boolean; user: Record<string, unknown> }>('/api/admin/users', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
   updateUser: (userId: string, patch: {
     display_name?: string
     role?: string

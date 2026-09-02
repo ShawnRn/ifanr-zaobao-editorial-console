@@ -2,6 +2,15 @@ import type { Story } from './types'
 
 export const publicationCategories = ['重磅', '大公司', '新产品', '新消费', '好看的'] as const
 
+const WEEKEND_EDITORIAL_TITLE = /^(One Fun Thing|周末看什么|买书不读指南|游戏推荐)\s*[|｜]\s*(?:主选|备选)\s*[|｜]\s*(.+)$/i
+
+/** Keep 主选/备选 in workbench cards, but never expose it in reader-facing copy. */
+export function readerFacingStoryTitle(value: string) {
+  const title = value.trim()
+  const match = WEEKEND_EDITORIAL_TITLE.exec(title)
+  return match ? `${match[1]}｜${match[2].trim()}` : title
+}
+
 export const publicationCategoryOrder = new Map<string, number>(
   publicationCategories.map((value, index) => [value, index]),
 )

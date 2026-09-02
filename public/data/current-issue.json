@@ -1,61 +1,149 @@
 {
-  "id": "ifanr-daily-20260825",
-  "publication_date": "2026-08-25",
-  "title": "20260825 早报",
+  "id": "ifanr-daily-20260903",
+  "publication_date": "2026-09-03",
+  "title": "20260903 早报",
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 68,
-  "selected_count": 20,
-  "review_count": 10,
-  "ready_count": 10,
-  "updated_at": "2026-08-24T09:42:52+00:00",
+  "revision": 93,
+  "selected_count": 34,
+  "review_count": 19,
+  "ready_count": 15,
+  "updated_at": "2026-09-02T16:29:31+00:00",
   "stories": [
     {
-      "id": "a9faf729-c708-51fa-b2f6-753e46aac023",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "26b94f24cba716b747135f1c231af54ba7a351c2",
-      "title": "曝 Hugging Face 评估出售，交易估值至少 130 亿美元",
-      "body": "据《商业内幕》援引知情人士报道，AI 开发者平台 Hugging Face 已聘请投行接触潜在买家，正在评估一笔估值至少 130 亿美元的出售交易，目前尚未达成协议。\n\nHugging Face 在 2023 年融资时估值为 45 亿美元。平台目前承担模型、数据集和开发工具的分发功能，谷歌、亚马逊、英伟达和 Salesforce 等既是投资方，也是生态参与者。新股东是否能够维持平台在不同模型公司之间的中立性，将成为潜在交易的关键变量。",
+      "id": "fcc145e1-d527-55f3-b4ac-0c24bad5e95c",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "62d02f6fe427657deec4e3bacad8e11edf2a381f",
+      "title": "《晚点 LatePost》：月之暗面据报以保密形式递交港股上市申请",
+      "body": "据《晚点 LatePost》报道，月之暗面已于本周以保密形式向港交所递交 A1 文件，启动港股 IPO 流程。A1 是企业申请在港交所上市时提交的正式申请文件之一；采用保密递交后，申请材料不会立即公开。\n\n月之暗面回应称，对于市场传闻不予置评，目前没有可以披露的信息。公司此前曾否认「最快 8 月递表」的说法，本次报道指向的是新的递表进展，因此仍以原始报道的匿名信源口径呈现。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/tCH9QyOtfEns3-9Tm2qcYQ",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "lead",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 21:31",
+      "published_at": "2026-09-02 21:31",
+      "cross_day_status": "ai_source_lead",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/ff45eaa08932-7962804df0b4138763d5.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/tCH9QyOtfEns3-9Tm2qcYQ；https://finance.sina.com.cn/7x24/2026-09-02/doc-iniqnawn4503549.shtml；https://t.me/OneMillion_AI/4336 🧭飞书群 · 2026 年 9 月 2 日 21:31",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/tCH9QyOtfEns3-9Tm2qcYQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://finance.sina.com.cn/7x24/2026-09-02/doc-iniqnawn4503549.shtml",
+          "title": "",
+          "publisher": "finance.sina.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://t.me/OneMillion_AI/4336",
+          "title": "",
+          "publisher": "动察Beating AI News - Telegram Channel",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "月之暗面（Kimi）向港交所秘密交表，正式启动IPO 月之暗面（Kimi）已于本周以保密形式向港交所递交 A1 文件，正式启动港股 IPO 流程。A1 是企业申请在港交所上市时提交的正式申请表之一。Kimi 方面回应上述消息称：「对于市场传闻不予置评，目前暂无可以披露的信息…",
+          "source_url": "https://mp.weixin.qq.com/s/tCH9QyOtfEns3-9Tm2qcYQ",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:28:19+00:00"
+    },
+    {
+      "id": "7bff495b-da57-52e1-9787-c75c0991ab13",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "3dc57e8686a983804e031e362de3b39bfeec10c6",
+      "title": "小米发布会定档 9 月 7 日，三款澎程汽车、18 Fold 与平板 9 Pro Max 齐亮相",
+      "body": "小米官宣，将于 9 月 7 日 19:00 举行秋季旗舰新品发布会，澎程 N70 Pro、N70 Max 和 N90 Max 三款汽车将在当晚正式上市。\n\n同场发布的还有小米 18 Fold 折叠屏手机和小米平板 9 Pro Max。两款新品都将首发搭载小米自研的玄戒 O3 AI 旗舰处理器。\n\n小米发布会与华为、Apple 的秋季活动排期高度集中。华为将在 9 月 7 日 14:30 举行 HarmonyOS 7、HUAWEI Mate XT 2 及全场景新品发布会，小米在当天 19:00 接档；Apple 特别活动则定于北京时间 9 月 10 日凌晨 1:00。三场活动从华为开场到 Apple 开场相隔约 58.5 小时。",
       "category": "大公司",
       "status": "needs_review",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://www.businessinsider.com/hugging-face-could-be-acquired-13-billion-2026-8",
-      "source_name": "businessinsider.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_url": "https://mp.weixin.qq.com/s/ldMIivoHq6ICCfneIAtlsw?scene=1",
+      "source_name": "早报 Bot 私聊",
+      "source_type": "lark_group",
+      "source_quality": "unknown",
+      "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-08-24 03:01",
-      "published_at": "2026-08-24 03:01",
-      "cross_day_status": "current",
+      "disclosed_at": "2026-09-02 09:06",
+      "published_at": "2026-09-02 09:06",
+      "cross_day_status": "needs_title_rewrite",
       "rumor": false,
-      "fact_status": "unverified",
+      "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "",
+      "image_url": "data/images/b534f62de730-d9601a8119e45e171307.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.businessinsider.com/hugging-face-could-be-acquired-13-billion-2026-8；https://mp.weixin.qq.com/s/jiC0hI5x8SLlCO8zwigdHA 🧭飞书群 · 2026 年 8 月 24 日 13:18",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/ldMIivoHq6ICCfneIAtlsw?scene=1；https://consumer.huawei.com/cn/support/content/zh-cn16103427/；https://www.apple.com.cn/apple-events/；https://s.weibo.com/weibo?q=%23%E8%8B%B9%E6%9E%9C%E5%B0%8F%E7%B1%B3%E5%8D%8E%E4%B8%BA%E5%8F%91%E5%B8%83%E6%97%B6%E9%97%B4%E6%92%9E%E6%A1%A3%23 🧭飞书群 · 2026 年 9 月 2 日 09:06",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.businessinsider.com/hugging-face-could-be-acquired-13-billion-2026-8",
+          "url": "https://mp.weixin.qq.com/s/ldMIivoHq6ICCfneIAtlsw?scene=1",
           "title": "",
-          "publisher": "businessinsider.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
         },
         {
-          "url": "https://mp.weixin.qq.com/s/jiC0hI5x8SLlCO8zwigdHA",
+          "url": "https://consumer.huawei.com/cn/support/content/zh-cn16103427/",
           "title": "",
-          "publisher": "mp.weixin.qq.com",
+          "publisher": "consumer.huawei.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.apple.com.cn/apple-events/",
+          "title": "",
+          "publisher": "apple.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://s.weibo.com/weibo?q=%23%E8%8B%B9%E6%9E%9C%E5%B0%8F%E7%B1%B3%E5%8D%8E%E4%B8%BA%E5%8F%91%E5%B8%83%E6%97%B6%E9%97%B4%E6%92%9E%E6%A1%A3%23",
+          "title": "",
+          "publisher": "s.weibo.com",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -64,591 +152,38 @@
       ],
       "claims": [
         {
-          "text": "据《商业内幕》援引知情人士报道，AI 开发者平台 Hugging Face 已聘请投行接触潜在买家，正在评估一笔估值至少 130 亿美元的出售交易，目前尚未达成协议。",
-          "source_url": "https://www.businessinsider.com/hugging-face-could-be-acquired-13-billion-2026-8",
+          "text": "小米官宣，将于 9 月 7 日 19:00 举行秋季旗舰新品发布会，澎程 N70 Pro、N70 Max 和 N90 Max 三款汽车将在当晚正式上市。",
+          "source_url": "https://mp.weixin.qq.com/s/ldMIivoHq6ICCfneIAtlsw?scene=1",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "Hugging Face 在 2023 年融资时估值为 45 亿美元。平台目前承担模型、数据集和开发工具的分发功能，谷歌、亚马逊、英伟达和 Salesforce 等既是投资方，也是生态参与者。新股东是否能够维持平台在不同模型公司之间的中立性，将成为潜在交易的关键变量。",
-          "source_url": "https://www.businessinsider.com/hugging-face-could-be-acquired-13-billion-2026-8",
+          "text": "同场发布的还有小米 18 Fold 折叠屏手机和小米平板 9 Pro Max。两款新品都将首发搭载小米自研的玄戒 O3 AI 旗舰处理器。",
+          "source_url": "https://mp.weixin.qq.com/s/ldMIivoHq6ICCfneIAtlsw?scene=1",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "小米发布会与华为、Apple 的秋季活动排期高度集中。华为将在 9 月 7 日 14:30 举行 HarmonyOS 7、HUAWEI Mate XT 2 及全场景新品发布会，小米在当天 19:00 接档；Apple 特别活动则定于北京时间 9 月 10 日凌晨 1:00。三场活动从华为开场到 Apple 开场相隔约 58.5 小时。",
+          "source_url": "https://mp.weixin.qq.com/s/ldMIivoHq6ICCfneIAtlsw?scene=1",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
+      "updated_at": "2026-09-02T16:27:57+00:00"
     },
     {
-      "id": "e40e0595-aa2a-54c8-b042-b4f82a0a49cc",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "e35504d4913387e2dc8a79b06e2ef4dda7c9357c",
-      "title": "小米调整售后规则，二手设备不再属于原厂三包范围",
-      "body": "小米近期更新手机、手表等产品的服务政策，在非保修条款中明确加入「产品属于二手商品」。发生回收、转售、赠予或转交第三方使用的设备，也无法继续享受与原购买者绑定的服务权益和电池保障。\n\n新规则针对的是厂商原始三包和增值权益，不等于二手交易中的卖方免责。公开司法解释显示，二手平台卖家如果长期从事经营性交易，仍可能被认定为经营者，并依据消费者权益保护规则承担售后责任。",
+      "id": "9067686e-d45b-598c-add1-ac0d07784ceb",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "63786a1e56f742ac945fd9768b8bbc91435c7eaa",
+      "title": "微信灰度测试未读聊天汇总，聊天页增加红包与转账提醒",
+      "body": "微信官方介绍了两项消息查找功能。其中，用户在微信主界面长按左下角的「微信」标签，可以汇总查看当前所有存在未读消息的聊天，无需在会话列表中逐个寻找。该功能目前正在灰度测试。\n\n另一项功能会在聊天界面右上角显示「红包」或「转账」入口，用于快速找出会话中尚未领取的红包，以及未收款的转账。",
       "category": "大公司",
-      "status": "needs_review",
+      "status": "ready",
       "selected": true,
       "position": 1,
       "score": 0,
-      "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-      "source_name": "coolapk.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 12:06",
-      "published_at": "2026-08-24 12:06",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/fd100cf22683-dd6e2dc847c67fbb25ae.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657；https://mp.weixin.qq.com/s/gGLEllVp6HwHlkcfIz_Wvg 🧭飞书群 · 2026 年 8 月 24 日 11:57",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-          "title": "",
-          "publisher": "coolapk.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/gGLEllVp6HwHlkcfIz_Wvg",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "小米近期更新手机、手表等产品的服务政策，在非保修条款中明确加入「产品属于二手商品」。发生回收、转售、赠予或转交第三方使用的设备，也无法继续享受与原购买者绑定的服务权益和电池保障。",
-          "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "新规则针对的是厂商原始三包和增值权益，不等于二手交易中的卖方免责。公开司法解释显示，二手平台卖家如果长期从事经营性交易，仍可能被认定为经营者，并依据消费者权益保护规则承担售后责任。",
-          "source_url": "https://www.coolapk.com/feed/73400486?s=NTFkY2Y3MWQxNTU5MzdiZzZhOGJjMzNlegi1657",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "45bb8638-4f5f-5491-a6fa-0b199deaef14",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "adae37446b0aecf59c63754db3a3adeb55c38866",
-      "title": "小米发布玄戒 O3、O100 与 D100 三款自研芯片",
-      "body": "8 月 24 日，小米发布玄戒 O3、O100 和 D100 三款自研芯片，把玄戒产品线从手机 SoC 扩展到端侧 AI 加速和智能驾驶计算。玄戒 O3 将于 9 月随 Xiaomi 18 Fold 首发上市，O100 与 D100 已完成研发，计划明年商用。\n\n玄戒 O3 采用 3nm 工艺和 10 核 CPU，集成 200 TOPS 的 4 核 NPU，并首发支持 LPDDR6；小米实验室数据显示，其安兔兔综合跑分为 5228014。玄戒 O100 是一款 6nm 端侧 AI 加速芯片，通过三层晶圆堆叠提供 1.22TB/s 内存带宽，端侧模型推理速度最高为每秒 330 Token。\n\n面向汽车和本地计算的玄戒 D100 同样采用 3nm 工艺，集成 20 核 CPU 与 16 核 NPU，单芯片最高支持 160GB 内存，可在本地部署超过 200B 参数量的模型。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "",
-      "source_name": "adae37446b0aecf59c63754db3a3adeb55c38866",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/f9dae8650a6c8a317f0c.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：lark-file://lark_private/file_v3_0014s_8a5e443c-94ee-4781-8f49-c08a2ed1eceg；新闻稿《【新闻稿】构筑人车家 AI 算力底座，小米玄戒发布三款自研芯片贯通全场景.docx》 🧭飞书群 · 2026 年 8 月 24 日 16:09",
-        "static_snapshot": true
-      },
-      "sources": [],
-      "claims": [
-        {
-          "text": "8 月 24 日，小米发布玄戒 O3、O100 和 D100 三款自研芯片，把玄戒产品线从手机 SoC 扩展到端侧 AI 加速和智能驾驶计算。玄戒 O3 将于 9 月随 Xiaomi 18 Fold 首发上市，O100 与 D100 已完成研发，计划明年商用。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "玄戒 O3 采用 3nm 工艺和 10 核 CPU，集成 200 TOPS 的 4 核 NPU，并首发支持 LPDDR6；小米实验室数据显示，其安兔兔综合跑分为 5228014。玄戒 O100 是一款 6nm 端侧 AI 加速芯片，通过三层晶圆堆叠提供 1.22TB/s 内存带宽，端侧模型推理速度最高为每秒 330 Token。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "面向汽车和本地计算的玄戒 D100 同样采用 3nm 工艺，集成 20 核 CPU 与 16 核 NPU，单芯片最高支持 160GB 内存，可在本地部署超过 200B 参数量的模型。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "0b0ee27e-c790-566d-8ae7-85eebf695d83",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "0ab5b711aacef6538c42fcacf8fdce89954a8684",
-      "title": "Counterpoint：今年全球智能手机出货量预计下降 14.3%",
-      "body": "Counterpoint Research 最新预测显示，受存储和芯片成本上升、低价机供应减少及消费者购买力承压影响，今年全球智能手机出货量预计同比下降 14.3%，明年还将下降 1.4%，到 2028 年才开始恢复。\n\n不同价位段和品牌受到的影响并不相同。低价机的零部件成本占物料成本比例更高，厂商可能通过涨价、减少低利润配置和收缩产品线应对；高端市场相对稳定。Counterpoint 预计，三星今年出货量增长约 0.8%，将重返全球第一；苹果出货量预计下降约 2.1%，中国主要手机厂商则可能下降 15% 至 34%。\n\n报告认为，折叠屏和端侧 AI 可以推动产品差异化，但不足以带来大规模换机周期；随着零部件供应改善和延后的换机需求释放，全球市场预计在 2028 年增长约 4.8%。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026",
-      "source_name": "counterpointresearch.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/b8afeb9219f5-28910e5561b744f5e6f5.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026；lark-file://lark_private/file_v3_0014s_abdc638e-bc68-4952-b2c9-6fd49072557g；新闻稿《【新闻稿】2026 年全球智能手机市场预计下降 14%，三星有望重返全球市场榜首.docx》 🧭飞书群 · 2026 年 8 月 24 日 14:53",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026",
-          "title": "",
-          "publisher": "counterpointresearch.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Counterpoint Research 最新预测显示，受存储和芯片成本上升、低价机供应减少及消费者购买力承压影响，今年全球智能手机出货量预计同比下降 14.3%，明年还将下降 1.4%，到 2028 年才开始恢复。",
-          "source_url": "https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "不同价位段和品牌受到的影响并不相同。低价机的零部件成本占物料成本比例更高，厂商可能通过涨价、减少低利润配置和收缩产品线应对；高端市场相对稳定。Counterpoint 预计，三星今年出货量增长约 0.8%，将重返全球第一；苹果出货量预计下降约 2.1%，中国主要手机厂商则可能下降 15% 至 34%。",
-          "source_url": "https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "报告认为，折叠屏和端侧 AI 可以推动产品差异化，但不足以带来大规模换机周期；随着零部件供应改善和延后的换机需求释放，全球市场预计在 2028 年增长约 4.8%。",
-          "source_url": "https://counterpointresearch.com/en/reports/market-outlook-handset-shipment-forecast-by-oem-region-aug-2026",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "851a2a98-d285-5bfb-b5bc-ff1019aad59b",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "04095189c5c7e36cda920481eef65394c7675791",
-      "title": "英伟达据报拟投资 Perplexity，估值超过 300 亿美元",
-      "body": "据《The Information》援引知情人士报道，英伟达正讨论参与 Perplexity 的新一轮股权融资，交易对这家 AI 搜索公司给出的估值将超过 300 亿美元。目前相关讨论尚未形成最终交易。\n\nPerplexity 的年化营收已从年初不足 2.5 亿美元增至超过 7.5 亿美元，增长部分来自可自动执行电脑任务的 Perplexity Computer。英伟达此前还曾考虑获得 Perplexity 部分技术授权并招聘部分员工，后来转向更传统的股权投资方案。\n\n两家公司近来在硬件和软件研发上加强合作。Perplexity 今年 3 月加入英伟达 Nemotron 联盟，双方团队每周举行多次会议；英伟达此前也已多次投资 Perplexity。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-      "source_name": "早报 Bot 私聊",
-      "source_type": "lark_group",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 13:59",
-      "published_at": "2026-08-24 13:59",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "data/images/7902f823bb56-51fa8b746f5331c0d781.avif",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset 🧭飞书群 · 2026 年 8 月 24 日 13:59",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-          "title": "",
-          "publisher": "早报 Bot 私聊",
-          "source_type": "lark_group",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "早报 Bot 私聊人工线索：英伟达正在考虑进一步投资perplexity https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-          "source_url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据《The Information》援引知情人士报道，英伟达正讨论参与 Perplexity 的新一轮股权融资，交易对这家 AI 搜索公司给出的估值将超过 300 亿美元。目前相关讨论尚未形成最终交易。",
-          "source_url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Perplexity 的年化营收已从年初不足 2.5 亿美元增至超过 7.5 亿美元，增长部分来自可自动执行电脑任务的 Perplexity Computer。英伟达此前还曾考虑获得 Perplexity 部分技术授权并招聘部分员工，后来转向更传统的股权投资方案。",
-          "source_url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "两家公司近来在硬件和软件研发上加强合作。Perplexity 今年 3 月加入英伟达 Nemotron 联盟，双方团队每周举行多次会议；英伟达此前也已多次投资 Perplexity。",
-          "source_url": "https://www.theinformation.com/articles/nvidia-discusses-perplexity-investment-30-billion-plus-valuation-considered-tech-licensing-deal?rc=qmzset",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "54545166-75eb-5f86-bb40-e7b185f326f3",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "90c126e1b37fcadd9acc7d80f5f99c58ea733c6a",
-      "title": "达摩院 LiON 肝脏 AI 在临床试验中找出 15 例漏诊恶性肿瘤",
-      "body": "达摩院联合中国医科大学附属盛京医院等机构研发的肝脏诊断 AI 系统 LiON 登上《自然·医学》。该系统以增强 CT 为输入，可结合多期影像和临床数据识别原发性肝癌及肝转移。\n\n论文显示，LiON 使用 6443 名患者数据训练，并在 22251 名患者组成的多中心和真实世界队列中回顾性验证。随后进行的单臂临床试验纳入 10333 名患者，AI 与医生协作发现 51 个此前被忽略的病灶，其中 15 个为恶性肿瘤，并推动 37 份影像报告修订。\n\n研究团队提醒，这项结果仍需要在不同医疗系统开展前瞻性对照研究，才能判断对长期临床结局的影响。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://www.nature.com/articles/s41591-026-04589-y",
-      "source_name": "nature.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/7cc717b2c8d1-8f18dd729d4a3c4cfc57.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.nature.com/articles/s41591-026-04589-y；https://mp.weixin.qq.com/s/_oXq4nTBgadFQKK7DwOaPw 🧭飞书群 · 2026 年 8 月 24 日 12:05",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.nature.com/articles/s41591-026-04589-y",
-          "title": "",
-          "publisher": "nature.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/_oXq4nTBgadFQKK7DwOaPw",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "达摩院联合中国医科大学附属盛京医院等机构研发的肝脏诊断 AI 系统 LiON 登上《自然·医学》。该系统以增强 CT 为输入，可结合多期影像和临床数据识别原发性肝癌及肝转移。",
-          "source_url": "https://www.nature.com/articles/s41591-026-04589-y",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "论文显示，LiON 使用 6443 名患者数据训练，并在 22251 名患者组成的多中心和真实世界队列中回顾性验证。随后进行的单臂临床试验纳入 10333 名患者，AI 与医生协作发现 51 个此前被忽略的病灶，其中 15 个为恶性肿瘤，并推动 37 份影像报告修订。",
-          "source_url": "https://www.nature.com/articles/s41591-026-04589-y",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "研究团队提醒，这项结果仍需要在不同医疗系统开展前瞻性对照研究，才能判断对长期临床结局的影响。",
-          "source_url": "https://www.nature.com/articles/s41591-026-04589-y",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "da97a022-4e28-518d-afb3-2bdaf5b2ac40",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "6c49aab4b7c9a69883f2ee835111684e4cbc783f",
-      "title": "💡 Sam Altman：应让更多人掌握 AI 未来的控制权",
-      "body": "OpenAI CEO Sam Altman 在 David Senra 8 月 23 日上线的访谈中表示，他担心 AI 的控制权最终集中到少数公司或个人手中。相较于由少数机构替社会决定技术方向，他主张让更多人实际参与并影响 AI 的未来，让社会与模型共同演进。\n\n> 正确的路径，是让人们深入掌握未来。社会与模型将共同演进。\n\nAltman 同时承认 AI 脱离人类控制是现实风险。他担心，行业如果只盯住这种风险，可能走向以保护世界为理由、要求公众用大量自由换取安全的治理路径。由此形成的集中控制，同样会让多数人在 AI 改变社会时失去发言权。\n\n他的方案包含两层：一方面，社会选择应持续进入模型和产品的演进过程；另一方面，应扩大个人使用 AI 的能力。Altman 举例称，AI 将让更多人以过去无法实现的规模创办小型企业，这也是个人参与技术未来的一种方式。\n\n这番表态并未否认安全治理，也没有提出放任前沿模型发展的主张。Altman 划出的边界是，控制失配模型的制度不能永久把决定权交给极少数机构；安全、自由与个人能动性需要在同一套治理框架里处理。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 6,
-      "score": 0,
-      "source_url": "https://www.davidsenra.com/",
-      "source_name": "davidsenra.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 12:49",
-      "published_at": "2026-08-24 12:49",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/a5e83d8dc284-fe2083e79b49de3c29ed.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.davidsenra.com/；https://www.digitaltoday.co.kr/en/view/95492/sam-altman-fears-ai-control-could-shift-to-a-few-hands 🧭飞书群 · 2026 年 8 月 24 日 12:49",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.davidsenra.com/",
-          "title": "",
-          "publisher": "davidsenra.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.digitaltoday.co.kr/en/view/95492/sam-altman-fears-ai-control-could-shift-to-a-few-hands",
-          "title": "",
-          "publisher": "早报 Bot 私聊",
-          "source_type": "lark_group",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "早报 Bot 私聊人工线索：有一条符合条件，而且很适合今天早报做观点。",
-          "source_url": "https://www.davidsenra.com/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "OpenAI CEO Sam Altman 在 David Senra 最新一期播客中表示，他现在担心的一件事，是 AI 的控制权最终集中到「少数几个人或公司」手里。他认为应该让更多人能够影响 AI 未来的发展方向。同时，他虽然承认存在 AI 脱离人类控制的风险，却警告行业不能因此走向另一个极端，以安全为理由牺牲自由。相关报道于今天 8:27 发布，属于过去一小时内刚出现的新报道。([디지털투",
-          "source_url": "https://www.davidsenra.com/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "OpenAI CEO Sam Altman 在 David Senra 8 月 23 日上线的访谈中表示，他担心 AI 的控制权最终集中到少数公司或个人手中。相较于由少数机构替社会决定技术方向，他主张让更多人实际参与并影响 AI 的未来，让社会与模型共同演进。",
-          "source_url": "https://www.davidsenra.com/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "> 正确的路径，是让人们深入掌握未来。社会与模型将共同演进。",
-          "source_url": "https://www.davidsenra.com/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Altman 同时承认 AI 脱离人类控制是现实风险。他担心，行业如果只盯住这种风险，可能走向以保护世界为理由、要求公众用大量自由换取安全的治理路径。由此形成的集中控制，同样会让多数人在 AI 改变社会时失去发言权。",
-          "source_url": "https://www.davidsenra.com/",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "e6bbbf1f-56db-55d6-aa44-6c0d3eee3594",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "b9ac5d122aa0864f3bafb91d3b678b03c22792a0",
-      "title": "英伟达据报以 60 亿美元获得 Poolside 技术授权",
-      "body": "据《华尔街日报》报道，英伟达将支付约 60 亿美元，获得 AI 初创公司 Poolside 的非独家模型开发技术授权，并吸收其 100 多名员工，目标是开发面向美国市场的高性能开放权重模型。\n\nPoolside 早期聚焦 AI 编程工具，后转向开放权重模型和算力基础设施。对英伟达而言，这笔交易把投入从芯片、网络和算力平台延伸至模型层，同时保留 Poolside 作为独立公司的安排。\n\n报道称，开放权重模型通常比封闭模型运行成本更低，也更方便企业定制。英伟达计划借此同时与 DeepSeek、Kimi 等中国模型，以及 OpenAI、Anthropic 等美国前沿模型公司竞争。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 7,
-      "score": 0,
-      "source_url": "https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42",
-      "source_name": "cn.wsj.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 09:02",
-      "published_at": "2026-08-24 09:02",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42 📮Folo · 2026 年 8 月 24 日 09:02",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42",
-          "title": "",
-          "publisher": "cn.wsj.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "据《华尔街日报》报道，英伟达将支付约 60 亿美元，获得 AI 初创公司 Poolside 的非独家模型开发技术授权，并吸收其 100 多名员工，目标是开发面向美国市场的高性能开放权重模型。",
-          "source_url": "https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Poolside 早期聚焦 AI 编程工具，后转向开放权重模型和算力基础设施。对英伟达而言，这笔交易把投入从芯片、网络和算力平台延伸至模型层，同时保留 Poolside 作为独立公司的安排。",
-          "source_url": "https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "报道称，开放权重模型通常比封闭模型运行成本更低，也更方便企业定制。英伟达计划借此同时与 DeepSeek、Kimi 等中国模型，以及 OpenAI、Anthropic 等美国前沿模型公司竞争。",
-          "source_url": "https://cn.wsj.com/articles/nvidia-is-spending-6-billion-to-build-a-powerful-u-s-alternative-to-chinese-ai-fb63ea42",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "e533a220-91ac-5590-94f6-10f959f3edbb",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "60c8498eaa0f8dd52a49277e4dcae480ff69822b",
-      "title": "阿里确定 800 亿港元配售价，每股 112.70 港元",
-      "body": "继昨日公布拟配售方案后，阿里巴巴确定以每股 112.70 港元配售 7.1 亿股新股，预计募资 800 亿港元。这批股份约占扩大后股本的 3.9%，交易预计于 8 月 26 日完成。\n\n公司表示，配售所得净额将全部投入全栈 AI 能力，包括扩充与升级 AI 基础设施。配售价较公告前一个交易日收盘价折让约 8.4%，消息公布后阿里港股一度跌近 10%。\n\n此次定价把昨日的拟配售方案推进至执行阶段。新股将依据一般授权向美国以外的投资者配售，阿里预计在满足惯常交割条件后完成交易。",
-      "category": "大公司",
-      "status": "needs_review",
-      "selected": true,
-      "position": 8,
-      "score": 0,
-      "source_url": "https://www.alibabagroup.com/en-US/ir-filings-hkex",
-      "source_name": "alibabagroup.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 09:35",
-      "published_at": "2026-08-24 09:35",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.alibabagroup.com/en-US/ir-filings-hkex；https://alihome.alibaba-inc.com/en-US/document-2028384807859257344；https://cn.wsj.com/articles/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E6%8B%9F%E9%85%8D%E8%82%A1%E5%8B%9F%E8%B5%84102%E4%BA%BF%E7%BE%8E%E5%85%83%E5%8A%A0%E7%A0%81ai%E6%8A%95%E8%B5%84-7d399cba 📮Folo · 2026 年 8 月 24 日 09:35",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://cn.wsj.com/articles/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E6%8B%9F%E9%85%8D%E8%82%A1%E5%8B%9F%E8%B5%84102%E4%BA%BF%E7%BE%8E%E5%85%83%E5%8A%A0%E7%A0%81ai%E6%8A%95%E8%B5%84-7d399cba",
-          "title": "",
-          "publisher": "cn.wsj.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        },
-        {
-          "url": "https://www.alibabagroup.com/en-US/ir-filings-hkex",
-          "title": "",
-          "publisher": "alibabagroup.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://alihome.alibaba-inc.com/en-US/document-2028384807859257344",
-          "title": "",
-          "publisher": "alihome.alibaba-inc.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "继昨日公布拟配售方案后，阿里巴巴确定以每股 112.70 港元配售 7.1 亿股新股，预计募资 800 亿港元。这批股份约占扩大后股本的 3.9%，交易预计于 8 月 26 日完成。",
-          "source_url": "https://www.alibabagroup.com/en-US/ir-filings-hkex",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "公司表示，配售所得净额将全部投入全栈 AI 能力，包括扩充与升级 AI 基础设施。配售价较公告前一个交易日收盘价折让约 8.4%，消息公布后阿里港股一度跌近 10%。",
-          "source_url": "https://www.alibabagroup.com/en-US/ir-filings-hkex",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "此次定价把昨日的拟配售方案推进至执行阶段。新股将依据一般授权向美国以外的投资者配售，阿里预计在满足惯常交割条件后完成交易。",
-          "source_url": "https://www.alibabagroup.com/en-US/ir-filings-hkex",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
-    },
-    {
-      "id": "0cd46517-0ed8-55f3-b762-b06762584249",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "74a25837a31b5ad3327203eaa280f424735672f0",
-      "title": "宇树科技上市后股价较开盘回撤超 44%",
-      "body": "8 月 24 日，「人形机器人第一股」宇树科技（688836.SH）股价盘中跌幅一度超过 10%，早盘收报 608 元/股。该股虽较 150.80 元/股的发行价仍上涨约 303%，但较首日 1100 元开盘价已累计回撤超 44%，公司总市值跌破 2500 亿元，较首日收盘蒸发约 959 亿元。\n\n人形机器人概念股同日普遍走低，科沃斯、格灵深瞳、埃斯顿、奥比中光等多只个股跌幅居前。宇树科技 2025 年营收 16.99 亿元、净利润 2.78 亿元，发行价对应 2025 年扣非后摊薄市盈率达 219 倍；市场在超高估值与具身智能在工业场景落地速度之间重新审视板块定价。\n\n8 月 20 日，宇树科技曾发布仿生 7 轴灵巧机械臂，采用高精度七轴仿生关节，售价 9900 元起，自重 5.5kg，面向科研教育与服务机器人场景。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 9,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA",
+      "source_url": "https://mp.weixin.qq.com/s/poQX94B6Qy8AJLKnQY599g",
       "source_name": "mp.weixin.qq.com",
       "source_type": "draft_source",
       "source_quality": "unknown",
@@ -660,17 +195,17 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/6bb1f126142fa41b5c18.jpg",
+      "image_url": "data/images/76cda55cc11670e44acf.gif",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA 🧭飞书群 · 2026 年 8 月 24 日 11:47",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/poQX94B6Qy8AJLKnQY599g 🧭飞书群 · 2026 年 9 月 2 日 13:17",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA",
+          "url": "https://mp.weixin.qq.com/s/poQX94B6Qy8AJLKnQY599g",
           "title": "",
           "publisher": "mp.weixin.qq.com",
           "source_type": "draft_source",
@@ -681,71 +216,159 @@
       ],
       "claims": [
         {
-          "text": "8 月 24 日，「人形机器人第一股」宇树科技（688836.SH）股价盘中跌幅一度超过 10%，早盘收报 608 元/股。该股虽较 150.80 元/股的发行价仍上涨约 303%，但较首日 1100 元开盘价已累计回撤超 44%，公司总市值跌破 2500 亿元，较首日收盘蒸发约 959 亿元。",
-          "source_url": "https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA",
+          "text": "微信官方介绍了两项消息查找功能。其中，用户在微信主界面长按左下角的「微信」标签，可以汇总查看当前所有存在未读消息的聊天，无需在会话列表中逐个寻找。该功能目前正在灰度测试。",
+          "source_url": "https://mp.weixin.qq.com/s/poQX94B6Qy8AJLKnQY599g",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "人形机器人概念股同日普遍走低，科沃斯、格灵深瞳、埃斯顿、奥比中光等多只个股跌幅居前。宇树科技 2025 年营收 16.99 亿元、净利润 2.78 亿元，发行价对应 2025 年扣非后摊薄市盈率达 219 倍；市场在超高估值与具身智能在工业场景落地速度之间重新审视板块定价。",
-          "source_url": "https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "8 月 20 日，宇树科技曾发布仿生 7 轴灵巧机械臂，采用高精度七轴仿生关节，售价 9900 元起，自重 5.5kg，面向科研教育与服务机器人场景。",
-          "source_url": "https://mp.weixin.qq.com/s/GUt5XGhIBTrWSwv_Ie82GA",
+          "text": "另一项功能会在聊天界面右上角显示「红包」或「转账」入口，用于快速找出会话中尚未领取的红包，以及未收款的转账。",
+          "source_url": "https://mp.weixin.qq.com/s/poQX94B6Qy8AJLKnQY599g",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:23:06+00:00"
+      "updated_at": "2026-09-02T16:27:57+00:00"
     },
     {
-      "id": "afaae22e-aaaa-546a-a91f-344c26c6fcf7",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "8ed7d2e939b8a1093c2eda4797587c4457e424a1",
-      "title": "釜山电影节公布 23 部 Vision 单元入选片",
-      "body": "第 31 届釜山国际电影节公布 Vision 单元片单，共选入 23 部韩国及亚洲独立电影，其中 Vision-Korea 12 部、Vision-Asia 11 部。\n\n韩国单元既有曾在釜山获奖的导演回归，也包括多部长片首作；亚洲单元覆盖越南、日本、印度、泰国、哈萨克斯坦、中国香港、菲律宾、伊朗和蒙古等地创作者。日本导演熊本凌平的首部长片 After the Song 聚焦青少年身份认同与家庭关系。\n\n本届釜山国际电影节将于 10 月 6 日至 15 日举行，Vision 单元将设置面向韩国与亚洲独立电影的多项奖项。",
-      "category": "好看的",
-      "status": "ready",
+      "id": "b5ac6778-498c-5ef6-95cc-3e5d9c0b04f7",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "b646f286889ee7c07c4f5b541edfa2d2e9f2bf5c",
+      "title": "李飞飞发布世界模型 Atlas，用统一模型生成、重建与模拟三维世界",
+      "body": "李飞飞联合创办的 World Labs 发布世界模型 Atlas。该模型从头训练，在统一空间上下文中处理文本、图像、视频、相机位姿和三维深度图，架构上结合自回归、扩散和 Transformer。\n\nAtlas 能根据 1 至 6 张参考图像与手工设定的相机路径，生成最长 1 分钟、1440p 的视频。在三维重建中，它可从数张图像生成新视角，输出点云或 3D Gaussian Splat；对于机器人任务，则可把真实场景转为导航和操作训练所需的模拟环境。\n\nAtlas 目前仅向少数合作伙伴开放早期访问，未来还将用于 World Labs 的 Marble 后续版本及其他产品。",
+      "category": "大公司",
+      "status": "needs_review",
       "selected": true,
-      "position": 0,
+      "position": 2,
       "score": 0,
-      "source_url": "https://www.biff.kr/eng/artyboard/mboard.asp?action=view&intSeq=102494&strBoardID=9611_05",
-      "source_name": "biff.kr",
+      "source_url": "https://www.worldlabs.ai/blog/atlas",
+      "source_name": "worldlabs.ai",
       "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
+      "source_quality": "secondary",
+      "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-24 13:08",
-      "published_at": "2026-08-24 13:08",
-      "cross_day_status": "needs_title_rewrite",
+      "disclosed_at": "2026-09-02 09:59",
+      "published_at": "2026-09-02 09:59",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/e6dc062d37f4-ec6712543d1d1fb7e1dd.webp",
+      "image_url": "data/images/e96c32bc7e9b-7cb3d927f0ba8fbbf274.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.biff.kr/eng/artyboard/mboard.asp?action=view&intSeq=102494&strBoardID=9611_05；https://variety.com/2026/film/festivals/busan-vision-section-lineup-2026-1236841324 📮Folo · 2026 年 8 月 24 日 13:08",
+        "source_line": "🔗 来源：https://www.worldlabs.ai/blog/atlas；https://www.36kr.com/p/3965618760834313 📮Folo · 2026 年 9 月 2 日 09:59",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://variety.com/2026/film/festivals/busan-vision-section-lineup-2026-1236841324",
+          "url": "https://www.worldlabs.ai/blog/atlas",
           "title": "",
-          "publisher": "Variety",
-          "source_type": "folo",
-          "authority": "strong",
+          "publisher": "worldlabs.ai",
+          "source_type": "draft_source",
+          "authority": "unknown",
           "is_paywalled": false,
-          "is_original": true
+          "is_original": false
         },
         {
-          "url": "https://www.biff.kr/eng/artyboard/mboard.asp?action=view&intSeq=102494&strBoardID=9611_05",
+          "url": "https://www.36kr.com/p/3965618760834313",
           "title": "",
-          "publisher": "biff.kr",
+          "publisher": "36kr.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "前脚友商还在为你追我赶生成几秒钟的「电子榨菜」视频卷到头秃；后脚李飞飞创办的 World Labs 微微一笑，把桌子掀了—— 就在刚刚，全球首个多模态世界模型 Atlas 正式登场！",
+          "source_url": "https://www.worldlabs.ai/blog/atlas",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "官方博客🔗 https://www.worldlabs.ai/blog…",
+          "source_url": "https://www.worldlabs.ai/blog/atlas",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "李飞飞联合创办的 World Labs 发布世界模型 Atlas。该模型从头训练，在统一空间上下文中处理文本、图像、视频、相机位姿和三维深度图，架构上结合自回归、扩散和 Transformer。",
+          "source_url": "https://www.worldlabs.ai/blog/atlas",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Atlas 能根据 1 至 6 张参考图像与手工设定的相机路径，生成最长 1 分钟、1440p 的视频。在三维重建中，它可从数张图像生成新视角，输出点云或 3D Gaussian Splat；对于机器人任务，则可把真实场景转为导航和操作训练所需的模拟环境。",
+          "source_url": "https://www.worldlabs.ai/blog/atlas",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Atlas 目前仅向少数合作伙伴开放早期访问，未来还将用于 World Labs 的 Marble 后续版本及其他产品。",
+          "source_url": "https://www.worldlabs.ai/blog/atlas",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "96ca7bc2-0b58-510a-b4e5-d4e69250978b",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "8a1140aa8a10de1476b8187a584e576d5570abf1",
+      "title": "尊界 V800 挥手关门未触发，官方称当时车辆处于 D 档",
+      "body": "近日，尊界 S800 Grand Design 典藏大观与 V800 举行全国首批车主交付仪式。演员袁弘、张歆艺夫妇在体验尊界 V800 挥手关门功能时，连续几次做出关门手势，车门均未响应。\n\n尊界后续说明，手势关门需要车辆处于 P 档，且手势位于车内摄像头识别范围内。当时司机踩下刹车且车辆处于 D 档，因此功能没有启用。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/k6FtxZLFEOIxTe5yXPlXrg",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/e9a1dc3d010d-12900ab487be5afc0b74.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/k6FtxZLFEOIxTe5yXPlXrg；https://weibo.com/2/detail/5338658837103962；https://hima.auto/zunjie/ 🧭飞书群 · 2026 年 9 月 2 日 19:58",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/k6FtxZLFEOIxTe5yXPlXrg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://weibo.com/2/detail/5338658837103962",
+          "title": "",
+          "publisher": "weibo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://hima.auto/zunjie/",
+          "title": "",
+          "publisher": "hima.auto",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -754,60 +377,2030 @@
       ],
       "claims": [
         {
-          "text": "第 31 届釜山国际电影节公布 Vision 单元片单，共选入 23 部韩国及亚洲独立电影，其中 Vision-Korea 12 部、Vision-Asia 11 部。",
-          "source_url": "https://www.biff.kr/eng/artyboard/mboard.asp?action=view&intSeq=102494&strBoardID=9611_05",
+          "text": "近日，尊界 S800 Grand Design 典藏大观与 V800 举行全国首批车主交付仪式。演员袁弘、张歆艺夫妇在体验尊界 V800 挥手关门功能时，连续几次做出关门手势，车门均未响应。",
+          "source_url": "https://mp.weixin.qq.com/s/k6FtxZLFEOIxTe5yXPlXrg",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "韩国单元既有曾在釜山获奖的导演回归，也包括多部长片首作；亚洲单元覆盖越南、日本、印度、泰国、哈萨克斯坦、中国香港、菲律宾、伊朗和蒙古等地创作者。日本导演熊本凌平的首部长片 After the Song 聚焦青少年身份认同与家庭关系。",
-          "source_url": "https://www.biff.kr/eng/artyboard/mboard.asp?action=view&intSeq=102494&strBoardID=9611_05",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "本届釜山国际电影节将于 10 月 6 日至 15 日举行，Vision 单元将设置面向韩国与亚洲独立电影的多项奖项。",
-          "source_url": "https://www.biff.kr/eng/artyboard/mboard.asp?action=view&intSeq=102494&strBoardID=9611_05",
+          "text": "尊界后续说明，手势关门需要车辆处于 P 档，且手势位于车内摄像头识别范围内。当时司机踩下刹车且车辆处于 D 档，因此功能没有启用。",
+          "source_url": "https://mp.weixin.qq.com/s/k6FtxZLFEOIxTe5yXPlXrg",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
+      "updated_at": "2026-09-02T16:27:57+00:00"
     },
     {
-      "id": "fad1ea99-499e-575e-9259-0398f7d6c3dc",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "89b098f5b2fbce43ac04d20cb79d2f018400c71e",
-      "title": "vivo 官宣 X500 系列，Pro 版首发光御 900 主摄",
-      "body": "vivo 正式公布 X500 系列，产品线包括 X500、X500 Pro 和 X500 Pro Max 三款机型。此次预热集中披露 Pro 系列的影像硬件，完整价格与配置将留待发布活动公布。\n\n其中，X500 Pro 系列将首发 vivo 蓝图与索尼联合定制的「蔡司超动态主摄」光御 900，官方称可输出 17EV 动态范围，并支持 4K 240fps 慢动作和 4K 120fps HDR 视频直出。X500 Pro Max 还加入最大 3 度 OIS 大角度防抖。",
+      "id": "0332d86f-d43b-5861-b18c-87663386559f",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "a12a4cf7c0ac7c4cae3f8e36cccdb8c8595cc17f",
+      "title": "豆包工作支持多 Agents 并行，Mac 版新增操作电脑",
+      "body": "豆包工作于 9 月 2 日上线两项新能力。多 Agents 并行会由主 Agent 先拆解任务，再把垂直、专业的子任务分发给不同子 Agent 同时处理，最后由主 Agent 汇总结果。不同子 Agent 也可分别交付 Word、PPT 和 HTML 等不同形式的产物。\n\nMac 版「操作电脑」功能可让豆包通过视觉理解执行本地 GUI 操作，在没有 MCP、API、插件或 CLI 的情况下识别界面并点击、输入。用户授权后，被操作应用会以小窗显示，人工接管时豆包会暂停操作。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/Lpu9QnEGRIpIazmz7gFdMA",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/470254c82a1cbd044487.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/Lpu9QnEGRIpIazmz7gFdMA；https://www.yicai.com/brief/103344298.html 🧭飞书群 · 2026 年 9 月 2 日 15:35",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/Lpu9QnEGRIpIazmz7gFdMA",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.yicai.com/brief/103344298.html",
+          "title": "",
+          "publisher": "yicai.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "豆包工作于 9 月 2 日上线两项新能力。多 Agents 并行会由主 Agent 先拆解任务，再把垂直、专业的子任务分发给不同子 Agent 同时处理，最后由主 Agent 汇总结果。不同子 Agent 也可分别交付 Word、PPT 和 HTML 等不同形式的产物。",
+          "source_url": "https://mp.weixin.qq.com/s/Lpu9QnEGRIpIazmz7gFdMA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Mac 版「操作电脑」功能可让豆包通过视觉理解执行本地 GUI 操作，在没有 MCP、API、插件或 CLI 的情况下识别界面并点击、输入。用户授权后，被操作应用会以小窗显示，人工接管时豆包会暂停操作。",
+          "source_url": "https://mp.weixin.qq.com/s/Lpu9QnEGRIpIazmz7gFdMA",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "bcf1c687-60b5-5c61-9212-74c888d0bef8",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "65b2bdee721da213ac7ff6de11c4ae529cfcb98f",
+      "title": "Mac App Store 应用现可移除 Intel Mac 支持",
+      "body": "Apple 向开发者确认，要求 macOS 13 或更高版本的通用 Mac App Store 应用，现在可以移除对 Intel Mac 的支持。此前，已经同时支持 Apple 芯片和 Intel 架构的应用，不能在 Mac App Store 中单独放弃 Intel 版本。\n\n应用移除 Intel 支持后，旧 Mac 将不再收到后续更新，但仍可使用最后一个兼容版本。Apple 表示，这可以简化开发，并缩小应用的下载和本机占用空间。\n\nApple 正在结束 Mac 的 Intel 过渡期。macOS 27 将是最后一个支持 Rosetta 的版本；后续系统中，纯 Intel 应用将无法在 Apple 芯片 Mac 上运行，只有部分依赖 Intel 框架的旧游戏会获得例外支持。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+      "source_name": "developer.apple.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 07:50",
+      "published_at": "2026-09-02 07:50",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/ca94aee9d1ae-2a43b2182e88720b7298.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://developer.apple.com/news/?id=w5ngl9k2；https://www.macrumors.com/2026/09/01/mac-app-store-intel-mac-support 📮Folo · 2026 年 9 月 2 日 07:50",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.macrumors.com/2026/09/01/mac-app-store-intel-mac-support",
+          "title": "",
+          "publisher": "macrumors.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        },
+        {
+          "url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "title": "",
+          "publisher": "developer.apple.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Apple today informed developers that universal Mac App Store apps that require macOS 13 or later can remove support for Intel-based Mac computers.",
+          "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "We're reaching out to let you know that universal macOS apps on the Mac App Store that require macOS 13 or later can now remove support for Intel-based Mac computers.",
+          "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "By removing support for Intel-based Mac computers, you can simplify your development and optimize your download and on-device size.",
+          "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Apple 向开发者确认，要求 macOS 13 或更高版本的通用 Mac App Store 应用，现在可以移除对 Intel Mac 的支持。此前，已经同时支持 Apple 芯片和 Intel 架构的应用，不能在 Mac App Store 中单独放弃 Intel 版本。",
+          "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "应用移除 Intel 支持后，旧 Mac 将不再收到后续更新，但仍可使用最后一个兼容版本。Apple 表示，这可以简化开发，并缩小应用的下载和本机占用空间。",
+          "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Apple 正在结束 Mac 的 Intel 过渡期。macOS 27 将是最后一个支持 Rosetta 的版本；后续系统中，纯 Intel 应用将无法在 Apple 芯片 Mac 上运行，只有部分依赖 Intel 框架的旧游戏会获得例外支持。",
+          "source_url": "https://developer.apple.com/news/?id=w5ngl9k2",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "a7911ccc-f23b-5cdf-a86a-e6abe6fbc218",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "be821ccdcb5f62ce7e58ce698d0462c74cd85eb6",
+      "title": "加州通过律师使用生成式 AI 法案，禁止将法律执业委托给 AI",
+      "body": "路透社报道，美国加利福尼亚州议会两院已通过 SB 574 法案，首次在州级层面为律师使用生成式 AI 设定专门规则。法案已送交州长 Gavin Newsom，等待签署或否决。\n\n法案规定，律师不得将法律执业「委托」给生成式 AI，仍需对工具的使用方式和输出内容承担专业责任。在向法院、客户或其他当事人引用法律依据时，律师必须核验引用是否真实、准确且未被断章取义。\n\n加州律师协会此前已起草相关执业规则修订，覆盖胜任能力、客户沟通、保密义务、对法庭的诚信义务，以及对非律师助手使用 AI 的监督。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01?taid=6a97c397ef34f6000187693d",
+      "source_name": "早报 Bot 私聊",
+      "source_type": "lark_group",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 15:06",
+      "published_at": "2026-09-02 15:06",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01?taid=6a97c397ef34f6000187693d；https://www.calbar.ca.gov/public-comment/proposed-amendments-rules-professional-conduct-related-artificial-intelligence 🧭飞书群 · 2026 年 9 月 2 日 15:06",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01",
+          "title": "",
+          "publisher": "路透社最新报道",
+          "source_type": "folo",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01?taid=6a97c397ef34f6000187693d",
+          "title": "",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.calbar.ca.gov/public-comment/proposed-amendments-rules-professional-conduct-related-artificial-intelligence",
+          "title": "",
+          "publisher": "calbar.ca.gov",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "路透社报道，美国加利福尼亚州议会两院已通过 SB 574 法案，首次在州级层面为律师使用生成式 AI 设定专门规则。法案已送交州长 Gavin Newsom，等待签署或否决。",
+          "source_url": "https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01?taid=6a97c397ef34f6000187693d",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "法案规定，律师不得将法律执业「委托」给生成式 AI，仍需对工具的使用方式和输出内容承担专业责任。在向法院、客户或其他当事人引用法律依据时，律师必须核验引用是否真实、准确且未被断章取义。",
+          "source_url": "https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01?taid=6a97c397ef34f6000187693d",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "加州律师协会此前已起草相关执业规则修订，覆盖胜任能力、客户沟通、保密义务、对法庭的诚信义务，以及对非律师助手使用 AI 的监督。",
+          "source_url": "https://www.reuters.com/legal/government/california-lawmakers-pass-bill-governing-lawyers-use-ai-2026-09-01?taid=6a97c397ef34f6000187693d",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "4b105a58-00f1-5eef-a3af-d8b8df2bb44a",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "4384ff072ee588cd0312124f6c4a265099e3b7b7",
+      "title": "普华永道：全球数据中心到 2050 年或投入 31.6 万亿美元",
+      "body": "普华永道发布《2026—2050 全球数据中心展望》，基准情景预计，2026 年至 2050 年全球数据中心累计资本支出将达 31.6 万亿美元；如果 AI 普及快于预期，该数字可能接近 50 万亿美元。\n\n该模型由牛津经济研究院为普华永道构建，覆盖 46 个国家和地区。报告认为，需要每 4 至 6 年更换的服务器、GPU、存储和网络设备是这轮投资的主体。到 2050 年，ICT 设备预计将占数据中心总投资的 93%。\n\n电力供应是报告列出的首要约束。此外，芯片贸易、数据主权、连接能力和社区接受度也会决定投资最终落在哪些地区。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 7,
+      "score": 0,
+      "source_url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/global-investment-in-ai-infrastructure.html",
+      "source_name": "pwc.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/53b196da5466-61009680c3c6fc090a59.avif",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.pwc.com/gx/en/news-room/press-releases/2026/global-investment-in-ai-infrastructure.html；https://www.pwc.com/gx/en/1/services/consulting/technology/data-centre-outlook.html；https://mp.weixin.qq.com/s/8lsRcleWVLIx6-h96OhcUw 🧭飞书群 · 2026 年 9 月 2 日 16:53",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/global-investment-in-ai-infrastructure.html",
+          "title": "",
+          "publisher": "pwc.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.pwc.com/gx/en/1/services/consulting/technology/data-centre-outlook.html",
+          "title": "",
+          "publisher": "pwc.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/8lsRcleWVLIx6-h96OhcUw",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "普华永道发布《2026—2050 全球数据中心展望》，基准情景预计，2026 年至 2050 年全球数据中心累计资本支出将达 31.6 万亿美元；如果 AI 普及快于预期，该数字可能接近 50 万亿美元。",
+          "source_url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/global-investment-in-ai-infrastructure.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "该模型由牛津经济研究院为普华永道构建，覆盖 46 个国家和地区。报告认为，需要每 4 至 6 年更换的服务器、GPU、存储和网络设备是这轮投资的主体。到 2050 年，ICT 设备预计将占数据中心总投资的 93%。",
+          "source_url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/global-investment-in-ai-infrastructure.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "电力供应是报告列出的首要约束。此外，芯片贸易、数据主权、连接能力和社区接受度也会决定投资最终落在哪些地区。",
+          "source_url": "https://www.pwc.com/gx/en/news-room/press-releases/2026/global-investment-in-ai-infrastructure.html",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "6fa65dd5-655c-53df-ac45-e589283b29b0",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "d43e4de4dba24aefbb1c04df320881314e8fa5ae",
+      "title": "网信办整治 AI 应用乱象，已清理 561 万余条信息",
+      "body": "中央网信办通报「清朗·整治 AI 应用乱象」专项行动第二阶段进展。截至目前，各平台累计清理违法违规信息 561 万余条，查处账号 4.9 万余个，处置违规网站和应用程序等 2400 余个。\n\n本轮整治重点包括：用 AI 制作虚假灾害与救援画面、「魔改」经典作品、生成暴力低俗内容，以及使用 AI 「托管」账号从事网络水军活动。通报列出的相关账号和应用已被处理。\n\n网信办表示，豆包、元宝、千问、文心一言等平台正加强原始语料审核、限制违规内容输出，并推动 AI 生成合成内容标识落地。多家手机应用商店也开始加强开发者准入和在架 App 抽检。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 8,
+      "score": 0,
+      "source_url": "https://www.cac.gov.cn/2026-09/02/c_1790099041364574.htm",
+      "source_name": "cac.gov.cn",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.cac.gov.cn/2026-09/02/c_1790099041364574.htm；https://mp.weixin.qq.com/s/1ucrh1qfYSnWddOhu9uNxw 🧭飞书群 · 2026 年 9 月 2 日 14:59",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.cac.gov.cn/2026-09/02/c_1790099041364574.htm",
+          "title": "",
+          "publisher": "cac.gov.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/1ucrh1qfYSnWddOhu9uNxw",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "中央网信办通报「清朗·整治 AI 应用乱象」专项行动第二阶段进展。截至目前，各平台累计清理违法违规信息 561 万余条，查处账号 4.9 万余个，处置违规网站和应用程序等 2400 余个。",
+          "source_url": "https://www.cac.gov.cn/2026-09/02/c_1790099041364574.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "本轮整治重点包括：用 AI 制作虚假灾害与救援画面、「魔改」经典作品、生成暴力低俗内容，以及使用 AI 「托管」账号从事网络水军活动。通报列出的相关账号和应用已被处理。",
+          "source_url": "https://www.cac.gov.cn/2026-09/02/c_1790099041364574.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "网信办表示，豆包、元宝、千问、文心一言等平台正加强原始语料审核、限制违规内容输出，并推动 AI 生成合成内容标识落地。多家手机应用商店也开始加强开发者准入和在架 App 抽检。",
+          "source_url": "https://www.cac.gov.cn/2026-09/02/c_1790099041364574.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "69939287-afb7-59b0-9e1d-194b1e0e8bf0",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "0256e31af6e33ce2d14367bd6e66e309ddc6b8de",
+      "title": "腾讯 WorkBuddy 开放平台上线，首批接入 9 款硬件与 30 多个行业应用",
+      "body": "腾讯 WorkBuddy 开放平台于 9 月 2 日上线，面向智能硬件厂商、行业应用方和开发者开放底层 Agent 能力。平台首批引入 100 余家生态伙伴，开放 Buddy 应用、专家、Skill、连接器和硬件等能力。\n\n发布会展示了 9 款联名智能硬件，合作方包括 Plaud、Rokid、影石、科大讯飞、安克、猛玛和京东京造等品牌。30 多个行业应用也已接入，覆盖金融、法律、医疗、教育和公益等 20 多个领域。\n\n腾讯云副总裁、CodeBuddy 与 WorkBuddy 负责人刘毅表示，公司希望将 WorkBuddy 建成能够承载多种工具和场景的 Agent 平台。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 9,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/wZGBaauG2Og6qQdh1cxV1Q",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/cdb033b6e45d1320dc6c.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/wZGBaauG2Og6qQdh1cxV1Q；lark-text://lark_private/om_x100b66480426f8a8b24be9e9c98b221 🧭飞书群 · 2026 年 9 月 2 日 15:17",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/wZGBaauG2Og6qQdh1cxV1Q",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "腾讯 WorkBuddy 开放平台于 9 月 2 日上线，面向智能硬件厂商、行业应用方和开发者开放底层 Agent 能力。平台首批引入 100 余家生态伙伴，开放 Buddy 应用、专家、Skill、连接器和硬件等能力。",
+          "source_url": "https://mp.weixin.qq.com/s/wZGBaauG2Og6qQdh1cxV1Q",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "发布会展示了 9 款联名智能硬件，合作方包括 Plaud、Rokid、影石、科大讯飞、安克、猛玛和京东京造等品牌。30 多个行业应用也已接入，覆盖金融、法律、医疗、教育和公益等 20 多个领域。",
+          "source_url": "https://mp.weixin.qq.com/s/wZGBaauG2Og6qQdh1cxV1Q",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "腾讯云副总裁、CodeBuddy 与 WorkBuddy 负责人刘毅表示，公司希望将 WorkBuddy 建成能够承载多种工具和场景的 Agent 平台。",
+          "source_url": "https://mp.weixin.qq.com/s/wZGBaauG2Og6qQdh1cxV1Q",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "a52ea412-388c-540f-82f5-113b556e5408",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "2d567831f8bc9065d271be8004160ca168694b5b",
+      "title": "星宇股份董事长再次致歉，大众已就批量解约应届生启动调查",
+      "body": "星宇股份董事长兼总经理周晓萍在 9 月 2 日的业绩说明会上，就公司与 107 名应届毕业生解除劳动合同再次致歉。她表示，公司已重新审视用工制度和流程，并正在政府部门指导下落实后续措施。\n\n常州市人社局此前通报，星宇股份共招录 440 名 2026 届毕业生，后与其中 107 人解除合同，协商过程「方法简单生硬，缺乏充分有效沟通」。公司已对人力资源总监作出停职处理，并宣布向 107 人发放 3 个月求职生活补贴、组织专场招聘会。\n\n大众中国已就供应商相关投诉启动专项调查，并表示尊重劳动者权益是其供应链管理要求。截至 8 月 25 日，107 人中已有 22 人实现就业，14 人参加其他企业面试。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 10,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/_W0WN3_X5ntkjxHnb8XA1g",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/_W0WN3_X5ntkjxHnb8XA1g；https://mp.weixin.qq.com/s/P23CFiJ0MGAYpO1f_A2ESg 🧭飞书群 · 2026 年 9 月 2 日 13:57",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/_W0WN3_X5ntkjxHnb8XA1g",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/P23CFiJ0MGAYpO1f_A2ESg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "星宇股份董事长兼总经理周晓萍在 9 月 2 日的业绩说明会上，就公司与 107 名应届毕业生解除劳动合同再次致歉。她表示，公司已重新审视用工制度和流程，并正在政府部门指导下落实后续措施。",
+          "source_url": "https://mp.weixin.qq.com/s/_W0WN3_X5ntkjxHnb8XA1g",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "常州市人社局此前通报，星宇股份共招录 440 名 2026 届毕业生，后与其中 107 人解除合同，协商过程「方法简单生硬，缺乏充分有效沟通」。公司已对人力资源总监作出停职处理，并宣布向 107 人发放 3 个月求职生活补贴、组织专场招聘会。",
+          "source_url": "https://mp.weixin.qq.com/s/_W0WN3_X5ntkjxHnb8XA1g",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "大众中国已就供应商相关投诉启动专项调查，并表示尊重劳动者权益是其供应链管理要求。截至 8 月 25 日，107 人中已有 22 人实现就业，14 人参加其他企业面试。",
+          "source_url": "https://mp.weixin.qq.com/s/_W0WN3_X5ntkjxHnb8XA1g",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "c5bb20b2-92e8-5254-9db2-353822a6c9bf",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "e34235e4f1ade1d4607000087ab8cc1cd035c07d",
+      "title": "Meta 将内部沟通从 Google Chat 转向 Slack，称后者更适合 AI Agent",
+      "body": "Business Insider 获得的一份内部备忘录显示，Meta 将把员工内部沟通工具从 Google Chat 迁移至 Slack。Meta 首席 AI 官 Alexandr Wang 在备忘录中表示，Slack 是目前最适合承载 AI Agents 的平台。\n\nMeta 看中的能力包括：面向 Agents 的对话界面、成熟的开发工具，以及丰富的第三方集成。Wang 称，即使并非所有员工都在开发 Agents，公司内部也能从更完整的 Agent 生态中受益。\n\n这笔迁移为 Slack 母公司 Salesforce 带来一名大型企业客户。Meta、Salesforce 均拒绝置评，Google 未回应置评请求。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 11,
+      "score": 0,
+      "source_url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+      "source_name": "businessinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 02:03",
+      "published_at": "2026-09-02 02:03",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/866d4696e19e-6dc09c8c924b91a45ee0.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9 🛰网页 · 2026 年 9 月 2 日 17:45",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+          "title": "",
+          "publisher": "businessinsider.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        }
+      ],
+      "claims": [
+        {
+          "text": "Meta CEO Mark Zuckerberg.",
+          "source_url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "Bloomberg/Getty Images Meta is migrating to Slack for internal communications, a memo from AI chief Alexandr Wang…",
+          "source_url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "Business Insider 获得的一份内部备忘录显示，Meta 将把员工内部沟通工具从 Google Chat 迁移至 Slack。Meta 首席 AI 官 Alexandr Wang 在备忘录中表示，Slack 是目前最适合承载 AI Agents 的平台。",
+          "source_url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Meta 看中的能力包括：面向 Agents 的对话界面、成熟的开发工具，以及丰富的第三方集成。Wang 称，即使并非所有员工都在开发 Agents，公司内部也能从更完整的 Agent 生态中受益。",
+          "source_url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这笔迁移为 Slack 母公司 Salesforce 带来一名大型企业客户。Meta、Salesforce 均拒绝置评，Google 未回应置评请求。",
+          "source_url": "https://www.businessinsider.com/meta-switching-from-google-chat-slack-for-ai-agents-2026-9",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "95313f71-5f33-5f6d-b058-a9438f0b4b75",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "152c7e52d65767d41c09d1399671e26851ce6baf",
+      "title": "Dell 上调全年业绩指引，AI 服务器订单积压继续扩大",
+      "body": "Dell 发布 2027 财年第二财季业绩：截至 7 月 31 日的三个月内，营收为 470 亿美元，同比增长 58%。\n\nAI 服务器是主要增量。该业务当季确认营收 164 亿美元，期末在手订单达 950 亿美元，公司称销售线索规模仍是在手订单的数倍。\n\nDell 将全年营收指引上调至 1920 亿美元，并将 AI 优化服务器的全年营收指引上调至 740 亿美元。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 12,
+      "score": 0,
+      "source_url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~09~dell-technologies-delivers-second-quarter-fiscal-2027-financial-results.htm",
+      "source_name": "dell.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 07:29",
+      "published_at": "2026-09-02 07:29",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/9834a582db26-4dcbc02e4e55dc251b79.avif",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~09~dell-technologies-delivers-second-quarter-fiscal-2027-financial-results.htm；https://www.reuters.com/business/dell-again-lifts-forecasts-ai-demand-powers-record-results-2026-09-01 📮Folo · 2026 年 9 月 2 日 07:29",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/dell-again-lifts-forecasts-ai-demand-powers-record-results-2026-09-01",
+          "title": "",
+          "publisher": "reuters.com",
+          "source_type": "draft_source",
+          "authority": "strong",
+          "is_paywalled": true,
+          "is_original": true
+        },
+        {
+          "url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~09~dell-technologies-delivers-second-quarter-fiscal-2027-financial-results.htm",
+          "title": "",
+          "publisher": "dell.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "Dell 发布 2027 财年第二财季业绩：截至 7 月 31 日的三个月内，营收为 470 亿美元，同比增长 58%。",
+          "source_url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~09~dell-technologies-delivers-second-quarter-fiscal-2027-financial-results.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "AI 服务器是主要增量。该业务当季确认营收 164 亿美元，期末在手订单达 950 亿美元，公司称销售线索规模仍是在手订单的数倍。",
+          "source_url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~09~dell-technologies-delivers-second-quarter-fiscal-2027-financial-results.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Dell 将全年营收指引上调至 1920 亿美元，并将 AI 优化服务器的全年营收指引上调至 740 亿美元。",
+          "source_url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~09~dell-technologies-delivers-second-quarter-fiscal-2027-financial-results.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "55497624-56aa-513a-a016-374703a0516c",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "254de7f89515395323f2d4b9fea4392f89cc8148",
+      "title": "💡 马斯克：AI 明年底可胜任所有数字工作",
+      "body": "昨日，马斯克在 G20 创新部长峰会的公开发言中表示，他预计到明年底，AI 可胜任几乎所有不需要人类直接操作物理世界的数字工作。\n\n他将届时的 AI 编程能力比作国际象棋引擎 Stockfish，认为人类将很难在软件开发上与之竞争；各类工程与其他数字任务也可能在未来 12 至 18 个月达到很高水平。\n\n对人形机器人，马斯克的判断更谨慎一些。他说，物理世界的产品需要建立庞大供应链，无法像软件那样直接复制。他把机器人的实用性拆成三个相乘的因素：AI 软件能力、机身芯片性能，以及机电灵巧性，尤其是手部操作能力。\n\n他同时把电力列为 AI 扩张的主要约束。按他引用的分析师共识估计，2027 年 AI 芯片可能面临至少 15GW 的供电缺口：AI 芯片产量每年增长约 40%～50%，而中国以外地区的可用电力年增速约为 10%～20%。\n\n针对电力缺口，马斯克建议各国在承接 AI 数据中心时，同步增建发电和电网设施。他也提到，Google、Anthropic 等公司正向 SpaceX 租用算力，SpaceX 之所以能更快投用设备，是因为自建了发电设施。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 13,
+      "score": 0,
+      "source_url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+      "source_name": "youtube.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 18:01",
+      "published_at": "2026-09-02 18:01",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/3dc273e226ef-13cb17941dd0b9149bdc.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.youtube.com/watch?v=2lvVEVat_ok；https://elonmuskarchive.org/video/g20-innovation-ministerial-2026；https://mp.weixin.qq.com/s/z2R8jOCeLQsMOo7gKSfCgQ 🧭飞书群 · 2026 年 9 月 2 日 18:01",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+          "title": "",
+          "publisher": "youtube.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://elonmuskarchive.org/video/g20-innovation-ministerial-2026",
+          "title": "",
+          "publisher": "elonmuskarchive.org",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/z2R8jOCeLQsMOo7gKSfCgQ",
+          "title": "",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "马斯克在 G20 创新部长峰会的公开发言中表示，他预计到明年底，AI 可胜任几乎所有不需要人类直接操作物理世界的数字工作。他将届时的 AI 编程能力比作国际象棋引擎 Stockfish，认为人类将很难在软件开发上与之竞争；各类工程与其他数字任务也可能在未来 12 至 18 个月达到很高水平。",
+          "source_url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "对人形机器人，马斯克的判断更谨慎一些。他说，物理世界的产品需要建立庞大供应链，无法像软件那样直接复制。他把机器人的实用性拆成三个相乘的因素：AI 软件能力、机身芯片性能，以及机电灵巧性，尤其是手部操作能力。",
+          "source_url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "他同时把电力列为 AI 扩张的主要约束。按他引用的分析师共识估计，2027 年 AI 芯片可能面临至少 15GW 的供电缺口：AI 芯片产量每年增长约 40%～50%，而中国以外地区的可用电力年增速约为 10%～20%。",
+          "source_url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "昨日，马斯克在 G20 创新部长峰会的公开发言中表示，他预计到明年底，AI 可胜任几乎所有不需要人类直接操作物理世界的数字工作。",
+          "source_url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "他将届时的 AI 编程能力比作国际象棋引擎 Stockfish，认为人类将很难在软件开发上与之竞争；各类工程与其他数字任务也可能在未来 12 至 18 个月达到很高水平。",
+          "source_url": "https://www.youtube.com/watch?v=2lvVEVat_ok",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "1db8f306-3fb4-50b9-acb3-10c7f7072822",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "535743ed57f078475c11652191260dcf7591030e",
+      "title": "苹果新 CEO 特努斯年薪升至 300 万美元，股权奖励目标 5500 万美元",
+      "body": "苹果向美国证券交易委员会提交的文件显示，约翰・特努斯 9 月 1 日正式出任 CEO 后，年薪升至 300 万美元。苹果还向他授予一笔覆盖 2026 财年剩余任期、目标价值 250 万美元的按比例限制性股票奖励。\n\n苹果薪酬委员会同时批准，特努斯在 2027 财年获得目标价值 5500 万美元的年度股权奖励。其中 75% 为绩效限制性股票，归属与苹果相对标普 500 成分公司的股东总回报挂钩；其余 25% 为时间限制性股票，将在 4 年内每半年归属 12.5%。\n\n转任苹果董事会执行主席的蒂姆・库克，年薪将于 9 月 26 日调整为 200 万美元，并在 2027 财年获得目标价值 4500 万美元的股权奖励。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 14,
+      "score": 0,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126035325/ef20081427_8ka.htm",
+      "source_name": "sec.gov",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.sec.gov/Archives/edgar/data/320193/000114036126035325/ef20081427_8ka.htm 📮Folo · 2026 年 9 月 2 日 18:40",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126035325/ef20081427_8ka.htm",
+          "title": "",
+          "publisher": "sec.gov",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "苹果向美国证券交易委员会提交的文件显示，约翰・特努斯 9 月 1 日正式出任 CEO 后，年薪升至 300 万美元。苹果还向他授予一笔覆盖 2026 财年剩余任期、目标价值 250 万美元的按比例限制性股票奖励。",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126035325/ef20081427_8ka.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "苹果薪酬委员会同时批准，特努斯在 2027 财年获得目标价值 5500 万美元的年度股权奖励。其中 75% 为绩效限制性股票，归属与苹果相对标普 500 成分公司的股东总回报挂钩；其余 25% 为时间限制性股票，将在 4 年内每半年归属 12.5%。",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126035325/ef20081427_8ka.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "转任苹果董事会执行主席的蒂姆・库克，年薪将于 9 月 26 日调整为 200 万美元，并在 2027 财年获得目标价值 4500 万美元的股权奖励。",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000114036126035325/ef20081427_8ka.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:57+00:00"
+    },
+    {
+      "id": "3dee43b0-00d3-5185-a035-a2aca1c2413e",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "2283e29235d4bee6dcef1f2d74cda91ed8d46b1b",
+      "title": "Jason Isbell 等音乐人起诉 Suno，主张身份和声纹遭未经授权使用",
+      "body": "六获格莱美奖的歌手 Jason Isbell，与 David Lowery、Guy Forsyth 和 Eduardo Calle 在波士顿联邦法院提起拟议集体诉讼，指控 AI 音乐公司 Suno 未经同意商业利用音乐人的姓名、形象和声音特征。\n\n这份 84 页诉状没有提出版权主张。原告称，Suno 的模型会在用户输入音乐人姓名后，生成模仿其演唱特征的歌曲、文字描述和封面图。诉状以 Isbell 的名字测试 Suno v5，得到一首带有男声乡村腔的 Americana 歌曲；其他原告的姓名也产生了对应风格的作品。\n\nSuno 此前表示，平台不会把艺人姓名作为训练元数据，并设有阻止艺人、歌曲和专辑名称的过滤器。原告则称，这些限制可以被绕过，并要求法院禁止 Suno 在未经同意的情况下捕获、存储或商业利用音乐人的姓名、声纹和其他识别特征。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/",
+      "source_name": "musicbusinessworldwide.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 05:36",
+      "published_at": "2026-09-02 05:36",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/920c62db2643-1252635e255d197b2f64.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/；https://news.bloomberglaw.com/us-law-week/suno-ai-draws-singers-class-action-over-name-indexed-voices；https://www.hollywoodreporter.com/music/music-industry-news/jason-isbell-files-class-action-lawsuit-against-suno-1236687285 📮Folo · 2026 年 9 月 2 日 05:36",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/",
+          "title": "",
+          "publisher": "musicbusinessworldwide.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://news.bloomberglaw.com/us-law-week/suno-ai-draws-singers-class-action-over-name-indexed-voices",
+          "title": "",
+          "publisher": "news.bloomberglaw.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.hollywoodreporter.com/music/music-industry-news/jason-isbell-files-class-action-lawsuit-against-suno-1236687285",
+          "title": "",
+          "publisher": "hollywoodreporter.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "The rocker alleged that the company takes artists' musical likeness without their consent, likening the company to The Borg from 'Star Trek.…",
+          "source_url": "https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "六获格莱美奖的歌手 Jason Isbell，与 David Lowery、Guy Forsyth 和 Eduardo Calle 在波士顿联邦法院提起拟议集体诉讼，指控 AI 音乐公司 Suno 未经同意商业利用音乐人的姓名、形象和声音特征。",
+          "source_url": "https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这份 84 页诉状没有提出版权主张。原告称，Suno 的模型会在用户输入音乐人姓名后，生成模仿其演唱特征的歌曲、文字描述和封面图。诉状以 Isbell 的名字测试 Suno v5，得到一首带有男声乡村腔的 Americana 歌曲；其他原告的姓名也产生了对应风格的作品。",
+          "source_url": "https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Suno 此前表示，平台不会把艺人姓名作为训练元数据，并设有阻止艺人、歌曲和专辑名称的过滤器。原告则称，这些限制可以被绕过，并要求法院禁止 Suno 在未经同意的情况下捕获、存储或商业利用音乐人的姓名、声纹和其他识别特征。",
+          "source_url": "https://www.musicbusinessworldwide.com/jason-isbell-and-david-lowery-are-suing-suno-in-a-class-action-suit-importantly-theyre-hitting-mikey-shulmans-company-with-identity-claims-not-copyright/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "3e60a04c-fb4d-5cd8-b68e-7b5cdb2ddeaa",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "1e057ab3ec87439167566a7d5d465650a12911b2",
+      "title": "《富爸爸穷爸爸》作者自称负债 12 亿美元，合作伙伴称不是个人债务",
+      "body": "《富爸爸穷爸爸》作者罗伯特·清崎在节目中称，自己「故意」背负 12 亿美元债务，并将借款用于房地产投资。《名利场》走访后表示，这一数字需要区分个人负债与投资组合负债。\n\n清崎的前妻、长期商业合作伙伴金·清崎确认了 12 亿美元这一总数，但她表示，债务属于清崎与多名合作伙伴共同持有的房地产投资组合，涉及约 1500 套公寓，并非清崎个人直接欠下全部金额。\n\n清崎将这种做法解释为用有资产抵押的债务继续融资。《名利场》称，由于资产价值、持股比例和贷款结构未完全公开，外界无法从 12 亿美元总数直接推导他的个人财务状况。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.vanityfair.com/story/the-wild-origins-of-rich-dad-poor-dad",
+      "source_name": "vanityfair.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/098188eb0bef-498fbf408bd5dc26bf1e.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.vanityfair.com/story/the-wild-origins-of-rich-dad-poor-dad；https://mp.weixin.qq.com/s/K6zLDqRJnFT94R2a_YudJQ；https://mp.weixin.qq.com/s/S6xQvAxvNSg-_yKiorpzmA 🧭飞书群 · 2026 年 9 月 2 日 19:59",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.vanityfair.com/story/the-wild-origins-of-rich-dad-poor-dad",
+          "title": "",
+          "publisher": "vanityfair.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/K6zLDqRJnFT94R2a_YudJQ",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/S6xQvAxvNSg-_yKiorpzmA",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "《富爸爸穷爸爸》作者罗伯特·清崎在节目中称，自己「故意」背负 12 亿美元债务，并将借款用于房地产投资。《名利场》走访后表示，这一数字需要区分个人负债与投资组合负债。",
+          "source_url": "https://www.vanityfair.com/story/the-wild-origins-of-rich-dad-poor-dad",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "清崎的前妻、长期商业合作伙伴金·清崎确认了 12 亿美元这一总数，但她表示，债务属于清崎与多名合作伙伴共同持有的房地产投资组合，涉及约 1500 套公寓，并非清崎个人直接欠下全部金额。",
+          "source_url": "https://www.vanityfair.com/story/the-wild-origins-of-rich-dad-poor-dad",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "清崎将这种做法解释为用有资产抵押的债务继续融资。《名利场》称，由于资产价值、持股比例和贷款结构未完全公开，外界无法从 12 亿美元总数直接推导他的个人财务状况。",
+          "source_url": "https://www.vanityfair.com/story/the-wild-origins-of-rich-dad-poor-dad",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "24c82c9c-79ec-525a-acc7-29e2c43ca518",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "caed7af24517d82056bcc563f857f4c3b20dc670",
+      "title": "Kimi API 原生支持 Codex 与 Claude Code",
+      "body": "月之暗面更新 Kimi API 开放平台文档，为 Codex 和 Claude Code 增加原生兼容端点。Codex 可通过 OpenAI Responses API 直连 `kimi-k3`，无需协议转换或本地代理；Claude Code 则可使用兼容 Anthropic Messages API 的端点。\n\n官方文档显示，Codex 桌面端与 CLI 共用同一份模型供应商配置，请求会发往 `https://api.moonshot.cn/v1/responses`。Claude Code 可通过 `https://api.moonshot.cn/anthropic` 接入 `kimi-k3`、`kimi-k2.7-code` 等模型；其中 Kimi K3 支持约 100 万 Token 上下文。",
       "category": "新产品",
       "status": "needs_review",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://weibo.com/1642720480/5335397572018856",
-      "source_name": "weibo.com",
+      "source_url": "https://platform.kimi.com/docs/guide/codex-kimi",
+      "source_name": "platform.kimi.com",
       "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
+      "source_quality": "secondary",
+      "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-08-24 12:03",
-      "published_at": "2026-08-24 12:03",
-      "cross_day_status": "current",
+      "disclosed_at": "2026-09-02 19:43",
+      "published_at": "2026-09-02 19:43",
+      "cross_day_status": "ai_source_lead",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": false,
-      "image_url": "data/images/e0ad4f5961fea4787cd0.png",
+      "image_url": "data/images/74c601b27f1a-47ab529cb4acd4e56159.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：lark-text://lark_private/om_x100b678867a304a4b2e789b6fef6989；https://weibo.com/1642720480/5335397572018856 🧭飞书群 · 2026 年 8 月 24 日 12:03",
+        "source_line": "🔗 来源：https://platform.kimi.com/docs/guide/codex-kimi；https://platform.kimi.com/docs/guide/claude-code-kimi；https://www.ithome.com/0/997/642.htm；https://t.me/OneMillion_AI/4334 📮Folo · 2026 年 9 月 2 日 19:44",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://weibo.com/1642720480/5335397572018856",
+          "url": "https://www.ithome.com/0/997/642.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://platform.kimi.com/docs/guide/codex-kimi",
+          "title": "",
+          "publisher": "platform.kimi.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://platform.kimi.com/docs/guide/claude-code-kimi",
+          "title": "",
+          "publisher": "platform.kimi.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://t.me/OneMillion_AI/4334",
+          "title": "",
+          "publisher": "动察Beating AI News - Telegram Channel",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 9 月 2 日消息，月之暗面宣布，为满足大家在 Codex 和 Claude Code 中接入 Kimi API 的需求，Kimi API 现已支持 OpenAI 的 Responses API 格式，base_url 为 https://api.moonshot.cn/v1 ；同时支持 Anthropic 的 Messages API 格式，base_url 为 https://...",
+          "source_url": "https://platform.kimi.com/docs/guide/codex-kimi",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "据IT之家了解，使用 Codex 或 Claude Code 的用户，无需转换格式或本地代理，即可通过自定义 model provider 直连 kimi-k3、kimi-k2.7-code-highspeed、kimi-k2.7-code、kimi-k2.6 等模型。",
+          "source_url": "https://platform.kimi.com/docs/guide/codex-kimi",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Codex： https://platform.kimi.com/docs/guide/codex-kimi",
+          "source_url": "https://platform.kimi.com/docs/guide/codex-kimi",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Kimi API已原生支持Codex和Claude Code 月之暗面宣布，为满足用户在 Codex 和 Claude Code 中接入 Kimi API 的需求，Kimi API 现已支持 OpenAI 的 Responses API 格式；同时支持 Anthropic 的…",
+          "source_url": "https://platform.kimi.com/docs/guide/codex-kimi",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:28:22+00:00"
+    },
+    {
+      "id": "f8ca55fc-f560-5c18-86de-946fbeb7af06",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "7130d04ea68a2a213db1b594206d8c194a94bddd",
+      "title": "50.98 万元，新一代理想 MEGA 上市",
+      "body": "理想汽车发布新一代理想 MEGA，全国统一零售价为 50.98 万元，展车已进入门店。新车保留标志性车身轮廓，新增无瑕车身、晶灰镀铬饰条和 Home 尾标。\n\n底盘升级为 800V 主动防倾系统，搭配双腔空气弹簧、双阀 CDC、线控转向与后轮转向，最小转弯半径为 5.5 米。官方标注的 CLTC 续航里程为 710 公里，充电 10 分钟可补能 500 公里。\n\n座舱方面，二排换用可旋转的动态零重力座椅，一至三排座椅均配备加热和通风。车内还提供 270° 电动调光玻璃、五处电动遮阳帘、29 英寸 OLED 6K 全景屏、21 英寸 OLED 4K 移动屏与双马赫具身智能套装。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/URP-2LXKZafPmPNriYOgsg",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/5d225ca726facec67f19.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/URP-2LXKZafPmPNriYOgsg；lark-text://lark_private/om_x100b66b451e038a0dd4ef604e9e1b12；人工要求「晚点看下有没有理想 MEGA 的消息」 🧭飞书群 · 2026 年 9 月 2 日 19:01",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/URP-2LXKZafPmPNriYOgsg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "理想汽车发布新一代理想 MEGA，全国统一零售价为 50.98 万元，展车已进入门店。新车保留标志性车身轮廓，新增无瑕车身、晶灰镀铬饰条和 Home 尾标。",
+          "source_url": "https://mp.weixin.qq.com/s/URP-2LXKZafPmPNriYOgsg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "底盘升级为 800V 主动防倾系统，搭配双腔空气弹簧、双阀 CDC、线控转向与后轮转向，最小转弯半径为 5.5 米。官方标注的 CLTC 续航里程为 710 公里，充电 10 分钟可补能 500 公里。",
+          "source_url": "https://mp.weixin.qq.com/s/URP-2LXKZafPmPNriYOgsg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "座舱方面，二排换用可旋转的动态零重力座椅，一至三排座椅均配备加热和通风。车内还提供 270° 电动调光玻璃、五处电动遮阳帘、29 英寸 OLED 6K 全景屏、21 英寸 OLED 4K 移动屏与双马赫具身智能套装。",
+          "source_url": "https://mp.weixin.qq.com/s/URP-2LXKZafPmPNriYOgsg",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "790d895f-35e2-5ed9-97a2-0b2c553410c2",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "57597cadd93450563d44cb1e0e6153097ec90fca",
+      "title": "ColorOS 17 定档 9 月 17 日，Find X10 系列首发",
+      "body": "OPPO 宣布，ColorOS 17 发布暨开发者大会将于 9 月 17 日 10:00 在珠海举行。主论坛将发布新系统，并由 OPPO Find X10 系列首发搭载。\n\n根据发布前信息，ColorOS 17 基于 Android 17 定制，新增贯穿系统的「浮岛式导航」和柔性反馈动效。OPPO 称，新系统的界面操作流畅度提升约 35%，应用冷启动速度提升约 20%，后台保活数量提升约 50%。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/997/245.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 10:05",
+      "published_at": "2026-09-02 10:05",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/c7f617699b1af428a3a2.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/997/245.htm 🧭飞书群 · 2026 年 9 月 2 日 14:56",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/997/245.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 9 月 2 日消息，OPPO ColorOS 17 发布暨开发者大会将于 2026 年 9 月 17 日 10:00 在珠海举行。",
+          "source_url": "https://www.ithome.com/0/997/245.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "本次大会主论坛将发布全新 ColorOS 17 操作系统，该系统将由 OPPO Find X10 系列首发搭载。",
+          "source_url": "https://www.ithome.com/0/997/245.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "ColorOS 17 基于 Android 17 深度定制，设计上采用全新的“浮岛式导航”，该设计贯穿系统全局，覆盖几乎所有内置应用。系统还继承了 ColorOS 16 的流体动效融合效果，并新增柔性反馈系统，全局元素可随操作自然拉伸、受力挤压、灵动回弹。在基础体验方面，系统界面操作流畅度提升约 35%，应用冷启动速度提升约 20%，后台应用保活数量提升约 50%。",
+          "source_url": "https://www.ithome.com/0/997/245.htm",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "OPPO 宣布，ColorOS 17 发布暨开发者大会将于 9 月 17 日 10:00 在珠海举行。主论坛将发布新系统，并由 OPPO Find X10 系列首发搭载。",
+          "source_url": "https://www.ithome.com/0/997/245.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "根据发布前信息，ColorOS 17 基于 Android 17 定制，新增贯穿系统的「浮岛式导航」和柔性反馈动效。OPPO 称，新系统的界面操作流畅度提升约 35%，应用冷启动速度提升约 20%，后台保活数量提升约 50%。",
+          "source_url": "https://www.ithome.com/0/997/245.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "7da3d964-44b3-5eea-ae05-d4f755127818",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "6dee84df58078470ea81f048dbf0afbf25f00d93",
+      "title": "高通推出「高通版 DLSS」，下代骁龙加入 GPU AI 核心",
+      "body": "高通发布移动端 AI 渲染技术 Adreno Neural Fusion，将神经网络处理、AI 超级分辨率和 AI 帧生成整合进同一条图形管线，用于降低渲染开销与功耗，并减少移动端超分常见的抖动和动态伪影。\n\n下一代骁龙旗舰移动平台将首次在 Adreno GPU 中加入专用的 Matrix Cores，并配备 18MB 片上高速显存 HPM。AI 模型可直接在图形管线内运行，中间结果也能留在 GPU 片上，减少反复访问系统内存带来的时延和能耗。\n\nAdreno Neural Fusion 已支持 Unity 和 Unreal Engine，游戏工作室可在现有工作流中接入，不必自行开发超分方案。高通将在北京时间 9 月 23 日至 25 日举行的骁龙峰会上进一步介绍下一代移动游戏平台。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/b468jI-PVLiLa1WZ8ByEGA",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/12f9f96c78c38bdb5ac6.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/b468jI-PVLiLa1WZ8ByEGA 🧭飞书群 · 2026 年 9 月 2 日 21:59",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/b468jI-PVLiLa1WZ8ByEGA",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "高通发布移动端 AI 渲染技术 Adreno Neural Fusion，将神经网络处理、AI 超级分辨率和 AI 帧生成整合进同一条图形管线，用于降低渲染开销与功耗，并减少移动端超分常见的抖动和动态伪影。",
+          "source_url": "https://mp.weixin.qq.com/s/b468jI-PVLiLa1WZ8ByEGA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "下一代骁龙旗舰移动平台将首次在 Adreno GPU 中加入专用的 Matrix Cores，并配备 18MB 片上高速显存 HPM。AI 模型可直接在图形管线内运行，中间结果也能留在 GPU 片上，减少反复访问系统内存带来的时延和能耗。",
+          "source_url": "https://mp.weixin.qq.com/s/b468jI-PVLiLa1WZ8ByEGA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Adreno Neural Fusion 已支持 Unity 和 Unreal Engine，游戏工作室可在现有工作流中接入，不必自行开发超分方案。高通将在北京时间 9 月 23 日至 25 日举行的骁龙峰会上进一步介绍下一代移动游戏平台。",
+          "source_url": "https://mp.weixin.qq.com/s/b468jI-PVLiLa1WZ8ByEGA",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:28:23+00:00"
+    },
+    {
+      "id": "4fa64795-ee31-52bf-8827-8b90c0862ad3",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "0d2a436fe00513ced6d4da4855aac05e889e2c01",
+      "title": "vivo 创作者盛典定档 9 月 7 日，X500 系列将亮相",
+      "body": "vivo 产品副总裁黄韬宣布，vivo 创作者盛典将于 9 月 7 日 19:00 举行。活动由此前的「影像盛典」更名，范围从影像技术和作品展示扩展至更广的创作者生态。\n\n同时，vivo 将「蓝图影像」从影像技术品牌调整为面向创作者的影像品牌。官方预热显示，vivo X500 系列将在盛典中作为面向创作者的影像旗舰亮相。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.ithome.com/0/997/285.htm",
+      "source_name": "ithome.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 11:33",
+      "published_at": "2026-09-02 11:33",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": false,
+      "image_url": "data/images/7cefdfb1bfe6519ab88f.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ithome.com/0/997/285.htm 🧭飞书群 · 2026 年 9 月 2 日 14:47",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/997/285.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "vivo 产品副总裁黄韬宣布，vivo 创作者盛典将于 9 月 7 日 19:00 举行。活动由此前的「影像盛典」更名，范围从影像技术和作品展示扩展至更广的创作者生态。",
+          "source_url": "https://www.ithome.com/0/997/285.htm",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "同时，vivo 将「蓝图影像」从影像技术品牌调整为面向创作者的影像品牌。官方预热显示，vivo X500 系列将在盛典中作为面向创作者的影像旗舰亮相。",
+          "source_url": "https://www.ithome.com/0/997/285.htm",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "0e56add2-25c7-57b9-8a32-88ce4f26c33e",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "fc91d35db8cdae85854ab493bc328956e2b80d76",
+      "title": "首款纯电揽胜发布，英国起售价约 15.41 万英镑",
+      "body": "捷豹路虎发布首款纯电揽胜 Range Rover Electric，新车已在英国开放订购，起售价 154070 英镑。它沿用可兼容燃油、插混和纯电动力的 MLA-Flex 架构，提供标准轴距和长轴距版本，并保留揽胜现有设计轮廓。\n\n新车前后各搭载一台 260kW 永磁电机，系统最大功率 550PS、峰值扭矩 850N・m，0～60 英里／小时加速最快 4.3 秒。118.5kWh 双层电池配合 800V 架构，WLTP 续航最高 372 英里，约合 599km；在 350kW 直流快充下，电量从 10% 充至 80% 约需 22 分钟。\n\n纯电揽胜仍支持最高 900mm 涉水深度，牵引力管理系统可在 50 毫秒内响应车轮打滑。捷豹路虎称，新车累计完成超过 150 万公里实体测试与 25 万小时虚拟测试，并已提交 300 多项专利申请。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://media.jlr.com/range-rover/en-gb/news/2026/09/range-rover-electric-new-era-original-luxury-suv",
+      "source_name": "media.jlr.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/6735236b47c4-d4bb3e5ed526bbf60af9.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://media.jlr.com/range-rover/en-gb/news/2026/09/range-rover-electric-new-era-original-luxury-suv；https://mp.weixin.qq.com/s/IijIPIkgvKYOxOQm68CAOg 🧭飞书群 · 2026 年 9 月 2 日 21:29",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://media.jlr.com/range-rover/en-gb/news/2026/09/range-rover-electric-new-era-original-luxury-suv",
+          "title": "",
+          "publisher": "media.jlr.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/IijIPIkgvKYOxOQm68CAOg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "捷豹路虎发布首款纯电揽胜 Range Rover Electric，新车已在英国开放订购，起售价 154070 英镑。它沿用可兼容燃油、插混和纯电动力的 MLA-Flex 架构，提供标准轴距和长轴距版本，并保留揽胜现有设计轮廓。",
+          "source_url": "https://media.jlr.com/range-rover/en-gb/news/2026/09/range-rover-electric-new-era-original-luxury-suv",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "新车前后各搭载一台 260kW 永磁电机，系统最大功率 550PS、峰值扭矩 850N・m，0～60 英里／小时加速最快 4.3 秒。118.5kWh 双层电池配合 800V 架构，WLTP 续航最高 372 英里，约合 599km；在 350kW 直流快充下，电量从 10% 充至 80% 约需 22 分钟。",
+          "source_url": "https://media.jlr.com/range-rover/en-gb/news/2026/09/range-rover-electric-new-era-original-luxury-suv",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "纯电揽胜仍支持最高 900mm 涉水深度，牵引力管理系统可在 50 毫秒内响应车轮打滑。捷豹路虎称，新车累计完成超过 150 万公里实体测试与 25 万小时虚拟测试，并已提交 300 多项专利申请。",
+          "source_url": "https://media.jlr.com/range-rover/en-gb/news/2026/09/range-rover-electric-new-era-original-luxury-suv",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:29:30+00:00"
+    },
+    {
+      "id": "630d5ad3-f6ac-5a7b-b3f3-0604ffa40e3f",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "bb440979abfeeb55ee24e4d868b44df728ccbdb8",
+      "title": "马斯克称 Grok 4.7 将在 10 天后发布",
+      "body": "马斯克 9 月 2 日在 X 回复 Shopify 联合创始人 Tobi Lütke 时称，Grok 4.7 将在 10 天后发布。按这一相对时间推算，目标窗口约为 9 月 12 日，但 xAI 尚未发布正式公告、模型卡、API 名称或价格。\n\n马斯克 7 月曾将 Grok 4.7 描述为规模达 2.1 万亿参数的模型，称其服务速度会略慢于 Grok 4.6，但 Token 效率更高。这些信息目前仍是创始人预告，没有 xAI 正式规格或评测结果支撑。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://t.me/OneMillion_AI/4317",
+      "source_name": "t.me",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 14:47",
+      "published_at": "2026-09-02 14:47",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/c22d65b1f9f6-888da80c9e2e8c184342.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://t.me/OneMillion_AI/4317；https://x.com/tobi/status/2094956748004118703 🧭飞书群 · 2026 年 9 月 2 日 14:47",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://t.me/OneMillion_AI/4317",
+          "title": "",
+          "publisher": "t.me",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://x.com/tobi/status/2094956748004118703",
+          "title": "",
+          "publisher": "x.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "马斯克：Grok4.7十天后发布 马斯克刚刚确认，Grok 4.7 将在 10 天后发布。按他此前披露，新模型参数量会从 Grok 4.6 的 1.5T 提高到 2.1T，也就是约 2.1 万亿参数。初始训练已经完成，目前还在用大量 SpaceX 公司数据做补充训练。",
+          "source_url": "https://t.me/OneMillion_AI/4317",
+          "status": "unverified",
+          "evidence": ""
+        },
+        {
+          "text": "马斯克 9 月 2 日在 X 回复 Shopify 联合创始人 Tobi Lütke 时称，Grok 4.7 将在 10 天后发布。按这一相对时间推算，目标窗口约为 9 月 12 日，但 xAI 尚未发布正式公告、模型卡、API 名称或价格。",
+          "source_url": "https://t.me/OneMillion_AI/4317",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "马斯克 7 月曾将 Grok 4.7 描述为规模达 2.1 万亿参数的模型，称其服务速度会略慢于 Grok 4.6，但 Token 效率更高。这些信息目前仍是创始人预告，没有 xAI 正式规格或评测结果支撑。",
+          "source_url": "https://t.me/OneMillion_AI/4317",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "b8251c3e-bc6e-54a4-972f-ffd726f39be3",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "cd9e1658b200d5a58e2dbf5f4118bcf323bd9f64",
+      "title": "阿里更新 Qwen3.8-Max，前端编程榜单升至第一",
+      "body": "阿里于 9 月 2 日发布 Qwen3.8-Max-0902。新版本继续使用 2.4 万亿参数架构和 100 万 Token 上下文，通过针对编程与专业办公的后训练，加强多步推理、工具调用和端到端应用生成能力。\n\n在 CodeArena 的 WebDev 榜单中，Qwen3.8-Max-0902 得分比上一版提升 22 分至 1691 分，高于 Claude Opus 5 的 1688 分和 Kimi K3 的 1674 分。该榜单按 3∶1 的输入、输出比例计算综合价格，显示新版本每百万 Token 约为 5 美元。\n\n目前，该模型已上线千问 AI 平台并对外提供 API，千问办公、Qoder 和千问 App 也已接入。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/pNZvZwPxYXxTAwUTjX7Wpg",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/0c05c19e3568-d3b795c2f922882634dd.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/pNZvZwPxYXxTAwUTjX7Wpg；https://www.qianwenai.com/models/qwen3.8-max-0902；lark-file://lark_private/file_v3_00155_acfcbe45-1e2c-4274-a914-0c62c7b07f6g；新闻稿《【新闻稿】阿里更新旗舰模型 Qwen3.8-Max，前端编程能力跃居全球第一 (1).docx》 🧭飞书群 · 2026 年 9 月 2 日 10:55",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/pNZvZwPxYXxTAwUTjX7Wpg",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.qianwenai.com/models/qwen3.8-max-0902",
+          "title": "",
+          "publisher": "qianwenai.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "阿里于 9 月 2 日发布 Qwen3.8-Max-0902。新版本继续使用 2.4 万亿参数架构和 100 万 Token 上下文，通过针对编程与专业办公的后训练，加强多步推理、工具调用和端到端应用生成能力。",
+          "source_url": "https://mp.weixin.qq.com/s/pNZvZwPxYXxTAwUTjX7Wpg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "在 CodeArena 的 WebDev 榜单中，Qwen3.8-Max-0902 得分比上一版提升 22 分至 1691 分，高于 Claude Opus 5 的 1688 分和 Kimi K3 的 1674 分。该榜单按 3∶1 的输入、输出比例计算综合价格，显示新版本每百万 Token 约为 5 美元。",
+          "source_url": "https://mp.weixin.qq.com/s/pNZvZwPxYXxTAwUTjX7Wpg",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "目前，该模型已上线千问 AI 平台并对外提供 API，千问办公、Qoder 和千问 App 也已接入。",
+          "source_url": "https://mp.weixin.qq.com/s/pNZvZwPxYXxTAwUTjX7Wpg",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "d7a14ce4-6dc6-522a-b299-3699e8772c76",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "716f3963c64832a279929914c0cd306bfc863af1",
+      "title": "元点机器人发布万元级人形机器人 Bridge，配套全开源生态",
+      "body": "元点机器人发布个人高性能人形机器人 Bridge，中文名为「小桥」。公司将它定位为万元级的具身智能本体，面向个人开发者、机器人爱好者和科研团队开放。\n\nBridge 搭载 FlowMimic 运动控制算法，用于生成自然步态和高动态动作。配套的 Tele_Bridge 可将人的动作实时映射至机器人，官方称能实现毫秒级同步和精细遥操。其软硬件采用开放架构，便于接入外部模型和控制算法。\n\n元点还同步发布 OpenBridge，计划将机器人在真实世界中获得的感知、动作、决策和结果记录为可共享、复用的技能。「筑桥者计划」将围绕 Bridge 本体邀请开发者共建开源能力库。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/i_mvWXmp9V6gDhO6c08rAw?scene=1",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/58b99d81fd08cfae5cad.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/i_mvWXmp9V6gDhO6c08rAw?scene=1 🛰网页 · 2026 年 9 月 2 日 17:12",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/i_mvWXmp9V6gDhO6c08rAw?scene=1",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "元点机器人发布个人高性能人形机器人 Bridge，中文名为「小桥」。公司将它定位为万元级的具身智能本体，面向个人开发者、机器人爱好者和科研团队开放。",
+          "source_url": "https://mp.weixin.qq.com/s/i_mvWXmp9V6gDhO6c08rAw?scene=1",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Bridge 搭载 FlowMimic 运动控制算法，用于生成自然步态和高动态动作。配套的 Tele_Bridge 可将人的动作实时映射至机器人，官方称能实现毫秒级同步和精细遥操。其软硬件采用开放架构，便于接入外部模型和控制算法。",
+          "source_url": "https://mp.weixin.qq.com/s/i_mvWXmp9V6gDhO6c08rAw?scene=1",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "元点还同步发布 OpenBridge，计划将机器人在真实世界中获得的感知、动作、决策和结果记录为可共享、复用的技能。「筑桥者计划」将围绕 Bridge 本体邀请开发者共建开源能力库。",
+          "source_url": "https://mp.weixin.qq.com/s/i_mvWXmp9V6gDhO6c08rAw?scene=1",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "d3b90bb8-205d-559b-8fe9-3f112fc4b1ef",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "9530738b76e4015725d216190552ebacc964f712",
+      "title": "Fermi Explorer 计划 2029 年发射航天器，AI 设计半人马座飞行轨道",
+      "body": "非营利机构 Fermi Explorer Mission 宣布，计划在 2029 年底前发射一枚飞往半人马座 α 星系的小型航天器。项目目标是在约 7.75 万年后接近该星系，最近距离控制在其重心 2600 个天文单位以内。\n\n方案偏向采用成熟硬件：航天器发射质量约 100 至 110kg，通过离子推进器和多次近日点加速，用约 12 年完成动力飞行，预计在 2043 年前后逃离太阳系，之后进入无动力滑行。\n\n项目方称，该轨道由剑桥物理 AI 实验室 Physical Super Intelligence 设计，这可能是生成式 AI 独立提出的新轨道首次被用于真实任务。方案将近日点降至 0.42 个天文单位，利用更强的太阳能和奥伯特效应降低燃料需求。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.fermiexplorer.org/faqs",
+      "source_name": "fermiexplorer.org",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 03:10",
+      "published_at": "2026-09-02 03:10",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/05ac90f9f88f-226e3115bbc2206b5995.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.fermiexplorer.org/faqs；https://www.technologyreview.com/2026/09/01/1143247/ai-interstellar-journey-alpha-centauri 📮Folo · 2026 年 9 月 2 日 03:10",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.fermiexplorer.org/faqs",
+          "title": "",
+          "publisher": "fermiexplorer.org",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.technologyreview.com/2026/09/01/1143247/ai-interstellar-journey-alpha-centauri",
+          "title": "",
+          "publisher": "technologyreview.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "A nonprofit organization called the Fermi Explorer Mission announced today that it intends to launch a spacecraft to our nearest star…",
+          "source_url": "https://www.fermiexplorer.org/faqs",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "非营利机构 Fermi Explorer Mission 宣布，计划在 2029 年底前发射一枚飞往半人马座 α 星系的小型航天器。项目目标是在约 7.75 万年后接近该星系，最近距离控制在其重心 2600 个天文单位以内。",
+          "source_url": "https://www.fermiexplorer.org/faqs",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "方案偏向采用成熟硬件：航天器发射质量约 100 至 110kg，通过离子推进器和多次近日点加速，用约 12 年完成动力飞行，预计在 2043 年前后逃离太阳系，之后进入无动力滑行。",
+          "source_url": "https://www.fermiexplorer.org/faqs",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "项目方称，该轨道由剑桥物理 AI 实验室 Physical Super Intelligence 设计，这可能是生成式 AI 独立提出的新轨道首次被用于真实任务。方案将近日点降至 0.42 个天文单位，利用更强的太阳能和奥伯特效应降低燃料需求。",
+          "source_url": "https://www.fermiexplorer.org/faqs",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "1080bb2e-a776-53f3-9850-d00fb54576b8",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "8bf3e460523dc121940f89a137864ca80dcc8383",
+      "title": "OPPO 联合高校团队推出端侧 AI 记忆评测基准 MobileMem",
+      "body": "OPPO 与中文开放知识图谱社区 OpenKG，联合浙江大学、同济大学和东南大学等高校团队，发布端侧 AI 记忆评测基准 MobileMem。它针对手机等设备在算力、存储和隐私保护限制下的长期记忆能力，为不同技术路线提供统一测试标准。\n\n数据集的累计历史上下文规模达百万词元，覆盖三类能力：跨时间、应用和模态的事件建模与检索；文本、图像之间的关联理解与推理；以及用户偏好、社交关系和事件状态的持续更新。\n\nMobileMem 1.0 技术白皮书已对外开放，后续计划逐步开源评测数据集、任务集和相关工具。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 7,
+      "score": 0,
+      "source_url": "https://www.oppo.com/cn/newsroom/press/548/",
+      "source_name": "oppo.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 10:21",
+      "published_at": "2026-09-02 10:21",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.oppo.com/cn/newsroom/press/548/；https://www.ithome.com/0/997/251.htm 🧭飞书群 · 2026 年 9 月 2 日 14:54",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ithome.com/0/997/251.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.oppo.com/cn/newsroom/press/548/",
+          "title": "",
+          "publisher": "oppo.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "OPPO 与中文开放知识图谱社区 OpenKG，联合浙江大学、同济大学和东南大学等高校团队，发布端侧 AI 记忆评测基准 MobileMem。它针对手机等设备在算力、存储和隐私保护限制下的长期记忆能力，为不同技术路线提供统一测试标准。",
+          "source_url": "https://www.oppo.com/cn/newsroom/press/548/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "数据集的累计历史上下文规模达百万词元，覆盖三类能力：跨时间、应用和模态的事件建模与检索；文本、图像之间的关联理解与推理；以及用户偏好、社交关系和事件状态的持续更新。",
+          "source_url": "https://www.oppo.com/cn/newsroom/press/548/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "MobileMem 1.0 技术白皮书已对外开放，后续计划逐步开源评测数据集、任务集和相关工具。",
+          "source_url": "https://www.oppo.com/cn/newsroom/press/548/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "bfbb2ea6-b9df-5515-ad6b-65e89f9ca542",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "e351d2fb7b69fee3b917e5b5fea9412cf3cbbbed",
+      "title": "Gemini API 上线智能视频理解，模型可自主检查时间轴",
+      "body": "Google 在 Gemini API 中加入 Agentic Video Understanding。与默认以固定 1 FPS 抽帧、一次性写入上下文的静态模式不同，智能模式会根据提问在时间轴上定位片段，选择性读取字幕，并动态调整帧率和分辨率。\n\nGoogle 称，该模式在长视频任务上最多可减少 88% 的 Token 用量，质量提升约 7%。它目前支持 Gemini 3.7 Flash、3.6 Flash 和 3.5 Flash Lite，适合长视频分析，或查找某个具体时刻的任务。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 8,
+      "score": 0,
+      "source_url": "https://ai.google.dev/gemini-api/docs/video-understanding",
+      "source_name": "ai.google.dev",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 12:03",
+      "published_at": "2026-09-02 12:03",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/4203bd7c95d8-5540685b13c8b1581a1e.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://ai.google.dev/gemini-api/docs/video-understanding；https://t.me/OneMillion_AI/4318 📮Folo · 2026 年 9 月 2 日 12:03",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/video-understanding",
+          "title": "",
+          "publisher": "ai.google.dev",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://t.me/OneMillion_AI/4318",
+          "title": "",
+          "publisher": "t.me",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "谷歌给Gemini加视频Agent：成本最高降66% 谷歌给 Gemini API 上线 Agentic Video Understanding。它让模型自己决定看哪段视频、怎么检查。普通模式默认按 1 FPS 固定抽帧，再一次性放进上下文。新模式会自己沿时间轴找片段…",
+          "source_url": "https://ai.google.dev/gemini-api/docs/video-understanding",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Google 在 Gemini API 中加入 Agentic Video Understanding。与默认以固定 1 FPS 抽帧、一次性写入上下文的静态模式不同，智能模式会根据提问在时间轴上定位片段，选择性读取字幕，并动态调整帧率和分辨率。",
+          "source_url": "https://ai.google.dev/gemini-api/docs/video-understanding",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Google 称，该模式在长视频任务上最多可减少 88% 的 Token 用量，质量提升约 7%。它目前支持 Gemini 3.7 Flash、3.6 Flash 和 3.5 Flash Lite，适合长视频分析，或查找某个具体时刻的任务。",
+          "source_url": "https://ai.google.dev/gemini-api/docs/video-understanding",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "18a9f509-4570-5b42-9f08-df085d5ab671",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "74e83d7b8dd2edb71dbaa16bbb413763d188ceea",
+      "title": "自变量发布 TwinDEX，用纯无本体数据训练机器人灵巧操作",
+      "body": "自变量机器人发布 TwinDEX，由一套可穿戴的无本体数据采集系统，以及安装在机器人上的三指九自由度灵巧手组成。采集端与执行端在自由度、关节轴、连杆比例、接触材料和视觉外观上保持一致，用于减少数据迁移时的运动学偏差。\n\n官方展示的化学实验任务包含 24 个子动作，涉及开瓶、取样、滴管和试管操作、玻璃棒引流及双手协调。模型仅使用数百条无本体数据进行后训练，未引入真机遥操数据，训练后直接部署到机器人执行整套任务。\n\n自变量称，TwinDEX 在相关任务中的每小时数据采集效率为真机遥操的 5.3 倍；多任务测试中，两类数据训练出的策略随数据量增长呈现相近的收敛趋势。项目下一步将把采集范围从桌面任务扩展到开放环境。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 9,
+      "score": 0,
+      "source_url": "https://x2robot.com/pages/twindex",
+      "source_name": "x2robot.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/4ffa1410aa0b98c11c16.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://x2robot.com/pages/twindex；https://mp.weixin.qq.com/s/UuICx-omFibbxZhinSB9_A 🛰网页 · 2026 年 9 月 2 日 17:12",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://x2robot.com/pages/twindex",
+          "title": "",
+          "publisher": "x2robot.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/UuICx-omFibbxZhinSB9_A",
+          "title": "",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "自变量机器人发布 TwinDEX，由一套可穿戴的无本体数据采集系统，以及安装在机器人上的三指九自由度灵巧手组成。采集端与执行端在自由度、关节轴、连杆比例、接触材料和视觉外观上保持一致，用于减少数据迁移时的运动学偏差。",
+          "source_url": "https://x2robot.com/pages/twindex",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "官方展示的化学实验任务包含 24 个子动作，涉及开瓶、取样、滴管和试管操作、玻璃棒引流及双手协调。模型仅使用数百条无本体数据进行后训练，未引入真机遥操数据，训练后直接部署到机器人执行整套任务。",
+          "source_url": "https://x2robot.com/pages/twindex",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "自变量称，TwinDEX 在相关任务中的每小时数据采集效率为真机遥操的 5.3 倍；多任务测试中，两类数据训练出的策略随数据量增长呈现相近的收敛趋势。项目下一步将把采集范围从桌面任务扩展到开放环境。",
+          "source_url": "https://x2robot.com/pages/twindex",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-09-02T16:27:58+00:00"
+    },
+    {
+      "id": "9bdacbc5-844d-5216-8253-a973a3eb006b",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "3bab6e2ec41de864f754c544554a135154d9cda4",
+      "title": "比亚迪海狮 08 上市，插混、纯电版售价 22.99 万～27.99 万元",
+      "body": "比亚迪海洋网旗舰 SUV 海狮 08 于 9 月 2 日正式上市，共提供 8 款车型。插电混动版售价为 22.99 万～26.99 万元，纯电版售价为 23.99 万～27.99 万元，同时提供五座、六座以及两驱、四驱组合。\n\n海狮 08 全系标配天神之眼 B 辅助驾驶激光版、云辇-A 闭式双腔空气悬架和后轮转向。纯电版 CLTC 最高续航 900 公里，支持 800V 闪充，官方称充电 5 分钟可补能约 400 公里。\n\n新车车长超过 5.1 米，后轮最大转向角度为 ±7°，最小转弯半径为 4.95 米。动力方面，纯电版提供单电机和双电机版本，插混版则搭载 1.5T 混动系统。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 10,
+      "score": 0,
+      "source_url": "https://www.ifanr.com/1678169",
+      "source_name": "爱范儿",
+      "source_type": "folo",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-09-02 19:48",
+      "published_at": "2026-09-02 19:48",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/c782ba008644-aba4727d58f0ac17066b.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：https://www.ifanr.com/1678169；https://www.autohome.com.cn/news/202609/1316920.html；https://www.ithome.com/0/997/538.htm；https://weibo.com/2/detail/5338771212209120 📮Folo · 2026 年 9 月 2 日 19:48",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ifanr.com/1678169",
+          "title": "",
+          "publisher": "爱范儿",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.autohome.com.cn/news/202609/1316920.html",
+          "title": "",
+          "publisher": "autohome.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/997/538.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://weibo.com/2/detail/5338771212209120",
           "title": "",
           "publisher": "weibo.com",
           "source_type": "draft_source",
@@ -818,56 +2411,65 @@
       ],
       "claims": [
         {
-          "text": "vivo 正式公布 X500 系列，产品线包括 X500、X500 Pro 和 X500 Pro Max 三款机型。此次预热集中披露 Pro 系列的影像硬件，完整价格与配置将留待发布活动公布。",
-          "source_url": "https://weibo.com/1642720480/5335397572018856",
+          "text": "今天下午，比亚迪海狮 08 正式上市，它一共有 8 款车型。其中，海狮 08 插混版售价 22.99-26.99 万元，海狮 08 纯电版售价 23.99-27.99 万元。",
+          "source_url": "https://www.ifanr.com/1678169",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "其中，X500 Pro 系列将首发 vivo 蓝图与索尼联合定制的「蔡司超动态主摄」光御 900，官方称可输出 17EV 动态范围，并支持 4K 240fps 慢动作和 4K 120fps HDR 视频直出。X500 Pro Max 还加入最大 3 度 OIS 大角度防抖。",
-          "source_url": "https://weibo.com/1642720480/5335397572018856",
+          "text": "海狮 08 是目前海洋网尺寸最大、定位最高的 SUV…",
+          "source_url": "https://www.ifanr.com/1678169",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:41:03+00:00"
+      "updated_at": "2026-09-02T16:27:58+00:00"
     },
     {
-      "id": "3aedb94a-74ab-56e9-bd6d-1e37a0c465f9",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "42a4cc84d1dc18b926f02ffe921e14e9dc18d1ff",
-      "title": "字节将 TRAE、扣子并入豆包，拟推「豆包工作」品牌",
-      "body": "据 36 氪旗下「智能涌现」报道，字节跳动已完成一轮 AI 办公产品团队整合：TRAE 和扣子团队将整体并入豆包体系，TRAE Work 与扣子的办公能力将和豆包整合，TRAE IDE 及 CLI 则继续作为豆包品牌下的编程产品线发展。相关产品和运营团队调整后向豆包产品负责人赵祺汇报。\n\n报道还称，字节最快将在本周推出独立 AI 办公产品「豆包工作」，作为面向办公场景的统一产品和品牌，并与飞书进一步整合。\n\n针对上述消息，字节方面回应称，此次调整旨在更好地协同产品和技术资源，为用户提供更优质的 AI 工作体验，现有用户权益不会受到影响。\n\n在 8 月的年中全员会上，字节 CEO 梁汝波将公司业务战略原则概括为「高度优先，粗主干，优化长期」，表示将精力聚焦于 AI、信息平台和交易服务三项核心业务，并称希望豆包未来也能成为一项「主干」AI 业务。",
-      "category": "新产品",
-      "status": "ready",
+      "id": "f6e7e708-5ceb-52ae-bf6a-89336c10ac25",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "9ee27cf95260ed177322c317e7e5983b4bbd9327",
+      "title": "智谱在天猫开店卖 Token，旗舰店销售 GLM Coding Plan 订阅",
+      "body": "智谱于 9 月 2 日在天猫开设官方旗舰店，上架 GLM Coding Plan 个人版 Lite、Pro、Max 和团队版标准席位。店铺公示的经营主体为北京智谱华章科技股份有限公司，套餐支持按月、季或年购买。\n\n本次上架的套餐基于 GLM-5.3，可用于 ZCode、Claude Code、Codex 等 20 多款 Agent 编程工具。个人版 Lite 月付价为 118 元，包含每月 10000 积分；Pro 和 Max 分别为每月 538 元和 1078 元。额度耗尽后需等待下一周期恢复，不会继续扣除账户余额。\n\n此前 GLM Coding Plan 主要通过智谱自有网站销售。进入天猫后，模型 Token 和 API 调用额度首次被包装成常规电商订阅商品。",
+      "category": "新消费",
+      "status": "needs_review",
       "selected": true,
-      "position": 1,
+      "position": 0,
       "score": 0,
-      "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
-      "source_name": "eu.36kr.com",
+      "source_url": "https://mp.weixin.qq.com/s/CpprszJa6Z3dcpMUCmIU8A",
+      "source_name": "mp.weixin.qq.com",
       "source_type": "draft_source",
       "source_quality": "secondary",
       "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
+      "disclosed_at": "2026-09-02 11:57",
+      "published_at": "2026-09-02 11:57",
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/181ce0b01114-fdad04b357936e96c35b.jpg",
+      "changed_since_review": true,
+      "image_url": "data/images/ae19af47d1d6c3c1aeda.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://eu.36kr.com/zh/p/3953230805876099；lark-text://lark_private/om_x100b678b887aacb8b39be2be01dd62f 🧭飞书群 · 2026 年 8 月 24 日 16:10",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/CpprszJa6Z3dcpMUCmIU8A；https://www.ithome.com/0/997/340.htm 🧭飞书群 · 2026 年 9 月 2 日 13:56",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://eu.36kr.com/zh/p/3953230805876099",
+          "url": "https://mp.weixin.qq.com/s/CpprszJa6Z3dcpMUCmIU8A",
           "title": "",
-          "publisher": "eu.36kr.com",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/0/997/340.htm",
+          "title": "",
+          "publisher": "ithome.com",
           "source_type": "draft_source",
           "authority": "secondary",
           "is_paywalled": false,
@@ -876,442 +2478,38 @@
       ],
       "claims": [
         {
-          "text": "据 36 氪旗下「智能涌现」报道，字节跳动已完成一轮 AI 办公产品团队整合：TRAE 和扣子团队将整体并入豆包体系，TRAE Work 与扣子的办公能力将和豆包整合，TRAE IDE 及 CLI 则继续作为豆包品牌下的编程产品线发展。相关产品和运营团队调整后向豆包产品负责人赵祺汇报。",
-          "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
+          "text": "智谱于 9 月 2 日在天猫开设官方旗舰店，上架 GLM Coding Plan 个人版 Lite、Pro、Max 和团队版标准席位。店铺公示的经营主体为北京智谱华章科技股份有限公司，套餐支持按月、季或年购买。",
+          "source_url": "https://mp.weixin.qq.com/s/CpprszJa6Z3dcpMUCmIU8A",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "报道还称，字节最快将在本周推出独立 AI 办公产品「豆包工作」，作为面向办公场景的统一产品和品牌，并与飞书进一步整合。字节回应称，此次调整旨在协同产品和技术资源，现有用户权益不会受到影响。",
-          "source_url": "https://eu.36kr.com/zh/p/3953230805876099",
+          "text": "本次上架的套餐基于 GLM-5.3，可用于 ZCode、Claude Code、Codex 等 20 多款 Agent 编程工具。个人版 Lite 月付价为 118 元，包含每月 10000 积分；Pro 和 Max 分别为每月 538 元和 1078 元。额度耗尽后需等待下一周期恢复，不会继续扣除账户余额。",
+          "source_url": "https://mp.weixin.qq.com/s/CpprszJa6Z3dcpMUCmIU8A",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "此前 GLM Coding Plan 主要通过智谱自有网站销售。进入天猫后，模型 Token 和 API 调用额度首次被包装成常规电商订阅商品。",
+          "source_url": "https://mp.weixin.qq.com/s/CpprszJa6Z3dcpMUCmIU8A",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:42:52+00:00"
+      "updated_at": "2026-09-02T16:27:58+00:00"
     },
     {
-      "id": "2cd1b92c-7e98-51fa-94f8-20cddebaee0e",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "58478815172339c0b2684ed94f261c648a8a3388",
-      "title": "阿里视频模型 Wan3.0 上线，可原生生成 30 秒视频",
-      "body": "8 月 24 日，阿里巴巴视频生成模型 Wan3.0 正式上线。新版本支持单次生成 30 秒视频，并首次接受 doc、xls、ppt、pdf 和 md 等文档输入，可从文字、图片和文档素材生成连续视频。\n\n模型重点改善长镜头中的人物、车辆、道具、声音和空间关系一致性。阿里称，公测期间 Wan3.0 已进入短剧、广告、文旅和音乐视频等生产流程，并接入 Flova、LibTV 等创作平台。\n\nWan3.0 现已在阿里云百炼、千问 AI 平台、万相官网和千问 App 上线，同时开放 API 调用。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/eea45ebd8c2d867fa23f.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ；lark-file://lark_private/file_v3_0014s_0ecf1f42-b74b-4015-af0c-d7fc08480a7g；新闻稿《【新闻稿】阿里视频大模型Wan3.0正式上线，行业评价「稳定、真实、有质感」(1).docx》 🧭飞书群 · 2026 年 8 月 24 日 12:47",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "8 月 24 日，阿里巴巴视频生成模型 Wan3.0 正式上线。新版本支持单次生成 30 秒视频，并首次接受 doc、xls、ppt、pdf 和 md 等文档输入，可从文字、图片和文档素材生成连续视频。",
-          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "模型重点改善长镜头中的人物、车辆、道具、声音和空间关系一致性。阿里称，公测期间 Wan3.0 已进入短剧、广告、文旅和音乐视频等生产流程，并接入 Flova、LibTV 等创作平台。",
-          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "Wan3.0 现已在阿里云百炼、千问 AI 平台、万相官网和千问 App 上线，同时开放 API 调用。",
-          "source_url": "https://mp.weixin.qq.com/s/peeeU6cBz4AaROvFe1zqQQ",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:41:03+00:00"
-    },
-    {
-      "id": "4fda95c3-3f39-5692-8ac5-8484f36d3d7c",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "f9a4f42823dce797d6e6479d753256798bcac2b2",
-      "title": "MINI 为 Spike 车载助手接入阿里与 DeepSeek 模型",
-      "body": "全新一代 MINI 家族开始推送远程软件升级，车载智能个人助理 Spike 接入阿里巴巴大语言模型，获得连续对话、复杂任务处理和自然问答能力；订阅 MINI 数字化优享互联装备后，还可调用 DeepSeek 的深度思考能力。\n\n同一轮升级还调整了车机主菜单和空调按钮，并为电动 MINI 加入宝马品牌充电站预约。官方数据显示，MINI 远程升级主动安装率长期超过 85%，今年上半年超过 91% 的用户会打开原生导航。\n\n升级将按车型和车机软件版本分批推送，不同车辆可用能力会有所差异。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "",
-      "source_name": "f9a4f42823dce797d6e6479d753256798bcac2b2",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：lark-file://lark_private/file_v3_0014s_d3d59592-26e5-4cfa-b997-64e4df231c5g；新闻稿《794dd6e39cfa0bba3dda17fb2e9af309_2018121766168700562_m_20260824-再次升级！MINI 智能个人助理进入 AI 双核时代.docx》 🧭飞书群 · 2026 年 8 月 24 日 12:47",
-        "static_snapshot": true
-      },
-      "sources": [],
-      "claims": [
-        {
-          "text": "全新一代 MINI 家族开始推送远程软件升级，车载智能个人助理 Spike 接入阿里巴巴大语言模型，获得连续对话、复杂任务处理和自然问答能力；订阅 MINI 数字化优享互联装备后，还可调用 DeepSeek 的深度思考能力。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "同一轮升级还调整了车机主菜单和空调按钮，并为电动 MINI 加入宝马品牌充电站预约。官方数据显示，MINI 远程升级主动安装率长期超过 85%，今年上半年超过 91% 的用户会打开原生导航。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "升级将按车型和车机软件版本分批推送，不同车辆可用能力会有所差异。",
-          "source_url": "",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:41:03+00:00"
-    },
-    {
-      "id": "1ddc984d-e41c-56de-be47-6630b69ed6c7",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "c16dae0d4e05ea12aca579670b314c1f19737564",
-      "title": "天工机器人在运动会获得 5 金 2 银 6 铜",
-      "body": "北京人形机器人创新中心研发的天工系列在第二届世界人形机器人运动会上获得 5 金、2 银和 6 铜。天工 Ultra 在 100 米大型组跑出 9.32 秒，在 400 米大型组跑出 38.15 秒；天轶 2.5-TE 还参加了园林和图书馆等场景任务。\n\n赛事成绩反映的是特定机器人分组、赛道与规则下的性能，不宜与国际田联认证的人类纪录直接等同。北京人形称，机器人通过自主导航和强化学习优化步态，并以具身大脑、世界模型和运动控制系统协同完成不同项目。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/u_WN7Ao8Yiv7w1-qv7Sl9A",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/f176f9605b8af51c6905.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/u_WN7Ao8Yiv7w1-qv7Sl9A 🧭飞书群 · 2026 年 8 月 24 日 12:47",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/u_WN7Ao8Yiv7w1-qv7Sl9A",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "北京人形机器人创新中心研发的天工系列在第二届世界人形机器人运动会上获得 5 金、2 银和 6 铜。天工 Ultra 在 100 米大型组跑出 9.32 秒，在 400 米大型组跑出 38.15 秒；天轶 2.5-TE 还参加了园林和图书馆等场景任务。",
-          "source_url": "https://mp.weixin.qq.com/s/u_WN7Ao8Yiv7w1-qv7Sl9A",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "赛事成绩反映的是特定机器人分组、赛道与规则下的性能，不宜与国际田联认证的人类纪录直接等同。北京人形称，机器人通过自主导航和强化学习优化步态，并以具身大脑、世界模型和运动控制系统协同完成不同项目。",
-          "source_url": "https://mp.weixin.qq.com/s/u_WN7Ao8Yiv7w1-qv7Sl9A",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:41:03+00:00"
-    },
-    {
-      "id": "14191816-118e-5490-8306-3569a932a450",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "b32e9d5a43669596caac5e76becf799e3abe690e",
-      "title": "上影与筷子科技上线「昊帧影视创制平台」",
-      "body": "上海科技影都近日上线「昊帧影视创制平台」。平台由筷子科技与上影昊浦智慧产业社区合作建设，在既有百卡规模影视算力池基础上新增 50 台英伟达 DGX Spark，并为影视项目提供多模态 Token 补贴。\n\n这套平台面向制片、编剧、美术、后期和宣发等专业岗位，试图把模型调用、素材管理、团队协作和算力调度整合到同一制作流程，推动 AI 工具进入可追踪、可协作的工业化影视生产链。",
-      "category": "新产品",
-      "status": "needs_review",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://www.ifanr.com/1676318",
-      "source_name": "爱范儿",
-      "source_type": "folo",
-      "source_quality": "lead",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 12:00",
-      "published_at": "2026-08-24 12:00",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": false,
-      "image_url": "data/images/97ec14bddc54-d14b6e440c889a0d29dd.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ifanr.com/1676318 📮Folo · 2026 年 8 月 24 日 12:00",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ifanr.com/1676318",
-          "title": "",
-          "publisher": "爱范儿",
-          "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "全球 AI 视频创作的注意力，全都被模型厂商以及少数 C 端产品所霸占。",
-          "source_url": "https://www.ifanr.com/1676318",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "从威尔·史密斯吃面条吃到动作变形的初期尝试，到如今时长达到数十秒、运镜精准、人物一致性和物理规律的维持效果日渐提高，AI 视频创作已经取得了巨大的技术和产品体验上的进步。",
-          "source_url": "https://www.ifanr.com/1676318",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "上海科技影都近日上线「昊帧影视创制平台」。平台由筷子科技与上影昊浦智慧产业社区合作建设，在既有百卡规模影视算力池基础上新增 50 台英伟达 DGX Spark，并为影视项目提供多模态 Token 补贴。",
-          "source_url": "https://www.ifanr.com/1676318",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这套平台面向制片、编剧、美术、后期和宣发等专业岗位，试图把模型调用、素材管理、团队协作和算力调度整合到同一制作流程，推动 AI 工具进入可追踪、可协作的工业化影视生产链。",
-          "source_url": "https://www.ifanr.com/1676318",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:41:03+00:00"
-    },
-    {
-      "id": "7bb6e267-0bbd-5c8b-881d-78d1485a7296",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "b90824e5aea4a4be0b868ae9ceb0dbbb99f2d5ce",
-      "title": "希音启动中国香港 IPO，预计 9 月 1 日挂牌",
-      "body": "希音在中国香港启动全球发售，计划发行约 2.8 亿股 B 类股份，招股价区间为每股 47.6 至 49.5 港元。按区间中位数计算，公司预计获得约 131.23 亿港元净募资，并于 9 月 1 日在港交所挂牌。\n\n招股书显示，约 40% 募资将用于提升技术能力，另有约 40% 用于品牌建设和全球布局。路透社测算，本次发行对应的公司估值最高约 270 亿美元，明显低于希音此前私募融资阶段的峰值估值。\n\n高盛、摩根士丹利和摩根大通担任联席保荐人，基石投资者包括腾讯、博裕资本、Tiger Global 和 General Atlantic 等。希音上市后将继续采用同股不同权架构。",
+      "id": "ab780c62-3dbe-5702-a6fa-b42c2e876f23",
+      "issue_id": "ifanr-daily-20260903",
+      "fingerprint": "d7d400034ec22be3adb43fd311a9315444fc91cb",
+      "title": "古茗调整加盟政策，半年内闭店可获 5 万元补贴",
+      "body": "古茗 9 月 1 日更新加盟政策，调整新店加盟费、设备分期和闭店补偿。9 月 1 日后签约的新店，加盟费由每店前期一次性收取 9.88 万元，改为每年收取 1.5 万元，以降低开店初期的资金占用。\n\n符合条件的咖啡机或首批设备采购可首付 65%，剩余 35% 从次月起分 24 期无息支付。对签约后经营不及预期的门店，在设备通过公司渠道转卖或备案转移的前提下，半年内闭店可获 5 万元补贴；满半年、不满 1 年闭店可获 3.5 万元补贴。\n\n古茗仍要求加盟商在店经营，并拒绝只提供资金、不参与门店运营的投资型加盟商。公司同时将对二手设备实施准入管理，兼顾设备利旧和门店运营标准。",
       "category": "新消费",
-      "status": "needs_review",
+      "status": "ready",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23",
-      "source_name": "路透社最新报道",
-      "source_type": "folo",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 11:17",
-      "published_at": "2026-08-24 11:17",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "unverified",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23；https://www.reuters.com/legal/transactional/fast-fashion-giant-shein-valued-up-27-billion-hong-kong-ipo-2026-08-24；https://mp.weixin.qq.com/s/qreOct6y-nLcStXeYX9g9w 🧭飞书群 · 2026 年 8 月 24 日 11:47",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.reuters.com/legal/transactional/fast-fashion-giant-shein-valued-up-27-billion-hong-kong-ipo-2026-08-24",
-          "title": "",
-          "publisher": "路透社最新报道",
-          "source_type": "folo",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        },
-        {
-          "url": "https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23",
-          "title": "",
-          "publisher": "路透社最新报道",
-          "source_type": "folo",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/qreOct6y-nLcStXeYX9g9w",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "Fast-fashion giant Shein shrinks value to 27 billion, at best, in Hong Kong IPO (www.reuters.com) 11:08",
-          "source_url": "https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "希音在中国香港启动全球发售，计划发行约 2.8 亿股 B 类股份，招股价区间为每股 47.6 至 49.5 港元。按区间中位数计算，公司预计获得约 131.23 亿港元净募资，并于 9 月 1 日在港交所挂牌。",
-          "source_url": "https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "招股书显示，约 40% 募资将用于提升技术能力，另有约 40% 用于品牌建设和全球布局。路透社测算，本次发行对应的公司估值最高约 270 亿美元，明显低于希音此前私募融资阶段的峰值估值。",
-          "source_url": "https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "高盛、摩根士丹利和摩根大通担任联席保荐人，基石投资者包括腾讯、博裕资本、Tiger Global 和 General Atlantic 等。希音上市后将继续采用同股不同权架构。",
-          "source_url": "https://www.reuters.com/business/retail-consumer/shein-launches-up-18-billion-hong-kong-ipo-2026-08-23",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
-    },
-    {
-      "id": "f8121c26-d228-5d5f-b7fd-e51baf89c46a",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "2d91f1de51da89efc938c1c56d4befa44322059b",
-      "title": "智元与长隆将在横琴建设具身智能主题乐园",
-      "body": "长隆集团与智元创新签署战略合作，计划在横琴长隆飞船乐园建设具身智能主题乐园，并共同成立文旅行业具身智能联合实验室。\n\n双方公布的场景包括机器人马戏演艺、园区巡游、科普讲解和酒店服务。长隆将提供高客流、全天候的真实运营环境，智元负责机器人本体与运动、作业和交互能力，项目也将用于验证机器人在文旅场景中的长期稳定运行。",
-      "category": "新消费",
-      "status": "needs_review",
-      "selected": true,
-      "position": 1,
-      "score": 0,
-      "source_url": "https://www.chimelong.com/news/3168.html",
-      "source_name": "chimelong.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-08-24 13:31",
-      "published_at": "2026-08-24 13:31",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": true,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.chimelong.com/news/3168.html；https://mapp.api.weibo.cn/fx/032b294fc47286fc55d43776574c90e0.html 🧭飞书群 · 2026 年 8 月 24 日 13:31",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.chimelong.com/news/3168.html",
-          "title": "",
-          "publisher": "chimelong.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mapp.api.weibo.cn/fx/032b294fc47286fc55d43776574c90e0.html、",
-          "title": "",
-          "publisher": "早报 Bot 私聊",
-          "source_type": "lark_group",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mapp.api.weibo.cn/fx/032b294fc47286fc55d43776574c90e0.html",
-          "title": "",
-          "publisher": "mapp.api.weibo.cn",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "长隆集团与智元创新签署战略合作，计划在横琴长隆飞船乐园建设具身智能主题乐园，并共同成立文旅行业具身智能联合实验室。",
-          "source_url": "https://www.chimelong.com/news/3168.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "双方公布的场景包括机器人马戏演艺、园区巡游、科普讲解和酒店服务。长隆将提供高客流、全天候的真实运营环境，智元负责机器人本体与运动、作业和交互能力，项目也将用于验证机器人在文旅场景中的长期稳定运行。",
-          "source_url": "https://www.chimelong.com/news/3168.html",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
-    },
-    {
-      "id": "671b18ea-3250-5d3e-9890-3c51c36f0979",
-      "issue_id": "ifanr-daily-20260825",
-      "fingerprint": "3b8ae32ab5705e3632d16ba53b791da19159147b",
-      "title": "12306 回应无座票与二等座同价",
-      "body": "针对「无座票为何与二等座同价」的讨论，铁路 12306 客服回应称，无座票全称为「无固定座位票」，与二等座属于同一席别和等级，因此执行相同票价，目前无法单独降低价格。\n\n客服表示，无座乘客可在座位指示灯显示绿色或黄色时临时就座，持票乘客上车后需要让座。无座票只在部分线路和客流高峰期少量发售；对于差异化定价建议，客服已记录并反馈。",
-      "category": "新消费",
-      "status": "ready",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/G2-4hwO1t-w1clbR88YYCg",
+      "source_url": "https://mp.weixin.qq.com/s/aTUT8X4YsaeXE4t9ZqSqIQ",
       "source_name": "mp.weixin.qq.com",
       "source_type": "draft_source",
       "source_quality": "unknown",
@@ -1323,26 +2521,17 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/9f57764ee07fc62fa419.jpg",
+      "image_url": "data/images/eb09cef00b32629c06cc.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/G2-4hwO1t-w1clbR88YYCg；https://mp.weixin.qq.com/s/OxISBo2nyVOpsapRYJU4Bg 🧭飞书群 · 2026 年 8 月 24 日 12:56",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/aTUT8X4YsaeXE4t9ZqSqIQ 🧭飞书群 · 2026 年 9 月 2 日 21:05",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://mp.weixin.qq.com/s/G2-4hwO1t-w1clbR88YYCg",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/OxISBo2nyVOpsapRYJU4Bg",
+          "url": "https://mp.weixin.qq.com/s/aTUT8X4YsaeXE4t9ZqSqIQ",
           "title": "",
           "publisher": "mp.weixin.qq.com",
           "source_type": "draft_source",
@@ -1353,95 +2542,101 @@
       ],
       "claims": [
         {
-          "text": "针对「无座票为何与二等座同价」的讨论，铁路 12306 客服回应称，无座票全称为「无固定座位票」，与二等座属于同一席别和等级，因此执行相同票价，目前无法单独降低价格。",
-          "source_url": "https://mp.weixin.qq.com/s/G2-4hwO1t-w1clbR88YYCg",
+          "text": "古茗 9 月 1 日更新加盟政策，调整新店加盟费、设备分期和闭店补偿。9 月 1 日后签约的新店，加盟费由每店前期一次性收取 9.88 万元，改为每年收取 1.5 万元，以降低开店初期的资金占用。",
+          "source_url": "https://mp.weixin.qq.com/s/aTUT8X4YsaeXE4t9ZqSqIQ",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "客服表示，无座乘客可在座位指示灯显示绿色或黄色时临时就座，持票乘客上车后需要让座。无座票只在部分线路和客流高峰期少量发售；对于差异化定价建议，客服已记录并反馈。",
-          "source_url": "https://mp.weixin.qq.com/s/G2-4hwO1t-w1clbR88YYCg",
+          "text": "符合条件的咖啡机或首批设备采购可首付 65%，剩余 35% 从次月起分 24 期无息支付。对签约后经营不及预期的门店，在设备通过公司渠道转卖或备案转移的前提下，半年内闭店可获 5 万元补贴；满半年、不满 1 年闭店可获 3.5 万元补贴。",
+          "source_url": "https://mp.weixin.qq.com/s/aTUT8X4YsaeXE4t9ZqSqIQ",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "古茗仍要求加盟商在店经营，并拒绝只提供资金、不参与门店运营的投资型加盟商。公司同时将对二手设备实施准入管理，兼顾设备利旧和门店运营标准。",
+          "source_url": "https://mp.weixin.qq.com/s/aTUT8X4YsaeXE4t9ZqSqIQ",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-08-24T09:22:16+00:00"
+      "updated_at": "2026-09-02T16:29:31+00:00"
     }
   ],
   "brand_packages": {
     "appso": {
       "cover_candidates": [
         {
-          "id": "story:e533a220-91ac-5590-94f6-10f959f3edbb",
+          "id": "story:bcf1c687-60b5-5c61-9212-74c888d0bef8",
           "source": "story",
-          "story_id": "e533a220-91ac-5590-94f6-10f959f3edbb",
-          "title": "阿里确定 800 亿港元配售价，每股 112.70 港元",
+          "story_id": "bcf1c687-60b5-5c61-9212-74c888d0bef8",
+          "title": "Mac App Store 应用现可移除 Intel Mac 支持",
           "url": ""
         },
         {
-          "id": "story:a9faf729-c708-51fa-b2f6-753e46aac023",
+          "id": "story:83de0065-f167-552c-aea9-099e25fdf4be",
           "source": "story",
-          "story_id": "a9faf729-c708-51fa-b2f6-753e46aac023",
-          "title": "Hugging Face 据报评估出售，交易估值至少 130 亿美元",
+          "story_id": "83de0065-f167-552c-aea9-099e25fdf4be",
+          "title": "X Money 上线后出现大规模密码重置，X 称未发现入侵",
           "url": ""
         }
       ],
-      "generated_at": "2026-08-24T09:14:25+00:00",
+      "generated_at": "2026-09-02T13:39:54+00:00",
       "generation_model": "codex_local_headline_editor",
       "generation_source": "ifanr_headline_editor",
       "headline_options": [
-        "阿里Wan3.0一次可生成30秒视频,还能直接读取文档/TRAE和扣子并入豆包,IDE与CLI保留编程产品线/Hugging Face据报评估出售,估值至少130亿美元",
-        "小米发布3款玄戒芯片,O3将随折叠屏首发LPDDR6/肝脏AI协助找出15例漏诊恶性肿瘤,仍待对照研究/MINI车载助手接入阿里模型,订阅用户还能调用DeepSeek",
-        "英伟达据报将付60亿美元获Poolside技术授权,并吸收百余人/Sam Altman担忧AI控制权集中,主张让更多人参与/天工机器人运动会拿下5金,Ultra百米跑出9.32秒",
-        "英伟达据报拟投资Perplexity,估值将超过300亿美元/字节整合TRAE和扣子,编程产品线继续留在豆包旗下/X500 Pro系列首发光御900,支持4K240fps慢动作",
-        "今年苹果手机出货量预计降2.1%,三星重返第一/字节据报最快本周推出「豆包工作」,并与飞书进一步整合/上影AI影视平台新增50台DGX Spark,还提供Token补贴",
-        "阿里Wan3.0支持文档生成视频,并向开发者开放API/LiON肝脏AI协助找出15例漏诊恶性肿瘤/英伟达据报用60亿美元换Poolside技术授权和百余名员工"
+        "Gemini可自主检查视频时间轴,最多省88%Token用量/豆包工作支持多Agent并行,Mac版还能操作电脑/Mac App Store应用现可移除Intel支持",
+        "李飞飞发布Atlas,6张图可生成1分钟视频/千问新模型登顶前端编程榜,API已经上线/腾讯WorkBuddy开放Agent能力,首批接入9款硬件",
+        "加州拟禁止律师把法律执业委托给生成式AI/Suno遭音乐人起诉,被指擅用姓名和声纹/OPPO发布端侧AI长期记忆评测基准MobileMem",
+        "消息称Meta将内部沟通迁至更适合Agent的Slack/马斯克称Grok 4.7将在10天后发布/AI设计半人马座飞行轨道,航天器计划2029年发射",
+        "TwinDEX用数百条无本体数据训练机器人做实验/万元级人形机器人Bridge开放软硬件生态/Gemini智能看视频,可动态调整帧率和分辨率",
+        "智谱在天猫开店卖AI编程订阅,月费118元起/部分Mac应用可停止向Intel机型更新/微信灰测长按底栏汇总所有未读聊天"
       ],
-      "selected_cover": "story:e533a220-91ac-5590-94f6-10f959f3edbb",
-      "selected_headline": "阿里Wan3.0一次可生成30秒视频,还能直接读取文档/TRAE和扣子并入豆包,IDE与CLI保留编程产品线/Hugging Face据报评估出售,估值至少130亿美元"
+      "selected_cover": "story:bcf1c687-60b5-5c61-9212-74c888d0bef8",
+      "selected_headline": "Gemini可自主检查视频时间轴,最多省88%Token用量/豆包工作支持多Agent并行,Mac版还能操作电脑/Mac App Store应用现可移除Intel支持"
     },
     "ifanr": {
       "cover_candidates": [
         {
-          "id": "story:e533a220-91ac-5590-94f6-10f959f3edbb",
+          "id": "story:bcf1c687-60b5-5c61-9212-74c888d0bef8",
           "source": "story",
-          "story_id": "e533a220-91ac-5590-94f6-10f959f3edbb",
-          "title": "阿里确定 800 亿港元配售价，每股 112.70 港元",
+          "story_id": "bcf1c687-60b5-5c61-9212-74c888d0bef8",
+          "title": "Mac App Store 应用现可移除 Intel Mac 支持",
           "url": ""
         },
         {
-          "id": "story:a9faf729-c708-51fa-b2f6-753e46aac023",
+          "id": "story:83de0065-f167-552c-aea9-099e25fdf4be",
           "source": "story",
-          "story_id": "a9faf729-c708-51fa-b2f6-753e46aac023",
-          "title": "Hugging Face 据报评估出售，交易估值至少 130 亿美元",
+          "story_id": "83de0065-f167-552c-aea9-099e25fdf4be",
+          "title": "X Money 上线后出现大规模密码重置，X 称未发现入侵",
           "url": ""
         }
       ],
-      "generated_at": "2026-08-24T09:14:25+00:00",
+      "generated_at": "2026-09-02T13:39:54+00:00",
       "generation_model": "codex_local_headline_editor",
       "generation_source": "ifanr_headline_editor",
       "headline_options": [
-        "小米调整售后规则,二手设备不再享原厂三包/四川4.7级地震被预警成7.7级,省地震局称发布方冒用官方名义/天工机器人运动会拿下5金,Ultra百米跑出9.32秒",
-        "12306回应无座票为何同价:它与二等座属于同一席别/小米玄戒一次发布3款芯片,从折叠屏做到端侧AI和智驾/肝脏AI协助找出15例漏诊恶性肿瘤,仍待对照研究",
-        "厦门一消杀企业被曝长期使用敌敌畏,涉事场所已关闭/vivo X500 Pro系列首发光御900,支持4K240fps慢动作/长隆与智元要建机器人主题乐园,机器人将参与马戏和巡游",
-        "今年全球手机出货量预计降14.3%,低价机或涨价减配/阿里Wan3.0一次可生成30秒视频,还能直接读取文档/釜山电影节Vision单元选出23部韩国及亚洲独立电影",
-        "阿里拟配售募资800亿港元,港股一度跌近10%/MINI车载助手接入阿里模型,订阅用户还能调用DeepSeek/Sam Altman担忧AI控制权落入少数公司和个人手中",
-        "希音启动香港IPO,估值最高约270亿美元,较峰值缩水/Xiaomi 18 Fold首发玄戒O3,小米自研芯片扩至智驾/12306称无座票与二等座同价,差异化定价建议已记录"
+        "微信长按底栏可汇总所有未读聊天/小米三款汽车与18Fold同场亮相/尊界挥手关门失灵,官方称车辆当时挂着D档",
+        "星宇解约107名应届生,大众启动专项调查/《富爸爸穷爸爸》作者称故意负债12亿美元/新一代理想MEGA上市,售价50.98万元",
+        "部分Mac应用可停止向Intel机型更新/比亚迪海狮08上市,纯电续航最高900公里/智谱把AI编程套餐搬上天猫,月费118元起",
+        "Suno被音乐人起诉,诉状未提出版权主张/李飞飞的Atlas能用6张图生成1分钟视频/万元级人形机器人Bridge开放软硬件生态",
+        "Altman称AI数据中心耗水担忧被夸大/微信聊天页可快速找回未领红包与未收转账/AI设计的半人马座航线计划2029年启程",
+        "华为,小米,Apple发布会挤进58.5小时/新一代理想MEGA充电10分钟补能500公里/AI应用整治已清理561万余条违规信息"
       ],
-      "selected_cover": "story:e533a220-91ac-5590-94f6-10f959f3edbb",
-      "selected_headline": "小米调整售后规则,二手设备不再享原厂三包/四川4.7级地震被预警成7.7级,省地震局称发布方冒用官方名义/天工机器人运动会拿下5金,Ultra百米跑出9.32秒"
+      "selected_cover": "story:bcf1c687-60b5-5c61-9212-74c888d0bef8",
+      "selected_headline": "微信长按底栏可汇总所有未读聊天/小米三款汽车与18Fold同场亮相/尊界挥手关门失灵,官方称车辆当时挂着D档"
     }
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 68,
-    "snapshot_generated_at": "2026-08-24T09:45:58+00:00",
+    "source_issue_revision": 93,
+    "snapshot_generated_at": "2026-09-02T16:33:11+00:00",
     "public_snapshot": {
-      "digest": "97f8042d774bb4e13412508247afccfe6d296cd4854a30adbdb311513b7c80e5",
-      "generated_at": "2026-08-24T09:45:58+00:00",
-      "image_count": 13,
-      "selected_count": 20,
-      "selected_image_count": 14,
+      "digest": "4fecf28f988c6f1fd00c0f030151cef06e8ec957bfe7163526cc4cafd3563c78",
+      "generated_at": "2026-09-02T16:33:11+00:00",
+      "image_count": 29,
+      "selected_count": 34,
+      "selected_image_count": 29,
       "mode": "explicit_review_operations"
     }
   }

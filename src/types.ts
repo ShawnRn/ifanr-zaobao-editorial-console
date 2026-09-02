@@ -59,6 +59,7 @@ export type Story = {
   sources: Source[]
   claims: Claim[]
   updated_at?: string
+  issue_revision?: number
 }
 
 export type StoryCreateInput = {
@@ -76,6 +77,23 @@ export type StoryCreateInput = {
   published_at?: string
   rumor: boolean
   editorial_reason: string
+}
+
+export type FlashDraftItem = {
+  id: string
+  title: string
+  body: string
+  category: string
+  sourceUrl?: string
+  imageUrl?: string
+  content?: string
+  keyPoints?: string[]
+  publishedDoc?: {
+    document_url: string
+    document_title: string
+  }
+  updatedAt: number
+  authorName?: string
 }
 
 export type CoverCandidate = {
@@ -121,6 +139,40 @@ export type Issue = {
   stories: Story[]
   brand_packages: Record<'appso' | 'ifanr', BrandPackage>
   diagnostics: Record<string, unknown>
+}
+
+export type IssueSummary = Omit<Issue, 'stories' | 'brand_packages' | 'diagnostics'>
+
+export type SocialPostStatus = 'draft' | 'needs_review' | 'ready' | 'published'
+
+export type SocialPost = {
+  id: string
+  issue_id: string
+  story_id: string
+  platform: 'weibo'
+  target_date: string
+  content: string
+  interaction: string
+  tags: string[]
+  status: SocialPostStatus
+  position: number
+  suggested_time: string
+  last_editor: string
+  last_editor_at: string
+  published_url: string
+  published_at: string
+  reposts_count: number | null
+  comments_count: number | null
+  attitudes_count: number | null
+  reads_count: number | null
+  metrics_captured_at: string
+  metrics_source: string
+  created_at: string
+  updated_at: string
+}
+
+export type SocialPostInput = Pick<SocialPost, 'story_id' | 'target_date' | 'content' | 'interaction' | 'tags' | 'status' | 'position' | 'suggested_time'> & {
+  platform?: 'weibo'
 }
 
 export type Job = {
@@ -191,4 +243,3 @@ export type RegistrationSettings = {
   allow_registration: boolean
   registration_invite_code: string
 }
-

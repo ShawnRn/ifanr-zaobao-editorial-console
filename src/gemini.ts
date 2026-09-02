@@ -29,7 +29,7 @@ export const getGeminiModel = () => getLLMConfig().geminiModel.trim() || default
 export const saveGeminiKey = (value: string) => {
   const key = value.trim()
   if (key.length < 16) throw new Error('Gemini API Key 格式不正确')
-  saveLLMConfig({ geminiKey: key })
+  saveLLMConfig({ provider: 'gemini', geminiKey: key })
 }
 
 export const clearGeminiKey = () => saveLLMConfig({ geminiKey: '' })

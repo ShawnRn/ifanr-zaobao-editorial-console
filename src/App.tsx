@@ -5,6 +5,7 @@ import {
   ArrowUpToLine,
   ArrowUpDown,
   BookOpen,
+  CalendarDays,
   Check,
   ChevronRight,
   CircleDot,
@@ -26,6 +27,9 @@ import {
   LoaderCircle,
   Lock,
   Menu,
+  Megaphone,
+  MoreHorizontal,
+  Newspaper,
   PanelRightClose,
   Plus,
   QrCode,
@@ -40,6 +44,7 @@ import {
   Trash2,
   Unlock,
   Upload,
+  User,
   Users,
   WandSparkles,
   X,
@@ -47,20 +52,57 @@ import {
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
 import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, resolveApiAssetUrl, setAuthToken, WorkerRequestError } from './api'
-import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder } from './categories'
+import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder, readerFacingStoryTitle } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
 import { defaultOpenaiBaseUrl, defaultOpenaiModel, getLLMConfig, isLLMConfigured, saveLLMConfig, type LLMProvider } from './llm-gateway'
 import { FlashWorkspace } from './FlashWorkspace'
 import { SettingsDialog } from './SettingsDialog'
-import { WelcomeWorkspace, type FlashDraftItem } from './WelcomeWorkspace'
+import { WelcomeWorkspace } from './WelcomeWorkspace'
+import { WeiboWorkspace } from './WeiboWorkspace'
 import { generateQrSvgDataUri } from './totp'
-import { buildReviewExport, currentHeadlineOptions, downloadText, renderIssueMarkdown } from './review'
+import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
+import { writeClipboardText } from './clipboard'
 import type { EditorialReviewExport } from './review'
-import type { AutomationHandoff, BrandPackage, Issue, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
+import type { AutomationHandoff, BrandPackage, FlashDraftItem, Issue, IssueSummary, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
 import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
 import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
-import ifanrMarkUrl from './assets/ifanr-mark.png'
 const LEGACY_AVATAR_STORAGE_KEY = 'ifanr-editorial-avatar'
+const LEGACY_FLASH_DRAFT_STORAGE_KEY = 'editorial_flash_drafts'
+const flashDraftCacheKey = (accountId: string) => `editorial_flash_drafts:${accountId}`
+
+const readFlashDraftCache = (key: string): FlashDraftItem[] => {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(key) || '[]')
+    if (!Array.isArray(parsed)) return []
+    return parsed.filter((item): item is FlashDraftItem => (
+      Boolean(item)
+      && typeof item.id === 'string'
+      && typeof item.title === 'string'
+      && typeof item.body === 'string'
+      && typeof item.updatedAt === 'number'
+    ))
+  } catch {
+    return []
+  }
+}
+
+export const mergeFlashDrafts = (...groups: FlashDraftItem[][]): FlashDraftItem[] => {
+  const merged = new Map<string, FlashDraftItem>()
+  for (const draft of groups.flat()) {
+    const current = merged.get(draft.id)
+    if (!current || draft.updatedAt >= current.updatedAt) merged.set(draft.id, draft)
+  }
+  return [...merged.values()].sort((first, second) => second.updatedAt - first.updatedAt)
+}
+
+const writeFlashDraftCache = (accountId: string, drafts: FlashDraftItem[]) => {
+  if (!accountId) return
+  try {
+    localStorage.setItem(flashDraftCacheKey(accountId), JSON.stringify(drafts))
+  } catch {
+    // Server remains the source of truth when browser storage is unavailable.
+  }
+}
 
 const categories = ['全部', ...publicationCategories]
 const categoryOrder = publicationCategoryOrder
@@ -69,6 +111,7 @@ const categoryOrder = publicationCategoryOrder
 const weekendWorkbenchCategories = ['大公司', '新产品', '新消费', '好看的'] as const
 const workerRefreshIntervalMs = 25_000
 const draftRecoveryKey = (storyId: string) => `ifanr-editorial-draft-recovery:${storyId}`
+const activeViewStorageKey = 'ifanr-editorial-active-view'
 
 type DraftRecovery = { title: string; body: string; baseTitle: string; baseBody: string; savedAt: string }
 
@@ -153,7 +196,23 @@ const sourceLabel: Record<string, string> = {
   unknown: '待追源',
 }
 
-type View = 'home' | 'draft' | 'candidates' | 'trash' | 'brands' | 'weekend' | 'flash'
+type View = 'home' | 'draft' | 'weibo' | 'candidates' | 'trash' | 'brands' | 'weekend' | 'flash'
+const views = new Set<View>(['home', 'draft', 'weibo', 'candidates', 'trash', 'brands', 'weekend', 'flash'])
+const secondaryViews: Array<{ id: View; label: string }> = [
+  { id: 'candidates', label: '候选库' },
+  { id: 'trash', label: '回收站' },
+  { id: 'brands', label: '标题' },
+  { id: 'weekend', label: '周末备选' },
+]
+
+function loadActiveView(): View {
+  try {
+    const saved = localStorage.getItem(activeViewStorageKey)
+    return saved && views.has(saved as View) ? saved as View : 'home'
+  } catch {
+    return 'home'
+  }
+}
 type WorkerConnection = {
   status: 'checking' | 'connected' | 'pages' | 'failed' | 'invalid'
   detail: string
@@ -1056,9 +1115,11 @@ async function hashPassword(username: string, password: string): Promise<string>
   return sha256(str)
 }
 
+type AuthLoginResult = 'authenticated' | 'two_factor_required' | 'failed'
+
 function AuthDialog({
   isReadOnly, authUser, busy, error, closing = false, has2FA, onClose, onLogin,
-  onChangePassword, onStart2FA, onEnable2FA, onDisable2FA, onLogout,
+  onClearError, onChangePassword, onStart2FA, onEnable2FA, onDisable2FA, onLogout, initialMode = 'login', initialInviteCode = '',
 }: {
   isReadOnly: boolean
   authUser: string
@@ -1067,20 +1128,27 @@ function AuthDialog({
   closing?: boolean
   has2FA: boolean
   onClose: () => void
-  onLogin: (username: string, password: string, totpCode?: string) => void
+  onLogin: (username: string, password: string, totpCode?: string) => Promise<AuthLoginResult>
+  onClearError: () => void
   onChangePassword: (currentPassword: string, newPassword: string) => void
   onStart2FA: () => Promise<{ secret: string; otpauth_url: string }>
   onEnable2FA: (totpCode: string) => Promise<string[]>
   onDisable2FA: (totpCode: string) => Promise<void>
   onLogout: () => void
+  initialMode?: 'login' | 'register'
+  initialInviteCode?: string
 }) {
-  const [authMode, setAuthMode] = useState<'login' | 'register'>('login')
-  const [username, setUsername] = useState('Shawn Rain')
+  const [authMode, setAuthMode] = useState<'login' | 'register'>(initialMode)
+  const [username, setUsername] = useState(initialMode === 'register' ? '' : 'Shawn Rain')
   const [displayName, setDisplayName] = useState('')
-  const [inviteCode, setInviteCode] = useState('')
+  const [inviteCode, setInviteCode] = useState(initialInviteCode)
   const [password, setPassword] = useState('')
   const [confirmRegisterPassword, setConfirmRegisterPassword] = useState('')
   const [totpCode, setTotpCode] = useState('')
+  const [loginNeedsSecondFactor, setLoginNeedsSecondFactor] = useState(false)
+  const [loginFactorMode, setLoginFactorMode] = useState<'totp' | 'recovery'>('totp')
+  const [loginOtpFocused, setLoginOtpFocused] = useState(false)
+  const loginOtpRef = useRef<HTMLInputElement>(null)
   const [registerBusy, setRegisterBusy] = useState(false)
   const [registerError, setRegisterError] = useState('')
 
@@ -1195,6 +1263,128 @@ function AuthDialog({
     setVerifyTotpInput('')
     setTwoFactorError('')
     setCopyMessage('')
+  }
+
+  const resetLoginChallenge = () => {
+    setLoginNeedsSecondFactor(false)
+    setLoginFactorMode('totp')
+    setTotpCode('')
+    setLoginOtpFocused(false)
+    onClearError()
+  }
+
+  const requestLogin = async (factor = '') => {
+    onClearError()
+    const result = await onLogin(username, password, factor)
+    if (result === 'two_factor_required') {
+      setLoginNeedsSecondFactor(true)
+      setLoginFactorMode('totp')
+      setTotpCode('')
+    }
+    return result
+  }
+
+  const verifyLoginFactor = async (factor: string) => {
+    const result = await requestLogin(factor)
+    if (result === 'failed' && loginFactorMode === 'totp') {
+      setTotpCode('')
+      window.setTimeout(() => loginOtpRef.current?.focus(), 0)
+    }
+  }
+
+  useEffect(() => {
+    if (loginNeedsSecondFactor && loginFactorMode === 'totp') loginOtpRef.current?.focus()
+  }, [loginFactorMode, loginNeedsSecondFactor])
+
+  if (isReadOnly) {
+    const isLogin = authMode === 'login'
+    if (isLogin && loginNeedsSecondFactor) {
+      const digits = cleanTotp(totpCode).split('')
+      const recoveryReady = secondFactorReady(totpCode) && !/^\d{6}$/.test(totpCode)
+      return <div className={`modal-backdrop auth-entry-backdrop ${closing ? 'closing' : ''}`} role="presentation">
+        <form className={`auth-dialog auth-entry-dialog auth-two-factor-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="auth-two-factor-title" onSubmit={(event) => {
+          event.preventDefault()
+          if (loginFactorMode === 'recovery' && recoveryReady) void verifyLoginFactor(totpCode)
+        }}>
+          <button type="button" className="auth-entry-close" aria-label="关闭并进入只读模式" onClick={onClose}><X size={18} /></button>
+          <div className="auth-entry-heading auth-two-factor-heading">
+            <h2 id="auth-two-factor-title">双重认证</h2>
+            <p>账号 <strong>{username}</strong> 已配置 Authenticator。{loginFactorMode === 'totp' ? '请输入应用中显示的 6 位验证码。' : '请输入保存的单次备用码。'}</p>
+          </div>
+          {loginFactorMode === 'totp' ? <>
+            <div className={`auth-otp-entry${loginOtpFocused ? ' focused' : ''}${error ? ' invalid' : ''}`} onClick={() => loginOtpRef.current?.focus()}>
+              <input
+                ref={loginOtpRef}
+                aria-label="6 位安全验证码"
+                autoComplete="one-time-code"
+                inputMode="numeric"
+                maxLength={6}
+                value={cleanTotp(totpCode)}
+                onFocus={() => setLoginOtpFocused(true)}
+                onBlur={() => setLoginOtpFocused(false)}
+                onChange={(event) => {
+                  const next = cleanTotp(event.target.value)
+                  setTotpCode(next)
+                  onClearError()
+                  if (next.length === 6 && !busy) void verifyLoginFactor(next)
+                }}
+              />
+              <div className="auth-otp-boxes" aria-hidden="true">
+                {Array.from({ length: 6 }, (_, index) => <span className={`${digits[index] ? 'filled' : ''}${loginOtpFocused && index === digits.length && digits.length < 6 ? ' active' : ''}`} key={index}>{digits[index] || ''}</span>)}
+              </div>
+            </div>
+            <div className="auth-two-factor-status" aria-live="polite">{busy ? <><LoaderCircle size={14} className="spin" />正在验证…</> : '输入完成后将自动验证'}</div>
+          </> : <div className="auth-entry-fields auth-recovery-entry">
+            <label><span>备用码</span><input autoFocus className="auth-code-input" autoComplete="one-time-code" maxLength={9} value={totpCode} placeholder="XXXX-XXXX" onChange={(event) => { setTotpCode(cleanSecondFactor(event.target.value)); onClearError() }} /></label>
+            <button type="submit" className="auth-entry-submit" disabled={busy || !recoveryReady}>{busy ? <LoaderCircle size={16} className="spin" /> : null}验证并登录</button>
+          </div>}
+          {error ? <p className="auth-error-msg auth-two-factor-error" role="alert">{error}</p> : null}
+          <div className="auth-two-factor-actions">
+            <button type="button" onClick={() => { setLoginFactorMode((current) => current === 'totp' ? 'recovery' : 'totp'); setTotpCode(''); onClearError() }}>{loginFactorMode === 'totp' ? '使用备用码' : '使用 Authenticator 验证码'}</button>
+            <button type="button" onClick={resetLoginChallenge}>← 返回登录</button>
+          </div>
+        </form>
+      </div>
+    }
+    return <div className={`modal-backdrop auth-entry-backdrop ${closing ? 'closing' : ''}`} role="presentation">
+      <form className={`auth-dialog auth-entry-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="auth-dialog-title" onSubmit={async (event) => {
+        event.preventDefault()
+        if (isLogin) await requestLogin()
+        else void handleRegisterSubmit()
+      }}>
+        <button type="button" className="auth-entry-close" aria-label="关闭并进入只读模式" onClick={onClose}><X size={18} /></button>
+        <div className="auth-entry-brand"><Newspaper size={28} /></div>
+        <div className="auth-entry-heading">
+          <h2 id="auth-dialog-title">{isLogin ? '登录早报编辑台' : '注册采编账号'}</h2>
+          <p>{isLogin ? '登录后可编辑早报、撰写快讯并使用团队能力。仅已配置 Authenticator 的账号会在下一步验证。' : '加入爱范儿早报与快讯采编团队。'}</p>
+        </div>
+        <div className="auth-entry-fields">
+          <label><span>用户名</span><input autoFocus autoComplete="username" type="text" value={username} placeholder={isLogin ? '请输入用户名' : '例如：zhangsan'} onChange={(event) => { setUsername(event.target.value); resetLoginChallenge() }} /></label>
+          {!isLogin ? <label><span>显示姓名</span><input type="text" value={displayName} placeholder="例如：张三" onChange={(event) => setDisplayName(event.target.value)} /></label> : null}
+          <label><span>密码</span><input autoComplete={isLogin ? 'current-password' : 'new-password'} type="password" value={password} placeholder={isLogin ? '请输入登录密码' : '设置不少于 6 位的密码'} onChange={(event) => { setPassword(event.target.value); resetLoginChallenge() }} /></label>
+          {!isLogin ? <label><span>确认密码</span><input autoComplete="new-password" type="password" value={confirmRegisterPassword} placeholder="再次输入密码" onChange={(event) => setConfirmRegisterPassword(event.target.value)} /></label> : null}
+          {!isLogin ? <label><span>注册邀请码</span><input type="text" value={inviteCode} readOnly={Boolean(initialInviteCode)} placeholder="请输入团队邀请码" onChange={(event) => setInviteCode(event.target.value)} />{initialInviteCode ? <small>已从邀请链接安全预填</small> : null}</label> : null}
+          {!isLogin && confirmRegisterPassword && password !== confirmRegisterPassword ? <p className="auth-error-msg">两次输入的密码不一致</p> : null}
+          {(isLogin ? error : registerError) ? <p className="auth-error-msg" role="alert">{isLogin ? error : registerError}</p> : null}
+        </div>
+        <button type="submit" className="auth-entry-submit" disabled={isLogin
+          ? busy || !username.trim() || !password.trim()
+          : registerBusy || !username.trim() || password.length < 6 || password !== confirmRegisterPassword}>
+          {(isLogin ? busy : registerBusy) ? <LoaderCircle size={16} className="spin" /> : null}{isLogin ? '登录' : '创建账号'}
+        </button>
+        <div className="auth-entry-divider"><span>{isLogin ? '还没有账号？' : '已有账号？'}</span></div>
+        <button type="button" className="auth-entry-switch" onClick={() => {
+          const nextMode = isLogin ? 'register' : 'login'
+          setAuthMode(nextMode)
+          setRegisterError('')
+          setPassword('')
+          setConfirmRegisterPassword('')
+          resetLoginChallenge()
+          if (nextMode === 'register' && username === 'Shawn Rain') setUsername('')
+        }}>{isLogin ? '注册新成员账号' : '返回登录'}</button>
+        <p className="auth-entry-readonly-hint">点击左上角 × 可先以只读模式浏览。</p>
+      </form>
+    </div>
   }
 
   return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}>
@@ -1363,6 +1553,7 @@ export function App() {
   })
   const [systemIsDark, setSystemIsDark] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches)
   const [issue, setIssue] = useState<Issue | null>(null)
+  const [recentIssues, setRecentIssues] = useState<IssueSummary[]>([])
   const [baseIssue, setBaseIssue] = useState<Issue | null>(null)
   const [reviewSessionId, setReviewSessionId] = useState('')
   const [dataMode, setDataMode] = useState<'worker' | 'static' | 'offline'>('offline')
@@ -1375,8 +1566,8 @@ export function App() {
   const [category, setCategory] = useState('全部')
   const [activeDraftSection, setActiveDraftSection] = useState('全部')
   const [candidateStatus, setCandidateStatus] = useState('all')
-  const [view, setView] = useState<View>('home')
-  const [activeView, setActiveView] = useState<View>('home')
+  const [view, setView] = useState<View>(loadActiveView)
+  const [activeView, setActiveView] = useState<View>(loadActiveView)
   const [settingsTab, setSettingsTab] = useState<'ai' | 'worker' | 'appearance' | 'users'>('ai')
   const [viewMotion, setViewMotion] = useState<'idle' | 'out' | 'in'>('idle')
   const [outlineCollapsed, setOutlineCollapsed] = useState(() => localStorage.getItem('ifanr-editorial-outline-collapsed') === '1')
@@ -1416,45 +1607,108 @@ export function App() {
   const [settingsClosing, setSettingsClosing] = useState(false)
   const [flashInitialStory, setFlashInitialStory] = useState<Story | null>(null)
   const [activeDraft, setActiveDraft] = useState<FlashDraftItem | null>(null)
-  const [drafts, setDrafts] = useState<FlashDraftItem[]>(() => {
-    try {
-      const raw = localStorage.getItem('editorial_flash_drafts')
-      return raw ? JSON.parse(raw) : []
-    } catch {
-      return []
+  const [flashSessionId, setFlashSessionId] = useState(0)
+  const [authAccountId, setAuthAccountId] = useState('')
+  const [drafts, setDrafts] = useState<FlashDraftItem[]>([])
+  const [draftSyncState, setDraftSyncState] = useState<'idle' | 'syncing' | 'synced' | 'offline'>('idle')
+  const draftWriteVersionRef = useRef<Record<string, number>>({})
+
+  const loadAccountDrafts = useCallback(async (accountId: string) => {
+    if (!accountId || isPagesDeployment) {
+      setDrafts([])
+      setDraftSyncState('idle')
+      return
     }
-  })
+    setDraftSyncState('syncing')
+    const accountCache = readFlashDraftCache(flashDraftCacheKey(accountId))
+    const legacyDrafts = readFlashDraftCache(LEGACY_FLASH_DRAFT_STORAGE_KEY)
+    const localDrafts = mergeFlashDrafts(accountCache, legacyDrafts)
+    try {
+      const remoteDrafts = await api.flashDrafts()
+      const remoteById = new Map(remoteDrafts.map((draft) => [draft.id, draft]))
+      const pendingUploads = localDrafts.filter((draft) => (
+        !remoteById.has(draft.id) || draft.updatedAt > (remoteById.get(draft.id)?.updatedAt || 0)
+      ))
+      const uploaded: FlashDraftItem[] = []
+      for (const draft of pendingUploads) uploaded.push(await api.upsertFlashDraft(draft))
+      const next = mergeFlashDrafts(remoteDrafts, uploaded, localDrafts)
+      setDrafts(next)
+      writeFlashDraftCache(accountId, next)
+      if (legacyDrafts.length) {
+        try { localStorage.removeItem(LEGACY_FLASH_DRAFT_STORAGE_KEY) } catch { /* no-op */ }
+      }
+      setDraftSyncState('synced')
+    } catch {
+      setDrafts(localDrafts)
+      writeFlashDraftCache(accountId, localDrafts)
+      setDraftSyncState('offline')
+    }
+  }, [])
 
-  const saveDraft = (draft: FlashDraftItem) => {
-    setDrafts((prev) => {
-      const filtered = prev.filter((d) => d.id !== draft.id)
-      const next = [draft, ...filtered]
-      try {
-        localStorage.setItem('editorial_flash_drafts', JSON.stringify(next))
-      } catch {}
+  const saveDraft = useCallback((draft: FlashDraftItem) => {
+    draftWriteVersionRef.current[draft.id] = draft.updatedAt
+    setDrafts((previous) => {
+      const next = mergeFlashDrafts(previous, [draft])
+      writeFlashDraftCache(authAccountId, next)
+      if (!authAccountId) {
+        try { localStorage.setItem(LEGACY_FLASH_DRAFT_STORAGE_KEY, JSON.stringify(next)) } catch { /* no-op */ }
+      }
       return next
     })
-  }
+    if (!authAccountId || isPagesDeployment) return
+    setDraftSyncState('syncing')
+    void api.upsertFlashDraft(draft)
+      .then((saved) => {
+        setDrafts((previous) => {
+          const current = previous.find((item) => item.id === saved.id)
+          const next = current && current.updatedAt > saved.updatedAt
+            ? previous
+            : mergeFlashDrafts(previous, [saved])
+          writeFlashDraftCache(authAccountId, next)
+          return next
+        })
+        if (draftWriteVersionRef.current[draft.id] === draft.updatedAt) setDraftSyncState('synced')
+      })
+      .catch(() => {
+        if (draftWriteVersionRef.current[draft.id] === draft.updatedAt) setDraftSyncState('offline')
+      })
+  }, [authAccountId])
 
-  const deleteDraft = (id: string) => {
-    setDrafts((prev) => {
-      const next = prev.filter((d) => d.id !== id)
-      try {
-        localStorage.setItem('editorial_flash_drafts', JSON.stringify(next))
-      } catch {}
+  const deleteDraft = useCallback((id: string) => {
+    let deleted: FlashDraftItem | undefined
+    setDrafts((previous) => {
+      deleted = previous.find((draft) => draft.id === id)
+      const next = previous.filter((draft) => draft.id !== id)
+      writeFlashDraftCache(authAccountId, next)
       return next
     })
-  }
+    if (!authAccountId || isPagesDeployment) return
+    setDraftSyncState('syncing')
+    void api.deleteFlashDraft(id)
+      .then(() => setDraftSyncState('synced'))
+      .catch(() => {
+        if (deleted) {
+          setDrafts((previous) => {
+            const next = mergeFlashDrafts(previous, [deleted as FlashDraftItem])
+            writeFlashDraftCache(authAccountId, next)
+            return next
+          })
+        }
+        setDraftSyncState('offline')
+      })
+  }, [authAccountId])
 
   const handleOpenDraft = (draft: FlashDraftItem) => {
     setActiveDraft(draft)
     setFlashInitialStory(null)
+    setFlashSessionId((current) => current + 1)
     switchView('flash')
   }
 
   const handleNewFlashNews = () => {
     setActiveDraft(null)
     setFlashInitialStory(null)
+    setFlashSessionId((current) => current + 1)
     switchView('flash')
   }
 
@@ -1475,7 +1729,7 @@ export function App() {
   const [openaiModel, setOpenaiModel] = useState(() => getLLMConfig().openaiModel)
   const [profileMessage, setProfileMessage] = useState('')
   const [showAuthDialog, setShowAuthDialog] = useState(false)
-  const [authUser, setAuthUser] = useState('Shawn Rain')
+  const [authUser, setAuthUser] = useState('')
   const [isReadOnly, setIsReadOnly] = useState(isPagesDeployment)
   const [authBusy, setAuthBusy] = useState(false)
   const [authMessage, setAuthMessage] = useState('')
@@ -1489,6 +1743,12 @@ export function App() {
   const avatarTriggerRef = useRef<HTMLButtonElement | null>(null)
   const avatarCloseTimerRef = useRef<number | null>(null)
   const avatarMigrationRef = useRef(false)
+  const authPromptShownRef = useRef(false)
+  const invitationCode = useMemo(() => {
+    const match = window.location.hash.match(/^#register\/(.+)$/)
+    if (!match) return ''
+    try { return decodeURIComponent(match[1]) } catch { return '' }
+  }, [])
   const sidebarItemRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
   useEffect(() => {
@@ -1524,21 +1784,38 @@ export function App() {
     if (isPagesDeployment) {
       setAuthToken('')
       setIsReadOnly(true)
+      setAuthUser('')
       setHas2FA(false)
       setAvatarUrl(null)
+      setAuthAccountId('')
+      setDrafts([])
+      setDraftSyncState('idle')
       return
     }
     try {
       const status = await api.authStatus()
       setIsReadOnly(status.read_only)
       setHas2FA(status.has_2fa)
-      if (status.username) setAuthUser(status.username)
+      setAuthUser(status.authenticated ? String(status.display_name || status.username || '').trim() : '')
+      const accountId = status.authenticated ? String(status.user_id || status.username || '') : ''
+      setAuthAccountId(accountId)
+      if (accountId) await loadAccountDrafts(accountId)
+      else {
+        setDrafts([])
+        setDraftSyncState('idle')
+      }
       const serverAvatarUrl = status.avatar_url ? resolveApiAssetUrl(status.avatar_url) : null
       const legacyAvatar = localStorage.getItem(LEGACY_AVATAR_STORAGE_KEY)
-      setAvatarUrl(serverAvatarUrl || (status.authenticated ? legacyAvatar : null))
+      const canMigrateLegacyAvatar = Boolean(status.authenticated && status.is_admin)
+      setAvatarUrl(serverAvatarUrl || (canMigrateLegacyAvatar ? legacyAvatar : null))
+      if (!status.authenticated && !authPromptShownRef.current) {
+        authPromptShownRef.current = true
+        setClosingOverlay(null)
+        setShowAuthDialog(true)
+      }
       if (serverAvatarUrl && legacyAvatar) {
         localStorage.removeItem(LEGACY_AVATAR_STORAGE_KEY)
-      } else if (status.authenticated && legacyAvatar && !avatarMigrationRef.current) {
+      } else if (canMigrateLegacyAvatar && legacyAvatar && !avatarMigrationRef.current) {
         const legacyFile = legacyAvatarFile(legacyAvatar)
         if (legacyFile) {
           avatarMigrationRef.current = true
@@ -1552,17 +1829,17 @@ export function App() {
         }
       }
     } catch {
-      // ignore
+      setDraftSyncState((current) => current === 'syncing' ? 'offline' : current)
     }
-  }, [])
+  }, [loadAccountDrafts])
 
   useEffect(() => {
     void checkAuthStatus()
   }, [checkAuthStatus, dataMode])
 
-  const doAuthLogin = async (usernameInput: string, passwordInput: string, totpInput?: string) => {
-    if (isPagesDeployment) return
-    if (!usernameInput.trim() || !passwordInput.trim()) return
+  const doAuthLogin = async (usernameInput: string, passwordInput: string, totpInput?: string): Promise<AuthLoginResult> => {
+    if (isPagesDeployment) return 'failed'
+    if (!usernameInput.trim() || !passwordInput.trim()) return 'failed'
     setAuthBusy(true)
     setAuthMessage('正在验证安全登录…')
     try {
@@ -1574,8 +1851,14 @@ export function App() {
       await checkAuthStatus()
       setAuthMessage('')
       closeOverlay('auth')
+      return 'authenticated'
     } catch (err) {
+      if (err instanceof WorkerRequestError && err.code === 'two_factor_required') {
+        setAuthMessage('')
+        return 'two_factor_required'
+      }
       setAuthMessage(err instanceof Error ? err.message : '验证失败，请检查用户名或密码')
+      return 'failed'
     } finally {
       setAuthBusy(false)
     }
@@ -1590,7 +1873,11 @@ export function App() {
     } finally {
       setAuthToken('')
       setIsReadOnly(true)
+      setAuthUser('')
       setAvatarUrl(null)
+      setAuthAccountId('')
+      setDrafts([])
+      setDraftSyncState('idle')
       setAuthMessage('')
       closeOverlay('auth')
     }
@@ -1701,15 +1988,23 @@ export function App() {
   const brandToastTimerRef = useRef<number | null>(null)
   const viewEnterTimerRef = useRef<number | null>(null)
   const issueRef = useRef<Issue | null>(null)
+  const viewRef = useRef<View>(view)
   const dataModeRef = useRef(dataMode)
   const workerRefreshInFlightRef = useRef(false)
   const reorderInFlightRef = useRef(false)
   const dragJustEndedAtRef = useRef(0)
   const draggedStoryIdRef = useRef<string | null>(null)
   const fullIssueLoadRef = useRef<Promise<void> | null>(null)
+  const issueCacheRef = useRef<Map<string, Issue>>(new Map())
+  const issuePrefetchRef = useRef<Map<string, Promise<Issue>>>(new Map())
+  const issueSwitchSequenceRef = useRef(0)
 
   useEffect(() => { issueRef.current = issue }, [issue])
+  useEffect(() => { viewRef.current = view }, [view])
   useEffect(() => { dataModeRef.current = dataMode }, [dataMode])
+  useEffect(() => {
+    try { localStorage.setItem(activeViewStorageKey, view) } catch { /* no-op */ }
+  }, [view])
   useEffect(() => {
     if (viewMotion === 'idle') setActiveView(view)
   }, [view, viewMotion])
@@ -1773,6 +2068,7 @@ export function App() {
       const snapshotTime = String(fallback.diagnostics?.snapshot_generated_at || fallback.updated_at || '')
       setWorkerConnection({ status: 'pages', detail: `${detail} · ${fallback.publication_date}${snapshotTime ? ` · 快照 ${snapshotTime}` : ''}`, url: workerUrl })
       setIssue(fallback)
+      setRecentIssues([fallback])
       setBaseIssue(structuredClone(fallback))
       setReviewSessionId('')
       setSelectedStoryId(null)
@@ -1796,14 +2092,17 @@ export function App() {
     }
     setWorkerConnection({ status: 'checking', detail: '正在测试 Worker 连接', url: workerUrl })
     try {
-      const [health, current] = await Promise.all([
+      const [health, current, recent] = await Promise.all([
         api.health(),
-        api.currentIssue('draft').catch(() => api.importLatest()),
+        api.currentIssue(viewRef.current === 'candidates' || viewRef.current === 'trash' ? 'full' : 'draft').catch(() => api.importLatest()),
+        api.recentIssues(3).catch(() => []),
       ])
       setDataMode('worker')
       setRepoRuntimeAccess(health.repo_runtime_access)
       const normalizedIssue = issueWithMetrics(current, current.stories)
+      issueCacheRef.current.set(normalizedIssue.id, normalizedIssue)
       setIssue(normalizedIssue)
+      setRecentIssues(recent.length ? recent : [normalizedIssue])
       setBaseIssue(structuredClone(normalizedIssue))
       setReviewSessionId('')
       setSelectedStoryId(null)
@@ -1826,7 +2125,8 @@ export function App() {
         setBaseIssue(null)
         setDataMode('offline')
         setWorkerConnection({ status: 'failed', detail: `Worker 与 Pages 快照均不可达：${workerMessage}`, url: workerUrl })
-        setError(snapshotError instanceof Error ? snapshotError.message : 'Pages 快照读取失败')
+        const snapshotMessage = snapshotError instanceof Error ? snapshotError.message : 'Pages 快照读取失败'
+        setError(`${workerMessage}；${snapshotMessage}`)
       }
     } finally { setLoading(false) }
   }, [])
@@ -1836,9 +2136,10 @@ export function App() {
     if (!currentIssue?.diagnostics?._story_scope || dataModeRef.current !== 'worker') return
     if (fullIssueLoadRef.current) return fullIssueLoadRef.current
     setLoadingIssueDetails(true)
-    const task = api.currentIssue()
+    const task = api.getIssue(currentIssue.id)
       .then((fullIssue) => {
         const normalized = issueWithMetrics(fullIssue, fullIssue.stories)
+        issueCacheRef.current.set(normalized.id, normalized)
         if (issueRef.current?.id === normalized.id) issueRef.current = normalized
         setIssue((current) => current?.id === normalized.id ? normalized : current)
         setBaseIssue((current) => current?.id === normalized.id ? structuredClone(normalized) : current)
@@ -1858,15 +2159,31 @@ export function App() {
     void loadIssue(false)
   }, [loadIssue])
 
+  useEffect(() => {
+    if (dataMode !== 'worker') return
+    for (const summary of recentIssues.slice(0, 3)) {
+      if (issueCacheRef.current.has(summary.id) || issuePrefetchRef.current.has(summary.id)) continue
+      const task = api.getIssue(summary.id)
+        .then((loaded) => {
+          const normalized = issueWithMetrics(loaded, loaded.stories)
+          issueCacheRef.current.set(normalized.id, normalized)
+          return normalized
+        })
+        .finally(() => issuePrefetchRef.current.delete(summary.id))
+      issuePrefetchRef.current.set(summary.id, task)
+    }
+  }, [dataMode, recentIssues])
+
   const refreshWorkerIssue = useCallback(async () => {
     const currentIssue = issueRef.current
     if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || workerRefreshInFlightRef.current || reorderInFlightRef.current) return
     workerRefreshInFlightRef.current = true
     try {
       const latestVersion = await api.currentIssueVersion()
-      if (latestVersion.id === currentIssue.id && latestVersion.revision === currentIssue.revision) return
+      if (latestVersion.id !== currentIssue.id || latestVersion.revision === currentIssue.revision) return
       const latest = await api.currentIssue()
       const refreshed = issueWithMetrics(latest, latest.stories)
+      issueCacheRef.current.set(refreshed.id, refreshed)
       const scrollTop = draftScrollRef.current?.scrollTop
       setIssue(refreshed)
       setBaseIssue(structuredClone(refreshed))
@@ -1882,6 +2199,44 @@ export function App() {
       workerRefreshInFlightRef.current = false
     }
   }, [])
+
+  const switchIssue = useCallback(async (issueId: string) => {
+    if (!issueId || issueId === issueRef.current?.id || dataModeRef.current !== 'worker') return
+    const sequence = ++issueSwitchSequenceRef.current
+    const cached = issueCacheRef.current.get(issueId)
+    const applyIssue = (selected: Issue) => {
+      if (sequence !== issueSwitchSequenceRef.current) return
+      issueRef.current = selected
+      setIssue(selected)
+      setBaseIssue(structuredClone(selected))
+      setReviewSessionId('')
+      setSelectedStoryId(null)
+      setQuery('')
+      setCategory('全部')
+      setActiveDraftSection('全部')
+    }
+    if (cached) applyIssue(cached)
+    else setLoading(true)
+    setError('')
+    try {
+      const prefetched = issuePrefetchRef.current.get(issueId)
+      const selected = cached || await (prefetched || api.getIssue(issueId))
+      const normalized = issueWithMetrics(selected, selected.stories)
+      issueCacheRef.current.set(normalized.id, normalized)
+      applyIssue(normalized)
+      if (cached) {
+        void api.getIssue(issueId).then((fresh) => {
+          const refreshed = issueWithMetrics(fresh, fresh.stories)
+          issueCacheRef.current.set(refreshed.id, refreshed)
+          if (issueRef.current?.id === refreshed.id && sequence === issueSwitchSequenceRef.current) applyIssue(refreshed)
+        }).catch(() => undefined)
+      }
+    } catch (switchError) {
+      showOperationError(switchError instanceof Error ? switchError.message : '刊期切换失败')
+    } finally {
+      if (!cached && sequence === issueSwitchSequenceRef.current) setLoading(false)
+    }
+  }, [showOperationError])
 
   useEffect(() => {
     if (dataMode !== 'worker') return
@@ -2092,7 +2447,10 @@ export function App() {
           })
       }
     }
-    setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
+    setIssue((current) => current ? issueWithMetrics({
+      ...current,
+      revision: updated.issue_revision ?? current.revision,
+    }, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
     return updated
   }
 
@@ -2360,16 +2718,11 @@ export function App() {
     if (dataMode === 'static') return
     try {
       const remoteIssue = await api.reorder(issue.id, ordered.map((item) => item.id), targetCategory)
-      // Only update if remote order differs
-      const sectionOrder = (value: Issue) => value.stories
-        .filter((item) => isDraftStory(item) && (isSaturdayIssue ? weekendWorkbenchSection(item) === targetCategory : item.category === targetCategory))
-        .sort((a, b) => a.position - b.position)
-        .map((item) => item.id)
-        .join(',')
-      if (sectionOrder(remoteIssue) !== sectionOrder(optimistic)) {
-        issueRef.current = remoteIssue
-        setIssue(remoteIssue)
-      }
+      // The optimistic order normally matches the server response, but the
+      // server also increments the issue revision. Always adopt that response
+      // so an immediate Bot publish carries the revision produced by reorder.
+      issueRef.current = remoteIssue
+      setIssue(remoteIssue)
     } catch (moveError) {
       setIssue(issue)
       showOperationError(moveError instanceof Error ? moveError.message : '调整顺序失败')
@@ -2391,7 +2744,10 @@ export function App() {
     if (dataMode === 'static') return
     try {
       const updated = await api.patchStory(storyId, { category: targetCategory, position: targetPosition })
-      setIssue((current) => current ? issueWithMetrics(current, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
+      setIssue((current) => current ? issueWithMetrics({
+        ...current,
+        revision: updated.issue_revision ?? current.revision,
+      }, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
     } catch (moveError) {
       setIssue(previous)
       showOperationError(moveError instanceof Error ? moveError.message : '移动栏目失败')
@@ -2612,7 +2968,12 @@ export function App() {
   }
 
   const openFlashForStory = (story: Story) => {
+    // A story-to-flash action always starts a fresh draft. Keeping the last
+    // opened account draft here makes its generated title/body win over the
+    // selected story because FlashWorkspace intentionally prioritizes drafts.
+    setActiveDraft(null)
     setFlashInitialStory(story)
+    setFlashSessionId((current) => current + 1)
     switchView('flash')
   }
 
@@ -2667,22 +3028,36 @@ export function App() {
       : workerConnection.status === 'pages'
         ? 'Pages 快照'
         : 'Worker 未连接'
+  const activeSecondaryView = secondaryViews.find((item) => item.id === activeView)
 
   return (
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-lockup">
           <img className="brand-logo" src={effectiveTheme === 'dark' ? ifanrLogoDarkUrl : ifanrLogoLightUrl} alt="爱范儿 iFanr" />
-          <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT · {issue?.publication_date || '未连接刊期'}</span></div>
+          <div className="brand-product"><strong>早报编辑台</strong><span>BOT DRAFT</span></div>
+          <label className="issue-switcher" title="切换最近 3 天刊期">
+            <CalendarDays size={14} />
+            <span>刊期</span>
+            <select value={issue?.id || ''} disabled={dataMode !== 'worker' || recentIssues.length < 2} onChange={(event) => void switchIssue(event.target.value)}>
+              {recentIssues.map((item) => <option value={item.id} key={item.id}>{item.publication_date.replaceAll('-', '.')}</option>)}
+              {!recentIssues.length ? <option value="">未连接</option> : null}
+            </select>
+          </label>
         </div>
         <nav className="view-switcher" aria-label="编辑台视图">
-          <button className={activeView === 'home' ? 'active' : ''} onClick={() => switchView('home')} type="button" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><LayoutDashboard size={13} style={{ color: activeView === 'home' ? 'inherit' : 'var(--brand)' }} />主页</button>
-          <button className={activeView === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button">早报稿</button>
-          <button className={activeView === 'candidates' ? 'active' : ''} onClick={() => switchView('candidates')} type="button">候选库</button>
-          <button className={activeView === 'trash' ? 'active' : ''} onClick={() => switchView('trash')} type="button">回收站</button>
-          <button className={activeView === 'brands' ? 'active' : ''} onClick={() => switchView('brands')} type="button">标题</button>
-          <button className={activeView === 'weekend' ? 'active' : ''} onClick={() => switchView('weekend')} type="button">周末备选</button>
-          <button className={activeView === 'flash' ? 'active' : ''} onClick={() => switchView('flash')} type="button" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Zap size={13} style={{ color: activeView === 'flash' ? 'inherit' : 'var(--brand)' }} />即时快讯</button>
+          <button className={activeView === 'home' ? 'active' : ''} onClick={() => switchView('home')} type="button"><LayoutDashboard size={13} />主页</button>
+          <button aria-label="早报稿" className={activeView === 'draft' ? 'active' : ''} onClick={() => switchView('draft')} type="button"><Newspaper size={13} />早报</button>
+          <button className={activeView === 'weibo' ? 'active' : ''} onClick={() => switchView('weibo')} type="button"><Megaphone size={13} />社媒</button>
+          <button aria-label="即时快讯" className={activeView === 'flash' ? 'active' : ''} onClick={() => switchView('flash')} type="button"><Zap size={13} />快讯</button>
+          <label className={`view-more ${activeSecondaryView ? 'active' : ''}`}>
+            <MoreHorizontal size={13} />
+            <span>{activeSecondaryView?.label || '更多'}</span>
+            <select aria-label="更多工作区" value={activeSecondaryView?.id || ''} onChange={(event) => { if (event.target.value) switchView(event.target.value as View) }}>
+              <option value="">更多</option>
+              {secondaryViews.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+            </select>
+          </label>
         </nav>
         <div className="topbar-actions">
           {!isPagesDeployment && !isReadOnly ? <button ref={connectionTriggerRef} className={`connection connection-${workerConnection.status}`} type="button" title={workerConnection.detail} onClick={() => { setClosingOverlay(null); setShowAuthDialog(true) }}>
@@ -2696,7 +3071,7 @@ export function App() {
             ref={avatarTriggerRef}
             className={`avatar-button ${showAvatarMenu && !avatarMenuClosing ? 'active' : ''}`}
             type="button"
-            title={isReadOnly ? 'ifanr' : authUser}
+            title={isReadOnly ? 'ifanr' : (authUser || 'ifanr')}
             aria-label="账号"
             onClick={() => {
               if (showAvatarMenu && !avatarMenuClosing) closeAvatarMenu()
@@ -2705,7 +3080,7 @@ export function App() {
           >
             {avatarUrl
               ? <img src={avatarUrl} alt="头像" />
-              : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
+              : <User size={18} className="avatar-placeholder-icon" aria-hidden="true" />}
           </button> : null}
           <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
         </div>
@@ -2713,10 +3088,10 @@ export function App() {
         {!isPagesDeployment && showAvatarMenu ? <div ref={avatarMenuRef} className={`avatar-menu ${avatarMenuClosing ? 'closing' : ''}`}>
           <div className="avatar-menu-profile">
             <div className="avatar-menu-avatar">
-              {avatarUrl ? <img src={avatarUrl} alt="头像" /> : <img src={ifanrMarkUrl} alt="ifanr" className="avatar-default-icon" />}
+              {avatarUrl ? <img src={avatarUrl} alt="头像" /> : <User size={20} className="avatar-placeholder-icon" aria-hidden="true" />}
             </div>
             <div className="avatar-menu-info">
-              <strong>{isReadOnly ? 'ifanr' : (authUser || 'Shawn Rain')}</strong>
+              <strong>{isReadOnly ? 'ifanr' : (authUser || 'ifanr')}</strong>
               <span>{isReadOnly ? '只读模式' : '编辑权限已解锁'}</span>
             </div>
           </div>
@@ -2758,8 +3133,9 @@ export function App() {
       {view === 'home' ? (
         <WelcomeWorkspace
           issue={issue}
-          currentUserName={authUser || 'Shawn Rain'}
+          currentUserName={authUser}
           drafts={drafts}
+          draftSyncState={draftSyncState}
           onOpenDraft={handleOpenDraft}
           onNewFlashNews={handleNewFlashNews}
           onSwitchView={switchView}
@@ -2836,7 +3212,7 @@ export function App() {
 
           <main ref={view === 'draft' ? draftScrollRef : undefined} onScroll={view === 'draft' ? syncDraftSection : undefined} className={view === 'draft' ? 'draft-column' : 'candidate-column'}>
             {loading ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></div> : null}
-            {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={() => openSettings()}>连接设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
+            {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={() => openSettings('worker')}>Worker 设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && loadingIssueDetails && (view === 'candidates' || view === 'trash') ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在载入完整候选库</span></div> : null}
             {!loading && issue && view === 'draft' ? <div className="draft-stage">
             <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onOpenFlash={() => openFlashForStory(story)} onExclude={() => requestDeleteStory(story)} onDragStart={() => { draggedStoryIdRef.current = story.id; setDraggedStoryId(story.id) }} onDragEnd={clearOutlineDrag} onDrop={(after, droppedStoryId) => void handleDrop(story.id, after, droppedStoryId)} />)}</section>)}</div></div>
@@ -2852,12 +3228,28 @@ export function App() {
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
-          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onOpenFlash={() => openFlashForStory(selectedStory)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics(current, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onOpenFlash={() => openFlashForStory(selectedStory)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics({ ...current, revision: updated.issue_revision ?? current.revision }, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
+      ) : null}
+
+      {view === 'weibo' && issue ? (
+        <WeiboWorkspace
+          issue={issue}
+          dataMode={dataMode}
+          onNotify={(message) => showBrandToast(message)}
+        />
+      ) : null}
+      {view === 'weibo' && !issue ? (
+        <main className="weibo-workspace weibo-workspace-offline">
+          <div className={`center-state${error ? ' error' : ''}`}>
+            {loading ? <><LoaderCircle size={24} className="spin" /><span>正在读取刊期</span></> : <><CloudOff size={26} /><strong>Worker 未连接</strong><span>{error || '连接 Worker 后即可读取刊期并生成次日微博。'}</span><div className="center-state-actions"><button type="button" onClick={() => openSettings('worker')}>Worker 设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></>}
+          </div>
+        </main>
       ) : null}
 
       {view === 'flash' ? (
         <FlashWorkspace
+          key={flashSessionId}
           issue={issue}
           initialStory={flashInitialStory}
           initialDraft={activeDraft}
@@ -2875,7 +3267,7 @@ export function App() {
           issue={issue}
           theme={theme}
           isAdmin={!isReadOnly && authUser?.toLowerCase() === 'shawn rain'}
-          currentUserName={authUser || 'Shawn Rain'}
+          currentUserName={authUser}
           avatarUrl={avatarUrl}
           initialTab={settingsTab}
           onOpenAuthDialog={() => { setClosingOverlay(null); setShowAuthDialog(true) }}
@@ -2889,44 +3281,14 @@ export function App() {
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
       {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onCopyToFeishu={() => copyIssueToFeishu(issue)} onPublishToLark={() => api.publishToLark(issue.id, issue.revision)} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
-      {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
+      {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} initialMode={invitationCode ? 'register' : 'login'} initialInviteCode={invitationCode} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onClearError={() => setAuthMessage('')} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
       {brandToast ? <div className={`brand-toast ${brandToastClosing ? 'is-closing' : ''}`} role="status"><Check size={15} /><span>{brandToast.message}</span></div> : null}
       {undoToastVisible && deletedStories.length ? <div className={`undo-toast ${undoToastClosing ? 'is-closing' : ''}`} role="status"><span>已移入回收站：{deletedStories.at(-1)?.title}</span><button type="button" disabled={undoBusy} onClick={() => void undoLastDeletion()}>{undoBusy ? <LoaderCircle size={14} className="spin" /> : <RotateCcw size={14} />}撤销 <kbd>⌘Z</kbd></button></div> : null}
     </div>
   )
 }
-export async function writeClipboardText(text: string): Promise<boolean> {
-  if (navigator.clipboard && window.isSecureContext) {
-    try {
-      await navigator.clipboard.writeText(text)
-      return true
-    } catch {
-      // Fall through to the synchronous copy path. It remains available on
-      // the HTTP-hosted editorial console where Clipboard API is restricted.
-    }
-  }
-
-  const textarea = document.createElement('textarea')
-  textarea.value = text
-  textarea.readOnly = true
-  textarea.setAttribute('aria-hidden', 'true')
-  textarea.style.position = 'fixed'
-  textarea.style.left = '-9999px'
-  textarea.style.top = '0'
-  document.body.appendChild(textarea)
-  textarea.focus()
-  textarea.select()
-  textarea.setSelectionRange(0, textarea.value.length)
-
-  try {
-    return typeof document.execCommand === 'function' && document.execCommand('copy')
-  } catch {
-    return false
-  } finally {
-    textarea.remove()
-  }
-}
+export { writeClipboardText } from './clipboard'
 
 function escapeClipboardHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character] || character)
@@ -2941,13 +3303,15 @@ function clipboardRelatedLinks(story: Story): Array<{ title: string; url: string
 async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
   const stories = issue.stories.filter((story) => story.selected && story.status !== 'excluded').sort(comparePublicationStories)
   const imageCache = new Map<string, string>()
-  // This mirrors the hand-edited Bot document shell so a direct Feishu paste
-  // lands in the same order and leaves the manual visual slots intact.
-  const candidateHtml = (brand: 'ifanr' | 'appso', label: string) => [`<h4>${label}</h4>`, `<ol>${currentHeadlineOptions(issue, brand).map((headline) => `<li>${escapeClipboardHtml(headline)}</li>`).join('')}</ol>`]
-  const htmlParts = ['<h3>备选标题</h3>', ...candidateHtml('ifanr', '爱范儿'), ...candidateHtml('appso', 'APPSO'), '<h1>早报｜</h1>', '<p>插入头图</p>', '<p>插入日期</p>', '<p>appso 头图</p>', '<p>插入目录</p>']
-  const textParts = ['### 备选标题', '', '#### 爱范儿', ...currentHeadlineOptions(issue, 'ifanr').map((headline, index) => `${index + 1}. ${headline}`), '', '#### APPSO', ...currentHeadlineOptions(issue, 'appso').map((headline, index) => `${index + 1}. ${headline}`), '', '早报｜', '', '插入头图', '插入日期', '', 'appso 头图', '', '插入目录', '']
-  let currentCategory = ''
-  for (const story of stories) {
+  // Keep headline candidates on the workbench. The Bot document starts with
+  // the reader-facing shell shared by weekday and Saturday editions.
+  const htmlParts = ['<h1>早报｜</h1>', '<p>插入日期</p>', '<p>appso 头图</p>', '<p>插入目录</p>']
+  const textParts = ['早报｜', '', '插入日期', '', 'appso 头图', '', '插入目录', '']
+  const appendHeading = (level: 2 | 3, title: string) => {
+    htmlParts.push(`<h${level}>${escapeClipboardHtml(title)}</h${level}>`)
+    textParts.push(`${'#'.repeat(level)} ${title}`, '')
+  }
+  const appendStory = async (story: Story) => {
     let imageData = imageCache.get(story.id) || ''
     if (!imageData && story.image_path) {
       try {
@@ -2959,12 +3323,8 @@ async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
         }
       } catch { /* 图片不可读时仍复制正文 */ }
     }
-    if (story.category !== currentCategory) {
-      currentCategory = story.category
-      htmlParts.push(`<h2>${escapeClipboardHtml(currentCategory)}</h2>`)
-      textParts.push(`## ${currentCategory}`, '')
-    }
-    htmlParts.push(`<h3>${escapeClipboardHtml(story.title)}</h3>`)
+    const publicTitle = readerFacingStoryTitle(story.title)
+    htmlParts.push(`<h3>${escapeClipboardHtml(publicTitle)}</h3>`)
     // Only paste locally fetched image bytes. Remote source URLs frequently
     // fail Feishu's server-side fetch or violate a source's anti-hotlink rule.
     if (imageData) htmlParts.push(`<p><img src="${escapeClipboardHtml(imageData)}" alt="" style="max-width:100%;height:auto" /></p>`)
@@ -2973,7 +3333,24 @@ async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
     for (const link of relatedLinks) {
       htmlParts.push(`<p>🔗 相关阅读：<a href="${escapeClipboardHtml(link.url)}">${escapeClipboardHtml(link.title)}</a></p>`)
     }
-    textParts.push(`### ${story.title}`, story.body.trim(), ...relatedLinks.map((link) => `🔗 相关阅读：${link.title}（${link.url}）`), '')
+    textParts.push(`### ${publicTitle}`, story.body.trim(), ...relatedLinks.map((link) => `🔗 相关阅读：${link.title}（${link.url}）`), '')
+  }
+  if (isSaturdayPublication(issue.publication_date)) {
+    const specialPattern = /^(One Fun Thing|周末看什么|买书不读指南|游戏推荐)(?:[｜|](?:主选|备选))?[｜|](.+)$/i
+    const sections = ['One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐']
+    appendHeading(3, '📰 周末也值得一看的新闻')
+    for (const story of stories.filter((item) => !specialPattern.test(item.title.trim()))) await appendStory(story)
+    appendHeading(3, '✨ 是周末啊！')
+    for (const section of sections) {
+      const sectionStories = stories.filter((story) => specialPattern.exec(story.title.trim())?.[1].toLocaleLowerCase() === section.toLocaleLowerCase())
+      if (!sectionStories.length) appendHeading(3, `${section}｜`)
+      else for (const story of sectionStories) await appendStory(story)
+    }
+  } else {
+    for (const category of publicationCategories) {
+      appendHeading(2, category)
+      for (const story of stories.filter((item) => item.category === category)) await appendStory(story)
+    }
   }
   const html = htmlParts.join('')
   const plain = textParts.join('\n')

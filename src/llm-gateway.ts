@@ -1,10 +1,12 @@
 import flashNewsPrompt from '../prompts/flash_news.md?raw'
 import appsoPrompt from '../prompts/appso_headline.md?raw'
 import ifanrPrompt from '../prompts/ifanr_headline.md?raw'
-import type { Issue } from './types'
+import weiboPostsPrompt from '../prompts/weibo_posts.md?raw'
+import { getApiUrl, getAuthToken, workerFetchOptions } from './api'
+import type { Issue, Story } from './types'
 
-export type LLMProvider = 'gemini' | 'openai'
-export type ThinkingLevel = 'off' | 'low' | 'medium' | 'high' | 'max'
+export type LLMProvider = 'ifanr' | 'gemini' | 'openai'
+export type ThinkingLevel = 'none' | 'low' | 'medium' | 'high' | 'xhigh' | 'max'
 
 export type ThinkingLevelInfo = {
   id: ThinkingLevel
@@ -15,23 +17,53 @@ export type ThinkingLevelInfo = {
 }
 
 export const THINKING_LEVEL_MAP: Record<ThinkingLevel, ThinkingLevelInfo> = {
-  off: { id: 'off', label: 'Off (关闭思考)', shortLabel: 'Off', budget: 0, desc: '0 token · 极速直出' },
-  low: { id: 'low', label: 'Low (轻度 1k)', shortLabel: 'Low', budget: 1024, desc: '1024 token · 轻微推理' },
-  medium: { id: 'medium', label: 'Medium (标准 2k)', shortLabel: 'Medium', budget: 2048, desc: '2048 token · 平衡' },
-  high: { id: 'high', label: 'High (深度 4k)', shortLabel: 'High', budget: 4096, desc: '4096 token · 深度推理（推荐）' },
-  max: { id: 'max', label: 'Max (超深 8k)', shortLabel: 'Max', budget: 8192, desc: '8192 token · 复杂推演' },
+  none: { id: 'none', label: 'None（关闭）', shortLabel: 'None', budget: 0, desc: '不使用推理 · 最低延迟' },
+  low: { id: 'low', label: 'Low（轻度）', shortLabel: 'Low', budget: 1024, desc: '较少推理 · 响应更快' },
+  medium: { id: 'medium', label: 'Medium（中）', shortLabel: 'Medium', budget: 2048, desc: '平衡质量与速度（默认）' },
+  high: { id: 'high', label: 'High（高）', shortLabel: 'High', budget: 4096, desc: '更充分的分析与核验' },
+  xhigh: { id: 'xhigh', label: 'Extra High（极高）', shortLabel: 'XHigh', budget: 8192, desc: '复杂任务 · 更高延迟' },
+  max: { id: 'max', label: 'Max（Ultra）', shortLabel: 'Max', budget: 16384, desc: '最难任务 · 质量优先' },
 }
 
 export const THINKING_LEVELS: ThinkingLevelInfo[] = [
-  THINKING_LEVEL_MAP.off,
+  THINKING_LEVEL_MAP.none,
   THINKING_LEVEL_MAP.low,
   THINKING_LEVEL_MAP.medium,
   THINKING_LEVEL_MAP.high,
+  THINKING_LEVEL_MAP.xhigh,
   THINKING_LEVEL_MAP.max,
 ]
 
+const CORE_REASONING_LEVELS: ThinkingLevel[] = ['none', 'low', 'medium', 'high', 'xhigh']
+const GPT_56_REASONING_LEVELS: ThinkingLevel[] = [...CORE_REASONING_LEVELS, 'max']
+const CODEX_REASONING_LEVELS: ThinkingLevel[] = ['low', 'medium', 'high', 'xhigh']
+
+export function thinkingLevelsForModel(modelName: string): ThinkingLevelInfo[] {
+  const lower = modelName.trim().toLowerCase()
+  let levels: ThinkingLevel[] = []
+  if (/^gpt-5\.6(?:-|$)/.test(lower) || lower === 'gpt-5.6') levels = GPT_56_REASONING_LEVELS
+  else if (/^gpt-5\.(?:4|5)(?:-|$)/.test(lower)) levels = CORE_REASONING_LEVELS
+  else if (/^gpt-5\.3-codex/.test(lower)) levels = CODEX_REASONING_LEVELS
+  else if (/^(?:o1|o3)(?:-|$)/.test(lower) || lower.includes('r1') || lower.includes('reasoning')) levels = ['low', 'medium', 'high']
+  else if (lower.includes('gemini') || lower.includes('flash') || lower.includes('thinking') || lower.includes('claude')) levels = THINKING_LEVELS.map((level) => level.id)
+  return levels.map((level) => THINKING_LEVEL_MAP[level])
+}
+
+export function normalizedThinkingLevel(modelName: string, requested: ThinkingLevel): ThinkingLevel | null {
+  const supported = thinkingLevelsForModel(modelName).map((level) => level.id)
+  if (!supported.length) return null
+  if (supported.includes(requested)) return requested
+  return supported.includes('medium') ? 'medium' : supported[0]
+}
+
+export function openAIReasoningFields(modelName: string, requested: ThinkingLevel): Record<string, string> {
+  const effort = normalizedThinkingLevel(modelName, requested)
+  return effort ? { reasoning_effort: effort } : {}
+}
+
 export type LLMConfig = {
   provider: LLMProvider
+  ifanrModel: string
   geminiKey: string
   geminiModel: string
   openaiBaseUrl: string
@@ -63,6 +95,19 @@ export type FlashNewsResult = {
   provider: LLMProvider
 }
 
+export type WeiboPostResult = {
+  story_id: string
+  content: string
+  interaction: string
+  tags: string[]
+  suggested_time: string
+}
+
+export type WeiboRevisionOptions = {
+  currentPost: Pick<WeiboPostResult, 'content' | 'interaction' | 'tags' | 'suggested_time'>
+  instruction?: string
+}
+
 const STORAGE_KEYS = {
   provider: 'editorial-llm-provider',
   geminiKey: 'editorial-gemini-api-key',
@@ -71,24 +116,135 @@ const STORAGE_KEYS = {
   openaiKey: 'editorial-openai-api-key',
   openaiModel: 'editorial-openai-model',
   thinkingLevel: 'editorial-thinking-level',
+  ifanrModel: 'editorial-ifanr-model',
 } as const
+const IFANR_DEFAULT_MIGRATION_KEY = 'editorial-ifanr-provider-default-v1'
 
 export const defaultGeminiModel = 'gemini-3.7-flash-high'
 export const defaultOpenaiModel = '3.7-flash-high'
+export const defaultIfanrModel = 'gpt-5.6-sol'
 export const defaultOpenaiBaseUrl = 'https://api.openai.com/v1'
+export const legacyIfanrHubBaseUrl = 'https://llm-gateway.corp.ifanr.com/translate/openai/openai/v1'
+export const workerOpenAIBaseUrl = () => `${getApiUrl().replace(/\/+$/, '')}/api/llm/openai/v1`
+
+const isWorkerOpenAIBaseUrl = (value: string) => value.replace(/\/+$/, '') === workerOpenAIBaseUrl()
+
+async function openAIFetch(baseUrl: string, path: string, init: RequestInit = {}) {
+  const normalizedBaseUrl = baseUrl.replace(/\/+$/, '')
+  if (!isWorkerOpenAIBaseUrl(normalizedBaseUrl)) {
+    return fetch(`${normalizedBaseUrl}/${path.replace(/^\/+/, '')}`, init)
+  }
+  const headers = new Headers(init.headers)
+  const token = getAuthToken()
+  if (token) headers.set('Authorization', `Bearer ${token}`)
+  else headers.delete('Authorization')
+  const workerUrl = getApiUrl()
+  return fetch(`${normalizedBaseUrl}/${path.replace(/^\/+/, '')}`, {
+    ...workerFetchOptions(workerUrl),
+    ...init,
+    credentials: 'include',
+    headers,
+  })
+}
+
+export type LLMStreamUpdate = {
+  content: string
+  reasoning: string
+  contentDelta: string
+  reasoningDelta: string
+}
+
+type StreamListener = (update: LLMStreamUpdate) => void
+
+function deltaText(value: unknown): string {
+  if (typeof value === 'string') return value
+  if (!Array.isArray(value)) return ''
+  return value.map((part) => typeof part === 'string' ? part : String((part as { text?: unknown })?.text || '')).join('')
+}
+
+async function readOpenAITextResponse(response: Response, onStream?: StreamListener): Promise<{ content: string; reasoning: string }> {
+  const contentType = response.headers.get('Content-Type') || ''
+  if (!contentType.includes('text/event-stream') || !response.body) {
+    const payload = await response.json()
+    const message = payload?.choices?.[0]?.message || {}
+    const content = deltaText(message.content)
+    const reasoning = deltaText(message.reasoning_content || message.reasoning || message.reasoning_summary)
+    if (content || reasoning) onStream?.({ content, reasoning, contentDelta: content, reasoningDelta: reasoning })
+    return { content, reasoning }
+  }
+
+  const reader = response.body.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ''
+  let content = ''
+  let reasoning = ''
+  const consumeLine = (line: string) => {
+    const trimmed = line.trim()
+    if (!trimmed.startsWith('data:')) return
+    const raw = trimmed.slice(5).trim()
+    if (!raw || raw === '[DONE]') return
+    let payload: any
+    try { payload = JSON.parse(raw) } catch { return }
+    const delta = payload?.choices?.[0]?.delta || {}
+    const contentDelta = deltaText(delta.content)
+    const reasoningDelta = deltaText(delta.reasoning_content || delta.reasoning || delta.reasoning_summary)
+    if (!contentDelta && !reasoningDelta) return
+    content += contentDelta
+    reasoning += reasoningDelta
+    onStream?.({ content, reasoning, contentDelta, reasoningDelta })
+  }
+
+  while (true) {
+    const { done, value } = await reader.read()
+    buffer += decoder.decode(value || new Uint8Array(), { stream: !done })
+    const lines = buffer.split(/\r?\n/)
+    buffer = lines.pop() || ''
+    lines.forEach(consumeLine)
+    if (done) break
+  }
+  if (buffer) consumeLine(buffer)
+  return { content, reasoning }
+}
+
+const resolveOpenAIConfig = (config: LLMConfig, modelOverride?: string) => config.provider === 'ifanr'
+  ? { baseUrl: workerOpenAIBaseUrl(), apiKey: '', modelName: modelOverride || config.ifanrModel || defaultIfanrModel }
+  : {
+      baseUrl: config.openaiBaseUrl || defaultOpenaiBaseUrl,
+      apiKey: config.openaiKey,
+      modelName: modelOverride || config.openaiModel || defaultOpenaiModel,
+    }
 
 export function getLLMConfig(): LLMConfig {
-  const provider = (localStorage.getItem(STORAGE_KEYS.provider) as LLMProvider) || 'gemini'
+  let provider = (localStorage.getItem(STORAGE_KEYS.provider) as LLMProvider) || 'ifanr'
+  const ifanrModel = localStorage.getItem(STORAGE_KEYS.ifanrModel)?.trim() || defaultIfanrModel
+  if (!localStorage.getItem(IFANR_DEFAULT_MIGRATION_KEY)) {
+    provider = 'ifanr'
+    localStorage.setItem(STORAGE_KEYS.provider, provider)
+    localStorage.setItem(IFANR_DEFAULT_MIGRATION_KEY, '1')
+  }
   const geminiKey = localStorage.getItem(STORAGE_KEYS.geminiKey)?.trim() || ''
   const geminiModel = localStorage.getItem(STORAGE_KEYS.geminiModel)?.trim() || defaultGeminiModel
-  const openaiBaseUrl = localStorage.getItem(STORAGE_KEYS.openaiBaseUrl)?.trim() || defaultOpenaiBaseUrl
-  const openaiKey = localStorage.getItem(STORAGE_KEYS.openaiKey)?.trim() || ''
+  let openaiBaseUrl = localStorage.getItem(STORAGE_KEYS.openaiBaseUrl)?.trim() || defaultOpenaiBaseUrl
+  let openaiKey = localStorage.getItem(STORAGE_KEYS.openaiKey)?.trim() || ''
+  if (openaiBaseUrl.replace(/\/+$/, '') === legacyIfanrHubBaseUrl) {
+    provider = 'ifanr'
+    openaiBaseUrl = workerOpenAIBaseUrl()
+    openaiKey = ''
+    localStorage.setItem(STORAGE_KEYS.provider, provider)
+    localStorage.setItem(STORAGE_KEYS.openaiBaseUrl, openaiBaseUrl)
+    localStorage.removeItem(STORAGE_KEYS.openaiKey)
+  } else if (isWorkerOpenAIBaseUrl(openaiBaseUrl) && openaiKey) {
+    openaiKey = ''
+    localStorage.removeItem(STORAGE_KEYS.openaiKey)
+  }
   const openaiModel = localStorage.getItem(STORAGE_KEYS.openaiModel)?.trim() || defaultOpenaiModel
-  const rawThinking = localStorage.getItem(STORAGE_KEYS.thinkingLevel) as ThinkingLevel
-  const thinkingLevel: ThinkingLevel = rawThinking && rawThinking in THINKING_LEVEL_MAP ? rawThinking : 'high'
+  const storedThinking = localStorage.getItem(STORAGE_KEYS.thinkingLevel)
+  const rawThinking = (storedThinking === 'off' ? 'none' : storedThinking) as ThinkingLevel
+  const thinkingLevel: ThinkingLevel = rawThinking && rawThinking in THINKING_LEVEL_MAP ? rawThinking : 'medium'
 
   return {
     provider,
+    ifanrModel,
     geminiKey,
     geminiModel,
     openaiBaseUrl,
@@ -101,6 +257,11 @@ export function getLLMConfig(): LLMConfig {
 export function saveLLMConfig(patch: Partial<LLMConfig>): void {
   if (patch.provider !== undefined) {
     localStorage.setItem(STORAGE_KEYS.provider, patch.provider)
+    localStorage.setItem(IFANR_DEFAULT_MIGRATION_KEY, '1')
+  }
+  if (patch.ifanrModel !== undefined) {
+    const model = patch.ifanrModel.trim()
+    if (model) localStorage.setItem(STORAGE_KEYS.ifanrModel, model)
   }
   if (patch.geminiKey !== undefined) {
     localStorage.setItem(STORAGE_KEYS.geminiKey, patch.geminiKey.trim())
@@ -112,9 +273,12 @@ export function saveLLMConfig(patch: Partial<LLMConfig>): void {
   if (patch.openaiBaseUrl !== undefined) {
     const raw = patch.openaiBaseUrl.trim().replace(/\/+$/, '')
     localStorage.setItem(STORAGE_KEYS.openaiBaseUrl, raw || defaultOpenaiBaseUrl)
+    if (raw && isWorkerOpenAIBaseUrl(raw)) localStorage.removeItem(STORAGE_KEYS.openaiKey)
   }
   if (patch.openaiKey !== undefined) {
-    localStorage.setItem(STORAGE_KEYS.openaiKey, patch.openaiKey.trim())
+    const baseUrl = patch.openaiBaseUrl?.trim().replace(/\/+$/, '') || getLLMConfig().openaiBaseUrl
+    if (isWorkerOpenAIBaseUrl(baseUrl)) localStorage.removeItem(STORAGE_KEYS.openaiKey)
+    else localStorage.setItem(STORAGE_KEYS.openaiKey, patch.openaiKey.trim())
   }
   if (patch.openaiModel !== undefined) {
     const model = patch.openaiModel.trim()
@@ -127,6 +291,7 @@ export function saveLLMConfig(patch: Partial<LLMConfig>): void {
 
 export function isLLMConfigured(): boolean {
   const config = getLLMConfig()
+  if (config.provider === 'ifanr') return true
   if (config.provider === 'gemini') {
     return Boolean(config.geminiKey)
   }
@@ -158,7 +323,7 @@ export async function listOpenAIModels(baseUrlInput?: string, apiKeyInput?: stri
   const headers: Record<string, string> = {}
   if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`
 
-  const response = await fetch(`${baseUrl}/models`, { headers })
+  const response = await openAIFetch(baseUrl, 'models', { headers })
   if (!response.ok) {
     const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
     throw new Error(payload?.error?.message || `无法读取模型列表（${response.status}）`)
@@ -178,6 +343,8 @@ export async function listOpenAIModels(baseUrlInput?: string, apiKeyInput?: stri
 export async function listAvailableModels(provider: LLMProvider): Promise<LLMModelOption[]> {
   if (provider === 'gemini') {
     return listGeminiModels()
+  } else if (provider === 'ifanr') {
+    return listOpenAIModels(workerOpenAIBaseUrl(), '')
   } else {
     return listOpenAIModels()
   }
@@ -201,16 +368,18 @@ export async function testLLMConnection(configInput?: Partial<LLMConfig>): Promi
     }
     return { ok: true, message: `连接成功！已连通 Google Gemini API（延迟 ${latencyMs}ms）`, latencyMs }
   } else {
-    const baseUrl = (config.openaiBaseUrl || defaultOpenaiBaseUrl).trim().replace(/\/+$/, '')
+    const { baseUrl, apiKey } = resolveOpenAIConfig(config)
     const headers: Record<string, string> = {}
-    if (config.openaiKey) headers['Authorization'] = `Bearer ${config.openaiKey.trim()}`
-    const res = await fetch(`${baseUrl}/models`, { headers })
+    if (apiKey) headers['Authorization'] = `Bearer ${apiKey.trim()}`
+    const res = await openAIFetch(baseUrl, 'models', { headers })
     const latencyMs = Math.round(performance.now() - start)
     if (!res.ok) {
       const err = await res.json().catch(() => ({}))
       throw new Error(err?.error?.message || `连接失败（HTTP ${res.status}）`)
     }
-    return { ok: true, message: `连接成功！已连通 OpenAI 兼容端点（延迟 ${latencyMs}ms）`, latencyMs }
+    return { ok: true, message: config.provider === 'ifanr'
+      ? `连接成功！已连通 ifanr 内置引擎（延迟 ${latencyMs}ms）`
+      : `连接成功！已连通 OpenAI 兼容端点（延迟 ${latencyMs}ms）`, latencyMs }
   }
 }
 
@@ -263,10 +432,114 @@ function cleanJsonOutput(text: string): string {
   return cleaned
 }
 
+function normalizeWeiboPost(value: Partial<WeiboPostResult>, fallbackStoryId: string): WeiboPostResult {
+  const tags = Array.isArray(value.tags)
+    ? value.tags.map(String).map((tag) => tag.replaceAll('#', '').trim()).filter(Boolean).slice(0, 3)
+    : []
+  const suggestedTime = /^([01]\d|2[0-2]):[0-5]\d$/.test(String(value.suggested_time || ''))
+    ? String(value.suggested_time)
+    : '10:00'
+  return {
+    story_id: String(value.story_id || fallbackStoryId),
+    content: String(value.content || '').trim(),
+    interaction: String(value.interaction || '').trim(),
+    tags,
+    suggested_time: suggestedTime,
+  }
+}
+
+export async function generateWeiboPosts(stories: Story[], targetDate: string, revision?: WeiboRevisionOptions): Promise<WeiboPostResult[]> {
+  const config = getLLMConfig()
+  if (!stories.length) return []
+  const sourcePayload = stories.map((story) => ({
+    id: story.id,
+    category: story.category,
+    title: story.title,
+    body: story.body,
+    source_name: story.source_name,
+    source_url: story.source_url,
+    fact_status: story.fact_status,
+  }))
+  const revisionPrompt = revision
+    ? `\n\n当前微博草稿：\n${JSON.stringify(revision.currentPost)}\n\n本次修改要求：${revision.instruction?.trim() || '请主动优化表达、节奏和信息层次，保留已核验事实与原意。'}\n请修改当前草稿，不得添加来源材料中没有的事实。返回的 posts 只包含这一条，story_id 必须保持为 ${stories[0]?.id || ''}。`
+    : ''
+  const taskPrompt = `目标发布日期：${targetDate}\n\n已核验早报条目：\n${JSON.stringify(sourcePayload)}${revisionPrompt}`
+  const userPrompt = `${weiboPostsPrompt}\n\n${taskPrompt}`
+  let text = ''
+
+  if (config.provider === 'gemini') {
+    if (!config.geminiKey) throw new Error('请先在设置中填写 Gemini API Key')
+    const modelName = config.geminiModel || defaultGeminiModel
+    const apiModel = modelName.includes('flash-high') || modelName === '3.7-flash' ? 'gemini-3.7-flash' : modelName.replace(/^models\//, '')
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 120_000)
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(apiModel)}:generateContent`, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': config.geminiKey },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+          generationConfig: { temperature: 0.65, responseMimeType: 'application/json' },
+        }),
+      })
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
+        throw new Error(payload?.error?.message || `Gemini 请求失败（${response.status}）`)
+      }
+      const payload = await response.json()
+      text = payload?.candidates?.[0]?.content?.parts?.map((part: { text?: string }) => part.text || '').join('') || ''
+    } finally {
+      window.clearTimeout(timeout)
+    }
+  } else {
+    const { baseUrl, apiKey, modelName } = resolveOpenAIConfig(config)
+    const reasoningFields = openAIReasoningFields(modelName, config.thinkingLevel || 'medium')
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+    if (apiKey) headers.Authorization = `Bearer ${apiKey}`
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 120_000)
+    try {
+      const response = await openAIFetch(baseUrl, 'chat/completions', {
+        method: 'POST',
+        signal: controller.signal,
+        headers,
+        body: JSON.stringify({
+          model: modelName,
+          ...reasoningFields,
+          ...(Object.keys(reasoningFields).length ? {} : { temperature: 0.65 }),
+          response_format: { type: 'json_object' },
+          messages: [
+            { role: 'system', content: weiboPostsPrompt },
+            { role: 'user', content: taskPrompt },
+          ],
+        }),
+      })
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
+        throw new Error(payload?.error?.message || `API 请求失败（HTTP ${response.status}）`)
+      }
+      const payload = await response.json()
+      text = payload?.choices?.[0]?.message?.content || ''
+    } finally {
+      window.clearTimeout(timeout)
+    }
+  }
+
+  if (!text) throw new Error('模型没有返回微博草稿')
+  const parsed = JSON.parse(cleanJsonOutput(text)) as { posts?: Array<Partial<WeiboPostResult>> }
+  const allowedIds = new Set(stories.map((story) => story.id))
+  const results = (parsed.posts || [])
+    .map((post, index) => normalizeWeiboPost(post, stories[index]?.id || ''))
+    .filter((post) => allowedIds.has(post.story_id) && post.content)
+  if (!results.length) throw new Error('模型返回的微博草稿无法匹配当前选题')
+  return results
+}
+
 /**
  * 生成即时快讯
  */
-export async function generateFlashNews(input: FlashNewsInput): Promise<FlashNewsResult> {
+export async function generateFlashNews(input: FlashNewsInput, onStream?: StreamListener): Promise<FlashNewsResult> {
   const config = getLLMConfig()
   const today = input.date || new Date().toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' }).replace('/', ' 月 ') + ' 日'
 
@@ -278,6 +551,12 @@ export async function generateFlashNews(input: FlashNewsInput): Promise<FlashNew
 
 正文/详情内容：
 ${input.content}
+
+材料使用要求：
+1. 「早报已有摘要」只作为选题线索，不得据此臆测扩写；
+2. 优先依据「原始信源全文」，核对主体、动作、时间、数字与原话；
+3. 「联网检索补充材料」仅用于交叉核验和补充背景，冲突时以原始/官方信源为准；
+4. 不得写入材料中没有依据的事实，无法确认的内容应省略或明确标注尚未确认。
 `
 
   if (config.provider === 'gemini') {
@@ -289,7 +568,7 @@ ${input.content}
       apiModel = 'gemini-3.7-flash'
     }
 
-    const currentBudget = THINKING_LEVEL_MAP[config.thinkingLevel || 'high']?.budget ?? 4096
+    const currentBudget = THINKING_LEVEL_MAP[config.thinkingLevel || 'medium']?.budget ?? 2048
     const generationConfig: Record<string, unknown> = {
       temperature: currentBudget > 0 ? 0.6 : 0.4,
       responseMimeType: 'application/json',
@@ -360,9 +639,7 @@ ${input.content}
     }
   } else {
     // OpenAI Compatible Provider (cockpit-tools / LiteLLM / DeepSeek / One-API)
-    const baseUrl = config.openaiBaseUrl || defaultOpenaiBaseUrl
-    const apiKey = config.openaiKey
-    const modelName = config.openaiModel || defaultOpenaiModel
+    const { baseUrl, apiKey, modelName } = resolveOpenAIConfig(config)
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -371,11 +648,14 @@ ${input.content}
       headers['Authorization'] = `Bearer ${apiKey}`
     }
 
-    const isReasoning = modelName.includes('thinking') || modelName.includes('r1') || modelName.includes('o1') || modelName.includes('o3') || modelName.includes('reason')
+    const reasoningFields = openAIReasoningFields(modelName, config.thinkingLevel || 'medium')
+    const isReasoning = Object.keys(reasoningFields).length > 0
 
     const requestPayload: Record<string, unknown> = {
       model: modelName,
       max_tokens: 4096,
+      stream: Boolean(onStream),
+      ...reasoningFields,
       messages: [
         {
           role: 'system',
@@ -395,7 +675,7 @@ ${input.content}
     const controller = new AbortController()
     const timeout = window.setTimeout(() => controller.abort(), 120_000)
     try {
-      const response = await fetch(`${baseUrl}/chat/completions`, {
+      const response = await openAIFetch(baseUrl, 'chat/completions', {
         method: 'POST',
         signal: controller.signal,
         headers,
@@ -406,8 +686,7 @@ ${input.content}
         const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
         throw new Error(payload?.error?.message || `API 请求失败（HTTP ${response.status}）`)
       }
-      const payload = await response.json()
-      const text = payload?.choices?.[0]?.message?.content
+      const { content: text } = await readOpenAITextResponse(response, onStream)
       if (!text) throw new Error('模型没有返回内容')
 
       const parsed = JSON.parse(cleanJsonOutput(text)) as FlashNewsResult
@@ -418,7 +697,7 @@ ${input.content}
         key_points: Array.isArray(parsed.key_points) ? parsed.key_points.map(String) : [],
         body: parsed.body || '',
         model: modelName,
-        provider: 'openai',
+        provider: config.provider,
       }
     } finally {
       window.clearTimeout(timeout)
@@ -502,9 +781,8 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
     }
   } else {
     // OpenAI-compatible provider
-    const baseUrl = config.openaiBaseUrl || defaultOpenaiBaseUrl
-    const apiKey = config.openaiKey
-    const modelName = config.openaiModel || defaultOpenaiModel
+    const { baseUrl, apiKey, modelName } = resolveOpenAIConfig(config)
+    const reasoningFields = openAIReasoningFields(modelName, config.thinkingLevel || 'medium')
 
     const headers: Record<string, string> = { 'Content-Type': 'application/json' }
     if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`
@@ -512,13 +790,14 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
     const controller = new AbortController()
     const timeout = window.setTimeout(() => controller.abort(), 90_000)
     try {
-      const response = await fetch(`${baseUrl}/chat/completions`, {
+      const response = await openAIFetch(baseUrl, 'chat/completions', {
         method: 'POST',
         signal: controller.signal,
         headers,
         body: JSON.stringify({
           model: modelName,
-          temperature: 0.7,
+          ...reasoningFields,
+          ...(Object.keys(reasoningFields).length ? {} : { temperature: 0.7 }),
           response_format: { type: 'json_object' },
           messages: [
             {
@@ -551,6 +830,9 @@ export async function generateBrandHeadlines(issue: Issue, brand: 'appso' | 'ifa
 }
 
 export const PRESET_MODELS: Record<LLMProvider, LLMModelOption[]> = {
+  ifanr: [
+    { name: defaultIfanrModel, displayName: defaultIfanrModel },
+  ],
   gemini: [
     { name: 'gemini-3.7-flash-high', displayName: 'Gemini 3.7 Flash（思考增强）' },
     { name: 'gemini-3.7-flash', displayName: 'Gemini 3.7 Flash' },
@@ -571,6 +853,8 @@ export type ChatMessage = {
   id: string
   role: 'user' | 'assistant'
   content: string
+  reasoning?: string
+  streaming?: boolean
   timestamp?: number
 }
 
@@ -589,18 +873,20 @@ export async function chatFlashNewsAssistant(
   history: ChatMessage[],
   context: FlashChatContext,
   userMessage: string,
-  modelOverride?: string
+  modelOverride?: string,
+  onStream?: StreamListener,
 ): Promise<string> {
   const config = getLLMConfig()
   const systemInstruction = `你是爱范儿（ifanr）科技快讯的资深副主编兼智能采编助手。
 你的任务是协助主编针对当前正在撰写的快讯草稿进行润色、改写段落、拟定新标题、精简字数、核对事实或补充背景。
 
 【爱范儿快讯写作核心原则】
-1. 标题：12~28 字，强反差、强信息增量与具象比喻主体（如「80 亿美元！『美国支付宝』买下全球最大 AI 中转站」）。
+1. 标题：12~28 字，直接写清主体、新闻动作和关键信息增量。只有事实本身形成明显反差时才写反差，不强造比喻或转折。
 2. 首段：加粗电头起始（**爱范儿 M 月 D 日消息，**），1~2 句话直接交代核心事实与关键数字。
-3. 结构：呼吸感短段落（1~3 句话成段），使用 ### 三级小标题分层（如「### 这究竟是一门什么生意？」），核心原话使用 > 引用块。
+3. 结构：呼吸感短段落（1~3 句话成段），需要分层时使用能直接提示事实内容的 ### 三级小标题（如「### 交易包括哪些业务和资产？」），核心原话使用 > 引用块。
 4. 标点：中文直角引号「」、中英文与中数字间半角空格，事实数据严格核对。
-5. 结尾：直击本质的行业前瞻发问或有力收束，不做套路总结。
+5. 结尾：优先用关键事实、明确待定事项、下一时间节点或当事人原话自然收住。只有材料确实留下具体问题时才追问，不固定追加行业前瞻或「直击本质」的反问。
+6. 语言：尽量避开「不是……而是……」「不只……更……」「与其说……不如说……」式刻意对举，以及「真正重要的是」「这意味着」「值得关注的是」「背后的逻辑」式抽象拔高。原始事实确有必要对照时可以自然使用；通常直接写清主体、动作、结果、机制、时间、数字或原话。修订不能只换连接词并保留同一套模板骨架。
 
 【当前快讯草稿实时上下文】
 - 当前标题：${context.title || '（暂未设定）'}
@@ -628,7 +914,7 @@ ${context.body || '（正文暂为空）'}
       apiModel = 'gemini-3.7-flash'
     }
 
-    const currentBudget = THINKING_LEVEL_MAP[config.thinkingLevel || 'high']?.budget ?? 4096
+    const currentBudget = THINKING_LEVEL_MAP[config.thinkingLevel || 'medium']?.budget ?? 2048
     const generationConfig: Record<string, unknown> = {
       temperature: currentBudget > 0 ? 0.7 : 0.4,
     }
@@ -673,9 +959,7 @@ ${context.body || '（正文暂为空）'}
     }
   } else {
     // OpenAI-compatible provider
-    const baseUrl = config.openaiBaseUrl || defaultOpenaiBaseUrl
-    const apiKey = config.openaiKey
-    const modelName = modelOverride || config.openaiModel || defaultOpenaiModel
+    const { baseUrl, apiKey, modelName } = resolveOpenAIConfig(config, modelOverride)
 
     const headers: Record<string, string> = { 'Content-Type': 'application/json' }
     if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`
@@ -688,15 +972,18 @@ ${context.body || '（正文暂为空）'}
 
     const controller = new AbortController()
     const timeout = window.setTimeout(() => controller.abort(), 90_000)
+    const reasoningFields = openAIReasoningFields(modelName, config.thinkingLevel || 'medium')
     try {
-      const response = await fetch(`${baseUrl}/chat/completions`, {
+      const response = await openAIFetch(baseUrl, 'chat/completions', {
         method: 'POST',
         signal: controller.signal,
         headers,
         body: JSON.stringify({
           model: modelName,
           messages,
-          temperature: 0.7,
+          stream: Boolean(onStream),
+          ...reasoningFields,
+          ...(Object.keys(reasoningFields).length ? {} : { temperature: 0.7 }),
         }),
       })
 
@@ -704,8 +991,7 @@ ${context.body || '（正文暂为空）'}
         const payload = await response.json().catch(() => ({ error: { message: response.statusText } }))
         throw new Error(payload?.error?.message || `API 请求失败（${response.status}）`)
       }
-      const payload = await response.json()
-      const text = payload?.choices?.[0]?.message?.content
+      const { content: text } = await readOpenAITextResponse(response, onStream)
       if (!text) throw new Error('模型没有返回回答')
       return text
     } finally {

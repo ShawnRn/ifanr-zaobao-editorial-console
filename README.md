@@ -29,6 +29,12 @@ pnpm dev
 
 主 Mac 每次成功发布飞书后会运行 `.agent/tools/publish_editorial_pages_snapshot.py`；该脚本同步前端源码与脱敏的当日正式稿快照，再触发 Pages 构建。Pages 更新失败只作为同步告警，不影响已经验证通过的飞书发布链路。
 
-## Gemini 标题生成
+## AI 生成与 VPS 内置端点
 
 双品牌页的标题生成由访问页面的浏览器直接调用 Gemini 3.5 Flash。API Key 只保存在该浏览器的 `localStorage` 中，不会写入 Worker、SQLite、导出文件或 GitHub Pages 构建产物。换一台设备或换一个浏览器时，需要在设置中分别配置。
+
+「ifanr」是默认且独立的 AI 引擎，快讯、品牌标题和 AI 采编助手会经 VPS Worker 调用内置上游。Worker 通过 `EDITORIAL_LLM_BASE_URL` / `EDITORIAL_LLM_API_KEY` / `EDITORIAL_LLM_MODEL` 读取固定配置，密钥只保存在权限为 `600` 的服务器环境文件，不会下发到浏览器。该代理需要工作台登录，前端不能指定任意上游 URL。Gemini 和 OpenAI 兼容直连作为另外两种独立选项保留。
+
+主页「最近稿件」中的快讯草稿由 Worker SQLite 按登录账号保存，同一账号在不同设备登录后会读取同一份记录。浏览器缓存只用于网络中断时暂存；升级前保存在 `editorial_flash_drafts` 的旧草稿会在账号首次成功连接 Worker 时自动迁入服务端，迁移成功后删除旧缓存。
+
+未登录用户首次打开 Worker 工作台时会看到登录/注册卡片，可关闭后以只读模式继续。管理员可在团队设置中复制 `#register/<invite>` 邀请链接，打开后直达注册并预填邀请码。账号头像按 `user_id` 独立保存，未上传时统一显示人形占位符。

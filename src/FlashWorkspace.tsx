@@ -34,6 +34,7 @@ import { useEffect, useRef, useState } from 'react'
 import { api } from './api'
 import {
   chatFlashNewsAssistant,
+  defaultIfanrModel,
   defaultGeminiModel,
   defaultOpenaiModel,
   generateFlashNews,
@@ -43,15 +44,15 @@ import {
   PRESET_MODELS,
   saveLLMConfig,
   THINKING_LEVEL_MAP,
-  THINKING_LEVELS,
+  normalizedThinkingLevel,
+  thinkingLevelsForModel,
   type ChatMessage,
   type FlashNewsResult,
   type LLMModelOption,
   type LLMProvider,
   type ThinkingLevel,
 } from './llm-gateway'
-import type { Issue, Story } from './types'
-import type { FlashDraftItem } from './WelcomeWorkspace'
+import type { FlashDraftItem, Issue, Story } from './types'
 
 export type FlashWorkspaceProps = {
   issue: Issue | null
@@ -64,11 +65,11 @@ export type FlashWorkspaceProps = {
 }
 
 const QUICK_PROMPTS = [
-  { label: '🎯 拟 3 个更吸睛标题', prompt: '请参考爱范儿快讯的标题原则（具象比喻、核心动作、强反差），为当前素材重新拟定 3 组更吸睛、更有信息增量的备选标题。' },
+  { label: '🎯 拟 3 个高信息量标题', prompt: '请为当前素材拟定 3 组备选标题，直接写清主体、核心动作和最有价值的信息增量。反差和比喻只在事实本身明确支持时使用，不要为了吸睛强造转折。' },
   { label: '✂️ 精简压缩至 300 字', prompt: '请在严格保留核心事实、关键数字与主要原话的前提下，将当前快讯正文精简压缩至 300 字左右，保持呼吸感短句。' },
-  { label: '💡 增加通俗具象比喻', prompt: '请尝试在正文中加入 1~2 个通俗易懂的具象比喻（如将复杂的架构比作交易所或自来水管道），帮助普通读者快速理解。' },
+  { label: '💡 讲清复杂概念', prompt: '请把正文里的复杂技术或商业概念解释得更清楚。优先使用具体机制、参与方和流程；只有类比关系准确、不会改变事实含义时才加入一个通俗类比。' },
   { label: '🔍 检查事实与标点规范', prompt: '请严格对照爱范儿编辑规范，检查当前草稿：是否使用直角引号「」、中英文是否留半角空格、数字单位换算是否严谨、有无内部采编废话。' },
-  { label: '➕ 结尾增加前瞻反问', prompt: '请优化当前正文的结尾段落，去掉八股套路总结，改为一段有力、留有余味的行业前瞻观察或直击本质的反问。' },
+  { label: '➕ 优化结尾收束', prompt: '请优化当前正文的结尾段落，优先用最后一个关键事实、明确待定事项、下一时间节点或当事人原话自然收住。只有材料确实留下具体问题时才追问，不要固定追加行业前瞻、抽象总结或「直击本质」式反问。' },
 ]
 
 export function FlashWorkspace({
@@ -321,15 +322,14 @@ export function FlashWorkspace({
     }
   }
 
-  const isThinkingCapable = (modelName: string) => {
-    const lower = modelName.toLowerCase()
-    return lower.includes('3.7') || lower.includes('2.5') || lower.includes('thinking') || lower.includes('claude') || lower.includes('r1') || lower.includes('o1') || lower.includes('o3') || lower.includes('gemini') || lower.includes('flash') || lower.includes('pro')
-  }
+  const isThinkingCapable = (modelName: string) => thinkingLevelsForModel(modelName).length > 0
 
   const handleSwitchModel = (provider: LLMProvider, modelName: string) => {
+    const nextThinkingLevel = normalizedThinkingLevel(modelName, llmConfig.thinkingLevel || 'medium')
     saveLLMConfig({
       provider,
-      ...(provider === 'gemini' ? { geminiModel: modelName } : { openaiModel: modelName }),
+      ...(provider === 'ifanr' ? { ifanrModel: modelName } : provider === 'gemini' ? { geminiModel: modelName } : { openaiModel: modelName }),
+      ...(nextThinkingLevel ? { thinkingLevel: nextThinkingLevel } : {}),
     })
     setLlmConfig(getLLMConfig())
     closeModelPicker()
@@ -339,7 +339,7 @@ export function FlashWorkspace({
   const handleSwitchModelAndThinking = (provider: LLMProvider, modelName: string, level: ThinkingLevel) => {
     saveLLMConfig({
       provider,
-      ...(provider === 'gemini' ? { geminiModel: modelName } : { openaiModel: modelName }),
+      ...(provider === 'ifanr' ? { ifanrModel: modelName } : provider === 'gemini' ? { geminiModel: modelName } : { openaiModel: modelName }),
       thinkingLevel: level,
     })
     setLlmConfig(getLLMConfig())
@@ -425,17 +425,22 @@ export function FlashWorkspace({
     let finalSourceUrl = sourceUrl
     let finalImageUrl = imageUrl
 
-    // 如果素材框内全是 URL 链接，自动先行抓取解析全文
-    const raw = `${content}\n${sourceUrl}`.trim()
-    const urlMatches = raw.match(/https?:\/\/[^\s<>"')]+/g)
-    const isPureUrls = raw.split(/\s+/).every((token) => /^https?:\/\//.test(token))
-    if (isPureUrls && urlMatches && urlMatches.length > 0) {
-      setStatusMessage(`检测到纯新闻链接，正在智能抓取 ${urlMatches.length} 篇报道全文…`)
+    // Agent 式素材准备：从早报进入时不把早报短稿当成全文，而是优先
+    // 回到全部绑定信源读取正文，再补充相关新闻检索材料交给模型交叉判断。
+    const activeStory = issue?.stories.find((story) => story.id === selectedStoryId)
+    const inlineUrls = `${content}\n${sourceUrl}`.match(/https?:\/\/[^\s<>"')]+/g) || []
+    const sourceUrls = Array.from(new Set([
+      ...(activeStory?.sources || []).map((source) => source.url),
+      activeStory?.source_url || '',
+      ...inlineUrls,
+    ].map((url) => url.trim()).filter(Boolean)))
+    if (sourceUrls.length > 0) {
+      setStatusMessage(`正在读取 ${sourceUrls.length} 个原始信源全文…`)
       try {
-        const ext = await api.extractUrlsContent({ raw_text: raw })
+        const ext = await api.extractUrlsContent({ urls: sourceUrls })
         if (ext.ok) {
-          finalContent = ext.merged_content
-          setContent(ext.merged_content)
+          const existingBrief = finalContent.trim()
+          finalContent = `${existingBrief ? `## 早报已有摘要（仅作线索）\n${existingBrief}\n\n` : ''}## 原始信源全文\n${ext.merged_content}`
           if (!finalTitle.trim() || finalTitle === '新闻素材') {
             finalTitle = ext.merged_title
             setTitle(ext.merged_title)
@@ -444,15 +449,35 @@ export function FlashWorkspace({
             finalImageUrl = ext.primary_image_url
             setImageUrl(ext.primary_image_url)
           }
-          if (!finalSourceUrl && ext.primary_source_url) {
+          if (ext.primary_source_url) {
             finalSourceUrl = ext.primary_source_url
             setSourceUrl(ext.primary_source_url)
           }
+          const failedCount = ext.errors?.length || 0
+          setStatusMessage(`已读取 ${ext.items.length} 个信源全文${failedCount ? `，${failedCount} 个抓取失败` : ''}；正在检索相关资料…`)
         }
       } catch (err) {
-        console.warn('URL 自动抓取失败，回退直接传值:', err)
+        console.warn('信源全文抓取失败，保留早报摘要继续检索:', err)
+        setStatusMessage('部分信源无法读取，正在用可见材料继续检索相关报道…')
       }
     }
+
+    if (finalTitle.trim()) {
+      try {
+        const research = await api.researchStory({
+          title: finalTitle,
+          source_urls: sourceUrls,
+          max_results: 4,
+        })
+        if (research.research_content.trim()) {
+          finalContent = `${finalContent.trim()}\n\n## 联网检索补充材料（需与原始信源交叉核验）\n${research.research_content}`
+          setStatusMessage(`已补充 ${research.results.length} 条相关资料，正在交给模型交叉核验并撰写…`)
+        }
+      } catch (err) {
+        console.warn('相关资料检索失败，使用已抓取信源继续生成:', err)
+      }
+    }
+    setContent(finalContent)
 
     // 联动右侧 AI 助手对话窗口
     setShowCopilot(true)
@@ -465,6 +490,15 @@ export function FlashWorkspace({
     }
     setChatMessages((prev) => [...prev, userMsg])
     setChatBusy(true)
+    const streamMessageId = `stream-${Date.now()}`
+    setChatMessages((prev) => [...prev, {
+      id: streamMessageId,
+      role: 'assistant',
+      content: '',
+      reasoning: '',
+      streaming: true,
+      timestamp: Date.now(),
+    }])
     setStatusMessage('正在调用 AI 引擎，根据爱范儿快讯规范撰写中…')
 
     try {
@@ -473,13 +507,18 @@ export function FlashWorkspace({
         content: finalContent || finalTitle,
         url: finalSourceUrl,
         category,
+      }, (update) => {
+        setChatMessages((prev) => prev.map((message) => message.id === streamMessageId
+          ? { ...message, content: update.content, reasoning: update.reasoning, streaming: true }
+          : message))
       })
       setResult(generated)
       setActiveTitle(generated.selected_title || generated.titles[0] || title)
       setBody(generated.body)
       setSummary(generated.summary)
       setKeyPoints(generated.key_points)
-      setStatusMessage(`快讯生成完成（引擎：${generated.provider === 'gemini' ? 'Gemini' : 'OpenAI 兼容'} · ${generated.model}）`)
+      const generatedProvider = generated.provider === 'ifanr' ? 'ifanr' : generated.provider === 'gemini' ? 'Gemini' : 'OpenAI 兼容'
+      setStatusMessage(`快讯生成完成（引擎：${generatedProvider} · ${generated.model}）`)
 
       // 在右侧 AI 助手窗口中展示结构化建议与正文初稿
       const titlesFormatted = (generated.titles || []).map((t, i) => `${i + 1}. ${t}`).join('\n')
@@ -503,7 +542,9 @@ ${generated.body}
 您可以点击「一键应用到正文」，或在下方输入框告诉我如何进一步修改（如精简到 300 字、换个更吸睛的角度等）！`,
         timestamp: Date.now(),
       }
-      setChatMessages((prev) => [...prev, assistantMsg])
+      setChatMessages((prev) => prev.map((message) => message.id === streamMessageId
+        ? { ...assistantMsg, id: streamMessageId, reasoning: message.reasoning, streaming: false }
+        : message))
     } catch (error) {
       const errMsg = error instanceof Error ? error.message : '快讯生成失败'
       setStatusMessage(errMsg)
@@ -518,7 +559,9 @@ ${generated.body}
 3. 您也可以直接在下方输入框告诉我您的需求，我将直接协助您撰写。`,
         timestamp: Date.now(),
       }
-      setChatMessages((prev) => [...prev, assistantErrMsg])
+      setChatMessages((prev) => prev.map((message) => message.id === streamMessageId
+        ? { ...assistantErrMsg, id: streamMessageId, reasoning: message.reasoning, streaming: false }
+        : message))
     } finally {
       setGenerating(false)
       setChatBusy(false)
@@ -584,6 +627,15 @@ ${generated.body}
     setChatMessages((prev) => [...prev, userMsg])
     if (!promptText) setChatInput('')
     setChatBusy(true)
+    const streamMessageId = `stream-${Date.now()}`
+    setChatMessages((prev) => [...prev, {
+      id: streamMessageId,
+      role: 'assistant',
+      content: '',
+      reasoning: '',
+      streaming: true,
+      timestamp: Date.now(),
+    }])
 
     try {
       const replyText = await chatFlashNewsAssistant(
@@ -595,7 +647,13 @@ ${generated.body}
           sourceUrl,
           category,
         },
-        text
+        text,
+        undefined,
+        (update) => {
+          setChatMessages((prev) => prev.map((message) => message.id === streamMessageId
+            ? { ...message, content: update.content, reasoning: update.reasoning, streaming: true }
+            : message))
+        },
       )
 
       const assistantMsg: ChatMessage = {
@@ -604,7 +662,9 @@ ${generated.body}
         content: replyText,
         timestamp: Date.now(),
       }
-      setChatMessages((prev) => [...prev, assistantMsg])
+      setChatMessages((prev) => prev.map((message) => message.id === streamMessageId
+        ? { ...assistantMsg, id: streamMessageId, reasoning: message.reasoning, streaming: false }
+        : message))
     } catch (err) {
       const errMsg: ChatMessage = {
         id: String(Date.now() + 1),
@@ -612,7 +672,9 @@ ${generated.body}
         content: `⚠️ 请求失败：${err instanceof Error ? err.message : '网络或模型异常'}`,
         timestamp: Date.now(),
       }
-      setChatMessages((prev) => [...prev, errMsg])
+      setChatMessages((prev) => prev.map((message) => message.id === streamMessageId
+        ? { ...errMsg, id: streamMessageId, reasoning: message.reasoning, streaming: false }
+        : message))
     } finally {
       setChatBusy(false)
     }
@@ -632,13 +694,15 @@ ${generated.body}
     }
   }
 
-  const currentModelName = llmConfig.provider === 'gemini'
-    ? (llmConfig.geminiModel || defaultGeminiModel)
-    : (llmConfig.openaiModel || defaultOpenaiModel)
+  const currentModelName = llmConfig.provider === 'ifanr'
+    ? (llmConfig.ifanrModel || defaultIfanrModel)
+    : llmConfig.provider === 'gemini'
+      ? (llmConfig.geminiModel || defaultGeminiModel)
+      : (llmConfig.openaiModel || defaultOpenaiModel)
 
-  const activeModelDisplay = llmConfig.provider === 'gemini'
-    ? `Gemini · ${currentModelName}`
-    : `OpenAI 兼容 · ${currentModelName}`
+  const providerDisplayName = llmConfig.provider === 'ifanr' ? 'ifanr' : llmConfig.provider === 'gemini' ? 'Google Gemini' : 'OpenAI 兼容'
+  const providerBadgeName = llmConfig.provider === 'ifanr' ? 'ifanr' : llmConfig.provider === 'gemini' ? 'Gemini' : 'OpenAI'
+  const activeModelDisplay = `${providerDisplayName} · ${currentModelName}`
 
   return (
     <div className="flash-workspace-shell">
@@ -646,7 +710,7 @@ ${generated.body}
         {/* 左侧：素材与突发线索录入 */}
         <section className="flash-panel flash-input-panel">
           <div className="flash-panel-header">
-            <h2><Zap size={17} style={{ color: 'var(--brand)' }} />突发素材录入</h2>
+            <h2 className="flash-panel-title"><Zap className="flash-panel-title-icon" />突发素材录入</h2>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <button
                 type="button"
@@ -819,12 +883,12 @@ ${generated.body}
                   type="button"
                   className={`flash-engine-badge ${configured ? 'active' : ''}`}
                   onClick={toggleModelPicker}
-                  title={`当前引擎：${llmConfig.provider === 'gemini' ? 'Google Gemini' : 'OpenAI 兼容'} · 模型：${currentModelName} · 思考强度：${THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'high']?.label || 'High'}`}
+                  title={`当前引擎：${providerDisplayName} · 模型：${currentModelName} · 思考强度：${THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'medium']?.label || 'Medium'}`}
                 >
-                  <span className="badge-brand-tag">⚡️ {llmConfig.provider === 'gemini' ? 'Gemini' : 'OpenAI'}</span>
+                  <span className="badge-brand-tag">⚡️ {providerBadgeName}</span>
                   <span className="badge-model-name">{currentModelName}</span>
                   {isThinkingCapable(currentModelName) ? (
-                    <span className="badge-thinking-pill">{THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'high']?.shortLabel || 'High'}</span>
+                    <span className="badge-thinking-pill">{THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'medium']?.shortLabel || 'Medium'}</span>
                   ) : null}
                   <ChevronDown size={12} style={{ flexShrink: 0, opacity: 0.7 }} />
                 </button>
@@ -842,6 +906,13 @@ ${generated.body}
                     }}
                   >
                     <div className="dropdown-tabs">
+                      <button
+                        type="button"
+                        className={`dropdown-tab ${modelTab === 'ifanr' ? 'active' : ''}`}
+                        onClick={() => { setModelTab('ifanr'); setHoveredModel(null) }}
+                      >
+                        ifanr
+                      </button>
                       <button
                         type="button"
                         className={`dropdown-tab ${modelTab === 'gemini' ? 'active' : ''}`}
@@ -891,7 +962,7 @@ ${generated.body}
                           .map((m) => {
                             const isSelected = llmConfig.provider === modelTab && currentModelName === m.name
                             const supportsThinking = isThinkingCapable(m.name)
-                            const currentThinkingLabel = THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'high']?.shortLabel || 'High'
+                            const currentThinkingLabel = THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'medium']?.shortLabel || 'Medium'
 
                             return (
                               <div
@@ -942,6 +1013,28 @@ ${generated.body}
                       )}
                     </div>
 
+                    {llmConfig.provider === modelTab && thinkingLevelsForModel(currentModelName).length ? (
+                      <div className="reasoning-inline-selector">
+                        <div className="reasoning-inline-header">
+                          <span>Reasoning effort</span>
+                          <small>{THINKING_LEVEL_MAP[llmConfig.thinkingLevel || 'medium'].label}</small>
+                        </div>
+                        <div className="reasoning-inline-options">
+                          {thinkingLevelsForModel(currentModelName).map((level) => (
+                            <button
+                              key={level.id}
+                              type="button"
+                              className={(llmConfig.thinkingLevel || 'medium') === level.id ? 'selected' : ''}
+                              title={level.desc}
+                              onClick={() => handleSwitchModelAndThinking(modelTab, currentModelName, level.id)}
+                            >
+                              {level.id === 'xhigh' ? '极高' : level.id === 'max' ? 'Ultra' : level.id === 'none' ? '关闭' : level.id === 'low' ? '轻度' : level.id === 'medium' ? '中' : '高'}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+
                     {/* 级联思考强度二级菜单 (Cursor 风格，自适应左右方向与过渡动画) */}
                     {hoveredModel ? (
                       <div
@@ -951,9 +1044,9 @@ ${generated.body}
                         onMouseLeave={() => scheduleClearHoveredModel(180)}
                       >
                         <div className="flyout-header">Reasoning 强度</div>
-                        {THINKING_LEVELS.map((lvl) => {
+                        {thinkingLevelsForModel(hoveredModel.name).map((lvl) => {
                           const isSelected = llmConfig.provider === modelTab && currentModelName === hoveredModel.name
-                          const isLevelActive = isSelected && (llmConfig.thinkingLevel || 'high') === lvl.id
+                          const isLevelActive = isSelected && (llmConfig.thinkingLevel || 'medium') === lvl.id
                           return (
                             <button
                               key={lvl.id}
@@ -1179,7 +1272,7 @@ ${generated.body}
         {showCopilot ? (
           <section className={`flash-panel flash-copilot-panel ${copilotClosing ? 'is-closing' : ''}`}>
             <div className="flash-panel-header">
-              <h2><Bot size={18} style={{ color: 'var(--brand)' }} />AI 修改助手</h2>
+              <h2 className="flash-panel-title"><Bot className="flash-panel-title-icon" />AI 修改助手</h2>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <button
                   type="button"
@@ -1221,7 +1314,15 @@ ${generated.body}
                     <strong>{msg.role === 'user' ? '主编' : 'AI 副主编'}</strong>
                     {msg.timestamp ? <small>{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small> : null}
                   </div>
-                  <div className="msg-content">{msg.content}</div>
+                  {msg.reasoning ? (
+                    <details className="msg-reasoning" open={msg.streaming}>
+                      <summary>推理摘要{msg.streaming ? ' · 实时' : ''}</summary>
+                      <div>{msg.reasoning}</div>
+                    </details>
+                  ) : null}
+                  <div className={`msg-content ${msg.streaming ? 'is-streaming' : ''}`}>
+                    {msg.content || (msg.streaming ? '模型正在推理；若接口返回推理摘要，会在此处实时展开…' : '')}
+                  </div>
 
                   {/* 若包含 Markdown 建议，显示一键应用按钮 */}
                   {msg.role === 'assistant' && (msg.content.includes('```') || msg.content.includes('**爱范儿')) ? (
@@ -1237,7 +1338,7 @@ ${generated.body}
                   ) : null}
                 </div>
               ))}
-              {chatBusy ? (
+              {chatBusy && !chatMessages.some((message) => message.streaming) ? (
                 <div className="copilot-msg-bubble assistant typing">
                   <LoaderCircle size={15} className="spin" /> AI 副主编正在组织修改建议…
                 </div>
@@ -1280,7 +1381,7 @@ ${generated.body}
           <div className="modal-backdrop" style={{ zIndex: 1200 }} role="presentation" onMouseDown={() => setShowLeaveModal(null)}>
             <div className="modal-card" style={{ maxWidth: '440px', width: '90%', background: 'var(--paper)', borderRadius: '12px', padding: '22px', border: '1px solid var(--line)' }} onMouseDown={(e) => e.stopPropagation()}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(234, 88, 12, 0.12)', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="ui-true-circle" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(234, 88, 12, 0.12)', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Save size={18} />
                 </div>
                 <h3 style={{ margin: 0, fontSize: '16px', color: 'var(--ink)' }}>是否保存当前稿件草稿？</h3>

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { applyReviewOperations, buildReviewExport, createClientId, renderFeishuCloudMarkdown } from './review'
+import { applyReviewOperations, buildReviewExport, createClientId, renderFeishuCloudMarkdown, renderHeadlineCandidatesMarkdown } from './review'
 import type { Issue, Story } from './types'
 
 vi.stubGlobal('crypto', { randomUUID: () => '12345678-1234-1234-1234-123456789abc' })
@@ -56,16 +56,36 @@ function issue(stories: Story[]): Issue {
 }
 
 describe('buildReviewExport', () => {
-  it('renders both current brand candidate groups before the fixed Feishu shell', () => {
+  it('keeps current brand candidates in the workbench and out of the Feishu shell', () => {
     const current = issue([story()])
     current.brand_packages.ifanr.headline_options = ['爱范儿一', '爱范儿二', '爱范儿三', '爱范儿四', '爱范儿五', '爱范儿六']
     current.brand_packages.ifanr.selected_headline = '爱范儿四'
     current.brand_packages.appso.headline_options = ['APPSO一', 'APPSO二', 'APPSO三', 'APPSO四', 'APPSO五', 'APPSO六']
     current.brand_packages.appso.selected_headline = 'APPSO五'
+    const candidates = renderHeadlineCandidatesMarkdown(current)
+    expect(candidates).toContain('#### 爱范儿\n1. 爱范儿四\n2. 爱范儿一\n3. 爱范儿二\n4. 爱范儿三\n5. 爱范儿五\n6. 爱范儿六')
+    expect(candidates).toContain('#### APPSO\n1. APPSO五\n2. APPSO一\n3. APPSO二\n4. APPSO三\n5. APPSO四\n6. APPSO六')
     const markdown = renderFeishuCloudMarkdown(current)
-    expect(markdown.indexOf('### 备选标题')).toBeLessThan(markdown.indexOf('早报｜'))
-    expect(markdown).toContain('#### 爱范儿\n1. 爱范儿四\n2. 爱范儿一\n3. 爱范儿二\n4. 爱范儿三\n5. 爱范儿五\n6. 爱范儿六')
-    expect(markdown).toContain('#### APPSO\n1. APPSO五\n2. APPSO一\n3. APPSO二\n4. APPSO三\n5. APPSO四\n6. APPSO六')
+    expect(markdown).toMatch(/^早报｜\n\n插入日期\n\nappso 头图\n\n插入目录/)
+    expect(markdown).not.toContain('插入头图')
+    expect(markdown).not.toContain('备选标题')
+    expect(markdown).toContain('## 重磅')
+  })
+
+  it('renders the Saturday reader sections without weekday category headings', () => {
+    const current = issue([
+      story({ title: '周六新闻' }),
+      story({ id: 'weekend', fingerprint: 'weekend', title: '周末看什么｜主选｜电影', category: '好看的', position: 1 }),
+    ])
+    current.publication_date = '2026-08-01'
+    const markdown = renderFeishuCloudMarkdown(current)
+    expect(markdown).toContain('### 📰 周末也值得一看的新闻')
+    expect(markdown).toContain('### ✨ 是周末啊！')
+    expect(markdown).toContain('### 周末看什么｜电影')
+    expect(markdown).not.toContain('主选｜')
+    expect(markdown).not.toContain('## 大公司')
+    expect(markdown).not.toContain('插入头图')
+    expect(markdown).not.toContain('备选标题')
   })
 
   it('creates ids when randomUUID is unavailable on a local HTTP origin', () => {

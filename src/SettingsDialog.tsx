@@ -8,6 +8,7 @@ import {
   ChevronRight,
   CircleDot,
   CloudOff,
+  Copy,
   Cpu,
   Edit3,
   Eye,
@@ -39,6 +40,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { api, resolveApiAssetUrl } from './api'
 import {
   defaultGeminiModel,
+  defaultIfanrModel,
   defaultOpenaiBaseUrl,
   defaultOpenaiModel,
   getLLMConfig,
@@ -145,6 +147,7 @@ export function SettingsDialog({
 
   // AI 引擎设置表单项
   const [provider, setProvider] = useState<LLMProvider>(config.provider)
+  const [ifanrModel] = useState(config.ifanrModel || defaultIfanrModel)
   const [geminiKey, setGeminiKey] = useState(config.geminiKey)
   const [geminiModel, setGeminiModel] = useState(config.geminiModel || defaultGeminiModel)
   const [openaiBaseUrl, setOpenaiBaseUrl] = useState(config.openaiBaseUrl || defaultOpenaiBaseUrl)
@@ -204,6 +207,10 @@ export function SettingsDialog({
 
   const canGoBack = historyIndex > 0
   const canGoForward = historyIndex < navHistory.length - 1
+  const settingsRouteKey = `${activeTab}-${activeTab === 'users' ? userSubView : 'root'}-${editingUser?.id || ''}`
+  const registrationInviteLink = inviteCode.trim()
+    ? `${window.location.origin}${window.location.pathname}#register/${encodeURIComponent(inviteCode.trim())}`
+    : ''
 
   const navigateTo = (tab: SettingsTab, subView: 'list' | 'edit' | 'add' = 'list', targetUser: UserType | null = null) => {
     setNavHistory((prev) => [...prev.slice(0, historyIndex + 1), { tab, subView, editUser: targetUser }])
@@ -289,7 +296,8 @@ export function SettingsDialog({
       setFeishuNotice(null)
       const res = await api.authFeishuUrl()
       if (res.configured && res.url) {
-        window.open(res.url, '_blank', 'width=600,height=700')
+        const popup = window.open(res.url, 'ifanr-feishu-oauth', 'popup=yes,width=600,height=700')
+        if (!popup) setFeishuNotice('浏览器拦截了授权窗口，请允许本站弹出窗口后重试')
       } else {
         setFeishuNotice(res.message || '飞书网页授权应用待配置，建议使用下方快捷 ID 绑定')
         setShowManualFeishu(true)
@@ -301,6 +309,19 @@ export function SettingsDialog({
       setFeishuLoading(false)
     }
   }
+
+  useEffect(() => {
+    const handleFeishuOAuthMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin || event.data?.type !== 'ifanr-feishu-oauth') return
+      setFeishuNotice(String(event.data.message || (event.data.ok ? '飞书账号绑定成功' : '飞书账号绑定失败')))
+      if (event.data.ok) {
+        void fetchMyAccount()
+        if (isSuperAdmin) void fetchUsersAndSettings()
+      }
+    }
+    window.addEventListener('message', handleFeishuOAuthMessage)
+    return () => window.removeEventListener('message', handleFeishuOAuthMessage)
+  }, [fetchMyAccount, isSuperAdmin])
 
   const handleManualFeishuBind = async () => {
     if (!manualFeishuInput.trim()) return
@@ -378,6 +399,27 @@ export function SettingsDialog({
     }
   }
 
+  const handleCopyRegistrationLink = async () => {
+    if (!registrationInviteLink) return
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(registrationInviteLink)
+      } else {
+        const helper = document.createElement('textarea')
+        helper.value = registrationInviteLink
+        helper.style.position = 'fixed'
+        helper.style.opacity = '0'
+        document.body.appendChild(helper)
+        helper.select()
+        document.execCommand('copy')
+        helper.remove()
+      }
+      setRegNotice('邀请链接已复制，打开后会直接进入注册并预填邀请码')
+    } catch {
+      setRegNotice('复制失败，请手动选中链接复制')
+    }
+  }
+
   const handleSaveEditUser = async () => {
     if (!editingUser) return
     setSavingUser(true)
@@ -417,16 +459,18 @@ export function SettingsDialog({
   const handleCreateUser = async () => {
     if (!newUserForm.username.trim() || !newUserForm.password.trim()) {
       alert('请填写用户名和密码')
-      return
+      return false
     }
     setSavingUser(true)
     try {
-      await api.authRegister({
+      await api.createUser({
         username: newUserForm.username.trim(),
         password: newUserForm.password.trim(),
         display_name: newUserForm.display_name.trim() || newUserForm.username.trim(),
         feishu_user_id: newUserForm.feishu_user_id.trim(),
         feishu_name: newUserForm.feishu_name.trim() || newUserForm.display_name.trim(),
+        role: newUserForm.role,
+        permissions: ROLE_PRESETS[newUserForm.role].perms,
       })
       setShowAddUserModal(false)
       setNewUserForm({
@@ -440,8 +484,10 @@ export function SettingsDialog({
       setUserActionNotice('成员账号创建成功')
       await fetchUsersAndSettings()
       setTimeout(() => setUserActionNotice(null), 3000)
+      return true
     } catch (err) {
       alert(`创建失败：${err instanceof Error ? err.message : '未知错误'}`)
+      return false
     } finally {
       setSavingUser(false)
     }
@@ -509,6 +555,7 @@ export function SettingsDialog({
   const handleSave = () => {
     saveLLMConfig({
       provider,
+      ifanrModel,
       geminiKey: geminiKey.trim(),
       geminiModel: geminiModel.trim(),
       openaiBaseUrl: openaiBaseUrl.trim(),
@@ -516,8 +563,11 @@ export function SettingsDialog({
       openaiModel: openaiModel.trim(),
     })
     setSavedSuccess(true)
-    const activeModelName = provider === 'gemini' ? (geminiModel.trim() || defaultGeminiModel) : (openaiModel.trim() || defaultOpenaiModel)
-    onSaveNotice?.(`设置已保存！当前 AI 引擎：${provider === 'gemini' ? 'Google Gemini' : 'OpenAI 兼容'} · ${activeModelName}`)
+    const activeModelName = provider === 'ifanr'
+      ? ifanrModel
+      : provider === 'gemini' ? (geminiModel.trim() || defaultGeminiModel) : (openaiModel.trim() || defaultOpenaiModel)
+    const providerLabel = provider === 'ifanr' ? 'ifanr' : provider === 'gemini' ? 'Google Gemini' : 'OpenAI 兼容'
+    onSaveNotice?.(`设置已保存！当前 AI 引擎：${providerLabel} · ${activeModelName}`)
     setTimeout(() => {
       setSavedSuccess(false)
       onClose()
@@ -560,7 +610,7 @@ export function SettingsDialog({
             <Cpu size={19} style={{ color: 'var(--brand)' }} />
             <div>
               <h3>系统设置与 AI 配置</h3>
-              <p>个性化偏好、API 密钥与连接状态（所有密钥仅存储于当前浏览器本地）</p>
+              <p>个性化偏好、AI 引擎与连接状态（ifanr 密钥由 VPS Worker 保管）</p>
             </div>
           </div>
           <button
@@ -615,12 +665,13 @@ export function SettingsDialog({
 
           {/* 右侧设置主面板 */}
           <main className="settings-tab-content">
+          <div key={settingsRouteKey} className="settings-route-stage">
             {/* Tab 4: 团队账号与权限管理 (普通成员个人中心与飞书授权) */}
             {activeTab === 'users' && !isSuperAdmin ? (
               <div className="settings-section-form">
                 {!myAccount?.username || myAccount.username === 'Guest' ? (
                   <div style={{ textAlign: 'center', padding: '48px 24px' }}>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'color-mix(in srgb, var(--brand) 10%, var(--panel))', color: 'var(--brand)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                    <div className="ui-true-circle" style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'color-mix(in srgb, var(--brand) 10%, var(--panel))', color: 'var(--brand)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                       <Lock size={22} />
                     </div>
                     <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', color: 'var(--ink)' }}>需要登录账号</h4>
@@ -649,7 +700,7 @@ export function SettingsDialog({
                     <div className="settings-card-group" style={{ border: '1px solid var(--line)', borderRadius: '8px', padding: '14px', background: 'var(--panel)', marginBottom: '16px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                          <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--brand)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '14px' }}>
+                          <div className="ui-true-circle" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--brand)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '14px' }}>
                             {(myAccount.display_name || myAccount.username)[0].toUpperCase()}
                           </div>
                           <div>
@@ -704,7 +755,7 @@ export function SettingsDialog({
                       {myAccount.feishu_user_id ? (
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--paper)', padding: '10px 14px', borderRadius: '6px', border: '1px solid var(--line-soft)' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'var(--warm)', color: 'var(--brand)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '12px' }}>
+                            <div className="ui-true-circle" style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'var(--warm)', color: 'var(--brand)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '12px' }}>
                               飞
                             </div>
                             <div>
@@ -805,11 +856,9 @@ export function SettingsDialog({
                         const isShawn = editingUser.username.toLowerCase() === 'shawn rain' || editingUser.is_admin
                         const uAvatar = isShawn ? (avatarUrl || (editingUser.avatar_url ? resolveApiAssetUrl(editingUser.avatar_url) : null)) : (editingUser.avatar_url ? resolveApiAssetUrl(editingUser.avatar_url) : null)
                         return uAvatar ? (
-                          <img src={uAvatar} alt="" style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--line-soft)' }} />
+                          <img className="ui-true-circle" src={uAvatar} alt="" style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--line-soft)' }} />
                         ) : (
-                          <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: isShawn ? 'var(--brand)' : 'var(--panel-2)', color: isShawn ? '#fff' : 'var(--ink)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '14px' }}>
-                            {(editingUser.display_name || editingUser.username)[0].toUpperCase()}
-                          </div>
+                          <div className="member-avatar-placeholder" style={{ width: '38px', height: '38px' }}><User size={18} /></div>
                         )
                       })()}
                       <div style={{ flex: 1 }}>
@@ -1020,7 +1069,7 @@ export function SettingsDialog({
                           style={{ width: '100%', padding: '7px 10px', fontSize: '12.5px', borderRadius: '6px', border: '1px solid var(--line)', background: 'var(--paper)', color: 'var(--ink)' }}
                           onChange={(e) => setNewUserForm({ ...newUserForm, role: e.target.value as UserRole })}
                         >
-                          {Object.entries(ROLE_PRESETS).map(([k, v]) => (
+                          {Object.entries(ROLE_PRESETS).filter(([k]) => k !== 'super_admin').map(([k, v]) => (
                             <option key={k} value={k}>{v.label}</option>
                           ))}
                         </select>
@@ -1050,8 +1099,7 @@ export function SettingsDialog({
                         className="console-btn-primary"
                         disabled={savingUser || !newUserForm.username.trim() || !newUserForm.password.trim()}
                         onClick={async () => {
-                          await handleCreateUser()
-                          navigateTo('users', 'list')
+                          if (await handleCreateUser()) navigateTo('users', 'list')
                         }}
                       >
                         {savingUser ? <LoaderCircle size={13} className="spin" /> : <UserPlus size={13} />} 创建成员
@@ -1176,6 +1224,12 @@ export function SettingsDialog({
                           </button>
                         </div>
                       </div>
+                      {registrationInviteLink ? (
+                        <div className="registration-invite-link-row">
+                          <input type="text" readOnly value={registrationInviteLink} aria-label="注册邀请链接" />
+                          <button type="button" className="console-btn-secondary" onClick={() => void handleCopyRegistrationLink()}><Copy size={12} /> 复制邀请链接</button>
+                        </div>
+                      ) : null}
                       {regNotice ? <small style={{ display: 'block', marginTop: '6px', color: 'var(--brand)' }}>{regNotice}</small> : null}
                     </div>
 
@@ -1236,12 +1290,11 @@ export function SettingsDialog({
                                     <img
                                       src={uAvatar}
                                       alt=""
+                                      className="ui-true-circle"
                                       style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--line-soft)' }}
                                     />
                                   ) : (
-                                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: isShawn ? 'var(--brand)' : 'var(--panel-2)', color: isShawn ? '#fff' : 'var(--ink)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '13px' }}>
-                                      {(u.display_name || u.username)[0].toUpperCase()}
-                                    </div>
+                                    <div className="member-avatar-placeholder" style={{ width: '36px', height: '36px' }}><User size={17} /></div>
                                   )}
                                   <div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -1299,6 +1352,23 @@ export function SettingsDialog({
                 {/* 引擎切换卡片 */}
                 <div className="provider-selector-grid">
                   <div
+                    className={`provider-card ${provider === 'ifanr' ? 'selected' : ''}`}
+                    onClick={() => { setProvider('ifanr'); setTestResult(null) }}
+                  >
+                    <div className="provider-card-header">
+                      <div className="provider-badge ifanr">Default</div>
+                      <input
+                        type="radio"
+                        name="llm-provider-select"
+                        checked={provider === 'ifanr'}
+                        onChange={() => setProvider('ifanr')}
+                      />
+                    </div>
+                    <strong>ifanr</strong>
+                    <p>VPS Worker 内置引擎，无需配置 API 地址或密钥。</p>
+                  </div>
+
+                  <div
                     className={`provider-card ${provider === 'gemini' ? 'selected' : ''}`}
                     onClick={() => { setProvider('gemini'); setTestResult(null) }}
                   >
@@ -1333,8 +1403,12 @@ export function SettingsDialog({
                   </div>
                 </div>
 
-                {/* Google Gemini 专属配置 */}
-                {provider === 'gemini' ? (
+                {provider === 'ifanr' ? (
+                  <div className="settings-form-panel ifanr-provider-panel">
+                    <div className="worker-status-line ok"><ShieldCheck size={16} /><strong>VPS Worker 统一管理连接与密钥</strong></div>
+                    <p>快讯、品牌标题和 AI 采编助手均通过登录后的 Worker 请求调用，不从浏览器传递 Hub API Key。当前默认模型：<code>{ifanrModel}</code>。</p>
+                  </div>
+                ) : provider === 'gemini' ? (
                   <div className="settings-form-panel">
                     <div className="form-field">
                       <label>
@@ -1501,7 +1575,9 @@ export function SettingsDialog({
                   <ShieldCheck size={16} style={{ color: 'var(--green)' }} />
                   <div>
                     <strong>本地私密存储保证</strong>
-                    <p>所有 API Key 与端点地址仅保存在您当前浏览器的本地 LocalStorage 中，直接由浏览器客户端发起请求，绝不会同步或上传至 VPS 服务器或任何第三方。</p>
+                    <p>{provider === 'ifanr'
+                      ? '内置 API Key 只保存在 VPS Worker 的受限环境文件中，不会下发到浏览器。'
+                      : '直连模式的 API Key 与端点地址仅保存在当前浏览器 LocalStorage 中。'}</p>
                   </div>
                 </div>
               </div>
@@ -1586,6 +1662,7 @@ export function SettingsDialog({
                 </div>
               </div>
             ) : null}
+          </div>
           </main>
         </div>
 

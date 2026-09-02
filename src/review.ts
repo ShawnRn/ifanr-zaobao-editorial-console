@@ -1,5 +1,5 @@
 import type { Issue, Story } from './types'
-import { comparePublicationStories, publicationCategories } from './categories'
+import { comparePublicationStories, publicationCategories, readerFacingStoryTitle } from './categories'
 
 export function currentHeadlineOptions(issue: Issue, brand: 'ifanr' | 'appso'): string[] {
   const pack = issue.brand_packages?.[brand]
@@ -262,7 +262,7 @@ export function renderIssueMarkdown(issue: Issue): string {
             .filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && typeof (item as { url?: unknown }).url === 'string'))
             .map((item) => `🔗 相关阅读：[${item.title}](${item.url})`)
           : []
-        return [`### ${story.title}`, story.body.trim(), ...relatedLinks, sourceLine].filter(Boolean).join('\n\n')
+        return [`### ${readerFacingStoryTitle(story.title)}`, story.body.trim(), ...relatedLinks, sourceLine].filter(Boolean).join('\n\n')
       })
     return [`## ${category}`, ...blocks].join('\n\n')
   })
@@ -271,8 +271,36 @@ export function renderIssueMarkdown(issue: Issue): string {
 
 /** Markdown shell for direct paste into the Feishu Bot document. */
 export function renderFeishuCloudMarkdown(issue: Issue): string {
-  const body = renderIssueMarkdown(issue).replace(/^# 早报｜[^\n]*\n\n?/, '')
-  return `${renderHeadlineCandidatesMarkdown(issue)}\n\n早报｜\n\n插入头图\n插入日期\n\nappso 头图\n\n插入目录\n\n${body}`.trim() + '\n'
+  const selected = issue.stories.filter((story) => story.selected && story.status !== 'excluded')
+  const relatedLinks = (story: Story) => Array.isArray(story.metadata.related_links)
+    ? story.metadata.related_links
+      .filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && typeof (item as { url?: unknown }).url === 'string'))
+      .map((item) => `🔗 相关阅读：[${item.title}](${item.url})`)
+    : []
+  const storyBlock = (story: Story) => [`### ${readerFacingStoryTitle(story.title)}`, story.body.trim(), ...relatedLinks(story)].filter(Boolean).join('\n\n')
+  const publication = new Date(`${issue.publication_date}T00:00:00Z`)
+  const isSaturday = publication.getUTCDay() === 6
+  let body: string
+  if (isSaturday) {
+    const weekendSections = ['One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const
+    const specialPattern = /^(One Fun Thing|周末看什么|买书不读指南|游戏推荐)(?:[｜|](?:主选|备选))?[｜|](.+)$/i
+    const news = selected.filter((story) => !specialPattern.test(story.title.trim())).sort(comparePublicationStories)
+    const parts = ['### 📰 周末也值得一看的新闻', ...news.map(storyBlock), '### ✨ 是周末啊！']
+    for (const section of weekendSections) {
+      const stories = selected
+        .filter((story) => specialPattern.exec(story.title.trim())?.[1].toLocaleLowerCase() === section.toLocaleLowerCase())
+        .sort((first, second) => first.position - second.position)
+      if (!stories.length) parts.push(`### ${section}｜`)
+      else parts.push(...stories.map(storyBlock))
+    }
+    body = parts.join('\n\n')
+  } else {
+    body = publicationCategories.map((category) => [
+      `## ${category}`,
+      ...selected.filter((story) => story.category === category).sort(comparePublicationStories).map(storyBlock),
+    ].join('\n\n')).join('\n\n')
+  }
+  return `早报｜\n\n插入日期\n\nappso 头图\n\n插入目录\n\n${body}`.trim() + '\n'
 }
 
 export function downloadText(filename: string, content: string, type = 'application/json;charset=utf-8') {

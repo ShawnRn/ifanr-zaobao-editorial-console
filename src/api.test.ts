@@ -1,5 +1,7 @@
-import { describe, expect, it } from 'vitest'
-import { apiUrlProblem, describeWorkerError, normalizeApiUrl, workerFetchOptions } from './api'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { api, apiUrlProblem, describeWorkerError, normalizeApiUrl, workerFetchOptions } from './api'
+
+afterEach(() => vi.unstubAllGlobals())
 
 
 describe('Worker URL handling', () => {
@@ -30,5 +32,14 @@ describe('Worker URL handling', () => {
 
   it('explains browser local-network blocking', () => {
     expect(describeWorkerError(new TypeError('Failed to fetch'))).toContain('本地网络')
+  })
+
+  it('turns an HTML Pages fallback into a useful connection error', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('<!doctype html><title>Vite</title>', {
+      status: 200,
+      headers: { 'Content-Type': 'text/html' },
+    })))
+
+    await expect(api.staticIssue()).rejects.toThrow('Pages 快照返回了网页而不是 JSON')
   })
 })

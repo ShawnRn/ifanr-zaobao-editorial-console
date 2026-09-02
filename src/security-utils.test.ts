@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import QRCode from 'qrcode'
 import { writeClipboardText } from './App'
+import { writeClipboardTextAndImage } from './clipboard'
 import { generateQrSvgDataUri } from './totp'
 
 afterEach(() => {
@@ -37,5 +38,22 @@ describe('two-factor setup utilities', () => {
     await expect(writeClipboardText('setup-secret')).resolves.toBe(true)
     expect(execCommand).toHaveBeenCalledWith('copy')
     expect(document.querySelector('textarea[aria-hidden="true"]')).toBeNull()
+  })
+
+  it('writes Weibo text and a PNG as one rich clipboard item', async () => {
+    const write = vi.fn().mockResolvedValue(undefined)
+    const png = new Blob(['png'], { type: 'image/png' })
+    const fetchImage = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, blob: async () => png } as Response)
+    class TestClipboardItem {
+      constructor(readonly data: Record<string, Blob>) {}
+    }
+    Object.defineProperty(window, 'isSecureContext', { configurable: true, value: true })
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write } })
+    Object.defineProperty(globalThis, 'ClipboardItem', { configurable: true, value: TestClipboardItem })
+
+    await expect(writeClipboardTextAndImage('微博正文', '/story.png')).resolves.toEqual({ copied: true, imageCopied: true })
+    expect(fetchImage).toHaveBeenCalledWith('/story.png')
+    const item = write.mock.calls[0][0][0] as TestClipboardItem
+    expect(Object.keys(item.data)).toEqual(['text/plain', 'image/png'])
   })
 })

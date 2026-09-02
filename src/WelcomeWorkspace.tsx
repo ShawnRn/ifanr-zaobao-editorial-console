@@ -21,29 +21,13 @@ import {
   Zap,
 } from 'lucide-react'
 import { useState, useMemo } from 'react'
-import type { Issue } from './types'
-
-export type FlashDraftItem = {
-  id: string
-  title: string
-  body: string
-  category: string
-  sourceUrl?: string
-  imageUrl?: string
-  content?: string
-  keyPoints?: string[]
-  publishedDoc?: {
-    document_url: string
-    document_title: string
-  }
-  updatedAt: number
-  authorName?: string
-}
+import type { FlashDraftItem, Issue } from './types'
 
 export type WelcomeWorkspaceProps = {
   issue: Issue | null
   currentUserName?: string
   drafts: FlashDraftItem[]
+  draftSyncState?: 'idle' | 'syncing' | 'synced' | 'offline'
   onOpenDraft: (draft: FlashDraftItem) => void
   onNewFlashNews: () => void
   onSwitchView: (view: 'draft' | 'candidates' | 'trash' | 'brands' | 'weekend' | 'flash' | 'home') => void
@@ -92,6 +76,7 @@ export function WelcomeWorkspace({
   issue,
   currentUserName,
   drafts,
+  draftSyncState = 'idle',
   onOpenDraft,
   onNewFlashNews,
   onSwitchView,
@@ -125,7 +110,7 @@ export function WelcomeWorkspace({
     return `${date.getMonth() + 1}月${date.getDate()}日 ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
   }
 
-  const userGreetingName = currentUserName || 'Shawn Rain'
+  const userGreetingName = currentUserName?.trim() || 'ifanr'
 
   return (
     <div className="welcome-workspace-container">
@@ -220,6 +205,14 @@ export function WelcomeWorkspace({
           </div>
 
           <div className="recents-tools-group">
+            <span className={`recents-sync-status ${draftSyncState}`}>
+              {draftSyncState === 'syncing' ? <RefreshCw size={12} className="spin" /> : <Users size={12} />}
+              {draftSyncState === 'syncing'
+                ? '正在同步'
+                : draftSyncState === 'offline'
+                  ? '本机暂存，等待同步'
+                  : '已随账号同步'}
+            </span>
             <div className="recents-search-box">
               <Search size={13} />
               <input
@@ -349,7 +342,7 @@ export function WelcomeWorkspace({
                   className="recent-list-row"
                   onClick={() => onOpenDraft(draft)}
                 >
-                  <div className="row-title-cell" style={{ flex: 3 }}>
+                  <div className="row-title-cell">
                     <div className="row-icon">
                       {draft.imageUrl ? (
                         <img src={draft.imageUrl} alt="" />
@@ -363,19 +356,19 @@ export function WelcomeWorkspace({
                     </div>
                   </div>
 
-                  <div style={{ width: '100px' }}>
+                  <div className="row-category-cell">
                     <span className="row-category-badge">{draft.category || '大公司'}</span>
                   </div>
 
-                  <div style={{ width: '120px', fontSize: '12px', color: 'var(--muted)' }}>
+                  <div className="row-status-cell">
                     {charCount} 字 {draft.publishedDoc ? <span className="row-published-tag">飞书已发</span> : null}
                   </div>
 
-                  <div style={{ width: '140px', fontSize: '12px', color: 'var(--quiet)' }}>
+                  <div className="row-time-cell">
                     {formatRelativeTime(draft.updatedAt)}
                   </div>
 
-                  <div className="row-actions-cell" style={{ width: '120px' }} onClick={(e) => e.stopPropagation()}>
+                  <div className="row-actions-cell" onClick={(e) => e.stopPropagation()}>
                     <button
                       type="button"
                       className="row-action-btn"
