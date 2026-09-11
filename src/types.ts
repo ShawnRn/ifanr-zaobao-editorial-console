@@ -187,6 +187,23 @@ export type Job = {
   error: string
 }
 
+export type LarkConflict = {
+  id: string
+  title: string
+  story_id?: string
+  field: 'title' | 'body' | 'category' | 'position' | 'selected' | 'story' | string
+  reason: string
+  workbench_value: unknown
+  lark_value: unknown
+  can_accept_lark?: boolean
+}
+
+export type LarkConflictReadback = {
+  conflicts: LarkConflict[]
+  conflict_set_id: string
+  conflict_issue_revision: number
+}
+
 export type AutomationHandoff = {
   issue_id: string
   revision: number

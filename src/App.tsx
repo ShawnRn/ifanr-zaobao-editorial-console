@@ -51,6 +51,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState, type DragEvent, type MouseEventHandler, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { api, describeWorkerError, getApiUrl, getAuthToken, isPagesDeployment, resolveApiAssetUrl, setAuthToken, WorkerRequestError } from './api'
 import { comparePublicationStories, groupPublicationStories, normalizeStoryCategory, publicationCategories, publicationCategoryOrder, readerFacingStoryTitle } from './categories'
 import { defaultGeminiModel, generateBrandHeadlines, getGeminiModel, hasGeminiKey, listGeminiModels, saveGeminiKey as persistGeminiKey, saveGeminiModel } from './gemini'
@@ -63,7 +64,7 @@ import { generateQrSvgDataUri } from './totp'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import { writeClipboardText } from './clipboard'
 import type { EditorialReviewExport } from './review'
-import type { AutomationHandoff, BrandPackage, FlashDraftItem, Issue, IssueSummary, Job, Source, Story, StoryCreateInput, StoryStatus } from './types'
+import type { AutomationHandoff, BrandPackage, FlashDraftItem, Issue, IssueSummary, Job, LarkConflict, LarkConflictReadback, Source, Story, StoryCreateInput, StoryStatus } from './types'
 import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
 import ifanrLogoLightUrl from './assets/ifanr-logo-light.png'
 const LEGACY_AVATAR_STORAGE_KEY = 'ifanr-editorial-avatar'
@@ -385,6 +386,79 @@ function LinkedSourceLine({ story }: { story: Story }) {
   )
 }
 
+function MobileStoryActions({
+  story,
+  open,
+  canMoveUp,
+  canMoveDown,
+  moveOptions,
+  currentMoveTarget,
+  onClose,
+  onMoveUp,
+  onMoveDown,
+  onMoveCategory,
+  onExclude,
+}: {
+  story: Story
+  open: boolean
+  canMoveUp: boolean
+  canMoveDown: boolean
+  moveOptions: readonly string[]
+  currentMoveTarget: string
+  onClose: () => void
+  onMoveUp?: () => void
+  onMoveDown?: () => void
+  onMoveCategory?: (category: string) => void
+  onExclude: () => void
+}) {
+  const sheetRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const focusFrame = window.requestAnimationFrame(() => sheetRef.current?.querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus())
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [open, onClose])
+
+  if (!open || typeof document === 'undefined') return null
+  const run = (action?: () => void) => {
+    onClose()
+    action?.()
+  }
+  const availableCategories = moveOptions.filter((category) => category !== currentMoveTarget)
+
+  return createPortal(
+    <div className="mobile-story-actions-backdrop" role="presentation" onClick={onClose}>
+      <div ref={sheetRef} className="mobile-story-actions-sheet" role="dialog" aria-modal="true" aria-labelledby={`mobile-story-actions-${story.id}`} onClick={(event) => event.stopPropagation()}>
+        <div className="mobile-story-actions-grabber" aria-hidden="true" />
+        <header>
+          <span>{currentMoveTarget}</span>
+          <h2 id={`mobile-story-actions-${story.id}`}>{story.title}</h2>
+        </header>
+        <div className="mobile-story-order-actions" aria-label="调整选题顺序">
+          <button type="button" disabled={!canMoveUp} onClick={() => run(onMoveUp)}><ArrowUp size={19} /><span>上移一位</span></button>
+          <button type="button" disabled={!canMoveDown} onClick={() => run(onMoveDown)}><ArrowDown size={19} /><span>下移一位</span></button>
+        </div>
+        {onMoveCategory && availableCategories.length ? <section className="mobile-story-category-actions">
+          <h3>移动到栏目</h3>
+          <div>
+            {availableCategories.map((category) => <button type="button" key={category} onClick={() => run(() => onMoveCategory(category))}><FolderInput size={18} /><span>{category}</span></button>)}
+          </div>
+        </section> : null}
+        <button type="button" className="mobile-story-delete-action" onClick={() => run(onExclude)}><Trash2 size={19} /><span>删除选题</span></button>
+        <button type="button" className="mobile-story-cancel-action" onClick={onClose}>取消</button>
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
 export function IssueArticle({
   story,
   active,
@@ -427,13 +501,70 @@ export function IssueArticle({
   const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
   const awaitingAiEditor = pendingAiEditorRequest(story)
   const relatedLinks = clipboardRelatedLinks(story)
+  const [mobileActionsOpen, setMobileActionsOpen] = useState(false)
+  const longPressTimerRef = useRef<number | null>(null)
+  const longPressStartRef = useRef<{ x: number; y: number } | null>(null)
+  const longPressTriggeredRef = useRef(false)
+  const lastPointerWasTouchRef = useRef(false)
+
+  const cancelLongPress = () => {
+    if (longPressTimerRef.current !== null) window.clearTimeout(longPressTimerRef.current)
+    longPressTimerRef.current = null
+    longPressStartRef.current = null
+  }
+
+  const closeMobileActions = useCallback(() => {
+    setMobileActionsOpen(false)
+  }, [])
+
+  useEffect(() => () => cancelLongPress(), [])
+
   return (
     <article
       id={`story-${story.id}`}
       className={`issue-article ${active ? 'active' : ''} ${moving ? 'moving' : ''}`}
-      onClick={onOpen}
+      onClick={(event) => {
+        if (longPressTriggeredRef.current) {
+          longPressTriggeredRef.current = false
+          event.preventDefault()
+          event.stopPropagation()
+          return
+        }
+        onOpen()
+      }}
+      onPointerDown={(event) => {
+        lastPointerWasTouchRef.current = event.pointerType === 'touch' || event.pointerType === 'pen'
+        if (!lastPointerWasTouchRef.current) return
+        if (event.target instanceof Element && event.target.closest('a, button, input, select, textarea')) return
+        cancelLongPress()
+        longPressTriggeredRef.current = false
+        longPressStartRef.current = { x: event.clientX, y: event.clientY }
+        longPressTimerRef.current = window.setTimeout(() => {
+          longPressTriggeredRef.current = true
+          setMobileActionsOpen(true)
+          longPressTimerRef.current = null
+        }, 520)
+      }}
+      onPointerMove={(event) => {
+        const start = longPressStartRef.current
+        if (!start || Math.hypot(event.clientX - start.x, event.clientY - start.y) <= 9) return
+        cancelLongPress()
+      }}
+      onPointerUp={cancelLongPress}
+      onPointerCancel={cancelLongPress}
+      onContextMenu={(event) => {
+        if (!lastPointerWasTouchRef.current) return
+        event.preventDefault()
+        cancelLongPress()
+        longPressTriggeredRef.current = true
+        setMobileActionsOpen(true)
+      }}
       draggable
       onDragStart={(event) => {
+        if (lastPointerWasTouchRef.current) {
+          event.preventDefault()
+          return
+        }
         event.dataTransfer.effectAllowed = 'move'
         // Keep a native payload as well as React state.  Browsers are allowed
         // to emit dragend before React flushes the drop handler, so state on
@@ -471,6 +602,34 @@ export function IssueArticle({
         </div>
         {image ? <img className="article-side-image" src={image} alt="" /> : null}
       </div>
+      <button
+        type="button"
+        className="mobile-article-menu-trigger"
+        aria-label={`更多操作：${story.title}`}
+        aria-haspopup="dialog"
+        aria-expanded={mobileActionsOpen}
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          setMobileActionsOpen(true)
+        }}
+      >
+        <MoreHorizontal size={21} />
+      </button>
+      <MobileStoryActions
+        story={story}
+        open={mobileActionsOpen}
+        canMoveUp={canMoveUp}
+        canMoveDown={canMoveDown}
+        moveOptions={moveOptions}
+        currentMoveTarget={currentMoveTarget}
+        onClose={closeMobileActions}
+        onMoveUp={onMoveUp}
+        onMoveDown={onMoveDown}
+        onMoveCategory={onMoveCategory}
+        onExclude={onExclude}
+      />
       <div className="article-hover-tools">
         <label className="category-move-control" title="移动到其他栏目" onClick={(event) => event.stopPropagation()} onMouseDown={(event) => event.stopPropagation()}>
           <FolderInput size={15} />
@@ -903,6 +1062,27 @@ function WeekendWorkspace({ data }: { data: Record<string, { label: string; cand
   })}</div>
 }
 
+const larkConflictFieldLabel: Record<string, string> = {
+  title: '标题', body: '正文', category: '分类', position: '排序', selected: '采用状态', story: '整条稿件',
+}
+
+function formatLarkConflictValue(conflict: LarkConflict, side: 'workbench' | 'lark') {
+  const value = side === 'workbench' ? conflict.workbench_value : conflict.lark_value
+  if (conflict.field === 'selected') return value ? '保留在早报稿' : '移出早报稿'
+  if (conflict.field === 'position' && typeof value === 'number') return `第 ${value + 1} 位`
+  if (conflict.field === 'story' && value && typeof value === 'object') {
+    const article = value as { title?: string; body?: string; category?: string }
+    return [article.title, article.category ? `分类：${article.category}` : '', article.body].filter(Boolean).join('\n\n')
+  }
+  if (value === null || value === undefined || value === '') return side === 'workbench' ? '工作台当前没有这项内容' : '飞书当前没有这项内容'
+  return String(value)
+}
+
+function readableConflictReason(reason: string) {
+  if (reason === 'url_or_domain_headline_requires_editorial_rewrite') return '飞书回读到的标题像网址或域名，不能直接作为新闻标题'
+  return reason
+}
+
 function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closing = false, onClose, onMarkdown, onHandoff, onCopyToFeishu, onPublishToLark, onReadback }: {
   issue: Issue
   handoff: AutomationHandoff | null
@@ -922,6 +1102,10 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
   const [publishMessage, setPublishMessage] = useState('')
   const [publishProgress, setPublishProgress] = useState(0)
   const [publishedDocUrl, setPublishedDocUrl] = useState('')
+  const [conflictReadback, setConflictReadback] = useState<LarkConflictReadback | null>(null)
+  const [conflictChoices, setConflictChoices] = useState<Record<string, 'workbench' | 'lark'>>({})
+  const [resolvingConflicts, setResolvingConflicts] = useState(false)
+  const [conflictError, setConflictError] = useState('')
   const headlineRewriteNotice = handoff?.requires_ai_headline_rewrite
     ? `已保存，但仍有 ${handoff.headline_quality_warnings?.length || 1} 条标题待 AI 主编根据原文改写；在改写前不能发布。`
     : ''
@@ -945,7 +1129,15 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
       setPublishProgress(queued.progress || 0)
       const completed = await api.watchJob(queued.id, (job) => { setPublishMessage(job.message); setPublishProgress(job.progress) })
       if (completed.state === 'failed') throw new Error(completed.error || '飞书 Bot 同步失败')
-      if (completed.result?.requires_review) await onReadback()
+      if (completed.result?.requires_review) {
+        await onReadback()
+        const readback = completed.result.readback as LarkConflictReadback | undefined
+        if (readback?.conflicts?.length && readback.conflict_set_id) {
+          setConflictReadback(readback)
+          setConflictChoices(Object.fromEntries(readback.conflicts.filter((item) => item.can_accept_lark === false).map((item) => [item.id, 'workbench'])))
+          setConflictError('')
+        }
+      }
       setPublishProgress(100)
       setPublishMessage(completed.message || '已同步飞书 Bot 同刊期文档')
       const docRef = String(completed.result?.document_url || completed.result?.document_ref || '')
@@ -956,7 +1148,32 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
       setPublishing(false)
     }
   }
-  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>结构化导出</span><h2>导出 {issue.selected_count} 条早报稿</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header><div className="export-options">{!staticMode ? <button className="export-option" type="button" disabled={publishing} onClick={() => void publishToLark()}>{publishing ? <LoaderCircle size={19} className="spin" /> : <CloudUpload size={19} />}<span><strong>同步飞书 Bot 同刊期文档</strong><small>{publishMessage || '先回收飞书手动新增与改稿，再同步同刊期文档；有新内容时提示审阅'}{publishedDocUrl && !publishing ? <> <a href={publishedDocUrl} target="_blank" rel="noreferrer" className="doc-open-link" onClick={(event) => event.stopPropagation()}>打开文档 ↗</a></> : null}</small>{publishing ? <span className="publish-progress" aria-live="polite"><i><b style={{ width: `${Math.max(2, publishProgress)}%` }} /></i><em>{Math.round(publishProgress)}%</em></span> : null}</span></button> : null}<button className="export-option" type="button" onClick={() => void copyToFeishu()}><Copy size={19} /><span><strong>{copied ? '已复制，可粘贴到飞书云文档' : '复制到飞书云文档'}</strong><small>复制当前标题、正文、分类和排序，打开飞书云文档后直接粘贴</small></span></button><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。{headlineRewriteNotice ? ` ${headlineRewriteNotice}` : ''}{bodyWriteNotice ? ` ${bodyWriteNotice}` : ''}</span></div> : null}<footer><button type="button" className="secondary-button" onClick={onClose}>完成</button></footer></div></div>
+  const unresolvedCount = conflictReadback?.conflicts.filter((item) => !conflictChoices[item.id]).length || 0
+  const resolveConflicts = async () => {
+    if (!conflictReadback || unresolvedCount) {
+      setConflictError(`还有 ${unresolvedCount} 项冲突未选择`)
+      return
+    }
+    setResolvingConflicts(true)
+    setConflictError('')
+    try {
+      await api.resolveLarkConflicts(
+        issue.id,
+        conflictReadback.conflict_set_id,
+        conflictReadback.conflict_issue_revision,
+        conflictReadback.conflicts.map((item) => ({ conflict_id: item.id, choice: conflictChoices[item.id] })),
+      )
+      await onReadback()
+      setConflictReadback(null)
+      setConflictChoices({})
+      setPublishMessage('冲突已解决，可重新同步飞书 Bot 文档')
+    } catch (error) {
+      setConflictError(error instanceof Error ? error.message : '保存冲突解决方案失败')
+    } finally {
+      setResolvingConflicts(false)
+    }
+  }
+  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onClose}><div className={`export-dialog ${conflictReadback ? 'has-conflicts' : ''} ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" onMouseDown={(event) => event.stopPropagation()}><header><div><span>{conflictReadback ? '需要人工确认' : '结构化导出'}</span><h2>{conflictReadback ? `解决 ${conflictReadback.conflicts.length} 项同步冲突` : `导出 ${issue.selected_count} 条早报稿`}</h2></div><IconButton title="关闭" onClick={onClose}><X size={18} /></IconButton></header>{conflictReadback ? <section className="lark-conflicts" aria-label="飞书同步冲突"><div className="lark-conflict-intro"><ShieldCheck size={18} /><div><strong>两端都保留了，尚未覆盖飞书文档</strong><p>请逐项选择最终版本。保存前如任意一端再次变更，本次处理会停止并重新检查。</p></div></div><div className="lark-conflict-list">{conflictReadback.conflicts.map((conflict, index) => <article className="lark-conflict" key={conflict.id}><header><span>{index + 1} / {conflictReadback.conflicts.length}</span><div><h3>{conflict.title}</h3><p>{larkConflictFieldLabel[conflict.field] || conflict.field} · {readableConflictReason(conflict.reason)}</p></div></header><div className="conflict-versions"><label className={conflictChoices[conflict.id] === 'workbench' ? 'selected' : ''}><input type="radio" name={conflict.id} checked={conflictChoices[conflict.id] === 'workbench'} onChange={() => setConflictChoices((current) => ({ ...current, [conflict.id]: 'workbench' }))} /><span><strong>保留工作台版本</strong><em>{formatLarkConflictValue(conflict, 'workbench')}</em></span></label><label className={`${conflictChoices[conflict.id] === 'lark' ? 'selected' : ''} ${conflict.can_accept_lark === false ? 'disabled' : ''}`}><input type="radio" name={conflict.id} disabled={conflict.can_accept_lark === false} checked={conflictChoices[conflict.id] === 'lark'} onChange={() => setConflictChoices((current) => ({ ...current, [conflict.id]: 'lark' }))} /><span><strong>采用飞书版本</strong><em>{formatLarkConflictValue(conflict, 'lark')}</em>{conflict.can_accept_lark === false ? <small>该版本无法安全导入</small> : null}</span></label></div></article>)}</div>{conflictError ? <p className="conflict-error" role="alert">{conflictError}</p> : null}<div className="lark-conflict-actions"><button type="button" className="secondary-button" disabled={resolvingConflicts} onClick={() => { setConflictChoices(Object.fromEntries(conflictReadback.conflicts.map((item) => [item.id, 'workbench']))); setConflictError('') }}>全部保留工作台</button><span>{unresolvedCount ? `还有 ${unresolvedCount} 项未选择` : '已逐项确认'}</span><button type="button" className="primary-button" disabled={resolvingConflicts || unresolvedCount > 0} onClick={() => void resolveConflicts()}>{resolvingConflicts ? <LoaderCircle size={15} className="spin" /> : <Check size={15} />}保存解决方案</button></div></section> : <><div className="export-options">{!staticMode ? <button className="export-option" type="button" disabled={publishing} onClick={() => void publishToLark()}>{publishing ? <LoaderCircle size={19} className="spin" /> : <CloudUpload size={19} />}<span><strong>同步飞书 Bot 同刊期文档</strong><small>{publishMessage || '先回收飞书手动新增与改稿，再同步同刊期文档；有新内容时提示审阅'}{publishedDocUrl && !publishing ? <> <a href={publishedDocUrl} target="_blank" rel="noreferrer" className="doc-open-link" onClick={(event) => event.stopPropagation()}>打开文档 ↗</a></> : null}</small>{publishing ? <span className="publish-progress" aria-live="polite"><i><b style={{ width: `${Math.max(2, publishProgress)}%` }} /></i><em>{Math.round(publishProgress)}%</em></span> : null}</span></button> : null}<button className="export-option" type="button" onClick={() => void copyToFeishu()}><Copy size={19} /><span><strong>{copied ? '已复制，可粘贴到飞书云文档' : '复制到飞书云文档'}</strong><small>复制当前标题、正文、分类和排序，打开飞书云文档后直接粘贴</small></span></button><button className="export-option" type="button" onClick={onMarkdown}><Download size={19} /><span><strong>下载 Markdown</strong><small>导出当前标题、正文、分类、排序和来源行</small></span></button><button className="export-option" type="button" disabled={busy || (staticMode && operationCount === 0)} onClick={onHandoff}>{busy ? <LoaderCircle size={19} className="spin" /> : <RefreshCw size={19} />}<span><strong>{staticMode ? '下载飞书审稿单' : '交给下一轮自动化'}</strong><small>{staticMode ? `仅包含 ${operationCount} 个显式修改；下载后发送到早报飞书群` : '写入本机 handoff，定时任务会在同刊期继承并合并新内容'}</small></span></button></div>{staticMode ? <div className="review-safety"><ShieldCheck size={16} /><span>审稿单不会把未列出的新闻视为删除。刊期、版本或故事指纹冲突时，主 Mac 会保留原稿并转为人工复核。</span></div> : null}{handoff ? <div className="handoff-success"><Check size={16} /><span>已写入刊期 {handoff.issue_id} 的 handoff，共 {handoff.selected_count} 条。{headlineRewriteNotice ? ` ${headlineRewriteNotice}` : ''}{bodyWriteNotice ? ` ${bodyWriteNotice}` : ''}</span></div> : null}</>}<footer><button type="button" className="secondary-button" onClick={onClose}>{conflictReadback ? '稍后处理' : '完成'}</button></footer></div></div>
 }
 
 function StoryCreateDialog({ busy, closing = false, onClose, onCreate }: {
@@ -1027,7 +1244,7 @@ function DeleteConfirmDialog({ story, busy, closing = false, onCancel, onConfirm
   onCancel: () => void
   onConfirm: () => void
 }) {
-  return <div className={`modal-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onCancel}>
+  return <div className={`modal-backdrop delete-confirm-backdrop ${closing ? 'closing' : ''}`} role="presentation" onMouseDown={onCancel}>
     <div className={`delete-confirm-dialog ${closing ? 'closing' : ''}`} role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" onMouseDown={(event) => event.stopPropagation()}>
       <header>
         <div><span>移入回收站</span><h2 id="delete-confirm-title">确定删除这个选题？</h2></div>

@@ -1,4 +1,4 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { App, BrandWorkspace, IssueArticle, sortCandidatesNewestFirst, StoryImageEditor, TrashItem } from './App'
 import { api, WorkerRequestError } from './api'
@@ -610,6 +610,53 @@ describe('App', () => {
     await waitFor(() => expect(publish).toHaveBeenCalledWith(connectedIssue.id, 4))
   })
 
+  it('shows sync conflicts as per-field choices and resolves them in the workbench', async () => {
+    const connectedIssue = structuredClone(staticIssue)
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connectedIssue)
+    vi.spyOn(api, 'currentIssueVersion').mockResolvedValue({ id: connectedIssue.id, revision: connectedIssue.revision })
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    vi.spyOn(api, 'publishToLark').mockResolvedValue({
+      id: 'conflict-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'queued', progress: 0, message: '', result: {}, error: '',
+    })
+    vi.spyOn(api, 'watchJob').mockResolvedValue({
+      id: 'conflict-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'completed', progress: 100,
+      message: '两端改稿存在冲突', error: '',
+      result: {
+        requires_review: true,
+        readback: {
+          conflict_set_id: 'set-1',
+          conflict_issue_revision: 3,
+          conflicts: [{
+            id: 'conflict-1', title: connectedIssue.stories[0].title, story_id: connectedIssue.stories[0].id,
+            field: 'body', reason: '工作台在上次发布后也修改了该字段',
+            workbench_value: '工作台人工正文。', lark_value: '飞书人工正文。', can_accept_lark: true,
+          }],
+        },
+      },
+    })
+    const resolve = vi.spyOn(api, 'resolveLarkConflicts').mockResolvedValue({ ok: true, resolved_count: 1, revision: 4, document_ref: 'doc-token' })
+
+    render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: '导出' }))
+    fireEvent.click(screen.getByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+
+    expect(await screen.findByRole('heading', { name: '解决 1 项同步冲突' })).toBeInTheDocument()
+    expect(screen.getByText('工作台人工正文。')).toBeInTheDocument()
+    expect(screen.getByText('飞书人工正文。')).toBeInTheDocument()
+    const conflictPanel = screen.getByRole('region', { name: '飞书同步冲突' })
+    fireEvent.click(within(conflictPanel).getAllByRole('radio')[1])
+    fireEvent.click(screen.getByRole('button', { name: '保存解决方案' }))
+
+    await waitFor(() => expect(resolve).toHaveBeenCalledWith(
+      connectedIssue.id,
+      'set-1',
+      3,
+      [{ conflict_id: 'conflict-1', choice: 'lark' }],
+    ))
+    await waitFor(() => expect(screen.queryByRole('heading', { name: '解决 1 项同步冲突' })).toBeNull())
+  })
+
   it('does not open the detail panel when removing a draft item', () => {
     const onOpen = vi.fn()
     const onExclude = vi.fn()
@@ -723,6 +770,63 @@ describe('App', () => {
     expect(screen.queryByRole('option', { name: '重磅' })).not.toBeInTheDocument()
     expect(screen.queryByRole('option', { name: '观点' })).not.toBeInTheDocument()
     expect(screen.queryByRole('option', { name: 'AI/开发者' })).not.toBeInTheDocument()
+  })
+
+  it('offers touch-friendly move, category, and delete actions from the mobile menu', () => {
+    const onOpen = vi.fn()
+    const onMoveUp = vi.fn()
+    const onMoveDown = vi.fn()
+    const onMoveCategory = vi.fn()
+    const onExclude = vi.fn()
+    const story: Story = {
+      ...staticStory,
+      id: 'mobile-actions-story',
+      title: '移动端操作测试',
+      category: '重磅',
+    }
+    render(<IssueArticle story={story} active={false} canMoveUp canMoveDown onMoveUp={onMoveUp} onMoveDown={onMoveDown} onMoveCategory={onMoveCategory} onOpen={onOpen} onExclude={onExclude} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
+
+    const openMenu = () => fireEvent.click(screen.getByRole('button', { name: `更多操作：${story.title}` }))
+    openMenu()
+    let dialog = screen.getByRole('dialog', { name: story.title })
+    fireEvent.click(within(dialog).getByRole('button', { name: '上移一位' }))
+    expect(onMoveUp).toHaveBeenCalledOnce()
+    expect(onOpen).not.toHaveBeenCalled()
+
+    openMenu()
+    dialog = screen.getByRole('dialog', { name: story.title })
+    fireEvent.click(within(dialog).getByRole('button', { name: '大公司' }))
+    expect(onMoveCategory).toHaveBeenCalledWith('大公司')
+
+    openMenu()
+    dialog = screen.getByRole('dialog', { name: story.title })
+    fireEvent.click(within(dialog).getByRole('button', { name: '删除选题' }))
+    expect(onExclude).toHaveBeenCalledOnce()
+    expect(screen.queryByRole('dialog', { name: story.title })).not.toBeInTheDocument()
+  })
+
+  it('opens the same mobile action menu after a touch long press without opening the article', async () => {
+    const onOpen = vi.fn()
+    const story = { ...staticStory, id: 'long-press-story', title: '长按操作测试' }
+    const { container } = render(<IssueArticle story={story} active={false} onOpen={onOpen} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
+    const article = container.querySelector('.issue-article') as HTMLElement
+    vi.useFakeTimers()
+    try {
+      const pointerDown = new Event('pointerdown', { bubbles: true })
+      Object.defineProperties(pointerDown, {
+        pointerType: { value: 'touch' },
+        clientX: { value: 20 },
+        clientY: { value: 20 },
+      })
+      fireEvent(article, pointerDown)
+      await act(async () => { vi.advanceTimersByTime(520) })
+      expect(screen.getByRole('dialog', { name: story.title })).toBeInTheDocument()
+      fireEvent.pointerUp(article)
+      fireEvent.click(article)
+      expect(onOpen).not.toHaveBeenCalled()
+    } finally {
+      vi.useRealTimers()
+    }
   })
 
   it('restores a discarded story without opening its detail panel', () => {

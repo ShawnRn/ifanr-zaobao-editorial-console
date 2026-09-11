@@ -359,6 +359,11 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ expected_revision: expectedRevision }),
     }),
+  resolveLarkConflicts: (issueId: string, conflictSetId: string, expectedRevision: number, resolutions: Array<{ conflict_id: string; choice: 'workbench' | 'lark' }>) =>
+    request<{ ok: boolean; resolved_count: number; revision: number; document_ref: string }>(`/api/issues/${issueId}/lark-conflicts/resolve`, {
+      method: 'POST',
+      body: JSON.stringify({ conflict_set_id: conflictSetId, expected_revision: expectedRevision, resolutions }),
+    }),
   publishFlashNewsToLark: (payload: {
     title: string
     body: string
