@@ -1,12 +1,12 @@
 import type { AutomationHandoff, BrandPackage, FlashDraftItem, Issue, IssueSummary, Job, SocialPost, SocialPostInput, Story, StoryCreateInput, StoryStatus } from './types'
 
-const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'http://111.228.56.220:8765'
-export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'http://111.228.56.220:8765'
+const fallbackUrl = import.meta.env.VITE_EDITORIAL_API_URL || 'https://111.228.56.220'
+export const lanConsoleUrl = import.meta.env.VITE_EDITORIAL_LAN_URL || 'https://111.228.56.220'
 // GitHub Pages is a public, static delivery target. This build-time flag keeps
 // its security boundary explicit instead of inferring it from mutable browser state.
 export const isPagesDeployment = import.meta.env.VITE_EDITORIAL_DEPLOYMENT === 'pages'
 
-const isWorkerOrigin = () => window.location.hostname.endsWith('.ts.net') || window.location.port === '8765'
+const isWorkerOrigin = () => window.location.hostname === '111.228.56.220' || window.location.hostname.endsWith('.ts.net') || window.location.port === '8765'
 
 const runtimeDefaultUrl = () => isWorkerOrigin() ? window.location.origin : fallbackUrl
 
@@ -62,6 +62,7 @@ export const normalizeApiUrl = (value: string) => {
   if (!raw) throw new Error('请输入 Worker URL')
   const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`
   const url = new URL(withScheme)
+  if (url.hostname === '111.228.56.220') return 'https://111.228.56.220'
   if (url.hostname.endsWith('.ts.net') && url.protocol === 'http:') url.protocol = 'https:'
   if (url.hostname.endsWith('.ts.net') && url.port === '8765') url.port = ''
   url.pathname = url.pathname.replace(/\/$/, '')
@@ -78,7 +79,7 @@ export const apiUrlProblem = (value: string, pageProtocol = window.location.prot
     return 'Worker URL 格式不正确'
   }
   if (pageProtocol === 'https:' && url.protocol !== 'https:') {
-    return 'GitHub Pages 无法连接 HTTP Worker；请使用 Tailscale Serve 的 HTTPS 地址'
+    return 'HTTPS 页面无法连接 HTTP Worker；请填写 Worker 的 HTTPS 地址'
   }
   if (url.hostname.endsWith('.ts.net') && url.port === '8765') {
     return 'Tailscale Serve 请填写 HTTPS 根地址，不要附加 :8765'
@@ -89,9 +90,11 @@ export const apiUrlProblem = (value: string, pageProtocol = window.location.prot
   return ''
 }
 
-export const getApiUrl = () => isWorkerOrigin()
-  ? window.location.origin
-  : localStorage.getItem('editorial-api-url') || runtimeDefaultUrl()
+export const getApiUrl = () => {
+  if (isWorkerOrigin()) return window.location.origin
+  const saved = localStorage.getItem('editorial-api-url')
+  return saved === 'http://111.228.56.220:8765' ? fallbackUrl : saved || runtimeDefaultUrl()
+}
 
 export const resolveApiAssetUrl = (path: string) => {
   if (!path) return ''
@@ -139,11 +142,11 @@ export const workerFetchOptions = (baseUrl: string): LocalNetworkRequestInit => 
 
 export const describeWorkerError = (error: unknown) => {
   if (error instanceof DOMException && error.name === 'AbortError') {
-    return 'Worker 连接超时；请确认两台 Mac 都已连接 Tailscale'
+    return 'Worker 连接超时；请检查网络后重新检测'
   }
   const message = error instanceof Error ? error.message : String(error || '未知错误')
   if (/failed to fetch|networkerror|load failed/i.test(message)) {
-    return '浏览器阻止了 Worker 请求；请允许本站访问「本地网络」，并确认 Air 已连接 Tailscale'
+    return '无法连接 Worker；请检查 Worker 地址或稍后重新检测'
   }
   return message
 }
