@@ -35,46 +35,50 @@ export type ClipboardWriteResult = {
   imageCopied: boolean
 }
 
-async function fetchClipboardPng(imageUrl: string): Promise<Blob | null> {
-  try {
-    const response = await fetch(imageUrl)
-    if (!response.ok) return null
-    const source = await response.blob()
-    if (!source.type.startsWith('image/')) return null
-    if (source.type === 'image/png') return source
-    if (typeof createImageBitmap !== 'function') return null
+async function fetchClipboardPng(imageUrl: string, signal: AbortSignal): Promise<Blob> {
+  const response = await fetch(imageUrl, { signal })
+  if (!response.ok) throw new Error('微博配图下载失败')
+  const source = await response.blob()
+  if (source.type === 'image/png') return source
+  if (!source.type.startsWith('image/')) throw new Error('微博配图格式无效')
 
-    const bitmap = await createImageBitmap(source)
-    const canvas = document.createElement('canvas')
-    canvas.width = bitmap.width
-    canvas.height = bitmap.height
+  const bitmap = await createImageBitmap(source)
+  const canvas = document.createElement('canvas')
+  canvas.width = bitmap.width
+  canvas.height = bitmap.height
+  try {
     const context = canvas.getContext('2d')
-    if (!context) {
-      bitmap.close()
-      return null
-    }
+    if (!context) throw new Error('微博配图无法转换为 PNG')
     context.drawImage(bitmap, 0, 0)
+  } finally {
     bitmap.close()
-    return await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'))
-  } catch {
-    return null
   }
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((png) => {
+      if (png) resolve(png)
+      else reject(new Error('微博配图无法转换为 PNG'))
+    }, 'image/png')
+  })
 }
 
 export async function writeClipboardTextAndImage(text: string, imageUrl: string): Promise<ClipboardWriteResult> {
   if (imageUrl && navigator.clipboard?.write && window.isSecureContext && typeof ClipboardItem !== 'undefined') {
-    const image = await fetchClipboardPng(imageUrl)
-    if (image) {
-      try {
-        await navigator.clipboard.write([new ClipboardItem({
-          'text/plain': new Blob([text], { type: 'text/plain' }),
-          'image/png': image,
-        })])
-        return { copied: true, imageCopied: true }
-      } catch {
-        // Some browsers expose rich clipboard APIs but reject mixed text and
-        // image payloads. Preserve the user's text through the normal path.
-      }
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 4000)
+    const image = fetchClipboardPng(imageUrl, controller.signal)
+    // The browser must receive the write during the click, before the image finishes downloading.
+    void image.catch(() => {}) // A browser may reject the write before reading the image promise.
+    try {
+      await navigator.clipboard.write([new ClipboardItem({
+        'text/plain': new Blob([text], { type: 'text/plain' }),
+        'image/png': image,
+      })])
+      return { copied: true, imageCopied: true }
+    } catch {
+      // Preserve the text if the image download or rich clipboard write fails.
+    } finally {
+      window.clearTimeout(timeout)
+      controller.abort()
     }
   }
 

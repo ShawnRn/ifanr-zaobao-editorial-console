@@ -89,6 +89,13 @@ export function FlashWorkspace({
   const [content, setContent] = useState(initialDraft?.content || initialStory?.body || initialStory?.editorial_reason || '')
   const [imageUrl, setImageUrl] = useState(initialDraft?.imageUrl || initialStory?.image_url || (initialStory?.image_path ? api.storyImageUrl(initialStory.id) : ''))
 
+  const selectedStory = issue?.stories.find((story) => story.id === selectedStoryId)
+    || (initialStory?.id === selectedStoryId ? initialStory : undefined)
+  const previewImageUrl = selectedStory?.image_path
+    && (imageUrl === selectedStory.image_url || imageUrl === api.storyImageUrl(selectedStory.id))
+    ? api.storyImagePreviewUrl(selectedStory)
+    : imageUrl
+
   const [generating, setGenerating] = useState(false)
   const [publishing, setPublishing] = useState(false)
   const [extractingUrls, setExtractingUrls] = useState(false)
@@ -785,7 +792,7 @@ ${generated.body}
             />
             {imageUrl ? (
               <div style={{ marginTop: '8px', maxHeight: '140px', overflow: 'hidden', borderRadius: '6px' }}>
-                <img src={imageUrl} alt="配图预览" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                <img src={previewImageUrl} alt="配图预览" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
               </div>
             ) : null}
           </div>

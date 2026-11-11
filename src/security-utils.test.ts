@@ -6,6 +6,7 @@ import { generateQrSvgDataUri } from './totp'
 
 afterEach(() => {
   vi.restoreAllMocks()
+  vi.useRealTimers()
 })
 
 describe('two-factor setup utilities', () => {
@@ -40,20 +41,48 @@ describe('two-factor setup utilities', () => {
     expect(document.querySelector('textarea[aria-hidden="true"]')).toBeNull()
   })
 
-  it('writes Weibo text and a PNG as one rich clipboard item', async () => {
-    const write = vi.fn().mockResolvedValue(undefined)
+  it('starts the rich clipboard write before the Weibo image arrives', async () => {
+    let finishDownload!: (response: Response) => void
+    const fetchImage = vi.spyOn(globalThis, 'fetch').mockImplementation(() => new Promise((resolve) => {
+      finishDownload = resolve
+    }))
     const png = new Blob(['png'], { type: 'image/png' })
-    const fetchImage = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, blob: async () => png } as Response)
+    const write = vi.fn(async ([item]: TestClipboardItem[]) => { await item.data['image/png'] })
     class TestClipboardItem {
-      constructor(readonly data: Record<string, Blob>) {}
+      constructor(readonly data: Record<string, Blob | Promise<Blob>>) {}
     }
     Object.defineProperty(window, 'isSecureContext', { configurable: true, value: true })
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write } })
     Object.defineProperty(globalThis, 'ClipboardItem', { configurable: true, value: TestClipboardItem })
 
-    await expect(writeClipboardTextAndImage('微博正文', '/story.png')).resolves.toEqual({ copied: true, imageCopied: true })
-    expect(fetchImage).toHaveBeenCalledWith('/story.png')
-    const item = write.mock.calls[0][0][0] as TestClipboardItem
+    const result = writeClipboardTextAndImage('微博正文', '/story.png')
+    expect(write).toHaveBeenCalledOnce()
+    expect(fetchImage).toHaveBeenCalledWith('/story.png', { signal: expect.any(AbortSignal) })
+    const item = write.mock.calls[0][0][0]
     expect(Object.keys(item.data)).toEqual(['text/plain', 'image/png'])
+
+    finishDownload({ ok: true, blob: async () => png } as Response)
+    await expect(item.data['image/png']).resolves.toBe(png)
+    await expect(result).resolves.toEqual({ copied: true, imageCopied: true })
+  })
+
+  it('copies Weibo text when the image download times out', async () => {
+    vi.useFakeTimers()
+    vi.spyOn(globalThis, 'fetch').mockImplementation((_url, options) => new Promise((_resolve, reject) => {
+      options?.signal?.addEventListener('abort', () => reject(options.signal?.reason), { once: true })
+    }))
+    class TestClipboardItem {
+      constructor(readonly data: Record<string, Blob | Promise<Blob>>) {}
+    }
+    const write = vi.fn(async ([item]: TestClipboardItem[]) => { await item.data['image/png'] })
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(window, 'isSecureContext', { configurable: true, value: true })
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write, writeText } })
+    Object.defineProperty(globalThis, 'ClipboardItem', { configurable: true, value: TestClipboardItem })
+
+    const result = writeClipboardTextAndImage('微博正文', '/slow.jpg')
+    await vi.advanceTimersByTimeAsync(4000)
+    await expect(result).resolves.toEqual({ copied: true, imageCopied: false })
+    expect(writeText).toHaveBeenCalledWith('微博正文')
   })
 })

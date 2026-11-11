@@ -343,6 +343,11 @@ export const api = {
     request<Job>(`/api/issues/${issueId}/brands/${brand}/generate`, { method: 'POST' }),
   markdownUrl: (issueId: string) => `${getApiUrl()}/api/issues/${issueId}/markdown`,
   storyImageUrl: (storyId: string, version = '') => `${getApiUrl()}/api/stories/${storyId}/image${version ? `?v=${encodeURIComponent(version)}` : ''}`,
+  storyImagePreviewUrl: (story: Pick<Story, 'id' | 'image_path' | 'image_url'>) => {
+    if (!story.image_path) return story.image_url || ''
+    const params = new URLSearchParams({ variant: 'preview', v: story.image_path.split('/').pop() || '' })
+    return `${getApiUrl()}/api/stories/${story.id}/image?${params}`
+  },
   uploadStoryImage: (storyId: string, file: File) => mediaRequest<Story>(`/api/stories/${storyId}/image/upload`, {
     method: 'POST',
     headers: { 'Content-Type': file.type || 'application/octet-stream' },

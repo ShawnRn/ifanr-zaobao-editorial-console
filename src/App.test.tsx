@@ -385,7 +385,7 @@ describe('App', () => {
     fireEvent.click(await screen.findByRole('button', { name: '复制微博正文和配图' }))
     await waitFor(() => expect(screen.getByRole('button', { name: '已复制' })).toBeInTheDocument())
     expect(copiedText).toBe('【当天真实 Bot 稿标题】 #测试话题#\n\n完整微博正文。')
-    expect(onNotify).toHaveBeenCalledWith('微博正文已复制；当前浏览器未允许写入配图')
+    expect(onNotify).toHaveBeenCalledWith('微博正文已复制')
   })
 
   it('keeps the Weibo card visible when marking it published fails', async () => {

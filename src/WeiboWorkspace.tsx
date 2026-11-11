@@ -29,12 +29,6 @@ type WeiboWorkspaceProps = {
   onNotify: (message: string) => void
 }
 
-function storyImage(story?: Story) {
-  if (!story) return ''
-  if (story.image_path) return api.storyImageUrl(story.id, story.updated_at || '')
-  return story.image_url || ''
-}
-
 function pendingAiEditorRequest(story: Story) {
   const request = story.metadata._ai_editor_request
   return Boolean(
@@ -66,12 +60,12 @@ export function formatWeiboPost(post: SocialPost, storyTitle = '') {
   ].filter(Boolean).join('\n\n')
 }
 
-function WeiboThumbnail({ imageUrl }: { imageUrl: string }) {
+function WeiboThumbnail({ imageUrl, managed }: { imageUrl: string; managed: boolean }) {
   const [failed, setFailed] = useState(false)
   useEffect(() => setFailed(false), [imageUrl])
   if (!imageUrl || failed) return null
   return <div className="weibo-copy-image">
-    <img src={imageUrl} alt="微博配图" onError={() => setFailed(true)} />
+    <img crossOrigin={managed ? 'anonymous' : undefined} src={imageUrl} loading="lazy" alt="微博配图" onError={() => setFailed(true)} />
     <span><Images size={12} />沿用早报配图</span>
   </div>
 }
@@ -168,7 +162,8 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
     setError('')
     setCopyFailedPostId('')
     setCopyingPostId(post.id)
-    const result = await writeClipboardTextAndImage(formatWeiboPost(post, story.title), storyImage(story))
+    const imageUrl = api.storyImagePreviewUrl(story)
+    const result = await writeClipboardTextAndImage(formatWeiboPost(post, story.title), imageUrl)
     setCopyingPostId('')
     if (!result.copied) {
       setError('复制失败，请手动选中卡片文字复制')
@@ -177,7 +172,7 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
     }
     setCopiedPostId(post.id)
     window.setTimeout(() => setCopiedPostId((current) => current === post.id ? '' : current), 1400)
-    onNotify(result.imageCopied ? '微博正文和配图已复制，可直接粘贴发布' : '微博正文已复制；当前浏览器未允许写入配图')
+    onNotify(result.imageCopied ? '微博正文和配图已复制，可直接粘贴发布' : (imageUrl ? '微博正文已复制，配图未能复制' : '微博正文已复制'))
   }
 
   const copyBatch = async () => {
@@ -346,7 +341,7 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
               </div>
             </header>
             {post ? <div className="weibo-copy-content">
-              <WeiboThumbnail imageUrl={storyImage(story)} />
+              <WeiboThumbnail imageUrl={api.storyImagePreviewUrl(story)} managed={Boolean(story.image_path)} />
               <pre>{text}</pre>
               {editingPostId === post.id ? <form id={`weibo-revision-${post.id}`} className="weibo-revision-panel" onSubmit={(event) => { event.preventDefault(); void revisePost(post, story) }}>
                 <textarea autoFocus rows={2} maxLength={500} value={revisionInstruction} placeholder="想怎么修改这条微博？（可选）" aria-label="微博修改意见" disabled={revisingPostId === post.id} onChange={(event) => setRevisionInstruction(event.target.value)} onKeyDown={(event) => {

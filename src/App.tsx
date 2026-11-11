@@ -498,7 +498,7 @@ export function IssueArticle({
   moving?: boolean
   onOpenFlash?: () => void
 }) {
-  const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
+  const image = api.storyImagePreviewUrl(story)
   const awaitingAiEditor = pendingAiEditorRequest(story)
   const relatedLinks = clipboardRelatedLinks(story)
   const [mobileActionsOpen, setMobileActionsOpen] = useState(false)
@@ -600,7 +600,7 @@ export function IssueArticle({
           {relatedLinks.map((link) => <p className="related-link-display" key={link.url}>🔗 相关阅读：<a href={link.url} target="_blank" rel="noreferrer">{link.title}</a></p>)}
           <LinkedSourceLine story={story} />
         </div>
-        {image ? <img className="article-side-image" src={image} alt="" /> : null}
+        {image ? <img className="article-side-image" loading="lazy" src={image} alt="" /> : null}
       </div>
       <button
         type="button"
@@ -903,7 +903,7 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
   const [busy, setBusy] = useState<'upload' | 'url' | 'sources' | 'delete' | null>(null)
   const [message, setMessage] = useState('')
   const fileInput = useRef<HTMLInputElement | null>(null)
-  const image = story.image_path ? api.storyImageUrl(story.id, story.updated_at) : story.image_url
+  const image = api.storyImagePreviewUrl(story)
 
   useEffect(() => {
     setUrl('')
