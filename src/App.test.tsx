@@ -354,7 +354,7 @@ describe('App', () => {
 
     expect(await screen.findByText(/完整微博正文。/)).toBeInTheDocument()
     expect(screen.queryByText('20:10')).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: '复制微博正文和配图' }).textContent).toBe('')
+    expect(screen.getByRole('button', { name: '复制微博正文' }).textContent).toBe('')
     const publishButton = screen.getByRole('button', { name: '标记已发布' })
     expect(publishButton.textContent).toBe('')
     fireEvent.click(publishButton)
@@ -382,7 +382,7 @@ describe('App', () => {
 
     render(<WeiboWorkspace issue={staticIssue} dataMode="worker" onNotify={onNotify} />)
 
-    fireEvent.click(await screen.findByRole('button', { name: '复制微博正文和配图' }))
+    fireEvent.click(await screen.findByRole('button', { name: '复制微博正文' }))
     await waitFor(() => expect(screen.getByRole('button', { name: '已复制' })).toBeInTheDocument())
     expect(copiedText).toBe('【当天真实 Bot 稿标题】 #测试话题#\n\n完整微博正文。')
     expect(onNotify).toHaveBeenCalledWith('微博正文已复制')

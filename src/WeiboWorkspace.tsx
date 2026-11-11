@@ -19,7 +19,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { api } from './api'
 import { readerFacingStoryTitle } from './categories'
-import { writeClipboardText, writeClipboardTextAndImage } from './clipboard'
+import { writeClipboardImage, writeClipboardText } from './clipboard'
 import { generateWeiboPosts } from './llm-gateway'
 import type { Issue, SocialPost, Story } from './types'
 
@@ -60,13 +60,22 @@ export function formatWeiboPost(post: SocialPost, storyTitle = '') {
   ].filter(Boolean).join('\n\n')
 }
 
-function WeiboThumbnail({ imageUrl, managed }: { imageUrl: string; managed: boolean }) {
+function WeiboThumbnail({ imageUrl, managed, disabled, copying, onCopy }: {
+  imageUrl: string
+  managed: boolean
+  disabled: boolean
+  copying: boolean
+  onCopy: () => void
+}) {
   const [failed, setFailed] = useState(false)
   useEffect(() => setFailed(false), [imageUrl])
   if (!imageUrl || failed) return null
   return <div className="weibo-copy-image">
     <img crossOrigin={managed ? 'anonymous' : undefined} src={imageUrl} loading="lazy" alt="微博配图" onError={() => setFailed(true)} />
-    <span><Images size={12} />沿用早报配图</span>
+    <button type="button" onClick={onCopy} disabled={disabled}>
+      {copying ? <LoaderCircle size={12} className="spin" /> : <Images size={12} />}
+      {copying ? '正在复制配图' : '复制配图'}
+    </button>
   </div>
 }
 
@@ -104,6 +113,7 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
   const [error, setError] = useState('')
   const [copiedPostId, setCopiedPostId] = useState('')
   const [copyingPostId, setCopyingPostId] = useState('')
+  const [copyingImagePostId, setCopyingImagePostId] = useState('')
   const [copyFailedPostId, setCopyFailedPostId] = useState('')
   const [publishingPostId, setPublishingPostId] = useState('')
   const [generatingStoryId, setGeneratingStoryId] = useState('')
@@ -162,17 +172,25 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
     setError('')
     setCopyFailedPostId('')
     setCopyingPostId(post.id)
-    const imageUrl = api.storyImagePreviewUrl(story)
-    const result = await writeClipboardTextAndImage(formatWeiboPost(post, story.title), imageUrl)
+    const copied = await writeClipboardText(formatWeiboPost(post, story.title))
     setCopyingPostId('')
-    if (!result.copied) {
+    if (!copied) {
       setError('复制失败，请手动选中卡片文字复制')
       setCopyFailedPostId(post.id)
       return
     }
     setCopiedPostId(post.id)
     window.setTimeout(() => setCopiedPostId((current) => current === post.id ? '' : current), 1400)
-    onNotify(result.imageCopied ? '微博正文和配图已复制，可直接粘贴发布' : (imageUrl ? '微博正文已复制，配图未能复制' : '微博正文已复制'))
+    onNotify('微博正文已复制')
+  }
+
+  const copyImage = async (postId: string, imageUrl: string) => {
+    setError('')
+    setCopyingImagePostId(postId)
+    const copied = await writeClipboardImage(imageUrl)
+    setCopyingImagePostId('')
+    if (copied) onNotify('微博配图已复制')
+    else setError('配图复制失败，请长按或右键保存图片后上传')
   }
 
   const copyBatch = async () => {
@@ -284,7 +302,7 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
         </div>
         <div className="weibo-hero-actions">
           <div className="weibo-target-date"><CalendarDays size={16} /><span>刊期</span><strong>{issue.publication_date.replaceAll('-', '.')}</strong></div>
-          <button type="button" className="weibo-copy-all" onClick={() => void copyBatch()} disabled={!completedEntries.length}><Copy size={15} />复制全部</button>
+          <button type="button" className="weibo-copy-all" onClick={() => void copyBatch()} disabled={!completedEntries.length || Boolean(copyingImagePostId)}><Copy size={15} />复制全部</button>
         </div>
       </header>
 
@@ -319,6 +337,7 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
       {!loading ? <section className="weibo-copy-list" aria-label="可复制微博列表">
         {entries.map(({ story, post }, index) => {
           const text = post ? formatWeiboPost(post, story.title) : ''
+          const imageUrl = api.storyImagePreviewUrl(story)
           return <WeiboMasonryCard className={`weibo-copy-card${post ? '' : ' pending'}${post?.status === 'published' ? ' published' : ''}`} key={story.id}>
             <header>
               <span className="weibo-post-index">{String(index + 1).padStart(2, '0')}</span>
@@ -330,7 +349,7 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
                   setRevisionInstruction('')
                   setError('')
                 }}><PencilLine size={14} /><span>修改</span></button> : null}
-                <button type="button" className={copyFailedPostId === post?.id ? 'copy-failed' : copiedPostId === post?.id ? 'copied' : ''} aria-label={copyingPostId === post?.id ? '正在复制正文和配图' : copyFailedPostId === post?.id ? '复制失败，点击重试' : copiedPostId === post?.id ? '已复制' : '复制微博正文和配图'} title={copyFailedPostId === post?.id ? '复制失败，点击重试' : copiedPostId === post?.id ? '已复制' : '复制微博正文和配图'} disabled={!post || copyingPostId === post?.id || publishingPostId === post?.id} onClick={() => post && void copyPost(post, story)}>
+                <button type="button" className={copyFailedPostId === post?.id ? 'copy-failed' : copiedPostId === post?.id ? 'copied' : ''} aria-label={copyingPostId === post?.id ? '正在复制正文' : copyFailedPostId === post?.id ? '复制失败，点击重试' : copiedPostId === post?.id ? '已复制' : '复制微博正文'} title={copyFailedPostId === post?.id ? '复制失败，点击重试' : copiedPostId === post?.id ? '已复制' : '复制微博正文'} disabled={!post || Boolean(copyingImagePostId) || copyingPostId === post?.id || publishingPostId === post?.id} onClick={() => post && void copyPost(post, story)}>
                   {copyingPostId === post?.id ? <LoaderCircle size={16} className="spin" /> : copyFailedPostId === post?.id ? <CircleAlert size={16} /> : copiedPostId === post?.id ? <Check size={16} /> : <Copy size={16} />}
                 </button>
                 {post?.status === 'published'
@@ -341,7 +360,13 @@ export function WeiboWorkspace({ issue, dataMode, onNotify }: WeiboWorkspaceProp
               </div>
             </header>
             {post ? <div className="weibo-copy-content">
-              <WeiboThumbnail imageUrl={api.storyImagePreviewUrl(story)} managed={Boolean(story.image_path)} />
+              <WeiboThumbnail
+                imageUrl={imageUrl}
+                managed={Boolean(story.image_path)}
+                disabled={Boolean(copyingImagePostId || copyingPostId)}
+                copying={copyingImagePostId === post.id}
+                onCopy={() => void copyImage(post.id, imageUrl)}
+              />
               <pre>{text}</pre>
               {editingPostId === post.id ? <form id={`weibo-revision-${post.id}`} className="weibo-revision-panel" onSubmit={(event) => { event.preventDefault(); void revisePost(post, story) }}>
                 <textarea autoFocus rows={2} maxLength={500} value={revisionInstruction} placeholder="想怎么修改这条微博？（可选）" aria-label="微博修改意见" disabled={revisingPostId === post.id} onChange={(event) => setRevisionInstruction(event.target.value)} onKeyDown={(event) => {

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import QRCode from 'qrcode'
 import { writeClipboardText } from './App'
-import { writeClipboardTextAndImage } from './clipboard'
+import { writeClipboardImage } from './clipboard'
 import { generateQrSvgDataUri } from './totp'
 
 afterEach(() => {
@@ -41,7 +41,7 @@ describe('two-factor setup utilities', () => {
     expect(document.querySelector('textarea[aria-hidden="true"]')).toBeNull()
   })
 
-  it('starts the rich clipboard write before the Weibo image arrives', async () => {
+  it('starts the image-only clipboard write before the Weibo image arrives', async () => {
     let finishDownload!: (response: Response) => void
     const fetchImage = vi.spyOn(globalThis, 'fetch').mockImplementation(() => new Promise((resolve) => {
       finishDownload = resolve
@@ -55,18 +55,18 @@ describe('two-factor setup utilities', () => {
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write } })
     Object.defineProperty(globalThis, 'ClipboardItem', { configurable: true, value: TestClipboardItem })
 
-    const result = writeClipboardTextAndImage('微博正文', '/story.png')
+    const result = writeClipboardImage('/story.png')
     expect(write).toHaveBeenCalledOnce()
     expect(fetchImage).toHaveBeenCalledWith('/story.png', { signal: expect.any(AbortSignal) })
     const item = write.mock.calls[0][0][0]
-    expect(Object.keys(item.data)).toEqual(['text/plain', 'image/png'])
+    expect(Object.keys(item.data)).toEqual(['image/png'])
 
     finishDownload({ ok: true, blob: async () => png } as Response)
     await expect(item.data['image/png']).resolves.toBe(png)
-    await expect(result).resolves.toEqual({ copied: true, imageCopied: true })
+    await expect(result).resolves.toBe(true)
   })
 
-  it('copies Weibo text when the image download times out', async () => {
+  it('cancels a timed-out image copy without changing the clipboard text', async () => {
     vi.useFakeTimers()
     vi.spyOn(globalThis, 'fetch').mockImplementation((_url, options) => new Promise((_resolve, reject) => {
       options?.signal?.addEventListener('abort', () => reject(options.signal?.reason), { once: true })
@@ -80,9 +80,9 @@ describe('two-factor setup utilities', () => {
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write, writeText } })
     Object.defineProperty(globalThis, 'ClipboardItem', { configurable: true, value: TestClipboardItem })
 
-    const result = writeClipboardTextAndImage('微博正文', '/slow.jpg')
+    const result = writeClipboardImage('/slow.jpg')
     await vi.advanceTimersByTimeAsync(4000)
-    await expect(result).resolves.toEqual({ copied: true, imageCopied: false })
-    expect(writeText).toHaveBeenCalledWith('微博正文')
+    await expect(result).resolves.toBe(false)
+    expect(writeText).not.toHaveBeenCalled()
   })
 })

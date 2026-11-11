@@ -30,11 +30,6 @@ export async function writeClipboardText(text: string): Promise<boolean> {
   }
 }
 
-export type ClipboardWriteResult = {
-  copied: boolean
-  imageCopied: boolean
-}
-
 async function fetchClipboardPng(imageUrl: string, signal: AbortSignal): Promise<Blob> {
   const response = await fetch(imageUrl, { signal })
   if (!response.ok) throw new Error('微博配图下载失败')
@@ -61,26 +56,23 @@ async function fetchClipboardPng(imageUrl: string, signal: AbortSignal): Promise
   })
 }
 
-export async function writeClipboardTextAndImage(text: string, imageUrl: string): Promise<ClipboardWriteResult> {
-  if (imageUrl && navigator.clipboard?.write && window.isSecureContext && typeof ClipboardItem !== 'undefined') {
-    const controller = new AbortController()
-    const timeout = window.setTimeout(() => controller.abort(), 4000)
-    const image = fetchClipboardPng(imageUrl, controller.signal)
-    // The browser must receive the write during the click, before the image finishes downloading.
-    void image.catch(() => {}) // A browser may reject the write before reading the image promise.
-    try {
-      await navigator.clipboard.write([new ClipboardItem({
-        'text/plain': new Blob([text], { type: 'text/plain' }),
-        'image/png': image,
-      })])
-      return { copied: true, imageCopied: true }
-    } catch {
-      // Preserve the text if the image download or rich clipboard write fails.
-    } finally {
-      window.clearTimeout(timeout)
-      controller.abort()
-    }
+export async function writeClipboardImage(imageUrl: string): Promise<boolean> {
+  if (!imageUrl || !navigator.clipboard?.write || !window.isSecureContext || typeof ClipboardItem === 'undefined') {
+    return false
   }
 
-  return { copied: await writeClipboardText(text), imageCopied: false }
+  const controller = new AbortController()
+  const timeout = window.setTimeout(() => controller.abort(), 4000)
+  const image = fetchClipboardPng(imageUrl, controller.signal)
+  // The browser must receive the write during the click, before the image finishes downloading.
+  void image.catch(() => {}) // A browser may reject the write before reading the image promise.
+  try {
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': image })])
+    return true
+  } catch {
+    return false
+  } finally {
+    window.clearTimeout(timeout)
+    controller.abort()
+  }
 }
