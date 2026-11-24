@@ -5,11 +5,11 @@
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 5,
-  "selected_count": 23,
-  "review_count": 5,
-  "ready_count": 18,
-  "updated_at": "2026-11-24T05:16:20.021070+00:00",
+  "revision": 6,
+  "selected_count": 24,
+  "review_count": 12,
+  "ready_count": 12,
+  "updated_at": "2026-11-24T07:06:50.827757+00:00",
   "stories": [
     {
       "id": "8592d4ce-a922-5a19-b37e-4aa55deb7cef",
@@ -18,7 +18,7 @@
       "title": "英伟达全票恢复黄仁勋总裁、CEO 和董事职务",
       "body": "英伟达董事会 11 月 23 日宣布，全票通过恢复黄仁勋的总裁、CEO 和董事职务，决定立即生效。黄仁勋此前于 11 月 12 日辞去这三项职务，前后间隔 11 天。\n\n公司称，董事会在决定前听取了美国政府高层意见，认为黄仁勋回归不会带来国家安全风险。黄仁勋随后回到英伟达总部与员工见面，并表示这是自己重新上班的第一天。\n\n这次人事变化发生在公司 AI 芯片业务和对华出口政策同时受到关注之际，英伟达董事会仍将经营权交回创始人。",
       "category": "大公司",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
       "position": 0,
       "score": 0,
@@ -28,12 +28,12 @@
       "source_quality": "strong",
       "confidence": 0.92,
       "event_date": null,
-      "disclosed_at": "2026-11-24 07:57",
-      "published_at": "2026-11-24 07:57",
-      "cross_day_status": "needs_title_rewrite",
+      "disclosed_at": "2026-11-24 11:31",
+      "published_at": "2026-11-24 11:31",
+      "cross_day_status": "ready",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
       "image_url": "data/images/4cb5167681ab-bdac56f7b987cc90fed3.jpg",
       "image_path": "",
       "image_token": "",
@@ -46,8 +46,8 @@
         {
           "url": "https://www.digitimes.com/news/a20261124PD201/nvidia-security-president-jensen-huang-ceo.html",
           "title": "",
-          "publisher": "DIGITIMES: News and Insight of the Global Supply Chain",
-          "source_type": "folo",
+          "publisher": "digitimes.com",
+          "source_type": "draft_source",
           "authority": "strong",
           "is_paywalled": true,
           "is_original": true
@@ -83,9 +83,27 @@
           "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "英伟达董事会 11 月 23 日宣布，全票通过恢复黄仁勋的总裁、CEO 和董事职务，决定立即生效。黄仁勋此前于 11 月 12 日辞去这三项职务，前后间隔 11 天。",
+          "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "公司称，董事会在决定前听取了美国政府高层意见，认为黄仁勋回归不会带来国家安全风险。黄仁勋随后回到英伟达总部与员工见面，并表示这是自己重新上班的第一天。",
+          "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这次人事变化发生在公司 AI 芯片业务和对华出口政策同时受到关注之际，英伟达董事会仍将经营权交回创始人。",
+          "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.152701+00:00"
+      "updated_at": "2026-11-24T07:04:40.387836+00:00"
     },
     {
       "id": "4052cb9c-0057-5aba-aabd-09ed4c805df5",
@@ -170,80 +188,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T01:18:12.071511+00:00"
-    },
-    {
-      "id": "8f077663-e186-5b41-91fd-e381ee3f80e8",
-      "issue_id": "ifanr-daily-20261125",
-      "fingerprint": "7b04139991d07829942942a16a2e0206bfbc2ab3",
-      "title": "欧洲企业要求欧盟调查苹果 iOS 浏览器引擎限制",
-      "body": "Mozilla、Shopify 等企业和民间组织向欧盟委员会发出联名信，要求调查苹果在 iPhone 浏览器竞争方面的限制。联名信称，苹果虽然在欧盟允许第三方浏览器使用其他引擎，但技术和法律要求仍让浏览器厂商难以完成切换。\n\n从 iOS 17.5 开始，欧盟地区的浏览器可以使用非 WebKit 引擎。联名企业认为，相关限制也让内容出版商更依赖 App Store 来触达 iPhone 用户，并限制其自行管理订阅价格和收费方式。\n\n欧盟此前已要求苹果为第三方浏览器引擎提供必要的软件和硬件访问权限，新的联名信把争议进一步指向实际切换的技术和法律成本。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 1,
-      "score": 0,
-      "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
-      "source_name": "appleinsider.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-11-24 08:32",
-      "published_at": "2026-11-24 08:32",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：AppleInsider 原报道｜https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions；📮Folo · 2026-11-24 08:32 · 发现线索｜https://www.ithome.com/1/031/265.htm",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
-          "title": "",
-          "publisher": "appleinsider.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.ithome.com/1/031/265.htm",
-          "title": "",
-          "publisher": "IT之家",
-          "source_type": "folo",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 11 月 24 日消息，据科技媒体 Appleinsider 昨天报道，Mozilla、Shopify 等多家企业和民间组织向欧盟委员会发出联名信，称苹果虽然已经略微放宽 iOS 系统浏览器内核限制，但其对 WebKit 的要求仍然让开发者几乎无法在 App Store 之外销售订阅服务。",
-          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "IT之家从原报道获悉，这些企业和民间组织敦促欧盟委员会对 iPhone 浏览器竞争问题启动调查。他们认为， 苹果如今的限制仍阻碍浏览器厂商从 WebKit 转向其他内核 。",
-          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "苹果此前要求所有第三方互联网浏览器在 iOS 系统使用 WebKit 内核。后来欧盟《数字市场法》要求苹果允许竞争对手使用第三方浏览器引擎，并为其提供必要的软件和硬件访问权限。",
-          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-11-24T05:16:20.214082+00:00"
+      "updated_at": "2026-11-24T07:04:40.409813+00:00"
     },
     {
       "id": "02c3db3f-dc4a-5fa4-9e67-83e3e794556c",
@@ -257,14 +202,14 @@
       "position": 1,
       "score": 0,
       "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
-      "source_name": "早报 Bot 私聊",
-      "source_type": "lark_group",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
       "source_quality": "strong",
       "confidence": 0.55,
       "event_date": "2026-11-24",
       "disclosed_at": "2026-11-24 09:11",
       "published_at": "2026-11-24 09:11",
-      "cross_day_status": "needs_title_rewrite",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": true,
@@ -273,15 +218,15 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：华为鸿蒙微信公众号｜https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA；华为官网｜https://www.huawei.com/cn/news/2026/9/hc-agentic-era-harmonyos；📮飞书群 · 2026-11-24 09:11 · 人工线索",
+        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA；https://www.huawei.com/cn/news/2026/9/hc-agentic-era-harmonyos；https://www.c114.com.cn/news/126/a1318746.html 🧭飞书群 · 2026-11-24 09:11",
         "static_snapshot": true
       },
       "sources": [
         {
           "url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
           "title": "",
-          "publisher": "早报 Bot 私聊",
-          "source_type": "lark_group",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
@@ -335,9 +280,179 @@
           "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "11 月 24 日，华为在鸿蒙微信公众号发布公开信，称搭载 HarmonyOS 5、6 或 7 的手机、平板和电脑合计已突破 1 亿台。",
+          "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.404022+00:00"
+      "updated_at": "2026-11-24T07:04:40.447175+00:00"
+    },
+    {
+      "id": "8f077663-e186-5b41-91fd-e381ee3f80e8",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "7b04139991d07829942942a16a2e0206bfbc2ab3",
+      "title": "欧洲企业要求欧盟调查苹果 iOS 浏览器引擎限制",
+      "body": "Mozilla、Shopify 等企业和民间组织向欧盟委员会发出联名信，要求调查苹果在 iPhone 浏览器竞争方面的限制。联名信称，苹果虽然在欧盟允许第三方浏览器使用其他引擎，但技术和法律要求仍让浏览器厂商难以完成切换。\n\n从 iOS 17.5 开始，欧盟地区的浏览器可以使用非 WebKit 引擎。联名企业认为，相关限制也让内容出版商更依赖 App Store 来触达 iPhone 用户，并限制其自行管理订阅价格和收费方式。\n\n欧盟此前已要求苹果为第三方浏览器引擎提供必要的软件和硬件访问权限，新的联名信把争议进一步指向实际切换的技术和法律成本。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+      "source_name": "appleinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 08:32",
+      "published_at": "2026-11-24 08:32",
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：AppleInsider 原报道｜https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions；📮Folo · 2026-11-24 08:32 · 发现线索｜https://www.ithome.com/1/031/265.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "title": "",
+          "publisher": "appleinsider.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/265.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 11 月 24 日消息，据科技媒体 Appleinsider 昨天报道，Mozilla、Shopify 等多家企业和民间组织向欧盟委员会发出联名信，称苹果虽然已经略微放宽 iOS 系统浏览器内核限制，但其对 WebKit 的要求仍然让开发者几乎无法在 App Store 之外销售订阅服务。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家从原报道获悉，这些企业和民间组织敦促欧盟委员会对 iPhone 浏览器竞争问题启动调查。他们认为， 苹果如今的限制仍阻碍浏览器厂商从 WebKit 转向其他内核 。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "苹果此前要求所有第三方互联网浏览器在 iOS 系统使用 WebKit 内核。后来欧盟《数字市场法》要求苹果允许竞争对手使用第三方浏览器引擎，并为其提供必要的软件和硬件访问权限。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Mozilla、Shopify 等企业和民间组织向欧盟委员会发出联名信，要求调查苹果在 iPhone 浏览器竞争方面的限制。联名信称，苹果虽然在欧盟允许第三方浏览器使用其他引擎，但技术和法律要求仍让浏览器厂商难以完成切换。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "从 iOS 17.5 开始，欧盟地区的浏览器可以使用非 WebKit 引擎。联名企业认为，相关限制也让内容出版商更依赖 App Store 来触达 iPhone 用户，并限制其自行管理订阅价格和收费方式。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "欧盟此前已要求苹果为第三方浏览器引擎提供必要的软件和硬件访问权限，新的联名信把争议进一步指向实际切换的技术和法律成本。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T07:04:40.431492+00:00"
+    },
+    {
+      "id": "7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "4074512719d76f799951ab96e283cf513d4da831",
+      "title": "百度开源文心 5.5 Flash Preview，支持最长 100 万 Token 上下文",
+      "body": "百度开源文心 5.5 Flash Preview（ERNIE 5.5 Flash Preview），采用 Apache 2.0 协议，开发者可以从 Hugging Face 获取模型权重和配套资源，并使用 vLLM、SGLang 等推理框架进行本地部署与二次开发。\n\n该模型总参数量为 2800 亿，每个 Token 激活 140 亿参数，支持最长 100 万 Token 上下文。文心方面还称，模型在 CodeArena WebDev 榜单中以 1668 分位列开源模型第二、国产模型第四；这些性能数据来自发布方披露。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/LeHxhOWdxx4tL8epczpCpA",
+      "source_name": "早报 Bot 私聊",
+      "source_type": "lark_group",
+      "source_quality": "unknown",
+      "confidence": 0.35,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 13:43",
+      "published_at": "2026-11-24 13:43",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/78dcb07f9c96-b33908119bdd7c55c73b.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/LeHxhOWdxx4tL8epczpCpA",
+          "title": "",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://huggingface.co/baidu/ERNIE-5.5-Flash-Preview",
+          "title": "",
+          "publisher": "huggingface.co",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "# 文心 5.5 Flash Preview正式开源！",
+          "source_url": "https://mp.weixin.qq.com/s/LeHxhOWdxx4tL8epczpCpA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "> 摘要：今天，文心 5.5 Flash Preview（ERNIE 5.5 Flash Preview）正式开源，采用 Apache 2.0 协议面向全球开源社区开放。💪\\x0a\\x0a🧑‍💻 开发者可在Hugging Face等平台获取模型权重与配套资源，进行本地部署与二次开发，支持vLLM、SGLang等主流推理框架进行部署。\\x0a\\x0a🧮 文心 5.5 Flash Preview...",
+          "source_url": "https://mp.weixin.qq.com/s/LeHxhOWdxx4tL8epczpCpA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "![](http://mmbiz.qpic.cn/mmbiz_png/0VQlwOsFb0kwtLQRsvn1S7W2C4sZlicly7ztjYfh8BmLE8DB9Lia8VgYHuKQQxzyRMqqdFJtiavYHgMvR5lnpkdbA/0?wx_fmt=png)",
+          "source_url": "https://mp.weixin.qq.com/s/LeHxhOWdxx4tL8epczpCpA",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T07:06:50.827757+00:00"
     },
     {
       "id": "eb291f35-6f18-5e5c-8557-9b97dc4daaeb",
@@ -348,7 +463,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 2,
+      "position": 5,
       "score": 0,
       "source_url": "https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/",
       "source_name": "bleepingcomputer.com",
@@ -410,7 +525,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.276641+00:00"
+      "updated_at": "2026-11-24T07:04:40.569597+00:00"
     },
     {
       "id": "74d0572d-feda-5e45-ba31-6281da1d1dbe",
@@ -419,9 +534,9 @@
       "title": "知乎宣布间接投资 DeepSeek，取得低个位数百分比股权",
       "body": "知乎 11 月 23 日发布自愿公告称，由知乎参投的天津砺思星深股权投资合伙企业已通过中间主体间接投资 DeepSeek，并取得低个位数百分比股权。知乎董事会认为，该基金投资有助于公司接触 AI 基础模型和相关生态资源。\n\n这笔投资通过基金和中间主体完成，知乎没有披露具体金额。公司股价随后上涨，但股价波动不等于投资回报或 DeepSeek 估值变化。\n\n知乎公告没有披露 DeepSeek 的交易估值，也没有说明该投资会如何改变知乎现有产品的模型接入安排。",
       "category": "大公司",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
-      "position": 3,
+      "position": 6,
       "score": 0,
       "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
       "source_name": "ir.zhihu.com",
@@ -434,7 +549,7 @@
       "cross_day_status": "ready",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
       "image_url": "",
       "image_path": "",
       "image_token": "",
@@ -481,9 +596,27 @@
           "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "IT之家 11 月 24 日消息，知乎 11 月 23 日发布自愿公告，宣布知乎参投的天津砺思星深股权投资合伙企业已通过中间主体间接投资 DeepSeek， 取得低个位数百分比股权 。",
+          "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "知乎董事会认为，基金投资于 DeepSeek 以及本公司通过基金拓宽参与优质人工智能及科技企业投资机会的渠道，同时还能进一步加深对人工智能技术、产品演进和商业模式发展的理解，两者在战略上是一致的。",
+          "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "消息公布后， 知乎港股股价今日大涨 10% ；美股隔夜收盘价 2.35 美元，涨约 15.76%。",
+          "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.343619+00:00"
+      "updated_at": "2026-11-24T07:04:40.597749+00:00"
     },
     {
       "id": "e8db6464-9b4c-5787-a967-76bc668491e4",
@@ -494,7 +627,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 4,
+      "position": 7,
       "score": 0,
       "source_url": "https://www.miit.gov.cn/",
       "source_name": "miit.gov.cn",
@@ -556,7 +689,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.379198+00:00"
+      "updated_at": "2026-11-24T07:04:40.614138+00:00"
     },
     {
       "id": "44ba5599-be0d-5bef-8984-29f45205b875",
@@ -567,7 +700,7 @@
       "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 6,
+      "position": 8,
       "score": 0,
       "source_url": "https://www.cmse.gov.cn/",
       "source_name": "cmse.gov.cn",
@@ -581,7 +714,7 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/e1ea463ab258-13fec82a84c235e4080e.png",
+      "image_url": "data/images/e1ea463ab258-3de23d0ce30ce8f0f23f.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -638,7 +771,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.449351+00:00"
+      "updated_at": "2026-11-24T07:04:40.631695+00:00"
     },
     {
       "id": "2a4b8620-d30a-5486-b7c1-12b4cb486aca",
@@ -705,7 +838,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:21.035635+00:00"
+      "updated_at": "2026-11-24T07:04:41.006647+00:00"
     },
     {
       "id": "fae87ffc-6c76-5e0f-acff-71eff12eea23",
@@ -719,14 +852,14 @@
       "position": 1,
       "score": 0,
       "source_url": "https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
-      "source_name": "Variety",
-      "source_type": "folo",
+      "source_name": "variety.com",
+      "source_type": "draft_source",
       "source_quality": "strong",
       "confidence": 0.92,
       "event_date": null,
       "disclosed_at": "2026-11-24 10:18",
       "published_at": "2026-11-24 10:18",
-      "cross_day_status": "needs_title_rewrite",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
@@ -742,8 +875,8 @@
         {
           "url": "https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
           "title": "",
-          "publisher": "Variety",
-          "source_type": "folo",
+          "publisher": "variety.com",
+          "source_type": "draft_source",
           "authority": "strong",
           "is_paywalled": false,
           "is_original": true
@@ -763,7 +896,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:21.056462+00:00"
+      "updated_at": "2026-11-24T07:04:41.036695+00:00"
     },
     {
       "id": "abe468b8-70fb-5643-a452-94c6ac2a2492",
@@ -827,7 +960,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:21.129206+00:00"
+      "updated_at": "2026-11-24T07:04:41.075039+00:00"
     },
     {
       "id": "c46f9e5e-b613-5e15-ba2f-7eb6eb59d385",
@@ -841,8 +974,8 @@
       "position": 0,
       "score": 0,
       "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
-      "source_name": "早报 Bot 私聊",
-      "source_type": "lark_group",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
       "source_quality": "lead",
       "confidence": 0.55,
       "event_date": null,
@@ -857,15 +990,15 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：豆包／小豆公众号文章 · 2026-11-24 10:34｜https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683；https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?from=singlemessage&isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683；📮Folo · 2026-11-24 10:50 · 动察发现线索｜https://t.me/OneMillion_AI/6116；🧭飞书群 · 2026-11-24 10:34 · 人工线索",
+        "source_line": "🔗 来源：豆包／小豆公众号文章 · 2026-11-24 10:34｜https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683；https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?from=singlemessage&isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683；🧭飞书群 · 2026-11-24 10:34 · 人工线索｜https://mp.weixin.qq.com/s/8V5y43BsZBrK7hZa8pC1Rw；📮Folo · 2026-11-24 10:50 · 动察发现线索｜https://t.me/OneMillion_AI/6116",
         "static_snapshot": true
       },
       "sources": [
         {
           "url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
           "title": "",
-          "publisher": "早报 Bot 私聊",
-          "source_type": "lark_group",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
@@ -885,6 +1018,15 @@
           "publisher": "动察Beating AI News - Telegram Channel",
           "source_type": "folo",
           "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/8V5y43BsZBrK7hZa8pC1Rw",
+          "title": "",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         }
@@ -919,9 +1061,27 @@
           "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "# 豆包个人AI助理产品“小豆”开启邀请制公测",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "> 来源：https://mp.weixin.qq.com/s/8V5y43BsZBrK7hZa8pC1Rw",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "11月24日，豆包旗下个人AI助理产品“小豆”开启公测。小豆是豆包在个人智能体（Personal Agent）方向推出的一款探索性产品，目前采用邀请制开放体验。",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.471009+00:00"
+      "updated_at": "2026-11-24T07:04:40.656461+00:00"
     },
     {
       "id": "d6f3db1d-f1c7-55fa-8a41-20b4c23def90",
@@ -935,14 +1095,14 @@
       "position": 1,
       "score": 0,
       "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
-      "source_name": "早报 Bot 私聊",
-      "source_type": "lark_group",
+      "source_name": "mp.weixin.qq.com",
+      "source_type": "draft_source",
       "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
       "disclosed_at": "2026-11-24 09:23",
       "published_at": "2026-11-24 09:23",
-      "cross_day_status": "needs_title_rewrite",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
@@ -958,8 +1118,8 @@
         {
           "url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
           "title": "",
-          "publisher": "早报 Bot 私聊",
-          "source_type": "lark_group",
+          "publisher": "mp.weixin.qq.com",
+          "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
@@ -983,9 +1143,27 @@
           "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "Ling 团队 11 月 24 日发布并开源 Ling-3.2-air。官方介绍称，该模型延续 Ling-3.0-flash-VL 的原生多模态架构，支持文本、图像和视频输入，总参数量为 1240 亿，每个 Token 激活 55 亿参数。",
+          "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "官方还称，新模型在代码仓库问题、多步骤工作流、视觉信息和专业文档推理等任务上进行了改进；模型权重、代码和许可证信息已随项目发布。",
+          "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "Ling-3.2-air 的发布重点放在开发者可用性和多模态任务覆盖，具体效果仍需结合公开评测和实际部署测试判断。",
+          "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.497083+00:00"
+      "updated_at": "2026-11-24T07:04:40.715098+00:00"
     },
     {
       "id": "22329dca-6953-5847-b3ce-a20a0cc025de",
@@ -994,7 +1172,7 @@
       "title": "OceanLake 发布，OceanBase 核心引擎向全球开源",
       "body": "OceanBase 11 月 24 日发布湖库一体 AI 数据平台 OceanLake，并宣布核心引擎向全球开源。OceanBase CEO 杨冰在 AI 数据大会上表示，随着模型和 Agent 基础设施发展，数据基础设施需要同时处理湖与库的数据形态。\n\n这次发布与 OceanBase 同日披露的经营数据相互关联，但 OceanLake 是独立的产品与开源动作。官方发布材料同时列出了代码仓库、组件范围和许可证信息。",
       "category": "新产品",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
       "position": 2,
       "score": 0,
@@ -1006,10 +1184,10 @@
       "event_date": null,
       "disclosed_at": "2026-11-24 11:35",
       "published_at": "2026-11-24 11:35",
-      "cross_day_status": "ready",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
       "image_url": "data/images/36ad791b5060-97f9c2db7d4d3c73438a.png",
       "image_path": "",
       "image_token": "",
@@ -1031,8 +1209,8 @@
         {
           "url": "https://www.ithome.com/1/031/365.htm",
           "title": "",
-          "publisher": "IT之家",
-          "source_type": "folo",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
           "authority": "secondary",
           "is_paywalled": false,
           "is_original": false
@@ -1052,7 +1230,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.569405+00:00"
+      "updated_at": "2026-11-24T07:04:40.786810+00:00"
     },
     {
       "id": "af9a6ebd-6749-5de5-92cf-0fcee1d27306",
@@ -1119,7 +1297,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.639558+00:00"
+      "updated_at": "2026-11-24T07:04:40.812187+00:00"
     },
     {
       "id": "56aef1a8-3883-5008-a490-7fa2aee2024b",
@@ -1186,7 +1364,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.674546+00:00"
+      "updated_at": "2026-11-24T07:04:40.831321+00:00"
     },
     {
       "id": "5d0067a3-946a-5f21-82e0-f0d1bb84b318",
@@ -1253,7 +1431,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.731184+00:00"
+      "updated_at": "2026-11-24T07:04:40.859223+00:00"
     },
     {
       "id": "e360b3d3-653c-5ac0-8329-acfa3105a6cb",
@@ -1320,7 +1498,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.788421+00:00"
+      "updated_at": "2026-11-24T07:04:40.880487+00:00"
     },
     {
       "id": "5838c0ee-d43a-5094-a64d-17146b4cf99b",
@@ -1387,7 +1565,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.826073+00:00"
+      "updated_at": "2026-11-24T07:04:40.899433+00:00"
     },
     {
       "id": "8e9ec5b5-dcc7-520f-b8f6-8590d3450550",
@@ -1396,7 +1574,7 @@
       "title": "铭瑄 Z890-C WIFI 主板上架，11 月 27 日开售",
       "body": "铭瑄 MS-Terminator Z890-C WIFI 主板已在电商平台上架，计划于 11 月 27 日晚间开售。该主板采用英特尔 FCLGA1851 平台，面向新一代桌面处理器。\n\n该主板的具体接口和供电配置已列入品牌规格表，面向需要升级新平台的桌面用户。",
       "category": "新消费",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
       "position": 1,
       "score": 0,
@@ -1408,10 +1586,10 @@
       "event_date": null,
       "disclosed_at": "2026-11-24 09:52",
       "published_at": "2026-11-24 09:52",
-      "cross_day_status": "ready",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
       "image_url": "data/images/438da8c236cd-0dd82cada72003a3af3b.jpg",
       "image_path": "",
       "image_token": "",
@@ -1433,8 +1611,8 @@
         {
           "url": "https://www.ithome.com/1/031/294.htm",
           "title": "",
-          "publisher": "IT之家",
-          "source_type": "folo",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
           "authority": "secondary",
           "is_paywalled": false,
           "is_original": false
@@ -1454,7 +1632,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.880601+00:00"
+      "updated_at": "2026-11-24T07:04:40.926330+00:00"
     },
     {
       "id": "275e9494-646a-547c-86e1-094d3094b555",
@@ -1527,7 +1705,7 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.922903+00:00"
+      "updated_at": "2026-11-24T07:04:40.947263+00:00"
     },
     {
       "id": "b401b3be-07c9-5113-b574-847efb79f08a",
@@ -1541,14 +1719,14 @@
       "position": 3,
       "score": 0,
       "source_url": "https://www.landian.news/archives/128723.html",
-      "source_name": "蓝点网",
-      "source_type": "folo",
-      "source_quality": "lead",
+      "source_name": "landian.news",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
       "disclosed_at": "2026-11-24 09:00",
       "published_at": "2026-11-24 09:00",
-      "cross_day_status": "ready",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "unverified",
       "changed_since_review": true,
@@ -1564,9 +1742,9 @@
         {
           "url": "https://www.landian.news/archives/128723.html",
           "title": "",
-          "publisher": "蓝点网",
-          "source_type": "folo",
-          "authority": "lead",
+          "publisher": "landian.news",
+          "source_type": "draft_source",
+          "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         }
@@ -1589,9 +1767,21 @@
           "source_url": "https://www.landian.news/archives/128723.html",
           "status": "supported",
           "evidence": ""
+        },
+        {
+          "text": "蓝点网援引供应链和产品线消息称，苹果可能在明年 2 至 3 月推出 MacBook Neo 2，预计升级为 A19 Pro 芯片和 12GB 内存。初代 MacBook Neo 于今年 3 月发布，搭载 A18 Pro 和 8GB 内存。",
+          "source_url": "https://www.landian.news/archives/128723.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "苹果尚未公布 MacBook Neo 2 的发布时间、配置或价格，这条消息目前属于未确认的产品传闻。",
+          "source_url": "https://www.landian.news/archives/128723.html",
+          "status": "supported",
+          "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.957327+00:00"
+      "updated_at": "2026-11-24T07:04:40.976128+00:00"
     },
     {
       "id": "bf6e5d9c-18b9-5caf-9f9f-dac830a16cf4",
@@ -1600,22 +1790,22 @@
       "title": "OceanBase 披露 2026 年经营数据，AI 业务成为新增长点",
       "body": "11 月 24 日，OceanBase 在北京披露 2026 年经营数据，称近五年营收复合增长率超过 60%。公司同时表示，AI 业务营收已超过 1 亿元，海外营收占比突破 15%，公有云营收增长 80%，其中多云业务收入占公有云营收的 35%。\n\nOceanBase 还称，专有云业务中的金融和政企客户数增长 50%，政企客户数占比首次达到 50%。这些数据由公司在 AI 数据大会披露，统计口径对应公司披露的 2026 年经营进展。\n\n公司把 AI 数据平台、全球化和公有云列为新的增长方向，并将传统金融、政企场景作为现有业务支撑。",
       "category": "重磅",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
       "position": 0,
       "score": 0,
       "source_url": "https://wallstreetcn.com/livenews/3204682",
-      "source_name": "华尔街见闻 - 实时快讯 - 要闻",
-      "source_type": "folo",
-      "source_quality": "lead",
+      "source_name": "wallstreetcn.com",
+      "source_type": "draft_source",
+      "source_quality": "unknown",
       "confidence": 0.55,
       "event_date": null,
       "disclosed_at": "2026-11-24 11:54",
       "published_at": "2026-11-24 11:54",
-      "cross_day_status": "ready",
+      "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
-      "changed_since_review": false,
+      "changed_since_review": true,
       "image_url": "",
       "image_path": "",
       "image_token": "",
@@ -1628,9 +1818,9 @@
         {
           "url": "https://wallstreetcn.com/livenews/3204682",
           "title": "",
-          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
-          "source_type": "folo",
-          "authority": "lead",
+          "publisher": "wallstreetcn.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         }
@@ -1655,41 +1845,57 @@
           "evidence": ""
         }
       ],
-      "updated_at": "2026-11-24T05:16:20.090403+00:00"
+      "updated_at": "2026-11-24T07:04:40.367385+00:00"
     }
   ],
   "brand_packages": {
     "appso": {
       "headline_options": [
-        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页",
         "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页 / 特斯拉中国推出「特从容」购车方案",
-        "OceanLake发布,OceanBase核心引擎向全球开源 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页 / 全球6G发展理念宣言发布,提出探索统一标准和可盈利模式"
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 特斯拉中国推出「特从容」购车方案 / 全球6G发展理念宣言发布,提出探索统一标准和可盈利模式",
+        "谷歌测试浏览器AI权限边界:可看商品但不能进入支付页 / 特斯拉中国推出「特从容」购车方案 / 铭匠发布AF 12mm F2.8全画幅自动对焦镜头"
       ],
-      "selected_headline": "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页",
-      "cover_candidates": [],
-      "selected_cover": ""
+      "selected_headline": "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页 / 特斯拉中国推出「特从容」购车方案",
+      "cover_candidates": [
+        {
+          "id": "story:7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4",
+          "story_id": "7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4",
+          "url": "",
+          "source": "story",
+          "title": "百度开源文心 5.5 Flash Preview，支持最长 100 万 Token 上下文"
+        }
+      ],
+      "selected_cover": "story:7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4"
     },
     "ifanr": {
       "headline_options": [
-        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 华为维感G1动态血糖仪开启预售",
-        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 华为维感G1动态血糖仪开启预售 / OceanBase披露2026年经营数据,AI业务成为新增长点",
-        "OceanLake发布,OceanBase核心引擎向全球开源 / 华为维感G1动态血糖仪开启预售 / 特斯拉中国推出「特从容」购车方案"
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 华为维感G1动态血糖仪开启预售 / 特斯拉中国推出「特从容」购车方案",
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 特斯拉中国推出「特从容」购车方案 / 全球6G发展理念宣言发布,提出探索统一标准和可盈利模式",
+        "华为维感G1动态血糖仪开启预售 / 特斯拉中国推出「特从容」购车方案 / 一加16 ×《凡人》动画联名礼盒暂缓发售"
       ],
-      "selected_headline": "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 华为维感G1动态血糖仪开启预售",
-      "cover_candidates": [],
-      "selected_cover": ""
+      "selected_headline": "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 华为维感G1动态血糖仪开启预售 / 特斯拉中国推出「特从容」购车方案",
+      "cover_candidates": [
+        {
+          "id": "story:7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4",
+          "story_id": "7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4",
+          "url": "",
+          "source": "story",
+          "title": "百度开源文心 5.5 Flash Preview，支持最长 100 万 Token 上下文"
+        }
+      ],
+      "selected_cover": "story:7ac4f1fc-4236-5e21-9dc8-9eb5d365a7c4"
     }
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 5,
-    "snapshot_generated_at": "2026-11-24T05:23:38+00:00",
+    "source_issue_revision": 6,
+    "snapshot_generated_at": "2026-11-24T07:15:11+00:00",
     "public_snapshot": {
-      "digest": "0b41b841761ead25e6bf11f62dbc6abad7bc8a9d6099de171f818eb837e1b111",
-      "generated_at": "2026-11-24T05:23:38+00:00",
-      "image_count": 14,
-      "selected_count": 23,
-      "selected_image_count": 16,
+      "digest": "6d51ba420c5810428f62a6cbe7e95bb9bd351dbad42c73e0d9c5d01f4641d926",
+      "generated_at": "2026-11-24T07:15:11+00:00",
+      "image_count": 15,
+      "selected_count": 24,
+      "selected_image_count": 17,
       "mode": "explicit_review_operations"
     }
   }
