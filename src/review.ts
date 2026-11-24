@@ -1,3 +1,4 @@
+import { isWeekendPublication } from './publicationCalendar'
 import type { Issue, Story } from './types'
 import { comparePublicationStories, publicationCategories, readerFacingStoryTitle } from './categories'
 
@@ -278,8 +279,7 @@ export function renderFeishuCloudMarkdown(issue: Issue): string {
       .map((item) => `🔗 相关阅读：[${item.title}](${item.url})`)
     : []
   const storyBlock = (story: Story) => [`### ${readerFacingStoryTitle(story.title)}`, story.body.trim(), ...relatedLinks(story)].filter(Boolean).join('\n\n')
-  const publication = new Date(`${issue.publication_date}T00:00:00Z`)
-  const isSaturday = publication.getUTCDay() === 6
+  const isSaturday = isWeekendPublication(issue.publication_date)
   let body: string
   if (isSaturday) {
     const weekendSections = ['One Fun Thing', '周末看什么', '买书不读指南', '游戏推荐'] as const

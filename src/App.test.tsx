@@ -1,10 +1,13 @@
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { App, BrandWorkspace, IssueArticle, sortCandidatesNewestFirst, StoryImageEditor, TrashItem } from './App'
+import { App, BrandWorkspace, DetailPanel, StoryFigure, IssueArticle, sortCandidatesNewestFirst, StoryImageEditor, TrashItem } from './App'
 import { api, WorkerRequestError } from './api'
 import { formatWeiboPost, WeiboWorkspace } from './WeiboWorkspace'
 import * as llmGateway from './llm-gateway'
 import type { FlashDraftItem, Issue, SocialPost, Story } from './types'
+
+// Exercise App persistence and revision flow independently of ProseMirror DOM APIs.
+vi.mock('./MarkdownEditor', () => ({ MarkdownEditor: ({ value, onChange, title }: { value: string; onChange: (value: string) => void; title?: boolean }) => <>{title ? <h3>{value}</h3> : null}<textarea aria-label={title ? '标题' : '正文'} value={value} onChange={event => onChange(event.target.value)} /></> }))
 
 expect.extend({
   toBeInTheDocument(received: Element | null) {
@@ -430,7 +433,7 @@ describe('App', () => {
     render(<App />)
     const switcher = await screen.findByRole('combobox', { name: '刊期' }) as HTMLSelectElement
     await waitFor(() => expect(switcher.options).toHaveLength(3))
-    await waitFor(() => expect(getIssue).toHaveBeenCalledWith(previousIssue.id))
+    await waitFor(() => expect(getIssue).toHaveBeenCalledWith(previousIssue.id, 'draft'))
     await act(async () => Promise.resolve())
     getIssue.mockImplementation(() => new Promise<Issue>(() => undefined))
 
@@ -572,13 +575,186 @@ describe('App', () => {
 
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
-    fireEvent.click(await screen.findByRole('heading', { name: staticStory.title }))
+    await screen.findByRole('heading', { name: staticStory.title }); fireEvent.click(within(screen.getByRole('heading', { name: staticStory.title }).closest('article')!).getByRole('button', { name: '编辑与核验' }))
     fireEvent.change(screen.getByLabelText('分类'), { target: { value: '大公司' } })
     await waitFor(() => expect(api.patchStory).toHaveBeenCalled())
     fireEvent.click(screen.getByRole('button', { name: '导出' }))
-    fireEvent.click(screen.getByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
 
     await waitFor(() => expect(publish).toHaveBeenCalledWith(connectedIssue.id, 4))
+  })
+
+  it('re-reads and retries stale publish jobs in place without reloading the page', async () => {
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(structuredClone(staticIssue))
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    const latest = vi.spyOn(api, 'getIssue')
+      .mockResolvedValueOnce({ ...structuredClone(staticIssue), revision: 4 })
+      .mockResolvedValueOnce({ ...structuredClone(staticIssue), revision: 5 })
+    const job = { id: 'publish-job', issue_id: staticIssue.id, action: 'lark-publish', state: 'queued' as const, progress: 0, message: '', result: {}, error: '' }
+    const publish = vi.spyOn(api, 'publishToLark')
+      .mockRejectedValueOnce(new WorkerRequestError('工作台已更新', 409, 'workbench_changed'))
+      .mockResolvedValue(job)
+    const watch = vi.spyOn(api, 'watchJob')
+      .mockResolvedValueOnce({ ...job, state: 'failed', error: '工作台在同步准备期间又有更新', result: { code: 'workbench_changed', retryable: true } })
+      .mockResolvedValueOnce({ ...job, state: 'completed', progress: 100, message: '已同步飞书 Bot', result: { document_url: 'https://ifanr.feishu.cn/docx/test' } })
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    await screen.findByRole('heading', { name: staticStory.title })
+    fireEvent.click(screen.getByRole('button', { name: '导出' }))
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+    await waitFor(() => expect(screen.getByRole('link', { name: /打开文档/ })).toBeInTheDocument(), { timeout: 3000 })
+    expect(latest).toHaveBeenCalledTimes(2)
+    expect(publish.mock.calls.map((call) => call[1])).toEqual([3, 4, 5])
+    expect(watch).toHaveBeenCalledTimes(2)
+  })
+
+  it('adopts the latest issue revision when a repeated save was already persisted', async () => {
+    const connectedIssue = structuredClone(staticIssue)
+    const editedStory = { ...staticStory, category: '大公司' }
+    const latestIssue = { ...structuredClone(connectedIssue), revision: 4, stories: [editedStory] }
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connectedIssue)
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    vi.spyOn(api, 'patchStory').mockRejectedValue(new WorkerRequestError('该条目已更新', 409, '该条目已更新'))
+    vi.spyOn(api, 'getIssue').mockResolvedValue(latestIssue)
+    const publish = vi.spyOn(api, 'publishToLark').mockResolvedValue({
+      id: 'publish-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'queued', progress: 0, message: '', result: {}, error: '',
+    })
+    vi.spyOn(api, 'watchJob').mockResolvedValue({
+      id: 'publish-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'completed', progress: 100, message: '已同步', result: {}, error: '',
+    })
+
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    await screen.findByRole('heading', { name: staticStory.title }); fireEvent.click(within(screen.getByRole('heading', { name: staticStory.title }).closest('article')!).getByRole('button', { name: '编辑与核验' }))
+    fireEvent.change(screen.getByLabelText('分类'), { target: { value: '大公司' } })
+    await waitFor(() => expect(api.getIssue).toHaveBeenCalledWith(connectedIssue.id))
+    fireEvent.click(screen.getByRole('button', { name: '导出' }))
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+
+    await waitFor(() => expect(publish).toHaveBeenCalledWith(connectedIssue.id, 4))
+  })
+
+  it('waits for an in-flight autosave before opening export and publishing', async () => {
+    const connectedIssue = structuredClone(staticIssue)
+    const editedStory = { ...staticStory, title: '自动保存后的新标题', issue_revision: 4 }
+    let resolvePatch!: (story: Story) => void
+    const pendingPatch = new Promise<Story>((resolve) => { resolvePatch = resolve })
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connectedIssue)
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    vi.spyOn(api, 'patchStory').mockReturnValue(pendingPatch)
+    const publish = vi.spyOn(api, 'publishToLark').mockResolvedValue({
+      id: 'publish-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'queued', progress: 0, message: '', result: {}, error: '',
+    })
+    vi.spyOn(api, 'watchJob').mockResolvedValue({
+      id: 'publish-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'completed', progress: 100, message: '已同步', result: {}, error: '',
+    })
+
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    await screen.findByRole('heading', { name: staticStory.title }); fireEvent.click(within(screen.getByRole('heading', { name: staticStory.title }).closest('article')!).getByRole('button', { name: '编辑与核验' }))
+    const title = screen.getByLabelText('标题')
+    fireEvent.change(title, { target: { value: editedStory.title } })
+    fireEvent.blur(title)
+    fireEvent.click(screen.getByRole('button', { name: '导出' }))
+
+    await waitFor(() => expect(api.patchStory).toHaveBeenCalled())
+    expect(screen.queryByRole('button', { name: /同步飞书 Bot 同刊期文档/ })).toBeNull()
+    resolvePatch(editedStory)
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+
+    await waitFor(() => expect(publish).toHaveBeenCalledWith(connectedIssue.id, 4))
+  })
+
+  it('reconciles a delayed save after another story advances the issue revision', async () => {
+    const second = { ...staticStory, id: 'story-b', title: '另一条稿件', position: 1 }
+    const connected = { ...structuredClone(staticIssue), stories: [structuredClone(staticStory), second] }
+    const savedA = { ...staticStory, title: '第一条完整修改后的标题', issue_revision: 4 }
+    const savedB = { ...second, category: '大公司', issue_revision: 5 }
+    let resolveA!: (story: Story) => void
+    const pendingA = new Promise<Story>((resolve) => { resolveA = resolve })
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connected)
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    const patch = vi.spyOn(api, 'patchStory').mockImplementation(async (id) => id === staticStory.id ? pendingA : savedB)
+    const read = vi.spyOn(api, 'getIssue').mockResolvedValue({ ...connected, revision: 5, stories: [savedA, savedB] })
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    await screen.findByRole('heading', { name: staticStory.title }); fireEvent.click(within(screen.getByRole('heading', { name: staticStory.title }).closest('article')!).getByRole('button', { name: '编辑与核验' }))
+    fireEvent.change(within(screen.getByRole('heading', { name: staticStory.title }).closest('article')!).getByLabelText('标题'), { target: { value: savedA.title } })
+    fireEvent.blur(screen.getAllByLabelText('标题')[0])
+    fireEvent.keyDown(window, { key: 's', ctrlKey: true })
+    await waitFor(() => expect(patch).toHaveBeenCalledTimes(1))
+    fireEvent.click(within(screen.getByRole('heading', { name: second.title }).closest('article')!).getByRole('button', { name: '编辑与核验' }))
+    fireEvent.change(screen.getByLabelText('分类'), { target: { value: '大公司' } })
+    await waitFor(() => expect(patch).toHaveBeenCalledTimes(2))
+    await act(async () => { resolveA(savedA) })
+    expect(await screen.findByRole('heading', { name: savedA.title })).toBeInTheDocument()
+    expect(read).not.toHaveBeenCalled()
+  })
+
+  it('keeps image elements and URLs stable across text and ordering acknowledgements', () => {
+    const imageStory = { ...staticStory, image_path: '/images/story/actual-asset-a.jpg', updated_at: 'before-save' }
+    const handlers = { active: false, onOpen: () => {}, onExclude: () => {}, onDragStart: () => {}, onDrop: () => {}, onDragEnd: () => {} }
+    const view = render(<IssueArticle story={imageStory} {...handlers} />)
+    const image = document.querySelector('.article-side-image')!
+    const src = image.getAttribute('src')
+    view.rerender(<IssueArticle story={{ ...imageStory, body: '编辑后的完整正文。', position: 4, updated_at: 'after-save' }} {...handlers} />)
+    expect(document.querySelector('.article-side-image')).toBe(image)
+    expect(image.getAttribute('src')).toBe(src)
+    view.rerender(<IssueArticle story={{ ...imageStory, image_path: '/images/story/actual-asset-b.jpg' }} {...handlers} />)
+    expect(image.getAttribute('src')).not.toBe(src)
+  })
+
+  it('accepts repeated local ordering before saving and keeps that order on acknowledgement', async () => {
+    const second = { ...staticStory, id: 'story-b', title: '第二条稿件', position: 1 }
+    const third = { ...staticStory, id: 'story-c', title: '第三条稿件', position: 2 }
+    const connected = { ...structuredClone(staticIssue), stories: [structuredClone(staticStory), second, third] }
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connected)
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    const reorder = vi.spyOn(api, 'reorder').mockResolvedValue({ ...connected, revision: 4 })
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    const secondArticle = (await screen.findByRole('heading', { name: second.title })).closest('article')!
+    const thirdArticle = screen.getByRole('heading', { name: third.title }).closest('article')!
+    fireEvent.click(within(secondArticle).getByRole('button', { name: '上移一位' }))
+    fireEvent.click(within(thirdArticle).getByRole('button', { name: '上移一位' }))
+    const order = () => [...document.querySelectorAll('.issue-article h3')].map(node => node.textContent)
+    expect(order()).toEqual([second.title, third.title, staticStory.title])
+    expect(reorder).not.toHaveBeenCalled()
+    fireEvent.keyDown(window, { key: 's', ctrlKey: true })
+    await waitFor(() => expect(reorder).toHaveBeenCalledExactlyOnceWith(connected.id, [second.id, third.id, staticStory.id], '重磅'))
+    expect(order()).toEqual([second.title, third.title, staticStory.title])
+    expect(screen.getByRole('heading', { name: second.title }).closest('article')).toBe(secondArticle)
+    expect(screen.getByRole('heading', { name: third.title }).closest('article')).toBe(thirdArticle)
+  })
+
+  it('defers background issue replacement while the text editor has focus', async () => {
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(structuredClone(staticIssue))
+    vi.spyOn(api, 'recentIssues').mockResolvedValue([staticIssue])
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    vi.spyOn(api, 'patchStory').mockImplementation(async (_id, changes) => ({ ...staticStory, ...changes, issue_revision: 4 }))
+    const version = vi.spyOn(api, 'currentIssueVersion').mockResolvedValue({ id: staticIssue.id, revision: 5, publication_date: staticIssue.publication_date, updated_at: '' })
+    const read = vi.spyOn(api, 'getIssue').mockResolvedValue({ ...staticIssue, revision: 5 })
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    await screen.findByRole('heading', { name: staticStory.title }); fireEvent.click(within(screen.getByRole('heading', { name: staticStory.title }).closest('article')!).getByRole('button', { name: '编辑与核验' }))
+    const body = screen.getByLabelText('正文') as HTMLTextAreaElement
+    body.focus()
+    const callsBefore = read.mock.calls.length
+    vi.useFakeTimers()
+    try {
+      fireEvent.change(body, { target: { value: '持续编辑时保留光标和输入。' } })
+      await act(async () => { await vi.advanceTimersByTimeAsync(26000); window.dispatchEvent(new Event('visibilitychange')) })
+      expect(version).not.toHaveBeenCalled()
+      expect(read).toHaveBeenCalledTimes(callsBefore)
+      expect(screen.getByLabelText('正文')).toBe(body)
+      expect(body.value).toBe('持续编辑时保留光标和输入。')
+    } finally { vi.useRealTimers() }
   })
 
   it('publishes the revision returned by reorder without requiring a page refresh', async () => {
@@ -603,17 +779,61 @@ describe('App', () => {
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
     fireEvent.click(await screen.findByRole('button', { name: '上移一位' }))
-    await waitFor(() => expect(reorder).toHaveBeenCalledWith(connectedIssue.id, [secondStory.id, staticStory.id], '重磅'))
+    expect(reorder).not.toHaveBeenCalled()
     fireEvent.click(screen.getByRole('button', { name: '导出' }))
-    fireEvent.click(screen.getByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+    await waitFor(() => expect(reorder).toHaveBeenCalledWith(connectedIssue.id, [secondStory.id, staticStory.id], '重磅'))
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
 
     await waitFor(() => expect(publish).toHaveBeenCalledWith(connectedIssue.id, 4))
   })
 
-  it('shows sync conflicts as per-field choices and resolves them in the workbench', async () => {
+  it('publishes the revision returned by drag reorder when server order matches the optimistic order', async () => {
+    const secondStory = { ...staticStory, id: 'second-story', fingerprint: 'second-fingerprint', title: '同栏目第二条', position: 1 }
+    const connectedIssue = { ...structuredClone(staticIssue), selected_count: 2, ready_count: 2, stories: [structuredClone(staticStory), secondStory] }
+    const reorderedIssue = {
+      ...structuredClone(connectedIssue),
+      revision: 4,
+      stories: [{ ...secondStory, position: 0 }, { ...structuredClone(staticStory), position: 1 }],
+    }
+    vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
+    vi.spyOn(api, 'currentIssue').mockResolvedValue(connectedIssue)
+    vi.spyOn(api, 'weekend').mockResolvedValue({})
+    const reorder = vi.spyOn(api, 'reorder').mockResolvedValue(reorderedIssue)
+    const publish = vi.spyOn(api, 'publishToLark').mockResolvedValue({
+      id: 'publish-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'queued', progress: 0, message: '', result: {}, error: '',
+    })
+    vi.spyOn(api, 'watchJob').mockResolvedValue({
+      id: 'publish-job', issue_id: connectedIssue.id, action: 'lark-publish', state: 'completed', progress: 100, message: '已同步', result: {}, error: '',
+    })
+
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '早报稿' }))
+    const source = (await screen.findByRole('heading', { name: staticStory.title })).closest('article') as HTMLElement
+    const target = screen.getByRole('heading', { name: secondStory.title }).closest('article') as HTMLElement
+    const dataTransfer = {
+      effectAllowed: 'none',
+      dropEffect: 'none',
+      setData: vi.fn(),
+      getData: vi.fn(() => staticStory.id),
+    }
+    fireEvent.dragStart(source, { dataTransfer })
+    const dropEvent = new Event('drop', { bubbles: true })
+    Object.defineProperties(dropEvent, { dataTransfer: { value: dataTransfer }, clientY: { value: 1 } })
+    fireEvent(target, dropEvent)
+
+    expect(reorder).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByRole('button', { name: '导出' }))
+    await waitFor(() => expect(reorder).toHaveBeenCalledWith(connectedIssue.id, [secondStory.id, staticStory.id], '重磅'))
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+
+    await waitFor(() => expect(publish).toHaveBeenCalledWith(connectedIssue.id, 4))
+  })
+
+  it.each(['body', 'blocks'])('shows %s sync conflicts as choices and resolves them in the workbench', async (field) => {
     const connectedIssue = structuredClone(staticIssue)
     vi.spyOn(api, 'health').mockResolvedValue({ ok: true, mode: 'local', repo_runtime_access: true, access_mode: 'local' })
     vi.spyOn(api, 'currentIssue').mockResolvedValue(connectedIssue)
+    vi.spyOn(api, 'getIssue').mockResolvedValue(connectedIssue)
     vi.spyOn(api, 'currentIssueVersion').mockResolvedValue({ id: connectedIssue.id, revision: connectedIssue.revision })
     vi.spyOn(api, 'weekend').mockResolvedValue({})
     vi.spyOn(api, 'publishToLark').mockResolvedValue({
@@ -629,7 +849,7 @@ describe('App', () => {
           conflict_issue_revision: 3,
           conflicts: [{
             id: 'conflict-1', title: connectedIssue.stories[0].title, story_id: connectedIssue.stories[0].id,
-            field: 'body', reason: '工作台在上次发布后也修改了该字段',
+            field, reason: '工作台在上次发布后也修改了该字段',
             workbench_value: '工作台人工正文。', lark_value: '飞书人工正文。', can_accept_lark: true,
           }],
         },
@@ -639,7 +859,7 @@ describe('App', () => {
 
     render(<App />)
     fireEvent.click(await screen.findByRole('button', { name: '导出' }))
-    fireEvent.click(screen.getByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
+    fireEvent.click(await screen.findByRole('button', { name: /同步飞书 Bot 同刊期文档/ }))
 
     expect(await screen.findByRole('heading', { name: '解决 1 项同步冲突' })).toBeInTheDocument()
     expect(screen.getByText('工作台人工正文。')).toBeInTheDocument()
@@ -895,7 +1115,7 @@ describe('App', () => {
     expect((changes.metadata?._ai_editor_request as Record<string, unknown>).state).toBe('pending')
   })
 
-  it('keeps article copy flowing independently from a tall side image', () => {
+  it('places the story image between its title and body', () => {
     const story: Story = {
       ...staticStory,
       title: '带图稿件',
@@ -904,10 +1124,10 @@ describe('App', () => {
     }
     const { container } = render(<IssueArticle story={story} active={false} onOpen={() => undefined} onExclude={() => undefined} onDragStart={() => undefined} onDrop={() => undefined} onDragEnd={() => undefined} />)
 
-    const layout = container.querySelector('.article-layout-with-image')
+    const layout = container.querySelector('.article-layout-stacked')
     expect(layout).toBeInTheDocument()
     expect(layout?.querySelector('.article-copy .article-body')).toBeInTheDocument()
-    expect(layout?.querySelector(':scope > .article-side-image')).toBeInTheDocument()
+    expect(layout?.querySelector('.article-copy > header + .story-figure img')).toBeInTheDocument()
   })
 
   it('shows manual image controls while connected and protects static mode', () => {
@@ -936,7 +1156,7 @@ describe('App', () => {
     const onImageChange = vi.fn()
     render(<StoryImageEditor story={staticStory} staticMode={false} onImageChange={onImageChange} />)
 
-    fireEvent.paste(window, {
+    fireEvent.paste(screen.getByPlaceholderText('粘贴原图 URL'), {
       clipboardData: {
         items: [{ kind: 'file', type: 'image/png', getAsFile: () => file }],
       },
@@ -945,4 +1165,99 @@ describe('App', () => {
     await waitFor(() => expect(upload).toHaveBeenCalledWith(staticStory.id, file))
     expect(onImageChange).toHaveBeenCalledWith(updated)
   })
+})
+
+
+describe('inline image paste', () => {
+  it('targets the cursor story even when another story is open in the sidebar', async () => {
+    const upload = vi.spyOn(api, 'uploadStoryImage').mockResolvedValue({ ...staticStory, image_path: '/images/pasted.png' })
+    const changed = vi.fn()
+    const props = { staticMode: false, onPatch: vi.fn(), onAction: vi.fn(), onClose: vi.fn(), onImageChange: changed }
+    render(<><DetailPanel inline story={staticStory} {...props} /><DetailPanel advancedOnly story={{ ...staticStory, id: 'sidebar-story' }} {...props} /></>)
+    const file = new File(['image'], 'paste.png', { type: 'image/png' })
+    const body = screen.getByLabelText('正文')
+    body.focus()
+    const normalPaste = fireEvent.paste(body, { clipboardData: { items: [{ kind: 'string', type: 'text/plain' }], files: [] } })
+    expect(normalPaste).toBe(true)
+    fireEvent.paste(body, { clipboardData: { items: [{ kind: 'file', type: file.type, getAsFile: () => file }], files: [file] } })
+    await waitFor(() => expect(upload).toHaveBeenCalledExactlyOnceWith(staticStory.id, file))
+    await waitFor(() => expect(changed).toHaveBeenCalledOnce())
+    expect(document.activeElement).toBe(body)
+  })
+
+  it('serializes repeated pastes and offers a retry after an upload failure', async () => {
+    let finish!: (story: Story) => void
+    const first = new Promise<Story>(resolve => { finish = resolve })
+    const upload = vi.spyOn(api, 'uploadStoryImage').mockReturnValueOnce(first).mockRejectedValueOnce(new Error('网络中断')).mockResolvedValue(staticStory)
+    render(<DetailPanel inline story={staticStory} staticMode={false} onPatch={vi.fn()} onAction={vi.fn()} onClose={vi.fn()} onImageChange={vi.fn()} />)
+    const file = new File(['image'], 'paste.png', { type: 'image/png' })
+    const paste = () => fireEvent.paste(screen.getByLabelText('标题'), { clipboardData: { items: [], files: [file] } })
+    paste(); paste()
+    await waitFor(() => expect(upload).toHaveBeenCalledTimes(1))
+    await act(async () => { finish(staticStory) })
+    await waitFor(() => expect(upload).toHaveBeenCalledTimes(2))
+    fireEvent.click(await screen.findByRole('button', { name: '重试上传' }))
+    await waitFor(() => expect(upload).toHaveBeenCalledTimes(3))
+  })
+})
+
+
+describe('story images in the reading flow', () => {
+  it('renders the cover below the title and suppresses it when the body already contains an image', () => {
+    const story = { ...staticStory, image_path: '/images/picture.png' }
+    const view = render(<StoryFigure story={story} body="正文" />)
+    expect(document.querySelector('.story-figure img')).not.toBeNull()
+    view.rerender(<StoryFigure story={story} body="![图片](https://example.com/photo.png)\n\n图｜图片来源\n\n正文" />)
+    expect(document.querySelector('.story-figure')).toBeNull()
+  })
+})
+
+
+it('hides redundant metadata related reading immediately as the body is edited', () => {
+  const story = { ...staticStory, metadata: { related_links: [{ title: '相关阅读文章', url: 'https://example.com/related' }] } }
+  render(<DetailPanel inline story={story} staticMode={false} onPatch={vi.fn().mockResolvedValue(story)} onAction={vi.fn()} onClose={vi.fn()} onImageChange={vi.fn()} />)
+  expect(screen.getByRole('link', { name: '相关阅读文章' })).toBeInTheDocument()
+  fireEvent.change(screen.getByLabelText('正文'), { target: { value: '正文。\n\n🔗 相关阅读：[相关阅读文章](https://example.com/related)' } })
+  expect(screen.queryByRole('link', { name: '相关阅读文章' })).toBeNull()
+})
+
+it('routes image-only browser HTML to the cover without inserting it into the body', async () => {
+  const download = vi.spyOn(api, 'downloadStoryImage').mockResolvedValue({ ...staticStory, image_path:'/images/cover.png' })
+  const patch = vi.fn()
+  const changed = vi.fn()
+  render(<DetailPanel inline story={staticStory} staticMode={false} onPatch={patch} onAction={vi.fn()} onClose={vi.fn()} onImageChange={changed} />)
+  const accepted = fireEvent.paste(screen.getByLabelText('正文'), { clipboardData: { items:[], files:[], getData: (type:string) => type === 'text/html' ? '<a href="https://example.com"><img src="https://example.com/cover.png"></a>' : '' } })
+  expect(accepted).toBe(false)
+  await waitFor(() => expect(download).toHaveBeenCalledExactlyOnceWith(staticStory.id,'https://example.com/cover.png'))
+  expect((screen.getByLabelText('正文') as HTMLTextAreaElement).value).toBe(staticStory.body)
+  expect(patch).not.toHaveBeenCalled()
+  expect(changed).toHaveBeenCalledOnce()
+})
+
+it('shows body related reading in the sidebar and deletes it through the same protected body save', async () => {
+  const body = '正文。\n\n🔗 相关阅读：[正文链接](https://example.com/related)'
+  const story = { ...staticStory, body }
+  const patch = vi.fn(async (changes:Partial<Story>) => ({...story,...changes}))
+  render(<DetailPanel story={story} staticMode={false} onPatch={patch} onAction={vi.fn()} onClose={vi.fn()} onImageChange={vi.fn()} />)
+  expect(screen.getByRole('link',{name:'正文链接'})).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button',{name:'删除相关阅读：正文链接'}))
+  await waitFor(() => expect(patch).toHaveBeenCalledWith({body:'正文。', metadata:{static_snapshot:true,related_links:[]}},story))
+  expect((screen.getByLabelText('正文') as HTMLTextAreaElement).value).toBe('正文。')
+})
+
+it('flushes inline prose before adding a sidebar link and includes the acknowledged body', async () => {
+  const latest = {...staticStory,body:'刚输入且已确认保存的正文。'}
+  const flush=vi.fn().mockResolvedValue(latest)
+  vi.spyOn(api,'resolveRelatedLink').mockResolvedValue({title:'新相关阅读',url:'https://example.com/related'})
+  const patch=vi.fn(async (changes:Partial<Story>) => ({...latest,...changes}))
+  render(<DetailPanel advancedOnly story={staticStory} onBeforeRelatedChange={flush} staticMode={false} onPatch={patch} onAction={vi.fn()} onClose={vi.fn()} onImageChange={vi.fn()} />)
+  fireEvent.change(screen.getByLabelText('相关阅读链接'),{target:{value:'https://example.com/related'}})
+  fireEvent.click(screen.getByRole('button',{name:'添加',exact:true}))
+  await waitFor(() => expect(patch).toHaveBeenCalledWith(expect.objectContaining({body:'刚输入且已确认保存的正文。\n\n🔗 相关阅读：[新相关阅读](https://example.com/related)'}),latest))
+  expect(flush).toHaveBeenCalledOnce()
+})
+
+it('shows an explicitly chosen cover even when legacy body images remain', () => {
+  render(<StoryFigure story={{ ...staticStory, image_path:'/images/cover.png', metadata:{_image_manual_state:'set'} }} body={'正文。\n\n![旧图](https://example.com/old.png)'} />)
+  expect(document.querySelector('.story-figure img')).not.toBeNull()
 })

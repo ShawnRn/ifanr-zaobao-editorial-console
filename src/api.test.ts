@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { api, apiUrlProblem, describeWorkerError, getApiUrl, normalizeApiUrl, workerFetchOptions } from './api'
 
 afterEach(() => vi.unstubAllGlobals())
@@ -52,4 +52,54 @@ describe('Worker URL handling', () => {
 
     await expect(api.staticIssue()).rejects.toThrow('Pages 快照返回了网页而不是 JSON')
   })
+})
+
+describe('request isolation', () => {
+  beforeEach(() => {
+    vi.stubGlobal('window', { location: new URL('https://111.228.56.220/'), setTimeout, clearTimeout })
+    vi.stubGlobal('document', { cookie: '' })
+    vi.stubGlobal('localStorage', { getItem: () => null })
+  })
+  it('shares concurrent reads without caching across later refreshes', async () => {
+    let resolve!: (response: Response) => void
+    const fetcher = vi.fn().mockImplementation(() => new Promise<Response>(done => { resolve = done }))
+    vi.stubGlobal('fetch', fetcher)
+    const a = api.currentIssueVersion()
+    const b = api.currentIssueVersion()
+    expect(fetcher).toHaveBeenCalledTimes(1)
+    resolve(new Response(JSON.stringify({id:'issue', revision:3}), {headers:{'Content-Type':'application/json'}}))
+    await expect(a).resolves.toMatchObject({revision:3})
+    await expect(b).resolves.toMatchObject({revision:3})
+    fetcher.mockResolvedValue(new Response(JSON.stringify({id:'issue', revision:4}), {headers:{'Content-Type':'application/json'}}))
+    await expect(api.currentIssueVersion()).resolves.toMatchObject({revision:4})
+    expect(fetcher).toHaveBeenCalledTimes(2)
+  })
+
+  it('translates an interrupted save into a recoverable confirmation error and never replays it', async () => {
+    const fetcher=vi.fn().mockRejectedValue(new DOMException('aborted', 'AbortError'))
+    vi.stubGlobal('fetch',fetcher)
+    await expect(api.patchStory('story',{body:'本机新稿'})).rejects.toMatchObject({status:408,code:'request_timeout'})
+    expect(fetcher).toHaveBeenCalledTimes(1)
+  })
+
+  it('falls back to read-only polling when the progress stream disconnects', async () => {
+    let connection!: FakeStream
+    class FakeStream {
+      listeners = new Map<string, () => void>()
+      close = vi.fn()
+      constructor() { connection = this }
+      addEventListener(name: string, callback: () => void) { this.listeners.set(name, callback) }
+    }
+    vi.stubGlobal('EventSource', FakeStream)
+    const fetcher = vi.fn().mockResolvedValue(new Response(JSON.stringify({id:'job',state:'completed',progress:100}), {headers:{'Content-Type':'application/json'}}))
+    vi.stubGlobal('fetch', fetcher)
+    const updated = vi.fn()
+    const result = api.watchJob('job', updated)
+    connection.listeners.get('error')!()
+    await expect(result).resolves.toMatchObject({state:'completed'})
+    expect(fetcher).toHaveBeenCalledTimes(1)
+    expect(fetcher.mock.calls[0][0]).toMatch(/api\/jobs\/job$/)
+    expect(connection.close).toHaveBeenCalled()
+  })
+
 })

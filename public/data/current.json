@@ -1,572 +1,304 @@
 {
-  "id": "ifanr-daily-20260915",
-  "publication_date": "2026-09-15",
-  "title": "20260915 早报",
+  "id": "ifanr-daily-20261125",
+  "publication_date": "2026-11-25",
+  "title": "20261125 早报",
   "state": "static_snapshot",
   "runtime_path": "",
   "draft_path": "",
-  "revision": 73,
-  "selected_count": 15,
-  "review_count": 0,
-  "ready_count": 15,
-  "updated_at": "2026-09-14T10:10:18+00:00",
+  "revision": 5,
+  "selected_count": 23,
+  "review_count": 5,
+  "ready_count": 18,
+  "updated_at": "2026-11-24T05:16:20.021070+00:00",
   "stories": [
     {
-      "id": "9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "b18eb82ceb39b1aa5ac59f674dbc6410cf5eb3f5",
-      "title": "曝 Anthropic 选择纳斯达克，争取 10 月上市",
-      "body": "据《商业内幕》报道，Anthropic 已选择纳斯达克作为潜在 IPO 的上市交易所，并争取在 10 月完成上市。公司尚未公开提交招股文件，上市时间仍可能调整。\n\n报道援引知情人士称，一些估算将 Anthropic 的上市估值放在 2 万亿美元左右，但最终估值尚未确定，不能视为已经完成的融资或定价。\n\n按美国上市流程，公司需要在启动路演前至少 15 天公开财务信息。选择交易所是筹备环节之一，接下来仍需经过文件披露、投资者路演和发行定价。",
+      "id": "8592d4ce-a922-5a19-b37e-4aa55deb7cef",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "c8a8a39847c0dba6849b2a77b26f65075b417d37",
+      "title": "英伟达全票恢复黄仁勋总裁、CEO 和董事职务",
+      "body": "英伟达董事会 11 月 23 日宣布，全票通过恢复黄仁勋的总裁、CEO 和董事职务，决定立即生效。黄仁勋此前于 11 月 12 日辞去这三项职务，前后间隔 11 天。\n\n公司称，董事会在决定前听取了美国政府高层意见，认为黄仁勋回归不会带来国家安全风险。黄仁勋随后回到英伟达总部与员工见面，并表示这是自己重新上班的第一天。\n\n这次人事变化发生在公司 AI 芯片业务和对华出口政策同时受到关注之际，英伟达董事会仍将经营权交回创始人。",
       "category": "大公司",
       "status": "ready",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://www.businessinsider.com/anthropic-selects-nasdaq-for-ipo-amid-ai-risk-concerns-2026-9",
-      "source_name": "businessinsider.com",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
+      "source_name": "nvidianews.nvidia.com",
       "source_type": "draft_source",
       "source_quality": "strong",
       "confidence": 0.92,
       "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
+      "disclosed_at": "2026-11-24 07:57",
+      "published_at": "2026-11-24 07:57",
+      "cross_day_status": "needs_title_rewrite",
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/2331ebefaba8-35e6c4c7e7337c71ce00.webp",
+      "image_url": "data/images/4cb5167681ab-bdac56f7b987cc90fed3.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.businessinsider.com/anthropic-selects-nasdaq-for-ipo-amid-ai-risk-concerns-2026-9 ｜ https://mp.weixin.qq.com/s/K--TQGo8A7LYCFG5WqvKNA · 🧭飞书群 / Chrome 登录态 · 2026-09-14 11:46",
+        "source_line": "🔗 来源：英伟达公告｜https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang；DIGITIMES · 2026-11-24｜https://www.digitimes.com/news/a20261124PD201/nvidia-security-president-jensen-huang-ceo.html；🛰网页 · 2026-11-24 11:31 · MIT 科技评论｜https://www.mittrchina.com/news/detail/17284",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.businessinsider.com/anthropic-selects-nasdaq-for-ipo-amid-ai-risk-concerns-2026-9",
+          "url": "https://www.digitimes.com/news/a20261124PD201/nvidia-security-president-jensen-huang-ceo.html",
           "title": "",
-          "publisher": "businessinsider.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/K--TQGo8A7LYCFG5WqvKNA",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "据《商业内幕》报道，Anthropic 已选择纳斯达克作为潜在 IPO 的上市交易所，并争取在 10 月完成上市。公司尚未公开提交招股文件，上市时间仍可能调整。",
-          "source_url": "https://www.businessinsider.com/anthropic-selects-nasdaq-for-ipo-amid-ai-risk-concerns-2026-9",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "报道援引知情人士称，一些估算将 Anthropic 的上市估值放在 2 万亿美元左右，但最终估值尚未确定，不能视为已经完成的融资或定价。",
-          "source_url": "https://www.businessinsider.com/anthropic-selects-nasdaq-for-ipo-amid-ai-risk-concerns-2026-9",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "按美国上市流程，公司需要在启动路演前至少 15 天公开财务信息。选择交易所是筹备环节之一，接下来仍需经过文件披露、投资者路演和发行定价。",
-          "source_url": "https://www.businessinsider.com/anthropic-selects-nasdaq-for-ipo-amid-ai-risk-concerns-2026-9",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:57:02+00:00"
-    },
-    {
-      "id": "2b2d1223-1754-50ac-8163-b605d002367b",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "547836184dd5e58ee7d5e5d78978892a112d6fd1",
-      "title": "广汽集团股票停牌，一汽据报考虑入股",
-      "body": "据路透社报道，广汽集团股票 9 月 14 日暂停交易。此前财新援引两名知情人士称，一汽集团正在研究入股广汽集团的方案。\n\n报道所述路径涉及资产划拨，并可能由两家汽车集团成立合资公司。潜在持股比例及具体操作方式仍未确定，因此目前不能将其表述为已经完成的收购。\n\n一汽旗下拥有红旗品牌及一汽解放。两家集团同时是丰田在中国的合资伙伴，分别运营一汽丰田与广汽丰田。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 1,
-      "score": 0,
-      "source_url": "https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14",
-      "source_name": "reuters.com",
-      "source_type": "draft_source",
-      "source_quality": "strong",
-      "confidence": 0.92,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 12:45",
-      "published_at": "2026-09-14 12:45",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "verified",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14；https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14/ 📮Folo · 2026-09-14 12:45",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14",
-          "title": "",
-          "publisher": "reuters.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        },
-        {
-          "url": "https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14/",
-          "title": "",
-          "publisher": "reuters.com",
-          "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "据路透社报道，广汽集团股票 9 月 14 日暂停交易。此前财新援引两名知情人士称，一汽集团正在研究入股广汽集团的方案。",
-          "source_url": "https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "报道所述路径涉及资产划拨，并可能由两家汽车集团成立合资公司。潜在持股比例及具体操作方式仍未确定，因此目前不能将其表述为已经完成的收购。",
-          "source_url": "https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "一汽旗下拥有红旗品牌及一汽解放。两家集团同时是丰田在中国的合资伙伴，分别运营一汽丰田与广汽丰田。",
-          "source_url": "https://www.reuters.com/world/asia-pacific/chinas-gac-group-shares-suspended-after-report-faws-potential-equity-investment-2026-09-14",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T10:10:17+00:00"
-    },
-    {
-      "id": "826015e6-1397-5885-a20c-808fe27879db",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "16fea830cfbf843dd424709bc3c17cdcfafcf2ca",
-      "title": "零跑 B01、B10 累计量产突破 30 万台",
-      "body": "零跑汽车 9 月 14 日宣布，B01 和 B10 累计量产下线突破 30 万台，用时 1 年 6 个月，创下零跑车系达到这一产量的最快纪录。\n\n其中，B10 还创下零跑车型出口 6 万台的最快纪录。这里的 30 万台是两款车型累计量产下线数量，并非单月销量或交付量；6 万台则是 B10 的出口口径。\n\nB01 定位紧凑型纯电轿车，B10 定位紧凑型纯电 SUV。两款车型今年 7 月同步推出年度改款，基于 LEAP3.5 技术架构打造，长续航版本配备 800V 高压架构。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 2,
-      "score": 0,
-      "source_url": "https://www.ithome.com/1/002/010.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 11:58",
-      "published_at": "2026-09-14 11:58",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/3c2d3ad9f226c55762e1.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/1/002/010.htm · 📮Folo · 2026-09-14 11:59",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/1/002/010.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "IT之家 9 月 14 日消息，零跑汽车官方今日宣布，旗下 B 系双子星 —— 零跑 B01 和零跑 B10 量产下线突破 30 万台 。",
-          "source_url": "https://www.ithome.com/1/002/010.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据介绍，此次 30 万台的量产下线仅用时 1 年 6 个月， 创零跑车系最快量产 30 万台新纪录 。同时， 零跑 B10 创零跑海外最快 6 万台出口纪录 。",
-          "source_url": "https://www.ithome.com/1/002/010.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据IT之家此前报道，在今年 7 月， 零跑汽车旗下新款零跑 B01 与新款零跑 B10 同步上市 。作为年度改款车型，两款新车基于 LEAP3.5 技术架构打造，长续航版本均配备 800V 高压架构，外观与内饰设计延续老款风格。",
-          "source_url": "https://www.ithome.com/1/002/010.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据 IT 之家报道，零跑汽车 9 月 14 日宣布，B01 和 B10 累计量产下线突破 30 万台，用时 1 年 6 个月，创下零跑车系达到这一产量的最快纪录。",
-          "source_url": "https://www.ithome.com/1/002/010.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "其中，B10 还创下零跑车型出口 6 万台的最快纪录。这里的 30 万台是两款车型累计量产下线数量，并非单月销量或交付量；6 万台则是 B10 的出口口径。",
-          "source_url": "https://www.ithome.com/1/002/010.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "B01 定位紧凑型纯电轿车，B10 定位紧凑型纯电 SUV。两款车型今年 7 月同步推出年度改款，基于 LEAP3.5 技术架构打造，长续航版本配备 800V 高压架构。",
-          "source_url": "https://www.ithome.com/1/002/010.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:57:46+00:00"
-    },
-    {
-      "id": "a9a8fd60-f61d-54b6-8f25-eb2fa56c6cb0",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "b90bdb78c8a2f34e6d5912587067f9a7b881a4fb",
-      "title": "中国地震台网中心：正与苹果沟通 iOS 地震预警",
-      "body": "北京新闻披露，中国地震台网中心在 9 月 11 日的官网留言回复中表示，正在与苹果公司沟通，力争加快把系统级地震预警接入 iOS。\n\n目前，苹果手机用户可以通过微信小程序接收中国地震台网统一发布的地震预警信息。此次回复表达的是推进接入的工作方向，没有宣布 iOS 系统级预警已经上线，也没有给出上线日期。\n\n在另一条关于小区广播预警的回复中，中国地震局表示，这种技术通过通信基站发送信息，不受手机品牌限制；相关工作正在与工信部门推进，仍需开展验证。小区广播与苹果系统接入是两项不同的工作。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 3,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/ahJ_baS5jnnj9vwiNoqkig",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/ahJ_baS5jnnj9vwiNoqkig · 🧭飞书群 · 2026-09-14 11:05",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/ahJ_baS5jnnj9vwiNoqkig",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "北京新闻披露，中国地震台网中心在 9 月 11 日的官网留言回复中表示，正在与苹果公司沟通，力争加快把系统级地震预警接入 iOS。",
-          "source_url": "https://mp.weixin.qq.com/s/ahJ_baS5jnnj9vwiNoqkig",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "目前，苹果手机用户可以通过微信小程序接收中国地震台网统一发布的地震预警信息。此次回复表达的是推进接入的工作方向，没有宣布 iOS 系统级预警已经上线，也没有给出上线日期。",
-          "source_url": "https://mp.weixin.qq.com/s/ahJ_baS5jnnj9vwiNoqkig",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "在另一条关于小区广播预警的回复中，中国地震局表示，这种技术通过通信基站发送信息，不受手机品牌限制；相关工作正在与工信部门推进，仍需开展验证。小区广播与苹果系统接入是两项不同的工作。",
-          "source_url": "https://mp.weixin.qq.com/s/ahJ_baS5jnnj9vwiNoqkig",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:57:54+00:00"
-    },
-    {
-      "id": "18481b84-c849-59f2-a392-c4216a066cbf",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "c21fd45f2bff1161b30f95d38730737efa0950e9",
-      "title": "比亚迪高管：燃油车在中国没有未来",
-      "body": "据 Carwow.es 报道，比亚迪执行副总裁李柯近日在西班牙瓦伦西亚表示，2027 年会有一款车型搭载比亚迪的固态电池技术，用于证明相关研发成果。这项安排目前属于技术示范目标，不等同于已经确定零售上市或规模量产时间。\n\n她表示，比亚迪正在研究各类电池技术，相关研发同时涉及电池化学体系、制造能力和设备设计。将电池装入车辆，还需要在振动、温度变化和反复充放电条件下验证系统集成能力。\n\n李柯认为，随着比亚迪闪充技术在中国普及，燃油车在中国已经没有未来；其他地区的电动化转型可能还需要几年，但她判断最终会走向同样的结果。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://www.youtube.com/watch?v=awKw1jDPZNM",
-      "source_name": "youtube.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": null,
-      "published_at": null,
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/1f4c2e0c13e0-d7c57e86e8529376fe61.webp",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.youtube.com/watch?v=awKw1jDPZNM；https://carnewschina.com/2026/09/13/byd-to-put-solid-state-battery-technology-into-a-vehicle-next-year-executive-confirms/；https://mp.weixin.qq.com/s/-3cbyScSuZt-MixeIMuXvg · Carwow.es / 第一财经 / 飞书私聊 · 🛰网页 · 2026-09-14 14:48",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.youtube.com/watch?v=awKw1jDPZNM",
-          "title": "",
-          "publisher": "youtube.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://carnewschina.com/2026/09/13/byd-to-put-solid-state-battery-technology-into-a-vehicle-next-year-executive-confirms/",
-          "title": "",
-          "publisher": "carnewschina.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://mp.weixin.qq.com/s/-3cbyScSuZt-MixeIMuXvg",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "据 CarNewsChina 对 Carwow.es 采访的报道，比亚迪执行副总裁李柯近日在西班牙瓦伦西亚表示，2027 年会有一款车型搭载比亚迪的固态电池技术，用于证明相关研发成果。这项安排目前属于技术示范目标，不等同于已经确定零售上市或规模量产时间。",
-          "source_url": "https://www.youtube.com/watch?v=awKw1jDPZNM",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "她表示，比亚迪正在研究各类电池技术，相关研发同时涉及电池化学体系、制造能力和设备设计。将电池装入车辆，还需要在振动、温度变化和反复充放电条件下验证系统集成能力。",
-          "source_url": "https://www.youtube.com/watch?v=awKw1jDPZNM",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "第一财经引述同一采访称，李柯认为，随着比亚迪闪充技术在中国普及，燃油车在中国已经没有未来；其他地区的电动化转型可能还需要几年，但她判断最终会走向同样的结果。",
-          "source_url": "https://www.youtube.com/watch?v=awKw1jDPZNM",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:58:50+00:00"
-    },
-    {
-      "id": "238c3ab2-63a5-55f4-b37b-1bc5a1e5050b",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "9d3ab2b286bfd5116d64dcfe4e4cfa6155632457",
-      "title": "💡 李想：纯电架构将结束 SUV 的尺寸军备竞赛",
-      "body": "理想汽车 CEO 李想 9 月 14 日发文谈及旗舰 SUV 越做越大的趋势，认为这只是一个过渡阶段。讨论的核心是车辆外部尺寸与实际座舱空间的关系。\n\n他表示，燃油车时代想要更大的空间，往往只能把车做大；纯电车的电机体积较小，可以缩短前悬，把省下来的空间留给座舱。电池平铺在底盘，地板能够做平，也不需要单靠增加车高来换取头部空间。因此，在相同内部空间下，纯电车的外壳可以比燃油车小一圈。\n\n在李想看来，现阶段的尺寸竞争来自行业沿用燃油车时代的产品思维，这种惯性会逐渐消退。\n\n> 你做到 2 米宽，我做到 2 米 05 宽，体感上没什么差别，但用户每天停车的焦虑多了不少，自己打不开门、下不了车，还被其他车开门杀。\n\n这番讨论发生在理想新车发布前。理想 i9 将于 9 月 16 日举行发布会，工信部申报尺寸为 5225×1970×1752mm，轴距为 3168mm。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 5,
-      "score": 0,
-      "source_url": "https://www.ithome.com/1/002/016.htm",
-      "source_name": "ithome.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 12:08",
-      "published_at": "2026-09-14 12:08",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/070cccba69ae-bec560c5c0845b101547.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/1/002/016.htm ｜ https://www.coolapk.com/feed/73744210?s=MTdjN2FkY2ExNTU5MzdiZzZhYTc2ZmM0egi1659 · 🧭飞书群 · 2026-09-14 11:53",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.ithome.com/1/002/016.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.coolapk.com/feed/73744210?s=MTdjN2FkY2ExNTU5MzdiZzZhYTc2ZmM0egi1659",
-          "title": "",
-          "publisher": "coolapk.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "理想汽车 CEO 李想 9 月 14 日发文谈及旗舰 SUV 越做越大的趋势，认为这只是一个过渡阶段。讨论的核心是车辆外部尺寸与实际座舱空间的关系。",
-          "source_url": "https://www.ithome.com/1/002/016.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "他表示，燃油车时代想要更大的空间，往往只能把车做大；纯电车的电机体积较小，可以缩短前悬，把省下来的空间留给座舱。电池平铺在底盘，地板能够做平，也不需要单靠增加车高来换取头部空间。因此，在相同内部空间下，纯电车的外壳可以比燃油车小一圈。",
-          "source_url": "https://www.ithome.com/1/002/016.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "在李想看来，现阶段的尺寸竞争来自行业沿用燃油车时代的产品思维，这种惯性会逐渐消退。",
-          "source_url": "https://www.ithome.com/1/002/016.htm",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:57:02+00:00"
-    },
-    {
-      "id": "ebf41e55-5967-5fb0-b00f-eb39e43c3bb7",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "fad66bcce6b720adf1d716caea6ba6da7c0fd52f",
-      "title": "现代高管称波士顿动力 2027 年 IPO 难实现",
-      "body": "据路透社报道，一名直接了解情况的现代汽车集团高管表示，波士顿动力明年进行 IPO「并不容易」。这家人形机器人公司尚未大规模部署旗舰产品 Atlas，也尚未实现盈利。该高管因事项涉及保密而要求匿名。\n\n现代汽车集团尚未公开潜在上市的时间表或目标估值。集团今年 1 月在 CES 展示了新版 Atlas，7 月宣布计划收购软银持有的约 10% 股份，将波士顿动力变为全资子公司。\n\n现代的制造计划指向 2028 年：建设一座年产 3 万台机器人的工厂，并从当年开始在美国佐治亚州工厂部署人形机器人，再推广到其他生产基地。\n\nMeritz Securities 分析师 Kim Joon-sung 认为，上市更可能发生在 2029 年或 2030 年，因为现代仍需积累大量运行数据、提升机器人能力，再向外部客户广泛销售。IBK Asset Management 基金经理 Kim Hyun-su 则指出，让机器人搬运重物并参与工厂制造，比让它们跳舞困难得多。",
-      "category": "大公司",
-      "status": "ready",
-      "selected": true,
-      "position": 6,
-      "score": 0,
-      "source_url": "https://www.reuters.com/business/media-telecom/ipo-humanoid-robot-maker-boston-dynamics-unlikely-2027-executive-says-2026-09-14",
-      "source_name": "路透社最新报道",
-      "source_type": "folo",
-      "source_quality": "strong",
-      "confidence": 0.86,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 15:21",
-      "published_at": "2026-09-14 15:21",
-      "cross_day_status": "ready",
-      "rumor": false,
-      "fact_status": "verified",
-      "changed_since_review": false,
-      "image_url": "",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.reuters.com/business/media-telecom/ipo-humanoid-robot-maker-boston-dynamics-unlikely-2027-executive-says-2026-09-14",
-          "title": "",
-          "publisher": "路透社最新报道",
+          "publisher": "DIGITIMES: News and Insight of the Global Supply Chain",
           "source_type": "folo",
           "authority": "strong",
           "is_paywalled": true,
           "is_original": true
         },
         {
-          "url": "https://www.reuters.com/business/media-telecom/ipo-humanoid-robot-maker-boston-dynamics-unlikely-2027-executive-says-2026-09-14/",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
           "title": "",
-          "publisher": "reuters.com",
+          "publisher": "nvidianews.nvidia.com",
           "source_type": "draft_source",
-          "authority": "strong",
-          "is_paywalled": true,
-          "is_original": true
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.mittrchina.com/news/detail/17284",
+          "title": "",
+          "publisher": "MIT 科技评论 - 首页资讯",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
         }
       ],
       "claims": [
         {
-          "text": "据路透社报道，一名直接了解情况的现代汽车集团高管表示，波士顿动力明年进行 IPO「并不容易」。这家人形机器人公司尚未大规模部署旗舰产品 Atlas，也尚未实现盈利。该高管因事项涉及保密而要求匿名。",
-          "source_url": "https://www.reuters.com/business/media-telecom/ipo-humanoid-robot-maker-boston-dynamics-unlikely-2027-executive-says-2026-09-14/",
+          "text": "就在几个小时前，钮祜禄·黄仁勋正式现身英伟达总部。这一次，他没穿皮衣。",
+          "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "现代汽车集团尚未公开潜在上市的时间表或目标估值。集团今年 1 月在 CES 展示了新版 Atlas，7 月宣布计划收购软银持有的约 10% 股份，将波士顿动力变为全资子公司。",
-          "source_url": "https://www.reuters.com/business/media-telecom/ipo-humanoid-robot-maker-boston-dynamics-unlikely-2027-executive-says-2026-09-14/",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "现代的制造计划指向 2028 年：建设一座年产 3 万台机器人的工厂，并从当年开始在美国佐治亚州工厂部署人形机器人，再推广到其他生产基地。",
-          "source_url": "https://www.reuters.com/business/media-telecom/ipo-humanoid-robot-maker-boston-dynamics-unlikely-2027-executive-says-2026-09-14/",
+          "text": "当地时间 11 月 23 日，在加州圣克拉拉，数百名员工聚集在公司中庭，用欢呼和掌声欢迎这位离开仅 12 天的创始人。黄仁勋也向员工表达了歉意，感谢大家再次给予自己机会，并承诺：“第二次担任 CEO…",
+          "source_url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-09-14T10:10:17+00:00"
+      "updated_at": "2026-11-24T05:16:20.152701+00:00"
     },
     {
-      "id": "e6bfee82-bb45-51e5-be77-2b34629bcba8",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "7b75a9853e83001b938a84b861054bea1fb83755",
-      "title": "上周全国票房降至 3.3 亿元，两部经典重映片进入市场",
-      "body": "据财新援引国家电影专资办数据，9 月 7 日至 13 日，全国电影市场票房为 3.3 亿元，环比下降 33%，没有一部影片的周票房超过 1 亿元。\n\n9 月上映的经典重映片中，《肖申克的救赎》半月取得 2087 万元票房，《杀死比尔：血色全传》取得 3598 万元票房。\n\n《肖申克的救赎》是 1994 年上映的作品，豆瓣评分为 9.7 分，位列 Top 250 榜首；《杀死比尔》则来自昆汀·塔伦蒂诺的系列作品。两部旧作重返院线，但上周市场整体规模仍较前一周收缩。",
-      "category": "好看的",
+      "id": "4052cb9c-0057-5aba-aabd-09ed4c805df5",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "b6f7ef6389e93d4ac66f595d84cc9b440ace5985",
+      "title": "公安部网安局公布 10 起 AI 造谣案例，涉及虚构灾情和冒名带货",
+      "body": "11 月 24 日，公安部网安局公布 10 起利用 AI 编造、传播网络谣言的典型案例。其中，有人用 AI 生成张家界大峡谷玻璃桥断裂的假视频，也有人编造广州花都夜市遭暴雨水浸的画面。通报称，属地公安机关已对这两起案件的涉案人员采取刑事强制措施。\n\n通报还披露，有人用 AI 生成自己身穿警服的图片和视频并发布到网上，已被采取刑事强制措施。另有网民伪造艺人的社交平台发帖截图，声称演出被叫停，也有人未经授权冒用公众人物形象直播带货，两起案件的涉案人员均受到行政处罚。",
+      "category": "大公司",
       "status": "ready",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://www.caixin.com/2026-09-14/102484628.html",
-      "source_name": "caixin.com",
+      "source_url": "https://m.thepaper.cn/newsDetail_forward_34544492",
+      "source_name": "m.thepaper.cn",
       "source_type": "draft_source",
-      "source_quality": "unknown",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 10:34",
-      "published_at": "2026-09-14 10:34",
+      "source_quality": "strong",
+      "confidence": 0.74,
+      "event_date": "2026-11-24",
+      "disclosed_at": null,
+      "published_at": null,
       "cross_day_status": "current",
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/81cd201ddbaa-a4184f98764f81ee4b46.jpg",
+      "image_url": "data/images/7657f5765780-1f100f2f367956aacd3a.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.caixin.com/2026-09-14/102484628.html · Chrome 登录态 / 📮Folo · 2026-09-14 10:34",
+        "source_line": "🔗 来源：🛰网页 · 2026-11-24 08:04 · 人民日报客户端（澎湃新闻刊载）｜https://m.thepaper.cn/newsDetail_forward_34544492；🛰网页 · 2026-11-24 08:03 · 界面新闻｜https://kandian.sina.cn/article_5182171545_134e1a99902002lron.html；🛰网页 · 2026-11-24 08:14 · 新华网转载公安部网安局微信公众号｜https://kandian.sina.cn/article_2810373291_a782e4ab0200318po.html；📮Folo · 2026-11-24 08:12｜https://www.ithome.com/1/031/261.htm",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.caixin.com/2026-09-14/102484628.html",
+          "url": "https://m.thepaper.cn/newsDetail_forward_34544492",
           "title": "",
-          "publisher": "caixin.com",
+          "publisher": "m.thepaper.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://kandian.sina.cn/article_5182171545_134e1a99902002lron.html",
+          "title": "",
+          "publisher": "kandian.sina.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://kandian.sina.cn/article_2810373291_a782e4ab0200318po.html",
+          "title": "",
+          "publisher": "kandian.sina.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/261.htm",
+          "title": "",
+          "publisher": "ithome.com",
+          "source_type": "draft_source",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "11 月 24 日，公安部网安局公布 10 起利用 AI 编造、传播网络谣言的典型案例。其中，有人用 AI 生成张家界大峡谷玻璃桥断裂的假视频，也有人编造广州花都夜市遭暴雨水浸的画面。通报称，属地公安机关已对这两起案件的涉案人员采取刑事强制措施。",
+          "source_url": "https://m.thepaper.cn/newsDetail_forward_34544492",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "通报还披露，有人用 AI 生成自己身穿警服的图片和视频并发布到网上，已被采取刑事强制措施。另有网民伪造艺人的社交平台发帖截图，声称演出被叫停，也有人未经授权冒用公众人物形象直播带货，两起案件的涉案人员均受到行政处罚。",
+          "source_url": "https://m.thepaper.cn/newsDetail_forward_34544492",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T01:18:12.071511+00:00"
+    },
+    {
+      "id": "8f077663-e186-5b41-91fd-e381ee3f80e8",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "7b04139991d07829942942a16a2e0206bfbc2ab3",
+      "title": "欧洲企业要求欧盟调查苹果 iOS 浏览器引擎限制",
+      "body": "Mozilla、Shopify 等企业和民间组织向欧盟委员会发出联名信，要求调查苹果在 iPhone 浏览器竞争方面的限制。联名信称，苹果虽然在欧盟允许第三方浏览器使用其他引擎，但技术和法律要求仍让浏览器厂商难以完成切换。\n\n从 iOS 17.5 开始，欧盟地区的浏览器可以使用非 WebKit 引擎。联名企业认为，相关限制也让内容出版商更依赖 App Store 来触达 iPhone 用户，并限制其自行管理订阅价格和收费方式。\n\n欧盟此前已要求苹果为第三方浏览器引擎提供必要的软件和硬件访问权限，新的联名信把争议进一步指向实际切换的技术和法律成本。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+      "source_name": "appleinsider.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 08:32",
+      "published_at": "2026-11-24 08:32",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：AppleInsider 原报道｜https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions；📮Folo · 2026-11-24 08:32 · 发现线索｜https://www.ithome.com/1/031/265.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "title": "",
+          "publisher": "appleinsider.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/265.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 11 月 24 日消息，据科技媒体 Appleinsider 昨天报道，Mozilla、Shopify 等多家企业和民间组织向欧盟委员会发出联名信，称苹果虽然已经略微放宽 iOS 系统浏览器内核限制，但其对 WebKit 的要求仍然让开发者几乎无法在 App Store 之外销售订阅服务。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家从原报道获悉，这些企业和民间组织敦促欧盟委员会对 iPhone 浏览器竞争问题启动调查。他们认为， 苹果如今的限制仍阻碍浏览器厂商从 WebKit 转向其他内核 。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "苹果此前要求所有第三方互联网浏览器在 iOS 系统使用 WebKit 内核。后来欧盟《数字市场法》要求苹果允许竞争对手使用第三方浏览器引擎，并为其提供必要的软件和硬件访问权限。",
+          "source_url": "https://appleinsider.com/articles/26/11/23/mozilla-shopify-and-others-urge-eu-to-investigate-apples-browser-engine-restrictions",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.214082+00:00"
+    },
+    {
+      "id": "02c3db3f-dc4a-5fa4-9e67-83e3e794556c",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "496522df23e8519e271ee119451a4e9276910a2d",
+      "title": "华为披露鸿蒙终端设备数突破 1 亿台",
+      "body": "11 月 24 日，华为在鸿蒙微信公众号发布公开信，称搭载 HarmonyOS 5、6 或 7 的手机、平板和电脑合计已突破 1 亿台。\n\n华为在今年 9 月的全联接大会上公布，搭载 HarmonyOS 6 或 HarmonyOS 7 的终端设备数已超过 8500 万台。10 月 1 日，华为终端 BG 董事长余承东在 Mate 90 系列发布会上将这一数字更新为超过 9000 万台。他同时表示，鸿蒙可获取的应用和元服务已超过 45 万项。",
+      "category": "大公司",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
+      "source_name": "早报 Bot 私聊",
+      "source_type": "lark_group",
+      "source_quality": "strong",
+      "confidence": 0.55,
+      "event_date": "2026-11-24",
+      "disclosed_at": "2026-11-24 09:11",
+      "published_at": "2026-11-24 09:11",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": true,
+      "image_url": "data/images/4281cf81c617-69a6842af1355e4b67b1.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：华为鸿蒙微信公众号｜https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA；华为官网｜https://www.huawei.com/cn/news/2026/9/hc-agentic-era-harmonyos；📮飞书群 · 2026-11-24 09:11 · 人工线索",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
+          "title": "",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.huawei.com/cn/news/2026/9/hc-agentic-era-harmonyos",
+          "title": "",
+          "publisher": "huawei.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.c114.com.cn/news/126/a1318746.html",
+          "title": "",
+          "publisher": "c114.com.cn",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
@@ -575,66 +307,373 @@
       ],
       "claims": [
         {
-          "text": "从目前市场表现来看，全年的新片供应数量和票房增长都面临一定压力 2026年9月1日，上海黄浦区南京西路大光明电影院外立面上，《肖申克的救赎》电影海报。图：IC photo 【财新网】国家电影专资办数据显示…",
-          "source_url": "https://www.caixin.com/2026-09-14/102484628.html",
+          "text": "11 月 24 日，华为通过微信公众号披露，鸿蒙终端设备数已突破 1 亿台。",
+          "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "据财新援引国家电影专资办数据，9 月 7 日至 13 日，全国电影市场票房为 3.3 亿元，环比下降 33%，没有一部影片的周票房超过 1 亿元。",
-          "source_url": "https://www.caixin.com/2026-09-14/102484628.html",
+          "text": "华为在今年 9 月的全联接大会上公布，搭载 HarmonyOS 6 或 HarmonyOS 7 的终端设备数已超过 8500 万台。10 月 1 日，华为终端 BG 董事长余承东在 Mate 90 系列发布会上将这一数字更新为超过 9000 万台。他同时表示，鸿蒙可获取的应用和元服务已超过 45 万项。",
+          "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "9 月上映的经典重映片中，《肖申克的救赎》半月取得 2087 万元票房，《杀死比尔：血色全传》取得 3598 万元票房。",
-          "source_url": "https://www.caixin.com/2026-09-14/102484628.html",
+          "text": "# 鸿蒙终端突破一亿，感谢每一位同行的你",
+          "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "《肖申克的救赎》是 1994 年上映的作品，豆瓣评分为 9.7 分，位列 Top 250 榜首；《杀死比尔》则来自昆汀·塔伦蒂诺的系列作品。两部旧作重返院线，但上周市场整体规模仍较前一周收缩。",
-          "source_url": "https://www.caixin.com/2026-09-14/102484628.html",
+          "text": "> 摘要：鸿蒙终端设备数突破1亿！每一步成长，都离不开同行者的信任与支持。感谢每一个坚定选择、热爱鸿蒙的你！正是这些真实的声音，推动着鸿蒙生态不断完善，让鸿蒙App成熟好用，也让更多创新走进日常。在一起，向未来！\\x26lt;a class=\"wx_topic_link\" topic-id=\"mwt3um3d-9c08cf\" style=\"color: #576B95 !important;...",
+          "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "![](http://mmbiz.qpic.cn/mmbiz_png/tMKgrgda9IBPcuQ24g67lCHDOicb2w895jalg7pU8WV58nL0KJlrjdeQiaNUicLxGhUT2aQhNKSn681SRxZYjXmMw/0?wx_fmt=png)",
+          "source_url": "https://mp.weixin.qq.com/s/xaf148NFyezGGvNgAMXvvA",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-09-14T09:59:38+00:00"
+      "updated_at": "2026-11-24T05:16:20.404022+00:00"
     },
     {
-      "id": "63d74e8b-9bff-5393-a492-5258709483e6",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "bc160689898513c2e71e01e7b41615e979ab3e5b",
-      "title": "RTÉ、BBC 续订《The Walsh Sisters》第二季",
-      "body": "据 Deadline 报道，爱尔兰公共广播机构 RTÉ 已批准《The Walsh Sisters》第二季，BBC 将继续在英国播出，澳大利亚观众可通过 Stan 收看。新一季现已开拍。\n\n这部喜剧剧情剧改编自爱尔兰作家 Marian Keyes 的小说，围绕都柏林一个混乱却彼此依恋的家庭展开，把五姐妹的生活困境与喜剧元素交织在一起。Stefanie Preissner 继续负责改编，并与 Caroline Menton、Danielle Galligan、Máiréad Tyers 和《德里女孩》主演 Louisa Harland 一同回归，饰演五姐妹。\n\n第二季新增演员包括《Bad Sisters》的 Peter Coonan、《普通人》的 Aislín McGuckin，以及 Art Campion 和 Fay Ripley。Aidan Quinn 与 Carrie Crowley 继续饰演姐妹们的父母。\n\n新剧情中，Rachel 将独立面对康复生活，Claire 挑战母亲身份的传统期待，Anna 尝试走出失恋，姐妹们各自的生活变化仍与家庭关系紧密相连。该剧由 Cuba Pictures 与 Metropolitan Pictures 制作，Cineflix Rights 负责全球发行。",
-      "category": "好看的",
+      "id": "eb291f35-6f18-5e5c-8557-9b97dc4daaeb",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "3f497d08728a007b06dabde90695e36108a4a5e9",
+      "title": "OpenRouter 清退 3 家服务商，称其提示词和密钥发生外泄",
+      "body": "OpenRouter 近日清退 Together AI、Phala 和 Novita 三家服务商，并撤销约 125 个模型的接入。公开报道将原因指向提示词、API 密钥及服务配置外泄，相关服务商的模型接口因此从平台下架。\n\nOpenRouter 是连接多家模型服务商的聚合平台。此次调整影响的是平台内的模型供应与调用路径，平台后续公告将决定受影响服务的恢复安排。\n\n供应商下架会同时影响模型可用性、路由配置和密钥管理，使用聚合 API 的开发者需要重新检查依赖的服务商。",
+      "category": "大公司",
       "status": "ready",
       "selected": true,
-      "position": 1,
+      "position": 2,
       "score": 0,
-      "source_url": "https://deadline.com/2026/09/the-walsh-sisters-renewed-for-season-2-rte-bbc-stan-1237100622",
-      "source_name": "Deadline",
-      "source_type": "folo",
-      "source_quality": "strong",
-      "confidence": 0.86,
+      "source_url": "https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/",
+      "source_name": "bleepingcomputer.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-09-14 15:01",
-      "published_at": "2026-09-14 15:01",
-      "cross_day_status": "needs_title_rewrite",
+      "disclosed_at": "2026-11-24 09:23",
+      "published_at": "2026-11-24 09:23",
+      "cross_day_status": "ready",
       "rumor": false,
-      "fact_status": "verified",
+      "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/323fd27e6d04-785cdc3adb04d46d51d5.webp",
+      "image_url": "",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "",
+        "source_line": "🔗 来源：BleepingComputer｜https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/；📮Folo · 2026-11-24 09:23 · 发现线索｜https://www.ithome.com/1/031/282.htm",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://deadline.com/2026/09/the-walsh-sisters-renewed-for-season-2-rte-bbc-stan-1237100622",
+          "url": "https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/",
+          "title": "",
+          "publisher": "bleepingcomputer.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/282.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "OpenRouter 近日清退 Together AI、Phala 和 Novita 三家服务商，并撤销约 125 个模型的接入。公开报道将原因指向提示词、API 密钥及服务配置外泄，相关服务商的模型接口因此从平台下架。",
+          "source_url": "https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "OpenRouter 是连接多家模型服务商的聚合平台。此次调整影响的是平台内的模型供应与调用路径，平台后续公告将决定受影响服务的恢复安排。",
+          "source_url": "https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "供应商下架会同时影响模型可用性、路由配置和密钥管理，使用聚合 API 的开发者需要重新检查依赖的服务商。",
+          "source_url": "https://www.bleepingcomputer.com/news/security/openrouter-removes-three-providers-after-prompt-and-api-key-leaks/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.276641+00:00"
+    },
+    {
+      "id": "74d0572d-feda-5e45-ba31-6281da1d1dbe",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "e9b13a9857a3662b0648db3aee1cc2f11ef92092",
+      "title": "知乎宣布间接投资 DeepSeek，取得低个位数百分比股权",
+      "body": "知乎 11 月 23 日发布自愿公告称，由知乎参投的天津砺思星深股权投资合伙企业已通过中间主体间接投资 DeepSeek，并取得低个位数百分比股权。知乎董事会认为，该基金投资有助于公司接触 AI 基础模型和相关生态资源。\n\n这笔投资通过基金和中间主体完成，知乎没有披露具体金额。公司股价随后上涨，但股价波动不等于投资回报或 DeepSeek 估值变化。\n\n知乎公告没有披露 DeepSeek 的交易估值，也没有说明该投资会如何改变知乎现有产品的模型接入安排。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+      "source_name": "ir.zhihu.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 11:26",
+      "published_at": "2026-11-24 11:26",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：知乎公告｜https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek；📮Folo · 2026-11-24 11:26 · 发现线索｜https://www.ithome.com/1/031/339.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "title": "",
+          "publisher": "ir.zhihu.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/339.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "知乎 11 月 23 日发布自愿公告称，由知乎参投的天津砺思星深股权投资合伙企业已通过中间主体间接投资 DeepSeek，并取得低个位数百分比股权。知乎董事会认为，该基金投资有助于公司接触 AI 基础模型和相关生态资源。",
+          "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这笔投资通过基金和中间主体完成，知乎没有披露具体金额。公司股价随后上涨，但股价波动不等于投资回报或 DeepSeek 估值变化。",
+          "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "知乎公告没有披露 DeepSeek 的交易估值，也没有说明该投资会如何改变知乎现有产品的模型接入安排。",
+          "source_url": "https://ir.zhihu.com/news-releases/news-release-details/zhihu-announces-indirect-investment-deepseek",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.343619+00:00"
+    },
+    {
+      "id": "e8db6464-9b4c-5787-a967-76bc668491e4",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "8ae9ebd2beed6c35c4dd03e93c624fb8ea583a9b",
+      "title": "工信部公布前三季度数字产业运行数据",
+      "body": "工信部运行监测协调局 11 月 24 日公布前三季度数字产业运行数据。前三季度我国数字产业收入保持增长，智能算力规模继续扩大，生成式人工智能产品应用普及率已超过一半。\n\n上述数据是数字产业整体统计，不能直接等同于单一 AI 产品的用户规模或商业收入。工信部同时称，数字技术与实体经济融合仍在扩大。\n\n统计范围覆盖数字产业相关行业，智能算力和生成式 AI 渗透率是其中的结构性指标。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://www.miit.gov.cn/",
+      "source_name": "miit.gov.cn",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 11:01",
+      "published_at": "2026-11-24 11:01",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/eaa05ed105a1-36dcb5657df0f63f6cdd.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：工信部相关数据经公开报道整理｜https://www.miit.gov.cn/；📮Folo · 2026-11-24 11:01 · 发现线索｜https://www.ithome.com/1/031/326.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.miit.gov.cn/",
+          "title": "",
+          "publisher": "miit.gov.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/326.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "工信部运行监测协调局 11 月 24 日公布前三季度数字产业运行数据。前三季度我国数字产业收入保持增长，智能算力规模继续扩大，生成式人工智能产品应用普及率已超过一半。",
+          "source_url": "https://www.miit.gov.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "上述数据是数字产业整体统计，不能直接等同于单一 AI 产品的用户规模或商业收入。工信部同时称，数字技术与实体经济融合仍在扩大。",
+          "source_url": "https://www.miit.gov.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "统计范围覆盖数字产业相关行业，智能算力和生成式 AI 渗透率是其中的结构性指标。",
+          "source_url": "https://www.miit.gov.cn/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.379198+00:00"
+    },
+    {
+      "id": "44ba5599-be0d-5bef-8984-29f45205b875",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "9b0e2ce84460726c4c57cbcc17c98b5863aa2e64",
+      "title": "神舟二十四号任务将开展一年期在轨驻留试验",
+      "body": "中国载人航天工程办公室 11 月 24 日在新闻发布会上介绍，航天员朱杨柱将执行一年期在轨驻留试验任务。巴基斯坦航天员完成短期联合飞行任务后，将随神舟二十三号飞船返回。\n\n发布会还介绍，揽月着陆器首次飞行任务正在按计划推进；空间站方面，神舟二十三号乘组已公布生命科学、材料科学、航天医学与航天新技术四个领域的阶段性成果。\n\n朱杨柱的一年期驻留试验将继续验证长期在轨任务中的健康、工作和生活保障能力。",
+      "category": "大公司",
+      "status": "ready",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.cmse.gov.cn/",
+      "source_name": "cmse.gov.cn",
+      "source_type": "draft_source",
+      "source_quality": "lead",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 09:14",
+      "published_at": "2026-11-24 09:14",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/e1ea463ab258-3de23d0ce30ce8f0f23f.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：中国载人航天工程办公室｜https://www.cmse.gov.cn/；央视新闻｜https://news.cctv.com/；📮Folo · 2026-11-24 09:14 · 发现线索｜https://wallstreetcn.com/livenews/3204610",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.cmse.gov.cn/",
+          "title": "",
+          "publisher": "cmse.gov.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://news.cctv.com/",
+          "title": "",
+          "publisher": "news.cctv.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://wallstreetcn.com/livenews/3204610",
+          "title": "",
+          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "中国载人航天工程办公室 11 月 24 日在新闻发布会上介绍，航天员朱杨柱将执行一年期在轨驻留试验任务。巴基斯坦航天员完成短期联合飞行任务后，将随神舟二十三号飞船返回。",
+          "source_url": "https://www.cmse.gov.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "发布会还介绍，揽月着陆器首次飞行任务正在按计划推进；空间站方面，神舟二十三号乘组已公布生命科学、材料科学、航天医学与航天新技术四个领域的阶段性成果。",
+          "source_url": "https://www.cmse.gov.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "朱杨柱的一年期驻留试验将继续验证长期在轨任务中的健康、工作和生活保障能力。",
+          "source_url": "https://www.cmse.gov.cn/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.449351+00:00"
+    },
+    {
+      "id": "2a4b8620-d30a-5486-b7c1-12b4cb486aca",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "3c51862e918cd1333906faf90459f34a587ac878",
+      "title": "《Careme》《División Palermo》获国际艾美奖主要奖项",
+      "body": "第 54 届国际艾美奖 11 月 23 日在纽约举行。法国剧集《Careme》获得最佳剧情类剧集，阿根廷剧集《División Palermo》也拿下主要奖项，完整获奖名单已由主办方公布。\n\n国际艾美奖面向美国以外制作的电视节目，获奖作品覆盖剧情、喜剧、纪录片和表演等类别。",
+      "category": "好看的",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.iemmys.tv/",
+      "source_name": "iemmys.tv",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 11:27",
+      "published_at": "2026-11-24 11:27",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/66618735ea8a-bc1ff16cc4be4ecd8d20.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：🛰网页 · 2026-11-24 11:27 · 国际艾美奖｜https://www.iemmys.tv/；Deadline｜https://deadline.com/2026/11/2026-international-emmys-winners-list-1237232118",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://deadline.com/2026/11/2026-international-emmys-winners-list-1237232118",
           "title": "",
           "publisher": "Deadline",
           "source_type": "folo",
@@ -643,7 +682,123 @@
           "is_original": true
         },
         {
-          "url": "https://deadline.com/2026/09/the-walsh-sisters-renewed-for-season-2-rte-bbc-stan-1237100622/",
+          "url": "https://www.iemmys.tv/",
+          "title": "",
+          "publisher": "iemmys.tv",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "第 54 届国际艾美奖 11 月 23 日在纽约举行。法国剧集《Careme》获得最佳剧情类剧集，阿根廷剧集《División Palermo》也拿下主要奖项，完整获奖名单已由主办方公布。",
+          "source_url": "https://www.iemmys.tv/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "国际艾美奖面向美国以外制作的电视节目，获奖作品覆盖剧情、喜剧、纪录片和表演等类别。",
+          "source_url": "https://www.iemmys.tv/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:21.035635+00:00"
+    },
+    {
+      "id": "fae87ffc-6c76-5e0f-acff-71eff12eea23",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "06a3e4df078d88ef9a1ee6d92582045ffa70f897",
+      "title": "台湾影院将上映可用手机投票决定结局的互动电影",
+      "body": "互动电影公司 Next 将在台湾影院推出《The Run》《Kaiju Princess》《Back From the Other World》三部作品。观众可以通过手机参与投票，影响电影在放映过程中的结局走向。\n\n这类影院互动把观众选择嵌入放映流程，三部电影将由当地发行方公布具体影院和场次。",
+      "category": "好看的",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
+      "source_name": "Variety",
+      "source_type": "folo",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 10:18",
+      "published_at": "2026-11-24 10:18",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/97ecc88200b8-f7fb8b667d2d384c2bcd.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：🛰网页 · 2026-11-24 10:18 · Variety｜https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
+          "title": "",
+          "publisher": "Variety",
+          "source_type": "folo",
+          "authority": "strong",
+          "is_paywalled": false,
+          "is_original": true
+        }
+      ],
+      "claims": [
+        {
+          "text": "互动电影公司 Next 将在台湾影院推出《The Run》《Kaiju Princess》《Back From the Other World》三部作品。观众可以通过手机参与投票，影响电影在放映过程中的结局走向。",
+          "source_url": "https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这类影院互动把观众选择嵌入放映流程，三部电影将由当地发行方公布具体影院和场次。",
+          "source_url": "https://variety.com/2026/film/news/interactive-films-the-run-kaiju-princess-taiwan-cinemas-1236956688",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:21.056462+00:00"
+    },
+    {
+      "id": "abe468b8-70fb-5643-a452-94c6ac2a2492",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "834b12f43e855026a221502c61fabc40b76f100c",
+      "title": "《Only Murders in the Building》或回到纽约拍摄第七季",
+      "body": "Deadline 报道，《Only Murders in the Building》团队可能在第七季回到纽约取景。该剧第六季把故事和角色带到了伦敦，下一季的具体续订与制作安排仍待官方确认。\n\n目前公开信息更接近制作方向和地点消息，Hulu 尚未公布完整的第七季播出计划。\n\n如果第七季回到纽约，城市取景将重新成为这部剧的叙事环境；目前公开信息还没有给出演员阵容和播出日期。",
+      "category": "好看的",
+      "status": "ready",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://deadline.com/2026/11/only-murders-in-the-building-new-york-return-for-likely-season-7-1237231938",
+      "source_name": "deadline.com",
+      "source_type": "draft_source",
+      "source_quality": "strong",
+      "confidence": 0.92,
+      "event_date": null,
+      "disclosed_at": null,
+      "published_at": null,
+      "cross_day_status": "current",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/d6a82d5809dc-add89ae89f7768a6ffa5.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：🛰网页 · 2026-11-24 09:20 · Deadline｜https://deadline.com/2026/11/only-murders-in-the-building-new-york-return-for-likely-season-7-1237231938",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://deadline.com/2026/11/only-murders-in-the-building-new-york-return-for-likely-season-7-1237231938",
           "title": "",
           "publisher": "deadline.com",
           "source_type": "draft_source",
@@ -654,60 +809,69 @@
       ],
       "claims": [
         {
-          "text": "据 Deadline 报道，爱尔兰公共广播机构 RTÉ 已批准《The Walsh Sisters》第二季，BBC 将继续在英国播出，澳大利亚观众可通过 Stan 收看。新一季现已开拍。",
-          "source_url": "https://deadline.com/2026/09/the-walsh-sisters-renewed-for-season-2-rte-bbc-stan-1237100622/",
+          "text": "Deadline 报道，《Only Murders in the Building》团队可能在第七季回到纽约取景。该剧第六季把故事和角色带到了伦敦，下一季的具体续订与制作安排仍待官方确认。",
+          "source_url": "https://deadline.com/2026/11/only-murders-in-the-building-new-york-return-for-likely-season-7-1237231938",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "这部喜剧剧情剧改编自爱尔兰作家 Marian Keyes 的小说，围绕都柏林一个混乱却彼此依恋的家庭展开，把五姐妹的生活困境与喜剧元素交织在一起。Stefanie Preissner 继续负责改编，并与 Caroline Menton、Danielle Galligan、Máiréad Tyers 和《德里女孩》主演 Louisa Harland 一同回归，饰演五姐妹。",
-          "source_url": "https://deadline.com/2026/09/the-walsh-sisters-renewed-for-season-2-rte-bbc-stan-1237100622/",
+          "text": "目前公开信息更接近制作方向和地点消息，Hulu 尚未公布完整的第七季播出计划。",
+          "source_url": "https://deadline.com/2026/11/only-murders-in-the-building-new-york-return-for-likely-season-7-1237231938",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "第二季新增演员包括《Bad Sisters》的 Peter Coonan、《普通人》的 Aislín McGuckin，以及 Art Campion 和 Fay Ripley。Aidan Quinn 与 Carrie Crowley 继续饰演姐妹们的父母。",
-          "source_url": "https://deadline.com/2026/09/the-walsh-sisters-renewed-for-season-2-rte-bbc-stan-1237100622/",
+          "text": "如果第七季回到纽约，城市取景将重新成为这部剧的叙事环境；目前公开信息还没有给出演员阵容和播出日期。",
+          "source_url": "https://deadline.com/2026/11/only-murders-in-the-building-new-york-return-for-likely-season-7-1237231938",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-09-14T10:10:18+00:00"
+      "updated_at": "2026-11-24T05:16:21.129206+00:00"
     },
     {
-      "id": "9635c427-03f4-557e-a460-38b176294534",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "7d4349996cdd42b6a6784bd09a41c71b2da685d8",
-      "title": "豆包手机助手正式发布消费版，支持跨应用任务与授权记忆",
-      "body": "豆包 9 月 14 日宣布手机助手消费版正式发布。首款搭载产品为努比亚 Navi X Ultra，已开启预约，将于 9 月 16 日开售。\n\n新版助手通过系统级协作提供语音、屏幕理解及手机操作能力：\n\n- AI 按键支持长按提问、双击视频交互，也可通过语音唤醒；连续对话仍处于 Beta 阶段。\n- 用户授权后，助手可调用通话录音、照片和短信等信息建立记忆，也支持手动保存屏幕内容。\n- 手机操作 Beta 结合工具调用与模拟点击执行跨应用任务，支持任务排队、中途插入新任务，并在锁屏上展示进度。\n- 系统工具可与日历、闹钟、电话及飞书等协作，提供会议录音转写、实时翻译，以及文档、PPT 等工作任务。\n\n这些能力有明确的适用范围：手机操作目前覆盖系统应用、相关合作应用及部分接入的第三方应用；曹操出行与地图结合的打车服务 Beta 首先支持北京、杭州。官方强调按最小必要原则处理信息，并由用户控制授权和记忆内容。",
+      "id": "c46f9e5e-b613-5e15-ba2f-7eb6eb59d385",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "d7f2ef4e3da2363dbbb06cfa70e7a2a3c7260a60",
+      "title": "豆包旗下 AI 个人助理「小豆」开启公测，仍需邀请码",
+      "body": "豆包旗下 AI 个人助理「小豆」11 月 24 日开启公测，已推出独立 App，支持苹果和安卓设备下载。目前产品仍采用邀请制，受邀用户可获得一定免费额度，邀请好友有机会增加额度。\n\n字节跳动表示，小豆的功能和体验未来将逐步上线豆包 App。产品主打主动帮用户处理日常事务，早期项目代号为 Spell，曾由豆包手机助手团队负责。\n\n目前公测资格和免费额度仍受邀请机制限制，普通用户能使用的功能范围取决于获得的测试权限。",
       "category": "新产品",
-      "status": "ready",
+      "status": "needs_review",
       "selected": true,
       "position": 0,
       "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
-      "source_name": "mp.weixin.qq.com",
-      "source_type": "draft_source",
-      "source_quality": "unknown",
+      "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+      "source_name": "早报 Bot 私聊",
+      "source_type": "lark_group",
+      "source_quality": "lead",
       "confidence": 0.55,
       "event_date": null,
-      "disclosed_at": "2026-09-14 11:49",
-      "published_at": "2026-09-14 11:49",
-      "cross_day_status": "current",
+      "disclosed_at": "2026-11-24 10:50",
+      "published_at": "2026-11-24 10:50",
+      "cross_day_status": "ai_source_lead",
       "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/202263ca5d50dc1659e4.jpg",
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/ac8481e7c0053402e38d.jpg",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ ｜ https://mp.weixin.qq.com/s/XKOcsPVNsmOwbBM9qZVAtg ｜ https://mp.weixin.qq.com/s/H5JK1giPgXhME1QLxIKicg ｜ https://t.me/OneMillion_AI/4602 · 🧭飞书群 · 2026-09-14 11:04",
+        "source_line": "🔗 来源：豆包／小豆公众号文章 · 2026-11-24 10:34｜https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683；https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?from=singlemessage&isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683；📮Folo · 2026-11-24 10:50 · 动察发现线索｜https://t.me/OneMillion_AI/6116；🧭飞书群 · 2026-11-24 10:34 · 人工线索",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
+          "url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "title": "",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?from=singlemessage&isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
           "title": "",
           "publisher": "mp.weixin.qq.com",
           "source_type": "draft_source",
@@ -716,28 +880,86 @@
           "is_original": false
         },
         {
-          "url": "https://mp.weixin.qq.com/s/XKOcsPVNsmOwbBM9qZVAtg",
+          "url": "https://t.me/OneMillion_AI/6116",
           "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
+          "publisher": "动察Beating AI News - Telegram Channel",
+          "source_type": "folo",
+          "authority": "lead",
           "is_paywalled": false,
           "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "字节个人Agent「小豆」正式公测：邀请码才能体验，未来能力将进入豆包",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
         },
         {
-          "url": "https://mp.weixin.qq.com/s/H5JK1giPgXhME1QLxIKicg",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
+          "text": "11 月 24 日，豆包旗下 AI 个人助理「小豆」正式开启公测，主打「一个懂你，还能主动帮你办事的豆包」。",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
         },
         {
-          "url": "https://t.me/OneMillion_AI/4602",
+          "text": "这款产品已经酝酿了大半年。早在今年 4 月，豆包内部就开始测试代号为 Spell 的个人助理项目，最初由豆包手机助手团队负责。后来因为豆包手机发布等原因，一直没能对外推出。",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "![](https://mmbiz.qpic.cn/mmbiz_jpg/xuOicI3dWzXy8iarJmndclwiczibvnS7nyJt1Ws2Y4DDlI07z17tySAHMzXazOyhIA96JaQALice5lQdmSyzsxae4jA4JBNFPZCNiaib9qDe3JXFZQ/0?wx_fmt=jpeg)",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "![](https://mmecoa.qpic.cn/mmecoa_png/ZsmQJHibcETPqvEKBLdMqias3KAiaRNIGIzX3ibYhOFN41CdXe35ick8dVWFF0IthlGtVOQE5IIsj7dibXVNVWbGoAc72IoSorHWgEU4vFw3Jr9XU/640?wx_fmt=png)",
+          "source_url": "https://mp.weixin.qq.com/s/4JBJszozOuJ5Ve5Ca3lHHA?isappinstalled=0&scene=1&clicktime=1795487683&enterid=1795487683",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.471009+00:00"
+    },
+    {
+      "id": "d6f3db1d-f1c7-55fa-8a41-20b4c23def90",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "c913e2b8099350cf084efa71805931729d03ff6c",
+      "title": "Ling-3.2-air 开源发布，支持文本、图像和视频输入",
+      "body": "Ling 团队 11 月 24 日发布并开源 Ling-3.2-air。官方介绍称，该模型延续 Ling-3.0-flash-VL 的原生多模态架构，支持文本、图像和视频输入，总参数量为 1240 亿，每个 Token 激活 55 亿参数。\n\n官方还称，新模型在代码仓库问题、多步骤工作流、视觉信息和专业文档推理等任务上进行了改进；模型权重、代码和许可证信息已随项目发布。\n\nLing-3.2-air 的发布重点放在开发者可用性和多模态任务覆盖，具体效果仍需结合公开评测和实际部署测试判断。",
+      "category": "新产品",
+      "status": "needs_review",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
+      "source_name": "早报 Bot 私聊",
+      "source_type": "lark_group",
+      "source_quality": "unknown",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 09:23",
+      "published_at": "2026-11-24 09:23",
+      "cross_day_status": "needs_title_rewrite",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/76f258108335effe0d76.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：Ling 团队公众号｜https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g；🧭飞书群 · 2026-11-24 09:23 · 人工线索",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
           "title": "",
-          "publisher": "t.me",
-          "source_type": "draft_source",
+          "publisher": "早报 Bot 私聊",
+          "source_type": "lark_group",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
@@ -745,276 +967,112 @@
       ],
       "claims": [
         {
-          "text": "豆包手机助手转正：GUI操作App继续保留，但App可以拒绝AI操作 豆包正式发布手机助手消费者版本。它仍然是与手机厂商在系统层合作的 AI 助手软件，首款量产机努比亚 NaviX Ultra 此前已经官宣，将于 9 月 16 日发布并开售。",
-          "source_url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
+          "text": "# Ling-3.2-air 开源发布，编程、智能体与多模态能力同步提升",
+          "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "此前争议最大的「操作手机」功能没有被砍…",
-          "source_url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
+          "text": "> 来源：https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
+          "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "豆包 9 月 14 日宣布手机助手消费版正式发布。首款搭载产品为努比亚 Navi X Ultra，已开启预约，将于 9 月 16 日开售。",
-          "source_url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "新版助手通过系统级协作提供语音、屏幕理解及手机操作能力：",
-          "source_url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "- AI 按键支持长按提问、双击视频交互，也可通过语音唤醒；连续对话仍处于 Beta 阶段。\n- 用户授权后，助手可调用通话录音、照片和短信等信息建立记忆，也支持手动保存屏幕内容。\n- 手机操作 Beta 结合工具调用与模拟点击执行跨应用任务，支持任务排队、中途插入新任务，并在锁屏上展示进度。\n- 系统工具可与日历、闹钟、电话及飞书等协作，提供会议录音转写、实时翻译，以及文档、PPT 等工作任务。",
-          "source_url": "https://mp.weixin.qq.com/s/NYekjPSgssJ_Dt5FJfEcsQ",
+          "text": "今天，我们发布并开源 Ling-3.2-air。它延续 Ling-3.0-flash-VL 的原生多模态架构，支持文本、图像和视频输入，拥有 1240 亿总参数，每个 Token 激活 55 亿参数。与上一代相比，Ling-3.2-air 在解决代码仓库中的问题、执行多步骤工作流，以及理解视觉信息和推理专业文档等任务上的表现均有提升。",
+          "source_url": "https://mp.weixin.qq.com/s/7-Dnhz1ouC6ans0znH154g",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-09-14T09:55:50+00:00"
+      "updated_at": "2026-11-24T05:16:20.497083+00:00"
     },
     {
-      "id": "bf37d911-a78c-51b7-ac80-fe52009f2d76",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "c2df5f2e77e60f937af9166762157cae26ee1ca5",
-      "title": "iQOO 公布三星 M16 屏幕方案，计划 iQOO 16 首发",
-      "body": "据 IT 之家现场报道，iQOO 9 月 14 日在三星韩国总部举行屏幕技术沟通会，介绍与三星联合探索的显示方案，计划由月底登场的 iQOO 16 首次搭载。\n\n新方案采用三星 M16 发光材料，提供 2K 分辨率与 165Hz 刷新率。公布的亮度指标包括手动最高 1100 尼特、全局最高 2800 尼特，以及局部峰值 10000 尼特；局部峰值不等同于整块屏幕持续显示的亮度。\n\n触控方面，方案公布瞬时采样率 5000Hz、多指采样率 500Hz，并支持 3300Hz PWM 调光。此次活动介绍的是屏幕技术方案，手机整机发布仍在之后。",
+      "id": "22329dca-6953-5847-b3ce-a20a0cc025de",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "839ea6e97e07546c36041dc6c3a4a2d7214b8471",
+      "title": "OceanLake 发布，OceanBase 核心引擎向全球开源",
+      "body": "OceanBase 11 月 24 日发布湖库一体 AI 数据平台 OceanLake，并宣布核心引擎向全球开源。OceanBase CEO 杨冰在 AI 数据大会上表示，随着模型和 Agent 基础设施发展，数据基础设施需要同时处理湖与库的数据形态。\n\n这次发布与 OceanBase 同日披露的经营数据相互关联，但 OceanLake 是独立的产品与开源动作。官方发布材料同时列出了代码仓库、组件范围和许可证信息。",
       "category": "新产品",
       "status": "ready",
       "selected": true,
-      "position": 1,
+      "position": 2,
       "score": 0,
-      "source_url": "https://www.ithome.com/1/001/929.htm",
-      "source_name": "ithome.com",
+      "source_url": "https://www.oceanbase.com/",
+      "source_name": "oceanbase.com",
       "source_type": "draft_source",
       "source_quality": "secondary",
       "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-09-14 09:49",
-      "published_at": "2026-09-14 09:49",
-      "cross_day_status": "current",
+      "disclosed_at": "2026-11-24 11:35",
+      "published_at": "2026-11-24 11:35",
+      "cross_day_status": "ready",
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/9badc554dbf9-3819d41f9a4fd47a699e.jpg",
+      "image_url": "data/images/36ad791b5060-97f9c2db7d4d3c73438a.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.ithome.com/1/001/929.htm ｜ https://www.coolapk.com/feed/73743398?s=MDQ5OWE0NDIxNTU5MzdiZzZhYTc2Zjc1egi1659 · 🧭飞书群 · 2026-09-14 11:52",
+        "source_line": "🔗 来源：OceanBase AI 数据大会｜https://www.oceanbase.com/；📮Folo · 2026-11-24 11:35 · 发现线索｜https://www.ithome.com/1/031/365.htm",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.ithome.com/1/001/929.htm",
+          "url": "https://www.oceanbase.com/",
           "title": "",
-          "publisher": "ithome.com",
+          "publisher": "oceanbase.com",
           "source_type": "draft_source",
-          "authority": "secondary",
+          "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         },
         {
-          "url": "https://www.coolapk.com/feed/73743398?s=MDQ5OWE0NDIxNTU5MzdiZzZhYTc2Zjc1egi1659",
+          "url": "https://www.ithome.com/1/031/365.htm",
           "title": "",
-          "publisher": "coolapk.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
           "is_paywalled": false,
           "is_original": false
         }
       ],
       "claims": [
         {
-          "text": "据 IT 之家现场报道，iQOO 9 月 14 日在三星韩国总部举行屏幕技术沟通会，介绍与三星联合探索的显示方案，计划由月底登场的 iQOO 16 首次搭载。",
-          "source_url": "https://www.ithome.com/1/001/929.htm",
+          "text": "OceanBase 11 月 24 日发布湖库一体 AI 数据平台 OceanLake，并宣布核心引擎向全球开源。OceanBase CEO 杨冰在 AI 数据大会上表示，随着模型和 Agent 基础设施发展，数据基础设施需要同时处理湖与库的数据形态。",
+          "source_url": "https://www.oceanbase.com/",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "新方案采用三星 M16 发光材料，提供 2K 分辨率与 165Hz 刷新率。公布的亮度指标包括手动最高 1100 尼特、全局最高 2800 尼特，以及局部峰值 10000 尼特；局部峰值不等同于整块屏幕持续显示的亮度。",
-          "source_url": "https://www.ithome.com/1/001/929.htm",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "触控方面，方案公布瞬时采样率 5000Hz、多指采样率 500Hz，并支持 3300Hz PWM 调光。此次活动介绍的是屏幕技术方案，手机整机发布仍在之后。",
-          "source_url": "https://www.ithome.com/1/001/929.htm",
+          "text": "这次发布与 OceanBase 同日披露的经营数据相互关联，但 OceanLake 是独立的产品与开源动作。官方发布材料同时列出了代码仓库、组件范围和许可证信息。",
+          "source_url": "https://www.oceanbase.com/",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-09-14T09:55:50+00:00"
+      "updated_at": "2026-11-24T05:16:20.569405+00:00"
     },
     {
-      "id": "eee36800-db22-5b8f-a66c-bf83196c6e83",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "7460970f43cd47cdc8fdd1ebf15c736825368cf5",
-      "title": "国产捉宠 RPG《伊莫》开启 PC 预下载，9 月 16 日上线",
-      "body": "《伊莫》官网 9 月 14 日宣布开启 PC 端预下载，游戏将于 9 月 16 日正式上线。此前公布的安排为 PC 与主机端先行，移动端于 9 月 23 日上线。\n\n这是一款多人在线大世界捉宠 RPG，由杭州爪印开发、上海趣乐糖发行。玩家在艾德尔大陆探索不同区域、寻找名为「伊莫」的生物，还可以通过 Twine 联结合体，以这些生物的视角和能力行动。\n\n飞行、潜水与遁地等能力被用于世界探索，场景还包含昼夜、天气变化和房车营地。游戏采用免费游玩模式；本次开放的是预下载，正式游玩仍需等待上线。",
+      "id": "af9a6ebd-6749-5de5-92cf-0fcee1d27306",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "d2559f8a069df129b8687a5f90b7b87de494db1f",
+      "title": "谷歌测试浏览器 AI 权限边界：可看商品但不能进入支付页",
+      "body": "谷歌工程师提出一项浏览器层面的实验性方案，计划为 AI Agent 设置更细的操作权限：允许它浏览商品和页面信息，但阻止其进入支付页面或执行高风险操作。\n\n该方案目前仍属于原型提议，尚未确定是否会加入 Chrome。它反映的是浏览器对 Agent 权限管理的探索，不代表现有 Chrome 已经提供这一功能。",
       "category": "新产品",
       "status": "ready",
       "selected": true,
       "position": 3,
       "score": 0,
-      "source_url": "https://www.yimo.com/main",
-      "source_name": "yimo.com",
+      "source_url": "https://www.neowin.net/news/google-proposes-browser-permission-locks-for-ai-agents/",
+      "source_name": "neowin.net",
       "source_type": "draft_source",
       "source_quality": "secondary",
       "confidence": 0.74,
       "event_date": null,
-      "disclosed_at": "2026-09-14 11:22",
-      "published_at": "2026-09-14 11:22",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/1eed110db076-40a024a1301605620342.png",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://www.yimo.com/main ｜ https://www.playstation.com/zh-hant-hk/games/aniimo/ ｜ https://www.ithome.com/1/001/995.htm · 📮Folo · 2026-09-14 12:52",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://www.yimo.com/main",
-          "title": "",
-          "publisher": "yimo.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.playstation.com/zh-hant-hk/games/aniimo/",
-          "title": "",
-          "publisher": "playstation.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.ithome.com/1/001/995.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
-          "authority": "secondary",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "《伊莫》官网 9 月 14 日宣布开启 PC 端预下载，游戏将于 9 月 16 日正式上线。此前公布的安排为 PC 与主机端先行，移动端于 9 月 23 日上线。",
-          "source_url": "https://www.yimo.com/main",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "这是一款多人在线大世界捉宠 RPG，由杭州爪印开发、上海趣乐糖发行。玩家在艾德尔大陆探索不同区域、寻找名为「伊莫」的生物，还可以通过 Twine 联结合体，以这些生物的视角和能力行动。",
-          "source_url": "https://www.yimo.com/main",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "飞行、潜水与遁地等能力被用于世界探索，场景还包含昼夜、天气变化和房车营地。游戏采用免费游玩模式；本次开放的是预下载，正式游玩仍需等待上线。",
-          "source_url": "https://www.yimo.com/main",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:55:50+00:00"
-    },
-    {
-      "id": "5c8b0f13-352f-53d2-a785-1c1df0e4f309",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "063ab20374d74c8ddb9a051271620d45772b7364",
-      "title": "WorkBuddy 升级 PPT 能力，支持沿用模板和局部修改",
-      "body": "腾讯 WorkBuddy 官方公众号公布 PPT 能力升级。用户可输入一个主题，或上传文档、固定模板及参考 PPT，由 WorkBuddy 梳理内容主线、生成页面和演讲备注，输出可继续编辑的 .pptx 文件。\n\n据官方介绍，这次升级重点改善页面布局、配色、数据图表和多页风格一致性。使用公司或学校模板时，可要求沿用主题色、字体层级和已有页面结构；参考某份 PPT 的整体风格或单页排版，也能作为生成依据。\n\n第一版生成后，用户可在「人机双写」中点选或框选标题、文本框、图片和图表，要求拆页、改图表或调整样式，也可直接手动修改文件，保留满意的页面。生成结果还可进入腾讯文档继续协作、评论和多端编辑。",
-      "category": "新产品",
-      "status": "ready",
-      "selected": true,
-      "position": 4,
-      "score": 0,
-      "source_url": "https://mp.weixin.qq.com/s/kB1es3oU-Ilg-sI5zddHRw",
-      "source_name": "腾讯 WorkBuddy 官方公众号",
-      "source_type": "official",
-      "source_quality": "primary",
-      "confidence": 0.98,
-      "event_date": "2026-09-14",
-      "disclosed_at": "2026-09-14T16:23:00+08:00",
-      "published_at": "2026-09-14T16:23:00+08:00",
-      "cross_day_status": "user_requested_carryover",
-      "rumor": false,
-      "fact_status": "verified",
-      "changed_since_review": false,
-      "image_url": "data/images/4412287a72acc1a13709.jpg",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://mp.weixin.qq.com/s/kB1es3oU-Ilg-sI5zddHRw · 腾讯 WorkBuddy 官方公众号 / 🛰网页 · 2026-09-14 16:23",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://mp.weixin.qq.com/s/kB1es3oU-Ilg-sI5zddHRw",
-          "title": "",
-          "publisher": "mp.weixin.qq.com",
-          "source_type": "official",
-          "authority": "primary",
-          "is_paywalled": false,
-          "is_original": true
-        }
-      ],
-      "claims": [
-        {
-          "text": "腾讯 WorkBuddy 官方公众号公布 PPT 能力升级。用户可输入一个主题，或上传文档、固定模板及参考 PPT，由 WorkBuddy 梳理内容主线、生成页面和演讲备注，输出可继续编辑的 .pptx 文件。",
-          "source_url": "https://mp.weixin.qq.com/s/kB1es3oU-Ilg-sI5zddHRw",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "据官方介绍，这次升级重点改善页面布局、配色、数据图表和多页风格一致性。使用公司或学校模板时，可要求沿用主题色、字体层级和已有页面结构；参考某份 PPT 的整体风格或单页排版，也能作为生成依据。",
-          "source_url": "https://mp.weixin.qq.com/s/kB1es3oU-Ilg-sI5zddHRw",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "第一版生成后，用户可在「人机双写」中点选或框选标题、文本框、图片和图表，要求拆页、改图表或调整样式，也可直接手动修改文件，保留满意的页面。生成结果还可进入腾讯文档继续协作、评论和多端编辑。",
-          "source_url": "https://mp.weixin.qq.com/s/kB1es3oU-Ilg-sI5zddHRw",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T10:09:21+00:00"
-    },
-    {
-      "id": "8aa130c9-27a3-56a2-8ac8-85e9fafd141a",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "3481854a97651713e7ed4ce5d965bef3044adc13",
-      "title": "商务部公开智能家居消费方案，地方可自主确定补贴标准",
-      "body": "商务部等 8 部门于 9 月 14 日公开《促进智能家居消费行动方案》，提出扩大智能家居供给、完善标准、支持消费及发展适老化产品。文件印发日期为 9 月 2 日。\n\n补贴方面，方案按照今年消费品以旧换新政策部署，支持地方结合实际自主合理确定智能家居产品补贴品类、补贴标准，统筹支持全屋智能家居购新，并用好个人消费贷款财政贴息政策。文件没有设定全国统一的智能家居补贴比例。\n\n互联互通也被列为重点：加快制定实施智能家居互联互通等强制性国家标准，推动全屋智能一体化融合；推动基础电信企业自有环境的家庭宽带网络设备默认开启 IPv6，提升家庭网络连通率，并鼓励新建全装修住宅光纤到房间布设。\n\n供给端将支持家居卖场、购物中心设立全屋智能样板间，打造基于国内开源操作系统的软硬件产品和一体化方案。适老化方向包括家庭服务机器人、健康监测和智能照护，并要求关注操作便利、方言识别及安全性能。回收服务则鼓励家居企业与回收企业合作，提供「送新 + 收旧」等服务。",
-      "category": "新消费",
-      "status": "ready",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_98f578b88d3f47538d7b516745faf230.html",
-      "source_name": "mofcom.gov.cn",
-      "source_type": "draft_source",
-      "source_quality": "lead",
-      "confidence": 0.55,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 14:32",
-      "published_at": "2026-09-14 14:32",
+      "disclosed_at": "2026-11-24 11:11",
+      "published_at": "2026-11-24 11:11",
       "cross_day_status": "ready",
       "rumor": false,
       "fact_status": "supported",
@@ -1024,103 +1082,24 @@
       "image_token": "",
       "editorial_reason": "",
       "metadata": {
-        "source_line": "🔗 来源：https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_98f578b88d3f47538d7b516745faf230.html ｜ https://wallstreetcn.com/livenews/3164624 ｜ https://wallstreetcn.com/livenews/3164626 ｜ https://wallstreetcn.com/livenews/3164650 · 商务部官网 / 📮Folo · 2026-09-14 14:30",
+        "source_line": "🔗 来源：NeoWin｜https://www.neowin.net/news/google-proposes-browser-permission-locks-for-ai-agents/；📮Folo · 2026-11-24 11:11 · 发现线索｜https://www.ithome.com/1/031/331.htm",
         "static_snapshot": true
       },
       "sources": [
         {
-          "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_98f578b88d3f47538d7b516745faf230.html",
+          "url": "https://www.neowin.net/news/google-proposes-browser-permission-locks-for-ai-agents/",
           "title": "",
-          "publisher": "mofcom.gov.cn",
+          "publisher": "neowin.net",
           "source_type": "draft_source",
           "authority": "unknown",
           "is_paywalled": false,
           "is_original": false
         },
         {
-          "url": "https://wallstreetcn.com/livenews/3164624",
+          "url": "https://www.ithome.com/1/031/331.htm",
           "title": "",
-          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
+          "publisher": "IT之家",
           "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://wallstreetcn.com/livenews/3164626",
-          "title": "",
-          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
-          "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://wallstreetcn.com/livenews/3164650",
-          "title": "",
-          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
-          "source_type": "folo",
-          "authority": "lead",
-          "is_paywalled": false,
-          "is_original": false
-        }
-      ],
-      "claims": [
-        {
-          "text": "商务部等8部门印发《促进智能家居消费行动方案》，其中指出，扩大优质智能家居供给，结合推进数字家庭全产业链场景培育和开放等工作，鼓励生产企业加强智能家居产品研发，支持家居卖场、购物中心等设立智能家居体验中心、全屋智能和数字家庭样板间。加快培育一批诚信经营…",
-          "source_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_98f578b88d3f47538d7b516745faf230.html",
-          "status": "supported",
-          "evidence": ""
-        }
-      ],
-      "updated_at": "2026-09-14T09:55:50+00:00"
-    },
-    {
-      "id": "367a6c4e-5563-5881-bdd9-49d96c9c85fd",
-      "issue_id": "ifanr-daily-20260915",
-      "fingerprint": "f0d7fde1f4da3af17e34e307196e36321f9c625f",
-      "title": "米家智能浴霸 2C 开启预售，加入人感照明与感应换气",
-      "body": "小米京东自营旗舰店上架米家智能浴霸 2C，预售价为 882 元。据 IT 之家报道，该产品将于 9 月 21 日开启首销。\n\n浴霸搭载 3000W 石墨烯加热模块与直流变频双核电机，支持恒温及摆动送风，取暖和换气可以同时运行。面板尺寸为 600×300mm，照明亮度为 1600lm。\n\n内置的 24GHz 雷达用于人感照明与感应换气，感应距离和灵敏度可调节。产品配有蓝牙墙面遥控器，也能通过米家应用或语音远程控制、设置定时预约，排风量为 180m³/h。",
-      "category": "新消费",
-      "status": "ready",
-      "selected": true,
-      "position": 0,
-      "score": 0,
-      "source_url": "https://item.jd.com/100317395689.html",
-      "source_name": "item.jd.com",
-      "source_type": "draft_source",
-      "source_quality": "secondary",
-      "confidence": 0.74,
-      "event_date": null,
-      "disclosed_at": "2026-09-14 11:18",
-      "published_at": "2026-09-14 11:18",
-      "cross_day_status": "current",
-      "rumor": false,
-      "fact_status": "supported",
-      "changed_since_review": false,
-      "image_url": "data/images/85fdde94d9174e85a41e.gif",
-      "image_path": "",
-      "image_token": "",
-      "editorial_reason": "",
-      "metadata": {
-        "source_line": "🔗 来源：https://item.jd.com/100317395689.html ｜ https://www.ithome.com/1/001/993.htm · Chrome 登录态 / 📮Folo · 2026-09-14 11:46",
-        "static_snapshot": true
-      },
-      "sources": [
-        {
-          "url": "https://item.jd.com/100317395689.html",
-          "title": "",
-          "publisher": "item.jd.com",
-          "source_type": "draft_source",
-          "authority": "unknown",
-          "is_paywalled": false,
-          "is_original": false
-        },
-        {
-          "url": "https://www.ithome.com/1/001/993.htm",
-          "title": "",
-          "publisher": "ithome.com",
-          "source_type": "draft_source",
           "authority": "secondary",
           "is_paywalled": false,
           "is_original": false
@@ -1128,101 +1107,589 @@
       ],
       "claims": [
         {
-          "text": "小米京东自营旗舰店上架米家智能浴霸 2C，预售价为 882 元。据 IT 之家报道，该产品将于 9 月 21 日开启首销。",
-          "source_url": "https://item.jd.com/100317395689.html",
+          "text": "谷歌工程师提出一项浏览器层面的实验性方案，计划为 AI Agent 设置更细的操作权限：允许它浏览商品和页面信息，但阻止其进入支付页面或执行高风险操作。",
+          "source_url": "https://www.neowin.net/news/google-proposes-browser-permission-locks-for-ai-agents/",
           "status": "supported",
           "evidence": ""
         },
         {
-          "text": "浴霸搭载 3000W 石墨烯加热模块与直流变频双核电机，支持恒温及摆动送风，取暖和换气可以同时运行。面板尺寸为 600×300mm，照明亮度为 1600lm。",
-          "source_url": "https://item.jd.com/100317395689.html",
-          "status": "supported",
-          "evidence": ""
-        },
-        {
-          "text": "内置的 24GHz 雷达用于人感照明与感应换气，感应距离和灵敏度可调节。产品配有蓝牙墙面遥控器，也能通过米家应用或语音远程控制、设置定时预约，排风量为 180m³/h。",
-          "source_url": "https://item.jd.com/100317395689.html",
+          "text": "该方案目前仍属于原型提议，尚未确定是否会加入 Chrome。它反映的是浏览器对 Agent 权限管理的探索，不代表现有 Chrome 已经提供这一功能。",
+          "source_url": "https://www.neowin.net/news/google-proposes-browser-permission-locks-for-ai-agents/",
           "status": "supported",
           "evidence": ""
         }
       ],
-      "updated_at": "2026-09-14T09:55:50+00:00"
+      "updated_at": "2026-11-24T05:16:20.639558+00:00"
+    },
+    {
+      "id": "56aef1a8-3883-5008-a490-7fa2aee2024b",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "80564f35fdeabc5b94c29ad9cccbc6f0d2db9a36",
+      "title": "特斯拉中国推出「特从容」购车方案",
+      "body": "特斯拉中国 11 月 24 日推出「特从容」金融方案，覆盖 Model 3、Model Y 和 Model Y L。活动时间为 11 月 24 日至 12 月 31 日，消费者需要在活动期内完成下单和提车；方案主打低首付和五年低月供。\n\n公开信息显示，部分车型提供更低的首付和月供方案，实际金额会随车型、配置、金融方案和订单条件变化。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 4,
+      "score": 0,
+      "source_url": "https://www.tesla.cn/",
+      "source_name": "tesla.cn",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 11:31",
+      "published_at": "2026-11-24 11:31",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/17a26a263e98-8f1ec0c917ffba1c1a61.avif",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：特斯拉中国｜https://www.tesla.cn/；📮Folo · 2026-11-24 11:31 · 发现线索｜https://www.ithome.com/1/031/345.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.tesla.cn/",
+          "title": "",
+          "publisher": "tesla.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/345.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "特斯拉中国 11 月 24 日推出「特从容」金融方案，覆盖 Model 3、Model Y 和 Model Y L。活动时间为 11 月 24 日至 12 月 31 日，消费者需要在活动期内完成下单和提车；方案主打低首付和五年低月供。",
+          "source_url": "https://www.tesla.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "公开信息显示，部分车型提供更低的首付和月供方案，实际金额会随车型、配置、金融方案和订单条件变化。",
+          "source_url": "https://www.tesla.cn/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.674546+00:00"
+    },
+    {
+      "id": "5d0067a3-946a-5f21-82e0-f0d1bb84b318",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "6ca28a516664b1bffd230be58c3d216ad0e14670",
+      "title": "铭匠发布 AF 12mm F2.8 全画幅自动对焦镜头",
+      "body": "铭匠光学发布品牌首款全画幅超广角自动对焦镜头 AF 12mm F2.8。镜头视角约 122°，采用 10 组 16 片光学结构，并配有非球面镜片和低色散镜片。\n\n这支镜头主打建筑、风光和近距离夸张透视效果，品牌页面已公布对应卡口和发售安排。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 5,
+      "score": 0,
+      "source_url": "https://www.ttartisan.com/",
+      "source_name": "ttartisan.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 11:42",
+      "published_at": "2026-11-24 11:42",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/3a484a270c24-e4eda0fbe13d69a527ff.webp",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：铭匠光学｜https://www.ttartisan.com/；📮Folo · 2026-11-24 11:42 · 发现线索｜https://www.ithome.com/1/031/374.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.ttartisan.com/",
+          "title": "",
+          "publisher": "ttartisan.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/374.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "铭匠光学发布品牌首款全画幅超广角自动对焦镜头 AF 12mm F2.8。镜头视角约 122°，采用 10 组 16 片光学结构，并配有非球面镜片和低色散镜片。",
+          "source_url": "https://www.ttartisan.com/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这支镜头主打建筑、风光和近距离夸张透视效果，品牌页面已公布对应卡口和发售安排。",
+          "source_url": "https://www.ttartisan.com/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.731184+00:00"
+    },
+    {
+      "id": "e360b3d3-653c-5ac0-8329-acfa3105a6cb",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "ff8f34260b79ce7eb7663d2438cbe6492972899e",
+      "title": "全球 6G 发展理念宣言发布，提出探索统一标准和可盈利模式",
+      "body": "2026 年 6G 发展大会 11 月 24 日在上海举行。IMT-2030（6G）推进组携手国际组织、产业联盟及企业发布《全球6G发展理念宣言》，提出面向 2030 年及未来推动全球统一标准，并探索可落地、可盈利的业务模式。\n\n这是一份产业理念宣言，暂不等同于具体商用网络的建设时间表。后续标准、频谱和设备方案仍需由相关组织继续推进。",
+      "category": "新产品",
+      "status": "ready",
+      "selected": true,
+      "position": 6,
+      "score": 0,
+      "source_url": "https://www.imt-2020.cn/",
+      "source_name": "imt-2020.cn",
+      "source_type": "draft_source",
+      "source_quality": "lead",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 12:38",
+      "published_at": "2026-11-24 12:38",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：2026 年 6G 发展大会｜https://www.imt-2020.cn/；🛰网页 · 2026-11-24 12:38 · 华尔街见闻｜https://wallstreetcn.com/livenews/3204695",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.imt-2020.cn/",
+          "title": "",
+          "publisher": "imt-2020.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://wallstreetcn.com/livenews/3204695",
+          "title": "",
+          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "2026 年 6G 发展大会 11 月 24 日在上海举行。IMT-2030（6G）推进组携手国际组织、产业联盟及企业发布《全球6G发展理念宣言》，提出面向 2030 年及未来推动全球统一标准，并探索可落地、可盈利的业务模式。",
+          "source_url": "https://www.imt-2020.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "这是一份产业理念宣言，暂不等同于具体商用网络的建设时间表。后续标准、频谱和设备方案仍需由相关组织继续推进。",
+          "source_url": "https://www.imt-2020.cn/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.788421+00:00"
+    },
+    {
+      "id": "5838c0ee-d43a-5094-a64d-17146b4cf99b",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "5e3a29a283d32a68d3e8742ac392d1281ee6aec9",
+      "title": "一加 16 ×《凡人》动画联名礼盒暂缓发售",
+      "body": "一加官方 11 月 24 日表示，由于部分物料生产良率过低，一加 16 ×《凡人》动画联名礼盒备货不足，无法按原计划于 11 月 27 日线上线下发售，新的开售时间将另行公布。\n\n官方称，后续购买该礼盒的用户将获得补偿，具体安排随新的发售通知公布。手机本体的销售安排不受这次礼盒延期影响。",
+      "category": "新消费",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://www.oneplus.com/cn",
+      "source_name": "oneplus.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 10:23",
+      "published_at": "2026-11-24 10:23",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/81af8f1a02b4-e0c698f2f87965d38994.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：一加官方｜https://www.oneplus.com/cn；📮Folo · 2026-11-24 10:23 · 发现线索｜https://www.ithome.com/1/031/307.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.oneplus.com/cn",
+          "title": "",
+          "publisher": "oneplus.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/307.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "一加官方 11 月 24 日表示，由于部分物料生产良率过低，一加 16 ×《凡人》动画联名礼盒备货不足，无法按原计划于 11 月 27 日线上线下发售，新的开售时间将另行公布。",
+          "source_url": "https://www.oneplus.com/cn",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "官方称，后续购买该礼盒的用户将获得补偿，具体安排随新的发售通知公布。手机本体的销售安排不受这次礼盒延期影响。",
+          "source_url": "https://www.oneplus.com/cn",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.826073+00:00"
+    },
+    {
+      "id": "8e9ec5b5-dcc7-520f-b8f6-8590d3450550",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "7abbedba4a0ab8e3be2600d8beb8a7f1de43dcd5",
+      "title": "铭瑄 Z890-C WIFI 主板上架，11 月 27 日开售",
+      "body": "铭瑄 MS-Terminator Z890-C WIFI 主板已在电商平台上架，计划于 11 月 27 日晚间开售。该主板采用英特尔 FCLGA1851 平台，面向新一代桌面处理器。\n\n该主板的具体接口和供电配置已列入品牌规格表，面向需要升级新平台的桌面用户。",
+      "category": "新消费",
+      "status": "ready",
+      "selected": true,
+      "position": 1,
+      "score": 0,
+      "source_url": "https://www.maxsun.com.cn/",
+      "source_name": "maxsun.com.cn",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 09:52",
+      "published_at": "2026-11-24 09:52",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "data/images/438da8c236cd-0dd82cada72003a3af3b.jpg",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：铭瑄｜https://www.maxsun.com.cn/；📮Folo · 2026-11-24 09:52 · 发现线索｜https://www.ithome.com/1/031/294.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.maxsun.com.cn/",
+          "title": "",
+          "publisher": "maxsun.com.cn",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/294.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "铭瑄 MS-Terminator Z890-C WIFI 主板已在电商平台上架，计划于 11 月 27 日晚间开售。该主板采用英特尔 FCLGA1851 平台，面向新一代桌面处理器。",
+          "source_url": "https://www.maxsun.com.cn/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "该主板的具体接口和供电配置已列入品牌规格表，面向需要升级新平台的桌面用户。",
+          "source_url": "https://www.maxsun.com.cn/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.880601+00:00"
+    },
+    {
+      "id": "275e9494-646a-547c-86e1-094d3094b555",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "32de0257931d9801777902d4394801610316ecb9",
+      "title": "华为维感 G1 动态血糖仪开启预售",
+      "body": "华为首款动态血糖仪维感 G1 开启预售，标称可持续监测一段时间，并赠送活力人生会员。\n\n这是一款健康监测设备，传感器适用范围、佩戴方式和数据解读需要结合产品说明书及医疗专业建议，消费电子的监测结果不能直接等同于医疗诊断。",
+      "category": "新消费",
+      "status": "ready",
+      "selected": true,
+      "position": 2,
+      "score": 0,
+      "source_url": "https://www.vmall.com/",
+      "source_name": "vmall.com",
+      "source_type": "draft_source",
+      "source_quality": "secondary",
+      "confidence": 0.74,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 10:04",
+      "published_at": "2026-11-24 10:04",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：华为商城｜https://www.vmall.com/；📮Folo · 2026-11-24 11:00 · 发现线索｜https://www.ithome.com/1/031/298.htm",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.vmall.com/",
+          "title": "",
+          "publisher": "vmall.com",
+          "source_type": "draft_source",
+          "authority": "unknown",
+          "is_paywalled": false,
+          "is_original": false
+        },
+        {
+          "url": "https://www.ithome.com/1/031/298.htm",
+          "title": "",
+          "publisher": "IT之家",
+          "source_type": "folo",
+          "authority": "secondary",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "IT之家 11 月 24 日消息，华为常务董事、产品投资评审委员会主任、终端 BG 董事长余承东今日发文， 宣布鸿蒙终端设备数突破一个亿 。",
+          "source_url": "https://www.vmall.com/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "IT之家注意到，华为官网显示， 鸿蒙 一亿感恩有礼纪念章活动将于 2026 年 12 月 5 日开启 。2026 年 11 月 24 日 00:00 前使用华为账号登录过 HarmonyOS 5 及以上版本的华为手机、平板、电脑任一商用设备的用户，可自 12 月 5 日起前往报名门店获得实体纪念章兑换券，领取鸿蒙生态实体纪念章。",
+          "source_url": "https://www.vmall.com/",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "另外，我的华为 App 今日也将开放“鸿蒙生态里程碑壹亿用户纪念章”电子章的领取， HarmonyOS 5 及以上系统可获得。",
+          "source_url": "https://www.vmall.com/",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.922903+00:00"
+    },
+    {
+      "id": "b401b3be-07c9-5113-b574-847efb79f08a",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "b121d8575c9298ad00b20acd9dbde4aa990b13e2",
+      "title": "MacBook Neo 2 据报最快明年春季发布，内存或升至 12GB",
+      "body": "蓝点网援引供应链和产品线消息称，苹果可能在明年 2 至 3 月推出 MacBook Neo 2，预计升级为 A19 Pro 芯片和 12GB 内存。初代 MacBook Neo 于今年 3 月发布，搭载 A18 Pro 和 8GB 内存。\n\n苹果尚未公布 MacBook Neo 2 的发布时间、配置或价格，这条消息目前属于未确认的产品传闻。",
+      "category": "新消费",
+      "status": "needs_review",
+      "selected": true,
+      "position": 3,
+      "score": 0,
+      "source_url": "https://www.landian.news/archives/128723.html",
+      "source_name": "蓝点网",
+      "source_type": "folo",
+      "source_quality": "lead",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 09:00",
+      "published_at": "2026-11-24 09:00",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "unverified",
+      "changed_since_review": true,
+      "image_url": "data/images/eab9c58efc33-eeee67b03dd395ec1666.png",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：🛰网页 · 2026-11-24 09:00 · 蓝点网｜https://www.landian.news/archives/128723.html",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://www.landian.news/archives/128723.html",
+          "title": "",
+          "publisher": "蓝点网",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "据彭博社编辑马克古尔曼发布的最新消息，苹果正在将 MacBook Neo 2 发布窗口安排在明年春季，具体来说可能会在 2027 年 2 月到 3 月。新款将采用苹果 A19 Pro 处理器，内存则会从 8GB 提升到 12GB 以支持苹果 AI 服务。",
+          "source_url": "https://www.landian.news/archives/128723.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "初代 MacBook Neo 在 2026 年 3 月发布，这款设备搭载苹果为智能手机准备的 A18 Pro 芯片，内存则是 8GB。虽然硬件配置看起来比较普通，不过 MacBook Neo 销量非常不错，",
+          "source_url": "https://www.landian.news/archives/128723.html",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "既然销量不错那苹果肯定还会继续开发后续机型，只不过没想到新机型竟然仅间隔 1 年就发布，或许是苹果认为有必要提高芯片性能和内存大小，以便为更多用户提供 AI 服务。",
+          "source_url": "https://www.landian.news/archives/128723.html",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.957327+00:00"
+    },
+    {
+      "id": "bf6e5d9c-18b9-5caf-9f9f-dac830a16cf4",
+      "issue_id": "ifanr-daily-20261125",
+      "fingerprint": "fe9b574190f0c7b2cde382b75472594562b45910",
+      "title": "OceanBase 披露 2026 年经营数据，AI 业务成为新增长点",
+      "body": "11 月 24 日，OceanBase 在北京披露 2026 年经营数据，称近五年营收复合增长率超过 60%。公司同时表示，AI 业务营收已超过 1 亿元，海外营收占比突破 15%，公有云营收增长 80%，其中多云业务收入占公有云营收的 35%。\n\nOceanBase 还称，专有云业务中的金融和政企客户数增长 50%，政企客户数占比首次达到 50%。这些数据由公司在 AI 数据大会披露，统计口径对应公司披露的 2026 年经营进展。\n\n公司把 AI 数据平台、全球化和公有云列为新的增长方向，并将传统金融、政企场景作为现有业务支撑。",
+      "category": "重磅",
+      "status": "ready",
+      "selected": true,
+      "position": 0,
+      "score": 0,
+      "source_url": "https://wallstreetcn.com/livenews/3204682",
+      "source_name": "华尔街见闻 - 实时快讯 - 要闻",
+      "source_type": "folo",
+      "source_quality": "lead",
+      "confidence": 0.55,
+      "event_date": null,
+      "disclosed_at": "2026-11-24 11:54",
+      "published_at": "2026-11-24 11:54",
+      "cross_day_status": "ready",
+      "rumor": false,
+      "fact_status": "supported",
+      "changed_since_review": false,
+      "image_url": "",
+      "image_path": "",
+      "image_token": "",
+      "editorial_reason": "",
+      "metadata": {
+        "source_line": "🔗 来源：🛰网页 · 2026-11-24 11:54 · 华尔街见闻｜https://wallstreetcn.com/livenews/3204682；📮飞书群新闻稿《【11·24 Final新闻素材】OceanBase披露2026年经营数据：延续强势增长，营收近五年复合增长率超60%.docx》｜lark-file://lark_private/file_v3_0017o_d0f0182a-fed9-4913-a8b0-41ca0dcd7cag；🧭飞书群 · 2026-11-24 11:41 · OceanBase 经营数据原文｜lark-text://lark_private/om_x100b7f64397b40a0df700ae6819476e",
+        "static_snapshot": true
+      },
+      "sources": [
+        {
+          "url": "https://wallstreetcn.com/livenews/3204682",
+          "title": "",
+          "publisher": "华尔街见闻 - 实时快讯 - 要闻",
+          "source_type": "folo",
+          "authority": "lead",
+          "is_paywalled": false,
+          "is_original": false
+        }
+      ],
+      "claims": [
+        {
+          "text": "11 月 24 日，OceanBase 在北京披露 2026 年经营数据，称近五年营收复合增长率超过 60%。公司同时表示，AI 业务营收已超过 1 亿元，海外营收占比突破 15%，公有云营收增长 80%，其中多云业务收入占公有云营收的 35%。",
+          "source_url": "https://wallstreetcn.com/livenews/3204682",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "OceanBase 还称，专有云业务中的金融和政企客户数增长 50%，政企客户数占比首次达到 50%。这些数据由公司在 AI 数据大会披露，统计口径对应公司披露的 2026 年经营进展。",
+          "source_url": "https://wallstreetcn.com/livenews/3204682",
+          "status": "supported",
+          "evidence": ""
+        },
+        {
+          "text": "公司把 AI 数据平台、全球化和公有云列为新的增长方向，并将传统金融、政企场景作为现有业务支撑。",
+          "source_url": "https://wallstreetcn.com/livenews/3204682",
+          "status": "supported",
+          "evidence": ""
+        }
+      ],
+      "updated_at": "2026-11-24T05:16:20.090403+00:00"
     }
   ],
   "brand_packages": {
     "appso": {
-      "cover_candidates": [
-        {
-          "id": "story:9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-          "source": "story",
-          "story_id": "9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-          "title": "Anthropic 据报选择纳斯达克，争取 10 月上市",
-          "url": ""
-        },
-        {
-          "id": "story:a9a8fd60-f61d-54b6-8f25-eb2fa56c6cb0",
-          "source": "story",
-          "story_id": "a9a8fd60-f61d-54b6-8f25-eb2fa56c6cb0",
-          "title": "中国地震台网中心：正与苹果沟通 iOS 地震预警",
-          "url": ""
-        }
-      ],
-      "generated_at": "2026-09-14T09:32:01+00:00",
-      "generation_model": "codex_local_headline_editor",
-      "generation_source": "ifanr_headline_editor",
       "headline_options": [
-        "豆包手机助手消费版发布,能跨App排队办事并保留记忆/中国地震台网称正与苹果沟通,iOS系统级预警暂无上线日期/iQOO16将首发三星M16屏幕,165Hz配10000尼特峰值",
-        "努比亚NaviXUltra9月16日开售,跨App操作仍属Beta/手机助手可调用照片短信建记忆,权限和内容由用户控制/理想李想称纯电车可缩小车身,不必用车宽换空间",
-        "中国地震台网正与苹果沟通,iOS系统级预警暂无上线日期/iQOO16首发三星M16屏幕,165Hz配3300HzPWM调光/豆包助手能排队跨App任务,锁屏显示执行进度",
-        "Anthropic被曝选纳斯达克,争取10月IPO但尚未提交招股书/豆包助手可调用通话录音和照片建记忆,用户需逐项授权/《伊莫》用Twine让玩家借伊莫视角探索大世界",
-        "AI按键双击视频可交互,豆包手机助手首发NaviXUltra/iOS预警仍靠微信小程序,苹果正与中国地震台网沟通/iQOO16屏幕2K165Hz,局部峰值最高10000尼特",
-        "比亚迪2027年拟让一款车搭载固态电池,目标是验证研发成果/豆包手机助手可联动日历电话飞书,支持录音转写和文档任务/米家浴霸2C用24GHz雷达感应照明换气,预售882元"
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页",
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页 / 特斯拉中国推出「特从容」购车方案",
+        "OceanLake发布,OceanBase核心引擎向全球开源 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页 / 全球6G发展理念宣言发布,提出探索统一标准和可盈利模式"
       ],
-      "selected_cover": "story:9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-      "selected_headline": "豆包手机助手消费版发布,能跨App排队办事并保留记忆/中国地震台网称正与苹果沟通,iOS系统级预警暂无上线日期/iQOO16将首发三星M16屏幕,165Hz配10000尼特峰值"
+      "selected_headline": "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 谷歌测试浏览器AI权限边界:可看商品但不能进入支付页",
+      "cover_candidates": [],
+      "selected_cover": ""
     },
     "ifanr": {
-      "cover_candidates": [
-        {
-          "id": "story:9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-          "source": "story",
-          "story_id": "9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-          "title": "Anthropic 据报选择纳斯达克，争取 10 月上市",
-          "url": ""
-        },
-        {
-          "id": "story:a9a8fd60-f61d-54b6-8f25-eb2fa56c6cb0",
-          "source": "story",
-          "story_id": "a9a8fd60-f61d-54b6-8f25-eb2fa56c6cb0",
-          "title": "中国地震台网中心：正与苹果沟通 iOS 地震预警",
-          "url": ""
-        }
-      ],
-      "generated_at": "2026-09-14T09:32:01+00:00",
-      "generation_model": "codex_local_headline_editor",
-      "generation_source": "ifanr_headline_editor",
       "headline_options": [
-        "Anthropic被曝选纳斯达克,争取10月上市但估值未定/苹果地震预警还没上线,中国地震台网称正加快沟通/豆包手机助手能跨App办事,努比亚NaviXUltra9月16日开售",
-        "一汽据报考虑入股广汽,广汽股票9月14日停牌/理想李想称SUV越做越宽,停车焦虑也在增加/米家智能浴霸2C预售882元,雷达能感应照明和换气",
-        "苹果系统级地震预警仍未上线,中国地震台网称正沟通/比亚迪称2027年让一款车搭载固态电池,先做技术示范/经典重映回归院线,上周全国电影市场票房降至3.3亿元",
-        "零跑B01和B10量产破30万台,B10出口6万台创纪录/豆包手机助手能排队执行跨App任务,锁屏也能看进度/《伊莫》9月16日上线,飞行潜水遁地都能捉宠",
-        "理想李想称纯电SUV可更小,车宽只会增加停车焦虑/iQOO16首发三星M16屏幕,165Hz和局部峰值10000尼特/《伊莫》PC端预下载开启,9月16日正式上线",
-        "Anthropic被曝拟10月冲刺上市,尚未提交招股文件/比亚迪高管称2027年让车型搭载固态电池,先验证技术/《肖申克的救赎》重映半月收2087万元,上周票房环比跌33%"
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 华为维感G1动态血糖仪开启预售",
+        "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / 华为维感G1动态血糖仪开启预售 / OceanBase披露2026年经营数据,AI业务成为新增长点",
+        "OceanLake发布,OceanBase核心引擎向全球开源 / 华为维感G1动态血糖仪开启预售 / 特斯拉中国推出「特从容」购车方案"
       ],
-      "selected_cover": "story:9dfc0d5b-fac8-5a67-bcf2-eb98365c010d",
-      "selected_headline": "Anthropic被曝选纳斯达克,争取10月上市但估值未定/苹果地震预警还没上线,中国地震台网称正加快沟通/豆包手机助手能跨App办事,努比亚NaviXUltra9月16日开售"
+      "selected_headline": "豆包旗下AI个人助理「小豆」开启公测,仍需邀请码 / OceanLake发布,OceanBase核心引擎向全球开源 / 华为维感G1动态血糖仪开启预售",
+      "cover_candidates": [],
+      "selected_cover": ""
     }
   },
   "diagnostics": {
     "static_snapshot": true,
-    "source_issue_revision": 73,
-    "snapshot_generated_at": "2026-09-14T10:12:00+00:00",
+    "source_issue_revision": 5,
+    "snapshot_generated_at": "2026-11-24T05:21:02+00:00",
     "public_snapshot": {
-      "digest": "d68f82239ebcebcb875f739b858c1774794ddb730e72bfb5e0bc99c232b21b5c",
-      "generated_at": "2026-09-14T10:12:00+00:00",
-      "image_count": 9,
-      "selected_count": 15,
-      "selected_image_count": 11,
+      "digest": "aceec07ab1f086e04ac7f885a117e7325444e81883da11a85498abee0690a635",
+      "generated_at": "2026-11-24T05:21:02+00:00",
+      "image_count": 14,
+      "selected_count": 23,
+      "selected_image_count": 16,
       "mode": "explicit_review_operations"
     }
   }

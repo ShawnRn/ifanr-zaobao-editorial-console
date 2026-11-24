@@ -71,6 +71,42 @@ export const normalizeApiUrl = (value: string) => {
   return url.toString().replace(/\/$/, '')
 }
 
+function watchWorkerJob(id: string, onUpdate: (job: Job) => void): Promise<Job> {
+  return new Promise((resolve, reject) => {
+    let stream: EventSource | undefined
+    let pollTimer: number | undefined
+    let finished = false
+    let polling = false
+    let previous = ''
+    const close = () => { finished = true; stream?.close(); window.clearTimeout(pollTimer); window.clearTimeout(deadline) }
+    const deliver = (job: Job) => {
+      if (finished) return
+      const signature = JSON.stringify(job)
+      if (signature !== previous) { previous = signature; onUpdate(job) }
+      if (job.state === 'completed' || job.state === 'failed') { close(); resolve(job) }
+    }
+    const deadline = window.setTimeout(() => { close(); reject(new Error('任务仍在服务器执行，进度连接已暂停；重新打开可查看状态')) }, 20 * 60_000)
+    const poll = async () => {
+      if (finished) return
+      try { deliver(await request<Job>(`/api/jobs/${id}`)) } catch { /* A lost read never restarts the server job. */ }
+      if (!finished) pollTimer = window.setTimeout(() => void poll(), 3000)
+    }
+    const fallback = () => {
+      stream?.close()
+      if (polling || finished) return
+      polling = true
+      void poll()
+    }
+    try {
+      stream = new EventSource(`${getApiUrl()}/api/jobs/${id}/events`)
+      stream.addEventListener('progress', event => {
+        try { deliver(JSON.parse((event as MessageEvent).data) as Job) } catch { fallback() }
+      })
+      stream.addEventListener('error', fallback)
+    } catch { fallback() }
+  })
+}
+
 export const apiUrlProblem = (value: string, pageProtocol = window.location.protocol) => {
   let url: URL
   try {
@@ -199,30 +235,47 @@ async function readJsonResponse<T>(response: Response, source: string): Promise<
   }
 }
 
+const pendingReads = new Map<string, Promise<unknown>>()
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const controller = new AbortController()
-  const timeout = window.setTimeout(() => controller.abort(), 10000)
   const baseUrl = getApiUrl()
   const token = getAuthToken()
+  const method = (init?.method || 'GET').toUpperCase()
+  const readKey = method === 'GET' && !init?.signal ? `${baseUrl}|${token}|${path}` : ''
+  const existing = readKey && pendingReads.get(readKey)
+  if (existing) return existing as Promise<T>
+  const task = performRequest<T>(baseUrl, token, path, method, init)
+  if (readKey) pendingReads.set(readKey, task)
+  try { return await task } finally { if (readKey && pendingReads.get(readKey) === task) pendingReads.delete(readKey) }
+}
+
+async function performRequest<T>(baseUrl: string, token: string, path: string, method: string, init?: RequestInit): Promise<T> {
+  const controller = new AbortController()
+  const mutating = !['GET', 'HEAD'].includes(method)
+  const timeout = window.setTimeout(() => controller.abort(), mutating ? 30000 : 15000)
+  const cancel = () => controller.abort()
+  if (init?.signal?.aborted) cancel()
+  init?.signal?.addEventListener('abort', cancel, { once: true })
   try {
     const response = await fetch(`${baseUrl}${path}`, {
-      ...workerFetchOptions(baseUrl),
-      credentials: 'include',
-      ...init,
-      signal: init?.signal || controller.signal,
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        ...init?.headers,
-      },
+      ...workerFetchOptions(baseUrl), credentials: 'include', ...init, signal: controller.signal,
+      headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}), ...init?.headers },
     })
     if (!response.ok) {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
       throw requestError(payload, response.status, response.statusText)
     }
-    return readJsonResponse<T>(response, 'Worker')
+    return await readJsonResponse<T>(response, 'Worker')
+  } catch (error) {
+    if (controller.signal.aborted || (typeof error === 'object' && error !== null && 'name' in error && error.name === 'AbortError')) {
+      throw new WorkerRequestError(mutating
+        ? '保存确认超时，本机输入仍保留；请核对线上状态后重试保存'
+        : '读取暂时超时，请稍后重试', 408, 'request_timeout')
+    }
+    throw error
   } finally {
     window.clearTimeout(timeout)
+    init?.signal?.removeEventListener('abort', cancel)
   }
 }
 
@@ -245,7 +298,11 @@ async function mediaRequest<T>(path: string, init: RequestInit): Promise<T> {
       const payload = await response.json().catch(() => ({ detail: response.statusText }))
       throw requestError(payload, response.status, response.statusText)
     }
-    return readJsonResponse<T>(response, 'Worker')
+    return await readJsonResponse<T>(response, 'Worker')
+  } catch (error) {
+    if (controller.signal.aborted || (typeof error === 'object' && error !== null && 'name' in error && error.name === 'AbortError'))
+      throw new WorkerRequestError('图片处理确认超时，原文件仍保留，请核对后重试', 408, 'request_timeout')
+    throw error
   } finally {
     window.clearTimeout(timeout)
   }
@@ -262,7 +319,7 @@ export const api = {
     return readJsonResponse<Issue>(response, 'Pages 快照')
   },
   importLatest: () => request<Issue>('/api/issues/import', { method: 'POST', body: '{}' }),
-  getIssue: (id: string) => request<Issue>(`/api/issues/${id}`),
+  getIssue: (id: string, scope: 'full' | 'draft' = 'full') => request<Issue>(`/api/issues/${id}${scope === 'draft' ? '?scope=draft' : ''}`),
   socialPosts: (issueId: string) => request<SocialPost[]>(`/api/issues/${issueId}/social-posts?platform=weibo`),
   flashDrafts: async () => (await request<FlashDraftRecord[]>('/api/flash-drafts')).map(flashDraftFromRecord),
   upsertFlashDraft: async (draft: FlashDraftItem) => flashDraftFromRecord(await request<FlashDraftRecord>(`/api/flash-drafts/${encodeURIComponent(draft.id)}`, {
@@ -319,21 +376,7 @@ export const api = {
       body: JSON.stringify({ use_chrome: useChrome, instruction }),
     }),
   job: (id: string) => request<Job>(`/api/jobs/${id}`),
-  watchJob: (id: string, onUpdate: (job: Job) => void) => new Promise<Job>((resolve, reject) => {
-    const stream = new EventSource(`${getApiUrl()}/api/jobs/${id}/events`)
-    stream.addEventListener('progress', (event) => {
-      const job = JSON.parse((event as MessageEvent).data) as Job
-      onUpdate(job)
-      if (job.state === 'completed' || job.state === 'failed') {
-        stream.close()
-        resolve(job)
-      }
-    })
-    stream.addEventListener('error', () => {
-      stream.close()
-      reject(new Error('任务进度连接中断'))
-    })
-  }),
+  watchJob: watchWorkerJob,
   patchBrand: (issueId: string, brand: 'appso' | 'ifanr', patch: Partial<BrandPackage>) =>
     request<BrandPackage>(`/api/issues/${issueId}/brands/${brand}`, {
       method: 'PATCH',

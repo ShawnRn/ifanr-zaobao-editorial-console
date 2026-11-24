@@ -1,3 +1,8 @@
+import { additionalRelatedLinks, allRelatedLinks, relatedReadingLabel, replaceBodyRelatedLinks, stripTrailingStorySeparators, type RelatedLink } from './relatedReading'
+import { MarkdownEditor } from './MarkdownEditor'
+import { DeferredLayoutSaver, editingIdleMs, type LayoutSaveState } from './deferredLayout'
+import { navigateDraft, revealOutlineItem, type DraftNavigation } from './draftNavigation'
+import { isWeekendPublication } from './publicationCalendar'
 import {
   ArrowDown,
   ArrowDownToLine,
@@ -63,6 +68,7 @@ import { WeiboWorkspace } from './WeiboWorkspace'
 import { generateQrSvgDataUri } from './totp'
 import { buildReviewExport, downloadText, renderIssueMarkdown } from './review'
 import { writeClipboardText } from './clipboard'
+import { pastedImage, type PastedImage } from './imagePaste'
 import type { EditorialReviewExport } from './review'
 import type { AutomationHandoff, BrandPackage, FlashDraftItem, Issue, IssueSummary, Job, LarkConflict, LarkConflictReadback, Source, Story, StoryCreateInput, StoryStatus } from './types'
 import ifanrLogoDarkUrl from './assets/ifanr-logo-dark.png'
@@ -111,6 +117,7 @@ const categoryOrder = publicationCategoryOrder
 // renderer deliberately collapses them into one reader-facing weekend section.
 const weekendWorkbenchCategories = ['大公司', '新产品', '新消费', '好看的'] as const
 const workerRefreshIntervalMs = 25_000
+const directoryEmoji = (story: Story): string => typeof story.metadata.toc_emoji === 'string' ? story.metadata.toc_emoji : ''
 const draftRecoveryKey = (storyId: string) => `ifanr-editorial-draft-recovery:${storyId}`
 const activeViewStorageKey = 'ifanr-editorial-active-view'
 
@@ -121,7 +128,7 @@ function loadDraftRecovery(story: Story): DraftRecovery | null {
     const raw = localStorage.getItem(draftRecoveryKey(story.id))
     if (!raw) return null
     const value = JSON.parse(raw) as DraftRecovery
-    return value.baseTitle === story.title && value.baseBody === story.body ? value : null
+    return [value.title, value.body, value.baseTitle, value.baseBody].every((field) => typeof field === 'string') ? value : null
   } catch {
     return null
   }
@@ -158,9 +165,7 @@ function IfanrMarkIcon({ size = 18 }: { size?: number }) {
 }
 
 function isSaturdayPublication(publicationDate?: string) {
-  if (!publicationDate) return false
-  const [year, month, day] = publicationDate.split('-').map(Number)
-  return new Date(Date.UTC(year, month - 1, day)).getUTCDay() === 6
+  return isWeekendPublication(publicationDate)
 }
 
 function weekendWorkbenchSection(story: Story) {
@@ -459,6 +464,33 @@ function MobileStoryActions({
   )
 }
 
+export function StoryFigure({ story, body }: { story: Story; body: string }) {
+  const [selected, setSelected] = useState(false)
+  // Inline Markdown images are already rendered by the body editor. Preserve
+  // their positions and avoid repeating the story's cover beside them.
+  if (story.metadata._image_manual_state !== 'set' && /!\[[^\]]*\]\([^\n]+\)|<img\b/i.test(body)) return null
+  const image = api.storyImagePreviewUrl(story)
+  return image ? <figure tabIndex={0} role="button" aria-label="选中配图" aria-pressed={selected} className={`story-figure ${selected ? 'image-selected' : ''}`} onClick={(event) => { event.stopPropagation(); setSelected(true); event.currentTarget.focus() }} onBlur={() => setSelected(false)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelected(true) } if (event.key === 'Escape') setSelected(false) }}><img className="article-side-image" loading="lazy" src={image} alt="" /></figure> : null
+}
+
+function DeferredInlineEditor({ children, story, eager = false }: { children: ReactNode; story: Story; eager?: boolean }) {
+  const host = useRef<HTMLDivElement>(null)
+  const [ready, setReady] = useState(typeof IntersectionObserver === 'undefined')
+  useEffect(() => {
+    if (eager) { setReady(true); return }
+    if (ready || !host.current) return
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) { setReady(true); observer.disconnect() }
+    }, { rootMargin: '500px' })
+    observer.observe(host.current)
+    return () => observer.disconnect()
+  }, [ready, eager])
+  return <div ref={host}>{ready || eager ? children : <div className="inline-editor-preview" onPointerDown={() => setReady(true)}>
+    <h3 className="inline-title">{renderFormattedText(story.title)}</h3><StoryFigure story={story} body={story.body} />
+    <div className="article-body"><BodyBlocks body={story.body} /></div>
+  </div>}</div>
+}
+
 export function IssueArticle({
   story,
   active,
@@ -478,7 +510,9 @@ export function IssueArticle({
   currentMoveTarget = story.category,
   moving = false,
   onOpenFlash,
+  inlineEditor,
 }: {
+  inlineEditor?: React.ReactNode
   story: Story
   active: boolean
   onOpen: () => void
@@ -498,7 +532,6 @@ export function IssueArticle({
   moving?: boolean
   onOpenFlash?: () => void
 }) {
-  const image = api.storyImagePreviewUrl(story)
   const awaitingAiEditor = pendingAiEditorRequest(story)
   const relatedLinks = clipboardRelatedLinks(story)
   const [mobileActionsOpen, setMobileActionsOpen] = useState(false)
@@ -530,7 +563,7 @@ export function IssueArticle({
           event.stopPropagation()
           return
         }
-        onOpen()
+        if (!inlineEditor) onOpen()
       }}
       onPointerDown={(event) => {
         lastPointerWasTouchRef.current = event.pointerType === 'touch' || event.pointerType === 'pen'
@@ -559,7 +592,7 @@ export function IssueArticle({
         longPressTriggeredRef.current = true
         setMobileActionsOpen(true)
       }}
-      draggable
+      draggable={!inlineEditor}
       onDragStart={(event) => {
         if (lastPointerWasTouchRef.current) {
           event.preventDefault()
@@ -585,22 +618,25 @@ export function IssueArticle({
       }}
       onDragEnd={onDragEnd}
     >
-      <div className={image ? 'article-layout-with-image' : ''}>
+      <div className="article-layout-stacked">
         <div className="article-copy">
+          {inlineEditor || <>
           <header>
           <h3>{renderFormattedText(story.title)}</h3>
           {awaitingAiEditor ? <span className="ai-editor-note">待 AI 主编撰写</span> : null}
           {story.changed_since_review ? <span className="changed-note">事实有更新，需复核</span> : null}
           </header>
+          <StoryFigure story={story} body={story.body} />
           {hasMeaningfulBody(story.body)
             ? <div className="article-body"><BodyBlocks body={story.body} /></div>
               : awaitingAiEditor
               ? <p className="pending-editorial-copy">已提交给 AI 主编，等待下一轮追源、核验并按早报 prompt 成稿。</p>
               : null}
-          {relatedLinks.map((link) => <p className="related-link-display" key={link.url}>🔗 相关阅读：<a href={link.url} target="_blank" rel="noreferrer">{link.title}</a></p>)}
+          </>}
+          {!inlineEditor && relatedLinks.map((link) => <p className="related-link-display" key={`${link.brand || ''}:${link.url}`}>{relatedReadingLabel(link.brand)}<a href={link.url} target="_blank" rel="noreferrer">{link.title}</a></p>)}
           <LinkedSourceLine story={story} />
         </div>
-        {image ? <img className="article-side-image" loading="lazy" src={image} alt="" /> : null}
+
       </div>
       <button
         type="button"
@@ -718,7 +754,7 @@ export function TrashItem({
   )
 }
 
-function DetailPanel({
+export function DetailPanel({
   story,
   onPatch,
   onAction,
@@ -726,104 +762,270 @@ function DetailPanel({
   activeJob,
   staticMode,
   onImageChange,
+  onRegisterFlush,
+  onPendingChange,
   closing = false,
+  onPreviewTitle,
+  inline = false,
+  advancedOnly = false,
   onOpenFlash,
+  onBeforeRelatedChange,
 }: {
   story: Story
-  onPatch: (patch: Partial<Story>) => Promise<unknown>
+  onPatch: (patch: Partial<Story>, baseline?: Story) => Promise<unknown>
   onAction: (action: string, chrome?: boolean) => Promise<void>
   onClose: () => void
   activeJob?: Job
   staticMode: boolean
   onImageChange: (story: Story) => void
+  onRegisterFlush?: (flush: (() => Promise<void>) | null) => void
+  onPendingChange?: (pending: boolean) => void
   closing?: boolean
+  onPreviewTitle?: (title: string) => void
+  inline?: boolean
+  advancedOnly?: boolean
+  onBeforeRelatedChange?: () => Promise<Story | undefined>
   onOpenFlash?: () => void
 }) {
   const [title, setTitle] = useState(story.title)
   const [body, setBody] = useState(story.body)
+  const [tocEmoji, setTocEmoji] = useState(directoryEmoji(story))
   const [relatedTitle, setRelatedTitle] = useState('')
   const [relatedUrl, setRelatedUrl] = useState('')
   const [relatedBusy, setRelatedBusy] = useState(false)
-  const [saveState, setSaveState] = useState<'saved' | 'saving' | 'error'>('saved')
+  const [saveState, setSaveState] = useState<'saved' | 'pending' | 'saving' | 'error'>('saved')
+  const [saveError, setSaveError] = useState('')
+  const [imagePasteState, setImagePasteState] = useState('')
+  const imageQueueRef = useRef<Promise<void>>(Promise.resolve())
+  const imageErrorRef = useRef<Error | null>(null)
+  const failedImageRef = useRef<PastedImage | null>(null)
+  const imageUploadsRef = useRef(0)
+  const imageChangeRef = useRef(onImageChange)
+  imageChangeRef.current = onImageChange
+  const pasteImage = (image: PastedImage) => {
+    imageUploadsRef.current++
+    setImagePasteState('正在上传配图…')
+    imageQueueRef.current = imageQueueRef.current.then(async () => {
+      try {
+        const updated = await ('file' in image ? api.uploadStoryImage(story.id, image.file) : api.downloadStoryImage(story.id, image.url))
+        imageChangeRef.current(updated)
+        imageErrorRef.current = null
+        failedImageRef.current = null
+      } catch (error) {
+        imageErrorRef.current = error instanceof Error ? error : new Error('配图上传失败')
+        failedImageRef.current = image
+      } finally {
+        imageUploadsRef.current--
+        if (mountedRef.current) setImagePasteState(imageUploadsRef.current ? '正在上传配图…' : imageErrorRef.current ? '配图上传失败，请重试' : '')
+      }
+    })
+  }
   const saveTimerRef = useRef<number | null>(null)
+  const retryTimerRef = useRef<number | null>(null)
   const pendingPatchRef = useRef<Partial<Story>>({})
-  const saveQueueRef = useRef<Promise<unknown>>(Promise.resolve())
+  const activeSaveRef = useRef<Promise<void> | null>(null)
   const titleRef = useRef(title)
   const bodyRef = useRef(body)
+  const onPatchRef = useRef(onPatch)
+  const editBaselineRef = useRef(story)
+  const composingRef = useRef(false)
+  const mountedRef = useRef(true)
+  const retryDelayRef = useRef(1000)
+  const lastInputAtRef = useRef(0)
+  const forceSaveRef = useRef(false)
+  onPatchRef.current = onPatch
+
+  // One drain owns all writes for this mounted story. New input stays pending
+  // until the previous response supplies the baseline for the next write.
+  const flushPending = useCallback(async (requireSuccess = false): Promise<void> => {
+    if (requireSuccess || !mountedRef.current) forceSaveRef.current = true
+    if (saveTimerRef.current !== null) window.clearTimeout(saveTimerRef.current)
+    if (retryTimerRef.current !== null) window.clearTimeout(retryTimerRef.current)
+    saveTimerRef.current = null
+    retryTimerRef.current = null
+    if (composingRef.current) {
+      if (requireSuccess) throw new Error('输入法尚未完成，请确认当前文字后再同步')
+      return
+    }
+    if (!activeSaveRef.current && Object.keys(pendingPatchRef.current).length) {
+      activeSaveRef.current = Promise.resolve().then(async () => {
+        while (Object.keys(pendingPatchRef.current).length) {
+          if (composingRef.current) break
+          const remaining = editingIdleMs - (Date.now() - lastInputAtRef.current)
+          if (!forceSaveRef.current && remaining > 0) {
+            saveTimerRef.current = window.setTimeout(() => { void flushPending() }, remaining)
+            setSaveState('pending')
+            break
+          }
+          const patch = pendingPatchRef.current
+          pendingPatchRef.current = {}
+          setSaveState('saving')
+          try {
+            const result = await onPatchRef.current(patch, editBaselineRef.current) as Story
+            editBaselineRef.current = result
+            if (patch.body !== undefined && bodyRef.current === patch.body) {
+              bodyRef.current = result.body
+              setBody(result.body)
+            }
+            retryDelayRef.current = 1000
+            setSaveError('')
+            // Keep recovery based on the last acknowledged server content.
+            // An older successful response must never delete newer input.
+            if (!staticMode && mountedRef.current) storeDraftRecovery(result, titleRef.current, bodyRef.current)
+          } catch (error) {
+            pendingPatchRef.current = { ...patch, ...pendingPatchRef.current }
+            if (!staticMode && mountedRef.current) storeDraftRecovery(editBaselineRef.current, titleRef.current, bodyRef.current)
+            setSaveState('error')
+            setSaveError(error instanceof Error ? error.message : '保存失败，输入已保留在本机')
+            const retryable = error instanceof WorkerRequestError
+              ? error.status >= 500 || error.status === 408 || error.status === 429
+              : error instanceof TypeError || (error instanceof Error && /网络|超时|fetch|network|timeout|abort/i.test(error.message))
+            if (retryable && mountedRef.current) {
+              retryTimerRef.current = window.setTimeout(() => { void flushPending() }, retryDelayRef.current)
+              retryDelayRef.current = Math.min(retryDelayRef.current * 2, 15000)
+            }
+            throw error
+          }
+        }
+        if (!Object.keys(pendingPatchRef.current).length) {
+          try { if (mountedRef.current) localStorage.removeItem(draftRecoveryKey(story.id)) } catch { /* no-op */ }
+          setSaveState('saved')
+        }
+      }).finally(() => { activeSaveRef.current = null; forceSaveRef.current = false })
+    }
+    try {
+      await activeSaveRef.current
+      // Input can arrive while a caller waits for an existing drain.
+      if (requireSuccess && Object.keys(pendingPatchRef.current).length) await flushPending(true)
+    } catch (error) {
+      if (requireSuccess) throw error
+    }
+  }, [story.id, staticMode])
 
   useEffect(() => {
-    const recovery = !staticMode ? loadDraftRecovery(story) : null
-    setTitle(recovery?.title ?? story.title)
-    setBody(recovery?.body ?? story.body)
-    titleRef.current = recovery?.title ?? story.title
-    bodyRef.current = recovery?.body ?? story.body
-    pendingPatchRef.current = {}
+    mountedRef.current = true
+    const recovery = !staticMode && !advancedOnly ? loadDraftRecovery(story) : null
     if (recovery) {
-      pendingPatchRef.current = { title: recovery.title, body: recovery.body }
-      setSaveState('error')
-      window.setTimeout(() => { void flushPending() }, 0)
-    } else setSaveState('saved')
-  }, [story.id])
+      editBaselineRef.current = { ...story, title: recovery.baseTitle, body: recovery.baseBody }
+      titleRef.current = recovery.title
+      bodyRef.current = recovery.body
+      setTitle(recovery.title)
+      setBody(recovery.body)
+      if (recovery.title !== recovery.baseTitle) pendingPatchRef.current.title = recovery.title
+      if (recovery.body !== recovery.baseBody) pendingPatchRef.current.body = recovery.body
+      void flushPending()
+    }
+    return () => {
+      mountedRef.current = false
+      if (retryTimerRef.current !== null) window.clearTimeout(retryTimerRef.current)
+    }
+  }, [story.id, staticMode, flushPending])
 
-  const flushPending = useCallback(async () => {
-    if (saveTimerRef.current !== null) {
-      window.clearTimeout(saveTimerRef.current)
-      saveTimerRef.current = null
+  // Refresh clean fields in place; a dirty field keeps its original baseline
+  // so an external edit is reported as a conflict instead of being overwritten.
+  useEffect(() => {
+    const baseline = editBaselineRef.current
+    if (titleRef.current === baseline.title) {
+      titleRef.current = story.title
+      setTitle(story.title)
+      editBaselineRef.current = { ...editBaselineRef.current, title: story.title }
     }
-    const patch = pendingPatchRef.current
-    pendingPatchRef.current = {}
-    if (!Object.keys(patch).length) return
-    setSaveState('saving')
-    const request = saveQueueRef.current.then(() => onPatch(patch))
-    saveQueueRef.current = request.catch(() => undefined)
-    try {
-      await request
-      if (!Object.keys(pendingPatchRef.current).length) {
-        try { localStorage.removeItem(draftRecoveryKey(story.id)) } catch { /* no-op */ }
-        setSaveState('saved')
-      }
-    } catch {
-      pendingPatchRef.current = { ...patch, ...pendingPatchRef.current }
-      storeDraftRecovery(story, titleRef.current, bodyRef.current)
-      setSaveState('error')
+    if (bodyRef.current === baseline.body) {
+      bodyRef.current = story.body
+      setBody(story.body)
+      editBaselineRef.current = { ...editBaselineRef.current, body: story.body }
     }
-  }, [onPatch, story])
+  }, [story.title, story.body])
+
+  useEffect(() => {
+    onRegisterFlush?.(async () => { await flushPending(true); await imageQueueRef.current; if (imageErrorRef.current) throw imageErrorRef.current })
+    return () => onRegisterFlush?.(null)
+  }, [flushPending, onRegisterFlush])
+
+  useEffect(() => {
+    onPendingChange?.(saveState !== 'saved' || Boolean(imagePasteState))
+    return () => onPendingChange?.(false)
+  }, [saveState, imagePasteState, onPendingChange])
 
   const schedulePersist = useCallback((field: 'title' | 'body', value: string, immediate = false) => {
     pendingPatchRef.current = { ...pendingPatchRef.current, [field]: value }
     if (field === 'title') titleRef.current = value
     else bodyRef.current = value
-    if (!staticMode) storeDraftRecovery(story, titleRef.current, bodyRef.current)
-    setSaveState('saving')
+    if (!staticMode) storeDraftRecovery(editBaselineRef.current, titleRef.current, bodyRef.current)
+    lastInputAtRef.current = Date.now()
+    setSaveState('pending')
     if (saveTimerRef.current !== null) window.clearTimeout(saveTimerRef.current)
+    if (composingRef.current) return
     if (immediate) void flushPending()
-    else saveTimerRef.current = window.setTimeout(() => { saveTimerRef.current = null; void flushPending() }, 600)
-  }, [flushPending, staticMode, story])
+    else saveTimerRef.current = window.setTimeout(() => { saveTimerRef.current = null; void flushPending() }, editingIdleMs)
+  }, [flushPending, staticMode])
 
-  const relatedLinks = Array.isArray(story.metadata.related_links)
-    ? story.metadata.related_links.filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && typeof (item as { url?: unknown }).url === 'string'))
-    : []
-  const saveRelatedLinks = (links: { title: string; url: string }[]) => void onPatch({ metadata: { ...story.metadata, related_links: links } })
+  const compositionHandlers = {
+    onCompositionStart: () => { composingRef.current = true },
+    onCompositionEnd: (event: React.CompositionEvent<HTMLTextAreaElement>) => {
+      composingRef.current = false
+      const field = event.currentTarget.id === 'story-title' ? 'title' : 'body'
+      schedulePersist(field, event.currentTarget.value)
+    },
+  }
+
+  // A deleted body link must not reappear from the previous metadata mirror
+  // while autosave is still pending. Only legacy metadata-only links remain.
+  const editableStory = { ...story, body, metadata: { ...story.metadata, related_links: additionalRelatedLinks(story) } }
+  const relatedLinks = allRelatedLinks(editableStory)
+  const saveRelatedLinks = async (change: (links: RelatedLink[]) => RelatedLink[]) => {
+    try {
+      await flushPending(true)
+      const baseline = await onBeforeRelatedChange?.() || editBaselineRef.current
+      const links = change(allRelatedLinks(baseline))
+      const nextBody = replaceBodyRelatedLinks(baseline.body, links)
+      const localBody = bodyRef.current
+      const result = await onPatchRef.current({ body: nextBody, metadata: { ...baseline.metadata, related_links: links } }, baseline) as Story
+      editBaselineRef.current = result
+      if (bodyRef.current === localBody) {
+        bodyRef.current = result.body
+        setBody(result.body)
+      } else {
+        // New typing used the old body: retain that baseline so a subsequent
+        // autosave reports a conflict rather than erasing the sidebar change.
+        editBaselineRef.current = { ...result, body: baseline.body }
+      }
+      setSaveError('')
+      setSaveState(Object.keys(pendingPatchRef.current).length ? 'pending' : 'saved')
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : '相关阅读保存失败')
+      setSaveState('error')
+      throw error
+    }
+  }
   const addRelatedLink = async () => {
-    if (!/^https?:\/\//.test(relatedUrl.trim())) return
+    const url = relatedUrl.trim()
+    if (!/^https?:\/\//.test(url)) return
     setRelatedBusy(true)
     try {
-      const resolved = await api.resolveRelatedLink(story.id, relatedUrl.trim())
-      saveRelatedLinks([...relatedLinks, resolved])
+      let resolved: RelatedLink
+      try { resolved = await api.resolveRelatedLink(story.id, url) }
+      catch (error) {
+        if (!relatedTitle.trim()) throw error
+        resolved = { title: relatedTitle.trim(), url }
+      }
+      await saveRelatedLinks(links => [...links, resolved])
       setRelatedTitle('')
       setRelatedUrl('')
-    } catch {
-      // A title field remains as a deliberate fallback for paywalls or JS-only pages.
-      if (relatedTitle.trim()) {
-        saveRelatedLinks([...relatedLinks, { title: relatedTitle.trim(), url: relatedUrl.trim() }])
-        setRelatedTitle('')
-        setRelatedUrl('')
-      }
-    } finally { setRelatedBusy(false) }
+    } catch (error) { setSaveError(error instanceof Error ? error.message : '相关阅读保存失败') }
+    finally { setRelatedBusy(false) }
+  }
+  const captureImagePaste = (event: React.ClipboardEvent) => {
+    const image = pastedImage(event.clipboardData)
+    if (!image) return
+    event.preventDefault()
+    event.stopPropagation()
+    if (staticMode) { setImagePasteState('连接 Worker 后才能粘贴配图'); return }
+    pasteImage(image)
   }
 
   useEffect(() => {
-    const flushOnLeave = () => { void flushPending() }
+    const flushOnLeave = () => { void flushPending(true).catch(() => undefined) }
     const onVisibility = () => { if (document.visibilityState === 'hidden') flushOnLeave() }
     const onShortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === 's') {
@@ -843,29 +1045,52 @@ function DetailPanel({
     }
   }, [flushPending])
 
+  if (inline) return <div className="inline-story-editor" onClick={(event) => event.stopPropagation()} onPasteCapture={captureImagePaste}>
+    <MarkdownEditor title value={title} label={`标题：${story.id}`} onChange={(value) => { setTitle(value); onPreviewTitle?.(value); schedulePersist('title', value) }} onComposition={(active) => { composingRef.current = active }} />
+    <StoryFigure story={story} body={body} />
+    <MarkdownEditor resolveRelatedLink={(url) => api.resolveRelatedLink(story.id, url)} value={body} label={`正文：${story.id}`} onChange={(value) => { setBody(value); schedulePersist('body', value) }} onComposition={(active) => { composingRef.current = active }} />
+    {clipboardRelatedLinks(editableStory).map(link => <p className="related-link-display" key={`${link.brand || ''}:${link.url}`}>{relatedReadingLabel(link.brand)}<a href={link.url} target="_blank" rel="noreferrer">{link.title}</a></p>)}
+    {imagePasteState ? <p className="inline-image-status" role={imageErrorRef.current ? 'alert' : 'status'}>{imagePasteState}{failedImageRef.current ? <button type="button" onClick={() => { if (failedImageRef.current) pasteImage(failedImageRef.current) }}>重试上传</button> : null}</p> : null}
+    {saveError ? <p role="alert">{saveError}<button onClick={() => void flushPending(true).catch(() => undefined)}>重试保存</button></p> : null}
+  </div>
+
   return (
-    <aside className={`detail-panel ${closing ? 'closing' : ''}`} onKeyDownCapture={(event) => {
+    <aside className={`detail-panel ${closing ? 'closing' : ''}`} onPasteCapture={captureImagePaste} onKeyDownCapture={(event) => {
       if (event.key !== 'Escape') return
       event.preventDefault()
       event.stopPropagation()
       void (async () => {
-        await flushPending()
-        onClose()
+        try { await flushPending(true); onClose() } catch { /* Keep the editor open with its recovery copy. */ }
       })()
     }}>
       <div className="detail-toolbar">
         <span className="detail-kicker">稿件与来源</span>
-        <span className={`autosave-state ${saveState}`} aria-live="polite">{saveState === 'saving' ? '正在保存' : saveState === 'error' ? '保存失败' : staticMode ? '本地审稿' : '已保存'}</span>
-        <button type="button" className="detail-save-button" title="立即保存（⌘S）" onClick={() => void flushPending()}><Save size={15} />⌘S 保存</button>
-        <IconButton title="关闭详情" onClick={() => { void (async () => { await flushPending(); onClose() })() }}><PanelRightClose size={18} /></IconButton>
+        <span className={`autosave-state ${saveState}`} aria-live="polite">{saveState === 'pending' ? '待保存' : saveState === 'saving' ? '正在保存' : saveState === 'error' ? '保存失败' : staticMode ? '本地审稿' : '已保存'}</span>
+        <button type="button" className="detail-save-button" title="立即保存（⌘S）" onClick={() => void flushPending(true).catch(() => undefined)}><Save size={15} />⌘S 保存</button>
+        <IconButton title="关闭详情" onClick={() => { void (async () => { try { await flushPending(true); onClose() } catch { /* Keep unsaved input visible. */ } })() }}><PanelRightClose size={18} /></IconButton>
       </div>
       <div className="detail-scroll">
-        <label className="field-label" htmlFor="story-title">标题</label>
-        <textarea id="story-title" className="title-editor" value={title} rows={2} onChange={(event) => { const value = event.target.value; setTitle(value); schedulePersist('title', value) }} onBlur={() => title !== story.title && schedulePersist('title', title, true)} />
+        {imagePasteState ? <p className="inline-image-status" role={imageErrorRef.current ? 'alert' : 'status'}>{imagePasteState}{failedImageRef.current ? <button type="button" onClick={() => { if (failedImageRef.current) pasteImage(failedImageRef.current) }}>重试上传</button> : null}</p> : null}
+        {saveState === 'error' ? <p className="conflict-error" role="alert">{saveError || '保存失败，输入已保留在本机'}</p> : null}
+        {!advancedOnly ? <><label className="field-label" htmlFor="story-title">标题</label>
+        <textarea {...compositionHandlers} id="story-title" className="title-editor" value={title} rows={2} onChange={(event) => { const value = event.target.value; setTitle(value); schedulePersist('title', value) }} onBlur={() => title !== story.title && schedulePersist('title', title)} />
+        </> : null}
         <div className="field-row">
           <label><span className="field-label">分类</span><select value={story.category} onChange={(event) => void onPatch({ category: event.target.value })}>{categories.slice(1).map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span className="field-label">状态</span><select value={story.status} onChange={(event) => void onPatch({ status: event.target.value as StoryStatus })}>{Object.entries(statusLabel).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
         </div>
+        {(() => {
+          const decision = story.metadata.jev_category as { likelihoods?: Record<string, number>; suggested_category?: string } | undefined
+          const scores = decision?.likelihoods
+          if (!scores || typeof scores !== 'object') return null
+          return <details className="jev-category-panel"><summary>JEV 分类参考{decision?.suggested_category ? ` · ${decision.suggested_category}` : ' · 信息不足'}</summary>
+            <div className="jev-category-scores">{['重磅', '大公司', '新产品', '新消费', '好看的', '信息不足'].map((label) => {
+              const value = scores[label]
+              return typeof value === 'number' && Number.isFinite(value) ? <span key={label}>{label}<strong>{(value * 100).toFixed(1)}%</strong></span> : null
+            })}</div><small>给定材料下的相对选择分数；重磅须人工采用。</small>
+          </details>
+        })()}
+        <label><span className="field-label">飞书目录 emoji（留空按标题自动选择）</span><input aria-label="早报目录 emoji" value={tocEmoji} placeholder="自动选择，可手动指定" onChange={(event) => setTocEmoji(event.target.value)} onBlur={() => { if (tocEmoji !== directoryEmoji(story)) void onPatch({ metadata: { ...story.metadata, toc_emoji: tocEmoji.trim() } }) }} /></label>
         <div className="time-grid">
           <label><span className="field-label">事件发生日</span><input type="date" value={story.event_date || ''} onChange={(event) => void onPatch({ event_date: event.target.value })} /></label>
           <label><span className="field-label">首次披露</span><input value={story.disclosed_at || ''} onChange={(event) => void onPatch({ disclosed_at: event.target.value })} placeholder="来源首次披露时间" /></label>
@@ -880,12 +1105,13 @@ function DetailPanel({
         </div>
         {staticMode ? <p className="static-mode-note">当前显示当天 Bot 稿的 Pages 快照。可以在浏览器内审稿并导出审稿单；连接 Worker 后才会把修改直接保存到主 Mac。</p> : null}
         {activeJob ? <div className={`job-banner ${activeJob.state}`}><LoaderCircle size={16} className={activeJob.state === 'running' ? 'spin' : ''} /><span>{activeJob.message || activeJob.action}</span><strong>{activeJob.progress}%</strong></div> : null}
-        <label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
-        <textarea id="story-body" className="body-editor" value={body} onChange={(event) => { const value = event.target.value; setBody(value); schedulePersist('body', value) }} onBlur={() => body !== story.body && schedulePersist('body', body, true)} />
+        {!advancedOnly ? <><label className="field-label" htmlFor="story-body">{story.metadata.content_role === 'lead_only' ? '待成稿（原始抓取材料不会直接进入正文）' : '正文'}</label>
+        <textarea {...compositionHandlers} id="story-body" className="body-editor" value={body} onChange={(event) => { const value = event.target.value; setBody(value); schedulePersist('body', value) }} onBlur={() => body !== story.body && schedulePersist('body', body)} />
+        </> : null}
         <section className="related-links-editor" aria-label="相关阅读">
           <span className="field-label">相关阅读</span>
-          <p>粘贴链接后自动抓取文章标题；仅在抓取失败时手动补标题。发布时会自动置于正文末尾。</p>
-          {relatedLinks.map((link, index) => <div className="related-link-item" key={`${link.url}-${index}`}><a href={link.url} target="_blank" rel="noreferrer">{link.title}</a><button type="button" aria-label={`删除相关阅读：${link.title}`} onClick={() => saveRelatedLinks(relatedLinks.filter((_, itemIndex) => itemIndex !== index))}><X size={14} /></button></div>)}
+          <p>与正文中的相关阅读同步；这里添加或删除，正文会一并更新。粘贴链接后自动抓取文章标题。</p>
+          {relatedLinks.map((link, index) => <div className="related-link-item" key={`${link.url}-${index}`}><a href={link.url} target="_blank" rel="noreferrer">{link.title}</a><button type="button" aria-label={`删除相关阅读：${link.title}`} onClick={() => void saveRelatedLinks(links => links.filter(item => item.url !== link.url || (item.brand || '') !== (link.brand || ''))).catch(() => undefined)}><X size={14} /></button></div>)}
           <div className="related-link-inputs">
             <input value={relatedTitle} onChange={(event) => setRelatedTitle(event.target.value)} placeholder="抓取失败时手动填标题" aria-label="相关阅读标题" />
             <input value={relatedUrl} onChange={(event) => setRelatedUrl(event.target.value)} placeholder="https://…" aria-label="相关阅读链接" />
@@ -943,15 +1169,15 @@ export function StoryImageEditor({ story, staticMode, onImageChange }: { story: 
 
   useEffect(() => {
     const pasteImage = (event: ClipboardEvent) => {
-      const item = Array.from(event.clipboardData?.items || []).find((candidate) => candidate.kind === 'file' && candidate.type.startsWith('image/'))
-      const file = item?.getAsFile()
-      if (!file || busy !== null) return
+      if (event.defaultPrevented || !(event.target instanceof Element) || !event.target.closest('.detail-panel, .image-section')) return
+      const image = pastedImage(event.clipboardData)
+      if (!image || busy !== null) return
       event.preventDefault()
       if (staticMode) {
         setMessage('连接 Worker 后才能粘贴配图')
         return
       }
-      uploadFile(file)
+      void run('file' in image ? 'upload' : 'url', () => 'file' in image ? api.uploadStoryImage(story.id, image.file) : api.downloadStoryImage(story.id, image.url))
     }
     window.addEventListener('paste', pasteImage)
     return () => window.removeEventListener('paste', pasteImage)
@@ -1063,7 +1289,7 @@ function WeekendWorkspace({ data }: { data: Record<string, { label: string; cand
 }
 
 const larkConflictFieldLabel: Record<string, string> = {
-  title: '标题', body: '正文', category: '分类', position: '排序', selected: '采用状态', story: '整条稿件',
+  title: '标题', body: '正文', category: '分类', position: '排序', selected: '采用状态', story: '整条稿件', blocks: '发布段落与原生资源',
 }
 
 function formatLarkConflictValue(conflict: LarkConflict, side: 'workbench' | 'lark') {
@@ -1125,10 +1351,24 @@ function ExportDialog({ issue, handoff, busy, staticMode, operationCount, closin
     setPublishMessage('正在启动同步…')
     setPublishedDocUrl('')
     try {
-      const queued = await onPublishToLark()
-      setPublishProgress(queued.progress || 0)
-      const completed = await api.watchJob(queued.id, (job) => { setPublishMessage(job.message); setPublishProgress(job.progress) })
-      if (completed.state === 'failed') throw new Error(completed.error || '飞书 Bot 同步失败')
+      let completed: Job | undefined
+      for (let attempt = 0; attempt < 8; attempt++) {
+        try {
+          const queued = await onPublishToLark()
+          setPublishProgress(queued.progress || 0)
+          completed = await api.watchJob(queued.id, (job) => { setPublishMessage(job.message); setPublishProgress(job.progress) })
+          if (completed.state === 'failed') throw new WorkerRequestError(completed.error || '飞书 Bot 同步失败', 409, String(completed.result?.code || ''))
+          break
+        } catch (error) {
+          const message = error instanceof Error ? error.message : ''
+          if (!(error instanceof WorkerRequestError && error.code === 'workbench_changed') && !/工作台.*(更新|变化)/.test(message)) throw error
+          if (attempt === 7) throw new Error('工作台仍在持续更新，最新内容已保留；请稍后点击同步重试，无需刷新页面')
+          setPublishMessage('工作台有更新，正在读取最新内容并重新同步…')
+          await onReadback()
+          await new Promise((resolve) => window.setTimeout(resolve, Math.min(300 * 2 ** attempt, 3000)))
+        }
+      }
+      if (!completed) throw new Error('飞书 Bot 同步失败')
       if (completed.result?.requires_review) {
         await onReadback()
         const readback = completed.result.readback as LarkConflictReadback | undefined
@@ -1972,11 +2212,10 @@ export function App() {
 
   useEffect(() => {
     const currentId = activeStoryId || selectedStoryId
-    if (currentId && sidebarItemRefs.current[currentId]) {
-      sidebarItemRefs.current[currentId]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-      })
+    if (currentId && sidebarItemRefs.current[currentId] && !draggedStoryIdRef.current
+      && !layoutSaverRef.current?.pending && Date.now() - dragJustEndedAtRef.current > editingIdleMs) {
+      const item = sidebarItemRefs.current[currentId]
+      if (outlineRef.current && item) revealOutlineItem(outlineRef.current, item)
     }
   }, [activeStoryId, selectedStoryId])
 
@@ -2195,6 +2434,8 @@ export function App() {
   }, [])
   useEffect(() => { if (mobileReadOnly) setSelectedStoryId(null) }, [mobileReadOnly])
   const draftScrollRef = useRef<HTMLElement | null>(null)
+  const draftNavigationRef = useRef<DraftNavigation | null>(null)
+  useEffect(() => () => { draftNavigationRef.current?.cancel(); draftNavigationRef.current = null }, [view, issue?.id])
   const outlineRef = useRef<HTMLDivElement | null>(null)
   const settingsPopoverRef = useRef<HTMLDivElement | null>(null)
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null)
@@ -2210,13 +2451,51 @@ export function App() {
   const viewRef = useRef<View>(view)
   const dataModeRef = useRef(dataMode)
   const workerRefreshInFlightRef = useRef(false)
-  const reorderInFlightRef = useRef(false)
+  const lastInteractionRef = useRef(0)
+  const editorPendingRef = useRef(false)
+  const workerNeedsReconcileRef = useRef(false)
+  const [layoutSaveState, setLayoutSaveState] = useState<LayoutSaveState>('saved')
+  const [layoutSaveMessage, setLayoutSaveMessage] = useState('')
+  const layoutSaverRef = useRef<DeferredLayoutSaver | null>(null)
+  if (!layoutSaverRef.current) layoutSaverRef.current = new DeferredLayoutSaver(
+    (write) => api.reorder(write.issueId, write.storyIds, write.category),
+    (remote) => {
+      issueCacheRef.current.set(remote.id, remote)
+      const current = issueRef.current
+      workerNeedsReconcileRef.current = true
+      if (!current || current.id !== remote.id || remote.revision <= current.revision) return
+      // The visible layout and editor remain authoritative while arranging.
+      // Only acknowledge the version here; merge background content when idle.
+      const acknowledged = { ...current, revision: remote.revision }
+      issueRef.current = acknowledged
+      setIssue(acknowledged)
+    },
+    (state, message = '') => { setLayoutSaveState(state); setLayoutSaveMessage(message) },
+  )
+  const noteInteraction = useCallback(() => {
+    lastInteractionRef.current = Date.now()
+    layoutSaverRef.current?.touch()
+  }, [])
+  const noteEditorPending = useCallback((pending: boolean) => { editorPendingRef.current = pending }, [])
   const dragJustEndedAtRef = useRef(0)
   const draggedStoryIdRef = useRef<string | null>(null)
   const fullIssueLoadRef = useRef<Promise<void> | null>(null)
   const issueCacheRef = useRef<Map<string, Issue>>(new Map())
   const issuePrefetchRef = useRef<Map<string, Promise<Issue>>>(new Map())
   const issueSwitchSequenceRef = useRef(0)
+  const [previewTitles, setPreviewTitles] = useState<Record<string, string>>({})
+  const inlineFlushers = useRef(new Map<string, () => Promise<void>>())
+  const inlinePending = useRef(new Set<string>())
+  const inlineBindings = useRef(new Map<string, { onRegisterFlush: (flush: (() => Promise<void>) | null) => void; onPendingChange: (pending: boolean) => void }>())
+  const bindingsFor = (id: string) => {
+    if (!inlineBindings.current.has(id)) inlineBindings.current.set(id, {
+      onRegisterFlush: (flush) => { if (flush) inlineFlushers.current.set(id, flush); else inlineFlushers.current.delete(id) },
+      onPendingChange: (pending) => { if (pending) inlinePending.current.add(id); else { inlinePending.current.delete(id); setPreviewTitles(current => { if (!(id in current)) return current; const next = { ...current }; delete next[id]; return next }) }; editorPendingRef.current = inlinePending.current.size > 0 },
+    })
+    return inlineBindings.current.get(id)!
+  }
+  const detailFlushRef = useRef<(() => Promise<void>) | null>(null)
+  const flushEditors = async () => { await Promise.all([...inlineFlushers.current.values()].map(flush => flush())); await detailFlushRef.current?.() }
 
   useEffect(() => { issueRef.current = issue }, [issue])
   useEffect(() => { viewRef.current = view }, [view])
@@ -2253,14 +2532,18 @@ export function App() {
 
   const closeDetail = useCallback(() => {
     if (!selectedStoryId || detailClosing) return
-    setDetailClosing(true)
-    if (detailCloseTimerRef.current !== null) window.clearTimeout(detailCloseTimerRef.current)
-    detailCloseTimerRef.current = window.setTimeout(() => {
-      setSelectedStoryId(null)
-      setDetailClosing(false)
-      detailCloseTimerRef.current = null
-    }, 180)
-  }, [detailClosing, selectedStoryId])
+    void (async () => {
+      try { await flushEditors() }
+      catch (error) { showOperationError(error instanceof Error ? error.message : '当前编辑尚未保存'); return }
+      setDetailClosing(true)
+      if (detailCloseTimerRef.current !== null) window.clearTimeout(detailCloseTimerRef.current)
+      detailCloseTimerRef.current = window.setTimeout(() => {
+        setSelectedStoryId(null)
+        setDetailClosing(false)
+        detailCloseTimerRef.current = null
+      }, 180)
+    })()
+  }, [detailClosing, selectedStoryId, showOperationError])
 
   const closeOverlay = useCallback((overlay: 'create' | 'export' | 'delete' | 'auth') => {
     if (closingOverlay) return
@@ -2313,7 +2596,7 @@ export function App() {
     try {
       const [health, current, recent] = await Promise.all([
         api.health(),
-        api.currentIssue(viewRef.current === 'candidates' || viewRef.current === 'trash' ? 'full' : 'draft').catch(() => api.importLatest()),
+        api.currentIssue(viewRef.current === 'candidates' || viewRef.current === 'trash' ? 'full' : 'draft'),
         api.recentIssues(3).catch(() => []),
       ])
       setDataMode('worker')
@@ -2359,9 +2642,15 @@ export function App() {
       .then((fullIssue) => {
         const normalized = issueWithMetrics(fullIssue, fullIssue.stories)
         issueCacheRef.current.set(normalized.id, normalized)
-        if (issueRef.current?.id === normalized.id) issueRef.current = normalized
-        setIssue((current) => current?.id === normalized.id ? normalized : current)
-        setBaseIssue((current) => current?.id === normalized.id ? structuredClone(normalized) : current)
+        const visible = issueRef.current
+        if (visible?.id !== normalized.id || visible.revision > normalized.revision
+          || editorPendingRef.current || layoutSaverRef.current?.pending) {
+          workerNeedsReconcileRef.current = true
+          return
+        }
+        issueRef.current = normalized
+        setIssue(normalized)
+        setBaseIssue(structuredClone(normalized))
       })
       .catch((detailError) => {
         showOperationError(detailError instanceof Error ? detailError.message : '完整刊期读取失败')
@@ -2382,7 +2671,7 @@ export function App() {
     if (dataMode !== 'worker') return
     for (const summary of recentIssues.slice(0, 3)) {
       if (issueCacheRef.current.has(summary.id) || issuePrefetchRef.current.has(summary.id)) continue
-      const task = api.getIssue(summary.id)
+      const task = api.getIssue(summary.id, 'draft')
         .then((loaded) => {
           const normalized = issueWithMetrics(loaded, loaded.stories)
           issueCacheRef.current.set(normalized.id, normalized)
@@ -2395,22 +2684,30 @@ export function App() {
 
   const refreshWorkerIssue = useCallback(async () => {
     const currentIssue = issueRef.current
-    if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || workerRefreshInFlightRef.current || reorderInFlightRef.current) return
+    if (!currentIssue || dataModeRef.current !== 'worker' || document.hidden || document.activeElement?.matches('#story-title, #story-body, [contenteditable="true"]') || workerRefreshInFlightRef.current || draggedStoryIdRef.current
+      || editorPendingRef.current || layoutSaverRef.current?.pending || draftNavigationRef.current || Date.now() - lastInteractionRef.current < editingIdleMs) return
     workerRefreshInFlightRef.current = true
     try {
       const latestVersion = await api.currentIssueVersion()
-      if (latestVersion.id !== currentIssue.id || latestVersion.revision === currentIssue.revision) return
-      const latest = await api.currentIssue()
+      if (latestVersion.id === currentIssue.id && latestVersion.revision === currentIssue.revision && !workerNeedsReconcileRef.current) return
+      const latest = await api.getIssue(currentIssue.id, viewRef.current === 'candidates' || viewRef.current === 'trash' ? 'full' : 'draft')
+      if (document.activeElement?.matches('#story-title, #story-body, [contenteditable="true"]') || draggedStoryIdRef.current || editorPendingRef.current || layoutSaverRef.current?.pending
+        || draftNavigationRef.current || Date.now() - lastInteractionRef.current < editingIdleMs) return
       const refreshed = issueWithMetrics(latest, latest.stories)
+      const newestVisibleIssue = issueRef.current
+      if (newestVisibleIssue?.id !== refreshed.id || newestVisibleIssue.revision > refreshed.revision) return
+      if (newestVisibleIssue.revision === refreshed.revision && !workerNeedsReconcileRef.current) return
+      workerNeedsReconcileRef.current = false
       issueCacheRef.current.set(refreshed.id, refreshed)
       const scrollTop = draftScrollRef.current?.scrollTop
+      issueRef.current = refreshed
       setIssue(refreshed)
       setBaseIssue(structuredClone(refreshed))
       setReviewSessionId('')
       setSelectedStoryId((selectedId) => refreshed.stories.some((story) => story.id === selectedId) ? selectedId : null)
       api.weekend().then(setWeekend).catch(() => undefined)
       if (typeof scrollTop === 'number') window.requestAnimationFrame(() => {
-        if (draftScrollRef.current) draftScrollRef.current.scrollTop = scrollTop
+        if (draftScrollRef.current && !draftNavigationRef.current) draftScrollRef.current.scrollTop = scrollTop
       })
     } catch {
       // 短暂网络抖动不打断正在审稿的页面，下一轮会自动重试。
@@ -2421,6 +2718,10 @@ export function App() {
 
   const switchIssue = useCallback(async (issueId: string) => {
     if (!issueId || issueId === issueRef.current?.id || dataModeRef.current !== 'worker') return
+    if (inlineFlushers.current.size || detailFlushRef.current || layoutSaverRef.current?.pending) {
+      try { await flushEditors(); await layoutSaverRef.current?.flush() }
+      catch (error) { showOperationError(error instanceof Error ? error.message : '修改尚未保存'); return }
+    }
     const sequence = ++issueSwitchSequenceRef.current
     const cached = issueCacheRef.current.get(issueId)
     const applyIssue = (selected: Issue) => {
@@ -2447,7 +2748,16 @@ export function App() {
         void api.getIssue(issueId).then((fresh) => {
           const refreshed = issueWithMetrics(fresh, fresh.stories)
           issueCacheRef.current.set(refreshed.id, refreshed)
-          if (issueRef.current?.id === refreshed.id && sequence === issueSwitchSequenceRef.current) applyIssue(refreshed)
+          if (issueRef.current?.id !== refreshed.id || sequence !== issueSwitchSequenceRef.current) return
+          if (editorPendingRef.current || layoutSaverRef.current?.pending || Date.now() - lastInteractionRef.current < editingIdleMs) {
+            workerNeedsReconcileRef.current = true
+            return
+          }
+          if (refreshed.revision >= issueRef.current.revision) {
+            issueRef.current = refreshed
+            setIssue(refreshed)
+            setBaseIssue(structuredClone(refreshed))
+          }
         }).catch(() => undefined)
       }
     } catch (switchError) {
@@ -2456,6 +2766,30 @@ export function App() {
       if (!cached && sequence === issueSwitchSequenceRef.current) setLoading(false)
     }
   }, [showOperationError])
+
+  useEffect(() => {
+    if (!issue || dataMode !== 'worker') return
+    const recovered = layoutSaverRef.current?.recover(issue)
+    if (recovered) { issueRef.current = recovered; setIssue(recovered) }
+  }, [issue?.id, dataMode])
+
+  useEffect(() => {
+    layoutSaverRef.current?.resume()
+    const leave = () => { void layoutSaverRef.current?.flush().catch(() => undefined) }
+    const shortcut = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 's') { event.preventDefault(); leave() }
+    }
+    const hidden = () => { if (document.hidden) leave() }
+    window.addEventListener('beforeunload', leave)
+    window.addEventListener('keydown', shortcut)
+    document.addEventListener('visibilitychange', hidden)
+    return () => {
+      window.removeEventListener('beforeunload', leave)
+      window.removeEventListener('keydown', shortcut)
+      document.removeEventListener('visibilitychange', hidden)
+      layoutSaverRef.current?.dispose()
+    }
+  }, [])
 
   useEffect(() => {
     if (dataMode !== 'worker') return
@@ -2620,8 +2954,8 @@ export function App() {
   const selectedStory = mobileReadOnly ? null : issue?.stories.find((story) => story.id === selectedStoryId) || null
   const selectedJob = selectedStory ? jobs[selectedStory.id] : undefined
 
-  const updateStory = async (storyId: string, patch: Partial<Story> & { confirm_delete?: boolean }) => {
-    const existing = issue?.stories.find((story) => story.id === storyId)
+  const updateStory = async (storyId: string, patch: Partial<Story> & { confirm_delete?: boolean }, baseline?: Story) => {
+    const existing = baseline || issueRef.current?.stories.find((story) => story.id === storyId)
     if (!existing) throw new Error('选题不存在')
     let updated: Story
     if (dataMode === 'static') {
@@ -2658,7 +2992,7 @@ export function App() {
         }
         const alreadySaved = fields.every(([field, value]) => matches(latestStory[field as keyof Story], value))
         updated = alreadySaved
-          ? latestStory
+          ? { ...latestStory, issue_revision: latestIssue.revision }
           : await api.patchStory(storyId, {
             ...patch,
             expected_updated_at: latestStory.updated_at || '',
@@ -2666,10 +3000,31 @@ export function App() {
           })
       }
     }
-    setIssue((current) => current ? issueWithMetrics({
-      ...current,
-      revision: updated.issue_revision ?? current.revision,
-    }, current.stories.map((story) => story.id === storyId ? updated : story)) : current)
+    const currentIssue = issueRef.current
+    if (currentIssue?.id === existing.issue_id) {
+      const nextRevision = updated.issue_revision ?? currentIssue.revision
+      if (nextRevision >= currentIssue.revision) {
+        const nextIssue = issueWithMetrics({ ...currentIssue, revision: nextRevision }, currentIssue.stories.map((story) => story.id === storyId
+          ? (layoutSaverRef.current?.pending ? { ...updated, category: story.category, position: story.position } : updated) : story))
+        issueRef.current = nextIssue
+        setIssue(nextIssue)
+      } else {
+        // An unrelated save may acknowledge a newer issue revision first.
+        // Merge only our acknowledged fields when their visible baseline is
+        // still unchanged, never replace the whole issue during interaction.
+        workerNeedsReconcileRef.current = true
+        const visible = currentIssue.stories.find(story => story.id === storyId)
+        const fields = Object.keys(patch).filter(field => field in updated)
+        const matches = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right)
+        if (visible && fields.every(field => matches(visible[field as keyof Story], existing[field as keyof Story])
+          || matches(visible[field as keyof Story], updated[field as keyof Story]))) {
+          const acknowledged = { ...visible, ...Object.fromEntries(fields.map(field => [field, updated[field as keyof Story]])), updated_at: updated.updated_at }
+          const next = issueWithMetrics(currentIssue, currentIssue.stories.map(story => story.id === storyId ? acknowledged : story))
+          issueRef.current = next
+          setIssue(next)
+        }
+      }
+    }
     return updated
   }
 
@@ -2786,7 +3141,14 @@ export function App() {
       }
     }
     if (job.state === 'failed') throw new Error(job.error || job.message || '任务失败')
-    if (issue) setIssue(await api.getIssue(issue.id))
+    if (issue && issueRef.current?.id === issue.id) {
+      const fresh = await api.getIssue(issue.id, viewRef.current === 'candidates' || viewRef.current === 'trash' ? 'full' : 'draft')
+      const visible = issueRef.current
+      if (visible?.id === fresh.id && visible.revision <= fresh.revision && !editorPendingRef.current && !layoutSaverRef.current?.pending) {
+        issueRef.current = fresh
+        setIssue(fresh)
+      } else workerNeedsReconcileRef.current = true
+    }
   }
 
   const canOutlineReorder = (targetId: string) => {
@@ -2823,190 +3185,98 @@ export function App() {
   const SCROLL_EDGE = 52
   const SCROLL_SPEED = 26
 
+  const applyLocalLayout = (before: Issue, stories: Story[], affectedCategories: string[]) => {
+    const next = issueWithMetrics(before, stories)
+    issueRef.current = next
+    setIssue(next)
+    noteInteraction()
+    if (dataMode === 'static') return
+    const writes = [...new Set(affectedCategories)].map(category => ({
+      issueId: before.id, category,
+      storyIds: stories.filter(story => isDraftStory(story) && story.category === category)
+        .sort((a, b) => a.position - b.position).map(story => story.id),
+    }))
+    layoutSaverRef.current!.enqueue(before, writes)
+  }
+
   const handleDrop = async (targetId: string, after = false, droppedStoryId = '') => {
-    const currentIssue = issueRef.current || issue
+    const current = issueRef.current
     const activeId = droppedStoryId || draggedStoryIdRef.current || draggedStoryId
-    if (!currentIssue || !activeId || activeId === targetId || reorderInFlightRef.current) return
-    const target = currentIssue.stories.find((story) => story.id === targetId)
-    const dragged = currentIssue.stories.find((story) => story.id === activeId)
+    if (!current || !activeId || activeId === targetId) return
+    const target = current.stories.find(story => story.id === targetId)
+    const dragged = current.stories.find(story => story.id === activeId)
     if (!target || !dragged) return
-
     const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(target) : target.category
-    const draggedCategory = isSaturdayIssue ? weekendWorkbenchSection(dragged) : dragged.category
-    const isSameCategory = targetCategory === draggedCategory
-
-    if (isSameCategory) {
-      const ordered = currentIssue.stories.filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory)).sort((a, b) => a.position - b.position)
-      const from = ordered.findIndex((story) => story.id === activeId)
-      if (from < 0) return
-      const [moved] = ordered.splice(from, 1)
-      const targetIndex = ordered.findIndex((story) => story.id === targetId)
-      if (targetIndex < 0) return
-      ordered.splice(targetIndex + (after ? 1 : 0), 0, moved)
-
-      const positions = new Map(ordered.map((story, index) => [story.id, index]))
-      const updatedStories = currentIssue.stories.map((story) => positions.has(story.id) ? { ...story, category: targetCategory, position: positions.get(story.id) || 0 } : story)
-      const optimisticIssue = issueWithMetrics(currentIssue, updatedStories)
-      issueRef.current = optimisticIssue
-      setIssue(optimisticIssue)
-      setMovingStoryId(activeId)
-      setActiveStoryId(activeId)
-      clearOutlineDrag()
-      window.setTimeout(() => setMovingStoryId(null), 440)
-
-      if (dataMode !== 'static') {
-        reorderInFlightRef.current = true
-        try {
-          const remoteIssue = await api.reorder(currentIssue.id, ordered.map((story) => story.id), targetCategory)
-          const sectionOrder = (value: Issue) => value.stories
-            .filter((story) => isDraftStory(story) && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory))
-            .sort((a, b) => a.position - b.position)
-            .map((story) => story.id)
-            .join(',')
-          if (sectionOrder(remoteIssue) !== sectionOrder(optimisticIssue)) {
-            issueRef.current = remoteIssue
-            setIssue(remoteIssue)
-          }
-        } catch (reorderError) {
-          showOperationError(reorderError instanceof Error ? reorderError.message : '保存排版顺序失败')
-          issueRef.current = currentIssue
-          setIssue(currentIssue)
-        } finally {
-          reorderInFlightRef.current = false
-        }
-      }
-    } else {
-      // 跨栏目移动
-      const targetOrdered = currentIssue.stories
-        .filter((story) => isDraftStory(story) && story.id !== activeId && (isSaturdayIssue ? weekendWorkbenchSection(story) === targetCategory : story.category === targetCategory))
-        .sort((a, b) => a.position - b.position)
-      const targetIndex = targetOrdered.findIndex((story) => story.id === targetId)
-      const insertAt = targetIndex >= 0 ? targetIndex + (after ? 1 : 0) : targetOrdered.length
-      targetOrdered.splice(insertAt, 0, { ...dragged, category: targetCategory })
-
-      const positions = new Map(targetOrdered.map((story, index) => [story.id, index]))
-      const updatedStories = currentIssue.stories.map((story) => {
-        if (story.id === activeId) return { ...story, category: targetCategory, position: insertAt }
-        if (positions.has(story.id)) return { ...story, category: targetCategory, position: positions.get(story.id) || 0 }
-        return story
-      })
-      const optimisticIssue = issueWithMetrics(currentIssue, updatedStories)
-      issueRef.current = optimisticIssue
-      setIssue(optimisticIssue)
-      setMovingStoryId(activeId)
-      setActiveStoryId(activeId)
-      clearOutlineDrag()
-      window.setTimeout(() => setMovingStoryId(null), 440)
-
-      if (dataMode !== 'static') {
-        reorderInFlightRef.current = true
-        try {
-          await api.patchStory(activeId, { category: targetCategory, position: insertAt })
-          const remoteIssue = await api.reorder(currentIssue.id, targetOrdered.map((s) => s.id), targetCategory)
-          issueRef.current = remoteIssue
-          setIssue(remoteIssue)
-        } catch (moveError) {
-          showOperationError(moveError instanceof Error ? moveError.message : '跨栏目移动失败')
-          issueRef.current = currentIssue
-          setIssue(currentIssue)
-        } finally {
-          reorderInFlightRef.current = false
-        }
-      }
-    }
+    const ordered = current.stories.filter(story => isDraftStory(story) && story.id !== activeId
+      && (isSaturdayIssue ? weekendWorkbenchSection(story) : story.category) === targetCategory)
+      .sort((a, b) => a.position - b.position)
+    const at = ordered.findIndex(story => story.id === targetId)
+    if (at < 0) return
+    ordered.splice(at + (after ? 1 : 0), 0, { ...dragged, category: targetCategory })
+    const positions = new Map(ordered.map((story, position) => [story.id, position]))
+    const stories = current.stories.map(story => positions.has(story.id)
+      ? { ...story, category: targetCategory, position: positions.get(story.id)! } : story)
+    clearOutlineDrag()
+    applyLocalLayout(current, stories, [targetCategory, dragged.category])
   }
 
   const moveStory = async (storyId: string, target: -1 | 1 | 'first' | 'last') => {
-    if (!issue) return
-    const story = issue.stories.find((item) => item.id === storyId)
-    if (!story) return
-    const ordered = issue.stories
-      .filter((item) => isDraftStory(item) && (isSaturdayIssue ? weekendWorkbenchSection(item) === weekendWorkbenchSection(story) : item.category === story.category))
+    const current = issueRef.current
+    const story = current?.stories.find(item => item.id === storyId)
+    if (!current || !story) return
+    const category = isSaturdayIssue ? weekendWorkbenchSection(story) : story.category
+    const ordered = current.stories.filter(item => isDraftStory(item)
+      && (isSaturdayIssue ? weekendWorkbenchSection(item) : item.category) === category)
       .sort((a, b) => a.position - b.position)
-    const from = ordered.findIndex((item) => item.id === storyId)
+    const from = ordered.findIndex(item => item.id === storyId)
     const to = target === 'first' ? 0 : target === 'last' ? ordered.length - 1 : from + target
     if (from < 0 || to < 0 || to >= ordered.length) return
     const [moved] = ordered.splice(from, 1)
     ordered.splice(to, 0, moved)
-    const positions = new Map(ordered.map((item, index) => [item.id, index]))
-    const targetCategory = isSaturdayIssue ? weekendWorkbenchSection(story) : story.category
-    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => positions.has(item.id) ? { ...item, category: targetCategory, position: positions.get(item.id) ?? item.position } : item))
-    setIssue(optimistic)
-    setMovingStoryId(storyId)
-    window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 440)
-    if (dataMode === 'static') return
-    try {
-      const remoteIssue = await api.reorder(issue.id, ordered.map((item) => item.id), targetCategory)
-      // The optimistic order normally matches the server response, but the
-      // server also increments the issue revision. Always adopt that response
-      // so an immediate Bot publish carries the revision produced by reorder.
-      issueRef.current = remoteIssue
-      setIssue(remoteIssue)
-    } catch (moveError) {
-      setIssue(issue)
-      showOperationError(moveError instanceof Error ? moveError.message : '调整顺序失败')
-    }
+    const positions = new Map(ordered.map((item, position) => [item.id, position]))
+    applyLocalLayout(current, current.stories.map(item => positions.has(item.id)
+      ? { ...item, category, position: positions.get(item.id)! } : item), [category])
   }
 
   const moveStoryToCategory = async (storyId: string, targetCategory: string) => {
-    if (!issue || !categoryOrder.has(targetCategory)) return
-    const story = issue.stories.find((item) => item.id === storyId)
-    if (!story || story.category === targetCategory) return
-    const targetPosition = issue.stories
-      .filter((item) => item.selected && item.status !== 'excluded' && item.category === targetCategory)
+    const current = issueRef.current
+    const story = current?.stories.find(item => item.id === storyId)
+    if (!current || !story || !categoryOrder.has(targetCategory) || story.category === targetCategory) return
+    const position = current.stories.filter(item => isDraftStory(item) && item.category === targetCategory)
       .reduce((maximum, item) => Math.max(maximum, item.position), -1) + 1
-    const previous = issue
-    const optimistic = issueWithMetrics(issue, issue.stories.map((item) => item.id === storyId ? { ...item, category: targetCategory, position: targetPosition } : item))
-    setIssue(optimistic)
-    setMovingStoryId(storyId)
-    window.setTimeout(() => setMovingStoryId((current) => current === storyId ? null : current), 320)
-    if (dataMode === 'static') return
-    try {
-      const updated = await api.patchStory(storyId, { category: targetCategory, position: targetPosition })
-      setIssue((current) => current ? issueWithMetrics({
-        ...current,
-        revision: updated.issue_revision ?? current.revision,
-      }, current.stories.map((item) => item.id === storyId ? updated : item)) : current)
-    } catch (moveError) {
-      setIssue(previous)
-      showOperationError(moveError instanceof Error ? moveError.message : '移动栏目失败')
-    }
+    applyLocalLayout(current, current.stories.map(item => item.id === storyId ? { ...item, category: targetCategory, position } : item), [targetCategory, story.category])
   }
 
-  const scrollToDraftSection = (section: string) => {
+  const startDraftNavigation = (resolve: () => HTMLElement | null, offset: number, smooth: boolean) => {
+    const container = draftScrollRef.current
+    if (!container) return
+    const navigation = navigateDraft(container, resolve, { offset, smooth, onFinish: () => {
+      if (draftNavigationRef.current === navigation) draftNavigationRef.current = null
+    } })
+    draftNavigationRef.current = navigation
+  }
+
+  const scrollToDraftSection = (section: string, animate = false) => {
+    draftNavigationRef.current?.cancel()
     setActiveDraftSection(section)
     if (query) setQuery('')
-    const performScroll = () => {
-      const container = draftScrollRef.current
-      if (!container) return
-      if (section === '全部') {
-        container.scrollTo({ top: 0, behavior: 'smooth' })
-        return
-      }
-      const target = document.getElementById(`section-${section.replaceAll('/', '-')}`)
-      if (!target) return
-      const top = target.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop
-      container.scrollTo({ top, behavior: 'smooth' })
-    }
-    window.requestAnimationFrame(() => window.requestAnimationFrame(performScroll))
+    const smooth = animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    startDraftNavigation(() => section === '全部' ? draftScrollRef.current
+      : document.getElementById(`section-${section.replaceAll('/', '-')}`), 0, smooth)
   }
 
   const scrollToStory = (story: Story) => {
+    draftNavigationRef.current?.cancel()
+    if (query) setQuery('')
     setActiveDraftSection(isSaturdayIssue ? weekendWorkbenchSection(story) : story.category)
     setActiveStoryId(story.id)
-    const performScroll = () => {
-      const container = draftScrollRef.current
-      const target = document.getElementById(`story-${story.id}`)
-      if (!container || !target) return
-      const top = target.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop - 24
-      container.scrollTo({ top, behavior: 'smooth' })
-    }
-    window.requestAnimationFrame(() => window.requestAnimationFrame(performScroll))
+    startDraftNavigation(() => document.getElementById(`story-${story.id}`), 24,
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches)
   }
 
   const syncDraftSection = () => {
     const container = draftScrollRef.current
-    if (!container || view !== 'draft') return
+    if (!container || view !== 'draft' || draftNavigationRef.current) return
     const containerTop = container.getBoundingClientRect().top
     if (container.scrollTop < 180) {
       setActiveDraftSection('全部')
@@ -3135,8 +3405,46 @@ export function App() {
     finally { setExporting(false) }
   }
 
-  const switchView = (next: View) => {
+  const openExport = async () => {
+    try {
+      await flushEditors()
+      await layoutSaverRef.current?.flush()
+      const current = issueRef.current
+      if (current && dataModeRef.current === 'worker' && workerNeedsReconcileRef.current) {
+        const cached = issueCacheRef.current.get(current.id)
+        const latest = cached && cached.revision >= current.revision ? cached : await api.getIssue(current.id)
+        if (issueRef.current?.id === latest.id && latest.revision >= issueRef.current.revision) {
+          const reconciled = issueWithMetrics(latest, latest.stories)
+          issueRef.current = reconciled
+          setIssue(reconciled)
+          workerNeedsReconcileRef.current = false
+        }
+      }
+    } catch (saveError) {
+      showOperationError(saveError instanceof Error ? saveError.message : '当前编辑尚未保存，未打开导出')
+      return
+    }
+    setHandoff(null)
+    setClosingOverlay(null)
+    setShowExport(true)
+  }
+
+  const applyStoryImage = (updated: Story) => {
+    const current = issueRef.current
+    if (!current || current.id !== updated.issue_id) return
+    const next = issueWithMetrics({ ...current, revision: Math.max(current.revision, updated.issue_revision ?? current.revision) }, current.stories.map(story => story.id === updated.id ? {
+      ...story, image_path: updated.image_path, image_url: updated.image_url, image_token: updated.image_token,
+      metadata: { ...story.metadata, ...Object.fromEntries(Object.entries(updated.metadata).filter(([key]) => key.includes('image'))) },
+    } : story))
+    issueRef.current = next
+    setIssue(next)
+  }
+
+  const switchView = async (next: View) => {
     if (next === activeView) return
+    if (editorPendingRef.current) {
+      try { await flushEditors() } catch (error) { showOperationError(error instanceof Error ? error.message : '编辑尚未保存'); return }
+    }
     if (viewExitTimerRef.current !== null) window.clearTimeout(viewExitTimerRef.current)
     if (viewEnterTimerRef.current !== null) window.clearTimeout(viewEnterTimerRef.current)
 
@@ -3155,7 +3463,6 @@ export function App() {
       applyView()
       return
     }
-
     setViewMotion('out')
     viewExitTimerRef.current = window.setTimeout(() => {
       viewExitTimerRef.current = null
@@ -3250,7 +3557,7 @@ export function App() {
   const activeSecondaryView = secondaryViews.find((item) => item.id === activeView)
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" onInputCapture={noteInteraction} onKeyDownCapture={noteInteraction} onPointerDownCapture={noteInteraction} onDragStartCapture={noteInteraction} onDragEndCapture={noteInteraction}>
       <header className="topbar">
         <div className="brand-lockup">
           <img className="brand-logo" src={effectiveTheme === 'dark' ? ifanrLogoDarkUrl : ifanrLogoLightUrl} alt="爱范儿 iFanr" />
@@ -3301,7 +3608,7 @@ export function App() {
               ? <img src={avatarUrl} alt="头像" />
               : <User size={18} className="avatar-placeholder-icon" aria-hidden="true" />}
           </button> : null}
-          <button className="export-button" type="button" disabled={!issue} onClick={() => { setHandoff(null); setClosingOverlay(null); setShowExport(true) }}><Download size={16} />导出</button>
+          <button className="export-button" type="button" disabled={!issue} onClick={() => void openExport()}><Download size={16} />导出</button>
         </div>
         {/* Avatar menu */}
         {!isPagesDeployment && showAvatarMenu ? <div ref={avatarMenuRef} className={`avatar-menu ${avatarMenuClosing ? 'closing' : ''}`}>
@@ -3370,13 +3677,14 @@ export function App() {
           <aside className="sidebar">
             <div className="sidebar-header">
               <div className="sidebar-title"><Menu size={16} /><span>{view === 'draft' ? (isSaturdayIssue ? '周六早报' : '稿件目录') : (view === 'trash' ? '回收站' : '栏目')}</span></div>
+              <span className="layout-save-state" aria-live="polite" aria-label="排序保存状态" title={layoutSaveMessage || '排序保存状态'}>{layoutSaveState === 'saved' ? '已保存' : layoutSaveState === 'pending' ? '待保存' : layoutSaveState === 'saving' ? '保存中' : '待重试'}</span>
               <em className="sidebar-count">{view === 'draft' ? draftStories.length : (view === 'trash' ? trashStories.length : candidates.length)}</em>
             </div>
 
             <div className="sidebar-content" ref={outlineRef}>
               {view === 'draft' ? outlineGroupedDraft.map(([section, stories]) => (
                 <section key={section} className="sidebar-outline-group">
-                  <button type="button" className={`sidebar-outline-section ${activeDraftSection === section ? 'active' : ''}`} onClick={() => scrollToDraftSection(section)}>
+                  <button type="button" className={`sidebar-outline-section ${activeDraftSection === section ? 'active' : ''}`} onClick={() => scrollToDraftSection(section, true)}>
                     <span>{section}</span>
                     <em>{stories.length}</em>
                   </button>
@@ -3413,7 +3721,7 @@ export function App() {
                         onDragEnd={clearOutlineDrag}
                       >
                         <GripVertical size={13} className="drag-handle" />
-                        <span className="item-title" title={story.title}>{story.title}</span>
+                        <span className="item-title" title={previewTitles[story.id] ?? story.title}>{(previewTitles[story.id] ?? story.title).replace(/^[\p{Extended_Pictographic}\uFE0F\u200D]+\s*/u, (prefix) => prefix.includes('💡') ? '💡 ' : '')}</span>
                       </button>
                     )
                   })}
@@ -3434,7 +3742,7 @@ export function App() {
             {!loading && error && !issue ? <div className="center-state error"><CloudOff size={26} /><strong>{workerConnection.status === 'pages' ? '尚未连接主 Mac' : 'Worker 未连接'}</strong><span>{error}</span><div className="center-state-actions"><button type="button" onClick={() => openSettings('worker')}>Worker 设置</button><button type="button" onClick={() => void loadIssue()}>重新检测</button></div></div> : null}
             {!loading && loadingIssueDetails && (view === 'candidates' || view === 'trash') ? <div className="center-state"><LoaderCircle size={24} className="spin" /><span>正在载入完整候选库</span></div> : null}
             {!loading && issue && view === 'draft' ? <div className="draft-stage">
-            <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onOpenFlash={() => openFlashForStory(story)} onExclude={() => requestDeleteStory(story)} onDragStart={() => { draggedStoryIdRef.current = story.id; setDraggedStoryId(story.id) }} onDragEnd={clearOutlineDrag} onDrop={(after, droppedStoryId) => void handleDrop(story.id, after, droppedStoryId)} />)}</section>)}</div></div>
+            <div className="draft-page"><header className="draft-masthead"><div className="draft-date">{issue?.publication_date?.replaceAll('-', ' / ')}</div><h1>{isSaturdayIssue ? '周末也值得一看的新闻' : '早报'}</h1><p>{issue?.diagnostics?.static_snapshot ? `当天飞书 Bot 稿 · ${issue?.selected_count || 0} 条 · Pages 只读快照` : `当前飞书 Bot 稿 · ${issue?.selected_count || 0} 条成稿${pendingAiEditorCount ? ` · ${pendingAiEditorCount} 条待 AI 主编撰写` : ''} · 自动化更新后保留人工编辑`}</p><div className="draft-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="在当前早报稿中搜索" /></div></header><div className="draft-document">{groupedDraft.map(([section, stories], sectionIndex) => <section className="issue-section" id={`section-${section.replaceAll('/', '-')}`} key={section}><header className="section-title"><span>{String(sectionIndex + 1).padStart(2, '0')}</span><h2>{section}</h2><em>{stories.length}</em></header>{stories.map((story, index) => <IssueArticle key={story.id} inlineEditor={dataMode !== 'static' && !isReadOnly && !mobileReadOnly ? <DeferredInlineEditor story={story} eager={activeStoryId === story.id}><DetailPanel inline onPreviewTitle={(title) => setPreviewTitles(current => ({ ...current, [story.id]: title }))} story={story} staticMode={false} {...bindingsFor(story.id)} onPatch={(patch, baseline) => updateStory(story.id, patch, baseline)} onAction={async () => {}} onClose={() => {}} onImageChange={applyStoryImage} /></DeferredInlineEditor> : undefined} story={story} active={selectedStoryId === story.id} moving={movingStoryId === story.id} canMoveUp={index > 0} canMoveDown={index < stories.length - 1} onMoveTop={() => void moveStory(story.id, 'first')} onMoveUp={() => void moveStory(story.id, -1)} onMoveDown={() => void moveStory(story.id, 1)} onMoveBottom={() => void moveStory(story.id, 'last')} onMoveCategory={(target) => void moveStoryToCategory(story.id, target)} moveOptions={isSaturdayIssue ? weekendWorkbenchCategories : undefined} currentMoveTarget={isSaturdayIssue ? weekendWorkbenchSection(story) : undefined} onOpen={() => setSelectedStoryId(story.id)} onOpenFlash={() => openFlashForStory(story)} onExclude={() => requestDeleteStory(story)} onDragStart={() => { draggedStoryIdRef.current = story.id; setDraggedStoryId(story.id) }} onDragEnd={clearOutlineDrag} onDrop={(after, droppedStoryId) => void handleDrop(story.id, after, droppedStoryId)} />)}</section>)}</div></div>
             </div> : null}
             {!loading && !loadingIssueDetails && issue && view === 'candidates' ? <>
               <header className="candidate-masthead"><div><span>候选库</span><h1>待追源与待复核</h1><p>候选不会直接进入正文；采用后会先以「待 AI 主编撰写」状态出现在「早报稿」。</p></div><strong>{candidates.length}</strong></header>
@@ -3447,7 +3755,7 @@ export function App() {
               <div className="candidate-list">{trashStories.length ? trashStories.map((story) => <TrashItem key={story.id} story={story} active={selectedStoryId === story.id} disabled={dataMode !== 'worker'} onOpen={() => setSelectedStoryId(story.id)} onRestore={() => void restoreStory(story)} />) : <div className="center-state"><Trash2 size={25} /><strong>回收站是空的</strong><span>当天从早报稿移出的选题会出现在这里。</span></div>}</div>
             </> : null}
           </main>
-          {selectedStory && !mobileReadOnly ? <DetailPanel story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onOpenFlash={() => openFlashForStory(selectedStory)} onPatch={(patch) => updateStory(selectedStory.id, patch)} onImageChange={(updated) => setIssue((current) => current ? issueWithMetrics({ ...current, revision: updated.issue_revision ?? current.revision }, current.stories.map((story) => story.id === updated.id ? updated : story)) : current)} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
+          {selectedStory && !mobileReadOnly ? <DetailPanel advancedOnly={view === 'draft'} key={selectedStory.id} story={selectedStory} activeJob={selectedJob} staticMode={dataMode === 'static' || isReadOnly} closing={detailClosing} onClose={closeDetail} onOpenFlash={() => openFlashForStory(selectedStory)} onPendingChange={view === 'draft' ? undefined : noteEditorPending} onRegisterFlush={(flush) => { detailFlushRef.current = flush }} onBeforeRelatedChange={async () => { await inlineFlushers.current.get(selectedStory.id)?.(); return issueRef.current?.stories.find(item => item.id === selectedStory.id) }} onPatch={(patch, baseline) => updateStory(selectedStory.id, patch, baseline)} onImageChange={applyStoryImage} onAction={async (action, chrome) => { const job = await api.action(selectedStory.id, action, chrome); await watchJob(selectedStory.id, job) }} /> : null}
         </div>
       ) : null}
 
@@ -3498,7 +3806,15 @@ export function App() {
         />
       ) : null}
       {showCreateStory && issue ? <StoryCreateDialog busy={creatingStory} closing={closingOverlay === 'create'} onClose={() => closeOverlay('create')} onCreate={createStory} /> : null}
-      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onCopyToFeishu={() => copyIssueToFeishu(issue)} onReadback={async () => { await refreshWorkerIssue() }} onPublishToLark={() => api.publishToLark(issue.id, issue.revision)} onHandoff={() => void createHandoff()} /> : null}
+      {showExport && issue ? <ExportDialog issue={issue} handoff={handoff} busy={exporting} staticMode={dataMode === 'static'} operationCount={reviewOperationCount} closing={closingOverlay === 'export'} onClose={() => closeOverlay('export')} onMarkdown={() => downloadText(`${issue.id}.md`, renderIssueMarkdown(issue), 'text/markdown;charset=utf-8')} onCopyToFeishu={() => copyIssueToFeishu(issue)} onReadback={async () => {
+        const latest = await api.getIssue(issue.id)
+        const current = issueRef.current
+        if (current?.id === latest.id && latest.revision >= current.revision) {
+          const refreshed = issueWithMetrics(latest, latest.stories)
+          issueRef.current = refreshed
+          setIssue(refreshed)
+        }
+      }} onPublishToLark={() => api.publishToLark(issue.id, issueRef.current?.id === issue.id ? issueRef.current.revision : issue.revision)} onHandoff={() => void createHandoff()} /> : null}
       {pendingDelete ? <DeleteConfirmDialog story={pendingDelete} busy={deleteBusy} closing={closingOverlay === 'delete'} onCancel={() => { if (!deleteBusy) closeOverlay('delete') }} onConfirm={() => void confirmDeleteStory()} /> : null}
       {!isPagesDeployment && showAuthDialog ? <AuthDialog isReadOnly={isReadOnly} authUser={authUser} busy={authBusy} error={authMessage} closing={closingOverlay === 'auth'} has2FA={has2FA} initialMode={invitationCode ? 'register' : 'login'} initialInviteCode={invitationCode} onClose={() => closeOverlay('auth')} onLogin={doAuthLogin} onClearError={() => setAuthMessage('')} onChangePassword={doAuthChangePassword} onStart2FA={doStart2FA} onEnable2FA={doEnable2FA} onDisable2FA={doDisable2FA} onLogout={doAuthLogout} /> : null}
       {operationError ? <div className="operation-error-toast" role="alert"><CloudOff size={16} /><span>{operationError}</span><button type="button" aria-label="关闭操作错误提示" onClick={() => setOperationError('')}>×</button></div> : null}
@@ -3513,10 +3829,8 @@ function escapeClipboardHtml(value: string) {
   return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character] || character)
 }
 
-function clipboardRelatedLinks(story: Story): Array<{ title: string; url: string }> {
-  return Array.isArray(story.metadata.related_links)
-    ? story.metadata.related_links.filter((item): item is { title: string; url: string } => Boolean(item && typeof item === 'object' && typeof (item as { title?: unknown }).title === 'string' && /^https?:\/\//.test(String((item as { url?: unknown }).url || ''))))
-    : []
+function clipboardRelatedLinks(story: Story) {
+  return additionalRelatedLinks(story)
 }
 
 async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
@@ -3547,12 +3861,13 @@ async function copyIssueToFeishu(issue: Issue): Promise<boolean> {
     // Only paste locally fetched image bytes. Remote source URLs frequently
     // fail Feishu's server-side fetch or violate a source's anti-hotlink rule.
     if (imageData) htmlParts.push(`<p><img src="${escapeClipboardHtml(imageData)}" alt="" style="max-width:100%;height:auto" /></p>`)
-    htmlParts.push(...story.body.split(/\n\s*\n/).filter(Boolean).map((paragraph) => `<p>${escapeClipboardHtml(paragraph).replace(/\n/g, '<br>')}</p>`))
+    const body = stripTrailingStorySeparators(story.body)
+    htmlParts.push(...body.split(/\n\s*\n/).filter(Boolean).map((paragraph) => `<p>${escapeClipboardHtml(paragraph).replace(/(?<!!)\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2">$1</a>').replace(/\n/g, '<br>')}</p>`))
     const relatedLinks = clipboardRelatedLinks(story)
     for (const link of relatedLinks) {
-      htmlParts.push(`<p>🔗 相关阅读：<a href="${escapeClipboardHtml(link.url)}">${escapeClipboardHtml(link.title)}</a></p>`)
+      htmlParts.push(`<p>${relatedReadingLabel(link.brand)}<a href="${escapeClipboardHtml(link.url)}">${escapeClipboardHtml(link.title)}</a></p>`)
     }
-    textParts.push(`### ${publicTitle}`, story.body.trim(), ...relatedLinks.map((link) => `🔗 相关阅读：${link.title}（${link.url}）`), '')
+    textParts.push(`### ${publicTitle}`, body.trim(), ...relatedLinks.map((link) => `${relatedReadingLabel(link.brand)}[${link.title}](${link.url})`), '')
   }
   if (isSaturdayPublication(issue.publication_date)) {
     const specialPattern = /^(One Fun Thing|周末看什么|买书不读指南|游戏推荐)(?:[｜|](?:主选|备选))?[｜|](.+)$/i
