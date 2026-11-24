@@ -581,7 +581,7 @@
       "rumor": false,
       "fact_status": "supported",
       "changed_since_review": false,
-      "image_url": "data/images/e1ea463ab258-3de23d0ce30ce8f0f23f.jpg",
+      "image_url": "data/images/e1ea463ab258-13fec82a84c235e4080e.png",
       "image_path": "",
       "image_token": "",
       "editorial_reason": "",
@@ -1683,10 +1683,10 @@
   "diagnostics": {
     "static_snapshot": true,
     "source_issue_revision": 5,
-    "snapshot_generated_at": "2026-11-24T05:21:02+00:00",
+    "snapshot_generated_at": "2026-11-24T05:23:38+00:00",
     "public_snapshot": {
-      "digest": "aceec07ab1f086e04ac7f885a117e7325444e81883da11a85498abee0690a635",
-      "generated_at": "2026-11-24T05:21:02+00:00",
+      "digest": "0b41b841761ead25e6bf11f62dbc6abad7bc8a9d6099de171f818eb837e1b111",
+      "generated_at": "2026-11-24T05:23:38+00:00",
       "image_count": 14,
       "selected_count": 23,
       "selected_image_count": 16,
